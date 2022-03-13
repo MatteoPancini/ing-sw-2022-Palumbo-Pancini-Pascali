@@ -1,4 +1,4 @@
-package Enum;
+package model.enumerations;
 
 public enum Wizard {
     ONE,
