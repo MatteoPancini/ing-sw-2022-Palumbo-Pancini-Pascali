@@ -1,3 +1,10 @@
+package model;
+
+import model.enumerations.CardState;
+import model.enumerations.MotherNatureMoves;
+import model.enumerations.OrderValue;
+import model.enumerations.Wizard;
+
 public class AssistantCard {
     private Wizard type;
     private OrderValue value;
