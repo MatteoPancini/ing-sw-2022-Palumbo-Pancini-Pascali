@@ -1,3 +1,5 @@
+package Enum;
+
 public class AssistantCard {
     private Wizard type;
     private OrderValue value;
