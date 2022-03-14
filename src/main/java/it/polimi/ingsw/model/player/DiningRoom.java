@@ -1,6 +1,4 @@
-package it.polimi.ingsw.model;
-
-import java.lang.reflect.Array;
+package it.polimi.ingsw.model.player;
 
 public class DiningRoom{
     private Table[] studTable; //array di Table

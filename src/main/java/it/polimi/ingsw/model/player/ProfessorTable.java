@@ -1,6 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.player;
 
-import java.lang.reflect.Array;
+import it.polimi.ingsw.model.game.BoardCell;
 
 public class ProfessorTable {
     private BoardCell[] profTable;    //array di BoardCell

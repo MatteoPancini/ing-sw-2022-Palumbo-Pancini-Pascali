@@ -1,4 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.game;
+
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Student;
+
 
 import java.util.ArrayList;
 
@@ -11,7 +15,9 @@ public class Game {
     private MotherNature motherNature;
     private CharacterCard characterCards;
 
-    public class Game
+    public Game() {
+        //initialize game
+    }
 
 
     public ArrayList<Player> getPlayers() {
