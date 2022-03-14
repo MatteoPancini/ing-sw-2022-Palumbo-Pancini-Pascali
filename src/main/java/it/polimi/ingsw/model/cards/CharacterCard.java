@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.game;
+package it.polimi.ingsw.model.cards;
 
 public abstract class CharacterCard {
     protected int price;

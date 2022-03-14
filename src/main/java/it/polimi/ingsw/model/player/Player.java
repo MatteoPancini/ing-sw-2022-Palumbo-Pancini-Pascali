@@ -3,8 +3,9 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.MotherNatureMoves;
-import it.polimi.ingsw.model.game.CharacterCard;
+import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.game.Island;
+import it.polimi.ingsw.model.game.Student;
 
 import java.util.ArrayList;
 

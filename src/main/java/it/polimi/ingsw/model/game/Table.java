@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.player;
+package it.polimi.ingsw.model.game;
 
 import java.lang.reflect.Array;
 

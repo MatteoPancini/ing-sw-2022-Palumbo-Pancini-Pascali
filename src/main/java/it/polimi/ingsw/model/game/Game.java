@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.game;
 
+import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Student;
 
 
 import java.util.ArrayList;
