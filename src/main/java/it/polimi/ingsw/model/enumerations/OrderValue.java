@@ -1,4 +1,4 @@
-package model.enumerations;
+package it.polimi.ingsw.model.enumerations;
 
 public enum OrderValue {
     ONE,
@@ -11,4 +11,5 @@ public enum OrderValue {
     EIGHT,
     NINE,
     TEN
+    //TODO: pensare a possibile hasmap tra OrderValue e MotherNatureMoves
 }

@@ -1,4 +1,4 @@
-package model.enumerations;
+package it.polimi.ingsw.model.enumerations;
 
 public enum CardState {
     IN_USE,

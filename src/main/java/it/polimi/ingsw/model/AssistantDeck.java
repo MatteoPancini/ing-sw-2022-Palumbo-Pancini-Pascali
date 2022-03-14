@@ -1,8 +1,6 @@
-import java.util.ArrayList
+package it.polimi.ingsw.model;
 
-package model;
-
-import model.*
+import java.util.ArrayList;
 
 public class AssistantDeck {
     private ArrayList<AssistantCard> deck;

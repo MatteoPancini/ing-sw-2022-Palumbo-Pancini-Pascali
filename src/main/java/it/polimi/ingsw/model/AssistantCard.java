@@ -1,9 +1,9 @@
-package model;
+package it.polimi.ingsw.model;
 
-import model.enumerations.CardState;
-import model.enumerations.MotherNatureMoves;
-import model.enumerations.OrderValue;
-import model.enumerations.Wizard;
+import it.polimi.ingsw.model.enumerations.CardState;
+import it.polimi.ingsw.model.enumerations.MotherNatureMoves;
+import it.polimi.ingsw.model.enumerations.OrderValue;
+import it.polimi.ingsw.model.enumerations.Wizard;
 
 public class AssistantCard {
     private Wizard type;
