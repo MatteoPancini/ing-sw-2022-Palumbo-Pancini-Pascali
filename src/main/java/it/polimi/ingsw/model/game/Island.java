@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.enumerations.IslandID;
 
 public class Island {
 
-    private IslandID islandID;
+    private int islandID; //TODO: DA MAPPARE IN FASE DI COSTRUZIONE
     private Boolean motherNature;
     private Boolean tower;
 

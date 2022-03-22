@@ -14,5 +14,5 @@ public class AssistantDeck {
     public void removeAssistant(AssistantCard card){
 
     }
-
+    //TODO: pensare a possibile implementazione tramite hashmap tra Wizard e OrderValue
 }
