@@ -10,7 +10,7 @@ import it.polimi.ingsw.model.Game;
 public class GameBoard {
     private final Game game;
     private final ArrayList<CloudTile> clouds;
-    private final LinkedList<Island> islands;
+    private final ArrayList<Island> islands;
     private final ArrayList<Professor> professors;
     private final MotherNature motherNature;
     private final CharacterCardDeck playableCharacters;
@@ -24,7 +24,7 @@ public class GameBoard {
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
         }
 
-        islands = new LinkedList<Island>;
+        islands = new ArrayList<Island>;
         for (int m = 1; m <= 12; m++){
             islands.add(new Island(m));
         }

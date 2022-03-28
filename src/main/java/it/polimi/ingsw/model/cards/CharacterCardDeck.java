@@ -4,8 +4,7 @@ import it.polimi.ingsw.model.cards.CharacterCard;
 import java.util.ArrayList
 
 public class CharacterCardDeck {
-    private ArrayList<CharacterCard> cards;
-
+    private final ArrayList<CharacterCard> cards;
 
 }
 
