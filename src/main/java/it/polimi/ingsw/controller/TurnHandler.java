@@ -21,15 +21,7 @@ public class TurnHandler {
 
     }
 
-    public void moveMotherNature(int moves) {
-        int currPosition = Game.motherNature.getPosition();
 
-        int newPosition = currPosition + moves;
-        if(newPosition > 12) {
-            newPosition = currPosition - 12;
-        }
-
-    }
 
     public void putStudentsEntrance() {
         Collections.shuffle(game.getStudentsBag());
