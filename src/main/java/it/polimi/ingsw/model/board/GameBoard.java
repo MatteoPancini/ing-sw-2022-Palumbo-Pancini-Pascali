@@ -10,4 +10,5 @@ public class GameBoard {
     private final Professor[] professors;
     private final MotherNature motherNature;
 
+    public
 }
