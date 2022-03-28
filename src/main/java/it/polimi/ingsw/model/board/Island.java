@@ -13,4 +13,12 @@ public class Island {
     private boolean noEntry;
     private Player owner;
 
+    public Island(int ID){
+        islandID = ID;
+        tower = 0;
+        mergedIsland = new ArrayList<Island>;
+        students = new ArrayList<Student>;
+        noEntry = false;
+        owner = null;
+    }
 }
