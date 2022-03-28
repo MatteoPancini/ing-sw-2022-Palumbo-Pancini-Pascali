@@ -1,9 +1,12 @@
-package it.polimi.ingsw.model;
+//TODO: CLASSE DA TOGLIERE NON APPENA SI IMPLEMENTA RoundHandler
+//Si potrebbero riciclare alcune righe scritte qui sotto...
 
-import it.polimi.ingsw.model.game.*;
+package it.polimi.ingsw.controller;
+
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.Player;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +16,9 @@ public class Round {
     // controllo l'ordine del turno
     public void pianificationPhase() {
 
-        //1) METODO DEL CONTROLLER in cui aggiunge x studenti in ogni nuvola
-        for(cloud in Game.clouds){
-            for(int i = 0; i < NUM_STUDENTS; i++){ //costante definita in fase di inizializzazione
+        //1) METODO DEL CONTROLLER in cui aggiunge x studenti in ogni nuvola -> public void putStudentsOnCLoud()
+        for (cloud in Game.clouds) {
+            for (int i = 0; i < NUM_STUDENTS; i++) { //costante definita in fase di inizializzazione
                 List<Student> newStudents = new ArrayList<Student>();
                 //chiamo random/shuffle su Game.studentsBag + assegno a newStudents i primi/ultimi N studenti
                 cloud.setStudents(newStudents);
@@ -23,18 +26,20 @@ public class Round {
         }
 
         //2) GIOCO CARTE ASSISTENTE
-        for(assistantCard in Game.lastAssistantUsed){
+        for (assistantCard in Game.lastAssistantUsed) {
             lastAssistantUsed.getOwner().pickAssistant();   //dalla carta risale al suo owner e gli fa scegliere un altro assistant, sovrascrivendolo
             //qua ci mettiamo un try catch con una exception in cui se dovesse essere il primo turno fa giocare gli assistant in maniera casuale
         }
         //3) ALGORITMO ORDINAMENTO del lastAssistantUsed basato su value
 
-    };
+    }
 
-    public void actionPhase(){
+    ;
+
+    public void actionPhase() {
 
         //1) Spostare 3/4 studenti o nella sala o su isola
-        for(assistantCard in Game.lastAssistantUsed) {
+        for (assistantCard in Game.lastAssistantUsed) {
             Player currentPlayer = lastAssistantUsed.getOwner();
             for (int i = 0; i < NUM_STUDENTS; i++) {
                 switch (playerChoice) {
@@ -66,12 +71,33 @@ public class Round {
             */
 
 
-            Player islandInfluencer = islandInfluenceCheck(newPosition );
-
-
-
-
+            Player islandInfluencer = islandInfluenceCheck(newPosition);
 
 
         }
+
+
+    }
+
+
+
+
+    public void putStudentsOnCLoud(){
+        for (cloud in Game.clouds) {
+            for (int i = 0; i < NUM_STUDENTS; i++) { //costante definita in fase di inizializzazione
+                List<Student> newStudents = new ArrayList<Student>();
+                //chiamo random/shuffle su Game.studentsBag + assegno a newStudents i primi/ultimi N studenti
+                cloud.setStudents(newStudents);
+            }
+        }
+    }
+
+    public void updateAssistantsState(){
+        ...
+    }
+
+    public void initialize(){
+
+    }
+
 }
