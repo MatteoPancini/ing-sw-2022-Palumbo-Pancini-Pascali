@@ -19,14 +19,14 @@ public class GameBoard {
 
     public GameBoard {
         clouds = new ArrayList<CloudTile>;
-        for (int k = 0; k < game.getPlayersNumber(); k++) {
+        for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
         }
 
         islands = new ArrayList<Island>;
-        for (int m = 1; m <= 12; m++){
-            islands.add(new Island(m));
+        for (int j = 1; j <= 12; j++){
+            islands.add(new Island(j));
         }
 
         ArrayList<PawnType> pawns = new ArrayList<PawnType>;
@@ -37,11 +37,9 @@ public class GameBoard {
         }
 
         studentsBag = new ArrayList<Student>;
-        for (int i = 1; i <= 5; i++) {
-            for (PawnType p : pawns) {
-                for (int j = 1; j <= 26; j++) {
-                    studentsBag.add(new Student(p));
-                }
+        for (PawnType p : pawns) {
+            for (int k = 1; k <= 26; k++) {
+                studentsBag.add(new Student(p));
             }
         }
 
