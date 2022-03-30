@@ -14,7 +14,7 @@ public class GameBoard {
     private final ArrayList<Professor> professors;
     private final MotherNature motherNature;
     private final CharacterCardDeck playableCharacters;
-    private final ArrayList<AssistantCard> lastAssistantUsed;
+    private ArrayList<AssistantCard> lastAssistantUsed;
     private final ArrayList<Student> studentsBag;
 
     public GameBoard {
@@ -49,7 +49,7 @@ public class GameBoard {
 
         playableCharacters = new CharacterCardDeck;
 
-        lastAssistantUsed = new ArrayList<>;
+        lastAssistantUsed = new ArrayList<AssistantCard>;
     }
 
     public ArrayList<Student> getStudentsBag() {
@@ -64,11 +64,14 @@ public class GameBoard {
         return professors;
     }
 
-    public LinkedList<Island> getIslands() {
+    public ArrayList<Island> getIslands() {
         return islands;
     }
 
     public MotherNature getMotherNature() {
         return motherNature;
     }
+
+    public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
+
 }

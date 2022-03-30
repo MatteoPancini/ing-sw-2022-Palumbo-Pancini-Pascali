@@ -2,29 +2,40 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.player.Player;
-
+import java.util.Collections
 
 import java.util.ArrayList;
 
 public class Game {
     private final GameBoard gameBoard;
     private final int playersNumber;
-    private final ArrayList<Player> players = new ArrayList<>();
-    private final ArrayList<Player> activePlayers = new ArrayList<>();
+    private final boolean expertMode;
+    private final ArrayList<Player> players;
+    private final ArrayList<Player> activePlayers;
     private Player currentPlayer;
 
 
-    public Game(int playersNumber){
+    public Game(int playersNumber, boolean expertMode, ArrayList<Player> players, ArrayList<Player> activePlayers){
         gameBoard = new GameBoard();
         this.playersNumber = playersNumber;
+        this.expertMode = expertMode;
+        this.players = players;
+        this.activePlayers = activePlayers;
+        Collections.shuffle(players);
+        currentPlayer = players.get(0);
     }
+
+    public ArrayList<Player> getPlayers() { return players; }
+
+    public ArrayList<Player> getActivePlayers() { return activePlayers; }
+
+    public Player getCurrentPlayer() { return currentPlayer; }
 
     public int getPlayersNumber(){
         return playersNumber;
     }
+
+    public boolean isExpertMode() { return expertMode; }
+
+    public void setCurrentPlayer(Player newPlayer) { currentPlayer = newPlayer; }
 }
-
-
-
-
-
