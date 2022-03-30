@@ -54,6 +54,8 @@ public class GameBoard {
         return studentsBag;
     }
 
+    public void removeStudents(int index){ studentsBag.remove(index); }
+
     public ArrayList<CloudTile> getClouds() {
         return clouds;
     }
