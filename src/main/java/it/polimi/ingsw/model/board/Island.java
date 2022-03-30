@@ -75,5 +75,5 @@ public class Island {
         }
     }
 
-    public Tower getTower(){ return Tower; }
+    public Tower getTower(){ return tower; }
 }

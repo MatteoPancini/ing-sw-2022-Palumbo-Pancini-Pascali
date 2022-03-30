@@ -3,14 +3,17 @@ import java.util.Random;
 
 public class MotherNature {
     private int position;
-    //implementazione singleton
-    private static MotherNature instance = null;
-    public static MotherNature getInstance() {
-        if(instance == null) {
-            instance = new MotherNature();
+    private static MotherNature motherNature = null;
+
+    private MotherNature(){}
+
+    public static MotherNature getMotherNature() {
+        if(motherNature == null) {
+            motherNature = new MotherNature();
         }
-        return instance;
+        return motherNature;
     }
+
     public int getPosition() {
         return position;
     }
@@ -18,6 +21,5 @@ public class MotherNature {
     public void setPosition(int position) {
         this.position = position;
     }
-
 
 }
