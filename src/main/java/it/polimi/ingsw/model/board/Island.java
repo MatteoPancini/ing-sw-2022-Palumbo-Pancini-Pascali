@@ -17,14 +17,17 @@ public class Island {
     public Island(GameBoard board, int ID){
         this.board = board;
         islandID = ID;
-        tower = false;
+        tower = null;
         mergedIsland = new ArrayList<Island>;
         students = new ArrayList<Student>;
         noEntry = false;
         owner = null;
     }
 
-    public Tower hasTower(){ return tower; }
+    public boolean hasTower(){
+        if(tower == null) return false;
+        else return true;
+    }
 
     public int getIslandID(){ return islandID};
 
@@ -65,8 +68,8 @@ public class Island {
             else return false;
         }
         else {
-            if(board.getIslands().get(12).hasTower() == true){
-                if(board.getIslands().get(12).getTower().getColor() == tower.getColor()) return true;
+            if(board.getIslands().get(1).hasTower() == true){
+                if(board.getIslands().get(1).getTower().getColor() == tower.getColor()) return true;
             }
             else return false;
         }
