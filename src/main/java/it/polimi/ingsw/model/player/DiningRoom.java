@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 
 import java.util.ArrayList;
 
-public class DiningRoom{
+public class DiningRoom {
     private ArrayList<Table> diningRoom;
 
     public DiningRoom() {

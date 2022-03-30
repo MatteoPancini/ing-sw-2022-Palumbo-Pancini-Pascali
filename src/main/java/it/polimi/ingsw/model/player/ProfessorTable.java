@@ -9,7 +9,7 @@ import java.util.ArrayList
 public class ProfessorTable {
     private ArrayList<BoardCell> professorTable;
 
-    public professorTable{
+    public professorTable {
         ArrayList<PawnType> pawns = new ArrayList<PawnType>;
         pawns.add(PawnType.BLUE, PawnType.GREEN, PawnType.PINK, PawnType.RED, PawnType.YELLOW);
         for (PawnType p : pawns) {

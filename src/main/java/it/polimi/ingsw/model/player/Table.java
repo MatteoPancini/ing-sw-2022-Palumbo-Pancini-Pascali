@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 public class Table {
     private ArrayList<BoardCell> table;
 
-    public Table(PawnType p){
+    public Table(PawnType p) {
         for (int i = 1; i <= 10; i++) {
             BoardCell cell = new BoardCell(p);
             if(i == 3 || i == 6 || i == 9) cell.setCoinCell();
