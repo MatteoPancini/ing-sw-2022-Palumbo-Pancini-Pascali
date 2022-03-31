@@ -57,7 +57,11 @@ public class GameHandler {
         }
 
         if(game.getPlayersNumber() == 4) {
-
+            Collections.shuffle(game.getPlayers());
+            game.getPlayers().get(0).setTeammateID(game.getPlayers().get(2).getID());
+            game.getPlayers().get(2).setTeammateID(game.getPlayers().get(0).getID());
+            game.getPlayers().get(1).setTeammateID(game.getPlayers().get(3).getID());
+            game.getPlayers().get(3).setTeammateID(game.getPlayers().get(1).getID());
         }
 
         Collections.shuffle(game.getPlayers());
@@ -81,29 +85,35 @@ public class GameHandler {
         allColors.add(TowerColor.WHITE, TowerColor.BLACK, TowerColor.GREY);
         if(game.getPlayersNumber() == 3) {
             towersNumber = 6;
-            int j = 0;
+            int colorsCounter3P = 0;
             for(SchoolBoard s : schoolBoards){
                 for(int i = 1; i <= towersNumber; i++) {
-                    s.getTowerArea().addTowers(new Tower(allColors.get(j)));
+                    s.getTowerArea().addTowers(new Tower(allColors.get(colorsCounter3P)));
                 }
-                j++;
+                colorsCounter3P++;
             }
         }
 
         if(game.getPlayersNumber() == 2) {
             towersNumber = 8;
-            int z = 0;
+            int colorsCounter2P = 0;
             for(SchoolBoard s : schoolBoards){
                 for(int k = 1; k <= towersNumber; k++) {
-                    s.getTowerArea().addTowers(new Tower(allColors.get(z)));
+                    s.getTowerArea().addTowers(new Tower(allColors.get(colorsCounter2P)));
                 }
-                z++;
+                colorsCounter2P++;
             }
         }
 
         if(game.getPlayersNumber() == 4){
             towersNumber = 8;
-
+            int colorsCounter4P = 0;
+            for(Player p : game.getPlayers()){
+                if(p.getID() == 0 || p.getID() == 2) {
+                    p.getBoard().getTowerArea().addTowers(new Tower(allColors.get(colorsCounter4P)));
+                    colorsCounter4P++;
+                }
+            }
         }
 
         int maximum = 11;
