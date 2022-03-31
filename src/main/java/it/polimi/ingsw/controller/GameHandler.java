@@ -11,6 +11,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import it.polimi.ingsw.model.enumerations.TowerColor;
+import it.polimi.ingsw.model.player.Tower;
 import it.polimi.ingsw.model.player.SchoolBoard
 
 public class GameHandler {
@@ -65,8 +68,38 @@ public class GameHandler {
             }
         }
 
+        int towersNumber;
+        ArrayList<TowerColor> allColors = new ArrayList<TowerColor>;
+        allColors.add(TowerColor.WHITE, TowerColor.BLACK, TowerColor.GREY);
+        if(game.getPlayersNumber() == 3) {
+            towersNumber = 6;
+            int j = 0;
+            for(SchoolBoard s : schoolBoards){
+                for(int i = 1; i <= towersNumber; i++) {
+                    s.getTowerArea().addTowers(new Tower(allColors.get(j)));
+                }
+                j++;
+            }
+        }
+        else{
+            towersNumber = 8;
+
+        }
+
 
         Collections.shuffle(gameBoard.getIslands())
         gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
