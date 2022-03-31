@@ -10,18 +10,20 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 import java.util.ArrayList;
 
 public class Player {
-    private Wizards wizard;
-    private String nickname;
-    private AssistantDeck assistantDeck;
-    private SchoolBoard board;
+    private final Wizards wizard;
+    private final int playerID;
+    private final String nickname;
+    private final AssistantDeck assistantDeck;
+    private final SchoolBoard board;
     private boolean isPlaying;
     private boolean isWinner;
-    private Player teammate;
+    private final int teammateID;
 
     public Player(String nickname) {
         this.nickname = nickname;
         assistantDeck = new AssistantDeck();
         board = new SchoolBoard();
+        playerID = 0;
         this.wizard = null;
     };
 
@@ -51,4 +53,5 @@ public class Player {
     //sceglie un numero compreso tra 1 e card.moves
     public int chooseMoves(AssistantCard card) { ... };
 
+    public int setID(int playerID) { this.playerID = playerID};
 }

@@ -47,6 +47,10 @@ public class GameHandler {
     }
 
     public void initialize() {
+        for(int a = 1; a <= game.getPlayersNumber(); a++){
+            game.getPlayers().get(a - 1).setID(a);
+        }
+
         for(int p = 1; p <= game.getPlayersNumber(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
             schoolBoards.add(newSchoolBoard);
