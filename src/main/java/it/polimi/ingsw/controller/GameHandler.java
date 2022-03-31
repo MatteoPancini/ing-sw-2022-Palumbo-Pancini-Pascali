@@ -24,12 +24,11 @@ public class GameHandler {
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
 
-    public GameHandler(Game game, Controller controller,
-                       GameBoard gameBoard, ArrayList<SchoolBoard> schoolBoards){
+    public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
-        this.gameBoard = gameBoard;
-        this.schoolBoards = schoolBoards;
+        gameBoard = new GameBoard();
+        schoolBoards = new ArrayList<SchoolBoard>();
     }
 
     public void putStudentsOnCloud() {
@@ -56,10 +55,8 @@ public class GameHandler {
     public void initialize() {
         for(int p = 1; p <= game.getPlayersNumber(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
-            schoolBoards = new ArrayList<SchoolBoard>;
             schoolBoards.add(newSchoolBoard);
-            players = new ArrayList<Player>;
-            players.add(new Player(newSchoolBoard));
+            game.getPlayers().get(p - 1).setBoard(newSchoolBoard);
         }
 
         Collections.shuffle(game.getPlayers());
@@ -79,7 +76,7 @@ public class GameHandler {
         }
 
         int towersNumber;
-        ArrayList<TowerColor> allColors = new ArrayList<TowerColor>;
+        ArrayList<TowerColor> allColors = new ArrayList<TowerColor>();
         allColors.add(TowerColor.WHITE, TowerColor.BLACK, TowerColor.GREY);
         if(game.getPlayersNumber() == 3) {
             towersNumber = 6;
@@ -102,7 +99,9 @@ public class GameHandler {
                 z++;
             }
         }
+
         if(game.getPlayersNumber() == 4){
+            towersNumber = 8;
 
         }
 

@@ -18,10 +18,10 @@ public class Player {
     private boolean isWinner;
     private Player teammate;
 
-    public Player(SchoolBoard board) {
-        nickname = new String();
+    public Player(String nickname) {
+        this.nickname = nickname;
         assistantDeck = new AssistantDeck();
-        board = this.board;
+        board = new SchoolBoard();
         this.wizard = null;
     };
 
@@ -35,6 +35,10 @@ public class Player {
 
     public SchoolBoard getBoard() {
         return board;
+    }
+
+    public void setBoard(SchoolBoard board) {
+        this.board = board;
     }
 
     public AssistantCard pickAssistant() { ... };
