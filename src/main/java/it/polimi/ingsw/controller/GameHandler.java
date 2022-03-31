@@ -7,7 +7,9 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.board.CloudTile;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameHandler {
@@ -23,11 +25,16 @@ public class GameHandler {
 
     public void putStudentsOnCloud() {
         for (CloudTile cloud : board.getClouds()) {
-            for (int i = 0; i < game.getPlayersNumber(); i++) { //costante definita in fase di inizializzazione
-                List<Student> newStudents = new ArrayList<Student>();
-                //chiamo random/shuffle su Game.studentsBag + assegno a newStudents i primi/ultimi N studenti
-                cloud.setStudents(newStudents);
+            ArrayList<Student> newStudents = new ArrayList<Student>();
+            Collections.shuffle(board.getStudentsBag());
+            int studentsNumber;
+            if(game.getPlayersNumber() == 3) studentsNumber = 4;
+            else studentsNumber = 3;
+            for (int j = 0; j < studentsNumber; j++) {
+                newStudents.get(j) = board.getStudentsBag().get(0);
+                board.removeStudents(0);
             }
+            cloud.setStudents(newStudents);
         }
     }
 
@@ -38,7 +45,6 @@ public class GameHandler {
     }
 
     public void initialize() {
-        ...
         /*
             Collections.shuffle(players);
             currentPlayer = players.get(0);
