@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.board;
 import java.util.Random;
 
 public class MotherNature {
-    private Island position;
+    private int position;
     private static MotherNature motherNature = null;
 
     private MotherNature(){}
@@ -14,11 +14,11 @@ public class MotherNature {
         return motherNature;
     }
 
-    public Island getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(Island position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 

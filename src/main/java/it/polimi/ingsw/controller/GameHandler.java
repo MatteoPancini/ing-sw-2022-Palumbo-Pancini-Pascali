@@ -1,21 +1,15 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.board.GameBoard;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.enumerations.CardState;
+import it.polimi.ingsw.model.board.*;
+import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.board.CloudTile;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.player.Tower;
-import it.polimi.ingsw.model.player.SchoolBoard;
-import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.*;
 
 public class GameHandler {
     private Game game;
@@ -106,8 +100,18 @@ public class GameHandler {
         }
 
 
-        Collections.shuffle(gameBoard.getIslands())
-        gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0));
+        Collections.shuffle(gameBoard.getIslands());
+        gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0).getIslandID());
+        int n = 0;
+        for(int s = 1; s <= 11; s++){
+            if(n != 6){
+                int pos;
+                pos = gameBoard.getMotherNature().getPosition() + s;
+                gameBoard.getIslands().get(pos).addStudent(Collections.shuffle(gameBoard.getStudentsBag().get(0)));
+                gameBoard.removeStudents(0);
+            }
+            n++;
+        }
     }
 }
 
