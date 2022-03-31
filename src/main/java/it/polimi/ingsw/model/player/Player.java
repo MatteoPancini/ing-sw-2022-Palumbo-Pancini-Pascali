@@ -53,5 +53,12 @@ public class Player {
     //sceglie un numero compreso tra 1 e card.moves
     public int chooseMoves(AssistantCard card) { ... };
 
-    public int setID(int playerID) { this.playerID = playerID};
+    public void setID(int playerID) { this.playerID = playerID; }
+
+    public int getID(){ return playerID; }
+
+    public void setTeammateID(int teammateID) { this.teammateID = teammateID; };
+
+    public int getTeammateID(){ return teammateID; }
+
 }

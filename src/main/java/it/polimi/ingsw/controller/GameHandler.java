@@ -54,6 +54,10 @@ public class GameHandler {
             game.getPlayers().get(p - 1).setID(p);
         }
 
+        if(game.getPlayersNumber() == 4) {
+
+        }
+
         Collections.shuffle(game.getPlayers());
         game.setCurrentPlayer(game.getPlayers().get(0));
 
