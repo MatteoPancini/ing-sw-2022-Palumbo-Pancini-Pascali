@@ -39,5 +39,9 @@ public class GameHandler {
 
     public void initialize() {
         ...
+        /*
+            Collections.shuffle(players);
+            currentPlayer = players.get(0);
+         */
     }
 }
