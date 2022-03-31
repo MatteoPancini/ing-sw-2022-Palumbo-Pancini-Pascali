@@ -18,10 +18,10 @@ public class Player {
     private boolean isWinner;
     private Player teammate;
 
-    public Player(String name, SchoolBoard board) {
-        this.nickname = name;
-        this.assistantDeck = new AssistantDeck();
-        this.board = board;
+    public Player(SchoolBoard board) {
+        nickname = new String();
+        assistantDeck = new AssistantDeck();
+        board = this.board;
         this.wizard = null;
     };
 

@@ -14,12 +14,14 @@ import java.util.List;
 
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.player.Tower;
-import it.polimi.ingsw.model.player.SchoolBoard
+import it.polimi.ingsw.model.player.SchoolBoard;
+import it.polimi.ingsw.model.player.Player;
 
 public class GameHandler {
     private Game game;
     public Controller controller;
     private GameBoard gameBoard;
+    private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
 
     public GameHandler(Game game, Controller controller,
@@ -52,6 +54,16 @@ public class GameHandler {
     }
 
     public void initialize() {
+        for(int p = 1; p <= game.getPlayersNumber(); p++){
+            SchoolBoard newSchoolBoard = new SchoolBoard(p);
+            schoolBoards.add(newSchoolBoard);
+            players.add(new Player(newSchoolBoard));
+        }
+
+        for(int q = 1; q <= game.getPlayersNumber(); q++){
+
+        }
+
         Collections.shuffle(game.getPlayers());
         game.setCurrentPlayer(game.getPlayers().get(0));
 
@@ -81,8 +93,18 @@ public class GameHandler {
                 j++;
             }
         }
-        else{
+
+        if(game.getPlayersNumber() == 2) {
             towersNumber = 8;
+            int z = 0;
+            for(SchoolBoard s : schoolBoards){
+                for(int k = 1; k <= towersNumber; k++) {
+                    s.getTowerArea().addTowers(new Tower(allColors.get(z)));
+                }
+                z++;
+            }
+        }
+        if(game.getPlayersNumber() == 4){
 
         }
 
