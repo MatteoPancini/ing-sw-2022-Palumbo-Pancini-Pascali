@@ -68,7 +68,7 @@ public class GameBoard {
         return islands;
     }
 
-    public MotherNature getMotherNature() { return getMotherNature(); }
+    public MotherNature getMotherNature() { return motherNature; }
 
     public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
 

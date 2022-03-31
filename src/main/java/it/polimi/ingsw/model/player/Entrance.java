@@ -15,13 +15,9 @@ import it.polimi.ingsw.model.board.GameBoard;
 import java.util.Collections
 
 public class Entrance{
-    private final Game game;
-    private final GameBoard board;
     private ArrayList<Student> students;
 
-    public Entrance (Game game, SchoolBoard board){
-        this.game = game;
-        this.board = board;
+    public Entrance (){
         students = new ArrayList<Student>;
     }
 
