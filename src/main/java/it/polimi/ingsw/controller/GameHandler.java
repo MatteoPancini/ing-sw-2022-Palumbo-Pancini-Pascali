@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import it.polimi.ingsw.model.player.*;
+import java.lang.Object
+import java.util.Random
 
 public class GameHandler {
     private Game game;
@@ -104,28 +106,19 @@ public class GameHandler {
 
         }
 
-        gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0).getIslandID());
+        int maximum = 11;
+        gameBoard.getMotherNature().setPosition(Random.nextInt(maximum) + 1);
         int n = 1;
         for(int s = 1; s <= 11; s++){
             if(n != 6){
                 int pos;
-                pos = gameBoard.getMotherNature().getPosition() + s;
-                gameBoard.getIslands().get(pos).addStudent(Collections.shuffle(gameBoard.getStudentsBag().get(0)));
+                pos = (gameBoard.getMotherNature().getPosition() + s) % 12;
+                if(gameBoard.getMotherNature().getPosition() + s > 12) pos = pos - 1;
+                Collections.shuffle(gameBoard.getStudentsBag());
+                gameBoard.getIslands().get(pos).addStudent(gameBoard.getStudentsBag().get(0)));
                 gameBoard.removeStudents(0);
             }
             n++;
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
