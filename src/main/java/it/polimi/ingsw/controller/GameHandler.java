@@ -99,9 +99,8 @@ public class GameHandler {
 
         }
 
-         //BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOH
         gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0).getIslandID());
-        int n = 0;
+        int n = 1;
         for(int s = 1; s <= 11; s++){
             if(n != 6){
                 int pos;
