@@ -56,12 +56,10 @@ public class GameHandler {
     public void initialize() {
         for(int p = 1; p <= game.getPlayersNumber(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
+            schoolBoards = new ArrayList<SchoolBoard>;
             schoolBoards.add(newSchoolBoard);
+            players = new ArrayList<Player>;
             players.add(new Player(newSchoolBoard));
-        }
-
-        for(int q = 1; q <= game.getPlayersNumber(); q++){
-
         }
 
         Collections.shuffle(game.getPlayers());
