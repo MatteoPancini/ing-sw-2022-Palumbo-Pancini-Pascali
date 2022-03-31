@@ -11,43 +11,62 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import it.polimi.ingsw.model.player.SchoolBoard
 
 public class GameHandler {
     private Game game;
     public Controller controller;
-    private GameBoard board;
+    private GameBoard gameBoard;
+    private ArrayList<SchoolBoard> schoolBoards;
 
-    public GameHandler{
+    public GameHandler(Game game, Controller controller,
+                       GameBoard gameBoard, ArrayList<SchoolBoard> schoolBoards){
         this.game = game;
         this.controller = controller;
-        this.board = board;
+        this.gameBoard = gameBoard;
+        this.schoolBoards = schoolBoards;
     }
 
     public void putStudentsOnCloud() {
-        for (CloudTile cloud : board.getClouds()) {
+        for (CloudTile cloud : gameBoard.getClouds()) {
             ArrayList<Student> newStudents = new ArrayList<Student>();
-            Collections.shuffle(board.getStudentsBag());
+            Collections.shuffle(gameBoard.getStudentsBag());
             int studentsNumber;
             if(game.getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = board.getStudentsBag().get(0);
-                board.removeStudents(0);
+                newStudents.get(j) = gameBoard.getStudentsBag().get(0);
+                gameBoard.removeStudents(0);
             }
             cloud.setStudents(newStudents);
         }
     }
 
     public void updateAssistantsState() {
-        for(AssistantCard assistant : board.getLastAssistantUsed()) {
+        for(AssistantCard assistant : gameBoard.getLastAssistantUsed()) {
             assistant.setState(CardState.PLAYED);
         }
     }
 
     public void initialize() {
-        /*
-            Collections.shuffle(players);
-            currentPlayer = players.get(0);
-         */
+        Collections.shuffle(game.getPlayers());
+        game.setCurrentPlayer(game.getPlayers().get(0));
+
+        putStudentsOnCloud();
+
+        int studentsNumber;
+        if(game.getPlayersNumber() == 3) studentsNumber = 9;
+        else studentsNumber = 7;
+        for(SchoolBoard s : schoolBoards){
+            for(int i = 1; i <= studentsNumber; i++){
+                Collections.shuffle(gameBoard.getStudentsBag());
+                s.getEntrance().getStudents().add(gameBoard.getStudentsBag().get(0));
+                gameBoard.removeStudents(0);
+            }
+        }
+
+
+        Collections.shuffle(gameBoard.getIslands())
+        gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0));
     }
 }

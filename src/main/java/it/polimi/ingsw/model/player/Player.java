@@ -18,10 +18,10 @@ public class Player {
     private boolean isWinner;
     private Player teammate;
 
-    public Player(String name) {
+    public Player(String name, SchoolBoard board) {
         this.nickname = name;
         this.assistantDeck = new AssistantDeck();
-        this.board = new SchoolBoard();
+        this.board = board;
         this.wizard = null;
     };
 

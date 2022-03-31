@@ -19,30 +19,11 @@ public class Entrance{
     private final GameBoard board;
     private ArrayList<Student> students;
 
-    public Entrance(){
-        Collections.shuffle(board.getStudentsBag());
-        int studentsNumber;
-        if(game.getPlayersNumber() == 3) studentsNumber = 9;
-        else studentsNumber = 7;
+    public Entrance (Game game, SchoolBoard board){
+        this.game = game;
+        this.board = board;
         students = new ArrayList<Student>;
-        for(int i = 1; i <= studentsNumber; i++){
-            students.add(board.getStudentsBag().get(0));
-            board.removeStudents(0);
-        }
     }
 
     public ArrayList<Student> getStudents() { return students; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

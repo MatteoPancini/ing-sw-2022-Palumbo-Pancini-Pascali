@@ -7,4 +7,9 @@ public class Controller {
     private final GameHandler gameHandler;
     private final RoundHandler roundHandler;
 
+    public Controller(Game game, GameHandler gameHandler, RoundHandler roundHandler){
+        this.game = game;
+        this.gameHandler = gameHandler;
+        this.roundHandler = roundHandler;
+    }
 }

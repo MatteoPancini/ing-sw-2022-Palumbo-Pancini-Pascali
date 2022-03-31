@@ -6,6 +6,7 @@ import java.util.ArrayList
 
 public class CloudTile {
     private CloudSide side;
+
     private ArrayList<Student> cloudStudents;
 
     public CloudTile(CloudSide side){

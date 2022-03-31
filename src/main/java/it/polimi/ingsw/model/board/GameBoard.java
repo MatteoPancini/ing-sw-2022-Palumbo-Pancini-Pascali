@@ -43,7 +43,7 @@ public class GameBoard {
             }
         }
 
-        motherNature = new MotherNature;
+        motherNature = getMotherNature();
 
         playableCharacters = new CharacterCardDeck;
 
@@ -68,9 +68,7 @@ public class GameBoard {
         return islands;
     }
 
-    public MotherNature getMotherNature() {
-        return motherNature;
-    }
+    public MotherNature getMotherNature() { return getMotherNature(); }
 
     public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
 

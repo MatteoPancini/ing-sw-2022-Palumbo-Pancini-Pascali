@@ -15,6 +15,7 @@ public class ActionHandler {
     public void moveStudents(message1, message2) {
         //message1 = colore studente, message2 = destinazione (isola o diningroom)
         Student studentToMove = new Student(message1);
+        GameBoard board;
         PawnType studType = message1;
         int destinationIsland;
         //putStudentsDiningRoom o putStudentsIsland
@@ -48,9 +49,9 @@ public class ActionHandler {
 
     public void moveMotherNature(int moves) {
         //moves lo leggo lato client
-        int currPosition = GameBoard.motherNature.getPosition();
+        int currPosition = board.getMotherNature().getPosition();
         int newPosition = currPosition % 12;
-        motherNature.setPosition(newPosition);
+        board.getMotherNature().setPosition(newPosition);
 
         checkIslandInfluence() { ... }
     }
