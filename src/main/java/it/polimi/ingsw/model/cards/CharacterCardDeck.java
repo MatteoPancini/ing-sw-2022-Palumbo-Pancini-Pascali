@@ -7,7 +7,7 @@ import java.util.Collections;
 import it.polimi.ingsw.model.cards.CharacterCard;
 
 public class CharacterCardDeck {
-    private final ArrayList<CharacterCard> cards;
+    private final ArrayList<CharacterCard> cards = new ArrayList<CharacterCard>;
 
     public CharacterCardDeck{
         ArrayList<CharacterCard> allCards = new ArrayList<CharacterCard>;
@@ -28,7 +28,7 @@ public class CharacterCardDeck {
 
         Collections.shuffle(allCards);
         for(int i = 0; i < 3; i++){
-            cards(i) = allCards(i);
+            cards.get(i) = allCards.get(i);
         }
     }
 

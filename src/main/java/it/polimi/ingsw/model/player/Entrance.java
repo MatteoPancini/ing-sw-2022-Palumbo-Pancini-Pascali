@@ -31,7 +31,7 @@ public class Entrance{
         }
     }
 
-    public ArrayList<Student> getStudents(){ return students; }
+    public ArrayList<Student> getStudents() { return students; }
 }
 
 

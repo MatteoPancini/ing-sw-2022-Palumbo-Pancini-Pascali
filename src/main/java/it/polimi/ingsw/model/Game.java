@@ -21,8 +21,7 @@ public class Game {
         this.expertMode = expertMode;
         this.players = players;
         this.activePlayers = activePlayers;
-        Collections.shuffle(players);
-        currentPlayer = players.get(0);
+        currentPlayer = null;
     }
 
     public ArrayList<Player> getPlayers() { return players; }
