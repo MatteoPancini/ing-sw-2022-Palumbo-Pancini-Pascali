@@ -99,8 +99,7 @@ public class GameHandler {
 
         }
 
-
-        Collections.shuffle(gameBoard.getIslands());
+         //BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOH
         gameBoard.getMotherNature().setPosition((gameBoard.getIslands()).get(0).getIslandID());
         int n = 0;
         for(int s = 1; s <= 11; s++){

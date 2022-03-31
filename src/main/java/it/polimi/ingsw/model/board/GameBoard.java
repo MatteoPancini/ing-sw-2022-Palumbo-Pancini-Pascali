@@ -17,7 +17,7 @@ public class GameBoard {
     private ArrayList<AssistantCard> lastAssistantUsed;
     private final ArrayList<Student> studentsBag;
 
-    public GameBoard {
+    public GameBoard (){
         clouds = new ArrayList<CloudTile>;
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
