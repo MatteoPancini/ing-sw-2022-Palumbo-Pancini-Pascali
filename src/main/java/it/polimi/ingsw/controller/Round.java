@@ -17,19 +17,10 @@ public class Round {
     public void pianificationPhase() {
 
         //1) METODO DEL CONTROLLER in cui aggiunge x studenti in ogni nuvola -> public void putStudentsOnCLoud()
-        for (cloud in Game.clouds) {
-            for (int i = 0; i < NUM_STUDENTS; i++) { //costante definita in fase di inizializzazione
-                List<Student> newStudents = new ArrayList<Student>();
-                //chiamo random/shuffle su Game.studentsBag + assegno a newStudents i primi/ultimi N studenti
-                cloud.setStudents(newStudents);
-            }
-        }
+
 
         //2) GIOCO CARTE ASSISTENTE
-        for (assistantCard in Game.lastAssistantUsed) {
-            lastAssistantUsed.getOwner().pickAssistant();   //dalla carta risale al suo owner e gli fa scegliere un altro assistant, sovrascrivendolo
-            //qua ci mettiamo un try catch con una exception in cui se dovesse essere il primo turno fa giocare gli assistant in maniera casuale
-        }
+
         //3) ALGORITMO ORDINAMENTO del lastAssistantUsed basato su value
 
     }

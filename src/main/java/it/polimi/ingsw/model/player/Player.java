@@ -44,6 +44,7 @@ public class Player {
     }
 
     public AssistantCard pickAssistant() { ... };
+
     public void setWizard(Wizards wiz) {
         if(this.wizard == null) {
             this.wizard = wiz;
