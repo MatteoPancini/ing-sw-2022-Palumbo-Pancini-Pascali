@@ -1,10 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.GameBoard;
-import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.board.Professor;
-import it.polimi.ingsw.model.board.Student;
+import it.polimi.ingsw.model.board.*;
+import it.polimi.ingsw.model.enumerations.CloudSide;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
