@@ -27,11 +27,13 @@ public class PianificationHandler {
             int temp = 0;
             int minimum = j;
             for(int k = j + 1; k < board.getLastAssistantUsed().size(); k++){
-                if (board.getLastAssistantUsed().get(minimum) > board.getLastAssistantUsed().get(k)) minimum = k;
+                if (board.getLastAssistantUsed().get(minimum).getValue() > board.getLastAssistantUsed().get(k).getValue()){
+                    minimum = k;
+                }
                 if (minimum != j){
-                    temp = board.getLastAssistantUsed().get(j);
-                    board.getLastAssistantUsed().get(j) = board.getLastAssistantUsed().get(minimum);
-                    board.getLastAssistantUsed().get(minimum) = temp;
+                    temp = board.getLastAssistantUsed().get(j).getValue();
+                    board.getLastAssistantUsed().get(j).getValue() = board.getLastAssistantUsed().get(minimum);
+                    board.getLastAssistantUsed().get(minimum).getValue() = temp;
                 }
             }
         }
