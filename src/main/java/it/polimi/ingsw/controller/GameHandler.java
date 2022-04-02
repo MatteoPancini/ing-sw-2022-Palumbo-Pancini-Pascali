@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import it.polimi.ingsw.model.player.*;
-import java.lang.Object
-import java.util.Random
+import java.lang.Object;
+import java.util.Random;
 
 public class GameHandler {
     private Game game;
@@ -19,12 +19,33 @@ public class GameHandler {
     private GameBoard gameBoard;
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
+    private GameBoard gameBoardCopy;
 
     public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
         gameBoard = new GameBoard();
         schoolBoards = new ArrayList<SchoolBoard>();
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public GameBoard getGameBoardCopy() {
+        return gameBoardCopy;
+    }
+
+    public ArrayList<SchoolBoard> getSchoolBoards() {
+        return schoolBoards;
     }
 
     public void putStudentsOnCloud() {
