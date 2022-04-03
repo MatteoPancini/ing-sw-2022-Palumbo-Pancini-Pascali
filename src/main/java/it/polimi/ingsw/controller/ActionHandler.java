@@ -9,8 +9,16 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.player.Player;
 
-public class ActionHandler {
+import java.util.ArrayList;
 
+public class ActionHandler {
+    private final Game game;
+    private final GameBoard board;
+
+    public ActionHandler(Game game, GameBoard board){
+        this.game = game;
+        this.board = board;
+    }
 
     public void moveStudents(message1, message2) {
         //message1 = colore studente, message2 = destinazione (isola o diningroom)
@@ -44,7 +52,7 @@ public class ActionHandler {
     }
 
     public Player checkIslandInfluence(Island island){
-        //TODO: gigiox
+
     }
 
     public void moveMotherNature(int moves) {
@@ -58,8 +66,9 @@ public class ActionHandler {
 
 
     public void fromCloudToEntrance(CloudTile cloud) {
-        //cloud lo leggo lato client
-        for(Student stud : cloud.getCloudStudents())
-            player.getBoard().entrance.students.add(stud);
+        int studentsToMove;
+        if (game.getPlayersNumber() == 3) studentsToMove = 4;
+        else studentsToMove = 3;
+        ArrayList<Student> newStudents = cloud.getStudents();
     }
 }
