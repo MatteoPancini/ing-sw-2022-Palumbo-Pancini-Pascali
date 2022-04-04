@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.enumerations.CloudSide;
 
-import java.util.ArrayList
+import java.util.ArrayList;
 
 public class CloudTile {
     private CloudSide side;
@@ -11,7 +11,11 @@ public class CloudTile {
 
     public CloudTile(CloudSide side){
         this.side = side;
-        cloudStudents = new ArrayList<Student>;
+        cloudStudents = new ArrayList<Student>();
+    }
+
+    public CloudSide getSide() {
+        return side;
     }
 
     public ArrayList<Student> getStudents(){ return cloudStudents; }

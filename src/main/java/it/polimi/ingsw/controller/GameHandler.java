@@ -14,12 +14,12 @@ import java.lang.Object;
 import java.util.Random;
 
 public class GameHandler {
-    private Game game;
+    private static Game game;
     public Controller controller;
-    private GameBoard gameBoard;
+    private static GameBoard gameBoard;
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
-    private GameBoard gameBoardCopy;
+    private static GameBoard gameBoardCopy;
 
     public GameHandler(Game game, Controller controller){
         this.game = game;
@@ -50,14 +50,14 @@ public class GameHandler {
     }
 
     public void putStudentsOnCloud() {
-        for (CloudTile cloud : gameBoard.getClouds()) {
+        for (CloudTile cloud : gameBoardCopy.getClouds()) {
             ArrayList<Student> newStudents = new ArrayList<Student>();
-            Collections.shuffle(gameBoard.getStudentsBag());
+            Collections.shuffle(gameBoardCopy.getStudentsBag());
             int studentsNumber;
             if(game.getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = gameBoard.getStudentsBag().get(0);
+                newStudents.get(j) = gameBoardCopy.getStudentsBag().get(0);
                 gameBoard.removeStudents(0);
             }
             cloud.setStudents(newStudents);
@@ -65,7 +65,7 @@ public class GameHandler {
     }
 
     public void updateAssistantsState() {
-        for(AssistantCard assistant : gameBoard.getLastAssistantUsed()) {
+        for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed().getDeck()) {
             assistant.setState(CardState.PLAYED);
         }
     }
@@ -104,7 +104,9 @@ public class GameHandler {
 
         int towersNumber;
         ArrayList<TowerColor> allColors = new ArrayList<TowerColor>();
-        allColors.add(TowerColor.WHITE, TowerColor.BLACK, TowerColor.GREY);
+        allColors.add(TowerColor.WHITE);
+        allColors.add(TowerColor.BLACK);
+        allColors.add(TowerColor.GREY);
         if(game.getPlayersNumber() == 3) {
             towersNumber = 6;
             int colorsCounter3P = 0;

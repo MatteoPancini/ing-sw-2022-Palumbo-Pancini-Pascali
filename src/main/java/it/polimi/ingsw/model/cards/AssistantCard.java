@@ -6,11 +6,15 @@ import it.polimi.ingsw.model.player.Player;
 //TODO: Consigliato di usare un Factory Method per il JSON nel costruttore
 
 public class AssistantCard {
-    private int value;
-    private int moves;
+    private final int value;
+    private final int moves;
     private CardState state;
     private Player owner;
 
+    public AssistantCard(int value, int moves) {
+        this.value = value;
+        this.moves = moves;
+    }
 
     public int getValue() {
         return value;

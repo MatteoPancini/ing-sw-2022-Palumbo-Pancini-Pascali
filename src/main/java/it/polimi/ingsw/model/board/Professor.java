@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.enumerations.PawnType;
 
-import it.polimi.ingsw.model.player.Player
+import it.polimi.ingsw.model.player.Player;
 
 public class Professor {
     private final PawnType type;

@@ -14,7 +14,7 @@ public class GameBoard {
     private final ArrayList<Professor> professors;
     private final MotherNature motherNature;
     private final CharacterCardDeck playableCharacters;
-    private ArrayList<AssistantCard> lastAssistantUsed;
+    private AssistantDeck lastAssistantUsed;
     private final ArrayList<Student> studentsBag;
 
     public GameBoard (){
@@ -24,14 +24,17 @@ public class GameBoard {
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
         }
 
-        islands = new ArrayList<Island>;
+        islands = new ArrayList<Island>();
         for (int j = 1; j <= 12; j++){
-            islands.add(new Island(j));
+            islands.add(new Island(game.getGameBoard(), j));
         }
 
-        ArrayList<PawnType> pawns = new ArrayList<PawnType>;
-        pawns.add(PawnType.BLUE, PawnType.GREEN, PawnType.PINK, PawnType.RED, PawnType.YELLOW);
-        professors = new ArrayList<Professor>;
+        ArrayList<PawnType> pawns = new ArrayList<PawnType>();
+        pawns.add(PawnType.BLUE);
+        pawns.add(PawnType.GREEN);
+        pawns.add(PawnType.RED);
+        pawns.add(PawnType.YELLOW);
+        professors = new ArrayList<Professor>();
         for (PawnType p : pawns) {
             professors.add(new Professor(p));
         }
@@ -45,9 +48,17 @@ public class GameBoard {
 
         motherNature = getMotherNature();
 
-        playableCharacters = new CharacterCardDeck;
+        playableCharacters = new CharacterCardDeck();
 
-        lastAssistantUsed = new ArrayList<AssistantCard>;
+        lastAssistantUsed = new AssistantDeck();
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public CharacterCardDeck getPlayableCharacters() {
+        return playableCharacters;
     }
 
     public ArrayList<Student> getStudentsBag() {
@@ -70,8 +81,9 @@ public class GameBoard {
 
     public MotherNature getMotherNature() { return motherNature; }
 
-    public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
+    public AssistantDeck getLastAssistantUsed(){ return lastAssistantUsed; }
 
     public void setLastAssistantUsed(int index, AssistantCard card){
-        lastAssistantUsed.get(index) = card; }
+        lastAssistantUsed.getDeck().set(index, card);
+    }
 }
