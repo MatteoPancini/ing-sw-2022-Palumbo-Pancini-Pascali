@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GameBoardTest {
+public class StudentsBagTest {
     GameBoard testGameBoard;
     ArrayList<Player> players = new ArrayList<Player>;
     private final Game game = new Game(3, false, players, players);
