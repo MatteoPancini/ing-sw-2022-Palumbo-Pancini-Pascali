@@ -8,14 +8,16 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
 public class GameBoard {
-    private final Game game;
-    private final ArrayList<CloudTile> clouds;
-    private final ArrayList<Island> islands;
-    private final ArrayList<Professor> professors;
-    private final MotherNature motherNature;
-    private final CharacterCardDeck playableCharacters;
+    //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
+    //si cerca di assegnare un valore nelle righe successive
+    private final Game game = null;
+    private final ArrayList<CloudTile> clouds = null;
+    private ArrayList<Island> islands = null;
+    private ArrayList<Professor> professors = null;
+    private MotherNature motherNature = null;
+    private CharacterCardDeck playableCharacters = null;
     private AssistantDeck lastAssistantUsed;
-    private final ArrayList<Student> studentsBag;
+    private final ArrayList<Student> studentsBag = null;
 
     public GameBoard (){
         clouds = new ArrayList<CloudTile>;
