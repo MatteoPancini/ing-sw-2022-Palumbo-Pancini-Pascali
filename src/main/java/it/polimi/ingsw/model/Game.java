@@ -37,4 +37,8 @@ public class Game {
     public boolean isExpertMode() { return expertMode; }
 
     public void setCurrentPlayer(Player newPlayer) { currentPlayer = newPlayer; }
+
+    public void createNewPlayer (String nickname, int playerID){
+        players.add(new Player(nickname, playerID));
+    }
 }
