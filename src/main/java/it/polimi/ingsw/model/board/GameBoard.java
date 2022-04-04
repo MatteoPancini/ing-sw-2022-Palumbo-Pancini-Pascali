@@ -9,15 +9,16 @@ import it.polimi.ingsw.model.Game;
 
 public class GameBoard {
     private final Game game;
-    private final ArrayList<CloudTile> clouds;
-    private final ArrayList<Island> islands;
-    private final ArrayList<Professor> professors;
-    private final MotherNature motherNature;
-    private final CharacterCardDeck playableCharacters;
+    private ArrayList<CloudTile> clouds = null;
+    private ArrayList<Island> islands = null;
+    private ArrayList<Professor> professors = null;
+    private MotherNature motherNature = null;
+    private CharacterCardDeck playableCharacters = null;
     private ArrayList<AssistantCard> lastAssistantUsed;
-    private final ArrayList<Student> studentsBag;
+    private ArrayList<Student> studentsBag = null;
 
-    public GameBoard (){
+    public GameBoard(Game game){
+        this.game = game;
         clouds = new ArrayList<CloudTile>;
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));

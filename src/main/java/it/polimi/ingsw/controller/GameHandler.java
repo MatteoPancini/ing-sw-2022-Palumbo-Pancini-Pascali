@@ -24,7 +24,7 @@ public class GameHandler {
     public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(game);
         schoolBoards = new ArrayList<SchoolBoard>();
     }
 

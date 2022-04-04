@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
@@ -44,7 +45,7 @@ public class Player {
         this.board = board;
     }
 
-    public AssistantCard pickAssistant() { ... };
+    /*public AssistantCard pickAssistant() { ...; }*/
 
     public void setWizard(Wizards wiz) {
         if(this.wizard == null) {
@@ -56,8 +57,8 @@ public class Player {
         return wizard;
     }
 
-    //sceglie un numero compreso tra 1 e card.moves
-    public int chooseMoves(AssistantCard card) {};
+    /*//sceglie un numero compreso tra 1 e card.moves
+    public int chooseMoves(AssistantCard card) {};*/
 
     public void setPlayerID(int playerID) { this.playerID = playerID; }
 

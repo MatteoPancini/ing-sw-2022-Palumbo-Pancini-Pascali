@@ -9,8 +9,8 @@ public class SchoolBoard {
     private ProfessorTable professorTable;
     private TowerArea towerArea;
 
-    public SchoolBoard(int idBoard){
-        this.idBoard = idBoard;
+    public SchoolBoard(int boardID){
+        this.boardID = boardID;
         diningRoom = new DiningRoom();
         entrance = new Entrance();
         professorTable = new ProfessorTable();

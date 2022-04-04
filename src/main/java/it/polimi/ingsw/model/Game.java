@@ -16,7 +16,7 @@ public class Game {
 
 
     public Game(int playersNumber, boolean expertMode, ArrayList<Player> players, ArrayList<Player> activePlayers){
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(this);
         this.playersNumber = playersNumber;
         this.expertMode = expertMode;
         this.players = players;
