@@ -16,7 +16,7 @@ public class Game {
 
 
     public Game(int playersNumber, boolean expertMode, ArrayList<Player> players, ArrayList<Player> activePlayers){
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(this);
         this.playersNumber = playersNumber;
         this.expertMode = expertMode;
         this.players = players;
@@ -41,4 +41,8 @@ public class Game {
     public boolean isExpertMode() { return expertMode; }
 
     public void setCurrentPlayer(Player newPlayer) { currentPlayer = newPlayer; }
+
+    public void createNewPlayer (String nickname, int playerID){
+        players.add(new Player(nickname, playerID));
+    }
 }

@@ -20,7 +20,7 @@ public class ActionHandler {
         this.board = board;
     }
 
-    public void moveStudents(message1, message2) {
+    /*public void moveStudents(message1, message2) {
         //message1 = colore studente, message2 = destinazione (isola o diningroom)
         Student studentToMove = new Student(message1);
         GameBoard board;
@@ -62,7 +62,7 @@ public class ActionHandler {
         board.getMotherNature().setPosition(newPosition);
 
         checkIslandInfluence() { ... }
-    }
+    }*/
 
 
     public void fromCloudToEntrance(CloudTile cloud) {

@@ -14,7 +14,7 @@ public abstract class CharacterCard {
         price = 0;
     }
 
-    public void cardEffect() { ... };
+    //public void cardEffect() { ... };
     public void incrementPrice() {
         price++;
     };
@@ -29,7 +29,7 @@ public class Priest extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... }
     }
 }
 
@@ -39,7 +39,7 @@ public class CheeseMan extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class TheReader extends CharacterCard {
@@ -48,7 +48,7 @@ public class TheReader extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class LetterMan extends CharacterCard {
@@ -57,7 +57,7 @@ public class LetterMan extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class Prohibitioner extends CharacterCard {
@@ -66,7 +66,7 @@ public class Prohibitioner extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class Centaur extends CharacterCard {
@@ -75,7 +75,7 @@ public class Centaur extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class Joker extends CharacterCard {
@@ -84,7 +84,7 @@ public class Joker extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class Cavalier extends CharacterCard {
@@ -93,7 +93,7 @@ public class Cavalier extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class MushroomLover extends CharacterCard {
@@ -102,7 +102,7 @@ public class MushroomLover extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class Guitarist extends CharacterCard {
@@ -111,7 +111,7 @@ public class Guitarist extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class Princess extends CharacterCard {
@@ -120,7 +120,7 @@ public class Princess extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 public class DrWitch extends CharacterCard {
@@ -129,7 +129,7 @@ public class DrWitch extends CharacterCard {
     }
     @Override
     public void cardEffect() {
-        cardEffect() { ... };
+        //cardEffect() { ... };
     }
 }
 
