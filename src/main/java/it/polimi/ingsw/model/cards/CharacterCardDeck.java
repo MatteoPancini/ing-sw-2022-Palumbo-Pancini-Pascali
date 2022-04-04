@@ -7,23 +7,23 @@ import java.util.Collections;
 import it.polimi.ingsw.model.cards.CharacterCard;
 
 public class CharacterCardDeck {
-    private final ArrayList<CharacterCard> cards = new ArrayList<CharacterCard>;
+    private final ArrayList<CharacterCard> cards = new ArrayList<CharacterCard>();
 
     public CharacterCardDeck{
-        ArrayList<CharacterCard> allCards = new ArrayList<CharacterCard>;
+        ArrayList<CharacterCard> allCards = new ArrayList<CharacterCard>();
         allCards.add(
-                CharacterCard new Cavalier;
-                CharacterCard new CheeseMan;
-                CharacterCard new Priest;
-                CharacterCard new Princess;
-                CharacterCard new LetterMan;
-                CharacterCard new MushroomLover;
-                CharacterCard new Guitarist;
-                CharacterCard new Joker;
-                CharacterCard new Prohibitioner;
-                CharacterCard new TheReader;
-                CharacterCard new DrWitch;
-                CharacterCard new Centaur;
+                CharacterCard cavalier = new Cavalier();
+                CharacterCard cheeseMan = new CheeseMan();
+                CharacterCard priest = new Priest();
+                CharacterCard princess = new Princess();
+                CharacterCard letterMan = new LetterMan();
+                CharacterCard mushroomLover = new MushroomLover();
+                CharacterCard guitarist = new Guitarist();
+                CharacterCard joker = new Joker();
+                CharacterCard prohibitioner = new Prohibitioner();
+                CharacterCard theReader = new TheReader();
+                CharacterCard drWitch = new DrWitch();
+                CharacterCard centaur = new Centaur();
         )
 
         Collections.shuffle(allCards);

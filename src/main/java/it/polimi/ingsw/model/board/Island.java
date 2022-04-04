@@ -18,8 +18,8 @@ public class Island {
         this.board = board;
         islandID = ID;
         tower = null;
-        mergedIsland = new ArrayList<Island>;
-        students = new ArrayList<Student>;
+        mergedIsland = new ArrayList<Island>();
+        students = new ArrayList<Student>();
         noEntry = false;
         owner = null;
     }
@@ -29,19 +29,19 @@ public class Island {
         else return true;
     }
 
-    public int getIslandID(){ return islandID};
+    public int getIslandID(){ return islandID; }
 
     public ArrayList<Student> getStudents(){ return students; }
 
     public Player getOwner(){ return owner; }
 
-    public boolean getNoEntry(){ return noEntry};
+    public boolean getNoEntry(){ return noEntry; }
 
     public void setNoEntry(boolean noEntry){ this.noEntry = noEntry; }
 
-    public void setOwner(Player owner){ this.owner = owner};
+    public void setOwner(Player owner){ this.owner = owner; }
 
-    public void addStudent(Student newStudent){ students.add(newStudent)};
+    public void addStudent(Student newStudent){ students.add(newStudent); }
 
     public void merge(Island island){ mergedIsland.add(island); }
 

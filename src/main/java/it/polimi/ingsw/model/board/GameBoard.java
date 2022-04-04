@@ -19,25 +19,25 @@ public class GameBoard {
 
     public GameBoard(Game game){
         this.game = game;
-        clouds = new ArrayList<CloudTile>;
+        clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
         }
 
-        islands = new ArrayList<Island>;
+        islands = new ArrayList<Island>();
         for (int j = 1; j <= 12; j++){
             islands.add(new Island(j));
         }
 
-        ArrayList<PawnType> pawns = new ArrayList<PawnType>;
+        ArrayList<PawnType> pawns = new ArrayList<PawnType>();
         pawns.add(PawnType.BLUE, PawnType.GREEN, PawnType.PINK, PawnType.RED, PawnType.YELLOW);
-        professors = new ArrayList<Professor>;
+        professors = new ArrayList<Professor>();
         for (PawnType p : pawns) {
             professors.add(new Professor(p));
         }
 
-        studentsBag = new ArrayList<Student>;
+        studentsBag = new ArrayList<Student>();
         for (PawnType p : pawns) {
             for (int k = 1; k <= 26; k++) {
                 studentsBag.add(new Student(p));
@@ -46,9 +46,9 @@ public class GameBoard {
 
         motherNature = getMotherNature();
 
-        playableCharacters = new CharacterCardDeck;
+        playableCharacters = new CharacterCardDeck();
 
-        lastAssistantUsed = new ArrayList<AssistantCard>;
+        lastAssistantUsed = new ArrayList<AssistantCard>();
     }
 
     public ArrayList<Student> getStudentsBag() {
