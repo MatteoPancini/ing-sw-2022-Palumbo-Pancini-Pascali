@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import it.polimi.ingsw.model.player.*;
-import java.lang.Object
-import java.util.Random
+import java.lang.Object;
+import java.util.Random;
 
 public class GameHandler {
     private Game game;
@@ -42,12 +42,6 @@ public class GameHandler {
         }
     }
 
-    public void updateAssistantsState() {
-        for(AssistantCard assistant : gameBoard.getLastAssistantUsed()) {
-            assistant.setState(CardState.PLAYED);
-        }
-    }
-
     public void initialize() {
         for(int p = 1; p <= game.getPlayersNumber(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
@@ -72,10 +66,10 @@ public class GameHandler {
         int studentsNumber;
         if(game.getPlayersNumber() == 3) studentsNumber = 9;
         else studentsNumber = 7;
-        for(SchoolBoard s : schoolBoards){
+        for(SchoolBoard sB : schoolBoards){
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(gameBoard.getStudentsBag());
-                s.getEntrance().getStudents().add(gameBoard.getStudentsBag().get(0));
+                sB.getEntrance().getStudents().add(gameBoard.getStudentsBag().get(0));
                 gameBoard.removeStudents(0);
             }
         }
@@ -83,11 +77,12 @@ public class GameHandler {
         int towersNumber;
         ArrayList<TowerColor> allColors = new ArrayList<TowerColor>();
         allColors.add(TowerColor.WHITE, TowerColor.BLACK, TowerColor.GREY);
+
         if(game.getPlayersNumber() == 3) {
             towersNumber = 6;
             int colorsCounter3P = 0;
             for(SchoolBoard s : schoolBoards){
-                for(int i = 1; i <= towersNumber; i++) {
+                for(int j = 1; j <= towersNumber; j++) {
                     s.getTowerArea().addTowers(new Tower(allColors.get(colorsCounter3P)));
                 }
                 colorsCounter3P++;
@@ -119,10 +114,10 @@ public class GameHandler {
         int maximum = 11;
         gameBoard.getMotherNature().setPosition(Random.nextInt(maximum) + 1);
         int n = 1;
-        for(int s = 1; s <= 11; s++){
+        for(int k = 1; k <= 11; k++){
             if(n != 6){
                 int pos;
-                pos = (gameBoard.getMotherNature().getPosition() + s) % 12;
+                pos = (gameBoard.getMotherNature().getPosition() + k) % 12;
                 Collections.shuffle(gameBoard.getStudentsBag());
                 gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0)));
                 gameBoard.removeStudents(0);

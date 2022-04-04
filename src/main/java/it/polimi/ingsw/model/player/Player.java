@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Player {
     private final Wizards wizard;
@@ -17,15 +18,15 @@ public class Player {
     private final SchoolBoard board;
     private boolean isPlaying;
     private boolean isWinner;
-    private final int teammateID;
+    private Optional<Integer> teammateID;
 
-    public Player(String nickname) {
+    public Player(String nickname, int playerID) {
         this.nickname = nickname;
+        this.playerID = playerID;
         assistantDeck = new AssistantDeck();
-        board = new SchoolBoard();
-        playerID = 0;
+        board = null;
         this.wizard = null;
-    };
+    }
 
     public String getNickname() {
         return nickname;

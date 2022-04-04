@@ -73,5 +73,7 @@ public class GameBoard {
     public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
 
     public void setLastAssistantUsed(int index, AssistantCard card){
-        lastAssistantUsed.get(index) = card; }
+        lastAssistantUsed.get(index) = card;
+    }
+
 }
