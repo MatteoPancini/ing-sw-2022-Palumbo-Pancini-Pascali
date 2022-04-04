@@ -8,25 +8,25 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Player {
-    private final Wizards wizard;
-    private final int playerID;
+
     private final String nickname;
+    private final int playerID;
+    private Wizards wizard;
     private final AssistantDeck assistantDeck;
     private final SchoolBoard board;
     private boolean isPlaying;
     private boolean isWinner;
-    private Optional<Integer> teammateID;
+    private final int teammateID;
 
     public Player(String nickname, int playerID) {
         this.nickname = nickname;
-        this.playerID = playerID;
         assistantDeck = new AssistantDeck();
-        board = null;
+        board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
+        this.playerID = playerID;
         this.wizard = null;
-    }
+    };
 
     public String getNickname() {
         return nickname;
@@ -52,12 +52,16 @@ public class Player {
         }
     }
 
+    public Wizards getWizard() {
+        return wizard;
+    }
+
     //sceglie un numero compreso tra 1 e card.moves
-    public int chooseMoves(AssistantCard card) { ... };
+    public int chooseMoves(AssistantCard card) {};
 
-    public void setID(int playerID) { this.playerID = playerID; }
+    public void setPlayerID(int playerID) { this.playerID = playerID; }
 
-    public int getID(){ return playerID; }
+    public int getPlayerID(){ return playerID; }
 
     public void setTeammateID(int teammateID) { this.teammateID = teammateID; };
 

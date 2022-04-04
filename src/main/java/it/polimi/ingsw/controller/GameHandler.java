@@ -19,12 +19,33 @@ public class GameHandler {
     private GameBoard gameBoard;
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
+    private GameBoard gameBoardCopy;
 
     public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
         gameBoard = new GameBoard();
         schoolBoards = new ArrayList<SchoolBoard>();
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public GameBoard getGameBoardCopy() {
+        return gameBoardCopy;
+    }
+
+    public ArrayList<SchoolBoard> getSchoolBoards() {
+        return schoolBoards;
     }
 
     public void putStudentsOnCloud() {
@@ -47,15 +68,15 @@ public class GameHandler {
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
             schoolBoards.add(newSchoolBoard);
             game.getPlayers().get(p - 1).setBoard(newSchoolBoard);
-            game.getPlayers().get(p - 1).setID(p);
+            game.getPlayers().get(p - 1).setPlayerID(p);
         }
 
         if(game.getPlayersNumber() == 4) {
             Collections.shuffle(game.getPlayers());
-            game.getPlayers().get(0).setTeammateID(game.getPlayers().get(2).getID());
-            game.getPlayers().get(2).setTeammateID(game.getPlayers().get(0).getID());
-            game.getPlayers().get(1).setTeammateID(game.getPlayers().get(3).getID());
-            game.getPlayers().get(3).setTeammateID(game.getPlayers().get(1).getID());
+            game.getPlayers().get(0).setTeammateID(game.getPlayers().get(2).getPlayerID());
+            game.getPlayers().get(2).setTeammateID(game.getPlayers().get(0).getPlayerID());
+            game.getPlayers().get(1).setTeammateID(game.getPlayers().get(3).getPlayerID());
+            game.getPlayers().get(3).setTeammateID(game.getPlayers().get(1).getPlayerID());
         }
 
         Collections.shuffle(game.getPlayers());
@@ -104,7 +125,7 @@ public class GameHandler {
             towersNumber = 8;
             int colorsCounter4P = 0;
             for(Player p : game.getPlayers()){
-                if(p.getID() == 0 || p.getID() == 2) {
+                if(p.getPlayerID() == 0 || p.getPlayerID() == 2) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allColors.get(colorsCounter4P)));
                     colorsCounter4P++;
                 }

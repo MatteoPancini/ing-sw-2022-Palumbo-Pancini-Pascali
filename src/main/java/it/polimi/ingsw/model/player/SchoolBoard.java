@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.Game;
 
 public class SchoolBoard {
-    private int idBoard;
+    private int boardID;
     private DiningRoom diningRoom;
     private Entrance entrance;
     private ProfessorTable professorTable;
@@ -15,6 +15,10 @@ public class SchoolBoard {
         entrance = new Entrance();
         professorTable = new ProfessorTable();
         towerArea = new TowerArea();
+    }
+
+    public int getBoardID() {
+        return boardID;
     }
 
     public DiningRoom getDiningRoom() {
