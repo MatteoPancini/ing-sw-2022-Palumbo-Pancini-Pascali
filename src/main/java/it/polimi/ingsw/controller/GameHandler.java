@@ -26,9 +26,10 @@ public class GameHandler {
         this.controller = controller;
         gameBoard = new GameBoard();
         schoolBoards = new ArrayList<SchoolBoard>();
+        gameBoardCopy = this.gameBoard;
     }
 
-    public Game getGame() {
+    public static Game getGame() {
         return game;
     }
 
@@ -40,7 +41,7 @@ public class GameHandler {
         return players;
     }
 
-    public GameBoard getGameBoardCopy() {
+    public static GameBoard getGameBoardCopy() {
         return gameBoardCopy;
     }
 
