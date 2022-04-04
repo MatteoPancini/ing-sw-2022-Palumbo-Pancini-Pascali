@@ -8,11 +8,15 @@ public class Client implements ClientInterface {
     private Optional<String> nickname;
     private boolean validNickname = false;
 
-    private final String clientID;
+    private final String clientIPAddress;
     private final int port;
 
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
 
-    public Client(){}
+    public Client(String ipAddress, int port) {
+        this.nickname = Optional.empty();
+        this.clientIPAddress = ipAddress;
+        this.port = port;
+    }
 }
