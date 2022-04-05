@@ -8,8 +8,7 @@ import it.polimi.ingsw.model.Game;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
 
 import java.util.Random;

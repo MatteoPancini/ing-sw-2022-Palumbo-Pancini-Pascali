@@ -1,7 +1,7 @@
 package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.constants.Constants;
-import it.polimi.ingsw.network.Server;
+import it.polimi.ingsw.network.server.Server;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

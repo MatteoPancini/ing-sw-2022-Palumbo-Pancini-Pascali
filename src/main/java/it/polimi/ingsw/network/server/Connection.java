@@ -45,7 +45,7 @@ public class Connection implements Runnable {
 
     //FAI LOBBY (server) + run di connection
 
-    @Override
+    /*@Override
     public void run() {
         try {
             inputStream = new Scanner(socket.getInputStream());
@@ -77,5 +77,5 @@ public class Connection implements Runnable {
         }
     }
 
-    }
+    }*/
 }

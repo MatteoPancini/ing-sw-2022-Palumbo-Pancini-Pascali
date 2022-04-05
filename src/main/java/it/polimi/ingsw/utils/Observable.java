@@ -3,7 +3,7 @@ package it.polimi.ingsw.utils;
 import java.util.ArrayList;
 
 public class Observable<T> {
-    private List<Observer<T>> observers = new ArrayList<>();
+    /*private List<Observer<T>> observers = new ArrayList<>();
 
     public void addObserver(Observer<T> observer){
         synchronized (observers) {
@@ -23,6 +23,6 @@ public class Observable<T> {
                 observer.update(message);
             }
         }
-    }
+    }*/
 
 }
