@@ -1,8 +1,9 @@
-package it.polimi.ingsw.model.board;
+package controller;
 
 import it.polimi.ingsw.controller.PianificationHandler;
 import it.polimi.ingsw.model.Game;
 
+import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.player.Player;
 import org.junit.jupiter.api.BeforeEach;

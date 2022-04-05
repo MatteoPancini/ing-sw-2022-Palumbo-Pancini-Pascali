@@ -37,7 +37,7 @@ public class ServerApp {
 
         System.out.println("Starting Socket Server");
 
-        Server server = new Server()
+        Server server = new Server();
 
     }
 }
