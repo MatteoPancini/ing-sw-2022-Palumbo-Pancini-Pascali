@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
@@ -71,7 +72,7 @@ public class GameHandler {
     }
 
     public void initialize() {
-        for(int p = 1; p <= game.getPlayersNumber(); p++){
+        for(int p = 1; p <= Constants.getPlayersNum(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
             schoolBoards.add(newSchoolBoard);
             game.getPlayers().get(p - 1).setBoard(newSchoolBoard);

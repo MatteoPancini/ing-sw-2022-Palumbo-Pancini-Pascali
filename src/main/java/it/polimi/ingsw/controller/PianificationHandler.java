@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.enumerations.*;
 

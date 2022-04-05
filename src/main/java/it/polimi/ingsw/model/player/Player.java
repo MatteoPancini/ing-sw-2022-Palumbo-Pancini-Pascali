@@ -1,10 +1,12 @@
 package it.polimi.ingsw.model.player;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
-import it.polimi.ingsw.model.board.cards.AssistantDeck;
-import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
+import it.polimi.ingsw.model.enumerations.Wizards;;
 
 public class Player {
-
     private final String nickname;
     private final int playerID;
     private Wizards wizard;
@@ -39,7 +41,16 @@ public class Player {
         this.board = board;
     }
 
-    /*public AssistantCard pickAssistant() { ...; }*/
+    public AssistantCard pickAssistant() {
+        BufferedReader assistant = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Pick an assistant card: ");
+        try {
+            String s = br.readLine();
+            System.out.println(s);
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void setWizard(Wizards wiz) {
         if(this.wizard == null) {
@@ -51,8 +62,16 @@ public class Player {
         return wizard;
     }
 
-    /*//sceglie un numero compreso tra 1 e card.moves
-    public int chooseMoves(AssistantCard card) {};*/
+    public int chooseMoves(AssistantCard card) {
+        BufferedReader moves = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Pick a number of moves: ");
+        try {
+            String s = moves.readLine();
+            System.out.println(s);
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+    };
 
     public void setPlayerID(int playerID) { this.playerID = playerID; }
 
