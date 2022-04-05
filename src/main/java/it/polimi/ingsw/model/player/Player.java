@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.player;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;;
@@ -44,11 +44,12 @@ public class Player {
     public AssistantCard pickAssistant() {
         BufferedReader assistant = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick an assistant card: ");
-        try {
-            String s = assistant.readLine();
-            System.out.println(s);
+        try{
+            Assistants a = Assistants.valueOf(assistant.readLine());
+            return this.getAssistantDeck().getCard(a);
         }catch(Exception e) {
             System.out.println(e);
+            return pickAssistant();
         }
     }
 
@@ -68,12 +69,12 @@ public class Player {
         int n = 0;
         try {
             n = Integer.parseInt(moves.readLine());
-            System.out.println(n);
+            return n;
         }catch(Exception e) {
             System.out.println(e);
+            return -1;
         }
-        return n;
-    };
+    }
 
     public void setPlayerID(int playerID) { this.playerID = playerID; }
 
