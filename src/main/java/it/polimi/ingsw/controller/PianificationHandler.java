@@ -22,18 +22,16 @@ public class PianificationHandler {
         }
 
         for (int j = 0; j < board.getLastAssistantUsed().size(); j++) {
-            int temp = 0;
-            int minimum = j;
-            for(int k = j + 1; k < board.getLastAssistantUsed().size(); k++){
-                if (board.getLastAssistantUsed().get(minimum).getValue() > board.getLastAssistantUsed().get(k).getValue()){
-                    minimum = k;
-                }
-                if (minimum != j){
-                    temp = board.getLastAssistantUsed().get(j).getValue();
-                    board.getLastAssistantUsed().get(j).getValue() = board.getLastAssistantUsed().get(minimum);
-                    board.getLastAssistantUsed().get(minimum).getValue() = temp;
+            boolean flag = false;
+            for(int k = 0; k < board.getLastAssistantUsed().size() - 1; k++) {
+                if(board.getLastAssistantUsed().get(j).getValue() > board.getLastAssistantUsed().get(j + 1).getValue()) {
+                    AssistantCard ac = board.getLastAssistantUsed().get(j);
+                    board.setLastAssistantUsed(j, board.getLastAssistantUsed().get(j + 1));
+                    board.setLastAssistantUsed(j + 1, ac);
+                    flag = true;
                 }
             }
+            if(!flag) break;
         }
     }
 

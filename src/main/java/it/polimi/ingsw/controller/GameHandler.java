@@ -24,7 +24,7 @@ public class GameHandler {
     public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(game);
         schoolBoards = new ArrayList<SchoolBoard>();
         gameBoardCopy = this.gameBoard;
     }
@@ -57,7 +57,7 @@ public class GameHandler {
             if(game.getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = gameBoardCopy.getStudentsBag().get(0);
+                newStudents.add(gameBoardCopy.getStudentsBag().get(0));
                 gameBoard.removeStudents(0);
             }
             cloud.setStudents(newStudents);
@@ -141,7 +141,8 @@ public class GameHandler {
         }
 
         int maximum = 11;
-        gameBoard.getMotherNature().setPosition(Random.nextInt(maximum) + 1);
+        Random rand = new Random() ;
+        gameBoard.getMotherNature().setPosition(rand.nextInt(maximum + 1));
         int n = 1;
         for(int s = 1; s <= 11; s++){
             if(n != 6){
