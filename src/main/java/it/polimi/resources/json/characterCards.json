@@ -1,0 +1,79 @@
+{
+	"characterCards" : [
+	{
+		"name": "HERALD",
+		"effect": "Choose an island and calculate the majority as if Mother Nature had finished her move there. In this turn Mother Nature will move as usual and on the Island where her movement ends, the majority will normally be calculated.",
+		"initialCost": 3
+	},
+
+	{
+		"name": "KNIGHT",
+		"effect": "This turn, you have 2 additional influence points when calculating influence.",
+		"initialCost": 2
+	},
+
+	{
+		"name": "CENTAUR",
+		"effect": "When counting the influence on an Island (or a group of Islands), the Towers present are not counted.",
+		"initialCost": 3
+	},
+
+	{
+		"name": "FARMER",
+		"effect": "During this turn, you take control of Professors even if you have the same number of Students in your Dining Room as the player currently controlling them.",
+		"initialCost": 2
+	},
+
+	{
+		"name": "FUNGARUS",
+		"effect": "Choose a Student color; this turn, that color provides no influence when calculating influence.",
+		"initialCost": 3
+
+	},
+
+	{
+		"name": "JESTER",
+		"effect": "You can take up to 3 students from this card and exchange them with as many Students present in your Entrance.",
+		"initialCost": 1
+	},
+
+	{
+		"name": "THIEF",
+		"effect": "Choose a Student color; each player (including you) must return 3 Students of that color present in their Dining Room to the students bag. Whoever has fewer than 3 Students of that color will put back all he has.",
+		"initialCost": 3
+
+	},
+
+	{
+		"name": "MINESTREL",
+		"effect": "You can exchange up to 2 Students present in your Dining Room and in your Entrance.",
+		"initialCost": 1
+
+	},
+
+	{
+		"name": "MONK",
+		"effect": "Take 1 Student from the card and place it on an Island of your choice. Then, draw 1 Student from the bag and place it on this card.",
+		"initialCost": 1
+
+	},
+
+	{
+		"name": "GRANNY_HERBS",
+		"effect": "Place a Prohibition tile on an Island of your choice. The first time Mother Nature finishes her movement there, return the Prohibition tile to the card WITHOUT calculating influence on that Island or placing Towers.",
+		"initialCost": 2
+	},
+
+	{
+		"name": "MAGIC_POSTMAN",
+		"effect": "You can move Mother Nature up to 2 more Islands than indicated on the Assistant card you played.",
+		"initialCost": 1
+	},
+
+	{
+		"name": "SPOILED_PRINCESS",
+		"effect": "Take 1 Student from this card and place it in your Hall. Then draw a new Student from the bag and place it on this card.",
+		"initialCost": 2
+	}
+	]
+}

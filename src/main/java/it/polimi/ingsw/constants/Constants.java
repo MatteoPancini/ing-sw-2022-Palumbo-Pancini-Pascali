@@ -32,6 +32,15 @@ public class Constants {
     //PLAYERS
     public static final int NUM_MIN_PLAYERS = 2;
     public static final int NUM_MAX_PLAYERS = 4;
+    private static int playersNum;
+
+    public static int getPlayersNum() {
+        return playersNum;
+    }
+
+    public static void setPlayersNum(int playersNum) {
+        Constants.playersNum = playersNum;
+    }
 
 
 }

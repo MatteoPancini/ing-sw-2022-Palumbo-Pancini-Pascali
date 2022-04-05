@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlayAssistantTest {
-    ArrayList<Player> players = new ArrayList<Player>;
+    ArrayList<Player> players = new ArrayList<Player>();
     Game game = new Game(3, false, players, players);
     GameBoard gameBoard = new GameBoard(game);
     PianificationHandler testPianificationHandler;

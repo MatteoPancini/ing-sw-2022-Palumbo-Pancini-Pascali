@@ -27,7 +27,7 @@ public class AssistantCard {
     }
 
 
-    public String getName() {
+    public Assistants getName() {
         return name;
     }
 

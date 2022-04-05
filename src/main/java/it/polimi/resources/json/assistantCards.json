@@ -1,4 +1,5 @@
-[
+{
+	"assistantCards": [
 	{
 		"name": "EAGLE",
 		"orderValue": 4,
@@ -252,5 +253,5 @@
 		"motherNatureMoves": 3,
 		"wizard": "FOREST"
 	}
-
-]
+	]
+}

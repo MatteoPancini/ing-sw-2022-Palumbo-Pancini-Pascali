@@ -24,7 +24,7 @@ public class ServerApp {
             try {
                 portNumber = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.err.println("Sorry, you have to insert a number! Application will now close...");
+                System.err.println("Sorry, you have to insert a number!\nApplication will now close...");
                 System.exit(-1);
             }
             if (portNumber < 0 || (portNumber > 0 && portNumber < 1024)) {
@@ -37,7 +37,7 @@ public class ServerApp {
 
         System.out.println("Starting Socket Server");
 
-        Server server = new Server()
+        Server server = new Server(Constants.getPort());
 
     }
 }
