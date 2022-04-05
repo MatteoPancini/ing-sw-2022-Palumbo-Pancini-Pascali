@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerWizardsTest {
 
@@ -27,5 +28,12 @@ public class PlayerWizardsTest {
         assertEquals(3, Wizards.notChosen().size());
         Wizards.reset();
         assertEquals(4, Wizards.notChosen().size());
+    }
+
+    @Test
+    @DisplayName("isChosen method behaviour")
+    void chosenTest() {
+        Wizards.choose(Wizards.KING);
+        assertTrue(Wizards.isChosen(Wizards.KING));
     }
 }

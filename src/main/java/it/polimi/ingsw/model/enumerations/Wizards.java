@@ -20,12 +20,10 @@ public enum Wizards {
     }
 
     public static void choose(Wizards wizard) {
-
         availableWizards.remove(wizard);
     }
 
     public static boolean isChosen(Wizards wizard) {
-
         return !(availableWizards.contains(wizard));
     }
 
