@@ -27,10 +27,11 @@ public class PlayAssistantTest {
     }
 
     @Test
-    @DisplayName("Control lastAssistantUsedCard")
+    @DisplayName("Control last assistant card used")
     void lastAssistantUsedTest(){
-        game.getPlayers().get(0).pickAssistant() = new AssistantCard();
-        assertEquals(game.getPlayers().get(0).pickAssistant(), gameBoard.getLastAssistantUsed().get(0));
+        AssistantCard card = new AssistantCard(/**/, 10, 3, /**/);
+        gameBoard.setLastAssistantUsed(0, card);
+        assertEquals(card, gameBoard.getLastAssistantUsed().get(0));
     }
 
 }
