@@ -45,7 +45,7 @@ public class Player {
         BufferedReader assistant = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick an assistant card: ");
         try {
-            String s = br.readLine();
+            String s = assistant.readLine();
             System.out.println(s);
         }catch(Exception e) {
             System.out.println(e);
@@ -66,8 +66,8 @@ public class Player {
         BufferedReader moves = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick a number of moves: ");
         try {
-            String s = moves.readLine();
-            System.out.println(s);
+            int n = Integer.parseInt(moves.readLine());
+            System.out.println(n);
         }catch(Exception e) {
             System.out.println(e);
         }
