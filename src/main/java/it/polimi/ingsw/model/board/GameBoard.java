@@ -20,7 +20,7 @@ public class GameBoard {
     private final ArrayList<Student> studentsBag = null;
 
     public GameBoard (){
-        clouds = new ArrayList<CloudTile>;
+        clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
@@ -41,7 +41,7 @@ public class GameBoard {
             professors.add(new Professor(p));
         }
 
-        studentsBag = new ArrayList<Student>;
+        studentsBag = new ArrayList<Student>();
         for (PawnType p : pawns) {
             for (int k = 1; k <= 26; k++) {
                 studentsBag.add(new Student(p));

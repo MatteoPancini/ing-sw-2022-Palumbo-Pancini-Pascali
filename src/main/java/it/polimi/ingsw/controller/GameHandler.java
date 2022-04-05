@@ -148,7 +148,7 @@ public class GameHandler {
                 int pos;
                 pos = (gameBoard.getMotherNature().getPosition() + s) % 12;
                 Collections.shuffle(gameBoard.getStudentsBag());
-                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0)));
+                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0));;
                 gameBoard.removeStudents(0);
             }
             n++;
