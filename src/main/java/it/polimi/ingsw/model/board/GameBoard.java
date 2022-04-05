@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model.board;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import it.polimi.ingsw.model.board.*;
+
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.board.cards.AssistantDeck;
+import it.polimi.ingsw.model.board.cards.CharacterCardDeck;
 
 public class GameBoard {
     //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
@@ -19,8 +21,8 @@ public class GameBoard {
     private AssistantDeck lastAssistantUsed;
     private final ArrayList<Student> studentsBag = null;
 
-    public GameBoard (Game game){
-        clouds = new ArrayList<CloudTile>;
+    public GameBoard (){
+        clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
@@ -41,7 +43,7 @@ public class GameBoard {
             professors.add(new Professor(p));
         }
 
-        studentsBag = new ArrayList<Student>;
+        studentsBag = new ArrayList<Student>();
         for (PawnType p : pawns) {
             for (int k = 1; k <= 26; k++) {
                 studentsBag.add(new Student(p));
@@ -83,7 +85,7 @@ public class GameBoard {
 
     public MotherNature getMotherNature() { return motherNature; }
 
-    public AssistantDeck getLastAssistantUsed(){ return lastAssistantUsed; }
+    public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
 
     public void setLastAssistantUsed(int index, AssistantCard card){
         lastAssistantUsed.getDeck().set(index, card);

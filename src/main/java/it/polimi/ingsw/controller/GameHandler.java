@@ -5,12 +5,12 @@ import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+
+import it.polimi.ingsw.model.board.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
-import java.lang.Object;
+
 import java.util.Random;
 
 public class GameHandler {
@@ -65,7 +65,7 @@ public class GameHandler {
     }
 
     public void updateAssistantsState() {
-        for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed().getDeck()) {
+        for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed()) {
             assistant.setState(CardState.PLAYED);
         }
     }
@@ -148,7 +148,7 @@ public class GameHandler {
                 int pos;
                 pos = (gameBoard.getMotherNature().getPosition() + s) % 12;
                 Collections.shuffle(gameBoard.getStudentsBag());
-                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0)));
+                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0));;
                 gameBoard.removeStudents(0);
             }
             n++;

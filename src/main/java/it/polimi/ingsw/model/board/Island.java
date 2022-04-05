@@ -76,4 +76,8 @@ public class Island {
     }
 
     public Tower getTower(){ return tower; }
+
+    public ArrayList<Island> getMergedIslands(){ return mergedIsland; }
+
+    public void setTower(Tower tower) { this.tower = tower; }
 }

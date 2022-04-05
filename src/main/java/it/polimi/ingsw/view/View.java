@@ -1,20 +1,16 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.GameHandler;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.*;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.AssistantDeck;
-import it.polimi.ingsw.model.cards.CharacterCard;
-import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.board.cards.AssistantDeck;
+import it.polimi.ingsw.model.board.cards.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Scanner;
 
 public class View extends Observable {

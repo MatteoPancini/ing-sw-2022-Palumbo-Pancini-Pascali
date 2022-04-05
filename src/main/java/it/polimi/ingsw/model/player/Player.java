@@ -1,14 +1,7 @@
 package it.polimi.ingsw.model.player;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.AssistantDeck;
-import it.polimi.ingsw.model.cards.CharacterCard;
-import it.polimi.ingsw.model.board.Student;
+import it.polimi.ingsw.model.board.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;
-
-
-import java.util.ArrayList;
 
 public class Player {
 
