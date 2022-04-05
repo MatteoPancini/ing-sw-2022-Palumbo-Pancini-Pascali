@@ -56,11 +56,11 @@ public class Island {
             if(board.getIslands().get(12).hasTower() == true){
                 if(board.getIslands().get(12).getTower().getColor() == tower.getColor()) return true;
             }
-            else return false;
         }
+        return false;
     }
 
-    public void hasRight() {
+    public boolean hasRight() {
         if(islandID != 12) {
             if(board.getIslands().get(islandID + 1).hasTower() == true){
                 if(board.getIslands().get(islandID + 1).getTower().getColor() == tower.getColor()) return true;
@@ -71,8 +71,8 @@ public class Island {
             if(board.getIslands().get(1).hasTower() == true){
                 if(board.getIslands().get(1).getTower().getColor() == tower.getColor()) return true;
             }
-            else return false;
         }
+        return false;
     }
 
     public Tower getTower(){ return tower; }

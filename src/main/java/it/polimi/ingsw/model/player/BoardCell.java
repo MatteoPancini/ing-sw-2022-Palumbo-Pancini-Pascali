@@ -27,5 +27,5 @@ public class BoardCell {
 
     public boolean hasProfessor() { return professorCell; };
 
-    public void setCoinCell() { coinCell = true; };
+    public void setCoinCell() { coinCell = true; }
 }

@@ -24,6 +24,10 @@ public class Game {
         currentPlayer = null;
     }
 
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
     public ArrayList<Player> getPlayers() { return players; }
 
     public ArrayList<Player> getActivePlayers() { return activePlayers; }

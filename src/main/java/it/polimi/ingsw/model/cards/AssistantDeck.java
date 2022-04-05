@@ -12,7 +12,9 @@ public class AssistantDeck {
     }
 
     public void removeAssistant(AssistantCard card){
-
+        //cambia lo stato, non rimuove
     }
+
+
     //TODO: pensare a possibile implementazione tramite hashmap tra Wizard e OrderValue
 }

@@ -9,7 +9,11 @@ public class DiningRoom {
 
     public DiningRoom () {
         ArrayList<PawnType> pawns = new ArrayList<PawnType>();
-        pawns.add(PawnType.BLUE, PawnType.GREEN, PawnType.PINK, PawnType.RED, PawnType.YELLOW);
+        pawns.add(PawnType.BLUE);
+        pawns.add(PawnType.GREEN);
+        pawns.add(PawnType.PINK);
+        pawns.add(PawnType.RED);
+        pawns.add(PawnType.YELLOW);
         for(PawnType p : pawns){
             Table table = new Table(p);
             diningRoom.add(table);

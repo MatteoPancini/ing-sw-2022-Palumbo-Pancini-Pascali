@@ -14,21 +14,22 @@ import java.lang.Object;
 import java.util.Random;
 
 public class GameHandler {
-    private Game game;
+    private static Game game;
     public Controller controller;
-    private GameBoard gameBoard;
+    private static GameBoard gameBoard;
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
-    private GameBoard gameBoardCopy;
+    private static GameBoard gameBoardCopy;
 
     public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
-        gameBoard = new GameBoard(game);
+        gameBoard = new GameBoard();
         schoolBoards = new ArrayList<SchoolBoard>();
+        gameBoardCopy = this.gameBoard;
     }
 
-    public Game getGame() {
+    public static Game getGame() {
         return game;
     }
 
@@ -40,7 +41,7 @@ public class GameHandler {
         return players;
     }
 
-    public GameBoard getGameBoardCopy() {
+    public static GameBoard getGameBoardCopy() {
         return gameBoardCopy;
     }
 
@@ -49,17 +50,23 @@ public class GameHandler {
     }
 
     public void putStudentsOnCloud() {
-        for (CloudTile cloud : gameBoard.getClouds()) {
+        for (CloudTile cloud : gameBoardCopy.getClouds()) {
             ArrayList<Student> newStudents = new ArrayList<Student>();
-            Collections.shuffle(gameBoard.getStudentsBag());
+            Collections.shuffle(gameBoardCopy.getStudentsBag());
             int studentsNumber;
             if(game.getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = gameBoard.getStudentsBag().get(0);
+                newStudents.get(j) = gameBoardCopy.getStudentsBag().get(0);
                 gameBoard.removeStudents(0);
             }
             cloud.setStudents(newStudents);
+        }
+    }
+
+    public void updateAssistantsState() {
+        for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed().getDeck()) {
+            assistant.setState(CardState.PLAYED);
         }
     }
 
@@ -87,23 +94,24 @@ public class GameHandler {
         int studentsNumber;
         if(game.getPlayersNumber() == 3) studentsNumber = 9;
         else studentsNumber = 7;
-        for(SchoolBoard sB : schoolBoards){
+        for(SchoolBoard s : schoolBoards){
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(gameBoard.getStudentsBag());
-                sB.getEntrance().getStudents().add(gameBoard.getStudentsBag().get(0));
+                s.getEntrance().getStudents().add(gameBoard.getStudentsBag().get(0));
                 gameBoard.removeStudents(0);
             }
         }
 
         int towersNumber;
         ArrayList<TowerColor> allColors = new ArrayList<TowerColor>();
-        allColors.add(TowerColor.WHITE, TowerColor.BLACK, TowerColor.GREY);
-
+        allColors.add(TowerColor.WHITE);
+        allColors.add(TowerColor.BLACK);
+        allColors.add(TowerColor.GREY);
         if(game.getPlayersNumber() == 3) {
             towersNumber = 6;
             int colorsCounter3P = 0;
             for(SchoolBoard s : schoolBoards){
-                for(int j = 1; j <= towersNumber; j++) {
+                for(int i = 1; i <= towersNumber; i++) {
                     s.getTowerArea().addTowers(new Tower(allColors.get(colorsCounter3P)));
                 }
                 colorsCounter3P++;
@@ -135,12 +143,12 @@ public class GameHandler {
         int maximum = 11;
         gameBoard.getMotherNature().setPosition(Random.nextInt(maximum) + 1);
         int n = 1;
-        for(int k = 1; k <= 11; k++){
+        for(int s = 1; s <= 11; s++){
             if(n != 6){
                 int pos;
-                pos = (gameBoard.getMotherNature().getPosition() + k) % 12;
+                pos = (gameBoard.getMotherNature().getPosition() + s) % 12;
                 Collections.shuffle(gameBoard.getStudentsBag());
-                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0));
+                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0)));
                 gameBoard.removeStudents(0);
             }
             n++;

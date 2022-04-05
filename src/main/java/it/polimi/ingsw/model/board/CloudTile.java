@@ -14,6 +14,10 @@ public class CloudTile {
         cloudStudents = new ArrayList<Student>();
     }
 
+    public CloudSide getSide() {
+        return side;
+    }
+
     public ArrayList<Student> getStudents(){ return cloudStudents; }
 
     public void setStudents(ArrayList<Student> newStudents){ cloudStudents = newStudents; }
