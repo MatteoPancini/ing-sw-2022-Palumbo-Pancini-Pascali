@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model.board;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import it.polimi.ingsw.model.board.*;
+
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.board.cards.AssistantDeck;
+import it.polimi.ingsw.model.board.cards.CharacterCardDeck;
 
 public class GameBoard {
     //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
@@ -83,7 +85,7 @@ public class GameBoard {
 
     public MotherNature getMotherNature() { return motherNature; }
 
-    public AssistantDeck getLastAssistantUsed(){ return lastAssistantUsed; }
+    public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
 
     public void setLastAssistantUsed(int index, AssistantCard card){
         lastAssistantUsed.getDeck().set(index, card);
