@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.player.Tower;
 import java.util.ArrayList;
 
 public class Island {
-    private final GameBoard board;
+    private final GameBoard board = null;
     private int islandID;
     private Tower tower;
     private ArrayList<Island> mergedIsland;
@@ -18,8 +18,8 @@ public class Island {
         this.board = board;
         islandID = ID;
         tower = null;
-        mergedIsland = new ArrayList<Island>;
-        students = new ArrayList<Student>;
+        mergedIsland = new ArrayList<Island>();
+        students = new ArrayList<Student>();
         noEntry = false;
         owner = null;
     }
@@ -29,19 +29,19 @@ public class Island {
         else return true;
     }
 
-    public int getIslandID(){ return islandID};
+    public int getIslandID(){ return islandID; }
 
     public ArrayList<Student> getStudents(){ return students; }
 
     public Player getOwner(){ return owner; }
 
-    public boolean getNoEntry(){ return noEntry};
+    public boolean getNoEntry(){ return noEntry; }
 
     public void setNoEntry(boolean noEntry){ this.noEntry = noEntry; }
 
-    public void setOwner(Player owner){ this.owner = owner};
+    public void setOwner(Player owner){ this.owner = owner; }
 
-    public void addStudent(Student newStudent){ students.add(newStudent)};
+    public void addStudent(Student newStudent){ students.add(newStudent); }
 
     public void merge(Island island){ mergedIsland.add(island); }
 
@@ -56,11 +56,11 @@ public class Island {
             if(board.getIslands().get(12).hasTower() == true){
                 if(board.getIslands().get(12).getTower().getColor() == tower.getColor()) return true;
             }
-            else return false;
         }
+        return false;
     }
 
-    public void hasRight() {
+    public boolean hasRight() {
         if(islandID != 12) {
             if(board.getIslands().get(islandID + 1).hasTower() == true){
                 if(board.getIslands().get(islandID + 1).getTower().getColor() == tower.getColor()) return true;
@@ -71,8 +71,8 @@ public class Island {
             if(board.getIslands().get(1).hasTower() == true){
                 if(board.getIslands().get(1).getTower().getColor() == tower.getColor()) return true;
             }
-            else return false;
         }
+        return false;
     }
 
     public Tower getTower(){ return tower; }

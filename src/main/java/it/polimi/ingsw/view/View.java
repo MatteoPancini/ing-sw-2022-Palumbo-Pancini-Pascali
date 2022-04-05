@@ -17,7 +17,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-public class View extends Observable implements Observer {
+public class View extends Observable {
     private Scanner scanner;
     private PrintWriter outputStream;
     private String chosenWizard;
@@ -37,7 +37,7 @@ public class View extends Observable implements Observer {
 
     public void update(Observable o, String input) {
         //azioni da eseguire quando il model notifica un suo cambiamento
-        showModel(GameHandler.modelCopy);
+        showModel(GameHandler.getGameBoardCopy());
     }
 
     public void askNickname() {
@@ -103,7 +103,7 @@ public class View extends Observable implements Observer {
         notifyObservers();
     }
 
-    public void showGenerciMessage(String message) {
+    public void showGenericMessage(String message) {
         outputStream.println(message);
     }
 

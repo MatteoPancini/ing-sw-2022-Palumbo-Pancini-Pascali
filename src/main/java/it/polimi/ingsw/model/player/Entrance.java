@@ -12,13 +12,13 @@ import it.polimi.ingsw.model.Game;
 
 import it.polimi.ingsw.model.board.GameBoard;
 
-import java.util.Collections
+import java.util.Collections;
 
 public class Entrance{
     private ArrayList<Student> students;
 
     public Entrance (){
-        students = new ArrayList<Student>;
+        students = new ArrayList<Student>();
     }
 
     public ArrayList<Student> getStudents() { return students; }

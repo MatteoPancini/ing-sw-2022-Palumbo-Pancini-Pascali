@@ -8,14 +8,16 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
 public class GameBoard {
-    private final Game game;
-    private final ArrayList<CloudTile> clouds;
-    private final ArrayList<Island> islands;
-    private final ArrayList<Professor> professors;
-    private final MotherNature motherNature;
-    private final CharacterCardDeck playableCharacters;
-    private ArrayList<AssistantCard> lastAssistantUsed;
-    private final ArrayList<Student> studentsBag;
+    //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
+    //si cerca di assegnare un valore nelle righe successive
+    private final Game game = null;
+    private final ArrayList<CloudTile> clouds = null;
+    private ArrayList<Island> islands = null;
+    private ArrayList<Professor> professors = null;
+    private MotherNature motherNature = null;
+    private CharacterCardDeck playableCharacters = null;
+    private AssistantDeck lastAssistantUsed;
+    private final ArrayList<Student> studentsBag = null;
 
     public GameBoard (){
         clouds = new ArrayList<CloudTile>;
@@ -24,14 +26,17 @@ public class GameBoard {
             else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
         }
 
-        islands = new ArrayList<Island>;
+        islands = new ArrayList<Island>();
         for (int j = 1; j <= 12; j++){
-            islands.add(new Island(j));
+            islands.add(new Island(game.getGameBoard(), j));
         }
 
-        ArrayList<PawnType> pawns = new ArrayList<PawnType>;
-        pawns.add(PawnType.BLUE, PawnType.GREEN, PawnType.PINK, PawnType.RED, PawnType.YELLOW);
-        professors = new ArrayList<Professor>;
+        ArrayList<PawnType> pawns = new ArrayList<PawnType>();
+        pawns.add(PawnType.BLUE);
+        pawns.add(PawnType.GREEN);
+        pawns.add(PawnType.RED);
+        pawns.add(PawnType.YELLOW);
+        professors = new ArrayList<Professor>();
         for (PawnType p : pawns) {
             professors.add(new Professor(p));
         }
@@ -45,9 +50,17 @@ public class GameBoard {
 
         motherNature = getMotherNature();
 
-        playableCharacters = new CharacterCardDeck;
+        playableCharacters = new CharacterCardDeck();
 
-        lastAssistantUsed = new ArrayList<AssistantCard>;
+        lastAssistantUsed = new AssistantDeck();
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public CharacterCardDeck getPlayableCharacters() {
+        return playableCharacters;
     }
 
     public ArrayList<Student> getStudentsBag() {
@@ -70,8 +83,9 @@ public class GameBoard {
 
     public MotherNature getMotherNature() { return motherNature; }
 
-    public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
+    public AssistantDeck getLastAssistantUsed(){ return lastAssistantUsed; }
 
     public void setLastAssistantUsed(int index, AssistantCard card){
-        lastAssistantUsed.get(index) = card; }
+        lastAssistantUsed.getDeck().set(index, card);
+    }
 }

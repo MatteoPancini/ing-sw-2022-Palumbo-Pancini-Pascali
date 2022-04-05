@@ -8,4 +8,6 @@ public class Student {
     public Student(PawnType type){
         this.type = type;
     }
+
+    public PawnType getType() { return this.type; }
 }

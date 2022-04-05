@@ -8,8 +8,8 @@ public class TowerArea {
     private ArrayList<Tower> myTowers;
 
     public TowerArea () {
-        myTowers = new ArrayList<Tower>;
+        myTowers = new ArrayList<Tower>();
     }
 
-    public void addTowers (Tower tower) { myTowers.add(tower) };
+    public void addTowers (Tower tower) { myTowers.add(tower); };
 }

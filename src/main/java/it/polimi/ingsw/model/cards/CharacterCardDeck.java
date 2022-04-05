@@ -7,24 +7,36 @@ import java.util.Collections;
 import it.polimi.ingsw.model.cards.CharacterCard;
 
 public class CharacterCardDeck {
-    private final ArrayList<CharacterCard> cards = new ArrayList<CharacterCard>;
+    private final ArrayList<CharacterCard> cards = new ArrayList<CharacterCard>();
+    CharacterCard priest;
+    CharacterCard cheeseman;
+    CharacterCard princess;
+    CharacterCard letterman;
+    CharacterCard mushroomLover;
+    CharacterCard guitarist;
+    CharacterCard joker;
+    CharacterCard prohibitioner;
+    CharacterCard theReader;
+    CharacterCard drWitch;
+    CharacterCard centaur;
+    CharacterCard cavalier;
 
-    public CharacterCardDeck{
-        ArrayList<CharacterCard> allCards = new ArrayList<CharacterCard>;
+    public CharacterCardDeck() {
+        ArrayList<CharacterCard> allCards = new ArrayList<CharacterCard>();
         allCards.add(
-                CharacterCard new Cavalier;
-                CharacterCard new CheeseMan;
-                CharacterCard new Priest;
-                CharacterCard new Princess;
-                CharacterCard new LetterMan;
-                CharacterCard new MushroomLover;
-                CharacterCard new Guitarist;
-                CharacterCard new Joker;
-                CharacterCard new Prohibitioner;
-                CharacterCard new TheReader;
-                CharacterCard new DrWitch;
-                CharacterCard new Centaur;
-        )
+                cavalier = new Cavalier();
+                cheeseman = new CheeseMan();
+                priest = new Priest();
+                princess = new Princess();
+                letterman = new LetterMan();
+                mushroomLover = new MushroomLover();
+                guitarist = new Guitarist();
+                joker = new Joker();
+                prohibitioner = new Prohibitioner();
+                theReader = new TheReader();
+                drWitch = new DrWitch();
+                centaur = new Centaur();
+        );
 
         Collections.shuffle(allCards);
         for(int i = 0; i < 3; i++){
@@ -32,7 +44,7 @@ public class CharacterCardDeck {
         }
     }
 
-    public CharacterCardDeck getCards(){ return cards; }
+    public  ArrayList<CharacterCard> getCards(){ return cards; }
 
 }
 
