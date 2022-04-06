@@ -8,7 +8,5 @@ import it.polimi.ingsw.model.cards.CharacterCard;
 
 public class CharacterCardDeck {
 
-    public  ArrayList<CharacterCard> getCards(){ return cards; }
-
 }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
@@ -7,8 +8,7 @@ import it.polimi.ingsw.model.Game;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
 
 import java.util.Random;
@@ -24,7 +24,7 @@ public class GameHandler {
     public GameHandler(Game game, Controller controller){
         this.game = game;
         this.controller = controller;
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(game);
         schoolBoards = new ArrayList<SchoolBoard>();
         gameBoardCopy = this.gameBoard;
     }
@@ -57,7 +57,7 @@ public class GameHandler {
             if(game.getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = gameBoardCopy.getStudentsBag().get(0);
+                newStudents.add(gameBoardCopy.getStudentsBag().get(0));
                 gameBoard.removeStudents(0);
             }
             cloud.setStudents(newStudents);
@@ -71,7 +71,7 @@ public class GameHandler {
     }
 
     public void initialize() {
-        for(int p = 1; p <= game.getPlayersNumber(); p++){
+        for(int p = 1; p <= Constants.getPlayersNum(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
             schoolBoards.add(newSchoolBoard);
             game.getPlayers().get(p - 1).setBoard(newSchoolBoard);
@@ -141,7 +141,8 @@ public class GameHandler {
         }
 
         int maximum = 11;
-        gameBoard.getMotherNature().setPosition(Random.nextInt(maximum) + 1);
+        Random rand = new Random() ;
+        gameBoard.getMotherNature().setPosition(rand.nextInt(maximum + 1));
         int n = 1;
         for(int s = 1; s <= 11; s++){
             if(n != 6){

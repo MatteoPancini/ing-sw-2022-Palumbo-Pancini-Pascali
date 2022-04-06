@@ -5,25 +5,21 @@ import java.util.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.AssistantDeck;
-import it.polimi.ingsw.model.cards.CharacterCardDeck;
-import it.polimi.ingsw.utils.Observable;
-import it.polimi.ingsw.utils.Observer;
-
-public class GameBoard extends Observer implements Observable {
+import it.polimi.ingsw.model.cards.*;
+public class GameBoard {
     //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
     //si cerca di assegnare un valore nelle righe successive
-    private final Game game = null;
-    private final ArrayList<CloudTile> clouds = null;
+    private Game game = null;
+    private ArrayList<CloudTile> clouds = null;
     private ArrayList<Island> islands = null;
     private ArrayList<Professor> professors = null;
     private MotherNature motherNature = null;
     private CharacterCardDeck playableCharacters = null;
-    private AssistantDeck lastAssistantUsed;
-    private final ArrayList<Student> studentsBag = null;
+    private ArrayList<AssistantCard> lastAssistantUsed;
+    private ArrayList<Student> studentsBag = null;
 
-    public GameBoard (){
+    public GameBoard (Game game){
+        this.game = game;
         clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
@@ -56,7 +52,7 @@ public class GameBoard extends Observer implements Observable {
 
         playableCharacters = new CharacterCardDeck();
 
-        lastAssistantUsed = new AssistantDeck();
+        lastAssistantUsed = new ArrayList<AssistantCard>();
     }
 
     public Game getGame() {
@@ -90,6 +86,6 @@ public class GameBoard extends Observer implements Observable {
     public ArrayList<AssistantCard> getLastAssistantUsed(){ return lastAssistantUsed; }
 
     public void setLastAssistantUsed(int index, AssistantCard card){
-        lastAssistantUsed.getDeck().set(index, card);
+        lastAssistantUsed.set(index, card);
     }
 }
