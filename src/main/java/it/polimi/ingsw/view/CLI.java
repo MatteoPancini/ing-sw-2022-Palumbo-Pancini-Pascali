@@ -1,21 +1,25 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.GameHandler;
-import it.polimi.ingsw.model.board.*;
-import it.polimi.ingsw.model.board.cards.AssistantCard;
-import it.polimi.ingsw.model.board.cards.AssistantDeck;
-import it.polimi.ingsw.model.board.cards.CharacterCard;
+import it.polimi.ingsw.model.board.CloudTile;
+import it.polimi.ingsw.model.board.GameBoard;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
+import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Observable;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
 import java.util.Scanner;
 
-public class View extends Observable {
+public class CLI {
     private Scanner scanner;
-    private PrintWriter outputStream;
+    private PrintWriter output;
+    private ModelView modelView;
     private String chosenWizard;
     private String chosenNickname;
     private String chosenMoves;
@@ -26,7 +30,13 @@ public class View extends Observable {
     private String chosenTeam;
     private String chosenCharacter;
 
-    //stampa a schermo la GameBoard (tutte? la propria?)
+    public CLI() {
+        scanner = new Scanner(System.in);
+        output = new PrintWriter(System.out);
+        modelView = new ModelView(this);
+    }
+
+    //scrivere diversi show per ogni parte del modello da mostrare
     public void showModel(GameBoard modelCopy) {
         outputStream.println(???);
     }

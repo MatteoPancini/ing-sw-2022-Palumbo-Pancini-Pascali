@@ -5,11 +5,13 @@ import java.util.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.cards.AssistantCard;
-import it.polimi.ingsw.model.board.cards.AssistantDeck;
-import it.polimi.ingsw.model.board.cards.CharacterCardDeck;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
+import it.polimi.ingsw.model.cards.CharacterCardDeck;
+import it.polimi.ingsw.utils.Observable;
+import it.polimi.ingsw.utils.Observer;
 
-public class GameBoard {
+public class GameBoard extends Observer implements Observable {
     //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
     //si cerca di assegnare un valore nelle righe successive
     private final Game game = null;

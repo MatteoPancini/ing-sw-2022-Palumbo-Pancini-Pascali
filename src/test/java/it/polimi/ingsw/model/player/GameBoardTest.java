@@ -3,10 +3,14 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.board.cards.AssistantCard;
-import it.polimi.ingsw.model.board.cards.AssistantDeck;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
+import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.CloudSide;
 import it.polimi.ingsw.model.enumerations.PawnType;
+import it.polimi.ingsw.model.enumerations.Wizards;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,7 +64,7 @@ public class GameBoardTest {
     @Test
     @BeforeEach
     void setupAssistants() {
-        assistant1 = new AssistantCard(3,4);
+        assistant1 = new AssistantCard(Assistants.CAT,4,3, Wizards.FOREST);
         assistant2 = new AssistantCard(10, 2);
         assistant3 = new AssistantCard(4, 5);
     }
