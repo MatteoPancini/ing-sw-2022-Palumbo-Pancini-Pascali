@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
@@ -10,23 +11,24 @@ import java.util.Collections;
 
 import it.polimi.ingsw.model.board.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.server.Server;
 
 import java.util.Random;
 
 public class GameHandler {
     private static Game game;
-    public Controller controller;
+    private Controller controller;
+    private Server server;
+    private int playersNumber;
     private static GameBoard gameBoard;
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
     private static GameBoard gameBoardCopy;
 
-    public GameHandler(Game game, Controller controller){
-        this.game = game;
-        this.controller = controller;
-        gameBoard = new GameBoard();
-        schoolBoards = new ArrayList<SchoolBoard>();
-        gameBoardCopy = this.gameBoard;
+    public GameHandler(Server server){
+        game = new Game();
+        controller = new Controller(game, this);
+        this.server = server;
     }
 
     public static Game getGame() {
@@ -35,6 +37,10 @@ public class GameHandler {
 
     public GameBoard getGameBoard() {
         return gameBoard;
+    }
+
+    public void addGamePlayer(String playerNickname, int playerID) {
+        game.addPlayer(new Player(playerNickname, playerID));
     }
 
     public ArrayList<Player> getPlayers() {
@@ -69,6 +75,22 @@ public class GameHandler {
             assistant.setState(CardState.PLAYED);
         }
     }
+
+    public void sendSinglePlayer(Answer serverAnswer, int clientID) {
+        server.getVirtualClientFromID(clientID).sendAnswerToClient(serverAnswer);
+    }
+
+    public void sendBroadcast(Answer serverAnswer) {
+        for(Player player : game.getActivePlayers()) {
+            sendSinglePlayer(serverAnswer, server.getIDFromNickname(player.getNickname()));
+        }
+    }
+
+    public void setPlayersNumber(int playersNumber) {
+        this.playersNumber = playersNumber;
+    }
+
+
 
     public void initialize() {
         for(int p = 1; p <= game.getPlayersNumber(); p++){

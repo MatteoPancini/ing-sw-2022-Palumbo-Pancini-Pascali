@@ -24,6 +24,12 @@ public class Game {
         currentPlayer = null;
     }
 
+
+    public void addPlayer(Player newPlayer) {
+        players.add(newPlayer);
+        activePlayers.add(newPlayer);
+    }
+
     public GameBoard getGameBoard() {
         return gameBoard;
     }

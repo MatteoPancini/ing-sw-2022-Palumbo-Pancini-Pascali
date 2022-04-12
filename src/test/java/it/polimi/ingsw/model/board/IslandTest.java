@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.board;
+
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.Game;
