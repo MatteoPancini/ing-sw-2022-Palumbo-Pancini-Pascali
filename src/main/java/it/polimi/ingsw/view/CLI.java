@@ -119,10 +119,10 @@ public class CLI {
 
     public void showWinMessage(Player winner) {
         if (GameHandler.getGame().getPlayersNumber() != 4) {
-            outputStream.println("Partita terminata! Il vincitore è: " + winner);
+            output.println("Partita terminata! Il vincitore è: " + winner);
         }
         else {
-            outputStream.println("Partita terminata! I vincitori sono i giocatori della squadra: " +
+            output.println("Partita terminata! I vincitori sono i giocatori della squadra: " +
                     winner.getTeammateID());
         }
     }
