@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.player.Tower;
 import java.util.ArrayList;
 
 public class Island {
-    private final GameBoard board = null;
+    private GameBoard board = null;
     private int islandID;
     private Tower tower;
     private ArrayList<Island> mergedIsland;

@@ -2,9 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.model.board.*;
-import it.polimi.ingsw.model.board.cards.AssistantCard;
-import it.polimi.ingsw.model.board.cards.AssistantDeck;
-import it.polimi.ingsw.model.board.cards.CharacterCard;
+import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 
@@ -27,7 +25,7 @@ public class View extends Observable {
     private String chosenCharacter;
 
     //stampa a schermo la GameBoard (tutte? la propria?)
-    public void showModel(GameBoard modelCopy) {
+    /*public void showModel(GameBoard modelCopy) {
         outputStream.println(???);
     }
 
@@ -115,6 +113,6 @@ public class View extends Observable {
             outputStream.println("Partita terminata! I vincitori sono i giocatori della squadra: " +
                     winner.getTeammateID());
         }
-    }
+    }*/
 
 }
