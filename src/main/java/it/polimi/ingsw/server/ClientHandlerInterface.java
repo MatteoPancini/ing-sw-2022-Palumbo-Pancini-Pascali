@@ -1,4 +1,4 @@
-package it.polimi.ingsw.network.server;
+package it.polimi.ingsw.server;
 
 public interface ClientHandlerInterface {
     /**
