@@ -100,6 +100,7 @@ import java.util.Random;
             game.getPlayers().get(p - 1).setPlayerID(p);
         }
 
+
         if(game.getPlayersNumber() == 4) {
             Collections.shuffle(game.getPlayers());
             game.getPlayers().get(0).setTeammateID(game.getPlayers().get(2).getPlayerID());

@@ -1,38 +1,37 @@
-package it.polimi.ingsw.controller;
-
+package it.polimi.ingsw.model.board;
+import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
-
-import it.polimi.ingsw.model.board.GameBoard;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.enumerations.Assistants;
-import it.polimi.ingsw.model.enumerations.CardState;
-import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 public class LastAssistantUsedTest {
-    private PianificationHandler testPianificationHandler;
-    private static ArrayList<Player> players;
+    private static GameBoard testGBoard;
     private static Game game;
+    private static Player player1;
+    private static Player player2;
+    private static Player player3;
     private static AssistantCard card1;
     private static AssistantCard card2;
     private static AssistantCard card3;
-    private static GameBoard gameBoard;
+    private static ArrayList<Player> players;
 
     @Test
     @BeforeEach
     void setupPlayers(){
-        Player player1 = new Player("Matteo", 1);
-        Player player2 = new Player("Francesco", 2);
-        Player player3 = new Player("Luigi", 3);
+        player1 = new Player("Matteo", 1);
+        player2 = new Player("Francesco", 2);
+        player3 = new Player("Luigi", 3);
         players = new ArrayList<Player>();
-        //players.add(player1, player2, player3);
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
     }
 
     @Test
@@ -42,34 +41,22 @@ public class LastAssistantUsedTest {
     }
 
     @Test
-    @BeforeEach
-    void setupGameBoard(){ gameBoard = new GameBoard(game); }
-
-    @Test
-    @BeforeEach
-    void setupPianificationHandler(){
-        testPianificationHandler = new PianificationHandler(game, gameBoard);
+    @DisplayName("Verify last assistant used")
+    void cardStateTest(){
+        testGBoard = new GameBoard(game);
+        card1 = new AssistantCard(Assistants.EAGLE, 8, 4, Wizards.MONACH);
+        card2 = new AssistantCard(Assistants.OSTRICH, 7, 1, Wizards.KING);
+        card3 = new AssistantCard(Assistants.TURTLE, 2, 3, Wizards.WITCH);
+        testGBoard.getLastAssistantUsed().add(card1);
+        testGBoard.getLastAssistantUsed().add(card2);
+        testGBoard.getLastAssistantUsed().add(card3);
+        assertEquals(Assistants.EAGLE, testGBoard.getLastAssistantUsed().get(0).getName());
+        assertEquals(Assistants.OSTRICH, testGBoard.getLastAssistantUsed().get(1).getName());
+        assertEquals(Assistants.TURTLE, testGBoard.getLastAssistantUsed().get(2).getName());
     }
-
-    @Test
-    @BeforeEach
-    void setupCards(){
-        card1 = new AssistantCard(Assistants.DOG, 10, 3, Wizards.FOREST);
-        card2 = new AssistantCard(Assistants.CHEETAH, 8, 2, Wizards.KING);
-        card3 = new AssistantCard(Assistants.EAGLE, 4, 4, Wizards.MONACH);
-    }
-
-    @Test
-    @DisplayName("Control last assistant card used")
-    void lastAssistantUsedTest(){
-        ArrayList<AssistantCard> cards = new ArrayList<AssistantCard>();
-        //cards.add(card1, card2, card3);
-        for (int i = 0; i < 3; i++) {
-            gameBoard.getLastAssistantUsed().get(i).setState(CardState.PLAYED);
-            gameBoard.setLastAssistantUsed(i, cards.get(i));
-            cards.get(i).setState(CardState.IN_USE);
-        }
-        assertEquals(card1, gameBoard.getLastAssistantUsed().get(0));
-    }
-
 }
+
+
+
+
+

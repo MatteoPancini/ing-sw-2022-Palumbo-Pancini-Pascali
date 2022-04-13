@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.cards;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.CardState;
+import it.polimi.ingsw.model.enumerations.Wizards;
 
 import java.util.ArrayList;
 

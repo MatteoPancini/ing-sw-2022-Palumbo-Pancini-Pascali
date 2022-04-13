@@ -37,4 +37,7 @@ public class SchoolBoard {
         return towerArea;
     }
 
+    public void setEntrance(Entrance entrance){ this.entrance = entrance; }
+
+    public void setTowerArea(TowerArea towerArea){ this.towerArea = towerArea; }
 }

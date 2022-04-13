@@ -17,7 +17,6 @@ public class AssistantCard {
     private CardState state;
     private Player owner;
 
-
     public AssistantCard(Assistants assistantName, int value, int moves, Wizards wizard) {
         name = assistantName;
         this.value = value;
@@ -25,7 +24,6 @@ public class AssistantCard {
         this.wizard = wizard;
         owner = null;
     }
-
 
     public Assistants getName() {
         return name;

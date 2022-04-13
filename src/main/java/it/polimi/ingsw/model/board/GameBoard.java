@@ -36,6 +36,7 @@ public class GameBoard {
         pawns.add(PawnType.GREEN);
         pawns.add(PawnType.RED);
         pawns.add(PawnType.YELLOW);
+        pawns.add(PawnType.PINK);
         professors = new ArrayList<Professor>();
         for (PawnType p : pawns) {
             professors.add(new Professor(p));

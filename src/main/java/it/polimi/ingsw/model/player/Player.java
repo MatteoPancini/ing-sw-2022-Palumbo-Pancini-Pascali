@@ -19,7 +19,7 @@ public class Player {
 
     public Player(String nickname, int playerID) {
         this.nickname = nickname;
-        assistantDeck = new AssistantDeck();
+        assistantDeck = null;
         board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
         this.playerID = playerID;
         this.wizard = null;
