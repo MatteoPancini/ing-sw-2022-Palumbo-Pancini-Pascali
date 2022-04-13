@@ -70,7 +70,7 @@ public class Player {
         try {
             int n = Integer.parseInt(moves.readLine());
             return n;
-        }catch(Exception e) {
+        } catch(Exception e) {
             System.err.println(e.getMessage());
             return -1;
         }
