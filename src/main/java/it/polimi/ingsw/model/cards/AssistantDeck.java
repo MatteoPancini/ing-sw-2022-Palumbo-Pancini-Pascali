@@ -23,7 +23,6 @@ public class AssistantDeck {
         for(AssistantCard card : deck){
             if(card.getName() == name) card.setState(CardState.PLAYED);
         }
-        return null;
     }
 
 
