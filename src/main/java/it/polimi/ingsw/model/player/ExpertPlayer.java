@@ -3,8 +3,8 @@ package it.polimi.ingsw.model.player;
 public class ExpertPlayer extends Player {
     private int myCoins;
 
-    public ExpertPlayer(String name) {
-        super(name);
+    public ExpertPlayer(String name, int playerID) {
+        super(name, playerID);
     }
 
     public int getMyCoins() {

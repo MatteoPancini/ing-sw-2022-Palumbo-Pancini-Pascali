@@ -15,7 +15,7 @@ import it.polimi.ingsw.server.Server;
 
 import java.util.Random;
 
-public class GameHandler {
+/*public class GameHandler {
     private static Game game;
     private Controller controller;
     private Server server;
@@ -176,4 +176,4 @@ public class GameHandler {
             n++;
         }
     }
-}
+}*/
