@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.player;
+package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.GameBoard;
@@ -106,8 +106,5 @@ public class GameBoardTest {
         assertEquals(cloud_2P.getSide(), cloudsTest.get(0).getSide());
         assertEquals(cloud_2P.getSide(), cloudsTest.get(1).getSide());
     }
-
-
-
 
 }

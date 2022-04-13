@@ -5,11 +5,8 @@ import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
-import it.polimi.ingsw.model.board.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.server.Server;
 
@@ -89,8 +86,6 @@ public class GameHandler {
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
     }
-
-
 
     public void initialize() {
         for(int p = 1; p <= game.getPlayersNumber(); p++){

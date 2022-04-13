@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlayerTest {
     Player testPlayer;
     private static final String nickname = "playerNickname";
-    private static final int playerID = 0;
+    private static final int playerID = 1;
 
     @Test
     @BeforeEach

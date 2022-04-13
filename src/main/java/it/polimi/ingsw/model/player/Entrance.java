@@ -22,4 +22,10 @@ public class Entrance{
     }
 
     public ArrayList<Student> getStudents() { return students; }
+
+    public void setStudents(ArrayList<Student> newStudents) {
+        for(int i = 0; i < newStudents.size(); i++){
+            if(newStudents.get(i) != null) students.add(newStudents.get(i));
+        }
+    }
 }

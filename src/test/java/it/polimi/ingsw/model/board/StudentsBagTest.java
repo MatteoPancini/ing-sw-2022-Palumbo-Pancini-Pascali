@@ -10,10 +10,24 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StudentsBagTest {
-    GameBoard testGameBoard;
-    ArrayList<Player> players = new ArrayList<Player>;
-    private final Game game = new Game(3, false, players, players);
+    private GameBoard testGameBoard;
+    private static ArrayList<Player> players;
+    private final Game game;
 
+    @Test
+    @BeforeEach
+    void setupPlayers(){
+        Player player1 = new Player("Matteo", 1);
+        Player player2 = new Player("Francesco", 2);
+        Player player3 = new Player("Luigi", 3);
+        players.add(player1, player2, player3);
+    }
+
+    @Test
+    @BeforeEach
+    void setupGame(){
+        game = new Game(3, false, players, players)
+    }
 
     @Test
     @BeforeEach
@@ -24,5 +38,4 @@ public class StudentsBagTest {
     void studentsBagTest(){
         assertEquals(130, testGameBoard.getStudentsBag().size());
     }
-
 }

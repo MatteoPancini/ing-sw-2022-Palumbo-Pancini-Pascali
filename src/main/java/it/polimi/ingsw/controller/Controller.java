@@ -10,6 +10,5 @@ public class Controller {
     public Controller(Game game, GameHandler gameHandler){
         this.game = game;
         this.gameHandler = gameHandler;
-        RoundHandler roundHandler = new RoundHandler();
     }
 }

@@ -23,7 +23,7 @@ public class Player {
         this.playerID = playerID;
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
-    };
+    }
 
     public String getNickname() {
         return nickname;
@@ -48,7 +48,7 @@ public class Player {
             Assistants a = Assistants.valueOf(assistant.readLine());
             return this.getAssistantDeck().getCard(a);
         }catch(Exception e) {
-            System.out.println(e);
+            System.err.println(e);
             return pickAssistant();
         }
     }
@@ -71,8 +71,8 @@ public class Player {
             n = Integer.parseInt(moves.readLine());
             return n;
         }catch(Exception e) {
-            System.out.println(e);
-            return -1;
+            System.err.println(e);
+            return chooseMoves();
         }
     }
 
