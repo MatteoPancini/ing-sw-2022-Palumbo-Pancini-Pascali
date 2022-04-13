@@ -33,13 +33,13 @@ public class CardStateTest {
         Player player2 = new Player("Francesco", 2);
         Player player3 = new Player("Luigi", 3);
         players = new ArrayList<Player>();
-        players.add(player1, player2, player3);
+        //players.add(player1, player2, player3);
     }
 
     @Test
     @BeforeEach
     void setupGame(){
-        game = new Game(3, false, players, players)
+        game = new Game(3, false, players, players);
     }
 
     @Test

@@ -65,8 +65,8 @@ public class GameBoardTest {
     @BeforeEach
     void setupAssistants() {
         assistant1 = new AssistantCard(Assistants.CAT,4,3, Wizards.FOREST);
-        assistant2 = new AssistantCard(10, 2);
-        assistant3 = new AssistantCard(4, 5);
+        //assistant2 = new AssistantCard(10, 2);
+        //assistant3 = new AssistantCard(4, 5);
     }
 
     @Test
