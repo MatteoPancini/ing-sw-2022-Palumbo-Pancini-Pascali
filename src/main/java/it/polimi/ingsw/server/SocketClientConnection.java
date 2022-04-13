@@ -12,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
+/*
 public class SocketClientConnection implements Runnable {
 
     //SocketClientConnection handles a connection between client and server, permitting sending and
@@ -134,36 +134,6 @@ public class SocketClientConnection implements Runnable {
 
     @Override
     public void run() {
-        /*
-        try {
-            inputStream = new Scanner(socket.getInputStream());
-            outputStream = new PrintWriter(socket.getOutputStream());
-
-            outputStream.println("Welcome to Eriantys! What's your nickname?");
-            nickname = inputStream.nextLine();
-            outputStream.println("Which game mode do you want to start? (2, 3 or 4 players)");
-            playersNum = 0;
-            try {
-                playersNum = inputStream.nextInt();
-            } catch (InputMismatchException e) {
-                System.err.println("Sorry, you have to insert a number between 2 and 4!\nApplication will now close...");
-                System.exit(-1);
-            }
-            Constants.setPlayersNum(playersNum);
-
-            server.lobby(this, nickname);
-
-            while(isActive()){
-                String read = inputStream.nextLine();
-                notify(read);
-            }
-
-        } catch(IOException e){
-            System.err.println(e.getMessage());
-        } finally {
-            close();
-        }
-        */
         try {
             while(activeConnection) {
                 readClientStream();
@@ -175,3 +145,6 @@ public class SocketClientConnection implements Runnable {
 
 
 }
+
+
+ */

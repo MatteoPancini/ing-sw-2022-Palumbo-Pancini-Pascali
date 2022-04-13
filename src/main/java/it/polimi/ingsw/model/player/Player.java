@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model.player;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
-import it.polimi.ingsw.model.enumerations.Wizards;;
+import it.polimi.ingsw.model.enumerations.Wizards;
 
 public class Player {
     private final String nickname;
@@ -23,11 +24,11 @@ public class Player {
         this.playerID = playerID;
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
-    };
+    }
 
     public String getNickname() {
         return nickname;
-    };
+    }
 
     public AssistantDeck getAssistantDeck() {
         return assistantDeck;
@@ -44,11 +45,11 @@ public class Player {
     public AssistantCard pickAssistant() {
         BufferedReader assistant = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick an assistant card: ");
-        try{
+        try {
             Assistants a = Assistants.valueOf(assistant.readLine());
             return this.getAssistantDeck().getCard(a);
-        }catch(Exception e) {
-            System.out.println(e);
+        } catch(IOException e) {
+            System.err.println(e.getMessage());
             return pickAssistant();
         }
     }
@@ -66,12 +67,11 @@ public class Player {
     public int chooseMoves(AssistantCard card) {
         BufferedReader moves = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick a number of moves: ");
-        int n = 0;
         try {
-            n = Integer.parseInt(moves.readLine());
+            int n = Integer.parseInt(moves.readLine());
             return n;
         }catch(Exception e) {
-            System.out.println(e);
+            System.err.println(e.getMessage());
             return -1;
         }
     }
@@ -80,7 +80,7 @@ public class Player {
 
     public int getPlayerID(){ return playerID; }
 
-    public void setTeammateID(int teammateID) { this.teammateID = teammateID; };
+    public void setTeammateID(int teammateID) { this.teammateID = teammateID; }
 
     public int getTeammateID(){ return teammateID; }
 

@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Optional;
 
+/*
 public class Client implements ClientInterface {
     private Optional<String> nickname;
     private boolean validNickname = false;
@@ -20,3 +21,6 @@ public class Client implements ClientInterface {
         this.port = port;
     }
 }
+
+
+ */

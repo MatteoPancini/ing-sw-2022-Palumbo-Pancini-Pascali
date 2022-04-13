@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+/*
 public class ClientConnection {
    // ClientConnection class handles the connection between the client and the server.
 
@@ -53,3 +54,6 @@ public class ClientConnection {
             return false;
         }
     }
+
+
+ */

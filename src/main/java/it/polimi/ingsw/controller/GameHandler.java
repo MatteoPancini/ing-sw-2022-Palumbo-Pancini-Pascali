@@ -9,12 +9,11 @@ import it.polimi.ingsw.model.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import it.polimi.ingsw.model.board.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
-import it.polimi.ingsw.server.Server;
 
 import java.util.Random;
 
+/*
 public class GameHandler {
     private static Game game;
     private Controller controller;
@@ -177,3 +176,5 @@ public class GameHandler {
         }
     }
 }
+
+ */
