@@ -66,7 +66,7 @@ public class Player {
     public int chooseMoves(AssistantCard card) {
         BufferedReader moves = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick a number of moves: ");
-        int n = 0;
+        int n;
         try {
             n = Integer.parseInt(moves.readLine());
             return n;
