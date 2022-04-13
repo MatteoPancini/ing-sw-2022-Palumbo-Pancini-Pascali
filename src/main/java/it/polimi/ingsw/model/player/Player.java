@@ -23,7 +23,7 @@ public class Player {
         this.playerID = playerID;
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
-    }
+    };
 
     public String getNickname() {
         return nickname;
@@ -48,7 +48,7 @@ public class Player {
             Assistants a = Assistants.valueOf(assistant.readLine());
             return this.getAssistantDeck().getCard(a);
         }catch(Exception e) {
-            System.err.println(e);
+            System.out.println(e);
             return pickAssistant();
         }
     }
@@ -66,13 +66,13 @@ public class Player {
     public int chooseMoves(AssistantCard card) {
         BufferedReader moves = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Pick a number of moves: ");
-        int n;
+        int n = 0;
         try {
             n = Integer.parseInt(moves.readLine());
             return n;
         }catch(Exception e) {
-            System.err.println(e);
-            return chooseMoves();
+            System.out.println(e);
+            return -1;
         }
     }
 

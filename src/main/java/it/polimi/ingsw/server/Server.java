@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.constants.Constants;
-import it.polimi.ingsw.controller.GameHandler;
+//import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.messages.servertoclient.PlayerJoinedNotification;
@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
 public class Server {
     private ServerSocketHandler serverSocketHandler;
 
@@ -195,27 +196,8 @@ public class Server {
 }
 
 
-/*
-    public void run(){
-        int connections = 0;
-        System.out.println("Server listening on port: " + Constants.getPort());
-        while(true){
-            try {
-                Socket socket = serverSocket.accept();
-                System.out.println("Number of connections: " + connections);
-                connections++;
-                SocketClientConnection socketClientConnection = new SocketClientConnection(socket, this);
-                registerConnection(socketClientConnection);
-                executor.submit(socketClientConnection);
-            } catch (IOException e){
-                System.err.println("Connection error!");
-            }
-        }
-    }
 
  */
-
-
 
 
 

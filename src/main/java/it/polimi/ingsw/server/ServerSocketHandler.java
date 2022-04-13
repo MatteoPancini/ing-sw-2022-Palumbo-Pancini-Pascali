@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
 public class ServerSocketHandler implements Runnable {
     // In order to create a smaller Server class, ServerSocketHandler class creates sockets
     // and threads that work with them
@@ -66,3 +67,6 @@ public class ServerSocketHandler implements Runnable {
         }
     }
 }
+
+
+ */

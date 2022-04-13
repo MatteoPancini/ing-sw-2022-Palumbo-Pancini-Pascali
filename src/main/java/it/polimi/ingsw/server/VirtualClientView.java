@@ -1,12 +1,13 @@
+
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.controller.GameHandler;
+//import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
+/*
 public class VirtualClientView implements PropertyChangeListener {
 
     //VirtualClientView manages comunication between server and client, representing a virtual instance of the client.
@@ -52,3 +53,4 @@ public class VirtualClientView implements PropertyChangeListener {
 
 
 }
+ */
