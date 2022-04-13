@@ -32,13 +32,13 @@ public class LastAssistantUsedTest {
         Player player2 = new Player("Francesco", 2);
         Player player3 = new Player("Luigi", 3);
         players = new ArrayList<Player>();
-        players.add(player1, player2, player3);
+        //players.add(player1, player2, player3);
     }
 
     @Test
     @BeforeEach
     void setupGame(){
-        game = new Game(3, false, players, players)
+        game = new Game(3, false, players, players);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class LastAssistantUsedTest {
     @DisplayName("Control last assistant card used")
     void lastAssistantUsedTest(){
         ArrayList<AssistantCard> cards = new ArrayList<AssistantCard>();
-        cards.add(card1, card2, card3);
+        //cards.add(card1, card2, card3);
         for (int i = 0; i < 3; i++) {
             gameBoard.getLastAssistantUsed().get(i).setState(CardState.PLAYED);
             gameBoard.setLastAssistantUsed(i, cards.get(i));

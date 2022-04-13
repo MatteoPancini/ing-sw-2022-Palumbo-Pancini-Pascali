@@ -27,10 +27,12 @@ import java.util.Collections;
     }
 
     public void startAction(){
-        /*actionHandler.moveMotherNature();
+        actionHandler.moveMotherNature();
         actionHandler.moveStudents();
-        actionHandler.fromCloudToEntrance();*/
+        actionHandler.fromCloudToEntrance();
     }
-}/*
+}
+/*
+ */
 
 

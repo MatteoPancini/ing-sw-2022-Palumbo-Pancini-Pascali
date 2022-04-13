@@ -51,13 +51,13 @@ public class SchoolBoardTest {
 
     void populateEntrance(){
         ArrayList<Student> students = new ArrayList<Student>();
-        students.add(stud1, stud2, stud3, stud4, stud5, stud6, stud7);
+        //students.add(stud1, stud2, stud3, stud4, stud5, stud6, stud7);
         schoolBTest.getEntrance().setStudents(students);
     }
 
     void setupTowers(){
         ArrayList<Tower> towers = new ArrayList<Tower>();
-        towers.add(tower1, tower2, tower3, tower4, tower5, tower6, tower7, tower8);
+        //towers.add(tower1, tower2, tower3, tower4, tower5, tower6, tower7, tower8);
         for(Tower tower : towers){
             tower = new Tower(TowerColor.BLACK);
         }
