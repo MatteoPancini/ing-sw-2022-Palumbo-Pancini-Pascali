@@ -23,7 +23,28 @@ import java.util.Collections;
 
     public void startPianification(){
         gameHandler.putStudentsOnCloud();
-        pianificationHandler.playAssistantCard();
+
+        for (int i = 0; i < game.getPlayersNumber(); i++) {
+            AssistantCard chosenCard = board.getLastAssistantUsed().get(i).getOwner().pickAssistant();
+            board.getLastAssistantUsed().get(i).setState(CardState.PLAYED);
+            board.setLastAssistantUsed(i, chosenCard);
+            chosenCard.setState(CardState.IN_USE);
+        }
+
+        for (int j = 0; j < board.getLastAssistantUsed().size(); j++) {
+            boolean flag = false;
+            for(int k = 0; k < board.getLastAssistantUsed().size() - 1; k++) {
+                if(board.getLastAssistantUsed().get(j).getValue() > board.getLastAssistantUsed().get(j + 1).getValue()) {
+                    AssistantCard ac = board.getLastAssistantUsed().get(j);
+                    board.setLastAssistantUsed(j, board.getLastAssistantUsed().get(j + 1));
+                    board.setLastAssistantUsed(j + 1, ac);
+                    flag = true;
+                }
+            }
+            if(!flag) break;
+        }
+    }
+
     }
 
     public void startAction(){

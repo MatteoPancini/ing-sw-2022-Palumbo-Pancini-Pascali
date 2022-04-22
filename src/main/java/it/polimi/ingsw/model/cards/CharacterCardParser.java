@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.enumerations.Assistants;
+import it.polimi.ingsw.model.enumerations.Characters;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
 import com.google.gson.JsonArray;
@@ -15,19 +16,17 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssistantCardParser {
-    //this class is used to parse the JSON file (containing the informations about characters card)
-
-    private AssistantCardParser() {
+public class CharacterCardParser {
+    private CharacterCardParser() {
         throw new IllegalStateException();
     }
 
 
-    public static List<AssistantCard> parseAssistantCards() {
-        List<AssistantCard> assistantCards = new ArrayList<>();
-        String jsonPath = "json/assistantCards.json";
+    public static List<CharacterCard> parseAssistantCards() {
+        List<CharacterCard> characterCards = new ArrayList<>();
+        String jsonPath = "json/characterCards.json";
 
-        InputStream in = AssistantCardParser.class.getClassLoader().getResourceAsStream(jsonPath);
+        InputStream in = CharacterCardParser.class.getClassLoader().getResourceAsStream(jsonPath);
 
         JsonReader reader = null;
 
@@ -39,24 +38,24 @@ public class AssistantCardParser {
 
         try {
             JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-            JsonArray jsonCards = jsonObject.getAsJsonArray("assistantCards");
+            JsonArray jsonCards = jsonObject.getAsJsonArray("characterCards");
             for(JsonElement cardElem : jsonCards) {
                 JsonObject card = cardElem.getAsJsonObject();
 
-                Assistants assistantName = Assistants.valueOf(card.get("name").getAsString());
-                int value = card.get("orderValue").getAsInt();
-                int moves = card.get("motherNatureMoves").getAsInt();
-                Wizards wizard = Wizards.valueOf(card.get("wizard").getAsString());
+                Characters characterName = Characters.valueOf(card.get("name").getAsString());
+                String effect = card.get("effect").getAsString();
+                int initialCost = card.get("initialCost").getAsInt();
 
-                assistantCards.add(new AssistantCard(assistantName, value, moves, wizard));
+                characterCards.add(new CharacterCard(characterName, effect, initialCost));
             }
         } catch (IllegalArgumentException e){
             e.printStackTrace();
         }
 
 
-        return assistantCards;
+        return characterCards;
 
 
     }
 }
+
