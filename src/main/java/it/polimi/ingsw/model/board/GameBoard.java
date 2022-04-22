@@ -51,7 +51,7 @@ public class GameBoard {
 
         motherNature = getMotherNature();
 
-        playableCharacters = new CharacterCardDeck();
+        playableCharacters = CharacterCardDeck.;
 
         lastAssistantUsed = new ArrayList<AssistantCard>();
     }
