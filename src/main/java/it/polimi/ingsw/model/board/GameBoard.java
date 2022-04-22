@@ -51,7 +51,10 @@ public class GameBoard {
 
         motherNature = getMotherNature();
 
-        playableCharacters = CharacterCardDeck.;
+        if(game.isExpertMode() == true){
+            CharacterCardDeck.selectPlayableCards();
+        }
+        else playableCharacters = null;
 
         lastAssistantUsed = new ArrayList<AssistantCard>();
     }

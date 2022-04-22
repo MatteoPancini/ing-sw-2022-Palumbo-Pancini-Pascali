@@ -54,7 +54,7 @@ public class CharacterCardDeck {
 
     }
 
-    public List<CharacterCard> selectPlayableCards(){
+    public static List<CharacterCard> selectPlayableCards(){
         List<CharacterCard> allCards = parseAssistantCards();
         List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
 
