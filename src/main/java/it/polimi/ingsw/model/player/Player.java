@@ -42,18 +42,6 @@ public class Player {
         this.board = board;
     }
 
-    public AssistantCard pickAssistant() {
-        BufferedReader assistant = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Pick an assistant card: ");
-        try {
-            Assistants a = Assistants.valueOf(assistant.readLine());
-            return this.getAssistantDeck().getCard(a);
-        } catch(IOException e) {
-            System.err.println(e.getMessage());
-            return pickAssistant();
-        }
-    }
-
     public void setWizard(Wizards wiz) {
         if(this.wizard == null) {
             this.wizard = wiz;
@@ -64,18 +52,6 @@ public class Player {
         return wizard;
     }
 
-    public int chooseMoves(AssistantCard card) {
-        BufferedReader moves = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Pick a number of moves: ");
-        try {
-            int n = Integer.parseInt(moves.readLine());
-            return n;
-        } catch(Exception e) {
-            System.err.println(e.getMessage());
-            return -1;
-        }
-    }
-
     public void setPlayerID(int playerID) { this.playerID = playerID; }
 
     public int getPlayerID(){ return playerID; }
@@ -84,4 +60,14 @@ public class Player {
 
     public int getTeammateID(){ return teammateID; }
 
+    public void removeCard(AssistantCard card){
+        for(AssistantCard c : getAssistantDeck()){
+            if(c == card) getAssistantDeck().getDeck().remove(c);
+        }
+        return;
+    }
+
 }
+
+
+

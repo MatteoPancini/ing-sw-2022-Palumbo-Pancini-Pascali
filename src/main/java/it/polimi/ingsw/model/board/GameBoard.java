@@ -7,8 +7,6 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.*;
 public class GameBoard {
-    //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
-    //si cerca di assegnare un valore nelle righe successive
     private Game game = null;
     private ArrayList<CloudTile> clouds = null;
     private ArrayList<Island> islands = null;

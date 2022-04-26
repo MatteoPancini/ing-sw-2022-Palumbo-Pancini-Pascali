@@ -1,62 +1,32 @@
 package it.polimi.ingsw.model.cards;
 
-import it.polimi.ingsw.model.enumerations.Assistants;
+import it.polimi.ingsw.model.cards.AssistantCard;
+
+import java.io.*;
+import java.lang.IllegalArgumentException;
+import com.google.gson.Gson;
+
 import it.polimi.ingsw.model.enumerations.Wizards;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssistantCardParser {
+public class AssistantCardParser{
     //this class is used to parse the JSON file (containing the informations about characters card)
 
     private AssistantCardParser() {
-        throw new IllegalStateException();
+        throw new IllegalStateException("Utility class");
     }
 
+    public static List<AssistantCard> parseCards(Wizards wizardUser) {
+        Gson gson = new Gson();
+        List<AssistantCard> result = new ArrayList<AssistantCard>();
+        InputStream in = AssistantCard.class.getResourceAsStream("resources/assistantCards.json");
 
-    public static List<AssistantCard> parseAssistantCards() {
-        List<AssistantCard> assistantCards = new ArrayList<>();
-        String jsonPath = "json/assistantCards.json";
-
-        InputStream in = AssistantCardParser.class.getClassLoader().getResourceAsStream(jsonPath);
-
-        JsonReader reader = null;
-
-        try {
-            reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-            JsonArray jsonCards = jsonObject.getAsJsonArray("assistantCards");
-            for(JsonElement cardElem : jsonCards) {
-                JsonObject card = cardElem.getAsJsonObject();
-
-                Assistants assistantName = Assistants.valueOf(card.get("name").getAsString());
-                int value = card.get("orderValue").getAsInt();
-                int moves = card.get("motherNatureMoves").getAsInt();
-                Wizards wizard = Wizards.valueOf(card.get("wizard").getAsString());
-
-                assistantCards.add(new AssistantCard(assistantName, value, moves, wizard));
-            }
-        } catch (IllegalArgumentException e){
-            e.printStackTrace();
-        }
-
-
-        return assistantCards;
-
-
+        Reader reader = new InputStreamReader(in);
+        AssistantCard[] cards = gson.fromJson(reader, AssistantCard[].class);
+        for (AssistantCard card : cards) { result.add(card); }
+        return result;
     }
 }

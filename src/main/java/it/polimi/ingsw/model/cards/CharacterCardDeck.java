@@ -21,7 +21,7 @@ public class CharacterCardDeck {
     }
 
     public static List<CharacterCard> parseAssistantCards() {
-        List<CharacterCard> characterCards = new ArrayList<>();
+        List<CharacterCard> characterCards = new ArrayList<CharacterCard>();
         String jsonPath = "json/characterCards.json";
 
         InputStream in = CharacterCardDeck.class.getClassLoader().getResourceAsStream(jsonPath);
@@ -51,7 +51,6 @@ public class CharacterCardDeck {
         }
 
         return characterCards;
-
     }
 
     public static List<CharacterCard> selectPlayableCards(){
@@ -68,4 +67,3 @@ public class CharacterCardDeck {
 
     }
 }
-

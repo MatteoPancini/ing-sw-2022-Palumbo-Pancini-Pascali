@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.*;
+import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.CloudSide;
 import it.polimi.ingsw.model.player.Player;
 
@@ -26,9 +27,8 @@ import java.util.Collections;
 
         for (int i = 0; i < game.getPlayersNumber(); i++) {
             AssistantCard chosenCard = board.getLastAssistantUsed().get(i).getOwner().pickAssistant();
-            board.getLastAssistantUsed().get(i).setState(CardState.PLAYED);
+            board.getLastAssistantUsed().get(i).getOwner().getAssistantDeck().removeCard(chosenCard);
             board.setLastAssistantUsed(i, chosenCard);
-            chosenCard.setState(CardState.IN_USE);
         }
 
         for (int j = 0; j < board.getLastAssistantUsed().size(); j++) {

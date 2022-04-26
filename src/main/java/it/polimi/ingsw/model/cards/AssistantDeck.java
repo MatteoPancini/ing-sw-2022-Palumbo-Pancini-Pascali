@@ -20,13 +20,5 @@ public class AssistantDeck {
         return null;
     }
 
-    public void removeAssistant(Assistants name){
-        for(AssistantCard card : deck){
-            if(card.getName() == name) card.setState(CardState.PLAYED);
-        }
-        //return null;
-    }
-
-
     //TODO: pensare a possibile implementazione tramite hashmap tra Wizard e OrderValue
 }

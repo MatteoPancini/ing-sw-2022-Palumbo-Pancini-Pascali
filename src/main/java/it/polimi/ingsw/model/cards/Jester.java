@@ -2,21 +2,21 @@ package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.enumerations.Characters;
 
-public class Herald {
-    private static Herald herald = null;
+public class Jester {
+    private static Jester jester = null;
     private static Characters character;
     private static String effect;
     private static int cost;
 
-    private Herald(Characters character){
+    private Jester(Characters character){
         this.character = character;
     }
 
-    public static Herald getHerald() {
-        if(herald == null) {
-            herald = new Herald(Characters.HERALD);
+    public static Jester getJester() {
+        if(jester == null) {
+            jester = new Jester(Characters.JESTER);
         }
-        return herald;
+        return jester;
     }
 
 }
