@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.enumerations.Characters;
 public class SpoiledPrincess {
     private static SpoiledPrincess spoiledPrincess = null;
     private static Characters character;
-    private static String effect;
-    private static int cost;
 
     private SpoiledPrincess(Characters character){
         this.character = character;

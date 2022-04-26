@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.enumerations.Characters;
 public class Herald {
     private static Herald herald = null;
     private static Characters character;
-    private static String effect;
-    private static int cost;
 
     private Herald(Characters character){
         this.character = character;

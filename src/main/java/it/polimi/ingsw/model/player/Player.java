@@ -1,8 +1,4 @@
 package it.polimi.ingsw.model.player;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;

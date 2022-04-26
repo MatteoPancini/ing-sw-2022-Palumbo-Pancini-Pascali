@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.enumerations.Characters;
 public class Fungarus {
     private static Fungarus fungarus = null;
     private static Characters character;
-    private static String effect;
-    private static int cost;
 
     private Fungarus(Characters character){
         this.character = character;

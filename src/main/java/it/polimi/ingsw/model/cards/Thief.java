@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.enumerations.Characters;
 public class Thief {
     private static Thief thief = null;
     private static Characters character;
-    private static String effect;
-    private static int cost;
 
     private Thief(Characters character){
         this.character = character;

@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.enumerations.Characters;
 public class MagicPostman {
     private static MagicPostman magicPostman = null;
     private static Characters character;
-    private static String effect;
-    private static int cost;
 
     private MagicPostman(Characters character){
         this.character = character;

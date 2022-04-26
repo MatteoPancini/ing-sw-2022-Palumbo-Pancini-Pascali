@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CharacterCardDeck {
-    private CharacterCardDeck() {
+public class CharacterDeck {
+    private CharacterDeck() {
         throw new IllegalStateException();
     }
 
-    public static List<CharacterCard> parseAssistantCards() {
+    public static List<CharacterCard> parseCharacterCards() {
         List<CharacterCard> characterCards = new ArrayList<CharacterCard>();
         String jsonPath = "json/characterCards.json";
 
-        InputStream in = CharacterCardDeck.class.getClassLoader().getResourceAsStream(jsonPath);
+        InputStream in = CharacterDeck.class.getClassLoader().getResourceAsStream(jsonPath);
 
         JsonReader reader = null;
 
@@ -54,7 +54,7 @@ public class CharacterCardDeck {
     }
 
     public static List<CharacterCard> selectPlayableCards(){
-        List<CharacterCard> allCards = parseAssistantCards();
+        List<CharacterCard> allCards = parseCharacterCards();
         List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
 
         Collections.shuffle(allCards);
@@ -64,6 +64,5 @@ public class CharacterCardDeck {
         }
 
         return playableCards;
-
     }
 }

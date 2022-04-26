@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.cards.AssistantCardParser;
+import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.CloudSide;
 import it.polimi.ingsw.model.enumerations.PawnType;
@@ -88,7 +88,7 @@ public class GameBoardTest {
     @DisplayName("Deck value check")
     void deckValueTest(){
         deckTest = new ArrayList<AssistantCard>();
-        deckTest = AssistantCardParser.parseCards(Wizards.KING);
+        deckTest = AssistantDeck.parseAssistantCards(Wizards.KING);
         assertEquals(assistant1.getValue(), deckTest.get(3).getValue());
         assertEquals(assistant2.getValue(), deckTest.get(6).getValue());
         assertEquals(assistant3.getValue(), deckTest.get(2).getValue());
@@ -98,7 +98,7 @@ public class GameBoardTest {
     @DisplayName("Deck moves check")
     void deckMovesTest() {
         deckTest = new ArrayList<AssistantCard>();
-        deckTest = AssistantCardParser.parseCards(Wizards.KING);
+        deckTest = AssistantDeck.parseAssistantCards(Wizards.KING);
         assertEquals(assistant1.getMoves(), deckTest.get(3).getMoves());
         assertEquals(assistant2.getMoves(), deckTest.get(6).getMoves());
         assertEquals(assistant3.getMoves(), deckTest.get(2).getMoves());
