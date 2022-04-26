@@ -14,7 +14,7 @@ public class Minestrel {
 
     public static Minestrel getMinestrel() {
         if(minestrel == null) {
-            minestrel = new GrannyHerbs(Characters.MINESTREL);
+            minestrel = new Minestrel(Characters.MINESTREL);
         }
         return minestrel;
     }

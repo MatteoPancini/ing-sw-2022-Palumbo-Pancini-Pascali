@@ -61,7 +61,7 @@ public class Player {
     public int getTeammateID(){ return teammateID; }
 
     public void removeCard(AssistantCard card){
-        for(AssistantCard c : getAssistantDeck()){
+        for(AssistantCard c : getAssistantDeck().getDeck()){
             if(c == card) getAssistantDeck().getDeck().remove(c);
         }
         return;
