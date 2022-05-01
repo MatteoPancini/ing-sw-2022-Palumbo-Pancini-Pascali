@@ -5,5 +5,6 @@ public enum Action {
     PICK_CHARACTER,
     PICK_MOVES_NUMBER,
     PICK_CLOUD,
-    PICK_STUDENT;
+    PICK_STUDENT,
+    PICK_TEAM;
 }

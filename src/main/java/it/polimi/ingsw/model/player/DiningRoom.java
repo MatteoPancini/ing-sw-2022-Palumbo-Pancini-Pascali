@@ -19,4 +19,8 @@ public class DiningRoom {
             diningRoom.add(table);
         }
     }
+
+    public ArrayList<Table> getDiningRoom() {
+        return diningRoom;
+    }
 }

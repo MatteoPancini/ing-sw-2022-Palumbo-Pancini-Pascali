@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
 public class Player {
-    private final String nickname;
+    private String nickname;
     private int playerID;
     private Wizards wizard;
     private final AssistantDeck assistantDeck;
@@ -30,6 +30,10 @@ public class Player {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public AssistantDeck getAssistantDeck() {
