@@ -5,16 +5,14 @@ import java.util.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.cards.*;
+
 public class GameBoard {
-    //perché final madre natura? cambia la sua position durante il gioco, idem per bag (dava errore quando
-    //si cerca di assegnare un valore nelle righe successive
     private Game game = null;
     private ArrayList<CloudTile> clouds = null;
     private ArrayList<Island> islands = null;
     private ArrayList<Professor> professors = null;
     private MotherNature motherNature = null;
-    private CharacterCardDeck playableCharacters = null;
+    private CharacterDeck playableCharacters = null;
     private ArrayList<AssistantCard> lastAssistantUsed;
     private ArrayList<Student> studentsBag = null;
 
@@ -51,7 +49,10 @@ public class GameBoard {
 
         motherNature = getMotherNature();
 
-        playableCharacters = new CharacterCardDeck();
+        if(game.isExpertMode() == true){
+            CharacterDeck.selectPlayableCards();
+        }
+        else playableCharacters = null;
 
         lastAssistantUsed = new ArrayList<AssistantCard>();
     }
@@ -60,7 +61,7 @@ public class GameBoard {
         return game;
     }
 
-    public CharacterCardDeck getPlayableCharacters() {
+    public CharacterDeck getPlayableCharacters() {
         return playableCharacters;
     }
 

@@ -3,133 +3,21 @@ package it.polimi.ingsw.model.cards;
 //TODO: Consigliato di usare un Factory Method per il JSON nel costruttore
 
 
-public abstract class CharacterCard {
-    /*protected int price;
+import it.polimi.ingsw.model.enumerations.Characters;
 
-    public CharacterCard(int cost) {
-        price = cost;
-    };
+public class CharacterCard {
+    private final Characters name;
+    private final String effect;
+    private int initialCost;
 
-    public CharacterCard() {
-        price = 0;
+    public CharacterCard(Characters name, String effect, int initialCost){
+        this.name = name;
+        this.effect = effect;
+        this.initialCost = initialCost;
     }
 
-    //public void cardEffect() { ... };
-    public void incrementPrice() {
-        price++;
-    };
-    public int getPrice() {
-        return price;
+    public void incrementPrice(){
+        initialCost++;
     }
-}
-
-public class Priest extends CharacterCard {
-    public Priest(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... }
-    }
-}
-
-public class CheeseMan extends CharacterCard {
-    public CheeseMan(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class TheReader extends CharacterCard {
-    public TheReader(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class LetterMan extends CharacterCard {
-    public LetterMan(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class Prohibitioner extends CharacterCard {
-    public Prohibitioner(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class Centaur extends CharacterCard {
-    public Centaur(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class Joker extends CharacterCard {
-    public Joker(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class Cavalier extends CharacterCard {
-    public Cavalier(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class MushroomLover extends CharacterCard {
-    public MushroomLover(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class Guitarist extends CharacterCard {
-    public Guitarist(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class Princess extends CharacterCard {
-    public Princess(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }
-}
-public class DrWitch extends CharacterCard {
-    public DrWitch(int cost) {
-        super();
-    }
-    @Override
-    public void cardEffect() {
-        //cardEffect() { ... };
-    }*/
 }
 

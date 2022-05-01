@@ -1,0 +1,56 @@
+{
+	"assistantCards": [
+		{
+			"name": "EAGLE",
+			"orderValue": 4,
+			"motherNatureMoves": 2
+		},
+		{
+			"name": "DOG",
+			"orderValue": 8,
+			"motherNatureMoves": 4
+		},
+		{
+			"name": "ELEPHANT",
+			"orderValue": 9,
+			"motherNatureMoves": 5
+		},
+		{
+			"name": "CAT",
+			"orderValue": 3,
+			"motherNatureMoves": 2
+		},
+		{
+			"name": "CHEETAH",
+			"orderValue": 1,
+			"motherNatureMoves": 1
+
+		},
+		{
+			"name": "LIZARD",
+			"orderValue": 6,
+			"motherNatureMoves": 3
+		},
+		{
+			"name": "OCTOPUS",
+			"orderValue": 7,
+			"motherNatureMoves": 4
+		},
+		{
+			"name": "OSTRICH",
+			"orderValue": 2,
+			"motherNatureMoves": 1
+		},
+		{
+			"name": "TURTLE",
+			"orderValue": 10,
+			"motherNatureMoves": 5
+		},
+		{
+			"name": "FOX",
+			"orderValue": 5,
+			"motherNatureMoves": 3
+
+		}
+	]
+}

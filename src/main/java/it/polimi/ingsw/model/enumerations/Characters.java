@@ -31,7 +31,6 @@ public enum Characters {
     }
 
     public int getCharacterID(){
-
         return characterID;
     }
 

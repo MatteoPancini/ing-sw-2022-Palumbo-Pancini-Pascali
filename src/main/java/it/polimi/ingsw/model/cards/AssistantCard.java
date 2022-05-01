@@ -6,9 +6,6 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import com.google.gson.Gson;
 
-
-//TODO: Consigliato di usare un Factory Method per il JSON nel costruttore
-
 public class AssistantCard {
     private final Assistants name;
     private final int value;

@@ -1,11 +1,7 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.CloudTile;
-import it.polimi.ingsw.model.board.GameBoard;
-import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Assistants;
@@ -17,10 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameBoardTest {
     private GameBoard gameBTest;
@@ -29,7 +25,7 @@ public class GameBoardTest {
     private static ArrayList<Student> stud;
     private static Student stud1;
     private static Student stud2;
-    private static AssistantDeck deckTest;
+    private static List<AssistantCard> deckTest;
     private static AssistantCard assistant1;
     private static AssistantCard assistant2;
     private static AssistantCard assistant3;
@@ -75,9 +71,9 @@ public class GameBoardTest {
 
     @Test
     void setupAssistants() {
-        assistant1 = new AssistantCard(Assistants.CAT,4,3, Wizards.FOREST);
-        assistant2 = new AssistantCard(Assistants.OCTOPUS, 10, 2, Wizards.WITCH);
-        assistant3 = new AssistantCard(Assistants.ELEPHANT, 4, 5, Wizards.KING);
+        assistant1 = new AssistantCard(Assistants.CAT,3,2, Wizards.KING);
+        assistant2 = new AssistantCard(Assistants.OCTOPUS, 7, 4, Wizards.KING);
+        assistant3 = new AssistantCard(Assistants.ELEPHANT, 9, 5, Wizards.KING);
     }
 
     @Test
@@ -90,26 +86,22 @@ public class GameBoardTest {
 
     @Test
     @DisplayName("Deck value check")
-    void deckValueTest() {
-        deckTest = new AssistantDeck();
-        deckTest.getDeck().add(assistant1);
-        deckTest.getDeck().add(assistant2);
-        deckTest.getDeck().add(assistant3);
-        assertEquals(assistant1.getValue(), deckTest.getDeck().get(0).getValue());
-        assertEquals(assistant2.getValue(), deckTest.getDeck().get(1).getValue());
-        assertEquals(assistant2.getValue(), deckTest.getDeck().get(2).getValue());
+    void deckValueTest(){
+        deckTest = new ArrayList<AssistantCard>();
+        deckTest = AssistantDeck.parseAssistantCards(Wizards.KING);
+        assertEquals(assistant1.getValue(), deckTest.get(3).getValue());
+        assertEquals(assistant2.getValue(), deckTest.get(6).getValue());
+        assertEquals(assistant3.getValue(), deckTest.get(2).getValue());
     }
 
     @Test
     @DisplayName("Deck moves check")
     void deckMovesTest() {
-        deckTest = new AssistantDeck();
-        deckTest.getDeck().add(assistant1);
-        deckTest.getDeck().add(assistant2);
-        deckTest.getDeck().add(assistant3);
-        assertEquals(assistant1.getMoves(), deckTest.getDeck().get(0).getMoves());
-        assertEquals(assistant2.getMoves(), deckTest.getDeck().get(1).getMoves());
-        assertEquals(assistant2.getMoves(), deckTest.getDeck().get(2).getMoves());
+        deckTest = new ArrayList<AssistantCard>();
+        deckTest = AssistantDeck.parseAssistantCards(Wizards.KING);
+        assertEquals(assistant1.getMoves(), deckTest.get(3).getMoves());
+        assertEquals(assistant2.getMoves(), deckTest.get(6).getMoves());
+        assertEquals(assistant3.getMoves(), deckTest.get(2).getMoves());
     }
 
     @Test

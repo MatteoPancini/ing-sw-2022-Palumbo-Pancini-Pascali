@@ -55,8 +55,3 @@ public class LastAssistantUsedTest {
         assertEquals(Assistants.TURTLE, testGBoard.getLastAssistantUsed().get(2).getName());
     }
 }
-
-
-
-
-
