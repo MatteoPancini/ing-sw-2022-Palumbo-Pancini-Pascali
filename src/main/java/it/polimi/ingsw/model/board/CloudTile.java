@@ -6,12 +6,16 @@ import java.util.ArrayList;
 
 public class CloudTile {
     private CloudSide side;
-
+    private int ID;
     private ArrayList<Student> cloudStudents;
 
     public CloudTile(CloudSide side){
         this.side = side;
         cloudStudents = new ArrayList<Student>();
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public CloudSide getSide() {

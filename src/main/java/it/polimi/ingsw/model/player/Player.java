@@ -16,6 +16,7 @@ public class Player {
     private boolean isPlaying;
     private boolean isWinner;
     private int teammateID;
+    private AssistantCard chosenAssistant;
 
     public Player(String nickname, int playerID) {
         this.nickname = nickname;
@@ -25,6 +26,11 @@ public class Player {
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
     }
+
+    public AssistantCard getChosenAssistant() {
+        return chosenAssistant;
+    }
+
 
     public String getNickname() {
         return nickname;

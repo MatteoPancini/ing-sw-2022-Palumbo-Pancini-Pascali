@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view;
 
-/*
+
 import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.GameBoard;
@@ -21,6 +21,8 @@ public class CLI {
     private Scanner scanner;
     private PrintWriter output;
     private ModelView modelView;
+    private Parser parser;
+    private PropertyChangeSupport virtualClient;
     private String chosenWizard;
     private String chosenNickname;
     private String chosenMoves;
@@ -31,10 +33,12 @@ public class CLI {
     private String chosenTeam;
     private String chosenCharacter;
 
+
     public CLI() {
         scanner = new Scanner(System.in);
         output = new PrintWriter(System.out);
-        modelView = new ModelView(this);
+        modelView = new ModelView(this, new VisualBoard());
+        virtualClient.addPropertyChangeListener(parser);
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
@@ -42,41 +46,44 @@ public class CLI {
         outputStream.println(???);
     }
 
-    public void update(Observable o, String input) {
-        //azioni da eseguire quando il model notifica un suo cambiamento
-        showModel(GameHandler.getGameBoardCopy());
+    public Scanner getScanner() {
+        return scanner;
     }
 
-    public void askNickname() {
-        outputStream.println("Inserire un nickname: ");
-        chosenNickname = scanner.next();
-        setChanged();
-        notifyObservers(chosenNickname);
+    public ModelView getModelView() {
+        return modelView;
     }
 
-    public void askWizard() {
-        outputStream.println("Scegliere un mago: ");
-        chosenWizard = scanner.next();
-        setChanged();
-        notifyObservers();
+    public Parser getParser() {
+        return parser;
+    }
+
+    public PrintWriter getOutput() {
+        return output;
     }
 
     public void askMoves(AssistantCard card) {
-        outputStream.println("Scegliere un numero di mosse: ");
-        chosenMoves= scanner.next();
-        setChanged();
-        notifyObservers();
+        output.println(">Pick a number of mother nature moves between 1 and"
+                + modelView.getCurrentPlayer().getChosenAssistant().getMoves());
+        chosenMoves = scanner.next();
+        virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
+    }
+
+    public void printPlayerDeck() {
+        for(AssistantCard card : modelView.getCurrentPlayer().getAssistantDeck().getDeck()) {
+            output.print("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
+        }
     }
 
     public void askAssistant(AssistantDeck deck) {
-        outputStream.println("Scegliere un assistente dal deck: ");
+        output.println(">Pick an assistant from your deck by typing its name: ");
+        printPlayerDeck();
         chosenAssistant = scanner.next();
-        setChanged();
-        notifyObservers();
+        virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
     }
 
     public void askCloud(ArrayList<CloudTile> clouds) {
-        outputStream.println("Scegliere un assistente dal deck: ");
+        output.println("Scegliere una nuvola: ");
         chosenCloud = scanner.next();
         setChanged();
         notifyObservers();
@@ -110,8 +117,8 @@ public class CLI {
         notifyObservers();
     }
 
-    public void showGenericMessage(String message) {
-        outputStream.println(message);
+    public void showGenericMessage(Answer serverAnswer) {
+        outputStream.println(serverAnswer);
     }
 
     public void showError(String message) {
