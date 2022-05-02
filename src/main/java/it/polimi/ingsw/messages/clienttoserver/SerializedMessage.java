@@ -8,4 +8,6 @@ public class SerializedMessage implements Serializable {
     public SerializedMessage(Message message) {
         this.message = message;
     }
+
+
 }

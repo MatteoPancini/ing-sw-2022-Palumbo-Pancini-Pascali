@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
 public class Player {
-    private final String nickname;
+    private String nickname;
     private int playerID;
     private Wizards wizard;
     private final AssistantDeck assistantDeck;
@@ -12,6 +12,7 @@ public class Player {
     private boolean isPlaying;
     private boolean isWinner;
     private int teammateID;
+    private AssistantCard chosenAssistant;
 
     public Player(String nickname, int playerID) {
         this.nickname = nickname;
@@ -22,8 +23,17 @@ public class Player {
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
     }
 
+    public AssistantCard getChosenAssistant() {
+        return chosenAssistant;
+    }
+
+
     public String getNickname() {
         return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public AssistantDeck getAssistantDeck() {
