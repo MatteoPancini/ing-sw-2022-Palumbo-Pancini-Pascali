@@ -50,7 +50,7 @@ public class GameBoard {
         motherNature = getMotherNature();
 
         if(game.isExpertMode() == true){
-            CharacterDeck.selectPlayableCards();
+            CharacterDeck.getPlayableCards();
         }
         else playableCharacters = null;
 

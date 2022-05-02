@@ -44,14 +44,21 @@ public class LastAssistantUsedTest {
     @DisplayName("Verify last assistant used")
     void cardStateTest(){
         testGBoard = new GameBoard(game);
-        card1 = new AssistantCard(Assistants.EAGLE, 8, 4, Wizards.MONACH);
-        card2 = new AssistantCard(Assistants.OSTRICH, 7, 1, Wizards.KING);
-        card3 = new AssistantCard(Assistants.TURTLE, 2, 3, Wizards.WITCH);
+        card1 = new AssistantCard(Assistants.EAGLE, 8, 4);
+        card2 = new AssistantCard(Assistants.OSTRICH, 7, 1);
+        card3 = new AssistantCard(Assistants.TURTLE, 2, 3);
+        card1.setWizard(Wizards.KING);
+        card2.setWizard(Wizards.MONACH);
+        card3.setWizard(Wizards.FOREST);
         testGBoard.getLastAssistantUsed().add(card1);
         testGBoard.getLastAssistantUsed().add(card2);
         testGBoard.getLastAssistantUsed().add(card3);
         assertEquals(Assistants.EAGLE, testGBoard.getLastAssistantUsed().get(0).getName());
         assertEquals(Assistants.OSTRICH, testGBoard.getLastAssistantUsed().get(1).getName());
         assertEquals(Assistants.TURTLE, testGBoard.getLastAssistantUsed().get(2).getName());
+        assertEquals(Wizards.KING, testGBoard.getLastAssistantUsed().get(0).getWizard());
+        assertEquals(Wizards.MONACH, testGBoard.getLastAssistantUsed().get(1).getWizard());
+        assertEquals(Wizards.FOREST, testGBoard.getLastAssistantUsed().get(2).getWizard());
+
     }
 }

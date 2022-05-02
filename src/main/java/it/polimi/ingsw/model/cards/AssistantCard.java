@@ -4,21 +4,27 @@ import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.CardState;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
-import com.google.gson.Gson;
 
 public class AssistantCard {
     private final Assistants name;
-    private final int value;
-    private final int moves;
-    private final Wizards wizard;
+    private final int orderValue;
+    private final int motherNatureMoves;
+    private Wizards wizard;
     private CardState state;
     private Player owner;
 
-    public AssistantCard(Assistants assistantName, int value, int moves, Wizards wizard) {
-        name = assistantName;
-        this.value = value;
-        this.moves = moves;
-        this.wizard = wizard;
+    public AssistantCard(){
+        name = null;
+        orderValue = 0;
+        motherNatureMoves = 0;
+        wizard = null;
+        owner = null;
+    }
+    public AssistantCard(Assistants name, int orderValue, int motherNatureMoves) {
+        this.name = name;
+        this.orderValue = orderValue;
+        this.motherNatureMoves = motherNatureMoves;
+        wizard = null;
         owner = null;
     }
 
@@ -27,11 +33,11 @@ public class AssistantCard {
     }
 
     public int getValue() {
-        return value;
+        return orderValue;
     }
 
     public int getMoves() {
-        return moves;
+        return motherNatureMoves;
     }
 
     public CardState getState() {
@@ -49,4 +55,8 @@ public class AssistantCard {
     public void setOwner(Player owner) {
         this.owner = owner;
     }
+
+    public Wizards getWizard(){ return wizard; }
+
+    public void setWizard(Wizards wizard) { this.wizard = wizard; }
 }

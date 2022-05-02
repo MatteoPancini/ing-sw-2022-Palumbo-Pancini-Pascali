@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class GameBoardTest {
     private GameBoard gameBTest;
     private static Game game;
@@ -71,9 +70,6 @@ public class GameBoardTest {
 
     @Test
     void setupAssistants() {
-        assistant1 = new AssistantCard(Assistants.CAT,3,2, Wizards.KING);
-        assistant2 = new AssistantCard(Assistants.OCTOPUS, 7, 4, Wizards.KING);
-        assistant3 = new AssistantCard(Assistants.ELEPHANT, 9, 5, Wizards.KING);
     }
 
     @Test
@@ -87,21 +83,27 @@ public class GameBoardTest {
     @Test
     @DisplayName("Deck value check")
     void deckValueTest(){
+        assistant1 = new AssistantCard(Assistants.CAT, 3, 2);
+        assistant2 = new AssistantCard(Assistants.ELEPHANT, 9, 5);
+        assistant3 = new AssistantCard(Assistants.CHEETAH, 1, 1);
         deckTest = new ArrayList<AssistantCard>();
         deckTest = AssistantDeck.parseAssistantCards(Wizards.KING);
         assertEquals(assistant1.getValue(), deckTest.get(3).getValue());
-        assertEquals(assistant2.getValue(), deckTest.get(6).getValue());
-        assertEquals(assistant3.getValue(), deckTest.get(2).getValue());
+        assertEquals(assistant2.getValue(), deckTest.get(2).getValue());
+        assertEquals(assistant3.getValue(), deckTest.get(4).getValue());
     }
 
     @Test
     @DisplayName("Deck moves check")
     void deckMovesTest() {
+        assistant1 = new AssistantCard(Assistants.CAT, 3, 2);
+        assistant2 = new AssistantCard(Assistants.ELEPHANT, 9, 5);
+        assistant3 = new AssistantCard(Assistants.CHEETAH, 1, 1);
         deckTest = new ArrayList<AssistantCard>();
         deckTest = AssistantDeck.parseAssistantCards(Wizards.KING);
         assertEquals(assistant1.getMoves(), deckTest.get(3).getMoves());
-        assertEquals(assistant2.getMoves(), deckTest.get(6).getMoves());
-        assertEquals(assistant3.getMoves(), deckTest.get(2).getMoves());
+        assertEquals(assistant2.getMoves(), deckTest.get(2).getMoves());
+        assertEquals(assistant3.getMoves(), deckTest.get(4).getMoves());
     }
 
     @Test
