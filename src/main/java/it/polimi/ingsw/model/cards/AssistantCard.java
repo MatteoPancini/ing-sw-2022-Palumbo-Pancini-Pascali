@@ -23,7 +23,7 @@ public class AssistantCard {
         this.value = value;
         this.moves = moves;
         this.wizard = wizard;
-        owner = null;
+        this.state = CardState.NOT_PLAYED;
     }
 
 

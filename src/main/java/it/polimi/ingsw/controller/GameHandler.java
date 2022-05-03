@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.messages.servertoclient.Answer;
+import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
+import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
@@ -9,13 +11,13 @@ import it.polimi.ingsw.model.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//import it.polimi.ingsw.model.board.cards.AssistantCard;
+import it.polimi.ingsw.model.board.cards.AssistantCard;
 import it.polimi.ingsw.model.player.*;
-//import it.polimi.ingsw.server.Server;
+import it.polimi.ingsw.server.Server;
 
 import java.util.Random;
 
-/*public class GameHandler {
+public class GameHandler {
     private static Game game;
     private Controller controller;
     private Server server;
@@ -24,12 +26,24 @@ import java.util.Random;
     private ArrayList<Player> players;
     private ArrayList<SchoolBoard> schoolBoards;
     private static GameBoard gameBoardCopy;
+    private boolean isExpertMode;
 
     public GameHandler(Server server){
         game = new Game();
         controller = new Controller(game, this);
         this.server = server;
     }
+
+
+    public boolean getExpertMode() {
+        return isExpertMode;
+    }
+
+    public void setExpertMode(boolean expertMode) {
+        isExpertMode = expertMode;
+    }
+
+
 
     public static Game getGame() {
         return game;
@@ -55,6 +69,7 @@ import java.util.Random;
         return schoolBoards;
     }
 
+    /*
     public void putStudentsOnCloud() {
         for (CloudTile cloud : gameBoardCopy.getClouds()) {
             ArrayList<Student> newStudents = new ArrayList<Student>();
@@ -70,6 +85,8 @@ import java.util.Random;
         }
     }
 
+     */
+
     public void updateAssistantsState() {
         for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed()) {
             assistant.setState(CardState.PLAYED);
@@ -78,6 +95,14 @@ import java.util.Random;
 
     public void sendSinglePlayer(Answer serverAnswer, int clientID) {
         server.getVirtualClientFromID(clientID).sendAnswerToClient(serverAnswer);
+    }
+
+    public void sendExcept(Answer serverAnswer, int notClientID) {
+        for(Player activePlayers : game.getActivePlayers()) {
+            if(server.getIDFromNickname(activePlayers.getNickname()) != notClientID) {
+                sendSinglePlayer(serverAnswer, activePlayers.getPlayerID());
+            }
+        }
     }
 
     public void sendBroadcast(Answer serverAnswer) {
@@ -92,7 +117,19 @@ import java.util.Random;
 
 
 
-    public void initialize() {
+    public void initializeGame() {
+        Wizards.reset();
+        WizardAnswer chooseWizard = new WizardAnswer("Please choose your Wizard!\nType 1 for");
+        chooseWizard.setWizardsLeft(Wizards.notChosen());
+
+        for(Player currPlayer : game.getActivePlayers()) {
+            String currNick = currPlayer.getNickname();
+            sendSinglePlayer(chooseWizard, currPlayer.getPlayerID());
+            sendExcept(new DynamicAnswer("Please wait: player " + currPlayer.getNickname() + " is choosing a wizard!"), currPlayer.getPlayerID());
+
+
+        }
+        /*
         for(int p = 1; p <= game.getPlayersNumber(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
             schoolBoards.add(newSchoolBoard);
@@ -175,5 +212,11 @@ import java.util.Random;
             }
             n++;
         }
+
+         */
     }
-}*/
+
+    public void unregisterPlayer(int id) {
+        game.removePlayer(game.getPlayerByID(id));
+    }
+}

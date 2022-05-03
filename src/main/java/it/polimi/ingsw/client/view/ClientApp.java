@@ -4,7 +4,7 @@ import it.polimi.ingsw.constants.Constants;
 
 import java.util.Scanner;
 
-/*
+
 public class ClientApp {
     //Client Main
 
@@ -30,4 +30,3 @@ public class ClientApp {
 }
 
 
- */

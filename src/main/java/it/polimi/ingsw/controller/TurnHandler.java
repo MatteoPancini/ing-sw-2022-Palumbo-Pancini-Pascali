@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/*public class TurnHandler {
+public class TurnHandler {
     private Game game;
     private final GameHandler gameHandler;
     private final PianificationHandler pianificationHandler;
@@ -32,7 +32,6 @@ import java.util.Collections;
         actionHandler.fromCloudToEntrance();
     }
 }
-/*
- */
+
 
 

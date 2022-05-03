@@ -11,9 +11,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-/*
+
 public class ClientConnection {
-   // ClientConnection class handles the connection between the client and the server.
+    // ClientConnection class handles the connection between the client and the server.
 
     private final String serverAddress;
     private final int serverPort;
@@ -39,11 +39,13 @@ public class ClientConnection {
             }
 
             ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-
+/*
             try {
                 SerializedAnswer answer = (SerializedAnswer) input;
 
             }
+
+ */
 
 
             return true;
@@ -54,6 +56,6 @@ public class ClientConnection {
             return false;
         }
     }
+}
 
 
- */

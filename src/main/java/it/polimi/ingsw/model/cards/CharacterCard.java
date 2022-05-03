@@ -4,7 +4,7 @@ package it.polimi.ingsw.model.cards;
 
 
 public abstract class CharacterCard {
-    /*protected int price;
+    protected int price;
 
     public CharacterCard(int cost) {
         price = cost;
@@ -130,6 +130,6 @@ public class DrWitch extends CharacterCard {
     @Override
     public void cardEffect() {
         //cardEffect() { ... };
-    }*/
+    }
 }
 

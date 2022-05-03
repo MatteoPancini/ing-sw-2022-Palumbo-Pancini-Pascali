@@ -15,13 +15,10 @@ public class Game {
     private Player currentPlayer;
 
 
-    public Game(int playersNumber, boolean expertMode, ArrayList<Player> players, ArrayList<Player> activePlayers){
-        gameBoard = new GameBoard(this);
-        this.playersNumber = playersNumber;
-        this.expertMode = expertMode;
-        this.players = players;
-        this.activePlayers = activePlayers;
-        currentPlayer = null;
+    public Game(){
+        gameBoard = new GameBoard();
+        this.players = new ArrayList<>();
+        this.activePlayers = new ArrayList<>();
     }
 
 
@@ -48,7 +45,11 @@ public class Game {
 
     public void setCurrentPlayer(Player newPlayer) { currentPlayer = newPlayer; }
 
-    public void createNewPlayer (String nickname, int playerID){
-        players.add(new Player(nickname, playerID));
+    public void createNewPlayer (String nickname, int playerID) {
+        Player newPlayer = new Player(nickname, playerID);
+        players.add(newPlayer);
+        activePlayers.add(newPlayer);
     }
+
+
 }

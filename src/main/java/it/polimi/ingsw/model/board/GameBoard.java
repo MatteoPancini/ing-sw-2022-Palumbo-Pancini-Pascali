@@ -18,7 +18,7 @@ public class GameBoard {
     private ArrayList<AssistantCard> lastAssistantUsed;
     private ArrayList<Student> studentsBag = null;
 
-    public GameBoard (Game game){
+    public GameBoard (){
         this.game = game;
         clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {

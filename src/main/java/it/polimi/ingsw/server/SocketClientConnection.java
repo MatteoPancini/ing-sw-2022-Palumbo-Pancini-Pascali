@@ -1,9 +1,11 @@
 package it.polimi.ingsw.server;
+import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.clienttoserver.Message;
 import it.polimi.ingsw.messages.clienttoserver.SerializedMessage;
 import it.polimi.ingsw.messages.clienttoserver.SetupNickname;
 import it.polimi.ingsw.messages.clienttoserver.GameModeChoice;
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
@@ -11,8 +13,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
-/*
+
 public class SocketClientConnection implements Runnable {
 
     //SocketClientConnection handles a connection between client and server, permitting sending and
@@ -72,6 +75,17 @@ public class SocketClientConnection implements Runnable {
                         server.getGameFromID(clientID).setPlayersNumber(playersNumber);
 
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Players number officially set to " + playersNumber));
+                        SerializedAnswer expertModeChoice = new SerializedAnswer();
+                        expertModeChoice.setServerAnswer(new DynamicAnswer("Do you want to play in expert mode or not?[y/n]"));
+                        Scanner scanner = new Scanner(System.in);
+                        String expertMode = scanner.nextLine();
+                        if(expertMode.equalsIgnoreCase("y")) {
+                            server.getGameFromID(clientID).setExpertMode(true);
+                            server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("The game will be played in Expert Mode!"));
+                        }
+                        else {
+                            server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("The game will be played in Standard Mode!"));
+                        }
 
                         break;
                     } catch(OutOfBoundException e) {
@@ -106,6 +120,9 @@ public class SocketClientConnection implements Runnable {
             Message userCommand = clientInput.message;
             actionHandler(userCommand);
 
+        } else if (clientInput.userAction != null) {
+            UserAction userAction = clientInput.userAction;
+            actionHandler(userAction);
         }
     }
 
@@ -114,6 +131,12 @@ public class SocketClientConnection implements Runnable {
         if(userCommand instanceof SetupNickname) {
             checkConnection((SetupNickname) userCommand);
         }
+        //TODO: aggiungi la scelta del wizard e disconnesione!
+
+    }
+
+
+    public void actionHandler(UserAction userAction) {
 
     }
 
@@ -135,11 +158,15 @@ public class SocketClientConnection implements Runnable {
     @Override
     public void run() {
         try {
-            while(activeConnection) {
+            while (activeConnection) {
                 readClientStream();
             }
-    }
+        } catch(IOException e) {
+            e.printStackTrace();
+        } catch(ClassNotFoundException e) {
+            e.printStackTrace();
 
+        }
     }
 
 
@@ -147,4 +174,3 @@ public class SocketClientConnection implements Runnable {
 }
 
 
- */

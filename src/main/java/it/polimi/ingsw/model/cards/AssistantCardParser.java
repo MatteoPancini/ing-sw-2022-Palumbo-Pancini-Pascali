@@ -23,9 +23,9 @@ public class AssistantCardParser {
     }
 
 
-    public static List<AssistantCard> parseAssistantCards() {
-        List<AssistantCard> asssistantCards = new ArrayList<>();
-        String jsonPath = "json/DevelopmentCards.json";
+    public static List<AssistantCard> createAssistantDeck(Wizards wizardUser) {
+        List<AssistantCard> assistantCards = new ArrayList<>();
+        String jsonPath = "json/assistantsCards.json";
 
         InputStream in = AssistantCardParser.class.getClassLoader().getResourceAsStream(jsonPath);
 
@@ -39,24 +39,22 @@ public class AssistantCardParser {
 
         try {
             JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-            JsonArray jsonCards = jsonObject.getAsJsonArray("developmentCards");
+            JsonArray jsonCards = jsonObject.getAsJsonArray("assistantCards");
             for(JsonElement cardElem : jsonCards) {
                 JsonObject card = cardElem.getAsJsonObject();
 
                 Assistants assistantName = Assistants.valueOf(card.get("name").getAsString());
                 int value = card.get("orderValue").getAsInt();
                 int moves = card.get("motherNatureMoves").getAsInt();
-                Wizards wizard = Wizards.valueOf(card.get("wizard").getAsString());
 
-                asssistantCards.add(new AssistantCard(assistantName, value, moves, wizard));
+
+                assistantCards.add(new AssistantCard(assistantName, value, moves, wizardUser));
             }
         } catch (IllegalArgumentException e){
             e.printStackTrace();
         }
 
-
-        return asssistantCards;
-
+        return assistantCards;
 
     }
 }
