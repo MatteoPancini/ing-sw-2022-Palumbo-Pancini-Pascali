@@ -109,14 +109,30 @@ public class SchoolBoardTest {
     @Test
     @DisplayName("Professor table test")
     void professorTableTest(){
-       assertEquals(PawnType.BLUE, schoolBTest.getProfessorTable().getProfessorTable().get(0).getBoardCellType());
-       assertEquals(PawnType.GREEN, schoolBTest.getProfessorTable().getProfessorTable().get(1).getBoardCellType());
-       assertEquals(PawnType.PINK, schoolBTest.getProfessorTable().getProfessorTable().get(2).getBoardCellType());
-       assertEquals(PawnType.RED, schoolBTest.getProfessorTable().getProfessorTable().get(3).getBoardCellType());
-       assertEquals(PawnType.YELLOW, schoolBTest.getProfessorTable().getProfessorTable().get(4).getBoardCellType());
+        assertEquals(PawnType.BLUE, schoolBTest.getProfessorTable().getProfessorTable().get(0).getBoardCellType());
+        assertEquals(PawnType.GREEN, schoolBTest.getProfessorTable().getProfessorTable().get(1).getBoardCellType());
+        assertEquals(PawnType.PINK, schoolBTest.getProfessorTable().getProfessorTable().get(2).getBoardCellType());
+        assertEquals(PawnType.RED, schoolBTest.getProfessorTable().getProfessorTable().get(3).getBoardCellType());
+        assertEquals(PawnType.YELLOW, schoolBTest.getProfessorTable().getProfessorTable().get(4).getBoardCellType());
+    }
+
+    @Test
+    @DisplayName("Dining room test")
+    void diningRoomTest(){
+        assertEquals(PawnType.BLUE, schoolBTest.getDiningRoom().getDiningRoom().get(0).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.GREEN, schoolBTest.getDiningRoom().getDiningRoom().get(1).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.PINK, schoolBTest.getDiningRoom().getDiningRoom().get(2).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.RED, schoolBTest.getDiningRoom().getDiningRoom().get(3).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.YELLOW, schoolBTest.getDiningRoom().getDiningRoom().get(4).getTable().get(0).getBoardCellType());
+    }
+
+    @Test
+    @DisplayName("Board cell test")
+    void boardCellTest(){
+        BoardCell bCell = new BoardCell(PawnType.BLUE);
+        bCell.setCoinCell();
+        assertEquals(true, bCell.hasCoin());
+        assertEquals(PawnType.BLUE, bCell.getBoardCellType());
     }
 }
-
-
-
 

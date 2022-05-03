@@ -27,7 +27,6 @@ public class Player {
         return chosenAssistant;
     }
 
-
     public String getNickname() {
         return nickname;
     }
@@ -65,15 +64,4 @@ public class Player {
     public void setTeammateID(int teammateID) { this.teammateID = teammateID; }
 
     public int getTeammateID(){ return teammateID; }
-
-    public void removeCard(AssistantCard card){
-        for(AssistantCard c : getAssistantDeck().getDeck()){
-            if(c == card) getAssistantDeck().getDeck().remove(c);
-        }
-        return;
-    }
-
 }
-
-
-
