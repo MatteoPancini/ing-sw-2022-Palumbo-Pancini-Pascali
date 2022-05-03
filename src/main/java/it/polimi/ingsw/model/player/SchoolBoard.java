@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.Student;
 
 public class SchoolBoard {
     private int boardID;
@@ -37,4 +38,11 @@ public class SchoolBoard {
         return towerArea;
     }
 
+    public void setEntrance(Entrance entrance){ this.entrance = entrance; }
+
+    public void setTowerArea(TowerArea towerArea){ this.towerArea = towerArea; }
+
+    public boolean isStudentInEntrance(String input) {
+
+    }
 }

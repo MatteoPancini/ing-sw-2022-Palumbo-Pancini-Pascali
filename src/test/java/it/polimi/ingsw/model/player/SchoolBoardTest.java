@@ -3,6 +3,7 @@ import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,7 @@ public class SchoolBoardTest {
         schoolBTest = new SchoolBoard(1);
     }
 
+    @Test
     void setupStudents(){
         stud1 = new Student(PawnType.YELLOW);
         stud2 = new Student(PawnType.PINK);
@@ -49,20 +51,23 @@ public class SchoolBoardTest {
         stud7 = new Student(PawnType.BLUE);
     }
 
-    void populateEntrance(){
-        ArrayList<Student> students = new ArrayList<Student>();
-        //students.add(stud1, stud2, stud3, stud4, stud5, stud6, stud7);
-        schoolBTest.getEntrance().setStudents(students);
-    }
-
+    @Test
     void setupTowers(){
         ArrayList<Tower> towers = new ArrayList<Tower>();
-        //towers.add(tower1, tower2, tower3, tower4, tower5, tower6, tower7, tower8);
+        towers.add(tower1);
+        towers.add(tower2);
+        towers.add(tower3);
+        towers.add(tower4);
+        towers.add(tower5);
+        towers.add(tower6);
+        towers.add(tower7);
+        towers.add(tower8);
         for(Tower tower : towers){
             tower = new Tower(TowerColor.BLACK);
         }
     }
 
+    @Test
     void populateTowerArea(){
         schoolBTest.getTowerArea().addTowers(tower1);
         schoolBTest.getTowerArea().addTowers(tower2);
@@ -75,8 +80,20 @@ public class SchoolBoardTest {
     }
 
     @Test
-    @DisplayName("Pawn type check")
-    void PawnTypeCheck(){
+    void pawnTypeCheck(){
+        ArrayList<Student> students = new ArrayList<Student>();
+        Entrance entrance = new Entrance();
+        students.add(stud1);
+        students.add(stud2);
+        students.add(stud3);
+        students.add(stud4);
+        students.add(stud5);
+        students.add(stud6);
+        students.add(stud7);
+        for(Student student : students){
+            entrance.setStudents(student);
+        }
+        schoolBTest.setEntrance(entrance);
         assertEquals(stud1.getType(), schoolBTest.getEntrance().getStudents().get(0).getType());
         assertEquals(stud2.getType(), schoolBTest.getEntrance().getStudents().get(1).getType());
         assertEquals(stud3.getType(), schoolBTest.getEntrance().getStudents().get(2).getType());
@@ -87,6 +104,3 @@ public class SchoolBoardTest {
     }
 
 }
-
-
-

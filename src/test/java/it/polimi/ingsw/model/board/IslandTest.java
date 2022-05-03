@@ -13,19 +13,21 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IslandTest {
-    Island testIsland;
+    private static Island testIsland1;
+    private static Island testIsland2;
     private GameBoard board;
     private Game game;
     private ArrayList<Player> players;
 
     @Test
-    @BeforeEach
     void setupPlayers(){
         Player player1 = new Player("Matteo", 1);
         Player player2 = new Player("Francesco", 2);
         Player player3 = new Player("Luigi", 3);
         players = new ArrayList<Player>();
-        //players.add(player1, player2, player3);
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
     }
 
     @Test
@@ -34,20 +36,15 @@ public class IslandTest {
         game = new Game(3, false, players, players);
     }
 
-    @Test
-    @BeforeEach
-    void setupGameBoard(){
-        board = new GameBoard(game);
-    }
-
-    @Test
+/*    @Test
     @DisplayName("Verify if islands are merged")
     void islandTest(){
+        board = new GameBoard(game);
         ArrayList<Island> islands = new ArrayList<Island>();
-        islands.add(board.getIslands().get(2));
-        islands.add(board.getIslands().get(3));
-        board.getIslands().get(2).setTower(new Tower(TowerColor.BLACK));
-        board.getIslands().get(3).setTower(new Tower(TowerColor.BLACK));
-        assertEquals(islands, board.getIslands().get(2).getMergedIslands());
-    }
+        islands.add(board.getIslands().get(0));
+        islands.add(board.getIslands().get(1));
+        board.getIslands().get(0).setTower(new Tower(TowerColor.BLACK));
+        board.getIslands().get(1).setTower(new Tower(TowerColor.BLACK));
+        assertEquals(islands, board.getIslands().get(1).getMergedIslands());
+    }*/
 }

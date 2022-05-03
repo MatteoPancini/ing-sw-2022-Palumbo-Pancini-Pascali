@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StudentsBagTest {
     private GameBoard testGameBoard;
     private static ArrayList<Player> players;
-    private Game game;
+    private static Game game;
 
     @Test
     @BeforeEach
@@ -20,7 +20,10 @@ public class StudentsBagTest {
         Player player1 = new Player("Matteo", 1);
         Player player2 = new Player("Francesco", 2);
         Player player3 = new Player("Luigi", 3);
-        //players.add(player1, player2, player3);
+        players = new ArrayList<Player>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
     }
 
     @Test
@@ -30,12 +33,9 @@ public class StudentsBagTest {
     }
 
     @Test
-    @BeforeEach
-    void setupGameBoard() { testGameBoard = new GameBoard(game); }
-
-    @Test
     @DisplayName("Verify students bag size")
     void studentsBagTest(){
+        testGameBoard = new GameBoard(game);
         assertEquals(130, testGameBoard.getStudentsBag().size());
     }
 }

@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.enumerations.PawnType;
 
+import java.util.Locale;
+
 public class Student {
     private PawnType type;
 
@@ -10,4 +12,11 @@ public class Student {
     }
 
     public PawnType getType() { return this.type; }
+
+    public void setType(PawnType type) {
+        this.type = type;
+    }
+
+
+
 }

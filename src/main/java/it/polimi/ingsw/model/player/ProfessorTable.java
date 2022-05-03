@@ -20,4 +20,9 @@ public class ProfessorTable {
             BoardCell cell = new BoardCell(p);
         }
     }
+
+
+    public ArrayList<BoardCell> getProfessorTable() {
+        return professorTable;
+    }
 }
