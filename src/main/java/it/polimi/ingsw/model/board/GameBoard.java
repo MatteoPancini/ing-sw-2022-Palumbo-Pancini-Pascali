@@ -26,7 +26,7 @@ public class GameBoard {
 
         islands = new ArrayList<Island>();
         for (int j = 1; j <= 12; j++){
-            islands.add(new Island(game.getGameBoard(), j));
+            islands.add(new Island(this, j));
         }
 
         ArrayList<PawnType> pawns = new ArrayList<PawnType>();
@@ -47,7 +47,7 @@ public class GameBoard {
             }
         }
 
-        motherNature = getMotherNature();
+        motherNature = MotherNature.getMotherNature();
 
         if(game.isExpertMode() == true){
             CharacterDeck.getPlayableCards();

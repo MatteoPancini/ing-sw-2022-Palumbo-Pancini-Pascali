@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.enumerations.Assistants;
-import it.polimi.ingsw.model.enumerations.CardState;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 
@@ -10,7 +9,6 @@ public class AssistantCard {
     private final int orderValue;
     private final int motherNatureMoves;
     private Wizards wizard;
-    private CardState state;
     private Player owner;
 
     public AssistantCard(){
@@ -24,8 +22,6 @@ public class AssistantCard {
         this.name = name;
         this.orderValue = orderValue;
         this.motherNatureMoves = motherNatureMoves;
-        wizard = null;
-        owner = null;
     }
 
     public Assistants getName() {
@@ -40,14 +36,6 @@ public class AssistantCard {
         return motherNatureMoves;
     }
 
-    public CardState getState() {
-        return state;
-    }
-
-    public void setState(CardState state){
-        this.state = state;
-    }
-
     public Player getOwner() {
         return owner;
     }
@@ -58,5 +46,5 @@ public class AssistantCard {
 
     public Wizards getWizard(){ return wizard; }
 
-    public void setWizard(Wizards wizard) { this.wizard = wizard; }
+    public void setWizard(Wizards wizard){ this.wizard = wizard; }
 }

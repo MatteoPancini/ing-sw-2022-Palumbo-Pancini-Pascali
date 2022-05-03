@@ -10,7 +10,6 @@ public class BoardCell {
     private boolean coinCell;
     private boolean studentCell;
     private boolean professorCell;
-    //TODO: pensare a possibile hashmap tra BoardCell e PawnType
 
     public BoardCell(PawnType boardCellType) {
         this.boardCellType = boardCellType;

@@ -42,7 +42,7 @@ public class SchoolBoard {
 
     public void setTowerArea(TowerArea towerArea){ this.towerArea = towerArea; }
 
-    public boolean isStudentInEntrance(String input) {
+    /*public boolean isStudentInEntrance(String input) {
 
-    }
+    }*/
 }

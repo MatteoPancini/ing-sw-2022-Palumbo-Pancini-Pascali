@@ -18,11 +18,7 @@ import java.util.Scanner;
 public class AssistantDeck {
     //this class is used to parse the JSON file (containing the informations about characters card)
     private static List<AssistantCard> deck = new ArrayList<AssistantCard>();
-    private AssistantDeck() {
-        throw new IllegalStateException();
-    }
-
-    public static List<AssistantCard> parseAssistantCards(Wizards wizard) {
+    public AssistantDeck(Wizards wizard) {
         try{
             File myObj = new File("./src/main/resources/assistantCards.txt");
             Scanner myReader = new Scanner(myObj);
@@ -41,12 +37,15 @@ public class AssistantDeck {
             System.out.println("File not found.");
             e.printStackTrace();
         }
-        return deck;
+        return;
     }
 
     public void removeCard(AssistantCard card){
-        for(AssistantCard c : deck){
-            if(c == card) deck.remove(c);
+        for(AssistantCard c : this.getDeck()) {
+            if(card.getName() == c.getName()){
+                deck.remove(c);
+                return;
+            }
         }
     }
 

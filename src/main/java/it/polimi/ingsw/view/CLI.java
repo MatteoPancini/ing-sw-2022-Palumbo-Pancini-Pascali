@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+/*package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.controller.GameHandler;
@@ -180,7 +180,4 @@ public class CLI implements Runnable {
     public void run() {
         userNicknameSetup();
     }
-}
-
-
- */
+}*/
