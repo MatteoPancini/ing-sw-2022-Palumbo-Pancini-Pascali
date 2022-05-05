@@ -22,7 +22,7 @@ public class TurnHandler {
         this.gameHandler = gameHandler;
     }
 
-    public void startPianification(){
+    public void startPianification() {
         gameHandler.putStudentsOnCloud();
 
         for (int i = 0; i < game.getPlayersNumber(); i++) {
