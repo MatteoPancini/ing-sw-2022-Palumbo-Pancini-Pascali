@@ -18,6 +18,10 @@ public class CloudTile {
         return ID;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public CloudSide getSide() {
         return side;
     }

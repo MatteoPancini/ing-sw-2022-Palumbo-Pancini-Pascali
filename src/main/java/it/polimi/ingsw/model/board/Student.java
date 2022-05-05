@@ -12,11 +12,4 @@ public class Student {
     }
 
     public PawnType getType() { return this.type; }
-
-    public void setType(PawnType type) {
-        this.type = type;
-    }
-
-
-
 }

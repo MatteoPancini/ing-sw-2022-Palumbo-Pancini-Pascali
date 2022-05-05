@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view;
+/*package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.SimpleModelView;
@@ -49,7 +49,4 @@ public class SimpleCLI implements Runnable {
         userNicknameSetup();
 
     }
-}
-
-
- */
+}*/

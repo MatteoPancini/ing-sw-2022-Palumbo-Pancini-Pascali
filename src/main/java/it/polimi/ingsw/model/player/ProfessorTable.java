@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.player.BoardCell;
 import java.util.ArrayList;
 
 public class ProfessorTable {
-    private ArrayList<BoardCell> professorTable;
+    private ArrayList<BoardCell> professorTable = new ArrayList<BoardCell>();
 
     public ProfessorTable (){
         ArrayList<PawnType> pawns = new ArrayList<PawnType>();
@@ -18,9 +18,9 @@ public class ProfessorTable {
         pawns.add(PawnType.YELLOW);
         for (PawnType p : pawns) {
             BoardCell cell = new BoardCell(p);
+            professorTable.add(cell);
         }
     }
-
 
     public ArrayList<BoardCell> getProfessorTable() {
         return professorTable;

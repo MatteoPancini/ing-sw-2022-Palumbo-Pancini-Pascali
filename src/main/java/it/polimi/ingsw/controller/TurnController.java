@@ -1,15 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.*;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.enumerations.CloudSide;
-import it.polimi.ingsw.model.player.Player;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
-public class TurnHandler {
+/*public class TurnHandler {
     private Game game;
     private final GameHandler gameHandler;
     private final PianificationHandler pianificationHandler;
@@ -22,7 +13,7 @@ public class TurnHandler {
         this.gameHandler = gameHandler;
     }
 
-    public void startPianification() {
+    public void startPianification(){
         gameHandler.putStudentsOnCloud();
 
         for (int i = 0; i < game.getPlayersNumber(); i++) {
@@ -53,6 +44,7 @@ public class TurnHandler {
         actionHandler.fromCloudToEntrance();
     }
 }
-
+/*
+ */
 
 
