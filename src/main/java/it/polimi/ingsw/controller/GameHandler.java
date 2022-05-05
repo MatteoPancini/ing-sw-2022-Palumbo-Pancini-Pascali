@@ -92,7 +92,7 @@ import java.util.Random;
 
 
 
-    public void initialize() {
+    public void initializeGame() {
         for(int p = 1; p <= game.getPlayersNumber(); p++){
             SchoolBoard newSchoolBoard = new SchoolBoard(p);
             schoolBoards.add(newSchoolBoard);
@@ -175,6 +175,22 @@ import java.util.Random;
                 gameBoard.removeStudents(0);
             }
             n++;
+        }
+    }
+
+    public boolean endGame(){
+        boolean endGame = false;
+
+        for(Player p : game.getActivePlayers()){
+            if(p.getAssistantDeck().getDeck().isEmpty() || p.getBoard().getTowerArea().getTowerArea().isEmpty()) {
+                endGame = true;
+                return endGame;
+            }
+        }
+
+        if(game.getGameBoard().getIslands().size() == 3){
+            endGame = true;
+            return endGame;
         }
     }
 }*/
