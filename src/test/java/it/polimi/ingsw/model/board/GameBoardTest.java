@@ -174,6 +174,12 @@ public class GameBoardTest {
         assertEquals(true, gameBTest.getIslands().get(11).hasRight());
         assertEquals(false, gameBTest.getIslands().get(0).hasRight());
         assertEquals(false, gameBTest.getIslands().get(11).hasLeft());
+    }
 
+    @Test
+    @DisplayName("Verify students bag size")
+    void studentsBagTest(){
+        gameBTest = new GameBoard(game);
+        assertEquals(130, gameBTest.getStudentsBag().size());
     }
 }

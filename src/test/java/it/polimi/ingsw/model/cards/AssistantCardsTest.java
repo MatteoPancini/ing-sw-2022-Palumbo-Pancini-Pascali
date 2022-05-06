@@ -43,17 +43,17 @@ public class AssistantCardsTest {
         assertEquals(assistant2.getName(), deckTest.getDeck().get(2).getName());
         assertEquals(assistant3.getName(), deckTest.getDeck().get(4).getName());
 
-        Player Matteo = new Player("Matteo", 1);
-        Player Francesco = new Player("Francesco", 2);
-        Player Luigi = new Player("Luigi", 3);
+        Player player1 = new Player("Matteo", 1);
+        Player player2 = new Player("Francesco", 2);
+        Player player3 = new Player("Luigi", 3);
 
-        assistant1.setOwner(Matteo);
-        assistant2.setOwner(Francesco);
-        assistant3.setOwner(Luigi);
+        assistant1.setOwner(player1);
+        assistant2.setOwner(player2);
+        assistant3.setOwner(player3);
 
-        assertEquals(Matteo, assistant1.getOwner());
-        assertEquals(Francesco, assistant2.getOwner());
-        assertEquals(Luigi, assistant3.getOwner());
+        assertEquals(player1, assistant1.getOwner());
+        assertEquals(player2, assistant2.getOwner());
+        assertEquals(player3, assistant3.getOwner());
 
         assertEquals(Wizards.FOREST, deckTest.getDeck().get(0).getWizard());
         assertEquals(10, deckTest.getDeck().size());

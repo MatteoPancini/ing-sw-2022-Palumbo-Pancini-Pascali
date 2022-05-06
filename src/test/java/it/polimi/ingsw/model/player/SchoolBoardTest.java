@@ -134,5 +134,16 @@ public class SchoolBoardTest {
         assertEquals(true, bCell.hasCoin());
         assertEquals(PawnType.BLUE, bCell.getBoardCellType());
     }
-}
 
+    @Test
+    @DisplayName("Tower area test")
+    void towerAreaTest(){
+        Tower tower = new Tower(TowerColor.BLACK);
+        TowerArea towerATest = schoolBTest.getTowerArea();
+
+        towerATest.addTowers(tower);
+        assertEquals(tower, towerATest.getTowerArea().get(towerATest.getTowerArea().size() - 1));
+        assertEquals(TowerColor.BLACK, towerATest.getTowerArea().get(towerATest.getTowerArea().size() - 1).getColor());
+    }
+
+}

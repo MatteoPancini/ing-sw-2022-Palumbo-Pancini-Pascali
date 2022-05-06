@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.board.Student;
 
 import java.util.ArrayList;
 
-public class ActionController {
+/*public class ActionController {
     private final Game game;
     private final GameBoard board;
 
@@ -16,7 +16,7 @@ public class ActionController {
         this.board = board;
     }
 
-    /*public void moveStudents(message1, message2) {
+    public void moveStudents(message1, message2) {
         //message1 = colore studente, message2 = destinazione (isola o diningroom)
         Student studentToMove = new Student(message1);
         GameBoard board;
@@ -47,9 +47,9 @@ public class ActionController {
         }
     }
 
-    public Player checkIslandInfluence(Island island){
+    //public Player checkIslandInfluence(Island island){
 
-    }
+    //}
 
     public void moveMotherNature(int moves) {
         //moves lo leggo lato client
@@ -57,8 +57,8 @@ public class ActionController {
         int newPosition = currPosition % 12;
         board.getMotherNature().setPosition(newPosition);
 
-        checkIslandInfluence() { ... }
-    }*/
+        //checkIslandInfluence() { ... }
+    }
 
 
     public void fromCloudToEntrance(CloudTile cloud) {
@@ -67,4 +67,4 @@ public class ActionController {
         else studentsToMove = 3;
         ArrayList<Student> newStudents = cloud.getStudents();
     }
-}
+}*/
