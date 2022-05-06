@@ -1,9 +1,11 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
+import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Tower;
 
@@ -23,6 +25,8 @@ public class VisualBoard {
     private ArrayList<Island> islandsView;
     private ArrayList<Student> entrance;
     private AssistantCard[] playedCards;
+    private ArrayList<CloudTile> clouds;
+    private CharacterCard[] characters;
 
     public VisualBoard() {
         yellow = 0;
@@ -54,12 +58,80 @@ public class VisualBoard {
         return red;
     }
 
+    public boolean isYellowProfessor() {
+        return yellowProfessor;
+    }
+
+    public void setYellow(int yellow) {
+        this.yellow = yellow;
+    }
+
+    public void setPink(int pink) {
+        this.pink = pink;
+    }
+
+    public void setRed(int red) {
+        this.red = red;
+    }
+
+    public void setBlue(int blue) {
+        this.blue = blue;
+    }
+
+    public void setGreen(int green) {
+        this.green = green;
+    }
+
+    public boolean isPinkProfessor() {
+        return pinkProfessor;
+    }
+
+    public boolean isRedProfessor() {
+        return redProfessor;
+    }
+
+    public boolean isBlueProfessor() {
+        return blueProfessor;
+    }
+
+    public boolean isGreenProfessor() {
+        return greenProfessor;
+    }
+
+    public void setIslandsView(ArrayList<Island> islandsView) {
+        this.islandsView = islandsView;
+    }
+
+
+    public void setClouds(ArrayList<CloudTile> clouds) {
+        this.clouds = clouds;
+    }
+
     public int getYellow() {
         return yellow;
     }
 
+    public CharacterCard[] getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(CharacterCard[] characters) {
+        this.characters = characters;
+    }
+
+    public ArrayList<CloudTile> getClouds() {
+        return clouds;
+    }
+
     public AssistantCard[] getPlayedCards() {
         return playedCards;
+    }
+    public AssistantCard getPlayedCard(Player player) {
+        return this.getPlayedCards()[player.getPlayerID()];
+    }
+
+    public void setPlayedCard(AssistantCard card, Player player) {
+        this.playedCards[player.getPlayerID()] = card;
     }
 
     public ArrayList<Island> getIslandsView() {
@@ -106,7 +178,7 @@ public class VisualBoard {
         this.islandsView.get(island.getIslandID()).setTower(tower);
     }
 
-    public void setPlayedCards(AssistantCard card, Player currPlayer) {
+    public void setPlayedCards(Assistants card, Player currPlayer) {
         this.playedCards[currPlayer.getPlayerID()] = card;
     }
 

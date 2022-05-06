@@ -4,14 +4,14 @@ import it.polimi.ingsw.model.enumerations.Action;
 
 public class PickCloud implements UserAction {
     private Action action;
-    private int cloudID;
+    private int chosenCloud;
     public PickCloud() {
         this.action = Action.PICK_CLOUD;
     }
 
     public PickCloud(int ID) {
         this.action = Action.PICK_CLOUD;
-        this.cloudID = ID;
+        this.chosenCloud = ID;
     }
 
     public Action getAction() {
@@ -19,6 +19,6 @@ public class PickCloud implements UserAction {
     }
 
     public int getCloudID() {
-        return cloudID;
+        return chosenCloud;
     }
 }

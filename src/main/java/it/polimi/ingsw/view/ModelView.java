@@ -107,8 +107,8 @@ public class ModelView {
     }
 
     //decidere se id parte da 0 o da 1
-    public void setPlayerNickname(String playerNickname, int id) {
-        players.get(id-1).setNickname(playerNickname);
+    public void setPlayerNickname(String playerNickname) {
+        currentPlayer.setNickname(playerNickname);
     }
 
     public void enableInput() {

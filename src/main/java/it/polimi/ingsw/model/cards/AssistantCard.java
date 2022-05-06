@@ -21,6 +21,12 @@ public class AssistantCard {
         this.wizard = wizard;
         owner = null;
     }
+    public AssistantCard(Assistants assistantName, int value, int moves) {
+        name = assistantName;
+        this.value = value;
+        this.moves = moves;
+        owner = null;
+    }
 
     public Assistants getName() {
         return name;

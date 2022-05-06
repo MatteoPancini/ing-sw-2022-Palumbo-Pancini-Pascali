@@ -1,8 +1,10 @@
 package it.polimi.ingsw.view;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
+import it.polimi.ingsw.model.enumerations.Action;
 import it.polimi.ingsw.server.SocketClientConnection;
 
+import java.awt.desktop.QuitEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -35,9 +37,14 @@ public class Parser implements PropertyChangeListener {
         return message;
     }
 
-    public UserAction parseStudentMove(String input1, String input2) {
+    public UserAction parseStudent(String input) {
         UserAction message;
-        message = inputChecker.checkStudentMove(input1, input2);
+        message = inputChecker.checkStudent(input);
+        return message;
+    }
+
+    public UserAction parseDestination(String input) {
+        UserAction message = inputChecker.checkDestination(input);
         return message;
     }
 
@@ -53,29 +60,71 @@ public class Parser implements PropertyChangeListener {
         return message;
     }
 
-    //definire altre azioni che il client può richiedere in qualsiasi momento
-    public synchronized boolean action(String input) {
-        UserAction message = null;
-        switch(input.toUpperCase()) {
-            case "PICK_CHARACTER" -> {
-                message = inputChecker.checkCharacter(input);
+
+    public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
+        UserAction action = null;
+        switch(actionName.toUpperCase()) {
+            case "PICKASSISTANT" -> {
+                action = inputChecker.checkAssistant(chosenValue);
             }
-            //case ...
+            case "PICKCLOUD" -> {
+                action = inputChecker.checkCloud(chosenValue);
+            }
+            case "PICKMOVESNUMBER" -> {
+                action = inputChecker.checkMoves(chosenValue);
+            }
+            case "PICKSTUDENT" -> {
+                action = inputChecker.checkStudent(chosenValue);
+            }
+            case "PICKDESTINATION" -> {
+                action = inputChecker.checkDestination(chosenValue);
+            }
+            case "PICKCHARACTER" -> {
+                action = inputChecker.checkCharacter(chosenValue);
+            }
+            case "QUIT" -> {
+                connectionSocket.sendUserInput(QUIT); ???
+            }
+            default -> {
+                return false;
+            }
+
         }
-        if(message!=null) {
-            connectionSocket.sendUserInput(message);
+        if(action!=null) {
+            connectionSocket.sendUserInput(action);
+            //modificare la model view in base all'action inviata
+
             return true;
         }
     }
 
+    public void updateModelView(UserAction action) {
+        switch(action) {
+            case "PICKASSISTANT" -> {
+                modelView.getVisualBoard().set
+            }
+        }
+    }
+
+
+    //parser ascolta la CLI
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (!modelView.getActiveInput()) {
             System.out.println("Input error: it's not your turn!");
-        } else if (action(evt.getNewValue().toString())) {
-            modelView.disableInput();
         } else {
-            modelView.enableInput();
+            try {
+                if (action(evt.getPropertyName(), evt.getNewValue().toString())) {
+                    modelView.disableInput();
+                } else {
+                    modelView.enableInput();
+                }
+            } catch (AlreadyPlayedAssistantException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
+
+
+//TODO finire action() con le restanti userAction (tutte)
