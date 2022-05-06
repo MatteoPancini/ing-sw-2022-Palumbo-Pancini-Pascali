@@ -37,6 +37,7 @@ public class GameHandler {
 
     public void setExpertMode(boolean expertMode) {
         isExpertMode = expertMode;
+        game.setExpertMode(expertMode);
     }
 
 

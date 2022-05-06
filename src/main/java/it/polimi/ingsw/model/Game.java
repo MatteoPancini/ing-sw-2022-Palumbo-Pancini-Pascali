@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Game {
     private final GameBoard gameBoard;
     private int playersNumber;
-    //private final boolean expertMode;
+    private  boolean expertMode;
     private final ArrayList<Player> players = new ArrayList<>();
     private final ArrayList<Player> activePlayers = new ArrayList<>();
     private Player currentPlayer;
@@ -32,6 +32,13 @@ public class Game {
         return playersNumber;
     }
 
+    public void setExpertMode(boolean expertMode) {
+        this.expertMode = expertMode;
+    }
+
+    public boolean isExpertMode() {
+        return expertMode;
+    }
     /*
     public Game(int playersNumber, boolean expertMode, ArrayList<Player> players, ArrayList<Player> activePlayers) {
         gameBoard = new GameBoard(this);
