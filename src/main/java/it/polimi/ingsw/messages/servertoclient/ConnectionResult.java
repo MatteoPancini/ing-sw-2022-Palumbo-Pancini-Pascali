@@ -17,4 +17,9 @@ public class ConnectionResult implements Answer {
     public String getConnectionAnswer() {
         return connectionAnswer;
     }
+
+    @Override
+    public Object getMessage() {
+        return connectionAnswer;
+    }
 }

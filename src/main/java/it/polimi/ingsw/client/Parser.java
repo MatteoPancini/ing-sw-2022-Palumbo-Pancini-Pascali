@@ -1,7 +1,6 @@
-/*package it.polimi.ingsw.view;
+package it.polimi.ingsw.client;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
-import it.polimi.ingsw.server.SocketClientConnection;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -78,4 +77,4 @@ public class Parser implements PropertyChangeListener {
             modelView.enableInput();
         }
     }
-}*/
+}

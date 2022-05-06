@@ -20,11 +20,11 @@ public class PlayerWizardsTest {
     @DisplayName("Color choose and reset validity test")
     void colorResetTest() {
         assertEquals(4, Wizards.notChosen().size());
-        Wizards.choose(Wizards.MONACH);
-        Wizards.choose(Wizards.WITCH);
+        Wizards.removeAvailableWizard(Wizards.MONACH);
+        Wizards.removeAvailableWizard(Wizards.WITCH);
         assertEquals(2, Wizards.notChosen().size());
         Wizards.reset();
-        Wizards.choose(Wizards.FOREST);
+        Wizards.removeAvailableWizard(Wizards.FOREST);
         assertEquals(3, Wizards.notChosen().size());
         Wizards.reset();
         assertEquals(4, Wizards.notChosen().size());
@@ -33,7 +33,7 @@ public class PlayerWizardsTest {
     @Test
     @DisplayName("isChosen method behaviour")
     void chosenTest() {
-        Wizards.choose(Wizards.KING);
+        Wizards.removeAvailableWizard(Wizards.KING);
         assertTrue(Wizards.isChosen(Wizards.KING));
     }
 }

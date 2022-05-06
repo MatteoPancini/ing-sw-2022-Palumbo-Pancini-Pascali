@@ -1,14 +1,10 @@
-/*package it.polimi.ingsw.view;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
-import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
-
-import java.util.Locale;
 
 public class InputChecker {
     private ClientConnection clientConnection;
@@ -26,7 +22,7 @@ public class InputChecker {
     }
 
     public ClientConnection getConnectionSocket() {
-        return client;
+        return clientConnection;
     }
 
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
@@ -215,4 +211,3 @@ public class InputChecker {
         return action;
     }
 }
-*/

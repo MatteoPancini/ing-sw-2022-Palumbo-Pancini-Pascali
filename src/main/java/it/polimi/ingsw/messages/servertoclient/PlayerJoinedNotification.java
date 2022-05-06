@@ -11,4 +11,9 @@ public class PlayerJoinedNotification implements Answer {
     public String getJoiningNotification() {
         return joiningNotification;
     }
+
+    @Override
+    public Object getMessage() {
+        return joiningNotification;
+    }
 }

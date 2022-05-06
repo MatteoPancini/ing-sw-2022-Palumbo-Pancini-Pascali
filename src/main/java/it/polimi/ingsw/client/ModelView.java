@@ -1,5 +1,4 @@
-/*
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
@@ -21,15 +20,18 @@ public class ModelView {
     private int pink;
     private int red;
     private int green;
+    private String playerNickname;
+    private boolean activateInput;
+    private String wizardName;
+    private boolean gameStarted;
 
     public ModelView(CLI cli, VisualBoard visualBoard)  {
         this.cli = cli;
         this.visualBoard = visualBoard;
+        this.gameStarted = false;
+
     }
 
-    public Answer getServerAnswer() {
-        return serverAnswer;
-    }
 
     public CLI getCli() {
         return cli;
@@ -37,6 +39,56 @@ public class ModelView {
 
     public Game getGame() {
         return game;
+    }
+
+    public void setServerAnswer(Answer answer) {
+        this.serverAnswer = answer;
+    }
+
+    public Answer getServerAnswer() {
+        return serverAnswer;
+    }
+
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
+
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
+    public boolean isActivateInput() {
+        return activateInput;
+    }
+
+    public void setActivateInput() {
+        this.activateInput = true;
+    }
+
+    public void resetActivateInput() {
+        this.activateInput = false;
+    }
+
+    public void setActivateInput(boolean activateInput) {
+        this.activateInput = activateInput;
+    }
+
+    public void setWizardName(String wizardName) {
+        System.out.println(getPlayerNickname() + "'s Wizard is: " + wizardName);
+        this.wizardName = wizardName;
+    }
+
+    public String getWizardName() {
+        return wizardName;
     }
 
     public Player getCurrentPlayer() {
@@ -178,4 +230,4 @@ public class ModelView {
         }
         return redProfessor;
     }
-}*/
+}

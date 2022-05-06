@@ -1,6 +1,5 @@
 package it.polimi.ingsw.messages.clienttoserver.actions;
 
-import it.polimi.ingsw.model.enumerations.Action;
 import it.polimi.ingsw.model.enumerations.Assistants;
 
 public class PickAssistant implements UserAction {
