@@ -1,59 +1,43 @@
 package it.polimi.ingsw.model.cards;
 
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.model.enumerations.Characters;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class CharacterDeck {
+    private static List<CharacterCard> cards = null;
     private CharacterDeck() {
         throw new IllegalStateException();
     }
 
     public static List<CharacterCard> parseCharacterCards() {
-        List<CharacterCard> characterCards = new ArrayList<CharacterCard>();
-        String jsonPath = "json/characterCards.json";
+        try{
+            File myObj = new File("./src/main/resources/characterCards.txt");
+            Scanner myReader = new Scanner(myObj);
+            String data = myReader.nextLine();
 
-        InputStream in = CharacterDeck.class.getClassLoader().getResourceAsStream(jsonPath);
+            Gson gson = new Gson();
+            Type userListType = new TypeToken<ArrayList<AssistantCard>>(){}.getType();
+            cards = gson.fromJson(data, userListType);
 
-        JsonReader reader = null;
-
-        try {
-            reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
+            myReader.close();
+        }catch(FileNotFoundException e){
+            System.out.println("File not found.");
             e.printStackTrace();
         }
-
-        try {
-            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-            JsonArray jsonCards = jsonObject.getAsJsonArray("characterCards");
-            for(JsonElement cardElem : jsonCards) {
-                JsonObject card = cardElem.getAsJsonObject();
-
-                Characters characterName = Characters.valueOf(card.get("name").getAsString());
-                String effect = card.get("effect").getAsString();
-                int initialCost = card.get("initialCost").getAsInt();
-
-                characterCards.add(new CharacterCard(characterName, effect, initialCost));
-            }
-        } catch (IllegalArgumentException e){
-            e.printStackTrace();
-        }
-
-        return characterCards;
+        return cards;
     }
 
-    public static List<CharacterCard> selectPlayableCards(){
+    public static List<CharacterCard> getPlayableCards(){
         List<CharacterCard> allCards = parseCharacterCards();
         List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
 

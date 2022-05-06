@@ -2,20 +2,16 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.GameBoard;
-import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.enumerations.PawnType;
-import it.polimi.ingsw.model.board.MotherNature;
-import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 
-public class ActionHandler {
+public class ActionController {
     private final Game game;
     private final GameBoard board;
 
-    public ActionHandler(Game game, GameBoard board){
+    public ActionController(Game game, GameBoard board){
         this.game = game;
         this.board = board;
     }

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+/*package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
@@ -243,3 +243,4 @@ public class InputChecker {
         return action;
     }
 }
+*/
