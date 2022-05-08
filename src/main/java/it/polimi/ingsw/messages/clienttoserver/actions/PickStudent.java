@@ -1,26 +1,27 @@
 package it.polimi.ingsw.messages.clienttoserver.actions;
 
+import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.Action;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
 public class PickStudent implements UserAction {
     private Action action;
-    private PawnType chosenStudent;
+    private Student chosenStudent;
 
     public PickStudent() {
         this.action = Action.PICK_STUDENT;
     }
 
-    public PickStudent(PawnType student) {
+    public PickStudent(Student stud) {
         this.action = Action.PICK_STUDENT;
-        this.chosenStudent = student;
+        this.chosenStudent = new Student(stud.getType());
     }
 
     public Action getAction() {
         return action;
     }
 
-    public PawnType getChosenStudent() {
+    public Student getChosenStudent() {
         return chosenStudent;
     }
 }

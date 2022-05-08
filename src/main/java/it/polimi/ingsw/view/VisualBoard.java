@@ -2,10 +2,12 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
+import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
-import it.polimi.ingsw.model.enumerations.Assistants;
+import it.polimi.ingsw.model.enumerations.PawnType;
+import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Tower;
 
@@ -17,6 +19,18 @@ public class VisualBoard {
     private int red;
     private int blue;
     private int green;
+    private MotherNature motherNature;
+
+    public DiningRoom getDiningRoom() {
+        return diningRoom;
+    }
+
+    public void addStudentDiningRoom(DiningRoom diningRoom, Student stud) {
+        PawnType type = stud.getType();
+        diningRoom.getDiningRoom().
+    }
+
+    private DiningRoom diningRoom;
     private boolean yellowProfessor;
     private boolean pinkProfessor;
     private boolean redProfessor;
@@ -24,7 +38,7 @@ public class VisualBoard {
     private boolean greenProfessor;
     private ArrayList<Island> islandsView;
     private ArrayList<Student> entrance;
-    private AssistantCard[] playedCards;
+    private AssistantCard[] deck;
     private ArrayList<CloudTile> clouds;
     private CharacterCard[] characters;
 
@@ -56,6 +70,14 @@ public class VisualBoard {
 
     public int getRed() {
         return red;
+    }
+
+    public MotherNature getMotherNature() {
+        return motherNature;
+    }
+
+    public void setMotherNature(int IDisland) {
+        motherNature.setPosition(IDisland);
     }
 
     public boolean isYellowProfessor() {
@@ -123,15 +145,15 @@ public class VisualBoard {
         return clouds;
     }
 
-    public AssistantCard[] getPlayedCards() {
-        return playedCards;
+    public AssistantCard[] getDeck() {
+        return deck;
     }
     public AssistantCard getPlayedCard(Player player) {
-        return this.getPlayedCards()[player.getPlayerID()];
+        return this.getDeck()[player.getPlayerID()];
     }
 
     public void setPlayedCard(AssistantCard card, Player player) {
-        this.playedCards[player.getPlayerID()] = card;
+        this.deck[player.getPlayerID()] = card;
     }
 
     public ArrayList<Island> getIslandsView() {
@@ -178,8 +200,8 @@ public class VisualBoard {
         this.islandsView.get(island.getIslandID()).setTower(tower);
     }
 
-    public void setPlayedCards(Assistants card, Player currPlayer) {
-        this.playedCards[currPlayer.getPlayerID()] = card;
+    public void setPlayedCards(AssistantCard card, Player currPlayer) {
+        this.deck[currPlayer.getPlayerID()] = card;
     }
 
     public void setEntrance(ArrayList<Student> students) {

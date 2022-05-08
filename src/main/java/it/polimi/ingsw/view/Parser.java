@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickDestination;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.model.enumerations.Action;
 import it.polimi.ingsw.server.SocketClientConnection;
@@ -14,10 +15,10 @@ public class Parser implements PropertyChangeListener {
     private ModelView modelView;
     private InputChecker inputChecker;
 
-    public Parser(ClientConnection conn, ModelView mv, InputChecker checker) {
+    public Parser(ClientConnection conn, ModelView mv) {
         this.connectionSocket = conn;
         this.modelView = mv;
-        this.inputChecker = checker;
+        this.inputChecker = new InputChecker(mv, getModelView().getCli(), conn);
     }
 
     public ModelView getModelView() {
@@ -34,29 +35,36 @@ public class Parser implements PropertyChangeListener {
         try {
             message = inputChecker.checkAssistant(input);
         } catch (AlreadyPlayedAssistantException e) { modelView.getCli().getOutput().println(e.getMessage()); }
+        modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseStudent(String input) {
         UserAction message;
         message = inputChecker.checkStudent(input);
+        modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseDestination(String input) {
         UserAction message = inputChecker.checkDestination(input);
+        modelView.setDestinationUserAction(message);
+        Object dest = ((PickDestination) modelView.getDestinationUserAction()).getDestination();
+        ((PickDestination) modelView.getDestinationUserAction()).setDestination(dest);
         return message;
     }
 
     public UserAction parseMoves(String input) {
         UserAction message;
         message = inputChecker.checkMoves(input);
+        modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseCloud(String input) {
         UserAction message;
         message = inputChecker.checkCloud(input);
+        modelView.setLastUserAction(message);
         return message;
     }
 
@@ -93,18 +101,13 @@ public class Parser implements PropertyChangeListener {
         if(action!=null) {
             connectionSocket.sendUserInput(action);
             //modificare la model view in base all'action inviata
+            // qui dovrei ricevere il messaggio dal serve che mi notifica di modificare la model view
+            // ricordare che ci sono due metodi di update, uno per la student move e l'altro per le restanti
 
             return true;
         }
     }
 
-    public void updateModelView(UserAction action) {
-        switch(action) {
-            case "PICKASSISTANT" -> {
-                modelView.getVisualBoard().set
-            }
-        }
-    }
 
 
     //parser ascolta la CLI

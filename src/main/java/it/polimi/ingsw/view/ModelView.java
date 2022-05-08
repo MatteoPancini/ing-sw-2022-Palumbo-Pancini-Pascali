@@ -1,8 +1,10 @@
-/*
+
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
@@ -20,12 +22,128 @@ public class ModelView {
     private int blue;
     private int pink;
     private int red;
+
+    public UserAction getDestinationUserAction() {
+        return destinationUserAction;
+    }
+
+    public void setDestinationUserAction(UserAction destinationUserAction) {
+        this.destinationUserAction = destinationUserAction;
+    }
+
+    private UserAction destinationUserAction;
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public void setServerAnswer(Answer serverAnswer) {
+        this.serverAnswer = serverAnswer;
+    }
+
+    public boolean isActiveInput() {
+        return activeInput;
+    }
+
+    public void setActiveInput(boolean activeInput) {
+        this.activeInput = activeInput;
+    }
+
+    public int getYellow() {
+        return yellow;
+    }
+
+    public void setYellow(int yellow) {
+        this.yellow = yellow;
+    }
+
+    public int getBlue() {
+        return blue;
+    }
+
+    public void setBlue(int blue) {
+        this.blue = blue;
+    }
+
+    public int getPink() {
+        return pink;
+    }
+
+    public void setPink(int pink) {
+        this.pink = pink;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public void setRed(int red) {
+        this.red = red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public void setGreen(int green) {
+        this.green = green;
+    }
+
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    public String getWizardName() {
+        return wizardName;
+    }
+
+    public void setWizardName(String wizardName) {
+        this.wizardName = wizardName;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
     private int green;
+    private String playerNickname;
+    private UserAction lastUserAction;
+
+    public void setCli(CLI cli) {
+        this.cli = cli;
+    }
+
+    public void setVisualBoard(VisualBoard visualBoard) {
+        this.visualBoard = visualBoard;
+    }
+
+    private String wizardName;
+    private boolean gameStarted;
+
+    public UserAction getLastUserAction() {
+        return lastUserAction;
+    }
+
+    public void setLastUserAction(UserAction lastUserAction) {
+        this.lastUserAction = lastUserAction;
+    }
 
     public ModelView(CLI cli, VisualBoard visualBoard)  {
         this.cli = cli;
         this.visualBoard = visualBoard;
     }
+
 
     public Answer getServerAnswer() {
         return serverAnswer;
@@ -178,4 +296,4 @@ public class ModelView {
         }
         return redProfessor;
     }
-}*/
+}

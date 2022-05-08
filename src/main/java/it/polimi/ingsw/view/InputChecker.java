@@ -1,4 +1,4 @@
-/*package it.polimi.ingsw.view;
+package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
@@ -35,7 +35,7 @@ public class InputChecker {
         switch (input.toUpperCase()) {
             case "EAGLE" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.EAGLE)) {
-                    action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.EAGLE);
+                    action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.EAGLE, ));
                     modelView.getVisualBoard().
                             setPlayedCard(new AssistantCard(Assistants.EAGLE, 4, 2), modelView.getCurrentPlayer());
                 } else {
@@ -46,7 +46,7 @@ public class InputChecker {
                 if (modelView.getGame().canPlayAssistant(Assistants.DOG)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.DOG);
                     modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.EAGLE, 1, 1), modelView.getCurrentPlayer());
+                            setPlayedCard(new AssistantCard(Assistants.DOG, 8, 4), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -54,7 +54,8 @@ public class InputChecker {
             case "ELEPHANT" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.ELEPHANT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.ELEPHANT);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.ELEPHANT, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.ELEPHANT, 9, 5), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -62,7 +63,8 @@ public class InputChecker {
             case "CAT" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.CAT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CAT);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.CAT, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.CAT, 3, 2), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -70,7 +72,8 @@ public class InputChecker {
             case "CHEETAH" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.CHEETAH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CHEETAH);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.CHEETAH, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.CHEETAH, 1, 1), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -78,7 +81,8 @@ public class InputChecker {
             case "LIZARD" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.LIZARD)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.LIZARD);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.LIZARD, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.LIZARD, 6, 3), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -86,7 +90,8 @@ public class InputChecker {
             case "OCTOPUS" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.OCTOPUS)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OCTOPUS);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.OCTOPUS, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.OCTOPUS, 7, 4), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -94,7 +99,8 @@ public class InputChecker {
             case "OSTRICH" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.OSTRICH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OSTRICH);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.OSTRICH, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.OSTRICH, 2, 1), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -102,7 +108,8 @@ public class InputChecker {
             case "TURTLE" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.TURTLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.TURTLE);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.TURTLE, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.TURTLE, 10, 5), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -110,7 +117,8 @@ public class InputChecker {
             case "FOX" -> {
                 if (modelView.getGame().canPlayAssistant(Assistants.FOX)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX);
-                    modelView.getVisualBoard().setPlayedCards(Assistants.FOX, getModelView().getCurrentPlayer());
+                    modelView.getVisualBoard().
+                            setPlayedCard(new AssistantCard(Assistants.FOX, 5, 3), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -122,10 +130,14 @@ public class InputChecker {
 
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
-        int maxMoves =
+        int maxMoves = modelView.getVisualBoard().getPlayedCard(modelView.getCurrentPlayer()).getMoves();
         int moves = Integer.parseInt(input);
-        if (moves > 0 && moves < maxMoves) {
+        if (moves > 0 && moves < maxMoves &&) {
             action = new PickMovesNumber(moves);
+            /* modelView.getVisualBoard().setMotherNature(getModelView().getVisualBoard().getMotherNature().getPosition()
+                    + moves);
+            modelView.getVisualBoard().getIslandsView().get(getModelView().getVisualBoard().getMotherNature().getPosition()).
+                    setMotherNature(true); */
         }
         return action;
     }
@@ -181,7 +193,7 @@ public class InputChecker {
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
         if (isStudentInEntrance(studentType, modelView.getCurrentPlayer())) {
-            action = new PickStudent(toPawnType(studentType));
+            action = new PickStudent(new Student(toPawnType(studentType)));
         }
     }
 
@@ -243,4 +255,3 @@ public class InputChecker {
         return action;
     }
 }
-*/
