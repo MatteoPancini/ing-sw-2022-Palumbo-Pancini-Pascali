@@ -1,6 +1,7 @@
 
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.VisualBoard;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
@@ -295,5 +296,10 @@ public class ModelView {
             redProfessor = "no";
         }
         return redProfessor;
+    }
+
+
+    public void setActivateInput(boolean activateUserInput) {
+        this.activeInput = activateUserInput;
     }
 }

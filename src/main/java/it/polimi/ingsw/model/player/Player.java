@@ -13,6 +13,39 @@ public class Player {
     private boolean isWinner;
     private int idTeam;
     private AssistantCard chosenAssistant;
+    private int coins;
+
+    public String getNicknamePlayer() {
+        return nicknamePlayer;
+    }
+
+    public boolean isPlaying() {
+        return isPlaying;
+    }
+
+    public void setPlaying(boolean playing) {
+        isPlaying = playing;
+    }
+
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(boolean winner) {
+        isWinner = winner;
+    }
+
+    public void setChosenAssistant(AssistantCard chosenAssistant) {
+        this.chosenAssistant = chosenAssistant;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
 
     public Player(String nickname, int playerID) {
         this.nicknamePlayer = nickname;

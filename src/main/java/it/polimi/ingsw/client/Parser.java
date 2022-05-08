@@ -1,8 +1,9 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.client;
+
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.PickDestination;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
-import it.polimi.ingsw.model.enumerations.Action;
+import it.polimi.ingsw.messages.clienttoserver.actions.Action;
 import it.polimi.ingsw.server.SocketClientConnection;
 
 import java.awt.desktop.QuitEvent;
@@ -91,7 +92,7 @@ public class Parser implements PropertyChangeListener {
                 action = inputChecker.checkCharacter(chosenValue);
             }
             case "QUIT" -> {
-                connectionSocket.sendUserInput(QUIT); ???
+                connectionSocket.sendUserInput(QUIT);
             }
             default -> {
                 return false;
@@ -128,6 +129,3 @@ public class Parser implements PropertyChangeListener {
         }
     }
 }
-
-
-//TODO finire action() con le restanti userAction (tutte)

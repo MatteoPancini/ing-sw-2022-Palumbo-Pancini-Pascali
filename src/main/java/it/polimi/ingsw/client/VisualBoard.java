@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
-import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Tower;
@@ -25,11 +24,6 @@ public class VisualBoard {
         return diningRoom;
     }
 
-    public void addStudentDiningRoom(DiningRoom diningRoom, Student stud) {
-        PawnType type = stud.getType();
-        diningRoom.getDiningRoom().
-    }
-
     private DiningRoom diningRoom;
     private boolean yellowProfessor;
     private boolean pinkProfessor;
@@ -38,9 +32,9 @@ public class VisualBoard {
     private boolean greenProfessor;
     private ArrayList<Island> islandsView;
     private ArrayList<Student> entrance;
-    private AssistantCard[] deck;
+    private ArrayList<AssistantCard> lastAssistantUsed;
     private ArrayList<CloudTile> clouds;
-    private CharacterCard[] characters;
+    private ArrayList<CharacterCard> characters;
 
     public VisualBoard() {
         yellow = 0;
@@ -71,6 +65,11 @@ public class VisualBoard {
     public int getRed() {
         return red;
     }
+
+     /*public void addStudentDiningRoom(DiningRoom diningRoom, Student stud) {
+        PawnType type = stud.getType();
+        diningRoom.getDiningRoom().
+    }*/
 
     public MotherNature getMotherNature() {
         return motherNature;
@@ -133,11 +132,11 @@ public class VisualBoard {
         return yellow;
     }
 
-    public CharacterCard[] getCharacters() {
+    public ArrayList<CharacterCard> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(CharacterCard[] characters) {
+    public void setCharacters(ArrayList<CharacterCard> characters) {
         this.characters = characters;
     }
 
@@ -145,15 +144,15 @@ public class VisualBoard {
         return clouds;
     }
 
-    public AssistantCard[] getDeck() {
-        return deck;
+    public ArrayList<AssistantCard> getLastAssistantUsed() {
+        return lastAssistantUsed;
     }
     public AssistantCard getPlayedCard(Player player) {
-        return this.getDeck()[player.getPlayerID()];
+        return this.getLastAssistantUsed().get(player.getPlayerID());
     }
 
     public void setPlayedCard(AssistantCard card, Player player) {
-        this.deck[player.getPlayerID()] = card;
+        this.lastAssistantUsed.set(player.getPlayerID(), card);
     }
 
     public ArrayList<Island> getIslandsView() {
@@ -201,7 +200,7 @@ public class VisualBoard {
     }
 
     public void setPlayedCards(AssistantCard card, Player currPlayer) {
-        this.deck[currPlayer.getPlayerID()] = card;
+        this.lastAssistantUsed.set(currPlayer.getPlayerID(), card);
     }
 
     public void setEntrance(ArrayList<Student> students) {

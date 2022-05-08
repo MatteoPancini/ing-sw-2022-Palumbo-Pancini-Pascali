@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class BoardCell {
     private PawnType boardCellType;
     private boolean coinCell;
-    public Student student;
+    private Student student;
+    private boolean professor;
 
     public BoardCell(PawnType boardCellType) {
         this.boardCellType = boardCellType;
@@ -31,5 +32,9 @@ public class BoardCell {
 
     public void setStudent(Student student){
         this.student = student;
+    }
+
+    public boolean hasProfessor() {
+        return professor;
     }
 }
