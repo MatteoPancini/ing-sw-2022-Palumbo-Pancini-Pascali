@@ -4,21 +4,21 @@ import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
 public class Player {
-    private String nickname;
-    private int playerID;
+    private String nicknamePlayer;
+    private int idPlayer;
     private Wizards wizard;
     private final AssistantDeck assistantDeck;
     private SchoolBoard board;
     private boolean isPlaying;
     private boolean isWinner;
-    private int teammateID;
+    private int idTeam;
     private AssistantCard chosenAssistant;
 
     public Player(String nickname, int playerID) {
-        this.nickname = nickname;
+        this.nicknamePlayer = nickname;
         assistantDeck = null;
         board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
-        this.playerID = playerID;
+        this.idPlayer = playerID;
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
     }
@@ -28,11 +28,11 @@ public class Player {
     }
 
     public String getNickname() {
-        return nickname;
+        return nicknamePlayer;
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nicknamePlayer = nickname;
     }
 
     public AssistantDeck getAssistantDeck() {
@@ -47,21 +47,38 @@ public class Player {
         this.board = board;
     }
 
-    public void setWizard(Wizards wiz) {
-        if(this.wizard == null) {
-            this.wizard = wiz;
-        }
+
+    public int getPlayerID() {
+        return idPlayer;
+    }
+
+    public void setIdTeam(int idTeam) {
+        this.idTeam = idTeam;
+    }
+
+    public int getIdTeam() {
+        return idTeam;
+    }
+
+
+
+    public int getIdPlayer() {
+        return idPlayer;
+    }
+
+    public void setIdPlayer(int idPlayer) {
+        this.idPlayer = idPlayer;
+    }
+
+    public void setNicknamePlayer(String nicknamePlayer) {
+        this.nicknamePlayer = nicknamePlayer;
+    }
+
+    public void setWizard(Wizards wizard) {
+        this.wizard = wizard;
     }
 
     public Wizards getWizard() {
         return wizard;
     }
-
-    public void setPlayerID(int playerID) { this.playerID = playerID; }
-
-    public int getPlayerID(){ return playerID; }
-
-    public void setTeammateID(int teammateID) { this.teammateID = teammateID; }
-
-    public int getTeammateID(){ return teammateID; }
 }

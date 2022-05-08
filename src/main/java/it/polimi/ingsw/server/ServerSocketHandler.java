@@ -7,9 +7,9 @@ import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/*
+
 public class ServerSocketHandler implements Runnable {
-    // In order to create a smaller Server class, ServerSocketHandler class creates sockets
+    // In order to create a smaller app.Server class, ServerSocketHandler class creates sockets
     // and threads that work with them
 
     private final int port;
@@ -42,24 +42,13 @@ public class ServerSocketHandler implements Runnable {
         this.activeSocket = activeSocket;
     }
 
-    public void acceptConnections(ServerSocket serverSocket) {
-        while(activeSocket) {
-            try {
-                SocketClientConnection socketClientConnection = new SocketClientConnection(serverSocket.accept(), server);
-                executorService.submit(socketClientConnection);
-
-            } catch (IOException e) {
-                System.err.println("Catched error trying to establish a socket client connection: " + e.getMessage());
-            }
-        }
-    }
 
     @Override
     public void run() {
         try {
             ServerSocket serverSocket = new ServerSocket(Constants.getPort());
-            System.out.println("Server socket opened on port " + port + ".\nPlease type \"Quit\" to exit!");
-            acceptConnections(serverSocket);
+            System.out.println("Server socket opened on port " + port + ".\nPlease type \"QUIT\" to exit!");
+            createConnections(serverSocket);
 
         } catch(IOException e) {
             System.err.println("Error during initialization of socket connection! Application will now close...");
@@ -69,4 +58,4 @@ public class ServerSocketHandler implements Runnable {
 }
 
 
- */
+

@@ -3,16 +3,14 @@ package it.polimi.ingsw.messages.clienttoserver;
 import it.polimi.ingsw.messages.clienttoserver.Message;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
-public class WizardChoice implements Message {
-    //Message by the client to the server containg the wizard chosen by the player.
+public class WizardChoice implements Message{
+    private Wizards wizardChosen;
 
-    private final Wizards wizard;
-
-    public WizardChoice(Wizards wizard) {
-        this.wizard = wizard;
+    public WizardChoice(Wizards wizardChosen) {
+        this.wizardChosen = wizardChosen;
     }
 
-    public Wizards getWizard() {
-        return wizard;
+    public Wizards getWizardChosen() {
+        return wizardChosen;
     }
 }
