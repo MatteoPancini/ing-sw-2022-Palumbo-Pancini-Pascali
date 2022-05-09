@@ -13,6 +13,7 @@ public class Player {
     private boolean isWinner;
     private int idTeam;
     private AssistantCard chosenAssistant;
+    private boolean teamLeader;
 
     public Player(String nickname, int playerID) {
         this.nicknamePlayer = nickname;
@@ -47,10 +48,14 @@ public class Player {
         this.board = board;
     }
 
-
-    public int getPlayerID() {
-        return idPlayer;
+    public void setTeamLeader(boolean teamLeader) {
+        this.teamLeader = teamLeader;
     }
+
+    public boolean isTeamLeader() {
+        return teamLeader;
+    }
+
 
     public void setIdTeam(int idTeam) {
         this.idTeam = idTeam;

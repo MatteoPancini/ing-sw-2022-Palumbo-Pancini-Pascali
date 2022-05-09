@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.cards;
 
-//TODO: Consigliato di usare un Factory Method per il JSON nel costruttore
-
 
 import it.polimi.ingsw.model.enumerations.Characters;
 

@@ -65,6 +65,7 @@ public class Parser implements PropertyChangeListener {
             connectionSocket.sendUserInput(message);
             return true;
         }
+        return false;
     }
 
     @Override

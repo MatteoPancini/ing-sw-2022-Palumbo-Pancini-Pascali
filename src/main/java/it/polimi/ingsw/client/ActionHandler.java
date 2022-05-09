@@ -33,10 +33,13 @@ public class ActionHandler {
             }
         } else if(answer instanceof ExpertModeAnswer) {
             view.firePropertyChange("InitialGamePhase", null, "ExpertModeAnswer");
-        }
-        else if (answer instanceof DynamicAnswer) {
+        } else if (answer instanceof DynamicAnswer) {
             notifyDynamicAnswer(answer);
-        }
+        } else if (answer instanceof RequestAction) {
+            String actionType = answer.getMessage().toString();
+            view.firePropertyChange("ActionPhase", null, actionType);
+        } //TODO M: inserisci answer instanceof ActionDoneNotification
+        // else if()
 
 
     }

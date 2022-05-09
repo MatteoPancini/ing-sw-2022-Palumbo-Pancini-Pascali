@@ -1,5 +1,8 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.messages.clienttoserver.actions.Action;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
@@ -8,22 +11,30 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.server.Server;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameHandler {
     private static Game game;
-    private Controller controller;
-    private Server server;
+    private final Controller controller;
+    private final Server server;
     private int playersNumber;
     private ArrayList<Player> players;
+    private final PropertyChangeSupport gameHandlerListener = new PropertyChangeSupport(this);
     private boolean isExpertMode;
     private boolean isTeamMode = false;
+    private int currentPlayerId;
+    private boolean isMatchStarted;
+
 
     public GameHandler(Server server){
         game = new Game();
         controller = new Controller(game, this);
         System.out.println("Istantiating new game and controller");
         this.server = server;
+        gameHandlerListener.addPropertyChangeListener(controller);
+
     }
 
     public void setTeamMode(boolean teamMode) {
@@ -40,7 +51,13 @@ public class GameHandler {
         game.setExpertMode(expertMode);
     }
 
+    public void setMatchStarted() {
+        isMatchStarted = true;
+    }
 
+    public boolean isMatchStarted() {
+        return isMatchStarted;
+    }
 
     public static Game getGame() {
         return game;
@@ -49,6 +66,14 @@ public class GameHandler {
     public void addGamePlayer(String playerNickname, int playerID) {
         game.createNewPlayer(playerNickname, playerID);
 
+    }
+
+    public void setCurrentPlayerId(int currentPlayerId) {
+        this.currentPlayerId = currentPlayerId;
+    }
+
+    public int getCurrentPlayerId() {
+        return currentPlayerId;
     }
 
     public void setupTeams() {
@@ -61,6 +86,13 @@ public class GameHandler {
             } else {
                 game.getPlayers().get(i).setIdTeam(teamID2);
             }
+
+            if(i == 0) {
+                game.getPlayers().get(i).setTeamLeader(true);
+            } else if(i == 1) {
+                game.getPlayers().get(i).setTeamLeader(true);
+            }
+
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }
 
@@ -107,7 +139,7 @@ public class GameHandler {
     public void sendExcept(Answer serverAnswer, int notClientID) {
         for(Player activePlayers : game.getActivePlayers()) {
             if(server.getIDFromNickname(activePlayers.getNickname()) != notClientID) {
-                sendSinglePlayer(serverAnswer, activePlayers.getPlayerID());
+                sendSinglePlayer(serverAnswer, activePlayers.getIdPlayer());
             }
         }
     }
@@ -165,97 +197,26 @@ public class GameHandler {
 
     public void startGame() {
         //GESTISCI MESSAGGIO PER METTERE GAMESTARTED IN MODELVIEW
+        setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
+        Random randomGenerator = new Random();
+        game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         controller.setupGame();
     }
         /*
-        for(int p = 1; p <= game.getPlayersNumber(); p++){
-            SchoolBoard newSchoolBoard = new SchoolBoard(p);
-            schoolBoards.add(newSchoolBoard);
-            game.getPlayers().get(p - 1).setBoard(newSchoolBoard);
-            game.getPlayers().get(p - 1).setPlayerID(p);
-        }
 
-        if(game.getPlayersNumber() == 4) {
-            Collections.shuffle(game.getPlayers());
-            game.getPlayers().get(0).setTeammateID(game.getPlayers().get(2).getPlayerID());
-            game.getPlayers().get(2).setTeammateID(game.getPlayers().get(0).getPlayerID());
-            game.getPlayers().get(1).setTeammateID(game.getPlayers().get(3).getPlayerID());
-            game.getPlayers().get(3).setTeammateID(game.getPlayers().get(1).getPlayerID());
-        }
-
-        Collections.shuffle(game.getPlayers());
-        game.setCurrentPlayer(game.getPlayers().get(0));
-
-        putStudentsOnCloud();
-
-        int studentsNumber;
-        if(game.getPlayersNumber() == 3) studentsNumber = 9;
-        else studentsNumber = 7;
-        for(SchoolBoard s : schoolBoards){
-            for(int i = 1; i <= studentsNumber; i++){
-                Collections.shuffle(gameBoard.getStudentsBag());
-                s.getEntrance().getStudents().add(gameBoard.getStudentsBag().get(0));
-                gameBoard.removeStudents(0);
-            }
-        }
-
-        int towersNumber;
-        ArrayList<TowerColor> allColors = new ArrayList<TowerColor>();
-        allColors.add(TowerColor.WHITE);
-        allColors.add(TowerColor.BLACK);
-        allColors.add(TowerColor.GREY);
-        if(game.getPlayersNumber() == 3) {
-            towersNumber = 6;
-            int colorsCounter3P = 0;
-            for(SchoolBoard s : schoolBoards){
-                for(int i = 1; i <= towersNumber; i++) {
-                    s.getTowerArea().addTowers(new Tower(allColors.get(colorsCounter3P)));
-                }
-                colorsCounter3P++;
-            }
-        }
-
-        if(game.getPlayersNumber() == 2) {
-            towersNumber = 8;
-            int colorsCounter2P = 0;
-            for(SchoolBoard s : schoolBoards){
-                for(int k = 1; k <= towersNumber; k++) {
-                    s.getTowerArea().addTowers(new Tower(allColors.get(colorsCounter2P)));
-                }
-                colorsCounter2P++;
-            }
-        }
-
-        if(game.getPlayersNumber() == 4){
-            towersNumber = 8;
-            int colorsCounter4P = 0;
-            for(Player p : game.getPlayers()){
-                if(p.getPlayerID() == 0 || p.getPlayerID() == 2) {
-                    p.getBoard().getTowerArea().addTowers(new Tower(allColors.get(colorsCounter4P)));
-                    colorsCounter4P++;
-                }
-            }
-        }
-
-        int maximum = 11;
-        gameBoard.getMotherNature().setPosition(Random.nextInt(maximum) + 1);
-        int n = 1;
-        for(int s = 1; s <= 11; s++){
-            if(n != 6){
-                int pos;
-                pos = (gameBoard.getMotherNature().getPosition() + s) % 12;
-                Collections.shuffle(gameBoard.getStudentsBag());
-                gameBoard.getIslands().get(pos - 1).addStudent(gameBoard.getStudentsBag().get(0));;
-                gameBoard.removeStudents(0);
-            }
-            n++;
-        }
 
          */
 
     public void unregisterPlayer(int leavingPlayer) {
         game.removePlayer(game.getPlayerByID(leavingPlayer));
+    }
+
+    public void parseActions(UserAction userAction, String actionType) {
+        switch(actionType) {
+            case "PickAssistant" -> gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getAction());
+
+        }
     }
 
 
@@ -321,20 +282,7 @@ import java.util.Random;
         return schoolBoards;
     }
 
-    public void putStudentsOnCloud() {
-        for (CloudTile cloud : gameBoardCopy.getClouds()) {
-            ArrayList<Student> newStudents = new ArrayList<Student>();
-            Collections.shuffle(gameBoardCopy.getStudentsBag());
-            int studentsNumber;
-            if(game.getPlayersNumber() == 3) studentsNumber = 4;
-            else studentsNumber = 3;
-            for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = gameBoardCopy.getStudentsBag().get(0);
-                gameBoard.removeStudents(0);
-            }
-            cloud.setStudents(newStudents);
-        }
-    }
+
 
     public void updateAssistantsState() {
         for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed()) {
@@ -342,19 +290,6 @@ import java.util.Random;
         }
     }
 
-    public void sendSinglePlayer(Answer serverAnswer, int clientID) {
-        server.getVirtualClientFromID(clientID).sendAnswerToClient(serverAnswer);
-    }
-
-    public void sendBroadcast(Answer serverAnswer) {
-        for(Player player : game.getActivePlayers()) {
-            sendSinglePlayer(serverAnswer, server.getIDFromNickname(player.getNickname()));
-        }
-    }
-
-    public void setPlayersNumber(int playersNumber) {
-        this.playersNumber = playersNumber;
-    }
 
 
 

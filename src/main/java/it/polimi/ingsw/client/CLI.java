@@ -199,8 +199,8 @@ public class CLI implements Runnable, ListenerInterface {
         } catch (DuplicateNicknameException e) {
             //e.printStackTrace();
             userNicknameSetup();
-        }//TODO: CICIO DA GUARDARE
-        //listeners.addPropertyChangeListener("action", new ActionParser(connectionSocket, modelView));
+        }//TODO M: CICIO DA GUARDARE
+        listeners.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
     }
 
     public boolean isActiveGame() {
@@ -313,6 +313,17 @@ public class CLI implements Runnable, ListenerInterface {
 
     }
 
+    public void actionPhaseHandler(String serverCommand) {
+        switch(serverCommand) {
+
+            case "PICKASSISTANT" -> {
+
+            }
+
+
+        }
+    }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
@@ -327,12 +338,24 @@ public class CLI implements Runnable, ListenerInterface {
                 break;
             }
 
-
-
             case "DynamicAnswer" -> {
                 //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
                 showServerMessage(modelView.getServerAnswer());
             }
+
+            case "ActionPhase" -> {
+                assert serverCommand != null;
+
+                makeAction(serverCommand);
+
+            }
+
+            case "EndActionPhase" -> {
+
+                updateModelView(serverCommand);
+            }
+
+
 
 
             default -> System.out.println("Unknown answer from server");

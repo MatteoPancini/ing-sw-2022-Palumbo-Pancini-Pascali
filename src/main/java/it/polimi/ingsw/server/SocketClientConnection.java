@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server;
-import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.clienttoserver.*;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 
 public class SocketClientConnection implements Runnable {
@@ -20,7 +19,7 @@ public class SocketClientConnection implements Runnable {
     //app.Server.SocketClientConnection handles a connection between client and server, permitting sending and
     // receiving messages.
 
-    private Socket socket;
+    private final Socket socket;
     private Server server;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
@@ -182,6 +181,24 @@ public class SocketClientConnection implements Runnable {
 
 
     public void actionHandler(UserAction userAction) {
+        if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
+            server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTYOURTURN), clientID);
+        }
+        else {
+            if(server.getGameFromID(clientID).isMatchStarted()) {
+                //TODO M: fai i vari switch tra le varie action
+                if(userAction instanceof PickAssistant) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
+
+                }
+
+            } else {
+                server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
+            }
+
+
+        }
+
 
 
     }
