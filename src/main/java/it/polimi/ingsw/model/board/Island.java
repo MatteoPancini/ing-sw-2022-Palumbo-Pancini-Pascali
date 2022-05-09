@@ -14,6 +14,7 @@ public class Island {
     private ArrayList<Student> students;
     private boolean noEntry;
     private Player owner;
+    private boolean motherNature;
 
     public Island(GameBoard board, int ID){
         this.board = board;
@@ -23,6 +24,14 @@ public class Island {
         students = new ArrayList<Student>();
         noEntry = false;
         owner = null;
+    }
+
+    public void setMotherNature(boolean motherNature) {
+        this.motherNature = motherNature;
+    }
+
+    public boolean isMotherNature() {
+        return motherNature;
     }
 
     public boolean hasTower(){

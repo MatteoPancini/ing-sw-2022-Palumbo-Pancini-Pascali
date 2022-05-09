@@ -1,7 +1,11 @@
+
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.VisualBoard;
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
@@ -19,44 +23,91 @@ public class ModelView {
     private int blue;
     private int pink;
     private int red;
-    private int green;
-    private String playerNickname;
-    private boolean activateInput;
-    private String wizardName;
-    private boolean gameStarted;
 
-    public ModelView(CLI cli, VisualBoard visualBoard)  {
-        this.cli = cli;
-        this.visualBoard = visualBoard;
-        this.gameStarted = false;
-
+    public UserAction getDestinationUserAction() {
+        return destinationUserAction;
     }
 
-
-    public CLI getCli() {
-        return cli;
+    public void setDestinationUserAction(UserAction destinationUserAction) {
+        this.destinationUserAction = destinationUserAction;
     }
 
-    public Game getGame() {
-        return game;
+    private UserAction destinationUserAction;
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
-    public void setServerAnswer(Answer answer) {
-        this.serverAnswer = answer;
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
-    public Answer getServerAnswer() {
-        return serverAnswer;
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public void setServerAnswer(Answer serverAnswer) {
+        this.serverAnswer = serverAnswer;
+    }
+
+    public boolean isActiveInput() {
+        return activeInput;
+    }
+
+    public void setActiveInput(boolean activeInput) {
+        this.activeInput = activeInput;
+    }
+
+    public int getYellow() {
+        return yellow;
+    }
+
+    public void setYellow(int yellow) {
+        this.yellow = yellow;
+    }
+
+    public int getBlue() {
+        return blue;
+    }
+
+    public void setBlue(int blue) {
+        this.blue = blue;
+    }
+
+    public int getPink() {
+        return pink;
+    }
+
+    public void setPink(int pink) {
+        this.pink = pink;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public void setRed(int red) {
+        this.red = red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public void setGreen(int green) {
+        this.green = green;
     }
 
     public String getPlayerNickname() {
         return playerNickname;
     }
 
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
+    public String getWizardName() {
+        return wizardName;
     }
 
+    public void setWizardName(String wizardName) {
+        this.wizardName = wizardName;
+    }
 
     public boolean isGameStarted() {
         return gameStarted;
@@ -66,29 +117,45 @@ public class ModelView {
         this.gameStarted = gameStarted;
     }
 
-    public boolean isActivateInput() {
-        return activateInput;
+    private int green;
+    private String playerNickname;
+    private UserAction lastUserAction;
+
+    public void setCli(CLI cli) {
+        this.cli = cli;
     }
 
-    public void setActivateInput() {
-        this.activateInput = true;
+    public void setVisualBoard(VisualBoard visualBoard) {
+        this.visualBoard = visualBoard;
     }
 
-    public void resetActivateInput() {
-        this.activateInput = false;
+    private String wizardName;
+    private boolean gameStarted;
+
+    public UserAction getLastUserAction() {
+        return lastUserAction;
     }
 
-    public void setActivateInput(boolean activateInput) {
-        this.activateInput = activateInput;
+    public void setLastUserAction(UserAction lastUserAction) {
+        this.lastUserAction = lastUserAction;
     }
 
-    public void setWizardName(String wizardName) {
-        System.out.println(getPlayerNickname() + "'s Wizard is: " + wizardName);
-        this.wizardName = wizardName;
+    public ModelView(CLI cli, VisualBoard visualBoard)  {
+        this.cli = cli;
+        this.visualBoard = visualBoard;
     }
 
-    public String getWizardName() {
-        return wizardName;
+
+    public Answer getServerAnswer() {
+        return serverAnswer;
+    }
+
+    public CLI getCli() {
+        return cli;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public Player getCurrentPlayer() {
@@ -159,8 +226,8 @@ public class ModelView {
     }
 
     //decidere se id parte da 0 o da 1
-    public void setPlayerNickname(String playerNickname, int id) {
-        players.get(id-1).setNickname(playerNickname);
+    public void setPlayerNickname(String playerNickname) {
+        currentPlayer.setNickname(playerNickname);
     }
 
     public void enableInput() {
@@ -229,5 +296,10 @@ public class ModelView {
             redProfessor = "no";
         }
         return redProfessor;
+    }
+
+
+    public void setActivateInput(boolean activateUserInput) {
+        this.activeInput = activateUserInput;
     }
 }

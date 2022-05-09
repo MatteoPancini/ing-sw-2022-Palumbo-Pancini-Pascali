@@ -4,10 +4,12 @@ import java.lang.reflect.Array;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
 public class Table {
     private ArrayList<BoardCell> table = new ArrayList<BoardCell>();
+    private int lastPosition = 0;
 
     //TODO
     public Table(PawnType p) {
@@ -20,6 +22,16 @@ public class Table {
 
     public ArrayList<BoardCell> getTable() {
         return table;
+    }
+
+    public PawnType getColor() {
+        return this.getTable().get(0).getBoardCellType();
+    }
+
+    public void addStudent(Student stud){
+        this.getTable().get(lastPosition).setStudent(stud);
+        lastPosition++;
+        return;
     }
 }
 
