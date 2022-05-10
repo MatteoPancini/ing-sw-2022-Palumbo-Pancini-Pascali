@@ -91,8 +91,7 @@ public class ActionHandler {
         }
         modelView.setDestinationUserAction(null);
     }
-
-    //TODO continuare sta merda
+    //TODO il server deve inviare un messaggio ogni volta che cambia il model
     public void updateModelView(String actionName) {
         switch(actionName) {
             case "PICKASSISTANT" -> {

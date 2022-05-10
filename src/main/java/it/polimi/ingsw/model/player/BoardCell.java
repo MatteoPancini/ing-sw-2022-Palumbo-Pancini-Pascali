@@ -15,7 +15,12 @@ public class BoardCell {
         this.boardCellType = boardCellType;
         coinCell = false;
     }
-
+    public boolean hasStudent() {
+        if(this.student!=null) {
+            return true;
+        }
+        return false;
+    }
     public boolean hasCoin(){
         return coinCell;
     };

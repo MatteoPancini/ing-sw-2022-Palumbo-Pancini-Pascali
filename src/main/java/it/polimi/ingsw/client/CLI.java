@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client;
 
-
 import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.ExpertModeChoice;
@@ -62,6 +61,7 @@ public class CLI implements Runnable, ListenerInterface {
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
     }
+
     public String printTower(Island isl) {
         if(isl.hasTower()) {
             return "yes";
@@ -113,6 +113,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return r;
     }
+
     public Scanner getIn() {
         return in;
     }
@@ -176,6 +177,16 @@ public class CLI implements Runnable, ListenerInterface {
     }
     public void showCoins() {
         output.println(">You have " + modelView.getCurrentPlayer().getCoins() + " left.");
+    }
+    public void printPlayerDiningRoom(int id) {
+        for(int i=0; i<11; i++) {
+            //TODO chiedere aiutooooo
+        }
+    }
+
+    public void showDiningRoom() {
+        output.println(">Take a look to the other players' dining room!");
+
     }
 
     public void askMoves(AssistantCard card) {
