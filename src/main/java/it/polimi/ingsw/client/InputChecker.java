@@ -1,18 +1,12 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.ClientConnection;
-import it.polimi.ingsw.client.ModelView;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
-import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
-
-import java.util.Locale;
 
 public class InputChecker {
     private ClientConnection clientConnection;
@@ -38,91 +32,71 @@ public class InputChecker {
         PickAssistant action;
         switch (input.toUpperCase()) {
             case "EAGLE" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.EAGLE)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.EAGLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.EAGLE));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.EAGLE, 4, 2), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "DOG" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.DOG)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.DOG)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.DOG));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.DOG, 8, 4), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "ELEPHANT" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.ELEPHANT)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.ELEPHANT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.ELEPHANT));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.ELEPHANT, 9, 5), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "CAT" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.CAT)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.CAT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.CAT));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.CAT, 3, 2), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "CHEETAH" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.CHEETAH)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.CHEETAH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.CHEETAH));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.CHEETAH, 1, 1), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "LIZARD" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.LIZARD)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.LIZARD)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.LIZARD));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.LIZARD, 6, 3), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "OCTOPUS" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.OCTOPUS)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.OCTOPUS)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.OCTOPUS));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.OCTOPUS, 7, 4), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "OSTRICH" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.OSTRICH)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.OSTRICH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.OSTRICH));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.OSTRICH, 2, 1), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "TURTLE" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.TURTLE)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.TURTLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.TURTLE));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.TURTLE, 10, 5), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
             }
             case "FOX" -> {
-                if (modelView.getGame().canPlayAssistant(Assistants.FOX)) {
+                if (modelView.getGameCopy().canPlayAssistant(Assistants.FOX)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, new AssistantCard(Assistants.FOX));
-                    modelView.getVisualBoard().
-                            setPlayedCard(new AssistantCard(Assistants.FOX, 5, 3), modelView.getCurrentPlayer());
                 } else {
                     throw new AlreadyPlayedAssistantException();
                 }
@@ -134,14 +108,10 @@ public class InputChecker {
 
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
-        int maxMoves = modelView.getVisualBoard().getPlayedCard(modelView.getCurrentPlayer()).getMoves();
+        int maxMoves = modelView.getGameCopy().getGameBoard().getLastAssistantUsed().get(modelView.getGameCopy().getCurrentPlayer().getPlayerID()).getMoves();
         int moves = Integer.parseInt(input);
         if (moves > 0 && moves < maxMoves) {
             action = new PickMovesNumber(moves);
-            /* modelView.getVisualBoard().setMotherNature(getModelView().getVisualBoard().getMotherNature().getPosition()
-                    + moves);
-            modelView.getVisualBoard().getIslandsView().get(getModelView().getVisualBoard().getMotherNature().getPosition()).
-                    setMotherNature(true); */
         }
         return action;
     }
@@ -175,20 +145,20 @@ public class InputChecker {
         PickDestination action = null;
         switch(destination.charAt(0)) {
             case 'D' -> {
-                action = new PickDestination(modelView.getVisualBoard().getDiningRoom());
+                action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
             }
             case 'I' -> {
                 int island = Integer.parseInt(destination);
                 if (island > 0 && island < 13) {
-                    action = new PickDestination(Integer.parseInt(destination));
+                    action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(Integer.parseInt(destination)));
                 } else {
-                    cli.getOutput().println("Error: wrong island! Choose a number between 1 and 12, according to " +
+                    cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                             "the remaining islands");
                 }
             }
             default -> {
-                cli.getOutput().println("Error: type a destination for your student by choosing between 'dining room'" +
-                        "or 'island' ");
+                cli.showError("Error: type a destination for your student by choosing between 'dining room'" +
+                        "or 'island'");
             }
         }
         return action;
@@ -196,7 +166,7 @@ public class InputChecker {
 
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
-        if (isStudentInEntrance(studentType, modelView.getCurrentPlayer())) {
+        if (isStudentInEntrance(studentType, modelView.getGameCopy().getCurrentPlayer())) {
             action = new PickStudent(new Student(toPawnType(studentType)));
         }
         return action;
@@ -207,15 +177,16 @@ public class InputChecker {
         int cloudID = Integer.parseInt(input);
         //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
         //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
-        if(!modelView.getGame().getGameBoard().getClouds().get(cloudID).getStudents().isEmpty()) {
+        if(!modelView.getGameCopy().getGameBoard().getClouds().get(cloudID).getStudents().isEmpty()) {
             action = new PickCloud(cloudID);
         }
         else {
-            cli.getOutput().println("Error: the cloud has already been taken! Choose another one");
+            cli.showError("Error: the cloud has already been taken! Choose another one");
         }
         return action;
     }
 
+    /* aspettare implemnetazione delle character cards
     public PickCharacter checkCharacter(String input) {
         PickCharacter action = null;
         switch(input.toUpperCase()) {
@@ -258,5 +229,5 @@ public class InputChecker {
             default -> action = new PickCharacter();
         }
         return action;
-    }
+    } */
 }

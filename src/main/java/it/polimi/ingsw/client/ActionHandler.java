@@ -26,28 +26,26 @@ public class ActionHandler {
         Answer answer = modelView.getServerAnswer();
         System.out.println("Analizzo la server answer: " + answer.getMessage());
 
-        if(answer instanceof NumOfPlayerRequest) {
+        if (answer instanceof NumOfPlayerRequest) {
             view.firePropertyChange("InitialGamePhase", null, "RequestPlayerNumber");
-        } else if(answer instanceof WizardAnswer) {
+        } else if (answer instanceof WizardAnswer) {
             if (((WizardAnswer) answer).getMessage() != null) {
                 view.firePropertyChange("InitialGamePhase", null, "RequestWizard");
             } else {
                 modelView.setWizardName(((WizardAnswer) answer).getWizard());
                 //cli.showServerMessage();
             }
-        } else if(answer instanceof ExpertModeAnswer) {
+        } else if (answer instanceof ExpertModeAnswer) {
             view.firePropertyChange("InitialGamePhase", null, "ExpertModeAnswer");
         } else if (answer instanceof DynamicAnswer) {
             notifyDynamicAnswer(answer);
         } else if (answer instanceof RequestAction) {
             String actionType = answer.getMessage().toString();
             view.firePropertyChange("ActionPhase", null, actionType);
-        } //TODO M -> chiedi Cicio -> inserisci answer instanceof ActionDoneNotification
-         else if(answer instanceof GameCopy) {
-             view.firePropertyChange("UpdateModelView", null, answer.getMessage());
         }
-
-
+        else if (answer instanceof GameCopy) {
+            view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+        }
     }
 
     private void notifyDynamicAnswer(Answer answer) {
@@ -57,7 +55,7 @@ public class ActionHandler {
 
     //viene chiamato all'interno di propertyChange della CLI, notificata dall'Action Handler
     public void makeAction(String serverCommand) {
-        switch(serverCommand) {
+        switch (serverCommand) {
             case "PICKASSISTANT" -> {
                 cli.askAssistant(modelView.getCurrentPlayer().getAssistantDeck());
             }
@@ -82,7 +80,12 @@ public class ActionHandler {
         }
     }
 
-    public void updateStudentMove(String student, String dest) {
+
+
+
+
+
+    /*public void updateStudentMove(String student, String dest) {
         if(((PickDestination) modelView.getDestinationUserAction()).getChosenIsland()==-1) {
             for(Table t : modelView.getVisualBoard().getDiningRoom().getDiningRoom()) {
                 if(t.getColor().equals(((PickStudent) modelView.getLastUserAction()).getChosenStudent())) {
@@ -96,8 +99,6 @@ public class ActionHandler {
         }
         modelView.setDestinationUserAction(null);
     }
-
-    //TODO CICIO: continuare sta merda
     public void updateModelView(String actionName) {
         switch(actionName) {
             case "PICKASSISTANT" -> {
@@ -129,4 +130,5 @@ public class ActionHandler {
         }
         return null;
     }
+*/
 }

@@ -7,25 +7,25 @@ import it.polimi.ingsw.model.player.DiningRoom;
 public class PickDestination implements UserAction {
     private Action action;
     private Object destination;
-    private int chosenIsland;
+    private Island chosenIsland;
     private DiningRoom diningRoom;
 
     public PickDestination() {
         this.action = Action.PICK_DESTINATION;
     }
 
-    public PickDestination(int island) {
+    public PickDestination(Island island) {
         this.chosenIsland = island;
         this.diningRoom = null;
     }
 
     public PickDestination(DiningRoom dR) {
-        this.chosenIsland = -1;
+        this.chosenIsland = null;
         this.diningRoom = dR;
     }
 
     public Object getDestination() {
-        if(chosenIsland != -1) {
+        if(chosenIsland != null) {
             return chosenIsland;
         }
         else if (diningRoom != null) {
@@ -42,7 +42,7 @@ public class PickDestination implements UserAction {
         return action;
     }
 
-    public int getChosenIsland() {
+    public Island getChosenIsland() {
         return chosenIsland;
     }
 

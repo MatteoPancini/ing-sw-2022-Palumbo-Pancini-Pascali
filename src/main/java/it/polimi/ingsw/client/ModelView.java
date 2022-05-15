@@ -16,16 +16,19 @@ public class ModelView {
     private VisualBoard visualBoard;
     /* private Player currentPlayer;
     private ArrayList<Player> players;
-    private Answer serverAnswer;
     private UserAction destinationUserAction;*/
+    private Answer serverAnswer;
     private boolean activeInput;
-    private Game game;
-    private int yellow;
+    private Game gameCopy;
+    /*private int yellow;
     private int blue;
     private int pink;
     private int red;
+    private int green;
+    private String playerNickname;
+    private UserAction lastUserAction;
 
-    /*public UserAction getDestinationUserAction() {
+    public UserAction getDestinationUserAction() {
         return destinationUserAction;
     }
 
@@ -48,58 +51,46 @@ public class ModelView {
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
     }
-
     public boolean isActiveInput() {
         return activeInput;
     }
-
+    /*
     public void setActiveInput(boolean activeInput) {
         this.activeInput = activeInput;
     }
-
     public int getYellow() {
         return yellow;
     }
-
     public void setYellow(int yellow) {
         this.yellow = yellow;
     }
-
     public int getBlue() {
         return blue;
     }
-
     public void setBlue(int blue) {
         this.blue = blue;
     }
-
     public int getPink() {
         return pink;
     }
-
     public void setPink(int pink) {
         this.pink = pink;
     }
-
     public int getRed() {
         return red;
     }
-
     public void setRed(int red) {
         this.red = red;
     }
-
     public int getGreen() {
         return green;
     }
-
     public void setGreen(int green) {
         this.green = green;
     }
-
     public String getPlayerNickname() {
         return playerNickname;
-    }
+    } */
 
     public String getWizardName() {
         return wizardName;
@@ -117,10 +108,6 @@ public class ModelView {
         this.gameStarted = gameStarted;
     }
 
-    private int green;
-    private String playerNickname;
-    private UserAction lastUserAction;
-
     public void setCli(CLI cli) {
         this.cli = cli;
     }
@@ -132,13 +119,13 @@ public class ModelView {
     private String wizardName;
     private boolean gameStarted;
 
-    public UserAction getLastUserAction() {
+    /* public UserAction getLastUserAction() {
         return lastUserAction;
     }
 
     public void setLastUserAction(UserAction lastUserAction) {
         this.lastUserAction = lastUserAction;
-    }
+    } */
 
     public ModelView(CLI cli, VisualBoard visualBoard)  {
         this.cli = cli;
@@ -154,24 +141,25 @@ public class ModelView {
         return cli;
     }
 
-    public Game getGame() {
-        return game;
+    public Game getGameCopy() {
+        return gameCopy;
     }
 
-    public Player getCurrentPlayer() {
+    /* public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
     public VisualBoard getVisualBoard() {
         return visualBoard;
     }
+    */
 
     public boolean getActiveInput() {
         return activeInput;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameCopy(Game game) {
+        this.gameCopy = game;
     }
 
     public int getYellowStudents(Player p) {
@@ -202,7 +190,7 @@ public class ModelView {
                 red++;
             }
         }
-        return yellow;
+        return red;
     }
 
     public int getPinkStudents(Player p) {
@@ -222,9 +210,10 @@ public class ModelView {
                 green++;
             }
         }
-        return yellow;
+        return green;
     }
 
+/*
     //decidere se id parte da 0 o da 1
     public void setPlayerNickname(String playerNickname) {
         currentPlayer.setNickname(playerNickname);
@@ -242,6 +231,7 @@ public class ModelView {
         for(Player p : game.getPlayers())
             players.add(p);
     }
+    */
 
     public String hasYellowProfessor(Player p) {
         String yellowProfessor;

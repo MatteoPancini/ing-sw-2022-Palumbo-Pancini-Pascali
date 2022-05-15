@@ -48,6 +48,12 @@ public class BoardCell {
     public Professor getProfessor() {
         return professor;
     }
+    public boolean hasProfessor() {
+        if(professor != null) {
+            return true;
+        }
+        return false;
+    }
 
     public void resetProfessor() {
         this.professor = null;

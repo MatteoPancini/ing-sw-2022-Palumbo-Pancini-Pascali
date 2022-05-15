@@ -5,21 +5,22 @@ import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.ExpertModeChoice;
 import it.polimi.ingsw.messages.clienttoserver.PlayersNumberChoice;
 import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
-import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
+import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
-import it.polimi.ingsw.client.Parser;
+
 import java.beans.PropertyChangeEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -68,6 +69,19 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return "false";
     }
+    public Scanner getIn() {
+        return in;
+    }
+    public ModelView getModelView() {
+        return modelView;
+    }
+    public Parser getParser() {
+        return parser;
+    }
+    public PrintWriter getOutput() {
+        return out;
+    }
+
     public Integer printYellowStudentsOnIsland(Island isl) {
         int y = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -113,37 +127,32 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return r;
     }
-
-    public Scanner getIn() {
-        return in;
+    //TODO perché non posso accedere alle singole cards né con for each né con for? Sono inizializzate con un json,
+    // non so se dipende da questo, in tal caso se stampo in questo modo cosa succede? (Guardare i prossimi due metodi)
+    public String printCharacters() {
+        return modelView.getGameCopy().getGameBoard().getPlayableCharacters().toString();
     }
-    public ModelView getModelView() {
-        return modelView;
-    }
-    public Parser getParser() {
-        return parser;
-    }
-    public PrintWriter getOutput() {
-        return out;
+    public void showAvailableCharacters() {
+        out.println(">The available characters for this match are: " + printCharacters());
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
     public void showBoard() {
         out.println("Here's a summary of your board: ");
-        out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getCurrentPlayer()) + " - Professor : "
-                + modelView.hasGreenProfessor(modelView.getCurrentPlayer()) + ANSI_RESET);
-        out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getCurrentPlayer()) + ANSI_RESET);
-        out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getCurrentPlayer()) + " - Professor : "
-                + modelView.hasYellowProfessor(modelView.getCurrentPlayer()) + ANSI_RESET);
-        out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getCurrentPlayer()) + " - Professor : "
-                + modelView.hasPinkProfessor(modelView.getCurrentPlayer()) + ANSI_RESET);
-        out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getCurrentPlayer()) + ANSI_RESET);
+        out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+                + modelView.hasGreenProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
+        out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
+        out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+                + modelView.hasYellowProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
+        out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+                + modelView.hasPinkProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
+        out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
     }
     public void showIslands() {
         out.println(">Here's a little description of the islands in the game board: ");
-        for (Island island : modelView.getVisualBoard().getIslandsView()) {
+        for (Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
             out.println("Island " + island.getIslandID() + " : " + "\n" + " Students : ");
             for (Student stud : island.getStudents()) {
                 out.print(stud.getType().toString() + "\n");
@@ -153,51 +162,105 @@ public class CLI implements Runnable, ListenerInterface {
     }
     public void showLastAssistantsUsed() {
         out.println(">These are all the assistants used in this turn: ");
-        for(AssistantCard ass : modelView.getVisualBoard().getLastAssistantUsed()) {
+        for(AssistantCard ass : modelView.getGameCopy().getGameBoard().getLastAssistantUsed()) {
             out.println("Name: " + ass.getName() + "Value: " + ass.getValue() + "Maximum moves: " + ass.getMoves());
         }
     }
     public void printStudentsOnCLoud(int ID) {
-        for(Student s : modelView.getVisualBoard().getClouds().get(ID).getStudents()) {
+        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
             out.print("-" + s.getType());
         }
     }
     public void showClouds() {
-        out.println(">Here's the clouds status of this turn: ");
-        for(CloudTile c : modelView.getVisualBoard().getClouds()) {
+        out.println(">Clouds status of this turn: ");
+        for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
             out.println("ID: " + c.getID() + "Students: ");
             printStudentsOnCLoud(c.getID());
         }
     }
+
+    public String printColor(PawnType p){
+        String color = ANSI_RESET;
+        if(p==PawnType.RED) {
+            color = ANSI_RED;
+        }
+        else if(p==PawnType.BLUE) {
+            color = ANSI_BLUE;
+        }
+        else if(p==PawnType.GREEN) {
+            color = ANSI_GREEN;
+        }
+        else if(p==PawnType.YELLOW) {
+            color = ANSI_YELLOW;
+        }
+        else if(p==PawnType.PINK) {
+            color = ANSI_PURPLE;
+        }
+        return color;
+    }
     public void showEntrance() {
-        out.println(">Here's a view of the students in your entrance: ");
-        for(Student s : modelView.getVisualBoard().getEntrance()) {
-            out.print("-" + s.getType());
+        out.println(">Here's a summary of the students in your entrance: ");
+        for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
+            out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
     }
     public void showCoins() {
-        out.println(">You have " + modelView.getCurrentPlayer().getCoins() + " left.");
+        out.println(">You have " + ANSI_YELLOW + modelView.getGameCopy().getCurrentPlayer().getCoins() + " left." + ANSI_RESET);
     }
-    public void printPlayerDiningRoom(int id) {
-        for(int i=0; i<11; i++) {
-            //TODO chiedere aiutooooo
+    public int[] getPlayerDiningRoom(int id) {
+        int r=0, p=0, g=0, y=0, b=0;
+        int[] students = null;
+        for(Table t : modelView.getGameCopy().getPlayers().get(id).getBoard().getDiningRoom().getDiningRoom()) {
+            for(int i=0; i < t.getTable().size(); i++) {
+                if(t.getTable().get(i).hasStudent()) {
+                    if(t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                        b++;
+                    }
+                    else if(t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                        g++;
+                    }
+                    else if(t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                        r++;
+                    }
+                    else if(t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                        p++;
+                    }
+                    else if(t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                        y++;
+                    }
+                }
+            }
         }
+        students[0] = b;
+        students[1] = g;
+        students[2] = r;
+        students[3] = p;
+        students[4] = y;
+        return students;
     }
 
-    public void showDiningRoom() {
-        output.println(">Take a look to the other players' dining room!");
-
+    public void showDiningRooms() {
+        out.println(">Take a look at the other players' dining rooms!");
+        for (Player p : modelView.getGameCopy().getActivePlayers()) {
+            int[] students = getPlayerDiningRoom(p.getPlayerID());
+            out.println("Player " + p.getNickname() + "has: ");
+            out.print(ANSI_BLUE + students[0] + "blue students\n" + ANSI_RESET);
+            out.print(ANSI_GREEN + students[1] + "green students\n" + ANSI_RESET);
+            out.print(ANSI_RED + students[2] + "red students\n" + ANSI_RESET);
+            out.print(ANSI_PURPLE + students[3] + "pink students\n" + ANSI_RESET);
+            out.print(ANSI_YELLOW + students[4] + "yellow students\n" + ANSI_RESET);
+        }
     }
 
     public void askMoves(AssistantCard card) {
         out.println(">Pick a number of mother nature moves between 1 and "
-                + modelView.getCurrentPlayer().getChosenAssistant().getMoves());
+                + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
         chosenMoves = in.next();
         virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
     }
 
     public void printPlayerDeck() {
-        for (AssistantCard card : modelView.getCurrentPlayer().getAssistantDeck().getDeck()) {
+        for (AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
             out.print("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
         }
     }
@@ -261,7 +324,7 @@ public class CLI implements Runnable, ListenerInterface {
                     out.println("Wizard not available!");
                 }
             } catch (IllegalArgumentException e) {
-                System.err.println("Invalid input! Please provide one of the accepted wizards.");
+                System.err.println(ANSI_RED + "Invalid input! Please provide one of the accepted wizards."+ ANSI_RESET);
                 out.print(">");
             }
         }
@@ -271,7 +334,6 @@ public class CLI implements Runnable, ListenerInterface {
         String cmd = in.nextLine();
         listeners.firePropertyChange("action", null, cmd);
     }
-
     public void choosePlayerNumber() {
         out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
@@ -299,7 +361,7 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void showWinMessage(Player winner) {
-        if (GameHandler.getGame().getPlayersNumber() != 4) {
+        if (modelView.getGameCopy().getPlayersNumber() != 4) {
             out.println(">Game over! The winner is " + ANSI_CYAN + winner + ANSI_RESET);
         } else {
             out.println(">Game over! The winner is team " + ANSI_CYAN +
@@ -328,7 +390,8 @@ public class CLI implements Runnable, ListenerInterface {
         }
         clientConnection = new ClientConnection();
 
-        modelView.setPlayerNickname(userNickname);
+        //TODO: PANCI questo posso toglierlo??? Passandoci il Game da server a client non dovrebbe più servire
+        // modelView.setPlayerNickname(userNickname);
         try {
             if (!clientConnection.setupNickname(userNickname, modelView, actionHandler)) {
                 System.err.println("The entered IP/port doesn't match any active server or the server is not " + "running. Please try again!");
@@ -342,7 +405,6 @@ public class CLI implements Runnable, ListenerInterface {
         listeners.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
     }
 
-
     @Override
     public void run() {
         userNicknameSetup();
@@ -352,8 +414,6 @@ public class CLI implements Runnable, ListenerInterface {
             if(modelView.isGameStarted()) {
                 actionsLoop();
             }
-
-
         }
         in.close();
         out.close();
@@ -362,7 +422,6 @@ public class CLI implements Runnable, ListenerInterface {
     public boolean isActiveGame() {
         return activeGame;
     }
-
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
         switch(serverCommand) {
@@ -375,14 +434,12 @@ public class CLI implements Runnable, ListenerInterface {
                 showServerMessage(modelView.getServerAnswer());
                 chooseExpertMode();
             }
-
             case "RequestWizard"-> {
                 out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
                 ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> out.println(wizardLeft + ", "));
                 //System.out.println("\n");
                 chooseWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             }
-
             default -> out.println("Nothing to do");
 
         }
@@ -426,7 +483,6 @@ public class CLI implements Runnable, ListenerInterface {
                 assert serverCommand != null;
                 //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
-                break;
             }
             case "DynamicAnswer" -> {
                 //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
@@ -437,13 +493,8 @@ public class CLI implements Runnable, ListenerInterface {
                 actionHandler.makeAction(serverCommand);
             }
             case "UpdateModelView" -> {
-                if(serverCommand == "PICKSTUDENT") {
-                    if(modelView.getDestinationUserAction()!=null) {
-                        actionHandler.updateStudentMove(((PickStudent) modelView.getLastUserAction()).getChosenStudent().getType().toString(),
-                                ((PickDestination) modelView.getDestinationUserAction()).getDestination().toString());
-                    }
-                }
-                actionHandler.updateModelView(serverCommand);
+                assert serverCommand != null;
+                modelView.setGameCopy((Game) changeEvent.getNewValue());
             }
             default -> out.println("Unknown answer from server");
         }
