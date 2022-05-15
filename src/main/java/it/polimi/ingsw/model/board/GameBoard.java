@@ -79,6 +79,15 @@ public class GameBoard {
         return professors;
     }
 
+    public Professor getProfessorByColor(PawnType pawnType) {
+        for(Professor professor : professors) {
+            if(professor.getType() == pawnType) {
+                return professor;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Island> getIslands() {
         return islands;
     }
@@ -89,5 +98,14 @@ public class GameBoard {
 
     public void setLastAssistantUsed(int index, AssistantCard card){
         lastAssistantUsed.set(index, card);
+    }
+
+    public Island getIslandById(int islandId) {
+        for(Island i : islands) {
+            if(i.getIslandID() == islandId) {
+                return i;
+            }
+        }
+        return null;
     }
 }

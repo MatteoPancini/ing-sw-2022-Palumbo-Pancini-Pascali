@@ -10,14 +10,14 @@ public enum PawnType {
     GREEN(0), RED(1), YELLOW(2), PINK(3), BLUE(4);
 
     private int pawnID;
-    private static Map<Integer, PawnType> map= new HashMap<>();
+    private static Map<Integer, PawnType> idMapType= new HashMap<>();
 
     PawnType(int pawnID) {
         this.pawnID = pawnID;
     }
 
     public static PawnType getPawnFromID(int pawnID){
-        return map.get(pawnID);
+        return idMapType.get(pawnID);
     }
 
     public int getPawnID(){

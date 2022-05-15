@@ -1,13 +1,15 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.messages.clienttoserver.actions.Action;
-import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
-import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
+//TODO: creare messaggio per aggiornare la modelView
+//TODO: ogni cambiamento del controller bisogna inviare GameBoard e SchoolBoard (forse activePlayers)
+
+import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.server.Server;
 
@@ -106,6 +108,10 @@ public class GameHandler {
         return controller;
     }
 
+    public int getPlayersNumber() {
+        return playersNumber;
+    }
+
     /*
     public void putStudentsOnCloud() {
         for (CloudTile cloud : gameBoardCopy.getClouds()) {
@@ -139,7 +145,7 @@ public class GameHandler {
     public void sendExcept(Answer serverAnswer, int notClientID) {
         for(Player activePlayers : game.getActivePlayers()) {
             if(server.getIDFromNickname(activePlayers.getNickname()) != notClientID) {
-                sendSinglePlayer(serverAnswer, activePlayers.getIdPlayer());
+                sendSinglePlayer(serverAnswer, activePlayers.getPlayerID());
             }
         }
     }
@@ -214,9 +220,28 @@ public class GameHandler {
 
     public void parseActions(UserAction userAction, String actionType) {
         switch(actionType) {
-            case "PickAssistant" -> gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getAction());
+            case "PickAssistant" -> gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
+
+            case "PickStudent" -> gameHandlerListener.firePropertyChange("PickStudent", null, ((PickStudent) userAction).getChosenStudent());
+
+            case "PickDestination" -> {
+                if (((PickDestination) userAction).getDestination() instanceof DiningRoom) {
+                    gameHandlerListener.firePropertyChange("PickDestinationDiningRoom", null, ((PickDestination) userAction).getDestination());
+                } else {
+                    gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
+                }
+            }
+
+            case "PickMovesNumber" -> gameHandlerListener.firePropertyChange("PickMovesNumber", null, ((PickMovesNumber) userAction).getMoves());
+
+            case "PickCloud" -> gameHandlerListener.firePropertyChange("PickCloud", null, ((PickCloud) userAction).getChosenCloud());
+
+
+
+
 
         }
+
     }
 
 

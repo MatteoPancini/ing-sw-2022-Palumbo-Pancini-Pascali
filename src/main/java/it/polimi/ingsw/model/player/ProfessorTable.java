@@ -25,4 +25,14 @@ public class ProfessorTable {
     public ArrayList<BoardCell> getProfessorTable() {
         return professorTable;
     }
+
+    public BoardCell getCellByColor(PawnType color) {
+        for(BoardCell b : professorTable) {
+            if(b.getBoardCellType() == color){
+                return b;
+            }
+        }
+        return null;
+    }
+
 }

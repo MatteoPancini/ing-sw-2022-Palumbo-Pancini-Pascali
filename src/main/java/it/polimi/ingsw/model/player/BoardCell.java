@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.model.board.Professor;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
@@ -9,7 +10,7 @@ public class BoardCell {
     private PawnType boardCellType;
     private boolean coinCell;
     private Student student;
-    private boolean professor;
+    private Professor professor;
 
     public BoardCell(PawnType boardCellType) {
         this.boardCellType = boardCellType;
@@ -34,7 +35,16 @@ public class BoardCell {
         this.student = student;
     }
 
-    public boolean hasProfessor() {
+
+    public void setProfessor(Professor professor){
+        this.professor = professor;
+    }
+
+    public Professor getProfessor() {
         return professor;
+    }
+
+    public void resetProfessor() {
+        this.professor = null;
     }
 }

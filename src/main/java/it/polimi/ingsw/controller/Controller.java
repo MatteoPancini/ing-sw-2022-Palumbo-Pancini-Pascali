@@ -1,21 +1,23 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.CloudTile;
+import it.polimi.ingsw.model.board.Student;
+import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 
-//TODO M: aggiungi PropertyChange
 
 public class Controller implements PropertyChangeListener {
     private final Game game;
@@ -121,7 +123,7 @@ public class Controller implements PropertyChangeListener {
             n++;
         }
 
-        turnController.pianificationPhase();
+        turnController.startPianificationPhase();
 
     }
 
@@ -129,7 +131,30 @@ public class Controller implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch(evt.getPropertyName()) {
-            case "PickAssistant" -> turnController.playAssistantCard();
+            case "PickAssistant" -> turnController.playAssistantCard((AssistantCard) evt.getNewValue());
+
+            case "PickStudent" -> {
+                turnController.setStudentToMove((Student) evt.getNewValue());
+                turnController.askStudentDestination();
+            }
+
+            case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom((DiningRoom) evt.getNewValue());
+
+            case "PickDestinationIsland" -> turnController.moveStudentToIsland((Integer) evt.getNewValue());
+
+
+            case "PickMovesNumber" -> turnController.moveMotherNature((Integer) evt.getNewValue());
+
+            case "PickCloud" -> {
+                CloudTile chosenCloud = null;
+                for(CloudTile cloud : game.getGameBoard().getClouds()) {
+                    if(cloud.getID() == ((Integer) evt.getNewValue())){
+                        chosenCloud = cloud;
+                        break;
+                    }
+                }
+                turnController.fromCloudToEntrance(chosenCloud);
+            }
 
 
             default -> System.err.println("Unrecognized message!");

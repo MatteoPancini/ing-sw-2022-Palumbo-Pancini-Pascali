@@ -1,8 +1,7 @@
 package it.polimi.ingsw.server;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.clienttoserver.*;
-import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
-import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
+import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
@@ -173,7 +172,20 @@ public class SocketClientConnection implements Runnable {
                 server.getGameFromID(clientID).sendExcept(new DynamicAnswer(server.getNicknameFromID(clientID) + "'s Wizard is: " + ((WizardChoice) userMessage).getWizardChosen().toString(), false), clientID );
                 server.getGameFromID(clientID).initializeWizards();
             }
-        }
+        } /*
+    else if (userMessage instanceof Disconnect) {
+            server
+                    .getGameByID(clientID)
+                    .sendAllExcept(
+                            new CustomMessage(
+                                    "Client " + server.getNicknameByID(clientID) + " disconnected from the server.",
+                                    false),
+                            clientID);
+            server.getGameByID(clientID).endGame(server.getNicknameByID(clientID));
+            close();
+            */
+
+
 
 
 
@@ -186,10 +198,25 @@ public class SocketClientConnection implements Runnable {
         }
         else {
             if(server.getGameFromID(clientID).isMatchStarted()) {
-                //TODO M: fai i vari switch tra le varie action
                 if(userAction instanceof PickAssistant) {
                     server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
 
+                }
+
+                if(userAction instanceof PickStudent) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickStudent");
+                }
+
+                if(userAction instanceof PickDestination) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
+                }
+
+                if(userAction instanceof PickMovesNumber) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickMovesNumber");
+                }
+
+                if(userAction instanceof PickCloud) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickCloud");
                 }
 
             } else {

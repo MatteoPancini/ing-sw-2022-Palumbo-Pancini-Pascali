@@ -42,8 +42,8 @@ public class ActionHandler {
         } else if (answer instanceof RequestAction) {
             String actionType = answer.getMessage().toString();
             view.firePropertyChange("ActionPhase", null, actionType);
-        } //TODO M: inserisci answer instanceof ActionDoneNotification
-        // else if()
+        } //TODO M -> chiedi Cicio -> inserisci answer instanceof ActionDoneNotification
+         //else if(answer instanceof ActionDoneNotification) {
 
 
     }
@@ -95,7 +95,7 @@ public class ActionHandler {
         modelView.setDestinationUserAction(null);
     }
 
-    //TODO continuare sta merda
+    //TODO CICIO: continuare sta merda
     public void updateModelView(String actionName) {
         switch(actionName) {
             case "PICKASSISTANT" -> {
