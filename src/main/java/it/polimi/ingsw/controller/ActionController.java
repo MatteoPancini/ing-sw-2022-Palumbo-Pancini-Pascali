@@ -16,6 +16,7 @@ public class ActionController {
         this.board = board;
     }
 
+    //TODO GIGIOX: metodi con effetti dei personaggi
     /*public void moveStudents(message1, message2) {
 
     }

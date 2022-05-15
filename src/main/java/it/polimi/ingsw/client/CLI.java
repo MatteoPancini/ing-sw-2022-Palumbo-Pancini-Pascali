@@ -14,6 +14,7 @@ import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
+import it.polimi.ingsw.model.cards.CharacterDeck;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
@@ -294,8 +295,9 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
 
-    public void askCharacterCard(ArrayList<CharacterCard> cards) {
+    public void askCharacterCard(CharacterDeck cards) {
         out.println(">Type the name of the Character Card you want to play: ");
+        out.println(printCharacters());
         chosenCharacter = in.next();
         virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
     }

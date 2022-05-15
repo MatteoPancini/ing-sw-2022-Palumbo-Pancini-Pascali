@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
-//TODO: creare messaggio per aggiornare la modelView
-//TODO: ogni cambiamento del controller bisogna inviare GameBoard e SchoolBoard (forse activePlayers)
+
 
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
@@ -241,6 +240,27 @@ public class GameHandler {
 
 
         }
+
+    }
+
+
+    public void endPlayerGame(String playerDisconnected) {
+        server.getVirtualClientFromID(server.getIDFromNickname(playerDisconnected)).getSocketClientConnection().closeConnection();
+        for(Player p : game.getActivePlayers()) {
+            if(p.getNickname() == playerDisconnected) {
+                game.getActivePlayers().remove(p);
+                break;
+            }
+        }
+
+        if(game.getActivePlayers().size() == 1) {
+            //TODO M: AGGIUNGI TIMEOUT, se getActivePlayers() continua a essere pari a 1, termina il gioco
+        }
+
+    }
+
+    //TODO M: elimina tutte le connessioni rimaste e manda messaggi vittoria!
+    public static void endGame() {
 
     }
 

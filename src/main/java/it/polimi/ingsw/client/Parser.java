@@ -1,12 +1,8 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
-import it.polimi.ingsw.messages.clienttoserver.actions.PickDestination;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
-import it.polimi.ingsw.messages.clienttoserver.actions.Action;
-import it.polimi.ingsw.server.SocketClientConnection;
 
-import java.awt.desktop.QuitEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -36,36 +32,36 @@ public class Parser implements PropertyChangeListener {
         try {
             message = inputChecker.checkAssistant(input);
         } catch (AlreadyPlayedAssistantException e) { modelView.getCli().getOutput().println(e.getMessage()); }
-        modelView.setLastUserAction(message);
+        //modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseStudent(String input) {
         UserAction message;
         message = inputChecker.checkStudent(input);
-        modelView.setLastUserAction(message);
+        //modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseDestination(String input) {
         UserAction message = inputChecker.checkDestination(input);
-        modelView.setDestinationUserAction(message);
+        /*modelView.setDestinationUserAction(message);
         Object dest = ((PickDestination) modelView.getDestinationUserAction()).getDestination();
-        ((PickDestination) modelView.getDestinationUserAction()).setDestination(dest);
+        ((PickDestination) modelView.getDestinationUserAction()).setDestination(dest); */
         return message;
     }
 
     public UserAction parseMoves(String input) {
         UserAction message;
         message = inputChecker.checkMoves(input);
-        modelView.setLastUserAction(message);
+        //modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseCloud(String input) {
         UserAction message;
         message = inputChecker.checkCloud(input);
-        modelView.setLastUserAction(message);
+        //modelView.setLastUserAction(message);
         return message;
     }
 
@@ -88,12 +84,14 @@ public class Parser implements PropertyChangeListener {
             case "PICKDESTINATION" -> {
                 action = inputChecker.checkDestination(chosenValue);
             }
-            case "PICKCHARACTER" -> {
+            //TODO: aspettare gigiox per le characters card, Panci per il quit game
+            /*case "PICKCHARACTER" -> {
                 action = inputChecker.checkCharacter(chosenValue);
             }
             case "QUIT" -> {
-                connectionSocket.sendUserInput(QUIT);
-            }
+                inputChecker.quitGame();
+                return true;
+            }*/
             default -> {
                 return false;
             }
@@ -120,9 +118,9 @@ public class Parser implements PropertyChangeListener {
         } else {
             try {
                 if (action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    modelView.disableInput();
+                    modelView.enableInput(false);
                 } else {
-                    modelView.enableInput();
+                    modelView.enableInput(true);
                 }
             } catch (AlreadyPlayedAssistantException e) {
                 e.printStackTrace();

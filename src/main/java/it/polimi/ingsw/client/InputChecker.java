@@ -186,7 +186,7 @@ public class InputChecker {
         return action;
     }
 
-    /* aspettare implemnetazione delle character cards
+    /* aspettare implementazione delle character cards
     public PickCharacter checkCharacter(String input) {
         PickCharacter action = null;
         switch(input.toUpperCase()) {

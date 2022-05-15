@@ -1,10 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
-import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.player.Table;
 
 import java.beans.PropertyChangeSupport;
 
@@ -50,29 +46,29 @@ public class ActionHandler {
 
     private void notifyDynamicAnswer(Answer answer) {
         view.firePropertyChange("DynamicAnswer", null, answer.getMessage());
-        modelView.setActivateInput(((DynamicAnswer) answer).isActivateUserInput());
+        modelView.enableInput(((DynamicAnswer) answer).isActivateUserInput());
     }
 
     //viene chiamato all'interno di propertyChange della CLI, notificata dall'Action Handler
     public void makeAction(String serverCommand) {
         switch (serverCommand) {
             case "PICKASSISTANT" -> {
-                cli.askAssistant(modelView.getCurrentPlayer().getAssistantDeck());
+                cli.askAssistant(modelView.getGameCopy().getCurrentPlayer().getAssistantDeck());
             }
             case "PICKCLOUD" -> {
-                cli.askCloud(modelView.getVisualBoard().getClouds());
+                cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
             }
             case "PICKDESTINATION" -> {
                 cli.askDestination();
             }
             case "PICKSTUDENT" -> {
-                cli.askStudent(modelView.getCurrentPlayer().getBoard());
+                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
             }
             case "PICKMOVESNUMBER" -> {
-                cli.askMoves(modelView.getCurrentPlayer().getChosenAssistant());
+                cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
             }
             case "PICKCHARACTER" -> {
-                cli.askCharacterCard(modelView.getVisualBoard().getCharacters());
+                cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
             }
             default -> {
                 cli.getOutput().println("Error: no such action");

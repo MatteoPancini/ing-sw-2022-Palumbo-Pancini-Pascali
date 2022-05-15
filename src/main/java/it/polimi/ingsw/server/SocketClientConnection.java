@@ -41,7 +41,7 @@ public class SocketClientConnection implements Runnable {
 
     }
 
-    private void closeConnection() {
+    public void closeConnection() {
         server.unregisterPlayer(clientID);
         try {
             socket.close();
@@ -172,22 +172,11 @@ public class SocketClientConnection implements Runnable {
                 server.getGameFromID(clientID).sendExcept(new DynamicAnswer(server.getNicknameFromID(clientID) + "'s Wizard is: " + ((WizardChoice) userMessage).getWizardChosen().toString(), false), clientID );
                 server.getGameFromID(clientID).initializeWizards();
             }
-        } /*
-    else if (userMessage instanceof Disconnect) {
-            server
-                    .getGameByID(clientID)
-                    .sendAllExcept(
-                            new CustomMessage(
-                                    "Client " + server.getNicknameByID(clientID) + " disconnected from the server.",
-                                    false),
-                            clientID);
-            server.getGameByID(clientID).endGame(server.getNicknameByID(clientID));
-            close();
-            */
+        } else if (userMessage instanceof QuitGame) {
+            server.getGameFromID(clientID).sendExcept(new DynamicAnswer("Player " + server.getNicknameFromID(clientID) + " has disconnected from the game!", false), clientID);
+            server.getGameFromID(clientID).endPlayerGame(server.getNicknameFromID(clientID));
 
-
-
-
+        }
 
     }
 
