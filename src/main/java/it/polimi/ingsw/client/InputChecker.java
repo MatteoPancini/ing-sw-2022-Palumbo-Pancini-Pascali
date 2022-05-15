@@ -3,6 +3,7 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.ModelView;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
+import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Student;
@@ -258,5 +259,11 @@ public class InputChecker {
             default -> action = new PickCharacter();
         }
         return action;
+    }
+
+    public void quitGame() {
+        clientConnection.sendUserInput(new QuitGame());
+        System.err.println("Disconnected from the server :(");
+        System.exit(0);
     }
 }

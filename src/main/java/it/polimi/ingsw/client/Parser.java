@@ -92,7 +92,8 @@ public class Parser implements PropertyChangeListener {
                 action = inputChecker.checkCharacter(chosenValue);
             }
             case "QUIT" -> {
-                connectionSocket.sendUserInput(QUIT);
+                inputChecker.quitGame();
+                return true;
             }
             default -> {
                 return false;

@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.messages.clienttoserver.actions.Action;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
+import it.polimi.ingsw.messages.servertoclient.GameCopy;
 import it.polimi.ingsw.messages.servertoclient.RequestAction;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
@@ -93,6 +94,12 @@ public class TurnController {
     public void startPianificationPhase() {
         setPianificationPhase();
 
+        gameHandler.sendBroadcast(new DynamicAnswer(" ___  _   _   _  _  _  ___  _   __   _  ___  _   _   _  _   ___  _ _   _   __  ___ \n" +
+                "| o \\| | / \\ | \\| || || __|| | / _| / \\|_ _|| | / \\ | \\| | | o \\| U | / \\ / _|| __|\n" +
+                "|  _/| || o || \\\\ || || _| | |( (_ | o || | | |( o )| \\\\ | |  _/|   || o |\\_ \\| _| \n" +
+                "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
+                "                                                                                   ", false));
+
         putStudentsOnCloud();
 
         askAssistantCard();
@@ -107,7 +114,16 @@ public class TurnController {
 
     public void startActionPhase() {
 
+        if(actionPhaseNum == 0) {
+            gameHandler.sendBroadcast(new DynamicAnswer("  _    __  ___  _   _   _  _   ___  _ _   _   __  ___ \n" +
+                    " / \\  / _||_ _|| | / \\ | \\| | | o \\| U | / \\ / _|| __|\n" +
+                    "| o |( (_  | | | |( o )| \\\\ | |  _/|   || o |\\_ \\| _| \n" +
+                    "|_n_| \\__| |_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
+                    "                                                      ", false));
+        }
+
         if(actionPhaseNum == gameHandler.getPlayersNumber()) {
+
             startPianificationPhase();
         } else {
             setActionPhase();
@@ -178,6 +194,10 @@ public class TurnController {
             }
 
             resetPianificationPhase();
+
+            GameCopy gameCopy = new GameCopy(gameHandler.getGame());
+            gameHandler.sendBroadcast(gameCopy);
+
             startActionPhase();
         }
 
@@ -443,10 +463,20 @@ public class TurnController {
         }
         cloud.removeStudents();
 
+        if(checkWin()) {
+            GameHandler.endGame();
+        }
+
         setCurrentPlayer();
 
         actionPhaseNum++;
         startActionPhase();
+    }
+
+
+    //TODO GIGIOX
+    public boolean checkWin() {
+        return false;
     }
 }
 
