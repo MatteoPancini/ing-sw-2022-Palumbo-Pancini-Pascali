@@ -43,7 +43,9 @@ public class ActionHandler {
             String actionType = answer.getMessage().toString();
             view.firePropertyChange("ActionPhase", null, actionType);
         } //TODO M -> chiedi Cicio -> inserisci answer instanceof ActionDoneNotification
-         //else if(answer instanceof ActionDoneNotification) {
+         else if(answer instanceof GameCopy) {
+             view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+        }
 
 
     }
