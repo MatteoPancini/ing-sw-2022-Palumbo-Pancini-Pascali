@@ -1,7 +1,6 @@
 package it.polimi.ingsw.messages.clienttoserver.actions;
 
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.enumerations.Action;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
 public class PickStudent implements UserAction {

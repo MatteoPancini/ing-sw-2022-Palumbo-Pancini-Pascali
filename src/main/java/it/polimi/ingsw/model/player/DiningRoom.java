@@ -10,11 +10,12 @@ public class DiningRoom {
 
     public DiningRoom() {
         ArrayList<PawnType> pawns = new ArrayList<PawnType>();
-        pawns.add(PawnType.BLUE);
         pawns.add(PawnType.GREEN);
-        pawns.add(PawnType.PINK);
         pawns.add(PawnType.RED);
         pawns.add(PawnType.YELLOW);
+        pawns.add(PawnType.PINK);
+        pawns.add(PawnType.BLUE);
+
         for (PawnType p : pawns) {
             Table table = new Table(p);
             diningRoom.add(table);
@@ -33,4 +34,5 @@ public class DiningRoom {
             }
         }
     }
+
 }

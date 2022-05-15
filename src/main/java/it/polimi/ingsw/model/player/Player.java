@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 
 public class Player {
     private String nicknamePlayer;
-    private int idPlayer;
+    private int playerID;
     private Wizards wizard;
     private final AssistantDeck assistantDeck;
     private SchoolBoard board;
@@ -13,7 +13,9 @@ public class Player {
     private boolean isWinner;
     private int idTeam;
     private AssistantCard chosenAssistant;
+    private boolean teamLeader;
     private int coins;
+    private int islandInfluence;
 
     public String getNicknamePlayer() {
         return nicknamePlayer;
@@ -51,7 +53,7 @@ public class Player {
         this.nicknamePlayer = nickname;
         assistantDeck = null;
         board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
-        this.idPlayer = playerID;
+        this.playerID = playerID;
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
     }
@@ -80,10 +82,14 @@ public class Player {
         this.board = board;
     }
 
+    public void setTeamLeader(boolean teamLeader) {
+        this.teamLeader = teamLeader;
+    }
 
     public int getPlayerID() {
-        return idPlayer;
+        return playerID;
     }
+
 
     public void setIdTeam(int idTeam) {
         this.idTeam = idTeam;
@@ -94,13 +100,18 @@ public class Player {
     }
 
 
-
-    public int getIdPlayer() {
-        return idPlayer;
+    public int getIslandInfluence() {
+        return islandInfluence;
     }
 
-    public void setIdPlayer(int idPlayer) {
-        this.idPlayer = idPlayer;
+    public void setIslandInfluence(int islandInfluence) {
+        this.islandInfluence = islandInfluence;
+    }
+
+
+
+    public void setIdPlayer(int playerID) {
+        this.playerID = playerID;
     }
 
     public void setNicknamePlayer(String nicknamePlayer) {
@@ -113,5 +124,9 @@ public class Player {
 
     public Wizards getWizard() {
         return wizard;
+    }
+
+    public boolean isTeamLeader() {
+        return teamLeader;
     }
 }

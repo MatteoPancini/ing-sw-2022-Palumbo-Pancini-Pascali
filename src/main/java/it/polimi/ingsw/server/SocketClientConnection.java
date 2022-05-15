@@ -1,8 +1,7 @@
 package it.polimi.ingsw.server;
-import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.clienttoserver.*;
-import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
+import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 
 public class SocketClientConnection implements Runnable {
@@ -20,7 +18,7 @@ public class SocketClientConnection implements Runnable {
     //app.Server.SocketClientConnection handles a connection between client and server, permitting sending and
     // receiving messages.
 
-    private Socket socket;
+    private final Socket socket;
     private Server server;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
@@ -174,7 +172,20 @@ public class SocketClientConnection implements Runnable {
                 server.getGameFromID(clientID).sendExcept(new DynamicAnswer(server.getNicknameFromID(clientID) + "'s Wizard is: " + ((WizardChoice) userMessage).getWizardChosen().toString(), false), clientID );
                 server.getGameFromID(clientID).initializeWizards();
             }
-        }
+        } /*
+    else if (userMessage instanceof Disconnect) {
+            server
+                    .getGameByID(clientID)
+                    .sendAllExcept(
+                            new CustomMessage(
+                                    "Client " + server.getNicknameByID(clientID) + " disconnected from the server.",
+                                    false),
+                            clientID);
+            server.getGameByID(clientID).endGame(server.getNicknameByID(clientID));
+            close();
+            */
+
+
 
 
 
@@ -182,6 +193,39 @@ public class SocketClientConnection implements Runnable {
 
 
     public void actionHandler(UserAction userAction) {
+        if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
+            server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTYOURTURN), clientID);
+        }
+        else {
+            if(server.getGameFromID(clientID).isMatchStarted()) {
+                if(userAction instanceof PickAssistant) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
+
+                }
+
+                if(userAction instanceof PickStudent) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickStudent");
+                }
+
+                if(userAction instanceof PickDestination) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
+                }
+
+                if(userAction instanceof PickMovesNumber) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickMovesNumber");
+                }
+
+                if(userAction instanceof PickCloud) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickCloud");
+                }
+
+            } else {
+                server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
+            }
+
+
+        }
+
 
 
     }

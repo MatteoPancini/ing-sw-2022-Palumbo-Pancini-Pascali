@@ -92,4 +92,7 @@ public class AssistantCard {
         this.owner = owner;
     }
 
+    public void setWizard(Wizards wizard) {
+        this.wizard = wizard;
+    }
 }

@@ -6,7 +6,6 @@ import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
 import java.util.*;
@@ -17,13 +16,10 @@ import java.util.concurrent.TimeUnit;
 
 
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+
 
 public class Server {
-    private ServerSocketHandler serverSocketHandler;
+    private final ServerSocketHandler serverSocketHandler;
 
     private GameHandler gameHandler;
 
@@ -31,7 +27,7 @@ public class Server {
 
     int currentClientID;
 
-    private List<SocketClientConnection> waitingPlayersConnection = new ArrayList<>();
+    private final List<SocketClientConnection> waitingPlayersConnection = new ArrayList<>();
 
 
 

@@ -11,7 +11,6 @@ public class Table {
     private ArrayList<BoardCell> table = new ArrayList<BoardCell>();
     private int lastPosition = 0;
 
-    //TODO
     public Table(PawnType p) {
         for (int i = 1; i <= 10; i++) {
             BoardCell cell = new BoardCell(p);
@@ -25,7 +24,7 @@ public class Table {
     }
 
     public PawnType getColor() {
-        return this.getTable().get(0).getBoardCellType();
+        return table.get(0).getBoardCellType();
     }
 
     public void addStudent(Student stud){
@@ -33,5 +32,6 @@ public class Table {
         lastPosition++;
         return;
     }
+
 }
 

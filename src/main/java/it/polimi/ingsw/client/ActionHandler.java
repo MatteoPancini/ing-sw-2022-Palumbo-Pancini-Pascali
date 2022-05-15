@@ -37,10 +37,13 @@ public class ActionHandler {
             }
         } else if(answer instanceof ExpertModeAnswer) {
             view.firePropertyChange("InitialGamePhase", null, "ExpertModeAnswer");
-        }
-        else if (answer instanceof DynamicAnswer) {
+        } else if (answer instanceof DynamicAnswer) {
             notifyDynamicAnswer(answer);
-        }
+        } else if (answer instanceof RequestAction) {
+            String actionType = answer.getMessage().toString();
+            view.firePropertyChange("ActionPhase", null, actionType);
+        } //TODO M -> chiedi Cicio -> inserisci answer instanceof ActionDoneNotification
+         //else if(answer instanceof ActionDoneNotification) {
 
 
     }
@@ -91,8 +94,8 @@ public class ActionHandler {
         }
         modelView.setDestinationUserAction(null);
     }
-    //TODO il server deve inviare un messaggio ogni volta che cambia il model, oppure trovare un modo
-    //per aggiornare la model view nei casi in cui non vengono mandate user action (es: riempire entrance dal sacchetto)
+
+    //TODO CICIO: continuare sta merda
     public void updateModelView(String actionName) {
         switch(actionName) {
             case "PICKASSISTANT" -> {
