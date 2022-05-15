@@ -14,9 +14,10 @@ import java.util.ArrayList;
 public class ModelView {
     private CLI cli;
     private VisualBoard visualBoard;
-    private Player currentPlayer;
+    /* private Player currentPlayer;
     private ArrayList<Player> players;
     private Answer serverAnswer;
+    private UserAction destinationUserAction;*/
     private boolean activeInput;
     private Game game;
     private int yellow;
@@ -24,7 +25,7 @@ public class ModelView {
     private int pink;
     private int red;
 
-    public UserAction getDestinationUserAction() {
+    /*public UserAction getDestinationUserAction() {
         return destinationUserAction;
     }
 
@@ -32,8 +33,7 @@ public class ModelView {
         this.destinationUserAction = destinationUserAction;
     }
 
-    private UserAction destinationUserAction;
-    public void setCurrentPlayer(Player currentPlayer) {
+    /*public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -43,7 +43,7 @@ public class ModelView {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
-    }
+    }*/
 
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
