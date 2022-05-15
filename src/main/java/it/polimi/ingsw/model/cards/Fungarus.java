@@ -2,12 +2,12 @@ package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.enumerations.Characters;
 
-public class Fungarus {
+public class Fungarus extends CharacterCard {
     private static Fungarus fungarus = null;
     private static Characters character;
     private static int cost;
 
-    private Fungarus(){
+    public Fungarus() {
         this.character = Characters.FUNGARUS;
     }
 
@@ -16,6 +16,10 @@ public class Fungarus {
             fungarus = new Fungarus();
         }
         return fungarus;
+    }
+
+    public void resetCost() {
+        cost = 3;
     }
 
 }

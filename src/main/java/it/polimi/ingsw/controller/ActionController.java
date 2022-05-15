@@ -34,10 +34,4 @@ public class ActionController {
     }*/
 
 
-    public void fromCloudToEntrance(CloudTile cloud) {
-        int studentsToMove;
-        if (game.getPlayersNumber() == 3) studentsToMove = 4;
-        else studentsToMove = 3;
-        ArrayList<Student> newStudents = cloud.getStudents();
-    }
 }
