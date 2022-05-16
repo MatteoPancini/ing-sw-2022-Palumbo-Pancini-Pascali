@@ -46,7 +46,7 @@ public class ActionHandler {
 
     private void notifyDynamicAnswer(Answer answer) {
         view.firePropertyChange("DynamicAnswer", null, answer.getMessage());
-        modelView.enableInput(((DynamicAnswer) answer).isActivateUserInput());
+        modelView.setActivateInput(((DynamicAnswer) answer).isActivateUserInput());
     }
 
     //viene chiamato all'interno di propertyChange della CLI, notificata dall'Action Handler

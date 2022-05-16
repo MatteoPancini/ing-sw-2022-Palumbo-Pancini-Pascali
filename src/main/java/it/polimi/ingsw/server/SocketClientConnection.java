@@ -208,6 +208,15 @@ public class SocketClientConnection implements Runnable {
                     server.getGameFromID(clientID).parseActions(userAction, "PickCloud");
                 }
 
+                if(userAction instanceof PickCharacter) {
+                    if(server.getGameFromID(clientID).getExpertMode()) {
+                        server.getGameFromID(clientID).parseActions(userAction, "PickCharacter");
+
+                    } else {
+                        server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT, "Game is in standard mode! You can't play a character card!"), clientID);
+                    }
+                }
+
             } else {
                 server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }
