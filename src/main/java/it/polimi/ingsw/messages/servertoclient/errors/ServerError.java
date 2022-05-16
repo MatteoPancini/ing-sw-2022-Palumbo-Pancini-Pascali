@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages.servertoclient.errors;
 
 import it.polimi.ingsw.messages.servertoclient.Answer;
+import it.polimi.ingsw.server.Server;
 
 
 public class ServerError implements Answer {
@@ -10,6 +11,11 @@ public class ServerError implements Answer {
     public ServerError(ServerErrorTypes serverError) {
         this.serverError = serverError;
         this.errorMessage = null;
+    }
+
+    public ServerError(ServerErrorTypes serverError, String errorMessage) {
+        this.serverError = serverError;
+        this.errorMessage = errorMessage;
     }
 
     public ServerErrorTypes getError() {

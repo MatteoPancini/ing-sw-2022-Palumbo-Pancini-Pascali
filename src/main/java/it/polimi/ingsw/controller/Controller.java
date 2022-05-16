@@ -2,8 +2,9 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
+import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.DiningRoom;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 
+import javax.swing.text.html.MinimalHTMLWriter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -23,12 +25,17 @@ public class Controller implements PropertyChangeListener {
     private final Game game;
     private final GameHandler gameHandler;
     private final TurnController turnController;
+    private final ActionController actionController;
 
 
     public Controller(Game game, GameHandler gameHandler) {
         this.game = game;
         this.gameHandler = gameHandler;
         turnController = new TurnController(this, gameHandler);
+        if(gameHandler.getExpertMode()) {
+            actionController = new ActionController(game, game.getGameBoard(), turnController);
+        } else
+            actionController = null;
     }
 
 
@@ -140,20 +147,32 @@ public class Controller implements PropertyChangeListener {
 
             case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom((DiningRoom) evt.getNewValue());
 
-            case "PickDestinationIsland" -> turnController.moveStudentToIsland((Integer) evt.getNewValue());
+            case "PickDestinationIsland" -> turnController.moveStudentToIsland((Island) evt.getNewValue());
 
 
             case "PickMovesNumber" -> turnController.moveMotherNature((Integer) evt.getNewValue());
 
-            case "PickCloud" -> {
-                CloudTile chosenCloud = null;
-                for(CloudTile cloud : game.getGameBoard().getClouds()) {
-                    if(cloud.getID() == ((Integer) evt.getNewValue())){
-                        chosenCloud = cloud;
-                        break;
-                    }
-                }
-                turnController.fromCloudToEntrance(chosenCloud);
+            case "PickCloud" -> turnController.fromCloudToEntrance((CloudTile) evt.getNewValue());
+
+
+            case "PickCharacter" -> {
+                //TODO GIGIOX -> QUI BISOGNA CAPIRE CHIAMARE I METODI DI "ActionController" che fanno le azioni dei personaggi
+                /*
+                if(evt.getNewValue() instanceof Centaur) actionController.xxx;
+                else if(evt.getNewValue() instanceof Farmer) actionController.xxx;
+                else if(evt.getNewValue() instanceof Fungarus) actionController.xxx;
+                else if(evt.getNewValue() instanceof GrannyHerbs) actionController.xxx;
+                else if(evt.getNewValue() instanceof Herald) actionController.xxx;
+                else if(evt.getNewValue() instanceof Jester) actionController.xxx;
+                else if(evt.getNewValue() instanceof Knight) actionController.xxx;
+                else if(evt.getNewValue() instanceof MagicPostman) actionController.xxx;
+                else if(evt.getNewValue() instanceof Minestrel) actionController.xxx;
+                else if(evt.getNewValue() instanceof Monk) actionController.xxx;
+                else if(evt.getNewValue() instanceof SpoiledPrincess) actionController.xxx;
+                else if(evt.getNewValue() instanceof Thief) actionController.xxx;
+
+
+                 */
             }
 
 
