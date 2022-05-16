@@ -11,5 +11,8 @@ public class Student {
         this.type = type;
     }
 
-    public PawnType getType() { return this.type; }
+    public PawnType getType() {
+        System.out.println("Boh");
+        return this.type;
+    }
 }
