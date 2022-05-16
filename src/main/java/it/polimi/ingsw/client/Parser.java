@@ -7,7 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 
-/*public class Parser implements PropertyChangeListener {
+public class Parser implements PropertyChangeListener {
     private ClientConnection connectionSocket;
     private ModelView modelView;
     private InputChecker inputChecker;
@@ -64,7 +64,6 @@ import java.beans.PropertyChangeListener;
         //modelView.setLastUserAction(message);
         return message;
     }
-
 
     public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
         UserAction action = null;
@@ -127,4 +126,4 @@ import java.beans.PropertyChangeListener;
             }
         }
     }
-}*/
+}
