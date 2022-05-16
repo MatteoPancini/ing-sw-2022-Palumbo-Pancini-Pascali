@@ -178,7 +178,7 @@ public class InputChecker {
         //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
         //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
         if(!modelView.getGameCopy().getGameBoard().getClouds().get(cloudID).getStudents().isEmpty()) {
-            action = new PickCloud(cloudID);
+            action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID));
         }
         else {
             cli.showError("Error: the cloud has already been taken! Choose another one");
