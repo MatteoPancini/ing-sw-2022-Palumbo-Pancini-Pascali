@@ -37,7 +37,7 @@ import static it.polimi.ingsw.constants.Constants.*;
 
 public class CLI implements Runnable, ListenerInterface {
     private Scanner in;
-    private static PrintWriter out; //Panci aveva PrintStream, cambia qualcosa con PrintWriter?
+    private static PrintWriter out;
     private Parser parser;
     private PropertyChangeSupport virtualClient;
     private String chosenWizard;
@@ -62,6 +62,7 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener(parser);
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
+
     }
 
     public String printTower(Island isl) {
@@ -128,13 +129,21 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return r;
     }
-    //TODO perché non posso accedere alle singole cards né con for each né con for? Sono inizializzate con un json,
-    // non so se dipende da questo, in tal caso se stampo in questo modo cosa succede? (Guardare i prossimi due metodi)
-    public String printCharacters() {
-        return modelView.getGameCopy().getGameBoard().getPlayableCharacters().toString();
+
+    public void printCharacters() {
+        for(CharacterCard c : CharacterDeck.getPlayableCards()) {
+            out.println(ANSI_CYAN + c.getName() + "," + ANSI_RESET);
+        }
     }
     public void showAvailableCharacters() {
-        out.println(">The available characters for this match are: " + printCharacters());
+        out.println(">The available characters for this match are: ");
+        printCharacters();
+    }
+
+    public void showCharactersDescription() {
+        for(CharacterCard c : CharacterDeck.getPlayableCards()) {
+            out.print(ANSI_CYAN + c.getName() + " : " + c.getEffect() + ANSI_RESET);
+        }
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
@@ -154,11 +163,27 @@ public class CLI implements Runnable, ListenerInterface {
     public void showIslands() {
         out.println(">Here's a little description of the islands in the game board: ");
         for (Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
-            out.println("Island " + island.getIslandID() + " : " + "\n" + " Students : ");
-            for (Student stud : island.getStudents()) {
-                out.print(stud.getType().toString() + "\n");
+            if(island.getMergedIslands()!=null) {
+                out.println("Island " + island.getIslandID() + "(merged with ");
+                for (int i = 0; i < island.getMergedIslands().size(); i++) {
+                    out.print(island.getMergedIslands().get(i).getIslandID() + " ");
+                }
+                out.print(")");
+                out.println("Students: ");
+                for (Student stud : island.getStudents()) {
+                    out.print(stud.getType().toString() + "\n");
+                }
+                for (int i = 0; i < island.getMergedIslands().size(); i++)
+                {
+                    out.println("\nTowers: " + island.getMergedTowers() + " "  + island.getTower().getColor().toString());
+                }
+            } else {
+                out.println("Island " + island.getIslandID() + " : " + "\n" + " Students : ");
+                for (Student stud : island.getStudents()) {
+                    out.print(stud.getType().toString() + "\n");
+                }
+                out.println("\nTower: " + island.getTower().getColor().toString());
             }
-            out.println("\nTower: " + island.getTower().getColor().toString());
         }
     }
     public void showLastAssistantsUsed() {
@@ -297,9 +322,18 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askCharacterCard(CharacterDeck cards) {
         out.println(">Type the name of the Character Card you want to play: ");
-        out.println(printCharacters());
+        printCharacters();
         chosenCharacter = in.next();
         virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
+    }
+
+    public void askIsland(ArrayList<Island> islands) {
+        out.println(">Choose an island by typing its ID!");
+        showIslands();
+    }
+
+    public void showMotherNature() {
+        out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
 
     public void chooseExpertMode() {
@@ -364,9 +398,9 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showWinMessage(Player winner) {
         if (modelView.getGameCopy().getPlayersNumber() != 4) {
-            out.println(">Game over! The winner is " + ANSI_CYAN + winner + ANSI_RESET);
+            out.println(">Game over! The winner is " + ANSI_RED + winner + ANSI_RESET);
         } else {
-            out.println(">Game over! The winner is team " + ANSI_CYAN +
+            out.println(">Game over! The winner is team " + ANSI_RED +
                     winner.getIdTeam() + ANSI_RESET);
         }
     }
@@ -497,6 +531,10 @@ public class CLI implements Runnable, ListenerInterface {
             case "UpdateModelView" -> {
                 assert serverCommand != null;
                 modelView.setGameCopy((Game) changeEvent.getNewValue());
+                showIslands();
+                showClouds();
+                showAvailableCharacters();
+                showMotherNature();
             }
             default -> out.println("Unknown answer from server");
         }
