@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.cards;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.Characters;
 
 import com.google.gson.stream.JsonReader;
@@ -15,12 +17,14 @@ import java.util.Scanner;
 
 public class CharacterDeck {
     private static List<CharacterCard> cards = null;
-    private static List<CharacterCard> playableCards = null;
+    private static Game game;
     private CharacterDeck() {
         throw new IllegalStateException();
     }
 
-    public static List<CharacterCard> parseCharacterCards() {
+    public List<CharacterCard> parseCharacterCards(Game game) {
+        this.game = game;
+
         try{
             File myObj = new File("./src/main/resources/characterCards.txt");
             Scanner myReader = new Scanner(myObj);
@@ -35,16 +39,37 @@ public class CharacterDeck {
             System.out.println("File not found.");
             e.printStackTrace();
         }
+
+        for(CharacterCard c : cards){
+            if(c.getName() == Characters.MONK || c.getName() == Characters.SPOILED_PRINCESS){
+                Collections.shuffle(game.getGameBoard().getStudentsBag());
+                for(int i = 1; i <= 4; i++){
+                    c.setStudents(game.getGameBoard().getStudentsBag().get(i));
+                    game.getGameBoard().getStudentsBag().remove(0);
+                }
+            }
+
+            if(c.getName() == Characters.JESTER){
+                Collections.shuffle(game.getGameBoard().getStudentsBag());
+                for(int i = 1; i <= 6; i++){
+                    c.setStudents(game.getGameBoard().getStudentsBag().get(i));
+                    game.getGameBoard().getStudentsBag().remove(0);
+                }
+            }
+        }
+
         return cards;
     }
 
     public static List<CharacterCard> getPlayableCards(){
-        if(playableCards==null) {
-            Collections.shuffle(cards);
-            for (int i = 1; i <= 3; i++) {
-                playableCards.add(cards.get(i));
-            }
+        List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
+
+        Collections.shuffle(cards);
+
+        for(int i = 1; i <= 3; i++){
+            playableCards.add(cards.get(i));
         }
+
         return playableCards;
     }
 }

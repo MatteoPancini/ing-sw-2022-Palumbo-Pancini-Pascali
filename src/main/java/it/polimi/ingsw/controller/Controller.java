@@ -12,7 +12,6 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 
-import javax.swing.text.html.MinimalHTMLWriter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class Controller implements PropertyChangeListener {
     private final Game game;
     private final GameHandler gameHandler;
     private final TurnController turnController;
-    private final ActionController actionController;
+    private final ExpertController expertController;
 
 
     public Controller(Game game, GameHandler gameHandler) {
@@ -33,9 +32,9 @@ public class Controller implements PropertyChangeListener {
         this.gameHandler = gameHandler;
         turnController = new TurnController(this, gameHandler);
         if(gameHandler.getExpertMode()) {
-            actionController = new ActionController(game, game.getGameBoard(), turnController);
+            expertController = new ExpertController(game, game.getGameBoard(), turnController);
         } else
-            actionController = null;
+            expertController = null;
     }
 
 
@@ -173,6 +172,11 @@ public class Controller implements PropertyChangeListener {
 
 
                  */
+            }
+
+            case "CheckInfluence" -> {
+                int islandId = ((Island) evt.getNewValue()).getIslandID();
+                turnController.checkIslandInfluence(islandId);
             }
 
 

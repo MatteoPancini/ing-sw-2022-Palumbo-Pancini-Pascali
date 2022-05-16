@@ -226,11 +226,16 @@ public class GameHandler {
             case "PickStudent" -> gameHandlerListener.firePropertyChange("PickStudent", null, ((PickStudent) userAction).getChosenStudent());
 
             case "PickDestination" -> {
-                if (((PickDestination) userAction).getDestination() instanceof DiningRoom) {
+                if(((PickDestination) userAction).getAction() == Action.PICK_ISLAND) {
+                    gameHandlerListener.firePropertyChange("CheckIslandInfluence", null, ((PickDestination) userAction).getChosenIsland());
+                }
+                else if (((PickDestination) userAction).getDestination() instanceof DiningRoom) {
                     gameHandlerListener.firePropertyChange("PickDestinationDiningRoom", null, ((PickDestination) userAction).getDestination());
                 } else {
                     gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
                 }
+
+
             }
 
             case "PickMovesNumber" -> gameHandlerListener.firePropertyChange("PickMovesNumber", null, ((PickMovesNumber) userAction).getMoves());
