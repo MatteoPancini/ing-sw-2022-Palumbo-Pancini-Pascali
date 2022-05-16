@@ -65,7 +65,6 @@ public class Parser implements PropertyChangeListener {
         return message;
     }
 
-
     public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
         UserAction action = null;
         switch(actionName.toUpperCase()) {

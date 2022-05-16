@@ -213,25 +213,7 @@ public class ModelView {
         return green;
     }
 
-/*
-    //decidere se id parte da 0 o da 1
-    public void setPlayerNickname(String playerNickname) {
-        currentPlayer.setNickname(playerNickname);
-    }
 
-    public void enableInput() {
-        activeInput = true;
-    }
-
-    public void disableInput() {
-        activeInput = false;
-    }
-
-    public void setPlayers() {
-        for(Player p : game.getPlayers())
-            players.add(p);
-    }
-    */
 
     public String hasYellowProfessor(Player p) {
         String yellowProfessor;
@@ -289,7 +271,7 @@ public class ModelView {
     }
 
 
-    public void enableInput(boolean activateUserInput) {
+    public void setActivateInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;
     }
 }

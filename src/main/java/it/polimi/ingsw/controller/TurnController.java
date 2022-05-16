@@ -478,9 +478,16 @@ public class TurnController {
         startActionPhase();
     }
 
-
-    //TODO GIGIOX
     public boolean checkWin() {
+        if(gameHandler.getGame().getGameBoard().getIslands().size() == 3){
+            return true;
+        }
+
+        for(Player p: gameHandler.getGame().getActivePlayers()){
+            if(p.getBoard().getTowerArea().getTowerArea().size() == 0) return true;
+            if(p.getAssistantDeck().getDeck().size() == 0) return true;
+        }
+
         return false;
     }
 }

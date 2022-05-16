@@ -16,5 +16,5 @@ public class Professor {
 
     public Player getOwner(){ return owner; }
 
-    public PawnType getType(){ return type;}
+    public PawnType getType(){ return type; }
 }
