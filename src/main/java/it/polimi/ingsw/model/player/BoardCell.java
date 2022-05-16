@@ -9,25 +9,53 @@ import java.util.ArrayList;
 public class BoardCell {
     private PawnType boardCellType;
     private boolean coinCell;
-    private boolean studentCell;
-    private boolean professorCell;
-    private Professor professor;
     private Student student;
+    private Professor professor;
 
     public BoardCell(PawnType boardCellType) {
         this.boardCellType = boardCellType;
         coinCell = false;
     }
-
+    public boolean hasStudent() {
+        if(this.student!=null) {
+            return true;
+        }
+        return false;
+    }
     public boolean hasCoin(){
         return coinCell;
     };
 
     public void setCoinCell() { coinCell = true; }
 
-    public boolean hasProfessor() { return professorCell; }
-
     public PawnType getBoardCellType() {
         return boardCellType;
+    }
+
+    public void setBoardCellType(PawnType boardCellType) {
+        this.boardCellType = boardCellType;
+    }
+
+    public void setStudent(Student student){
+        this.student = student;
+    }
+
+
+    public void setProfessor(Professor professor){
+        this.professor = professor;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+    public boolean hasProfessor() {
+        if(professor != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public void resetProfessor() {
+        this.professor = null;
     }
 }

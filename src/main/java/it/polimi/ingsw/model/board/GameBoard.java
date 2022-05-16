@@ -7,16 +7,16 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
 public class GameBoard {
-    private Game game = null;
-    private ArrayList<CloudTile> clouds = null;
-    private ArrayList<Island> islands = null;
-    private ArrayList<Professor> professors = null;
-    private MotherNature motherNature = null;
+    private Game game;
+    private ArrayList<CloudTile> clouds;
+    private ArrayList<Island> islands;
+    private ArrayList<Professor> professors;
+    private MotherNature motherNature;
     private CharacterDeck playableCharacters = null;
     private ArrayList<AssistantCard> lastAssistantUsed;
-    private ArrayList<Student> studentsBag = null;
+    private ArrayList<Student> studentsBag;
 
-    public GameBoard () {
+    public GameBoard (Game game) {
         this.game = game;
         clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
@@ -79,6 +79,15 @@ public class GameBoard {
         return professors;
     }
 
+    public Professor getProfessorByColor(PawnType pawnType) {
+        for(Professor professor : professors) {
+            if(professor.getType() == pawnType) {
+                return professor;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Island> getIslands() {
         return islands;
     }
@@ -89,5 +98,14 @@ public class GameBoard {
 
     public void setLastAssistantUsed(int index, AssistantCard card){
         lastAssistantUsed.set(index, card);
+    }
+
+    public Island getIslandById(int islandId) {
+        for(Island i : islands) {
+            if(i.getIslandID() == islandId) {
+                return i;
+            }
+        }
+        return null;
     }
 }

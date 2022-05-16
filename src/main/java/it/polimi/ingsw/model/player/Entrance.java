@@ -25,5 +25,4 @@ public class Entrance{
 
     public void setStudents(Student newStudent) { students.add(newStudent); }
 
-
 }

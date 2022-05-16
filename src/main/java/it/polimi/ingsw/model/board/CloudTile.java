@@ -29,4 +29,8 @@ public class CloudTile {
     public ArrayList<Student> getStudents(){ return cloudStudents; }
 
     public void setStudents(ArrayList<Student> newStudents){ cloudStudents = newStudents; }
+
+    public void removeStudents() {
+        cloudStudents = null;
+    }
 }

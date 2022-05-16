@@ -1,7 +1,11 @@
+
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.VisualBoard;
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
@@ -10,53 +14,91 @@ import java.util.ArrayList;
 public class ModelView {
     private CLI cli;
     private VisualBoard visualBoard;
-    private Player currentPlayer;
+    /* private Player currentPlayer;
     private ArrayList<Player> players;
+    private UserAction destinationUserAction;*/
     private Answer serverAnswer;
     private boolean activeInput;
-    private Game game;
-    private int yellow;
+    private Game gameCopy;
+    /*private int yellow;
     private int blue;
     private int pink;
     private int red;
     private int green;
     private String playerNickname;
-    private boolean activateInput;
-    private String wizardName;
-    private boolean gameStarted;
+    private UserAction lastUserAction;
 
-    public ModelView(CLI cli, VisualBoard visualBoard)  {
-        this.cli = cli;
-        this.visualBoard = visualBoard;
-        this.gameStarted = false;
-
+    public UserAction getDestinationUserAction() {
+        return destinationUserAction;
     }
 
-
-    public CLI getCli() {
-        return cli;
+    public void setDestinationUserAction(UserAction destinationUserAction) {
+        this.destinationUserAction = destinationUserAction;
     }
 
-    public Game getGame() {
-        return game;
+    /*public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
-    public void setServerAnswer(Answer answer) {
-        this.serverAnswer = answer;
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
-    public Answer getServerAnswer() {
-        return serverAnswer;
-    }
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }*/
 
+    public void setServerAnswer(Answer serverAnswer) {
+        this.serverAnswer = serverAnswer;
+    }
+    public boolean isActiveInput() {
+        return activeInput;
+    }
+    /*
+    public void setActiveInput(boolean activeInput) {
+        this.activeInput = activeInput;
+    }
+    public int getYellow() {
+        return yellow;
+    }
+    public void setYellow(int yellow) {
+        this.yellow = yellow;
+    }
+    public int getBlue() {
+        return blue;
+    }
+    public void setBlue(int blue) {
+        this.blue = blue;
+    }
+    public int getPink() {
+        return pink;
+    }
+    public void setPink(int pink) {
+        this.pink = pink;
+    }
+    public int getRed() {
+        return red;
+    }
+    public void setRed(int red) {
+        this.red = red;
+    }
+    public int getGreen() {
+        return green;
+    }
+    public void setGreen(int green) {
+        this.green = green;
+    }
     public String getPlayerNickname() {
         return playerNickname;
+    } */
+
+    public String getWizardName() {
+        return wizardName;
     }
 
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
+    public void setWizardName(String wizardName) {
+        this.wizardName = wizardName;
     }
-
 
     public boolean isGameStarted() {
         return gameStarted;
@@ -66,45 +108,58 @@ public class ModelView {
         this.gameStarted = gameStarted;
     }
 
-    public boolean isActivateInput() {
-        return activateInput;
+    public void setCli(CLI cli) {
+        this.cli = cli;
     }
 
-    public void setActivateInput() {
-        this.activateInput = true;
+    public void setVisualBoard(VisualBoard visualBoard) {
+        this.visualBoard = visualBoard;
     }
 
-    public void resetActivateInput() {
-        this.activateInput = false;
+    private String wizardName;
+    private boolean gameStarted;
+
+    /* public UserAction getLastUserAction() {
+        return lastUserAction;
     }
 
-    public void setActivateInput(boolean activateInput) {
-        this.activateInput = activateInput;
+    public void setLastUserAction(UserAction lastUserAction) {
+        this.lastUserAction = lastUserAction;
+    } */
+
+    public ModelView(CLI cli, VisualBoard visualBoard)  {
+        this.cli = cli;
+        this.visualBoard = visualBoard;
     }
 
-    public void setWizardName(String wizardName) {
-        System.out.println(getPlayerNickname() + "'s Wizard is: " + wizardName);
-        this.wizardName = wizardName;
+
+    public Answer getServerAnswer() {
+        return serverAnswer;
     }
 
-    public String getWizardName() {
-        return wizardName;
+    public CLI getCli() {
+        return cli;
     }
 
-    public Player getCurrentPlayer() {
+    public Game getGameCopy() {
+        return gameCopy;
+    }
+
+    /* public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
     public VisualBoard getVisualBoard() {
         return visualBoard;
     }
+    */
 
     public boolean getActiveInput() {
         return activeInput;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameCopy(Game game) {
+        this.gameCopy = game;
     }
 
     public int getYellowStudents(Player p) {
@@ -135,7 +190,7 @@ public class ModelView {
                 red++;
             }
         }
-        return yellow;
+        return red;
     }
 
     public int getPinkStudents(Player p) {
@@ -155,12 +210,13 @@ public class ModelView {
                 green++;
             }
         }
-        return yellow;
+        return green;
     }
 
+/*
     //decidere se id parte da 0 o da 1
-    public void setPlayerNickname(String playerNickname, int id) {
-        players.get(id-1).setNickname(playerNickname);
+    public void setPlayerNickname(String playerNickname) {
+        currentPlayer.setNickname(playerNickname);
     }
 
     public void enableInput() {
@@ -175,6 +231,7 @@ public class ModelView {
         for(Player p : game.getPlayers())
             players.add(p);
     }
+    */
 
     public String hasYellowProfessor(Player p) {
         String yellowProfessor;
@@ -229,5 +286,10 @@ public class ModelView {
             redProfessor = "no";
         }
         return redProfessor;
+    }
+
+
+    public void setActivateInput(boolean activateUserInput) {
+        this.activeInput = activateUserInput;
     }
 }
