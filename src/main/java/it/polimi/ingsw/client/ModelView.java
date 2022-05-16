@@ -289,7 +289,7 @@ public class ModelView {
     }
 
 
-    public void setActivateInput(boolean activateUserInput) {
+    public void enableInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;
     }
 }
