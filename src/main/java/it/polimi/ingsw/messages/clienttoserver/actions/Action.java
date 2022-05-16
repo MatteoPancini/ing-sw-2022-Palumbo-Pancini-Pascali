@@ -6,5 +6,6 @@ public enum Action {
     PICK_MOVES_NUMBER,
     PICK_CLOUD,
     PICK_STUDENT,
-    PICK_DESTINATION;
+    PICK_DESTINATION,
+    PICK_ISLAND;
 }

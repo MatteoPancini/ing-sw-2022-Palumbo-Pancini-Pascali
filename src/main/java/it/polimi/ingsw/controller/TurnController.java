@@ -24,7 +24,7 @@ public class TurnController {
 
     private Player currentPlayer;
 
-    private ActionController actionController;
+    private ExpertController expertController;
 
     private int studentRequest;
 
@@ -38,6 +38,13 @@ public class TurnController {
 
     private Student studentToMove;
 
+    public GameHandler getGameHandler() {
+        return gameHandler;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 
     public TurnController(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
