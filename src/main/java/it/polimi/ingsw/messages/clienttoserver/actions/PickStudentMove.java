@@ -1,7 +1,5 @@
 package it.polimi.ingsw.messages.clienttoserver.actions;
 
-import it.polimi.ingsw.model.enumerations.Action;
-
 public class PickStudentMove implements UserAction {
     private Action action;
     private String chosenStudent;

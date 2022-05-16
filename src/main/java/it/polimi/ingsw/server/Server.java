@@ -1,34 +1,39 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.constants.Constants;
-//import it.polimi.ingsw.controller.GameHandler;
+import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
-import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
-import it.polimi.ingsw.messages.servertoclient.PlayerJoinedNotification;
-import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
+import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.enumerations.Wizards;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-/*
+
+
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class Server {
     private ServerSocketHandler serverSocketHandler;
 
     private GameHandler gameHandler;
 
-    private int totaleGamePlayers;
+    private int totalGamePlayers;
 
     int currentClientID;
 
-    private List<SocketClientConnection> waitingPlayers = new ArrayList<>();
+    private List<SocketClientConnection> waitingPlayersConnection = new ArrayList<>();
 
 
-    //private List<SocketClientConnection> socketClientConnections = new ArrayList<SocketClientConnection>();
-    private List<SocketClientConnection> waitingConnection = new ArrayList<>();
 
     private final Map<String, Integer> nicknameMapID;
     private final Map<Integer, String> idMapNickname;
@@ -37,16 +42,30 @@ public class Server {
 
 
 
+    public Server() {
+        serverSocketHandler = new ServerSocketHandler(Constants.getPort(), this);
+        nicknameMapID = new HashMap<>();
+        totalGamePlayers = 0;
+        idMapNickname = new HashMap<>();
+        idMapVirtualClient = new HashMap<>();
+        virtualClientToClientConnection = new HashMap<>();
+
+        Thread thread = new Thread(this::socketQuitting);
+        thread.start();
+
+
+    }
+
     //method used to add a connection
-    public synchronized Integer registerClient(String nickname, SocketClientConnection socketClientConnection) {
-        Integer clientID = nicknameMapID.get(nickname);
+    public synchronized Integer registerClient(String clientNickname, SocketClientConnection socketClientConnection) {
+        Integer clientID = nicknameMapID.get(clientNickname);
 
         //checks about nickname
         if (clientID == null) {
-            if (waitingPlayers.isEmpty()) {
+            if (waitingPlayersConnection.isEmpty()) {
                 gameHandler = new GameHandler(this);
             }
-            if (nicknameMapID.keySet().stream().anyMatch(nickname::equalsIgnoreCase)) {
+            if (nicknameMapID.keySet().stream().anyMatch(clientNickname::equalsIgnoreCase)) {
                 SerializedAnswer duplicateNicknameError = new SerializedAnswer();
                 duplicateNicknameError.setServerAnswer(new ServerError(ServerErrorTypes.DUPLICATENICKNAME));
                 socketClientConnection.sendServerMessage(duplicateNicknameError);
@@ -54,38 +73,60 @@ public class Server {
             }
 
             //checks about waiting list and available slot for the game
-            currentClientID = generateNewClientID();
-            gameHandler.addGamePlayer(nickname, clientID);
-            VirtualClientView virtualClientView = new VirtualClientView(clientID, nickname, socketClientConnection, gameHandler);
-            if (totaleGamePlayers != 0 && waitingPlayers.size() >= totaleGamePlayers) {
+            clientID = generateNewClientID();
+            gameHandler.addGamePlayer(clientNickname, clientID);
+            VirtualClientView virtualClientView = new VirtualClientView(clientID, clientNickname, socketClientConnection, gameHandler);
+            if (totalGamePlayers != 0 && waitingPlayersConnection.size() >= totalGamePlayers) {
                 virtualClientView.sendAnswerToClient(new ServerError(ServerErrorTypes.FULLGAMESERVER));
                 return null;
             }
 
-            //qui potrebbero starci un pò di map... al momento ometto
-            System.out.println("Player " + virtualClientView.getClientNickname() + " has successfully connected with id " + virtualClientView.getClientID());
+            idMapNickname.put(clientID, clientNickname);
+            nicknameMapID.put(clientNickname, clientID);
+            idMapVirtualClient.put(clientID, virtualClientView);
+            virtualClientToClientConnection.put(virtualClientView, socketClientConnection);
 
-            if (waitingPlayers.size() > 1) {
-                gameHandler.sendBroadcast(new PlayerJoinedNotification("Player " + virtualClientView.getClientNickname() + " has officially joined the game!"));
-            } else { //client già registrato con quel nickname (quindi ID != null)
-                VirtualClientView registeredClient = idMapVirtualClient.get(clientID);
-                if (socketClientConnection != null) {
-                    SerializedAnswer duplicateNicknameError = new SerializedAnswer();
-                    duplicateNicknameError.setServerAnswer(new ServerError(ServerErrorTypes.DUPLICATENICKNAME));
-                    socketClientConnection.sendServerMessage(duplicateNicknameError);
-                    return null;
-                }
+
+            System.out.println("Player " + virtualClientView.getClientNickname() + " has successfully connected with id " + virtualClientView.getClientID());
+            SerializedAnswer connectionCompleted = new SerializedAnswer();
+            connectionCompleted.setServerAnswer(new ConnectionResult("Congrats! You successfully connected with id " + virtualClientView.getClientID(), true));
+            socketClientConnection.sendServerMessage(connectionCompleted);
+
+
+            if (waitingPlayersConnection.size() > 1) {
+                gameHandler.sendExcept(new PlayerJoinedNotification("Player " + virtualClientView.getClientNickname() + " has officially joined the game!"), clientID);
+            }
+        } else { //client già registrato con quel nickname (quindi ID != null)
+            VirtualClientView registeredClient = idMapVirtualClient.get(clientID);
+            if (socketClientConnection != null) {
+                SerializedAnswer duplicateNicknameError = new SerializedAnswer();
+                duplicateNicknameError.setServerAnswer(new ServerError(ServerErrorTypes.DUPLICATENICKNAME));
+                socketClientConnection.sendServerMessage(duplicateNicknameError);
+                return null;
             }
         }
 
         return clientID;
     }
 
+    public synchronized void unregisterPlayer(int clientID) {
+        getGameFromID(clientID).unregisterPlayer(clientID);
+        VirtualClientView client = idMapVirtualClient.get(clientID);
+        System.out.println("Unregistering client " + client.getClientNickname() + "...");
+        idMapVirtualClient.remove(clientID);
+        nicknameMapID.remove(client.getClientNickname());
+        waitingPlayersConnection.remove(virtualClientToClientConnection.get(client));
+        idMapNickname.remove(client.getClientID());
+        virtualClientToClientConnection.remove(client);
+        System.out.println("Client has been successfully unregistered.");
+    }
+
+
     public void setTotalGamePlayers (int totalGamePlayers) throws OutOfBoundException {
         if (totalGamePlayers < Constants.NUM_MIN_PLAYERS || totalGamePlayers > Constants.NUM_MAX_PLAYERS) {
             throw new OutOfBoundException();
         } else {
-            this.totaleGamePlayers = totalGamePlayers;
+            this.totalGamePlayers = totalGamePlayers;
         }
     }
 
@@ -101,25 +142,12 @@ public class Server {
 
 
 
-    public Server() {
-        serverSocketHandler = new ServerSocketHandler(Constants.getPort(), this);
-        nicknameMapID = new HashMap<>();
-        totaleGamePlayers = 0;
-        idMapNickname = new HashMap<>();
-        idMapVirtualClient = new HashMap<>();
-        virtualClientToClientConnection = new HashMap<>();
-
-        Thread thread = new Thread(this::socketQuitting);
-        thread.start();
-
-
-    }
-
 
     public void socketQuitting() {
         Scanner quittingInput = new Scanner(System.in);
         while (true) {
-            if (quittingInput.next().equalsIgnoreCase("QUIT")) {
+            String quittingUpper = quittingInput.nextLine().toUpperCase();
+            if (quittingUpper.equalsIgnoreCase("QUIT")) {
                 getServerSocketHandler().setActiveSocket(false);
                 System.exit(0);
                 break;
@@ -127,6 +155,9 @@ public class Server {
         }
     }
 
+    public String getNicknameFromID(int clientID) {
+        return idMapNickname.get(clientID);
+    }
 
     public synchronized ServerSocketHandler getServerSocketHandler() {
         return serverSocketHandler;
@@ -134,15 +165,35 @@ public class Server {
 
 
 
-    public synchronized void lobby(SocketClientConnection c) throws InterruptedException{
-        waitingConnection.add(c); //first connected player
-        if(waitingConnection.size() == 1) {
+    public synchronized void lobby(SocketClientConnection socketClientConnection) throws InterruptedException {
+        waitingPlayersConnection.add(socketClientConnection); //new connected player (no needs it's a new player of the game)
+        if(waitingPlayersConnection.size() == 1) { //if it's the first player
+            socketClientConnection.setupPlayers(new NumOfPlayerRequest("Hi " + idMapVirtualClient.get(socketClientConnection.getClientID()).getClientNickname() + " you are now the host of this lobby.\nPlease choose the number of player you want to play with [2, 3, 4]:"));
+            try {
+                socketClientConnection.setupGameMode(new ExpertModeAnswer("Do you want to play in Expert Mode? [y/n]"));
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else if(waitingPlayersConnection.size() == totalGamePlayers) {
+            System.out.println("The lobby has reached the number of player requested by the host.\nStarting the game...");
+            for(int timer = 3; timer > 0; timer--) {
+                gameHandler.sendBroadcast(new DynamicAnswer("Game is starting in " + timer, false));
+                TimeUnit.MILLISECONDS.sleep(1000);
+            }
+            waitingPlayersConnection.clear();
+            Wizards.reset();
 
-            SerializedAnswer serverAns = new SerializedAnswer();
-            serverAns.setServerAnswer(new DynamicAnswer("Hi " + idMapVirtualClient.get(c.getClientID()).getClientNickname() + " you are now the host of this lobby.\nPlease choose the number of player you want to play with [2, 3, 4]:"));
-            c.sendServerMessage(serverAns);
-            c.setupGameMode();
+            if(gameHandler.isTeamMode()) {
+                gameHandler.setupTeams();
+            }
+
+
+            gameHandler.initializeWizards();
+
+        } else {
+            gameHandler.sendBroadcast(new DynamicAnswer("There are " + (totalGamePlayers - waitingPlayersConnection.size()) + " slots left!", false));
         }
+
 
 
     }
@@ -153,7 +204,7 @@ public class Server {
     }
 
 
-    public VirtualClientView getVirtualClientFromID(int clientID){
+    public VirtualClientView getVirtualClientFromID(int clientID) {
         return idMapVirtualClient.get(clientID);
     }
 
@@ -165,7 +216,8 @@ public class Server {
         System.out.print("This is the Server of Eryantis: Welcome!");
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Do you want to use a server default configuration?[y/n]");
+        System.out.println("\nDo you want to use a server default configuration?[y/n]");
+        System.out.print(">");
         String configServer = scanner.nextLine();
         if (configServer.equalsIgnoreCase("y")) {
             Constants.setPort(1234);
@@ -187,7 +239,7 @@ public class Server {
 
         }
 
-        System.out.println("Starting Socket Server");
+        System.out.println("Starting Socket Server...");
 
         Server server = new Server();
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -197,7 +249,7 @@ public class Server {
 
 
 
- */
+
 
 
 

@@ -19,7 +19,7 @@ public enum Wizards {
         availableWizards.add(FOREST);
     }
 
-    public static void choose(Wizards wizard) {
+    public static void removeAvailableWizard(Wizards wizard) {
         availableWizards.remove(wizard);
     }
 
@@ -29,5 +29,11 @@ public enum Wizards {
 
     public static List<Wizards> notChosen() {
         return availableWizards;
+    }
+
+
+    public static Wizards parseWizardInput(String wizardInput) {
+        System.out.println(wizardInput);
+        return Enum.valueOf(Wizards.class, wizardInput.toUpperCase());
     }
 }
