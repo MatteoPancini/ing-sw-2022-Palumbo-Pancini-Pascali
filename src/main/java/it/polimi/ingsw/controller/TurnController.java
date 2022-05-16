@@ -404,8 +404,6 @@ public class TurnController {
         }
 
 
-
-
     }
 
     public void askCloud() {
