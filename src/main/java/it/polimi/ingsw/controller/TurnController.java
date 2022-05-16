@@ -397,6 +397,8 @@ public class TurnController {
         }
 
 
+
+
     }
 
     public void askCloud() {
@@ -467,7 +469,7 @@ public class TurnController {
         cloud.removeStudents();
 
         if(checkWin()) {
-            GameHandler.endGame();
+            gameHandler.endGame();
         }
 
         setCurrentPlayer();

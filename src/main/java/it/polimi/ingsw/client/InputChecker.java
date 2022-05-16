@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
+import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
@@ -230,4 +231,10 @@ public class InputChecker {
         }
         return action;
     } */
+
+    public void quitGame() {
+        clientConnection.sendUserInput(new QuitGame());
+        System.err.println("Disconnected from the server.");
+        System.exit(0);
+    }
 }

@@ -158,7 +158,7 @@ public class SocketClientConnection implements Runnable {
     }
 
 
-    public void actionHandler(Message userMessage) { //TODO: disconnesione!
+    public void actionHandler(Message userMessage) {
         if(userMessage instanceof NicknameChoice) {
             checkConnection((NicknameChoice) userMessage);
         } else if(userMessage instanceof WizardChoice) {
@@ -175,7 +175,6 @@ public class SocketClientConnection implements Runnable {
         } else if (userMessage instanceof QuitGame) {
             server.getGameFromID(clientID).sendExcept(new DynamicAnswer("Player " + server.getNicknameFromID(clientID) + " has disconnected from the game!", false), clientID);
             server.getGameFromID(clientID).endPlayerGame(server.getNicknameFromID(clientID));
-
         }
 
     }

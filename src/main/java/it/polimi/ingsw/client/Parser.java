@@ -85,13 +85,13 @@ public class Parser implements PropertyChangeListener {
                 action = inputChecker.checkDestination(chosenValue);
             }
             //TODO: aspettare gigiox per le characters card, Panci per il quit game
-            /*case "PICKCHARACTER" -> {
+            case "PICKCHARACTER" -> {
                 action = inputChecker.checkCharacter(chosenValue);
             }
             case "QUIT" -> {
                 inputChecker.quitGame();
                 return true;
-            }*/
+            }
             default -> {
                 return false;
             }

@@ -264,8 +264,10 @@ public class GameHandler {
 
     }
 
-    //TODO M: elimina tutte le connessioni rimaste e manda messaggi vittoria!
-    public static void endGame() {
+    public void endGame() {
+        while(!game.getActivePlayers().isEmpty()) {
+            server.getVirtualClientFromID(game.getActivePlayers().get(0).getPlayerID()).getSocketClientConnection().closeConnection();
+        }
 
     }
 
