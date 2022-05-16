@@ -38,13 +38,12 @@ public class CharacterDeck {
     }
 
     public static List<CharacterCard> getPlayableCards(){
-        List<CharacterCard> allCards = parseCharacterCards();
         List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
 
-        Collections.shuffle(allCards);
+        Collections.shuffle(cards);
 
         for(int i = 1; i <= 3; i++){
-            playableCards.add(allCards.get(i));
+            playableCards.add(cards.get(i));
         }
 
         return playableCards;
