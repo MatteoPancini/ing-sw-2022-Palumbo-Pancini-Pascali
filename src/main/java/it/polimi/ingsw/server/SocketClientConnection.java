@@ -158,7 +158,8 @@ public class SocketClientConnection implements Runnable {
     }
 
 
-    public void actionHandler(Message userMessage) { //TODO: disconnesione!
+    public void actionHandler(Message userMessage) { //
+        // TODO: disconnesione!
         if(userMessage instanceof NicknameChoice) {
             checkConnection((NicknameChoice) userMessage);
         } else if(userMessage instanceof WizardChoice) {
@@ -206,6 +207,15 @@ public class SocketClientConnection implements Runnable {
 
                 if(userAction instanceof PickCloud) {
                     server.getGameFromID(clientID).parseActions(userAction, "PickCloud");
+                }
+
+                if(userAction instanceof PickCharacter) {
+                    if(server.getGameFromID(clientID).getExpertMode()) {
+                        server.getGameFromID(clientID).parseActions(userAction, "PickCharacter");
+
+                    } else {
+                        server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT, "Game is in standard mode! You can't play a character card!"), clientID);
+                    }
                 }
 
             } else {

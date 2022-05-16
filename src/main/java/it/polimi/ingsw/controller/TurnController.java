@@ -24,6 +24,8 @@ public class TurnController {
 
     private Player currentPlayer;
 
+    private ActionController actionController;
+
     private int studentRequest;
 
 
@@ -35,6 +37,7 @@ public class TurnController {
 
 
     private Student studentToMove;
+
 
     public TurnController(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
@@ -311,8 +314,8 @@ public class TurnController {
 
     }
 
-    public void moveStudentToIsland(int chosenIslandId) {
-        Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
+    public void moveStudentToIsland(Island chosenIsland) {
+        //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
         chosenIsland.addStudent(studentToMove);
         studentRequest++;
         askStudent(studentRequest);
@@ -473,9 +476,16 @@ public class TurnController {
         startActionPhase();
     }
 
-
-    //TODO GIGIOX
     public boolean checkWin() {
+        if(gameHandler.getGame().getGameBoard().getIslands().size() == 3){
+            return true;
+        }
+
+        for(Player p: gameHandler.getGame().getActivePlayers()){
+            if(p.getBoard().getTowerArea().getTowerArea().size() == 0) return true;
+            if(p.getAssistantDeck().getDeck().size() == 0) return true;
+        }
+
         return false;
     }
 }

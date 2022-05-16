@@ -6,6 +6,8 @@ import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.DiningRoom;
@@ -234,6 +236,9 @@ public class GameHandler {
             case "PickMovesNumber" -> gameHandlerListener.firePropertyChange("PickMovesNumber", null, ((PickMovesNumber) userAction).getMoves());
 
             case "PickCloud" -> gameHandlerListener.firePropertyChange("PickCloud", null, ((PickCloud) userAction).getChosenCloud());
+
+            case "PickCharacter" -> gameHandlerListener.firePropertyChange("PickCharacter", null, ((PickCharacter) userAction).getChosenCharacter());
+
 
 
 
