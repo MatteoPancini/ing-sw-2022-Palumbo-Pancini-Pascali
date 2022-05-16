@@ -5,13 +5,13 @@ import it.polimi.ingsw.model.enumerations.Characters;
 
 public class PickCharacter implements UserAction {
     private Action action;
-    private CharacterCard chosenCharacter;
+    private Characters chosenCharacter;
 
     public PickCharacter() {
         this.action = Action.PICK_CHARACTER;
     }
 
-    public PickCharacter(CharacterCard character) {
+    public PickCharacter(Characters character) {
         this.action = action;
         this.chosenCharacter = character;
     }
@@ -20,11 +20,11 @@ public class PickCharacter implements UserAction {
         return action;
     }
 
-    public CharacterCard getChosenCharacter() {
+    public Characters getChosenCharacter() {
         return chosenCharacter;
     }
 
-    public void setChosenCharacter(CharacterCard character) {
+    public void setChosenCharacter(Characters character) {
         this.chosenCharacter = character;
     }
 }

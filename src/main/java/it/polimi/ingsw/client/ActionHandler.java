@@ -17,11 +17,10 @@ public class ActionHandler {
         view.addPropertyChangeListener(cli);
     }
 
-
+    //notifica la CLI con i listeners
     public void answerHandler() {
         Answer answer = modelView.getServerAnswer();
         System.out.println("Analizzo la server answer: " + answer.getMessage());
-
         if (answer instanceof NumOfPlayerRequest) {
             view.firePropertyChange("InitialGamePhase", null, "RequestPlayerNumber");
         } else if (answer instanceof WizardAnswer) {
@@ -38,15 +37,14 @@ public class ActionHandler {
         } else if (answer instanceof RequestAction) {
             String actionType = answer.getMessage().toString();
             view.firePropertyChange("ActionPhase", null, actionType);
-        }
-        else if (answer instanceof GameCopy) {
+        } else if (answer instanceof GameCopy) {
             view.firePropertyChange("UpdateModelView", null, answer.getMessage());
         }
     }
 
     private void notifyDynamicAnswer(Answer answer) {
         view.firePropertyChange("DynamicAnswer", null, answer.getMessage());
-        modelView.enableInput(((DynamicAnswer) answer).isActivateUserInput());
+        modelView.setActivateInput(((DynamicAnswer) answer).isActivateUserInput());
     }
 
     //viene chiamato all'interno di propertyChange della CLI, notificata dall'Action Handler
@@ -70,8 +68,11 @@ public class ActionHandler {
             case "PICKCHARACTER" -> {
                 cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
             }
+            case "PICKISLAND" -> {
+                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+            }
             default -> {
-                cli.getOutput().println("Error: no such action");
+                cli.showError("Error: no such action");
             }
         }
     }

@@ -8,6 +8,8 @@ import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
 
+import java.util.Locale;
+
 public class InputChecker {
     private ClientConnection clientConnection;
     private ModelView modelView;
@@ -143,11 +145,11 @@ public class InputChecker {
     //se action == null ri-chiedo l'input
     public PickDestination checkDestination(String destination) {
         PickDestination action = null;
-        switch(destination.charAt(0)) {
-            case 'D' -> {
+        switch(destination.toUpperCase()) {
+            case "DININGROOM" -> {
                 action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
             }
-            case 'I' -> {
+            case "ISLAND" -> {
                 int island = Integer.parseInt(destination);
                 if (island > 0 && island < 13) {
                     action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(Integer.parseInt(destination)));
@@ -186,48 +188,47 @@ public class InputChecker {
         return action;
     }
 
-    /* aspettare implementazione delle character cards
     public PickCharacter checkCharacter(String input) {
         PickCharacter action = null;
         switch(input.toUpperCase()) {
             case "HERALD" -> {
-                action = new PickCharacter(new Herald());
+                action = new PickCharacter(Characters.HERALD);
             }
             case "KNIGHT" -> {
-                action = new PickCharacter(new Knight());
+                action = new PickCharacter(Characters.KNIGHT);
             }
             case "CENTAUR" -> {
-                action = new PickCharacter(new Centaur());
+                action = new PickCharacter(Characters.CENTAUR);
             }
             case "FARMER" -> {
-                action = new PickCharacter(new Farmer());
+                action = new PickCharacter(Characters.FARMER);
             }
             case "FUNGARUS" -> {
-                action = new PickCharacter(new Fungarus());
+                action = new PickCharacter(Characters.FUNGARUS);
             }
             case "JESTER" -> {
-                action = new PickCharacter(new Jester());
+                action = new PickCharacter(Characters.JESTER);
             }
             case "THIEF" -> {
-                action = new PickCharacter(new Thief());
+                action = new PickCharacter(Characters.THIEF);
             }
             case "MINESTREL" -> {
-                action = new PickCharacter(new Minestrel());
+                action = new PickCharacter(Characters.MINESTREL);
             }
             case "MONK" -> {
-                action = new PickCharacter(new Monk());
+                action = new PickCharacter(Characters.MONK);
             }
             case "GRANNY_HERBS" -> {
-                action = new PickCharacter(new GrannyHerbs());
+                action = new PickCharacter(Characters.GRANNY_HERBS);
             }
             case "MAGIC_POSTMAN" -> {
-                action = new PickCharacter(new MagicPostman());
+                action = new PickCharacter(Characters.MAGIC_POSTMAN);
             }
             case "SPOILED_PRINCESS" -> {
-                action = new PickCharacter(new SpoiledPrincess());
+                action = new PickCharacter(Characters.SPOILED_PRINCESS);
             }
             default -> action = new PickCharacter();
         }
         return action;
-    } */
+    }
 }

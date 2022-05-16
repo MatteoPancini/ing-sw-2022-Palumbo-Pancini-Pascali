@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class CharacterDeck {
     private static List<CharacterCard> cards = null;
+    private static List<CharacterCard> playableCards = null;
     private CharacterDeck() {
         throw new IllegalStateException();
     }
@@ -38,15 +39,12 @@ public class CharacterDeck {
     }
 
     public static List<CharacterCard> getPlayableCards(){
-        List<CharacterCard> allCards = parseCharacterCards();
-        List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
-
-        Collections.shuffle(allCards);
-
-        for(int i = 1; i <= 3; i++){
-            playableCards.add(allCards.get(i));
+        if(playableCards==null) {
+            Collections.shuffle(cards);
+            for (int i = 1; i <= 3; i++) {
+                playableCards.add(cards.get(i));
+            }
         }
-
         return playableCards;
     }
 }
