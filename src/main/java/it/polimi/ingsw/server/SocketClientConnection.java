@@ -158,8 +158,7 @@ public class SocketClientConnection implements Runnable {
     }
 
 
-    public void actionHandler(Message userMessage) { //
-        // TODO: disconnesione!
+    public void actionHandler(Message userMessage) {
         if(userMessage instanceof NicknameChoice) {
             checkConnection((NicknameChoice) userMessage);
         } else if(userMessage instanceof WizardChoice) {

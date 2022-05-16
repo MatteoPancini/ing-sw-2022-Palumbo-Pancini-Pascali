@@ -20,12 +20,13 @@ public class ModelView {
     private Answer serverAnswer;
     private boolean activeInput;
     private Game gameCopy;
+    private String playerNickname;
     /*private int yellow;
     private int blue;
     private int pink;
     private int red;
     private int green;
-    private String playerNickname;
+
     private UserAction lastUserAction;
 
     public UserAction getDestinationUserAction() {
@@ -88,9 +89,11 @@ public class ModelView {
     public void setGreen(int green) {
         this.green = green;
     }
+
+     */
     public String getPlayerNickname() {
         return playerNickname;
-    } */
+    }
 
     public String getWizardName() {
         return wizardName;
@@ -153,6 +156,10 @@ public class ModelView {
         return visualBoard;
     }
     */
+
+    public void setPlayerNickname(String playerNickname) {
+        this.playerNickname = playerNickname;
+    }
 
     public boolean getActiveInput() {
         return activeInput;

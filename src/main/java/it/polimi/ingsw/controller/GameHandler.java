@@ -9,6 +9,7 @@ import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
@@ -262,6 +263,16 @@ public class GameHandler {
                 break;
             }
         }
+
+        //in caso di disconesssione rimuove la carta giocata
+
+        for(AssistantCard a : game.getGameBoard().getLastAssistantUsed()) {
+            if(a.getOwner().getNickname() == playerDisconnected) {
+                game.getGameBoard().getLastAssistantUsed().remove(a);
+            }
+        }
+
+
 
         if(game.getActivePlayers().size() == 1) {
             //TODO M: AGGIUNGI TIMEOUT, se getActivePlayers() continua a essere pari a 1, termina il gioco

@@ -426,8 +426,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         clientConnection = new ClientConnection();
 
-        //TODO: PANCI questo posso toglierlo??? Passandoci il Game da server a client non dovrebbe più servire
-        // modelView.setPlayerNickname(userNickname);
+        modelView.setPlayerNickname(userNickname);
         try {
             if (!clientConnection.setupNickname(userNickname, modelView, actionHandler)) {
                 System.err.println("The entered IP/port doesn't match any active server or the server is not " + "running. Please try again!");

@@ -190,7 +190,6 @@ public class TurnController {
 
 
     public void askAssistantCard() {
-        //TODO M: in caso di disconnessione ricordarsi di togliere il suo assistant
         if(gameHandler.getGame().getGameBoard().getLastAssistantUsed().size() != gameHandler.getGame().getActivePlayers().size()) {
             setCurrentPlayer();
 

@@ -83,7 +83,6 @@ public class Parser implements PropertyChangeListener {
             case "PICKDESTINATION" -> {
                 action = inputChecker.checkDestination(chosenValue);
             }
-            //TODO: aspettare gigiox per le characters card, Panci per il quit game
             case "PICKCHARACTER" -> {
                 action = inputChecker.checkCharacter(chosenValue);
             }
