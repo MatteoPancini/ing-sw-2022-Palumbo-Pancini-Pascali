@@ -21,3 +21,4 @@ src/**/META-INF
 !resources/
 !src/
 !javadoc/
+/target/classes/
