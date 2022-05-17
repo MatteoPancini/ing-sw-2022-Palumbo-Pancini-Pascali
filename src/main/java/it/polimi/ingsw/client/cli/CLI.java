@@ -23,6 +23,7 @@ import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
 
 import java.beans.PropertyChangeEvent;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
@@ -36,10 +37,9 @@ import static it.polimi.ingsw.constants.Constants.*;
 //    cli.receiveCommand(??) ???
 
 public class CLI implements Runnable, ListenerInterface {
-    private Scanner in;
-    private static PrintWriter out;
+    private final Scanner in;
+    private static PrintStream out;
     private Parser parser;
-    private PropertyChangeSupport virtualClient;
     private String chosenWizard;
     private String chosenNickname;
     private String chosenMoves;
@@ -47,19 +47,19 @@ public class CLI implements Runnable, ListenerInterface {
     private String chosenCloud;
     private String chosenStudent;
     private String chosenDestination;
+    private String chosenIsland;
     private String chosenTeam;
     private String chosenCharacter;
     private ClientConnection clientConnection;
     private final ModelView modelView;
     private boolean activeGame;
     private ActionHandler actionHandler;
-    private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
 
     public CLI() {
         in = new Scanner(System.in);
-        out = new PrintWriter(out);
-        modelView = new ModelView(this, new VisualBoard());
-        virtualClient.addPropertyChangeListener(parser);
+        out = new PrintStream(System.out);
+        modelView = new ModelView(this);
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
 
@@ -80,7 +80,7 @@ public class CLI implements Runnable, ListenerInterface {
     public Parser getParser() {
         return parser;
     }
-    public PrintWriter getOutput() {
+    public PrintStream getOutput() {
         return out;
     }
 
@@ -130,19 +130,33 @@ public class CLI implements Runnable, ListenerInterface {
         return r;
     }
 
-    public void printCharacters() {
+    /*public void printCharacters() {
         for(CharacterCard c : CharacterDeck.getPlayableCards()) {
             out.println(ANSI_CYAN + c.getName() + "," + ANSI_RESET);
         }
-    }
+    }*/
+
     public void showAvailableCharacters() {
         out.println(">The available characters for this match are: ");
-        printCharacters();
+        showCharactersDescription();
     }
 
-    public void showCharactersDescription() {
+    /*public void showCharactersDescription() {
         for(CharacterCard c : CharacterDeck.getPlayableCards()) {
             out.print(ANSI_CYAN + c.getName() + " : " + c.getEffect() + ANSI_RESET);
+        }
+    }*/
+
+    public void showCharactersDescription() {
+        CLITable st = new CLITable();
+        st.setShowVerticalLines(true);
+        st.addRow("Effect: ");
+        st.addRow("Cost: ");
+        for(CharacterCard c : CharacterDeck.getPlayableCards()) {
+            st.setHeader(c.getName().toString());
+            st.addRow(c.getEffect());
+            st.addRow(Integer.toString(c.getInitialCost()));
+            st.print();
         }
     }
 
@@ -186,11 +200,38 @@ public class CLI implements Runnable, ListenerInterface {
             }
         }
     }
-    public void showLastAssistantsUsed() {
+
+    /*public void showLastAssistantsUsed() {
         out.println(">These are all the assistants used in this turn: ");
         for(AssistantCard ass : modelView.getGameCopy().getGameBoard().getLastAssistantUsed()) {
             out.println("Name: " + ass.getName() + "Value: " + ass.getValue() + "Maximum moves: " + ass.getMoves());
         }
+    }*/
+    public Player[] getPlayersByAssistantUsed() {
+        Player[] players = new Player[4];
+        for(int i=0; i < modelView.getGameCopy().getActivePlayers().size() ; i++) {
+            players[i] = modelView.getGameCopy().getGameBoard().getLastAssistantUsed().get(i).getOwner();
+        }
+        return players;
+    }
+    public String[] getAssistantUsedByOwner() {
+        String[] assistants = new String[4];
+        for(int i=0; i < modelView.getGameCopy().getActivePlayers().size() ; i++) {
+            assistants[i] = modelView.getGameCopy().getActivePlayers().get(i).getChosenAssistant().getName().toString();
+        }
+        return assistants;
+    }
+
+    public void showLastAssistantsUsed() {
+        out.println(">These are all the assistants used in this turn: ");
+        CLITable st = new CLITable();
+        st.setShowVerticalLines(true);
+        Player[] nicknames = getPlayersByAssistantUsed();
+        String[] assistants = getAssistantUsedByOwner();
+        st.setHeaders(nicknames[0].getNickname(), nicknames[1].getNickname(), nicknames[2].getNickname(), nicknames[3].getNickname());
+        st.addRow(nicknames[0].getChosenAssistant().getName().toString(), nicknames[1].getChosenAssistant().getName().toString(),
+                nicknames[2].getChosenAssistant().getName().toString(), nicknames[3].getChosenAssistant().getName().toString());
+        st.print();
     }
     public void printStudentsOnCLoud(int ID) {
         for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
@@ -224,6 +265,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return color;
     }
+
     public void showEntrance() {
         out.println(">Here's a summary of the students in your entrance: ");
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
@@ -265,7 +307,8 @@ public class CLI implements Runnable, ListenerInterface {
         return students;
     }
 
-    public void showDiningRooms() {
+   /* implementazione senza la tabella, segue quella con
+        public void showDiningRooms() {
         out.println(">Take a look at the other players' dining rooms!");
         for (Player p : modelView.getGameCopy().getActivePlayers()) {
             int[] students = getPlayerDiningRoom(p.getPlayerID());
@@ -276,9 +319,25 @@ public class CLI implements Runnable, ListenerInterface {
             out.print(ANSI_PURPLE + students[3] + "pink students\n" + ANSI_RESET);
             out.print(ANSI_YELLOW + students[4] + "yellow students\n" + ANSI_RESET);
         }
+    }*/
+
+    public void showDiningRooms() {
+        out.println(">Take a look at the other players' dining rooms!");
+        CLITable st = new CLITable();
+        st.setShowVerticalLines(true);
+        for (Player p : modelView.getGameCopy().getActivePlayers()) {
+            st.setHeaders(p.getNickname());
+            st.addRow(ANSI_BLUE + "Blue: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[0]) + ANSI_RESET);
+            st.addRow(ANSI_GREEN + "Green: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[1]) + ANSI_RESET);
+            st.addRow(ANSI_RED + "Green: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[2]) + ANSI_RESET);
+            st.addRow(ANSI_PURPLE + "Green: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[3]) + ANSI_RESET);
+            st.addRow(ANSI_YELLOW + "Green: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[4]) + ANSI_RESET);
+            st.print();
+        }
     }
 
     public void askMoves(AssistantCard card) {
+        showMotherNature();
         out.println(">Pick a number of mother nature moves between 1 and "
                 + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
         chosenMoves = in.next();
@@ -286,13 +345,21 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void printPlayerDeck() {
+        out.println(">Take a look at your deck before choosing: ");
         for (AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-            out.print("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
+            out.println("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
         }
     }
 
+    //alla fine del turno rimuovere le lastAssistantsUsed
     public void askAssistant(AssistantDeck deck) {
-        out.println(">Pick an assistant from your deck by typing its name: ");
+        if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size() > 0) {
+            showLastAssistantsUsed();
+        }
+        out.println(">Pick an assistant from your deck by typing its name.: ");
+        if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()>=1) {
+            out.println(">Remember: you can't play an assistant already played by another player!");
+        }
         printPlayerDeck();
         chosenAssistant = in.next();
         virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
@@ -307,7 +374,9 @@ public class CLI implements Runnable, ListenerInterface {
     //chiamato dal controller, quando ritorna lo studente esso viene salvato in una variabile
     //che verrà poi usata per la chosenDestination nella userAction successiva
     public void askStudent(SchoolBoard schoolB) {
-        out.println(">Pick a student from your Entrance: ");
+        out.println(">Pick a student from your Entrance by typing its color: ");
+        out.print("[RED, BLUE, YELLOW, GREEN, PINK]");
+        showEntrance();
         chosenStudent = in.next();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
     }
@@ -319,17 +388,18 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
     }
 
-
     public void askCharacterCard(CharacterDeck cards) {
-        out.println(">Type the name of the Character Card you want to play: ");
-        printCharacters();
+        out.println(">Type the name of the character card you want to play: ");
+        showCharactersDescription();
         chosenCharacter = in.next();
         virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
     }
 
     public void askIsland(ArrayList<Island> islands) {
-        out.println(">Choose an island by typing its ID!");
+        out.println(">Choose an island by typing its ID: ");
         showIslands();
+        chosenIsland = in.next();
+        virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
     }
 
     public void showMotherNature() {
@@ -368,17 +438,21 @@ public class CLI implements Runnable, ListenerInterface {
     public void actionsLoop() {
         in.reset();
         String cmd = in.nextLine();
-        listeners.firePropertyChange("action", null, cmd);
+        virtualClient.firePropertyChange("Action", null, cmd);
     }
+
     public void choosePlayerNumber() {
-        out.println("Sono in choosePlayerNumber");
+        System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
         while (true) {
             try {
+
                 Scanner inputNum = new Scanner(System.in);
                 out.print(">");
                 numOfPlayer = inputNum.nextInt();
-                out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
+                //out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
+
+
                 break;
             } catch (NumberFormatException e) {
                 out.println("Invalid parameter, it must be a numeric value.");
@@ -396,16 +470,16 @@ public class CLI implements Runnable, ListenerInterface {
         out.println(ANSI_RED + ">Warning! " + message + ANSI_RESET);
     }
 
-    public void showWinMessage(Player winner) {
-        if (modelView.getGameCopy().getPlayersNumber() != 4) {
-            out.println(">Game over! The winner is " + ANSI_RED + winner + ANSI_RESET);
-        } else {
-            out.println(">Game over! The winner is team " + ANSI_RED +
-                    winner.getIdTeam() + ANSI_RESET);
-        }
+    public void showWinMessage() {
+        out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
     }
-
+    public void showLoseMessage(String winnerNickname) {
+        out.println(">Game Over! You lost :(");
+        out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
+    }
     public void userNicknameSetup() {
+        System.out.println("Entro in usernameSetup");
+
         String userNickname = null;
         boolean nickCheck = false;
 
@@ -425,7 +499,6 @@ public class CLI implements Runnable, ListenerInterface {
             }
         }
         clientConnection = new ClientConnection();
-
         modelView.setPlayerNickname(userNickname);
         try {
             if (!clientConnection.setupNickname(userNickname, modelView, actionHandler)) {
@@ -437,16 +510,17 @@ public class CLI implements Runnable, ListenerInterface {
             //e.printStackTrace();
             userNicknameSetup();
         }
-        listeners.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
+        virtualClient.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
     }
 
     @Override
     public void run() {
+        System.out.println("Entro in run");
+
         userNicknameSetup();
-
         while (isActiveGame()) {
-
             if(modelView.isGameStarted()) {
+                System.out.println("Entro dentro all'action");
                 actionsLoop();
             }
         }
@@ -476,14 +550,13 @@ public class CLI implements Runnable, ListenerInterface {
                 chooseWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             }
             default -> out.println("Nothing to do");
-
         }
 
     }
 
     public static void main(String[] args) {
-        out.println("Welcome to the magic world of:");
-        out.println(" .----------------.  .----------------.  .----------------.  .----------------.  .-----------------. .----------------.  .----------------.  .----------------. \n" +
+        System.out.println("Welcome to the magic world of:");
+        System.out.println(" .----------------.  .----------------.  .----------------.  .----------------.  .-----------------. .----------------.  .----------------.  .----------------. \n" +
                 "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
                 "| |  _________   | || |  _______     | || |     _____    | || |      __      | || | ____  _____  | || |  _________   | || |  ____  ____  | || |    _______   | |\n" +
                 "| | |_   ___  |  | || | |_   __ \\    | || |    |_   _|   | || |     /  \\     | || ||_   \\|_   _| | || | |  _   _  |  | || | |_  _||_  _| | || |   /  ___  |  | |\n" +
@@ -494,19 +567,21 @@ public class CLI implements Runnable, ListenerInterface {
                 "| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |\n" +
                 "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ");
-        out.println("Let's start your client configuration!\n");
+        System.out.println("Let's start your client configuration!\n");
         Scanner clientInput = new Scanner(System.in);
-        out.println(">Please, insert the server IP address:");
-        out.print(">");
+        System.out.println(">Please, insert the server IP address:");
+        System.out.print(">");
         String ipServerAddress = clientInput.nextLine();
-        out.println(">Please, insert the server port");
-        out.print(">");
+        System.out.println(">Please, insert the server port");
+        System.out.print(">");
         int serverPort = clientInput.nextInt();
         Constants.setAddress(ipServerAddress);
         Constants.setPort(serverPort);
-
         CLI cli = new CLI();
+
         cli.run();
+        System.out.println("Arrivo dopo qui");
+
     }
 
     @Override
@@ -534,6 +609,16 @@ public class CLI implements Runnable, ListenerInterface {
                 showClouds();
                 showAvailableCharacters();
                 showMotherNature();
+                showCoins();
+                showDiningRooms();
+            }
+            case "WinMessage" -> {
+                assert serverCommand != null;
+                showWinMessage();
+            }
+            case "LoseMessage" -> {
+                assert serverCommand != null;
+                showLoseMessage(changeEvent.getNewValue().toString());
             }
             default -> out.println("Unknown answer from server");
         }

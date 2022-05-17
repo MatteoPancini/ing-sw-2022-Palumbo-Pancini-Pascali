@@ -6,13 +6,13 @@ import it.polimi.ingsw.model.enumerations.Assistants;
 
 public class PickAssistant implements UserAction {
     private Action action;
-    private AssistantCard chosenAssistant;
+    private Assistants chosenAssistant;
 
     public PickAssistant() {
         this.action = Action.PICK_ASSISTANT;
     }
 
-    public PickAssistant(Action action, AssistantCard assistant) {
+    public PickAssistant(Action action, Assistants assistant) {
         this.action = action;
         this.chosenAssistant = assistant;
     }
@@ -21,7 +21,7 @@ public class PickAssistant implements UserAction {
         return action;
     }
 
-    public AssistantCard getChosenAssistant() {
+    public Assistants getChosenAssistant() {
         return chosenAssistant;
     }
 }

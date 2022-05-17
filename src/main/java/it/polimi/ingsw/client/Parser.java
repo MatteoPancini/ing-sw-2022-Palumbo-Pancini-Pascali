@@ -1,11 +1,13 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.PickDestination;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.Transient;
 
 
 public class Parser implements PropertyChangeListener {
@@ -28,35 +30,28 @@ public class Parser implements PropertyChangeListener {
     }
 
 
-
     public UserAction parseAssistant(String input) throws AlreadyPlayedAssistantException {
         UserAction message = null;
         try {
             message = inputChecker.checkAssistant(input);
         } catch (AlreadyPlayedAssistantException e) { modelView.getCli().getOutput().println(e.getMessage()); }
-        //modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseStudent(String input) {
         UserAction message;
         message = inputChecker.checkStudent(input);
-        //modelView.setLastUserAction(message);
         return message;
     }
 
     public UserAction parseDestination(String input) {
         UserAction message = inputChecker.checkDestination(input);
-        modelView.setDestinationUserAction(message);
-        Object dest = ((PickDestination) modelView.getDestinationUserAction()).getDestination();
-        ((PickDestination) modelView.getDestinationUserAction()).setDestination(dest);
         return message;
     }
 
     public UserAction parseMoves(String input) {
         UserAction message;
         message = inputChecker.checkMoves(input);
-        //modelView.setLastUserAction(message);
         return message;
     }
 
@@ -88,21 +83,21 @@ public class Parser implements PropertyChangeListener {
             case "PICKCHARACTER" -> {
                 action = inputChecker.checkCharacter(chosenValue);
             }
+            case "PICKISLAND" -> {
+                action = inputChecker.checkIsland(chosenValue);
+            }
             case "QUIT" -> {
                 inputChecker.quitGame();
                 return true;
             }
             default -> {
+                modelView.getCli().showError("Unknown input, please try again!");
                 return false;
             }
 
         }
         if(action!=null) {
             connectionSocket.sendUserInput(action);
-            //modificare la model view in base all'action inviata
-            // qui dovrei ricevere il messaggio dal serve che mi notifica di modificare la model view
-            // ricordare che ci sono due metodi di update, uno per la student move e l'altro per le restanti
-
             return true;
         }
         return false;

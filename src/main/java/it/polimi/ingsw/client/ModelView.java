@@ -13,86 +13,18 @@ import java.util.ArrayList;
 public class ModelView {
     private CLI cli;
     private GUI gui;
-    private VisualBoard visualBoard;
-    private Player currentPlayer;
-    private ArrayList<Player> players;
-    private UserAction destinationUserAction;
+
     private Answer serverAnswer;
     private boolean activeInput;
     private Game gameCopy;
     private String playerNickname;
-    private int yellow;
-    private int blue;
-    private int pink;
-    private int red;
-    private int green;
-
-    private UserAction lastUserAction;
-
-    public UserAction getDestinationUserAction() {
-        return destinationUserAction;
-    }
-
-    public void setDestinationUserAction(UserAction destinationUserAction) {
-        this.destinationUserAction = destinationUserAction;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
-    }
 
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
     }
+
     public boolean isActiveInput() {
         return activeInput;
-    }
-
-    public void setActiveInput(boolean activeInput) {
-        this.activeInput = activeInput;
-    }
-    public int getYellow() {
-        return yellow;
-    }
-    public void setYellow(int yellow) {
-        this.yellow = yellow;
-    }
-    public int getBlue() {
-        return blue;
-    }
-    public void setBlue(int blue) {
-        this.blue = blue;
-    }
-    public int getPink() {
-        return pink;
-    }
-    public void setPink(int pink) {
-        this.pink = pink;
-    }
-    public int getRed() {
-        return red;
-    }
-    public void setRed(int red) {
-        this.red = red;
-    }
-    public int getGreen() {
-        return green;
-    }
-    public void setGreen(int green) {
-        this.green = green;
-    }
-
-
-    public String getPlayerNickname() {
-        return playerNickname;
     }
 
     public String getWizardName() {
@@ -115,25 +47,11 @@ public class ModelView {
         this.cli = cli;
     }
 
-    public void setVisualBoard(VisualBoard visualBoard) {
-        this.visualBoard = visualBoard;
-    }
-
     private String wizardName;
     private boolean gameStarted;
 
-    public UserAction getLastUserAction() {
-        return lastUserAction;
-    }
-
-    public void setLastUserAction(UserAction lastUserAction) {
-        this.lastUserAction = lastUserAction;
-    }
-
-    public ModelView(CLI cli, VisualBoard visualBoard)  {
+    public ModelView(CLI cli)  {
         this.cli = cli;
-        this.gui = null;
-        this.visualBoard = visualBoard;
     }
 
     public ModelView(GUI gui) {
@@ -154,18 +72,6 @@ public class ModelView {
         return gameCopy;
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public VisualBoard getVisualBoard() {
-        return visualBoard;
-    }
-
-
-    public void setPlayerNickname(String playerNickname) {
-        this.playerNickname = playerNickname;
-    }
 
     public boolean getActiveInput() {
         return activeInput;
@@ -286,5 +192,9 @@ public class ModelView {
 
     public void setActivateInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;
+    }
+
+    public void setPlayerNickname(String userNickname) {
+        this.playerNickname = userNickname;
     }
 }
