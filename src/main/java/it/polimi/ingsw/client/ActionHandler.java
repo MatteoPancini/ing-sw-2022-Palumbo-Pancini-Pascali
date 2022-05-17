@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.cli.CLI;
+import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.servertoclient.*;
 
 import java.beans.PropertyChangeSupport;
@@ -7,6 +9,7 @@ import java.beans.PropertyChangeSupport;
 public class ActionHandler {
     private ModelView modelView;
     private CLI cli;
+    private GUI gui;
 
     private final PropertyChangeSupport view = new PropertyChangeSupport(this);
 
@@ -15,6 +18,12 @@ public class ActionHandler {
         this.cli = cli;
         this.modelView = modelView;
         view.addPropertyChangeListener(cli);
+    }
+
+    public ActionHandler(GUI gui, ModelView modelView) {
+        this.gui = gui;
+        this.modelView = modelView;
+        view.addPropertyChangeListener(gui);
     }
 
     //notifica la CLI con i listeners

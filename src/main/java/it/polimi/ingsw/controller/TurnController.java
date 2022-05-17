@@ -1,9 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.messages.clienttoserver.actions.Action;
-import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
-import it.polimi.ingsw.messages.servertoclient.GameCopy;
-import it.polimi.ingsw.messages.servertoclient.RequestAction;
+import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
@@ -473,9 +471,14 @@ public class TurnController {
         cloud.removeStudents();
 
         if(checkWin()) {
+            gameHandler.sendSinglePlayer(new WinNotification(), currentPlayer.getPlayerID());
+            gameHandler.sendExcept(new LoseNotification(currentPlayer.getNickname()), currentPlayer.getPlayerID());
             gameHandler.endGame();
         }
 
+        for(AssistantCard card : controller.getGame().getGameBoard().getLastAssistantUsed()) {
+            controller.getGame().getGameBoard().getLastAssistantUsed().remove(card);
+        }
         setCurrentPlayer();
 
         actionPhaseNum++;

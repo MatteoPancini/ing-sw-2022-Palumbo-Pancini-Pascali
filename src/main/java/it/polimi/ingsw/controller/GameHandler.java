@@ -31,6 +31,10 @@ public class GameHandler {
     private int currentPlayerId;
     private boolean isMatchStarted;
 
+    private Thread timeout;
+    private boolean activeTimeout = false;
+    private boolean restartGame = false;
+
 
     public GameHandler(Server server){
         game = new Game();
@@ -275,7 +279,20 @@ public class GameHandler {
 
 
         if(game.getActivePlayers().size() == 1) {
-            //TODO M: AGGIUNGI TIMEOUT, se getActivePlayers() continua a essere pari a 1, termina il gioco
+            startTimeoutGame();
+            while(activeTimeout) {
+                if(game.getActivePlayers().size() > 1) {
+                    restartGame = true;
+                    activeTimeout = false;
+                }
+            }
+
+            if(!restartGame) {
+                for(Player p : game.getActivePlayers()) {
+                    sendSinglePlayer(new DynamicAnswer("TIMEOUT EXPIRED! Game is finished!", false), p.getPlayerID());
+                }
+                endGame();
+            }
         }
 
     }
@@ -285,6 +302,21 @@ public class GameHandler {
             server.getVirtualClientFromID(game.getActivePlayers().get(0).getPlayerID()).getSocketClientConnection().closeConnection();
         }
 
+    }
+
+
+    public void startTimeoutGame() {
+        timeout = new Thread(() -> {
+            try{
+                for(int i = 1; i < 30000; i++) {
+                    Thread.sleep(1000);
+                }
+                this.activeTimeout = false;
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        timeout.start();
     }
 
 

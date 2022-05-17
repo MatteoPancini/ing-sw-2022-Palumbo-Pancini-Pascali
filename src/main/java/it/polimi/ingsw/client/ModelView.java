@@ -1,18 +1,16 @@
 
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.VisualBoard;
-import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
+import it.polimi.ingsw.client.cli.CLI;
+import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.MotherNature;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
-import java.util.ArrayList;
-
 public class ModelView {
     private CLI cli;
+    private GUI gui;
     private VisualBoard visualBoard;
     /* private Player currentPlayer;
     private ArrayList<Player> players;
@@ -132,7 +130,13 @@ public class ModelView {
 
     public ModelView(CLI cli, VisualBoard visualBoard)  {
         this.cli = cli;
+        this.gui = null;
         this.visualBoard = visualBoard;
+    }
+
+    public ModelView(GUI gui) {
+        this.gui = gui;
+        this.cli = null;
     }
 
 

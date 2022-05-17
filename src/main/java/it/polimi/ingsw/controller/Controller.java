@@ -37,6 +37,9 @@ public class Controller implements PropertyChangeListener {
             expertController = null;
     }
 
+    public Game getGame() {
+        return game;
+    }
 
     public void setPlayerWizard(int playerID, Wizards chosenWizard) {
         game.getPlayerByID(playerID).setWizard(chosenWizard);

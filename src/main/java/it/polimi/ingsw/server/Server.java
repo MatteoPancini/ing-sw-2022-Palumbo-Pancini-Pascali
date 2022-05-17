@@ -209,6 +209,10 @@ public class Server {
     }
 
     public static void main(String[] args) {
+        System.out.println(" ____  ____  ____    __    _  _  ____  _  _  ___    ___  ____  ____  _  _  ____  ____ \n" +
+                "( ___)(  _ \\(_  _)  /__\\  ( \\( )(_  _)( \\/ )/ __)  / __)( ___)(  _ \\( \\/ )( ___)(  _ \\\n" +
+                " )__)  )   / _)(_  /(__)\\  )  (   )(   \\  / \\__ \\  \\__ \\ )__)  )   / \\  /  )__)  )   /\n" +
+                "(____)(_)\\_)(____)(__)(__)(_)\\_) (__)  (__) (___/  (___/(____)(_)\\_)  \\/  (____)(_)\\_)");
         System.out.print("This is the Server of Eryantis: Welcome!");
         Scanner scanner = new Scanner(System.in);
 
