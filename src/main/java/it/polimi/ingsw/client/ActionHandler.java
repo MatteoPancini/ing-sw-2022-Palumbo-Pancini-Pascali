@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
@@ -136,5 +136,5 @@ public class ActionHandler {
         }
         return null;
     }
-*/
-}
+
+}*/

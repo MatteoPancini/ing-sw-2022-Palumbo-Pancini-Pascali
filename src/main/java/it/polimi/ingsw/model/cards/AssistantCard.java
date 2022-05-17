@@ -7,20 +7,19 @@ import com.google.gson.Gson;
 
 public class AssistantCard {
     private final Assistants name;
-    private int value = 0;
-    private int moves = 0;
+    private int orderValue;
+    private int motherNatureMoves;
     private Wizards wizard = null;
     private Player owner;
 
-    public AssistantCard(Assistants assistantName, int value, int moves, Wizards wizard) {
-        name = assistantName;
-        this.value = value;
-        this.moves = moves;
-        this.wizard = wizard;
+    public AssistantCard(Assistants name, int orderValue, int motherNatureMoves) {
+        this.name = name;
+        this.orderValue = orderValue;
+        this.motherNatureMoves = motherNatureMoves;
         owner = null;
     }
     //costruttore per la model view
-    public AssistantCard(Assistants assistantName, int value, int moves) {
+    /*public AssistantCard(Assistants assistantName, int value, int moves) {
         name = assistantName;
         this.value = value;
         this.moves = moves;
@@ -70,18 +69,18 @@ public class AssistantCard {
             this.moves = 3;
             this.value = 5;
         }
-    }
+    }*/
 
     public Assistants getName() {
         return name;
     }
 
     public int getValue() {
-        return value;
+        return orderValue;
     }
 
     public int getMoves() {
-        return moves;
+        return motherNatureMoves;
     }
 
     public Player getOwner() {
@@ -95,4 +94,6 @@ public class AssistantCard {
     public void setWizard(Wizards wizard) {
         this.wizard = wizard;
     }
+
+    public Wizards getWizard() { return wizard; }
 }

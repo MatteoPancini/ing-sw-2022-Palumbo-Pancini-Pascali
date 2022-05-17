@@ -8,23 +8,18 @@ import java.util.ArrayList;
 
 public class CharacterCard {
     private final Characters name;
-    private int cost;
+    private int initialCost;
     private final String effect;
     private ArrayList<Student> students = new ArrayList<Student>();
 
-    public CharacterCard(Characters name, String effect, int cost){
+    public CharacterCard(Characters name, String effect, int initialCost){
         this.name = name;
-        this.cost = cost;
+        this.initialCost = initialCost;
         this.effect = effect;
     }
 
-    public CharacterCard() {
-        name = null;
-        effect = null;
-    }
-
     public void incrementPrice(){
-        cost++;
+        initialCost++;
     }
 
     public Characters getName() {
@@ -40,5 +35,5 @@ public class CharacterCard {
         students.add(stud);
     }
 
+    public int getInitialCost(){ return initialCost; }
 }
-

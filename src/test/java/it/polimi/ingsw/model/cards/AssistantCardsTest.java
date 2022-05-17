@@ -24,8 +24,8 @@ public class AssistantCardsTest {
     private static AssistantCard assistant3;
 
     @Test
-    @DisplayName("Deck check")
-    void deckValueTest(){
+    @DisplayName("Deck test")
+    void deckTest(){
         assistant1 = new AssistantCard(Assistants.CAT, 3, 2);
         assistant2 = new AssistantCard(Assistants.ELEPHANT, 9, 5);
         assistant3 = new AssistantCard(Assistants.CHEETAH, 1, 1);

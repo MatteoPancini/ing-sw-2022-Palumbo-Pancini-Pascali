@@ -43,11 +43,12 @@ public class GameBoardTest {
     @Test
     @BeforeEach
     void createGame() {
-        game = new Game(3, false, players, players);
+        game = new Game();
         gameBTest = new GameBoard(game);
     }
 
     @Test
+    @DisplayName("Clouds setup")
     @BeforeEach
     void setupClouds() {
         cloud1 = new CloudTile(CloudSide.THREE);

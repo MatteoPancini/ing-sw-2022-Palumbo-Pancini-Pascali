@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -70,4 +70,4 @@ public class ServerListener implements Runnable {
             closeConnection();
         }
     }
-}
+}*/

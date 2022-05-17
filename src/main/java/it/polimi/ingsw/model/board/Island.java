@@ -144,6 +144,7 @@ public class Island {
 
     public void setTower(Tower tower) {
         this.tower = tower;
+        mergedTowers = new ArrayList<Tower>();
         mergedTowers.add(tower);
     }
 

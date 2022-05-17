@@ -119,11 +119,11 @@ public class SchoolBoardTest {
     @Test
     @DisplayName("Dining room test")
     void diningRoomTest(){
-        assertEquals(PawnType.BLUE, schoolBTest.getDiningRoom().getDiningRoom().get(0).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.GREEN, schoolBTest.getDiningRoom().getDiningRoom().get(1).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.PINK, schoolBTest.getDiningRoom().getDiningRoom().get(2).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.RED, schoolBTest.getDiningRoom().getDiningRoom().get(3).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.YELLOW, schoolBTest.getDiningRoom().getDiningRoom().get(4).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.GREEN, schoolBTest.getDiningRoom().getDiningRoom().get(0).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.RED, schoolBTest.getDiningRoom().getDiningRoom().get(1).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.YELLOW, schoolBTest.getDiningRoom().getDiningRoom().get(2).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.PINK, schoolBTest.getDiningRoom().getDiningRoom().get(3).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.BLUE, schoolBTest.getDiningRoom().getDiningRoom().get(4).getTable().get(0).getBoardCellType());
     }
 
     @Test

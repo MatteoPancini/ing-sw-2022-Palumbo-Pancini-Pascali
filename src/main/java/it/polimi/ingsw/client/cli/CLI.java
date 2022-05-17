@@ -1,6 +1,6 @@
-package it.polimi.ingsw.client.cli;
+package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.*;
+import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.ExpertModeChoice;
 import it.polimi.ingsw.messages.clienttoserver.PlayersNumberChoice;
@@ -539,5 +539,3 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
 }
-
-

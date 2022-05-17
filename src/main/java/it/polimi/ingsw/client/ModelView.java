@@ -1,5 +1,4 @@
-
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
@@ -14,7 +13,7 @@ public class ModelView {
     private VisualBoard visualBoard;
     /* private Player currentPlayer;
     private ArrayList<Player> players;
-    private UserAction destinationUserAction;*/
+    private UserAction destinationUserAction;
     private Answer serverAnswer;
     private boolean activeInput;
     private Game gameCopy;
@@ -45,7 +44,7 @@ public class ModelView {
 
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
-    }*/
+    }
 
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
@@ -53,7 +52,7 @@ public class ModelView {
     public boolean isActiveInput() {
         return activeInput;
     }
-    /*
+
     public void setActiveInput(boolean activeInput) {
         this.activeInput = activeInput;
     }
@@ -88,7 +87,7 @@ public class ModelView {
         this.green = green;
     }
 
-     */
+
     public String getPlayerNickname() {
         return playerNickname;
     }
@@ -126,7 +125,7 @@ public class ModelView {
 
     public void setLastUserAction(UserAction lastUserAction) {
         this.lastUserAction = lastUserAction;
-    } */
+    }
 
     public ModelView(CLI cli, VisualBoard visualBoard)  {
         this.cli = cli;
@@ -159,7 +158,7 @@ public class ModelView {
     public VisualBoard getVisualBoard() {
         return visualBoard;
     }
-    */
+
 
     public void setPlayerNickname(String playerNickname) {
         this.playerNickname = playerNickname;
@@ -285,4 +284,4 @@ public class ModelView {
     public void setActivateInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;
     }
-}
+}*/
