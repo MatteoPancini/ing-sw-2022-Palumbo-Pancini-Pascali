@@ -13,3 +13,11 @@ target/
 out/
 *.iml
 src/**/META-INF
+
+/*
+!.gitignore
+!README.md
+!pom.xml
+!resources/
+!src/
+!javadoc/
