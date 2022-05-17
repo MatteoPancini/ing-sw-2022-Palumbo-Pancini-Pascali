@@ -1,4 +1,4 @@
-/*package it.polimi.ingsw.client;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
@@ -28,6 +28,7 @@ public class InputChecker {
         return clientConnection;
     }
 
+    /*
     //prende in input i chosen values e ritorna una UserAction da inviare al server
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
         PickAssistant action;
@@ -106,6 +107,8 @@ public class InputChecker {
         }
         return action;
     }
+
+     */
 
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
@@ -236,4 +239,4 @@ public class InputChecker {
         System.err.println("Disconnected from the server.");
         System.exit(0);
     }
-}*/
+}

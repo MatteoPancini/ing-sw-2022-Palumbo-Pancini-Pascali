@@ -1,6 +1,7 @@
-/*package it.polimi.ingsw.client;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickDestination;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 
 import java.beans.PropertyChangeEvent;
@@ -27,6 +28,7 @@ public class Parser implements PropertyChangeListener {
     }
 
 
+
     public UserAction parseAssistant(String input) throws AlreadyPlayedAssistantException {
         UserAction message = null;
         try {
@@ -45,7 +47,7 @@ public class Parser implements PropertyChangeListener {
 
     public UserAction parseDestination(String input) {
         UserAction message = inputChecker.checkDestination(input);
-        /*modelView.setDestinationUserAction(message);
+        modelView.setDestinationUserAction(message);
         Object dest = ((PickDestination) modelView.getDestinationUserAction()).getDestination();
         ((PickDestination) modelView.getDestinationUserAction()).setDestination(dest);
         return message;
@@ -125,4 +127,4 @@ public class Parser implements PropertyChangeListener {
             }
         }
     }
-}*/
+}

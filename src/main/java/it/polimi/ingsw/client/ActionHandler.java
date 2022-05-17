@@ -1,8 +1,12 @@
-/*package it.polimi.ingsw.client;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
+import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
+import it.polimi.ingsw.model.board.Student;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.player.Table;
 
 import java.beans.PropertyChangeSupport;
 
@@ -90,9 +94,9 @@ public class ActionHandler {
 
 
 
-
-    /*public void updateStudentMove(String student, String dest) {
-        if(((PickDestination) modelView.getDestinationUserAction()).getChosenIsland()==-1) {
+/*
+    public void updateStudentMove(String student, String dest) {
+        if(((PickDestination) modelView.getDestinationUserAction()).getChosenIsland() == -1) {
             for(Table t : modelView.getVisualBoard().getDiningRoom().getDiningRoom()) {
                 if(t.getColor().equals(((PickStudent) modelView.getLastUserAction()).getChosenStudent())) {
                     t.addStudent(((PickStudent) modelView.getLastUserAction()).getChosenStudent());
@@ -137,4 +141,6 @@ public class ActionHandler {
         return null;
     }
 
-}*/
+ */
+
+}

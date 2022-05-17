@@ -1,24 +1,27 @@
-/*package it.polimi.ingsw.client;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
+import java.util.ArrayList;
+
 public class ModelView {
     private CLI cli;
     private GUI gui;
     private VisualBoard visualBoard;
-    /* private Player currentPlayer;
+    private Player currentPlayer;
     private ArrayList<Player> players;
     private UserAction destinationUserAction;
     private Answer serverAnswer;
     private boolean activeInput;
     private Game gameCopy;
     private String playerNickname;
-    /*private int yellow;
+    private int yellow;
     private int blue;
     private int pink;
     private int red;
@@ -34,7 +37,7 @@ public class ModelView {
         this.destinationUserAction = destinationUserAction;
     }
 
-    /*public void setCurrentPlayer(Player currentPlayer) {
+    public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -119,7 +122,7 @@ public class ModelView {
     private String wizardName;
     private boolean gameStarted;
 
-    /* public UserAction getLastUserAction() {
+    public UserAction getLastUserAction() {
         return lastUserAction;
     }
 
@@ -151,7 +154,7 @@ public class ModelView {
         return gameCopy;
     }
 
-    /* public Player getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -284,4 +287,4 @@ public class ModelView {
     public void setActivateInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;
     }
-}*/
+}
