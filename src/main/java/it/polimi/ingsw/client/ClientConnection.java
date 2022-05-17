@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 
 import it.polimi.ingsw.constants.Constants;
@@ -122,6 +122,4 @@ public class ClientConnection {
 
 
 
-}
-
-
+}*/

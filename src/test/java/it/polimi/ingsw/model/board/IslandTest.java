@@ -33,7 +33,7 @@ public class IslandTest {
     @Test
     @BeforeEach
     void setupGame(){
-        game = new Game(3, false, players, players);
+        game = new Game();
     }
 
 /*    @Test

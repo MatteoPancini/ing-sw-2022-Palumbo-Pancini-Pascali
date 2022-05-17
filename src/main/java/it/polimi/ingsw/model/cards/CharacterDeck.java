@@ -22,7 +22,7 @@ public class CharacterDeck {
         throw new IllegalStateException();
     }
 
-    public List<CharacterCard> parseCharacterCards(Game game) {
+    public CharacterDeck(Game game) {
         this.game = game;
 
         try{
@@ -31,7 +31,7 @@ public class CharacterDeck {
             String data = myReader.nextLine();
 
             Gson gson = new Gson();
-            Type userListType = new TypeToken<ArrayList<AssistantCard>>(){}.getType();
+            Type userListType = new TypeToken<ArrayList<CharacterCard>>(){}.getType();
             cards = gson.fromJson(data, userListType);
 
             myReader.close();
@@ -57,8 +57,6 @@ public class CharacterDeck {
                 }
             }
         }
-
-        return cards;
     }
 
     public static List<CharacterCard> getPlayableCards(){
@@ -71,5 +69,9 @@ public class CharacterDeck {
         }
 
         return playableCards;
+    }
+
+    public List<CharacterCard> getDeck(){
+        return cards;
     }
 }

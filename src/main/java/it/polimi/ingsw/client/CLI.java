@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.DuplicateNicknameException;
@@ -538,6 +538,4 @@ public class CLI implements Runnable, ListenerInterface {
             default -> out.println("Unknown answer from server");
         }
     }
-}
-
-
+}*/

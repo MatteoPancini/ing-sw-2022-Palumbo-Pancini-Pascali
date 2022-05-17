@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.messages.servertoclient.*;
 
@@ -127,5 +127,5 @@ public class ActionHandler {
         }
         return null;
     }
-*/
-}
+
+}*/

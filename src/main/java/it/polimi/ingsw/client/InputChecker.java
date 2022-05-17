@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+/*package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.QuitGame;
@@ -238,4 +238,4 @@ public class InputChecker {
         System.err.println("Disconnected from the server.");
         System.exit(0);
     }
-}
+}*/

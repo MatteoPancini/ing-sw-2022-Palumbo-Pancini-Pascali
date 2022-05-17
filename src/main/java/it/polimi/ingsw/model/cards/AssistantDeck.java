@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AssistantDeck {
-    //this class is used to parse the JSON file (containing the informations about characters card)
     private static List<AssistantCard> deck = new ArrayList<AssistantCard>();
     public AssistantDeck(Wizards wizard) {
         try{
