@@ -24,7 +24,6 @@ import it.polimi.ingsw.model.player.Table;
 
 import java.beans.PropertyChangeEvent;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -39,21 +38,16 @@ import static it.polimi.ingsw.constants.Constants.*;
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
-    private Parser parser;
-    private String chosenWizard;
-    private String chosenNickname;
-    private String chosenMoves;
     private String chosenAssistant;
     private String chosenCloud;
     private String chosenStudent;
     private String chosenDestination;
     private String chosenIsland;
-    private String chosenTeam;
-    private String chosenCharacter;
+    //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
-    private boolean activeGame;
-    private ActionHandler actionHandler;
+    private final boolean activeGame;
+    private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
 
     public CLI() {
@@ -77,9 +71,11 @@ public class CLI implements Runnable, ListenerInterface {
     public ModelView getModelView() {
         return modelView;
     }
-    public Parser getParser() {
+    /*public Parser getParser() {
         return parser;
     }
+
+     */
     public PrintStream getOutput() {
         return out;
     }
@@ -174,6 +170,7 @@ public class CLI implements Runnable, ListenerInterface {
         out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
                 + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
     }
+
     public void showIslands() {
         out.println(">Here's a little description of the islands in the game board: ");
         for (Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
@@ -340,7 +337,10 @@ public class CLI implements Runnable, ListenerInterface {
         showMotherNature();
         out.println(">Pick a number of mother nature moves between 1 and "
                 + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
-        chosenMoves = in.next();
+        //private Parser parser;
+        //private String chosenWizard;
+        //private String chosenNickname;
+        String chosenMoves = in.next();
         virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
     }
 
@@ -391,7 +391,7 @@ public class CLI implements Runnable, ListenerInterface {
     public void askCharacterCard(CharacterDeck cards) {
         out.println(">Type the name of the character card you want to play: ");
         showCharactersDescription();
-        chosenCharacter = in.next();
+        String chosenCharacter = in.next();
         virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
     }
 
@@ -435,11 +435,7 @@ public class CLI implements Runnable, ListenerInterface {
             }
         }
     }
-    public void actionsLoop() {
-        in.reset();
-        String cmd = in.nextLine();
-        virtualClient.firePropertyChange("Action", null, cmd);
-    }
+
 
     public void choosePlayerNumber() {
         System.out.println("Sono in choosePlayerNumber");
@@ -478,12 +474,12 @@ public class CLI implements Runnable, ListenerInterface {
         out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
     }
     public void userNicknameSetup() {
-        System.out.println("Entro in usernameSetup");
+        //System.out.println("Entro in usernameSetup");
 
         String userNickname = null;
         boolean nickCheck = false;
 
-        while (nickCheck == false) {
+        while (!nickCheck) {
             do {
                 out.println(">Please, insert your nickname: ");
                 out.print(">");
@@ -513,12 +509,19 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
     }
 
+    public void actionsLoop() {
+        in.reset();
+        String cmd = in.nextLine();
+        virtualClient.firePropertyChange("action", null, cmd);
+    }
+
     @Override
     public void run() {
-        System.out.println("Entro in run");
+        //System.out.println("Entro in run");
 
         userNicknameSetup();
         while (isActiveGame()) {
+            //TODO: QUESTA PARTE E' DA CAMBIARE
             if(modelView.isGameStarted()) {
                 System.out.println("Entro dentro all'action");
                 actionsLoop();
@@ -531,6 +534,7 @@ public class CLI implements Runnable, ListenerInterface {
     public boolean isActiveGame() {
         return activeGame;
     }
+
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
         switch(serverCommand) {
@@ -594,10 +598,8 @@ public class CLI implements Runnable, ListenerInterface {
                 //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
             }
-            case "DynamicAnswer" -> {
-                //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
-                showServerMessage(modelView.getServerAnswer());
-            }
+            case "DynamicAnswer" -> //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
+                    showServerMessage(modelView.getServerAnswer());
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);

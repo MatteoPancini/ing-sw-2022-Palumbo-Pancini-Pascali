@@ -96,6 +96,7 @@ public class Parser implements PropertyChangeListener {
             }
 
         }
+
         if(action!=null) {
             connectionSocket.sendUserInput(action);
             return true;

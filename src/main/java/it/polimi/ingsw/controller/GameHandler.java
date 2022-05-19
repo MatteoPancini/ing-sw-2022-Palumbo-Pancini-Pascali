@@ -6,8 +6,6 @@ import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
-import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
-import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Wizards;
@@ -213,7 +211,8 @@ public class GameHandler {
         sendBroadcast(new DynamicAnswer("Game is started", false));
         Random randomGenerator = new Random();
         game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
-        controller.setupGame();
+        System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
+        controller.newSetupGame();
     }
         /*
 

@@ -8,10 +8,10 @@ import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
 
 public class ServerListener implements Runnable {
-    private Socket socket;
-    private ModelView modelView;
-    private ObjectInputStream objectInputStream;
-    private ActionHandler actionHandler;
+    private final Socket socket;
+    private final ModelView modelView;
+    private final ObjectInputStream objectInputStream;
+    private final ActionHandler actionHandler;
     private boolean activeConnection;
 
 

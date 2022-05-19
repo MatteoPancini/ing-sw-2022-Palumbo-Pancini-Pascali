@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import it.polimi.ingsw.model.cards.*;
@@ -15,6 +16,7 @@ public class GameBoard {
     private CharacterDeck playableCharacters = null;
     private ArrayList<AssistantCard> lastAssistantUsed;
     private ArrayList<Student> studentsBag;
+    private ArrayList<Student>  setupStudentsBag;
 
     public GameBoard (Game game) {
         this.game = game;
@@ -41,9 +43,13 @@ public class GameBoard {
         }
 
         studentsBag = new ArrayList<Student>();
+        setupStudentsBag = new ArrayList<>();
         for (PawnType p : pawns) {
-            for (int k = 1; k <= 26; k++) {
+            for(int k = 1; k <= 24; k++) {
                 studentsBag.add(new Student(p));
+            }
+            for(int l = 1; l <=2; l++) {
+                setupStudentsBag.add(new Student(p));
             }
         }
 
@@ -71,6 +77,12 @@ public class GameBoard {
 
     public void removeStudents(int index){ studentsBag.remove(index); }
 
+    public void removeSetupStudents(int index) {
+        setupStudentsBag.remove(index);
+    }
+
+
+
     public ArrayList<CloudTile> getClouds() {
         return clouds;
     }
@@ -86,6 +98,10 @@ public class GameBoard {
             }
         }
         return null;
+    }
+
+    public ArrayList<Student> getSetupStudentsBag() {
+        return setupStudentsBag;
     }
 
     public ArrayList<Island> getIslands() {

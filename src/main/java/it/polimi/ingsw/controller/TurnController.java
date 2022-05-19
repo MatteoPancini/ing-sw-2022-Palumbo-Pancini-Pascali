@@ -16,9 +16,9 @@ import java.util.Collections;
 
 
 public class TurnController {
-    private Controller controller;
+    private final Controller controller;
 
-    private GameHandler gameHandler;
+    private final GameHandler gameHandler;
 
     private Player currentPlayer;
 
@@ -100,6 +100,7 @@ public class TurnController {
     }
 
     public void startPianificationPhase() {
+        System.out.println("Start Pianification Phase");
         setPianificationPhase();
 
         gameHandler.sendBroadcast(new DynamicAnswer(" ___  _   _   _  _  _  ___  _   __   _  ___  _   _   _  _   ___  _ _   _   __  ___ \n" +
@@ -171,16 +172,16 @@ public class TurnController {
     }
 
     public void putStudentsOnCloud() {
-        for (CloudTile cloud : gameHandler.getGame().getGameBoard().getClouds()) {
+        for (CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
             ArrayList<Student> newStudents = new ArrayList<>();
-            Collections.shuffle(gameHandler.getGame().getGameBoard().getStudentsBag());
+            Collections.shuffle(controller.getGame().getGameBoard().getStudentsBag());
             int studentsNumber;
-            if(gameHandler.getGame().getPlayersNumber() == 3) studentsNumber = 4;
+            if(controller.getGame().getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
-                newStudents.add(gameHandler.getGame().getGameBoard().getStudentsBag().get(0));
+                newStudents.add(controller.getGame().getGameBoard().getStudentsBag().get(0));
                 //newStudents.get(j) = gameHandler.getGame().getGameBoard().getStudentsBag().get(0);
-                gameHandler.getGame().getGameBoard().removeStudents(0);
+                controller.getGame().getGameBoard().removeStudents(0);
             }
             cloud.setStudents(newStudents);
         }
@@ -188,7 +189,7 @@ public class TurnController {
 
 
     public void askAssistantCard() {
-        if(gameHandler.getGame().getGameBoard().getLastAssistantUsed().size() != gameHandler.getGame().getActivePlayers().size()) {
+        if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
             setCurrentPlayer();
 
             RequestAction assistantAction = new RequestAction(Action.PICK_ASSISTANT);
@@ -196,13 +197,13 @@ public class TurnController {
             gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing an assistant card!", false), currentPlayer.getPlayerID());
         } else {
             //riordina per ogni assistantCard giocata anche gli active players
-            for(int i = 0; i < gameHandler.getGame().getActivePlayers().size(); i++) {
-                gameHandler.getGame().getActivePlayers().set(i, gameHandler.getGame().getGameBoard().getLastAssistantUsed().get(i).getOwner());
+            for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
+                controller.getGame().getActivePlayers().set(i, controller.getGame().getGameBoard().getLastAssistantUsed().get(i).getOwner());
             }
 
             resetPianificationPhase();
 
-            GameCopy gameCopy = new GameCopy(gameHandler.getGame());
+            GameCopy gameCopy = new GameCopy(controller.getGame());
             gameHandler.sendBroadcast(gameCopy);
 
             startActionPhase();
@@ -211,8 +212,8 @@ public class TurnController {
     }
 
     public void setCurrentPlayer() {
-        gameHandler.getGame().switchToNextPlayer();
-        this.currentPlayer = gameHandler.getGame().getCurrentPlayer();
+        controller.getGame().switchToNextPlayer();
+        this.currentPlayer = controller.getGame().getCurrentPlayer();
         gameHandler.setCurrentPlayerId(currentPlayer.getPlayerID());
 
     }
@@ -225,19 +226,19 @@ public class TurnController {
 
     public void playAssistantCard(AssistantCard cardPlayed) {
 
-        if(gameHandler.getGame().canPlayAssistant(cardPlayed.getName())) {
-            gameHandler.getGame().getGameBoard().getLastAssistantUsed().add(cardPlayed);
-            gameHandler.getGame().getCurrentPlayer().getAssistantDeck().removeCard(cardPlayed);
+        if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
+            controller.getGame().getGameBoard().getLastAssistantUsed().add(cardPlayed);
+            controller.getGame().getCurrentPlayer().getAssistantDeck().removeCard(cardPlayed);
 
 
             //ordino
-            for(int j = 0; j < gameHandler.getGame().getGameBoard().getLastAssistantUsed().size(); j++) {
+            for(int j = 0; j < controller.getGame().getGameBoard().getLastAssistantUsed().size(); j++) {
                 boolean flag = false;
-                for (int k = 0; k < gameHandler.getGame().getGameBoard().getLastAssistantUsed().size() - 1; k++) {
-                    if (gameHandler.getGame().getGameBoard().getLastAssistantUsed().get(j).getValue() > gameHandler.getGame().getGameBoard().getLastAssistantUsed().get(j + 1).getValue()) {
-                        AssistantCard ac = gameHandler.getGame().getGameBoard().getLastAssistantUsed().get(j);
-                        gameHandler.getGame().getGameBoard().setLastAssistantUsed(j, gameHandler.getGame().getGameBoard().getLastAssistantUsed().get(j + 1));
-                        gameHandler.getGame().getGameBoard().setLastAssistantUsed(j + 1, ac);
+                for (int k = 0; k < controller.getGame().getGameBoard().getLastAssistantUsed().size() - 1; k++) {
+                    if (controller.getGame().getGameBoard().getLastAssistantUsed().get(j).getValue() > controller.getGame().getGameBoard().getLastAssistantUsed().get(j + 1).getValue()) {
+                        AssistantCard ac = controller.getGame().getGameBoard().getLastAssistantUsed().get(j);
+                        controller.getGame().getGameBoard().setLastAssistantUsed(j, controller.getGame().getGameBoard().getLastAssistantUsed().get(j + 1));
+                        controller.getGame().getGameBoard().setLastAssistantUsed(j + 1, ac);
                         flag = true;
                     }
                 }
@@ -254,7 +255,7 @@ public class TurnController {
         int currentPlayerStudents = 0;
         int professorWinnerId = 0;
 
-        for(Player p : gameHandler.getGame().getActivePlayers()) {
+        for(Player p : controller.getGame().getActivePlayers()) {
             for(int i = 0; i < 5; i++) {
                 if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getColor() == studentToMove.getType()) {
                     if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().size() > currentPlayerStudents) {
@@ -265,10 +266,10 @@ public class TurnController {
         }
 
         if(currentPlayer.getPlayerID() == professorWinnerId) {
-            for(Player p : gameHandler.getGame().getActivePlayers()) {
+            for(Player p : controller.getGame().getActivePlayers()) {
                 if(p.getBoard().getProfessorTable().getCellByColor(studentToMove.getType()) != null && p.getPlayerID() != currentPlayer.getPlayerID()) {
                     p.getBoard().getProfessorTable().getCellByColor(studentToMove.getType()).resetProfessor();
-                    currentPlayer.getBoard().getProfessorTable().getCellByColor(studentToMove.getType()).setProfessor(gameHandler.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()));
+                    currentPlayer.getBoard().getProfessorTable().getCellByColor(studentToMove.getType()).setProfessor(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()));
                 }
             }
 
@@ -329,9 +330,9 @@ public class TurnController {
 
 
     public void moveMotherNature(int moves) {
-        int currPosition = gameHandler.getGame().getGameBoard().getMotherNature().getPosition();
+        int currPosition = controller.getGame().getGameBoard().getMotherNature().getPosition();
         int newPosition = (currPosition + moves) % 12;
-        gameHandler.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
+        controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
 
         checkIslandInfluence(newPosition);
 
@@ -350,17 +351,17 @@ public class TurnController {
         }
 
          */
-        for(Student student : gameHandler.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
+        for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
-            Player studentOwner = gameHandler.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
+            Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
             studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
 
         }
 
-        TowerColor towerColor = gameHandler.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
-        for(Player p : gameHandler.getGame().getActivePlayers()) {
+        TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
+        for(Player p : controller.getGame().getActivePlayers()) {
             if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
-                p.setIslandInfluence(p.getIslandInfluence() + gameHandler.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size());
+                p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size());
             }
         }
 
@@ -369,7 +370,7 @@ public class TurnController {
         int islandInfluence = 0;
 
 
-        for(Player player : gameHandler.getGame().getActivePlayers()) {
+        for(Player player : controller.getGame().getActivePlayers()) {
             if(player.getIslandInfluence() > islandInfluence || (player.getBoard().getTowerArea().getTowerArea().get(0).getColor() == gameHandler.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) && player.getIslandInfluence() >= islandInfluence) {
                 islandInfluence = player.getIslandInfluence();
             }
@@ -377,25 +378,25 @@ public class TurnController {
 
         if(currentPlayer.getIslandInfluence() == islandInfluence) {
             //controllare che non abbia già costruito
-            if(gameHandler.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() != null) {
+            if(controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() != null) {
                 //aggiunge torre ev
-                currentPlayer.getBoard().getTowerArea().moveTowerToIsland(gameHandler.getGame().getGameBoard().getIslandById(islandId));
+                currentPlayer.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslandById(islandId));
             } else {
-                for(Player p : gameHandler.getGame().getActivePlayers()) {
-                    if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == gameHandler.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
-                        gameHandler.getGame().getGameBoard().getIslandById(islandId).moveTowerToArea(p.getBoard().getTowerArea());
+                for(Player p : controller.getGame().getActivePlayers()) {
+                    if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
+                        controller.getGame().getGameBoard().getIslandById(islandId).moveTowerToArea(p.getBoard().getTowerArea());
                         break;
                     }
                 }
-                currentPlayer.getBoard().getTowerArea().moveTowerToIsland(gameHandler.getGame().getGameBoard().getIslandById(islandId));
+                currentPlayer.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslandById(islandId));
 
             }
 
-            if(gameHandler.getGame().getGameBoard().getIslandById(islandId).hasLeft()) {
-                gameHandler.getGame().getGameBoard().getIslandById(islandId).merge(gameHandler.getGame().getGameBoard().getIslandById(islandId - 1));
+            if(controller.getGame().getGameBoard().getIslandById(islandId).hasLeft()) {
+                controller.getGame().getGameBoard().getIslandById(islandId).merge(controller.getGame().getGameBoard().getIslandById(islandId - 1));
             }
-            if(gameHandler.getGame().getGameBoard().getIslandById(islandId).hasRight()) {
-                gameHandler.getGame().getGameBoard().getIslandById(islandId).merge(gameHandler.getGame().getGameBoard().getIslandById(islandId + 1));
+            if(controller.getGame().getGameBoard().getIslandById(islandId).hasRight()) {
+                controller.getGame().getGameBoard().getIslandById(islandId).merge(controller.getGame().getGameBoard().getIslandById(islandId + 1));
             }
 
         }
@@ -486,11 +487,11 @@ public class TurnController {
     }
 
     public boolean checkWin() {
-        if(gameHandler.getGame().getGameBoard().getIslands().size() == 3){
+        if(controller.getGame().getGameBoard().getIslands().size() == 3){
             return true;
         }
 
-        for(Player p: gameHandler.getGame().getActivePlayers()){
+        for(Player p: controller.getGame().getActivePlayers()){
             if(p.getBoard().getTowerArea().getTowerArea().size() == 0) return true;
             if(p.getAssistantDeck().getDeck().size() == 0) return true;
         }
