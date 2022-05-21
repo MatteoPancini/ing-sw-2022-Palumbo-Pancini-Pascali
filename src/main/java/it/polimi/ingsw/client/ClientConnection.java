@@ -98,7 +98,7 @@ public class ClientConnection {
     public void sendUserInput(Message message) {
         SerializedMessage userInput = new SerializedMessage(message);
         try {
-            System.out.println("Invio messaggio al server: " + userInput.message.toString());
+            //System.out.println("Invio messaggio al server: " + userInput.message.toString());
             outputStream.reset();
             outputStream.writeObject(userInput);
             outputStream.flush();

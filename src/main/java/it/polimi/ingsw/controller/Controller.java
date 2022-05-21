@@ -14,6 +14,7 @@ import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -110,9 +111,8 @@ public class Controller implements PropertyChangeListener {
         }
         System.out.println("metto madre natura");
 
-        //TODO: QUESTA COSA NON FUNZIONA
         int maximum = 11;
-        Random r = new Random();
+        SecureRandom r = new SecureRandom();
         game.getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
         //int n = 1;
         int mnPos = game.getGameBoard().getMotherNature().getPosition();
@@ -131,7 +131,6 @@ public class Controller implements PropertyChangeListener {
 
             if(s != mnPos && s != mnPosOpposite) {
                 //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
-                //TODO: SI STA AGGIUNGENDO STUDENTI A CASO: DEVONO ESSERE 2 PER COLORE
                 Collections.shuffle(game.getGameBoard().getSetupStudentsBag());
                 game.getGameBoard().getIslands().get(s - 1).addStudent(game.getGameBoard().getSetupStudentsBag().get(0));
                 game.getGameBoard().removeSetupStudents(0);

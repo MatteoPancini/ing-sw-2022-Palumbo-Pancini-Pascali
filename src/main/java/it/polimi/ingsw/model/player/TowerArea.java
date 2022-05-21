@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 
-public class TowerArea {
+public class TowerArea implements Serializable {
     private ArrayList<Tower> myTowers = new ArrayList<Tower>();
 
     public TowerArea () {

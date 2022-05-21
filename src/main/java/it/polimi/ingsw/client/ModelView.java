@@ -15,9 +15,10 @@ public class ModelView {
     private GUI gui;
 
     private Answer serverAnswer;
-    private boolean activeInput;
+    private boolean activeInput = false;
     private Game gameCopy;
     private String playerNickname;
+    private boolean startPlaying = false;
 
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
@@ -25,6 +26,14 @@ public class ModelView {
 
     public boolean isActiveInput() {
         return activeInput;
+    }
+
+    public void setStartPlaying(boolean startPlaying) {
+        this.startPlaying = startPlaying;
+    }
+
+    public boolean isStartPlaying() {
+        return startPlaying;
     }
 
     public String getWizardName() {

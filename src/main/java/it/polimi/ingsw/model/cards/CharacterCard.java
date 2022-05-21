@@ -4,9 +4,10 @@ package it.polimi.ingsw.model.cards;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.Characters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CharacterCard {
+public class CharacterCard implements Serializable {
     private final Characters name;
     private int initialCost;
     private final String effect;

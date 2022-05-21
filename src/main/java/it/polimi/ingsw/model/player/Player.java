@@ -3,7 +3,9 @@ import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Wizards;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private String nicknamePlayer;
     private int playerID;
     private Wizards wizard;

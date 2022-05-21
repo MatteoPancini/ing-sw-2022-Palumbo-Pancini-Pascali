@@ -4,7 +4,9 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 
 import it.polimi.ingsw.model.player.Player;
 
-public class Professor {
+import java.io.Serializable;
+
+public class Professor implements Serializable {
     private final PawnType type;
     private Player owner;
 

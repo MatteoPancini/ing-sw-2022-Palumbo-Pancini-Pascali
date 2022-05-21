@@ -5,7 +5,9 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import com.google.gson.Gson;
 
-public class AssistantCard {
+import java.io.Serializable;
+
+public class AssistantCard implements Serializable {
     private final Assistants name;
     private int orderValue;
     private int motherNatureMoves;

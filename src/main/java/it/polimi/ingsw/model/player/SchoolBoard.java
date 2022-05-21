@@ -3,7 +3,9 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Student;
 
-public class SchoolBoard {
+import java.io.Serializable;
+
+public class SchoolBoard implements Serializable {
     private int boardID;
     private DiningRoom diningRoom;
     private Entrance entrance;

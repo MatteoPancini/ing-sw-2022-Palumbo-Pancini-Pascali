@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.player;
 
-public class ExpertPlayer extends Player {
+import java.io.Serializable;
+
+public class ExpertPlayer extends Player implements Serializable {
     private int myCoins;
 
     public ExpertPlayer(String name, int playerID) {

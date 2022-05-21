@@ -6,9 +6,10 @@ import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.player.Player;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable {
     private final GameBoard gameBoard;
     private int playersNumber;
     private  boolean expertMode;

@@ -4,9 +4,10 @@ import it.polimi.ingsw.model.board.Professor;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BoardCell {
+public class BoardCell implements Serializable {
     private PawnType boardCellType;
     private boolean coinCell;
     private Student student;

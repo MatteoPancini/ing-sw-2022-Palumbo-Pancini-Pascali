@@ -33,7 +33,7 @@ public class ActionHandler {
     //notifica la CLI con i listeners
     public void answerHandler() {
         Answer answer = modelView.getServerAnswer();
-        System.out.println("Analizzo la server answer: " + answer.getMessage());
+        //System.out.println("Analizzo la server answer: " + answer.getMessage());
         if (answer instanceof NumOfPlayerRequest) {
             view.firePropertyChange("InitialGamePhase", null, "RequestPlayerNumber");
         } else if (answer instanceof WizardAnswer) {
@@ -52,6 +52,10 @@ public class ActionHandler {
             view.firePropertyChange("ActionPhase", null, actionType);
         } else if (answer instanceof GameCopy) {
             view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+        } else if(answer instanceof StartAction) {
+            modelView.setStartPlaying(true);
+        } else if(answer instanceof EndAction) {
+            modelView.setStartPlaying(false);
         }
     }
 
@@ -65,27 +69,35 @@ public class ActionHandler {
         switch (serverCommand) {
             case "PICKASSISTANT" -> {
                 cli.askAssistant(modelView.getGameCopy().getCurrentPlayer().getAssistantDeck());
+
             }
             case "PICKCLOUD" -> {
                 cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+
             }
             case "PICKDESTINATION" -> {
                 cli.askDestination();
             }
             case "PICKSTUDENT" -> {
                 cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+
             }
             case "PICKMOVESNUMBER" -> {
                 cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
+
             }
             case "PICKCHARACTER" -> {
                 cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+
             }
             case "PICKISLAND" -> {
                 cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+
             }
             default -> {
                 cli.showError("Error: no such action");
+                modelView.setActivateInput(false);
+
             }
         }
     }

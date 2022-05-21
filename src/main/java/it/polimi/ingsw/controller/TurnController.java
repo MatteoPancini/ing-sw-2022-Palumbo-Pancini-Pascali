@@ -109,6 +109,8 @@ public class TurnController {
                 "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
                 "                                                                                   ", false));
 
+        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
+
         putStudentsOnCloud();
 
         askAssistantCard();
@@ -136,6 +138,7 @@ public class TurnController {
             startPianificationPhase();
         } else {
             setActionPhase();
+            gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
 
             studentRequest = 0;
 
@@ -191,6 +194,7 @@ public class TurnController {
     public void askAssistantCard() {
         if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
             setCurrentPlayer();
+            gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
 
             RequestAction assistantAction = new RequestAction(Action.PICK_ASSISTANT);
             gameHandler.sendSinglePlayer(assistantAction, currentPlayer.getPlayerID());
@@ -244,6 +248,7 @@ public class TurnController {
                 }
                 if (!flag) break;
             }
+            gameHandler.sendSinglePlayer(new EndAction(), currentPlayer.getPlayerID());
 
             askAssistantCard();
         }
@@ -480,7 +485,9 @@ public class TurnController {
         for(AssistantCard card : controller.getGame().getGameBoard().getLastAssistantUsed()) {
             controller.getGame().getGameBoard().getLastAssistantUsed().remove(card);
         }
+        gameHandler.sendSinglePlayer(new EndAction(), currentPlayer.getPlayerID());
         setCurrentPlayer();
+
 
         actionPhaseNum++;
         startActionPhase();

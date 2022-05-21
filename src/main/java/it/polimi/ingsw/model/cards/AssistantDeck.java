@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class AssistantDeck {
+public class AssistantDeck implements Serializable {
     private static List<AssistantCard> deck = new ArrayList<AssistantCard>();
     public AssistantDeck(Wizards wizard) {
         try{

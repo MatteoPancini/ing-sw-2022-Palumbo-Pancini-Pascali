@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class CharacterDeck {
+public class CharacterDeck implements Serializable {
     private static List<CharacterCard> cards = null;
     private static Game game;
     private CharacterDeck() {

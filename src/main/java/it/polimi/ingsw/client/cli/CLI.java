@@ -43,6 +43,7 @@ public class CLI implements Runnable, ListenerInterface {
     private String chosenStudent;
     private String chosenDestination;
     private String chosenIsland;
+    private String chosenCharacter;
     //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
@@ -133,7 +134,7 @@ public class CLI implements Runnable, ListenerInterface {
     }*/
 
     public void showAvailableCharacters() {
-        out.println(">The available characters for this match are: ");
+        System.out.println(">The available characters for this match are: ");
         showCharactersDescription();
     }
 
@@ -158,42 +159,42 @@ public class CLI implements Runnable, ListenerInterface {
 
     //scrivere diversi show per ogni parte del modello da mostrare
     public void showBoard() {
-        out.println("Here's a summary of your board: ");
-        out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+        System.out.println("Here's a summary of your board: ");
+        System.out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
                 + modelView.hasGreenProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+        System.out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
                 + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+        System.out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
                 + modelView.hasYellowProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+        System.out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
                 + modelView.hasPinkProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
+        System.out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
                 + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
     }
 
     public void showIslands() {
-        out.println(">Here's a little description of the islands in the game board: ");
+        System.out.println(">Here's a little description of the islands in the game board: ");
         for (Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
             if(island.getMergedIslands()!=null) {
-                out.println("Island " + island.getIslandID() + "(merged with ");
+                System.out.println("Island " + island.getIslandID() + "(merged with ");
                 for (int i = 0; i < island.getMergedIslands().size(); i++) {
-                    out.print(island.getMergedIslands().get(i).getIslandID() + " ");
+                    System.out.print(island.getMergedIslands().get(i).getIslandID() + " ");
                 }
-                out.print(")");
-                out.println("Students: ");
+                System.out.print(")");
+                System.out.println("Students: ");
                 for (Student stud : island.getStudents()) {
-                    out.print(stud.getType().toString() + "\n");
+                    System.out.print(stud.getType().toString() + "\n");
                 }
                 for (int i = 0; i < island.getMergedIslands().size(); i++)
                 {
-                    out.println("\nTowers: " + island.getMergedTowers() + " "  + island.getTower().getColor().toString());
+                    System.out.println("\nTowers: " + island.getMergedTowers() + " "  + island.getTower().getColor().toString());
                 }
             } else {
-                out.println("Island " + island.getIslandID() + " : " + "\n" + " Students : ");
+                System.out.println("Island " + island.getIslandID() + " : " + "\n" + " Students : ");
                 for (Student stud : island.getStudents()) {
-                    out.print(stud.getType().toString() + "\n");
+                    System.out.print(stud.getType().toString() + "\n");
                 }
-                out.println("\nTower: " + island.getTower().getColor().toString());
+                System.out.println("\nTower: " + island.getTower().getColor().toString());
             }
         }
     }
@@ -220,7 +221,7 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void showLastAssistantsUsed() {
-        out.println(">These are all the assistants used in this turn: ");
+        System.out.println(">These are all the assistants used in this turn: ");
         CLITable st = new CLITable();
         st.setShowVerticalLines(true);
         Player[] nicknames = getPlayersByAssistantUsed();
@@ -232,13 +233,13 @@ public class CLI implements Runnable, ListenerInterface {
     }
     public void printStudentsOnCLoud(int ID) {
         for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
-            out.print("-" + s.getType());
+            System.out.print("-" + s.getType());
         }
     }
     public void showClouds() {
-        out.println(">Clouds status of this turn: ");
+        System.out.println(">Clouds status of this turn: ");
         for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
-            out.println("ID: " + c.getID() + "Students: ");
+            System.out.println("ID: " + c.getID() + "Students: ");
             printStudentsOnCLoud(c.getID());
         }
     }
@@ -264,13 +265,13 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void showEntrance() {
-        out.println(">Here's a summary of the students in your entrance: ");
+        System.out.println(">Here's a summary of the students in your entrance: ");
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
-            out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
     }
     public void showCoins() {
-        out.println(">You have " + ANSI_YELLOW + modelView.getGameCopy().getCurrentPlayer().getCoins() + " left." + ANSI_RESET);
+        System.out.println(">You have " + ANSI_YELLOW + modelView.getGameCopy().getCurrentPlayer().getCoins() + " left." + ANSI_RESET);
     }
     public int[] getPlayerDiningRoom(int id) {
         int r=0, p=0, g=0, y=0, b=0;
@@ -319,7 +320,7 @@ public class CLI implements Runnable, ListenerInterface {
     }*/
 
     public void showDiningRooms() {
-        out.println(">Take a look at the other players' dining rooms!");
+        System.out.println(">Take a look at the other players' dining rooms!");
         CLITable st = new CLITable();
         st.setShowVerticalLines(true);
         for (Player p : modelView.getGameCopy().getActivePlayers()) {
@@ -335,19 +336,20 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askMoves(AssistantCard card) {
         showMotherNature();
-        out.println(">Pick a number of mother nature moves between 1 and "
+        System.out.println(">Pick a number of mother nature moves between 1 and "
                 + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
         //private Parser parser;
         //private String chosenWizard;
         //private String chosenNickname;
-        String chosenMoves = in.next();
+        in.reset();
+        String chosenMoves = in.nextLine();
         virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
     }
 
     public void printPlayerDeck() {
-        out.println(">Take a look at your deck before choosing: ");
+        System.out.println(">Take a look at your deck before choosing: ");
         for (AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-            out.println("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
+            System.out.println("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
         }
     }
 
@@ -356,69 +358,69 @@ public class CLI implements Runnable, ListenerInterface {
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size() > 0) {
             showLastAssistantsUsed();
         }
-        out.println(">Pick an assistant from your deck by typing its name.: ");
+        System.out.println(">Pick an assistant from your deck by typing its name.: ");
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()>=1) {
-            out.println(">Remember: you can't play an assistant already played by another player!");
+            System.out.println(">Remember: you can't play an assistant already played by another player!");
         }
         printPlayerDeck();
-        chosenAssistant = in.next();
+        chosenAssistant = in.nextLine();
         virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
     }
 
     public void askCloud(ArrayList<CloudTile> clouds) {
-        out.println(">Pick a cloud by typing its ID: ");
-        chosenCloud = in.next();
+        System.out.println(">Pick a cloud by typing its ID: ");
+        chosenCloud = in.nextLine();
         virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
     }
 
     //chiamato dal controller, quando ritorna lo studente esso viene salvato in una variabile
     //che verrà poi usata per la chosenDestination nella userAction successiva
     public void askStudent(SchoolBoard schoolB) {
-        out.println(">Pick a student from your Entrance by typing its color: ");
-        out.print("[RED, BLUE, YELLOW, GREEN, PINK]");
+        System.out.println(">Pick a student from your Entrance by typing its color: ");
+        System.out.print("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
-        chosenStudent = in.next();
+        chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
     }
 
     //prende come input lo studente scelto nella richiesta precedente
     public void askDestination() {
-        out.println(">Pick a destination between your DiningRoom or an island: ");
-        chosenDestination = in.next();
+        System.out.println(">Pick a destination between your DiningRoom or an island: ");
+        chosenDestination = in.nextLine();
         virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
     }
 
     public void askCharacterCard(CharacterDeck cards) {
-        out.println(">Type the name of the character card you want to play: ");
+        System.out.println(">Type the name of the character card you want to play: ");
         showCharactersDescription();
-        String chosenCharacter = in.next();
+        String chosenCharacter = in.nextLine();
         virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
     }
 
     public void askIsland(ArrayList<Island> islands) {
-        out.println(">Choose an island by typing its ID: ");
+        System.out.println(">Choose an island by typing its ID: ");
         showIslands();
-        chosenIsland = in.next();
+        chosenIsland = in.nextLine();
         virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
     }
 
     public void showMotherNature() {
-        out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
+        System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
 
     public void chooseExpertMode() {
         String expertModeChoice;
-        out.println("Sono in chooseExpertMode");
-        out.print(">");
+        System.out.println("Sono in chooseExpertMode");
+        System.out.print(">");
         expertModeChoice = in.nextLine();
-        out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
+        System.out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
         clientConnection.sendUserInput(new ExpertModeChoice(expertModeChoice));
     }
 
     public void chooseWizard(List<Wizards> availableWizards) {
         while (true) {
-            out.println(">Choose your wizard!");
-            out.print(">");
+            System.out.println(">Choose your wizard!");
+            System.out.print(">");
             try {
                 String wizardTyped = in.nextLine();
                 Wizards wizardChosen = Wizards.parseWizardInput(wizardTyped);
@@ -427,11 +429,11 @@ public class CLI implements Runnable, ListenerInterface {
                     modelView.setGameStarted(true);
                     return;
                 } else {
-                    out.println("Wizard not available!");
+                    System.out.println("Wizard not available!");
                 }
             } catch (IllegalArgumentException e) {
                 System.err.println(ANSI_RED + "Invalid input! Please provide one of the accepted wizards."+ ANSI_RESET);
-                out.print(">");
+                System.out.print(">");
             }
         }
     }
@@ -444,34 +446,35 @@ public class CLI implements Runnable, ListenerInterface {
             try {
 
                 Scanner inputNum = new Scanner(System.in);
-                out.print(">");
+                System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
                 //out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
 
 
                 break;
             } catch (NumberFormatException e) {
-                out.println("Invalid parameter, it must be a numeric value.");
+                System.out.println("Invalid parameter, it must be a numeric value.");
             }
 
         }
         clientConnection.sendUserInput(new PlayersNumberChoice(numOfPlayer));
 
     }
+
     public void showServerMessage(Answer serverAnswer) {
-        out.println(serverAnswer);
+        System.out.println(serverAnswer.getMessage());
     }
 
     public void showError(String message) {
-        out.println(ANSI_RED + ">Warning! " + message + ANSI_RESET);
+        System.out.println(ANSI_RED + ">Warning! " + message + ANSI_RESET);
     }
 
     public void showWinMessage() {
-        out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
+        System.out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
     }
     public void showLoseMessage(String winnerNickname) {
-        out.println(">Game Over! You lost :(");
-        out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
+        System.out.println(">Game Over! You lost :(");
+        System.out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
     }
     public void userNicknameSetup() {
         //System.out.println("Entro in usernameSetup");
@@ -481,13 +484,13 @@ public class CLI implements Runnable, ListenerInterface {
 
         while (!nickCheck) {
             do {
-                out.println(">Please, insert your nickname: ");
-                out.print(">");
+                System.out.println(">Please, insert your nickname: ");
+                System.out.print(">");
                 userNickname = in.nextLine();
             } while (userNickname == null);
-            out.println(">Your nickname is: " + userNickname);
-            out.println(">Is it right? [y/n] ");
-            out.print(">");
+            System.out.println(">Your nickname is: " + userNickname);
+            System.out.println(">Is it right? [y/n] ");
+            System.out.print(">");
             if (in.nextLine().equalsIgnoreCase("y")) {
                 nickCheck = true;
             } else {
@@ -501,7 +504,7 @@ public class CLI implements Runnable, ListenerInterface {
                 System.err.println("The entered IP/port doesn't match any active server or the server is not " + "running. Please try again!");
                 System.exit(-1);
             }
-            out.println("Socket Connection setup completed!");
+            System.out.println("Socket Connection setup completed!");
         } catch (DuplicateNicknameException e) {
             //e.printStackTrace();
             userNicknameSetup();
@@ -509,10 +512,11 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
     }
 
-    public void actionsLoop() {
+    public void noActionsLoop() {
         in.reset();
         String cmd = in.nextLine();
-        virtualClient.firePropertyChange("action", null, cmd);
+        showError("It's not your turn :(");
+        //virtualClient.firePropertyChange("noAction", null, cmd);
     }
 
     @Override
@@ -523,8 +527,10 @@ public class CLI implements Runnable, ListenerInterface {
         while (isActiveGame()) {
             //TODO: QUESTA PARTE E' DA CAMBIARE
             if(modelView.isGameStarted()) {
-                System.out.println("Entro dentro all'action");
-                actionsLoop();
+                if (!modelView.isStartPlaying()) {
+                    System.out.println("Entro dentro all'action");
+                    noActionsLoop();
+                }
             }
         }
         in.close();
@@ -534,6 +540,7 @@ public class CLI implements Runnable, ListenerInterface {
     public boolean isActiveGame() {
         return activeGame;
     }
+
 
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
@@ -622,7 +629,7 @@ public class CLI implements Runnable, ListenerInterface {
                 assert serverCommand != null;
                 showLoseMessage(changeEvent.getNewValue().toString());
             }
-            default -> out.println("Unknown answer from server");
+            default -> System.out.println("Unknown answer from server");
         }
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -7,7 +8,7 @@ import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
-public class GameBoard {
+public class GameBoard implements Serializable {
     private Game game;
     private ArrayList<CloudTile> clouds;
     private ArrayList<Island> islands;

@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Tower;
 import it.polimi.ingsw.model.player.TowerArea;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Island {
+public class Island implements Serializable {
     private GameBoard board = null;
     private int islandID;
     private Tower tower;

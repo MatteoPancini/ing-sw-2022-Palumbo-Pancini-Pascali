@@ -2,9 +2,10 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.enumerations.CloudSide;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CloudTile {
+public class CloudTile implements Serializable {
     private CloudSide side;
     private int ID;
     private ArrayList<Student> cloudStudents;

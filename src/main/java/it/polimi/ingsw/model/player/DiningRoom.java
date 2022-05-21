@@ -3,9 +3,10 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DiningRoom {
+public class DiningRoom implements Serializable {
     private ArrayList<Table> diningRoom = new ArrayList<Table>();
 
     public DiningRoom() {

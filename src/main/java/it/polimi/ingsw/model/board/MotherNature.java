@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model.board;
+import java.io.Serializable;
 import java.util.Random;
 
-public class MotherNature {
+public class MotherNature implements Serializable {
     private int position;
     private static MotherNature motherNature = null;
 
