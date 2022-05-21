@@ -16,6 +16,7 @@ public class Game implements Serializable {
     private final ArrayList<Player> players = new ArrayList<>();
     private final ArrayList<Player> activePlayers = new ArrayList<>();
     private Player currentPlayer;
+    private int currentPlayerNumber;
 
     public int getCurrentPlayerNumber() {
         return currentPlayerNumber;
@@ -24,9 +25,6 @@ public class Game implements Serializable {
     public void setCurrentPlayerNumber(int currentPlayerNumber) {
         this.currentPlayerNumber = currentPlayerNumber;
     }
-
-    private int currentPlayerNumber;
-
 
 
     public Game() {
@@ -60,13 +58,12 @@ public class Game implements Serializable {
 
      */
 
-
     public void addPlayer(Player newPlayer) {
         players.add(newPlayer);
         activePlayers.add(newPlayer);
     }
-    public void createNewPlayer (String nickname, int playerID) {
-        Player newPlayer = new Player(nickname, playerID);
+    public void createNewPlayer (Player player) {
+        Player newPlayer = new Player(player.getNickname(), player.getPlayerID());
         players.add(newPlayer);
         activePlayers.add(newPlayer);
     }
@@ -81,30 +78,6 @@ public class Game implements Serializable {
 
     public void removePlayer(Player player) {
         activePlayers.remove(player);
-        /*
-        if (player.getWorkers().isEmpty()) {
-            activePlayers.remove(player);
-            if (!activePlayers.isEmpty()) {
-                if (currentPlayerN == activePlayers.size()) currentPlayerN = 0;
-                setCurrentPlayer(activePlayers.get(currentPlayerN));
-            }
-            return;
-        }
-        for (int i = Constants.GRID_MIN_SIZE; i < Constants.GRID_MAX_SIZE; i++) {
-            for (int j = Constants.GRID_MIN_SIZE; j < Constants.GRID_MAX_SIZE; j++) {
-                if (gameBoard.getSpace(i, j).getWorker() == player.getWorkers().get(0)
-                        || gameBoard.getSpace(i, j).getWorker() == player.getWorkers().get(1)) {
-                    gameBoard.getSpace(i, j).setWorker(null);
-                }
-            }
-        }
-        activePlayers.remove(player);
-        if (!activePlayers.isEmpty()) {
-            if (currentPlayerN == activePlayers.size()) currentPlayerN = 0;
-            setCurrentPlayer(activePlayers.get(currentPlayerN));
-        }
-
-         */
     }
 
     public Player getPlayerByID(int idPlayer) {

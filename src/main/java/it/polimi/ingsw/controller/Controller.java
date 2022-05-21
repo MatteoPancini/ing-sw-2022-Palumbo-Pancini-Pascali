@@ -80,16 +80,16 @@ public class Controller implements PropertyChangeListener {
 
 
         for(Player p : game.getPlayers()) {
-            System.out.println("Inizio setup di " + p.getNickname());
+            //System.out.println("Inizio setup di " + p.getNickname());
 
-            System.out.println("metto students nell'entrance");
+            //System.out.println("metto students nell'entrance");
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
                 p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
                 game.getGameBoard().removeStudents(0);
             }
 
-            System.out.println("metto torri");
+            //System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
@@ -106,10 +106,9 @@ public class Controller implements PropertyChangeListener {
                     colorsCounter4P++;
                 }
             }
-
-
         }
-        System.out.println("metto madre natura");
+
+        //System.out.println("metto madre natura");
 
         int maximum = 11;
         SecureRandom r = new SecureRandom();
@@ -302,5 +301,3 @@ public class Controller implements PropertyChangeListener {
     }
 
 }
-
-

@@ -37,16 +37,14 @@ public class GameHandler {
     public GameHandler(Server server){
         game = new Game();
         controller = new Controller(game, this);
-        System.out.println("Istantiating new game and controller");
+        System.out.println("Instantiating new game and controller");
         this.server = server;
         gameHandlerListener.addPropertyChangeListener(controller);
-
     }
 
     public void setTeamMode(boolean teamMode) {
         isTeamMode = teamMode;
     }
-
 
     public boolean getExpertMode() {
         return isExpertMode;
@@ -71,7 +69,6 @@ public class GameHandler {
 
     public void addGamePlayer(String playerNickname, int playerID) {
         game.createNewPlayer(playerNickname, playerID);
-
     }
 
     public void setCurrentPlayerId(int currentPlayerId) {
@@ -93,15 +90,12 @@ public class GameHandler {
                 game.getPlayers().get(i).setIdTeam(teamID2);
             }
 
-            if(i == 0) {
-                game.getPlayers().get(i).setTeamLeader(true);
-            } else if(i == 1) {
+            if(i == 0 || i == 1) {
                 game.getPlayers().get(i).setTeamLeader(true);
             }
 
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }
-
     }
 
     public ArrayList<Player> getPlayers() {
@@ -115,32 +109,6 @@ public class GameHandler {
     public int getPlayersNumber() {
         return playersNumber;
     }
-
-    /*
-    public void putStudentsOnCloud() {
-        for (CloudTile cloud : gameBoardCopy.getClouds()) {
-            ArrayList<Student> newStudents = new ArrayList<Student>();
-            Collections.shuffle(gameBoardCopy.getStudentsBag());
-            int studentsNumber;
-            if(game.getPlayersNumber() == 3) studentsNumber = 4;
-            else studentsNumber = 3;
-            for (int j = 0; j < studentsNumber; j++) {
-                newStudents.get(j) = gameBoardCopy.getStudentsBag().get(0);
-                gameBoard.removeStudents(0);
-            }
-            cloud.setStudents(newStudents);
-        }
-    }
-
-     */
-/*
-    public void updateAssistantsState() {
-        for(AssistantCard assistant : gameBoardCopy.getLastAssistantUsed()) {
-            assistant.setState(CardState.PLAYED);
-        }
-    }
-
- */
 
     public void sendSinglePlayer(Answer serverAnswer, int clientID) {
         server.getVirtualClientFromID(clientID).sendAnswerToClient(serverAnswer);
@@ -164,7 +132,6 @@ public class GameHandler {
         this.playersNumber = playersNumber;
         game.setPlayersNumber(playersNumber);
     }
-
 
     public boolean isTeamMode() {
         return isTeamMode;
@@ -247,12 +214,6 @@ public class GameHandler {
             case "PickCloud" -> gameHandlerListener.firePropertyChange("PickCloud", null, ((PickCloud) userAction).getChosenCloud());
 
             case "PickCharacter" -> gameHandlerListener.firePropertyChange("PickCharacter", null, ((PickCharacter) userAction).getChosenCharacter());
-
-
-
-
-
-
         }
 
     }

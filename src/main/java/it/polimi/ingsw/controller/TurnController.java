@@ -13,27 +13,15 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-
 public class TurnController {
     private final Controller controller;
-
     private final GameHandler gameHandler;
-
     private Player currentPlayer;
-
     private ExpertController expertController;
-
     private int studentRequest;
-
-
     private boolean isActionPhase;
-
     private int actionPhaseNum;
-
     private boolean isPianificationPhase;
-
-
     private Student studentToMove;
 
     public GameHandler getGameHandler() {
@@ -64,7 +52,6 @@ public class TurnController {
     public void setStudentRequest(int studentRequest) {
         this.studentRequest = studentRequest;
     }
-
 
     public Student getStudentToMove() {
         return studentToMove;
