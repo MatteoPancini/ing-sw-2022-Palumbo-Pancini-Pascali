@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Game implements Serializable {
     private final GameBoard gameBoard;
     private int playersNumber;
-    private  boolean expertMode;
+    private boolean expertMode;
     private final ArrayList<Player> players = new ArrayList<>();
     private final ArrayList<Player> activePlayers = new ArrayList<>();
     private Player currentPlayer;
@@ -65,8 +65,7 @@ public class Game implements Serializable {
         players.add(newPlayer);
         activePlayers.add(newPlayer);
     }
-    public void createNewPlayer (String nickname, int playerID) {
-        Player newPlayer = new Player(nickname, playerID);
+    public void createNewPlayer (Player newPlayer) {
         players.add(newPlayer);
         activePlayers.add(newPlayer);
     }

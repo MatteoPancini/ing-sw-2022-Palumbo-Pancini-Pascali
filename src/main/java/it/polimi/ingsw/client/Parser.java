@@ -110,7 +110,7 @@ public class Parser implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (!modelView.getActiveInput()) {
-            System.out.println("Input error: it's not your turn!");
+            modelView.getCli().showError("Input error: it's not your turn!");
         } else {
             try {
                 if (action(evt.getPropertyName(), evt.getNewValue().toString())) {

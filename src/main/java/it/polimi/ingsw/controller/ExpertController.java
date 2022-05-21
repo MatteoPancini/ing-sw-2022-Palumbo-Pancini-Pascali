@@ -23,7 +23,7 @@ public class ExpertController {
         turnController.getGameHandler().sendSinglePlayer(islandDestination, turnController.getCurrentPlayer().getPlayerID());
     }
 
-    public void knightEffect(){
+    public void knightEffect() {
         turnController.getCurrentPlayer().setIslandInfluence(2);
     }
 
