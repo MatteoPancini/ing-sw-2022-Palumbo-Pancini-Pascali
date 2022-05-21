@@ -3,10 +3,8 @@ package it.polimi.ingsw.model.cards;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.Characters;
 
-import com.google.gson.stream.JsonReader;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -18,6 +16,7 @@ import java.util.Scanner;
 public class CharacterDeck implements Serializable {
     private static List<CharacterCard> cards = null;
     private static Game game;
+
     private CharacterDeck() {
         throw new IllegalStateException();
     }
@@ -35,23 +34,23 @@ public class CharacterDeck implements Serializable {
             cards = gson.fromJson(data, userListType);
 
             myReader.close();
-        }catch(FileNotFoundException e){
+        } catch(FileNotFoundException e) {
             System.out.println("File not found.");
             e.printStackTrace();
         }
 
-        for(CharacterCard c : cards){
-            if(c.getName() == Characters.MONK || c.getName() == Characters.SPOILED_PRINCESS){
+        for(CharacterCard c : cards) {
+            if(c.getName() == Characters.MONK || c.getName() == Characters.SPOILED_PRINCESS) {
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
-                for(int i = 1; i <= 4; i++){
+                for(int i = 1; i <= 4; i++) {
                     c.setStudents(game.getGameBoard().getStudentsBag().get(i));
                     game.getGameBoard().getStudentsBag().remove(0);
                 }
             }
 
-            if(c.getName() == Characters.JESTER){
+            if(c.getName() == Characters.JESTER) {
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
-                for(int i = 1; i <= 6; i++){
+                for(int i = 1; i <= 6; i++) {
                     c.setStudents(game.getGameBoard().getStudentsBag().get(i));
                     game.getGameBoard().getStudentsBag().remove(0);
                 }
@@ -59,13 +58,15 @@ public class CharacterDeck implements Serializable {
         }
     }
 
-    public static List<CharacterCard> getPlayableCards(){
-        List<CharacterCard> playableCards = new ArrayList<CharacterCard>();
+    public static List<CharacterCard> getPlayableCards() {
+        CharacterDeck deck = new CharacterDeck();
 
-        Collections.shuffle(cards);
+        List<CharacterCard> playableCards = new ArrayList<>();
+
+        Collections.shuffle(deck.getDeck());
 
         for(int i = 1; i <= 3; i++){
-            playableCards.add(cards.get(i));
+            playableCards.add(deck.getDeck().get(i));
         }
 
         return playableCards;

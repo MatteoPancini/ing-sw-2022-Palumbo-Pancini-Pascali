@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.board;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.*;
 
 import it.polimi.ingsw.model.cards.*;
@@ -56,7 +55,7 @@ public class GameBoard implements Serializable {
 
         motherNature = MotherNature.getMotherNature();
 
-        if(game.isExpertMode() == true){
+        if(game.isExpertMode() == true) {
             CharacterDeck.getPlayableCards();
         }
         else playableCharacters = null;

@@ -515,8 +515,8 @@ public class CLI implements Runnable, ListenerInterface {
     public void noActionsLoop() {
         in.reset();
         String cmd = in.nextLine();
-        showError("It's not your turn :(");
-        //virtualClient.firePropertyChange("noAction", null, cmd);
+        //showError("It's not your turn :(");
+        virtualClient.firePropertyChange("noAction", null, cmd);
     }
 
     @Override

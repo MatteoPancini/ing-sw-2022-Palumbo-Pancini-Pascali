@@ -29,7 +29,13 @@ public class InputChecker {
     }
 
 
-    //prende in input i chosen values e ritorna una UserAction da inviare al server
+    /**
+     * prende in input i chosen values e ritorna una UserAction da inviare al server
+     *
+     * @param input  assistant chosen
+     * @return
+     * @throws AlreadyPlayedAssistantException
+     */
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
         PickAssistant action;
         switch (input.toUpperCase()) {
