@@ -11,9 +11,11 @@ import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.server.Server;
 
 import java.beans.PropertyChangeSupport;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -99,6 +101,19 @@ public class GameHandler {
             }
 
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
+        }
+
+        for(int i = 0; i < playersNumber; i++) {
+            if(game.getPlayers().get(i).isTeamLeader()) {
+                game.getPlayers().get(i).setBoard(new SchoolBoard(game.getPlayers().get(i).getPlayerID()));
+            } else {
+                for(int j = 0; j < playersNumber; j++){
+                    if(game.getPlayers().get(j).isTeamLeader() && game.getPlayers().get(i).getIdTeam() == game.getPlayers().get(j).getIdTeam()) {
+                        game.getPlayers().get(i).setBoard(game.getPlayers().get(j).getBoard());
+                    }
+                }
+
+            }
         }
 
     }
@@ -208,7 +223,7 @@ public class GameHandler {
         //GESTISCI MESSAGGIO PER METTERE GAMESTARTED IN MODELVIEW
         setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
-        Random randomGenerator = new Random();
+        SecureRandom randomGenerator = new SecureRandom();
         game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
         controller.newSetupGame();
@@ -247,7 +262,7 @@ public class GameHandler {
 
             case "PickCharacter" -> gameHandlerListener.firePropertyChange("PickCharacter", null, ((PickCharacter) userAction).getChosenCharacter());
 
-
+            case "PickPawnType" -> gameHandlerListener.firePropertyChange("PickPawnType", null, ((PickPawnType) userAction).getType());
 
 
 

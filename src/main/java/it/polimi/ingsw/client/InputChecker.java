@@ -195,6 +195,15 @@ public class InputChecker {
         return action;
     }
 
+    public PickPawnType checkPawnType(String pawnType) {
+        PickPawnType action = null;
+        if(pawnType.toUpperCase().equalsIgnoreCase("GREEN") || pawnType.toUpperCase().equalsIgnoreCase("RED") || pawnType.toUpperCase().equalsIgnoreCase("YELLOW") || pawnType.toUpperCase().equalsIgnoreCase("PINK")  || pawnType.toUpperCase().equalsIgnoreCase("BLUE")) {
+            action = new PickPawnType(toPawnType(pawnType));
+        }
+
+        return action;
+    }
+
     public PickCloud checkCloud(String input) {
         PickCloud action = null;
         int cloudID = Integer.parseInt(input);

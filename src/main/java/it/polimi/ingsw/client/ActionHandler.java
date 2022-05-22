@@ -67,33 +67,40 @@ public class ActionHandler {
     //viene chiamato all'interno di propertyChange della CLI, notificata dall'Action Handler
     public void makeAction(String serverCommand) {
         switch (serverCommand) {
-            case "PICKASSISTANT" -> {
+            case "PICK_ASSISTANT" -> {
                 cli.askAssistant(modelView.getGameCopy().getCurrentPlayer().getAssistantDeck());
 
             }
-            case "PICKCLOUD" -> {
+            case "PICK_CLOUD" -> {
                 cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
 
             }
-            case "PICKDESTINATION" -> {
+            case "PICK_DESTINATION" -> {
                 cli.askDestination();
             }
-            case "PICKSTUDENT" -> {
+            case "PICK_STUDENT" -> {
                 cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
 
             }
-            case "PICKMOVESNUMBER" -> {
+            case "PICK_MOVES_NUMBER" -> {
                 cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
 
             }
-            case "PICKCHARACTER" -> {
+            case "PICK_CHARACTER" -> {
                 cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
 
             }
-            case "PICKISLAND" -> {
+            case "PICK_ISLAND" -> {
                 cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
 
             }
+
+            case "PICK_PAWN_TYPE" -> {
+                cli.askPawnType();
+
+            }
+
+
             default -> {
                 cli.showError("Error: no such action");
                 modelView.setActivateInput(false);

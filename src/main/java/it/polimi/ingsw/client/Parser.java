@@ -86,6 +86,9 @@ public class Parser implements PropertyChangeListener {
             case "PICKISLAND" -> {
                 action = inputChecker.checkIsland(chosenValue);
             }
+            case "PICKPAWNTYPE" -> {
+                action = inputChecker.checkPawnType(chosenValue);
+            }
             case "QUIT" -> {
                 inputChecker.quitGame();
                 return true;
