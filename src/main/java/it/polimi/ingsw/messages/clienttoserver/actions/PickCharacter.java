@@ -13,7 +13,7 @@ public class PickCharacter implements UserAction {
     }
 
     public PickCharacter(Characters character) {
-        this.action = action;
+        this.action = Action.PICK_CHARACTER;
         this.chosenCharacter = character;
     }
 

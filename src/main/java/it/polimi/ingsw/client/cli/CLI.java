@@ -44,6 +44,7 @@ public class CLI implements Runnable, ListenerInterface {
     private String chosenDestination;
     private String chosenIsland;
     private String chosenCharacter;
+    private String chosenPawnType;
     //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
@@ -414,6 +415,19 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
 
+    public void showPawnType() {
+        ArrayList<PawnType> pawns = new ArrayList<>();
+        pawns.add(PawnType.BLUE);
+        pawns.add(PawnType.GREEN);
+        pawns.add(PawnType.RED);
+        pawns.add(PawnType.YELLOW);
+        pawns.add(PawnType.PINK);
+
+        for(PawnType type : pawns) {
+            System.out.println(type.toString());
+        }
+    }
+
     public void askMoves(AssistantCard card) {
         showMotherNature();
         System.out.println(">Pick a number of mother nature moves between 1 and "
@@ -484,6 +498,15 @@ public class CLI implements Runnable, ListenerInterface {
         showIslandsTable();
         chosenIsland = in.nextLine();
         virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
+    }
+
+    public void askPawnType() {
+        System.out.println(">Choose a pawn type: ");
+        showPawnType();
+        chosenPawnType = in.nextLine();
+        virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
+
+
     }
 
     public void showMotherNature() {
@@ -592,8 +615,8 @@ public class CLI implements Runnable, ListenerInterface {
     public void noActionsLoop() {
         in.reset();
         String cmd = in.nextLine();
-        showError("It's not your turn :(");
-        //virtualClient.firePropertyChange("noAction", null, cmd);
+        //showError("It's not your turn :(");
+        virtualClient.firePropertyChange("noAction", null, cmd);
     }
 
     @Override
@@ -602,7 +625,7 @@ public class CLI implements Runnable, ListenerInterface {
 
         userNicknameSetup();
         while (isActiveGame()) {
-            //TODO: QUESTA PARTE E' DA CAMBIARE
+            //TODO M e CICIO: QUESTA PARTE E' DA CONTROLLARE SE FUNZIONA E CAMBIARE
             if(modelView.isGameStarted()) {
                 if (!modelView.isStartPlaying()) {
                     System.out.println("Entro dentro all'action");

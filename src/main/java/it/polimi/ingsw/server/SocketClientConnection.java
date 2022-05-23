@@ -117,11 +117,12 @@ public class SocketClientConnection implements Runnable {
                 String expertMode = ((ExpertModeChoice) clientMessage).getExpertChoice();
                 if(expertMode.equalsIgnoreCase("y")) {
                     server.getGameFromID(clientID).setExpertMode(true);
-                    server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Game will be played in Expert Mode!", false));
+                    server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Game will be played in Expert Mode!\nPlease wait for other players to connect :)", false));
+
                 }
                 else if(expertMode.equalsIgnoreCase("n")){
                     server.getGameFromID(clientID).setExpertMode(false);
-                    server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Game will be played in Standard Mode!", false));
+                    server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Game will be played in Standard Mode!\nPlease wait for other players to connect :)", false));
 
                 } else {
                     setupGameMode(new ExpertModeAnswer("Please type [y/n] to setup the Expert GameMode:\ny: Expert Mode\nn: Standard Mode"));
@@ -215,6 +216,10 @@ public class SocketClientConnection implements Runnable {
                     } else {
                         server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT, "Game is in standard mode! You can't play a character card!"), clientID);
                     }
+                }
+
+                if(userAction instanceof PickPawnType) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickPawnType");
                 }
 
             } else {

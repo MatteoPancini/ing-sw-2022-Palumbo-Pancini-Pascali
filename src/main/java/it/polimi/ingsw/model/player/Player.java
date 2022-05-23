@@ -54,7 +54,7 @@ public class Player implements Serializable {
     public Player(String nickname, int playerID) {
         this.nicknamePlayer = nickname;
         assistantDeck = null;
-        board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
+        //board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
         this.playerID = playerID;
         this.wizard = null;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }

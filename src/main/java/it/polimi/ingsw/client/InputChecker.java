@@ -29,7 +29,13 @@ public class InputChecker {
     }
 
 
-    //prende in input i chosen values e ritorna una UserAction da inviare al server
+    /**
+     * prende in input i chosen values e ritorna una UserAction da inviare al server
+     *
+     * @param input  assistant chosen
+     * @return
+     * @throws AlreadyPlayedAssistantException
+     */
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
         PickAssistant action;
         switch (input.toUpperCase()) {
@@ -186,6 +192,15 @@ public class InputChecker {
         if (isStudentInEntrance(studentType, modelView.getGameCopy().getCurrentPlayer())) {
             action = new PickStudent(new Student(toPawnType(studentType)));
         }
+        return action;
+    }
+
+    public PickPawnType checkPawnType(String pawnType) {
+        PickPawnType action = null;
+        if(pawnType.toUpperCase().equalsIgnoreCase("GREEN") || pawnType.toUpperCase().equalsIgnoreCase("RED") || pawnType.toUpperCase().equalsIgnoreCase("YELLOW") || pawnType.toUpperCase().equalsIgnoreCase("PINK")  || pawnType.toUpperCase().equalsIgnoreCase("BLUE")) {
+            action = new PickPawnType(toPawnType(pawnType));
+        }
+
         return action;
     }
 
