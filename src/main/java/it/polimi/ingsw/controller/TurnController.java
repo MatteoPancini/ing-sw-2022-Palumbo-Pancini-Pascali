@@ -38,7 +38,6 @@ public class TurnController {
         isPianificationPhase = false;
         isActionPhase = false;
         actionPhaseNum = 0;
-
     }
 
     public boolean isPianificationPhase() {
@@ -204,9 +203,8 @@ public class TurnController {
 
     public void setCurrentPlayer() {
         controller.getGame().switchToNextPlayer();
-        this.currentPlayer = controller.getGame().getCurrentPlayer();
+        currentPlayer = controller.getGame().getCurrentPlayer();
         gameHandler.setCurrentPlayerId(currentPlayer.getPlayerID());
-
     }
 
     public void askStudentDestination() {
@@ -269,46 +267,11 @@ public class TurnController {
 
     }
 
-
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
         chosenDiningRoom.setDiningRoom(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
         askStudent(studentRequest);
-
-        /*
-        chosenDiningRoom.getDiningRoom()
-        //message1 = colore studente, message2 = destinazione (isola o diningroom)
-        Student studentToMove = new Student(message1);
-        GameBoard board;
-        PawnType studType = message1;
-        int destinationIsland;
-        //putStudentsDiningRoom o putStudentsIsland
-        for(int i = 0; i < 3; i++) {
-            studentToMove = player.pickStudent();
-
-            //switch oppure if in cui il player dove spostarlo
-            //se lo sposta in island -> destinationIsland:
-            if(message2 == "island") {
-                destinationIsland = player.pickIsland().islandID;
-                for (Island island : gameBoard.getIslands()) {
-                    if (island.getIslandID() == destinationIsland) {
-                        island.setStudent(studentToMove);
-                    }
-
-                }
-                destinationIsland.setStudent(studentToMove);
-            }
-            //se lo sposta nella DiningRoom -> studType
-            else if(message2 == "dining room") {
-                //try ... catch se ha già il tavolo pieno
-                studType = studentToMove.getType();
-                player.getBoard().diningRoom.setStudent(studentToMove);
-            }
-        }
-
-         */
-
     }
 
     public void moveStudentToIsland(Island chosenIsland) {
@@ -316,8 +279,6 @@ public class TurnController {
         chosenIsland.addStudent(studentToMove);
         studentRequest++;
         askStudent(studentRequest);
-
-
     }
 
 
@@ -332,17 +293,6 @@ public class TurnController {
     }
 
     public void checkIslandInfluence(int islandId) {
-        //verifica se l'isola viene conquistata o controllata
-        /*
-        for(Player player : gameHandler.getGame().getActivePlayers()) {
-            for(BoardCell professorCell : player.getBoard().getProfessorTable().getProfessorTable()) {
-                if(professorCell.hasProfessor()) {
-
-                }
-            }
-        }
-
-         */
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
             Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
@@ -357,10 +307,7 @@ public class TurnController {
             }
         }
 
-
-
         int islandInfluence = 0;
-
 
         for(Player player : controller.getGame().getActivePlayers()) {
             if(player.getIslandInfluence() > islandInfluence || (player.getBoard().getTowerArea().getTowerArea().get(0).getColor() == gameHandler.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) && player.getIslandInfluence() >= islandInfluence) {
@@ -392,8 +339,6 @@ public class TurnController {
             }
 
         }
-
-
     }
 
     public void askCloud() {
@@ -402,61 +347,7 @@ public class TurnController {
         gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a cloud to take!", false), currentPlayer.getPlayerID());
     }
 
-    /*
-    private Game game;
-    private final GameHandler gameHandler;
-    private final PianificationHandler pianificationHandler;
-    private final ActionHandler actionHandler;
-    private ArrayList<Player> activePlayers;
-
-    public TurnHandler(PianificationHandler pianificationHandler, ActionHandler actionHandler, GameHandler gameHandler){
-        this.pianificationHandler = pianificationHandler;
-        this.actionHandler = actionHandler;
-        this.gameHandler = gameHandler;
-    }
-
-    public void startPianification(){
-        gameHandler.putStudentsOnCloud();
-
-        for (int i = 0; i < game.getPlayersNumber(); i++) {
-            AssistantCard chosenCard = board.getLastAssistantUsed().get(i).getOwner().pickAssistant();
-            board.getLastAssistantUsed().get(i).getOwner().getAssistantDeck().removeCard(chosenCard);
-            board.setLastAssistantUsed(i, chosenCard);
-        }
-
-        for (int j = 0; j < board.getLastAssistantUsed().size(); j++) {
-            boolean flag = false;
-            for(int k = 0; k < board.getLastAssistantUsed().size() - 1; k++) {
-                if(board.getLastAssistantUsed().get(j).getValue() > board.getLastAssistantUsed().get(j + 1).getValue()) {
-                    AssistantCard ac = board.getLastAssistantUsed().get(j);
-                    board.setLastAssistantUsed(j, board.getLastAssistantUsed().get(j + 1));
-                    board.setLastAssistantUsed(j + 1, ac);
-                    flag = true;
-                }
-            }
-            if(!flag) break;
-        }
-    }
-
-    }
-
-    public void startAction(){
-        actionHandler.moveMotherNature();
-        actionHandler.moveStudents();
-        actionHandler.fromCloudToEntrance();
-    }
-
-     */
-
     public void fromCloudToEntrance(CloudTile cloud) {
-        /*
-        int studentsToMove;
-        if (gameHandler.getPlayersNumber() == 3)
-            studentsToMove = 4;
-        else
-            studentsToMove = 3;
-
-         */
         ArrayList<Student> newStudents = cloud.getStudents();
         for (Student s : newStudents) {
             currentPlayer.getBoard().getEntrance().setStudents(s);
@@ -493,5 +384,3 @@ public class TurnController {
         return false;
     }
 }
-
-

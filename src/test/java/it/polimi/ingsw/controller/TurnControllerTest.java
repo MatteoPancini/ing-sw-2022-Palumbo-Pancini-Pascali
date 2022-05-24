@@ -1,16 +1,21 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.Student;
+import it.polimi.ingsw.model.enumerations.PawnType;
+import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.server.Server;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TurnTest {
-    ControllerStub cStub;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TurnControllerTest {
+    TurnControllerStub turnCStub;
     Game game;
     UserAction action1;
     UserAction action2;
@@ -48,11 +53,17 @@ public class TurnTest {
         }
     }
 
+
+    private static class TurnControllerStub extends TurnController {
+        public TurnControllerStub(Controller controller, GameHandler gameHandler) {
+            super(new ControllerStub(new Game(), new GameHandler(new Server())), new GameHandlerStub(new Server()));
+        }
+    }
+
     private static class PlayerStub extends Player {
         public PlayerStub(String nickname, int clientID) {
             super(nickname, clientID);
         }
-
     }
 
     @BeforeEach
@@ -61,16 +72,22 @@ public class TurnTest {
         game.createNewPlayer(new PlayerStub("Francesco", 1));
         game.createNewPlayer(new PlayerStub("Matteo", 2));
         game.setCurrentPlayer(game.getActivePlayers().get(0));
-        cStub = new ControllerStub(game, new GameHandlerStub(new Server()));
-        action1 = new PickAssistant();
-        action2 = new PickCloud();
-        action3 = new PickDestination();
-        action4 = new PickMovesNumber();
+        GameHandlerStub gameHStub = new GameHandlerStub(new Server());
+        ControllerStub cStub = new ControllerStub(game, gameHStub);
+        turnCStub = new TurnControllerStub(cStub, gameHStub);
+
+
+        /*action1 = new PickAssistant(Action.PICK_ASSISTANT, );
+        action2 = new PickCloud(Action.PICK_CLOUD, );
+        action3 = new PickDestination(Action.PICK_DESTINATION, );
+        action4 = new PickMovesNumber(Action.PICK_MOVES_NUMBER, );*/
     }
 
     @Test
-    void controllerTest() {
-
-
+    void setStudents(){
+        System.out.println(game.getActivePlayers().get(1).getNickname());
+        turnCStub.setCurrentPlayer();
+        //turnCStub.setStudentToMove(new Student(PawnType.BLUE));
     }
+
 }
