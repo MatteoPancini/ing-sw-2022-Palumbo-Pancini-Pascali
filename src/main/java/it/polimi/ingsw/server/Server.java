@@ -189,7 +189,7 @@ public class Server {
             if(gameHandler.isTeamMode()) {
                 gameHandler.setupTeams();
             } else {
-                for(Player p : gameHandler.getPlayers()) {
+                for(Player p : gameHandler.getGame().getPlayers()) {
                     p.setBoard(new SchoolBoard(p.getPlayerID()));
                 }
             }
