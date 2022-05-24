@@ -13,7 +13,7 @@ public class NumOfPlayerRequest implements Answer {
     }
 
     @Override
-    public Object getMessage() {
+    public String getMessage() {
         return numOfPlayerRequest;
     }
 }

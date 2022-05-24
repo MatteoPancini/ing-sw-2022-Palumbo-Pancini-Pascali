@@ -1,19 +1,28 @@
 package it.polimi.ingsw.client.gui.controllers;
 
+import it.polimi.ingsw.client.ClientConnection;
+import it.polimi.ingsw.client.Parser;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.constants.Constants;
+import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.awt.*;
 
 public class MainMenuController implements GUIController {
 
     private GUI gui;
-    @FXML
-    private TextField username;
-    @FXML private TextField address;
+    private static final String MAIN_MENU = "mainMenu.fxml";
+
+    @FXML private TextField username;
+    @FXML private TextField ipAddress;
     @FXML private TextField port;
-    @FXML private Label confirmation;
+    @FXML private Label confirmationLabel;
 
 
 
@@ -29,22 +38,49 @@ public class MainMenuController implements GUIController {
     }
 
     public void start() {
-        if (username.getText().equals("") || address.getText().equals("") || port.getText().equals("")) {
-            confirmation.setText("Attention: missing parameters!!!");
-        } else if (address.getText().contains(" ")) {
-            confirmation.setText("Attention: address must not contain spaces!");
+        if (username.getText().equals("") || ipAddress.getText().equals("") || port.getText().equals("")) {
+            confirmationLabel.setText("Attention: missing parameters!!!");
+        } else if (ipAddress.getText().contains(" ")) {
+            confirmationLabel.setText("Attention: address must not contain spaces!");
         } else {
-            //gui.getModelView().s(username.getText());
+            gui.getModelView().setPlayerNickname(username.getText());
             LoadingController loadingController;
             try {
-                Constants.setAddress(address.getText());
+                Constants.setAddress(ipAddress.getText());
                 Constants.setPort(Integer.parseInt(port.getText()));
             } catch (NumberFormatException e) {
-                confirmation.setText("Error: missing parameters!");
+                confirmationLabel.setText("Error: missing parameters!");
                 return;
             }
 
-
+            try {
+                gui.changeState("loading.fxml");
+                loadingController = (LoadingController) gui.getControllerFromName("loading.fxml");
+                loadingController.setText("Configuring connection socket...");
+                ClientConnection clientConnection = new ClientConnection();
+                if(!clientConnection.setupNickname(username.getText(), gui.getModelView(),gui.getActionHandler())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Server not reachable");
+                    alert.setContentText(
+                            "The entered IP/port doesn't match any active server or the server is not "
+                                    + "running. Please try again!");
+                    alert.showAndWait();
+                    gui.changeStage(MAIN_MENU);
+                    return;
+                }
+                gui.setClientConnection(clientConnection);
+                loadingController.setText("SOCKET CONNECTION \nSETUP COMPLETED!");
+                loadingController.setText("WAITING FOR PLAYERS");
+                gui.getVirtualClient().addPropertyChangeListener("action", new Parser(clientConnection, gui.getModelView()));
+            } catch (DuplicateNicknameException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Duplicate nickname");
+                alert.setHeaderText("Duplicate nickname!");
+                alert.setContentText("This nickname is already in use! Please choose another one.");
+                alert.showAndWait();
+                gui.changeStage(MAIN_MENU);
+            }
         }
     }
 

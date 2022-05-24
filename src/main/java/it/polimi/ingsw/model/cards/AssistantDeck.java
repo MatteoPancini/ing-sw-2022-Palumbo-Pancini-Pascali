@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class AssistantDeck implements Serializable {
     private static List<AssistantCard> deck = new ArrayList<AssistantCard>();
     public AssistantDeck(Wizards wizard) {
-        try{
+        try {
             File myObj = new File("./src/main/resources/assistantCards.txt");
             Scanner myReader = new Scanner(myObj);
             String data = myReader.nextLine();
@@ -39,7 +39,7 @@ public class AssistantDeck implements Serializable {
         return;
     }
 
-    public void removeCard(AssistantCard card){
+    public void removeCard(AssistantCard card) {
         for(AssistantCard c : this.getDeck()) {
             if(card.getName() == c.getName()){
                 deck.remove(c);
@@ -48,7 +48,7 @@ public class AssistantDeck implements Serializable {
         }
     }
 
-    public List<AssistantCard> getDeck(){
+    public List<AssistantCard> getDeck() {
         return deck;
     }
 }

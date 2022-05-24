@@ -8,7 +8,7 @@ public class ExpertModeAnswer implements Answer {
     }
 
     @Override
-    public Object getMessage() {
+    public String getMessage() {
         return expertModeAnswer;
     }
 }
