@@ -9,6 +9,8 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+
 
 import java.awt.*;
 import java.util.HashMap;
