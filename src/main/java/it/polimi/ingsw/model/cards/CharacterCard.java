@@ -31,10 +31,20 @@ public class CharacterCard implements Serializable {
 
     public ArrayList<Student> getStudents() { return students; }
 
-    public void setStudents(Student stud){
+    public void setStudents(Student stud) {
         if(students == null) students = new ArrayList<Student>();
         students.add(stud);
     }
 
-    public int getInitialCost(){ return initialCost; }
+    public int getInitialCost() { return initialCost; }
+
+    public void removeStudent(Student stud) {
+        students.remove(stud);
+    }
+
+    public void addStudent(Student stud) {
+        students.add(stud);
+    }
+
+
 }

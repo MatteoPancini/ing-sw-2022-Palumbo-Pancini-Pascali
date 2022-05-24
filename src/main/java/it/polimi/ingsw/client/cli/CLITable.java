@@ -27,10 +27,15 @@ public class CLITable {
     }
 
     public void setHeader(String header) {
-        for(int i=0; i < this.headers.length; i++) {
-            if(this.headers[i]!=null) {
-                headers[i] = header;
+        if(this.headers!=null) {
+            for (int i = 0; i < this.headers.length; i++) {
+                if (this.headers[i] != null) {
+                    headers[i] = header;
+                }
             }
+        } else {
+            headers = new String[200];
+            headers[0] = header;
         }
     }
     public void setHeaders(String... headers) {
@@ -92,13 +97,13 @@ public class CLITable {
         System.out.println();
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         //test code
         CLITable st = new CLITable();
         //st.setRightAlign(true);//if true then cell text is right aligned
-        st.setShowVerticalLines(true);
+        //st.setShowVerticalLines(true);
         st.setHeaders("rosso", "giallo", "blu");
         st.addRow("1", "3", "0");
         st.print();
-    } */
+    }
 }

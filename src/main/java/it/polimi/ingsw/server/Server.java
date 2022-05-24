@@ -7,6 +7,8 @@ import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import java.io.IOException;
 
-
+//TODO M -> sistemare le riconnessioni
 public class Server {
     private final ServerSocketHandler serverSocketHandler;
 
@@ -99,6 +101,10 @@ public class Server {
                 duplicateNicknameError.setServerAnswer(new ServerError(ServerErrorTypes.DUPLICATENICKNAME));
                 socketClientConnection.sendServerMessage(duplicateNicknameError);
                 return null;
+            } else {
+                //TODO M -> RIAGGIUNGI PLAYER AL GIOCO
+                //Attenzione alla gestione delle varie hashmap, che potrebbero risultare comode
+
             }
         }
 
@@ -109,6 +115,7 @@ public class Server {
         getGameFromID(clientID).unregisterPlayer(clientID);
         VirtualClientView client = idMapVirtualClient.get(clientID);
         System.out.println("Unregistering client " + client.getClientNickname() + "...");
+        //TODO M -> potrebbe starci di non rimuovere tutto, così da poterlo far rigiocare, tanto si basa tutto su activePlayers
         idMapVirtualClient.remove(clientID);
         nicknameMapID.remove(client.getClientNickname());
         waitingPlayersConnection.remove(virtualClientToClientConnection.get(client));
@@ -181,6 +188,10 @@ public class Server {
 
             if(gameHandler.isTeamMode()) {
                 gameHandler.setupTeams();
+            } else {
+                for(Player p : gameHandler.getGame().getPlayers()) {
+                    p.setBoard(new SchoolBoard(p.getPlayerID()));
+                }
             }
 
 

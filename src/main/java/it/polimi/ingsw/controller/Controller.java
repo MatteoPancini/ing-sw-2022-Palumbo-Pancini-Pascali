@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.model.enumerations.Characters;
+import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.DiningRoom;
@@ -171,23 +173,26 @@ public class Controller implements PropertyChangeListener {
 
 
             case "PickCharacter" -> {
-                //TODO GIGIOX -> QUI BISOGNA CAPIRE CHIAMARE I METODI DI "ActionController" che fanno le azioni dei personaggi
-                /*
-                if(evt.getNewValue() instanceof Centaur) actionController.xxx;
-                else if(evt.getNewValue() instanceof Farmer) actionController.xxx;
-                else if(evt.getNewValue() instanceof Fungarus) actionController.xxx;
-                else if(evt.getNewValue() instanceof GrannyHerbs) actionController.xxx;
-                else if(evt.getNewValue() instanceof Herald) actionController.xxx;
-                else if(evt.getNewValue() instanceof Jester) actionController.xxx;
-                else if(evt.getNewValue() instanceof Knight) actionController.xxx;
-                else if(evt.getNewValue() instanceof MagicPostman) actionController.xxx;
-                else if(evt.getNewValue() instanceof Minestrel) actionController.xxx;
-                else if(evt.getNewValue() instanceof Monk) actionController.xxx;
-                else if(evt.getNewValue() instanceof SpoiledPrincess) actionController.xxx;
-                else if(evt.getNewValue() instanceof Thief) actionController.xxx;
+
+                if(evt.getNewValue() == Characters.HERALD) expertController.heraldEffect();
+                else if(evt.getNewValue() == Characters.KNIGHT) expertController.knightEffect();
+                else if(evt.getNewValue() == Characters.CENTAUR) expertController.centaurEffect();
+                else if(evt.getNewValue() == Characters.FARMER) expertController.farmerEffect();
+                else if(evt.getNewValue() == Characters.FUNGARUS) expertController.fungarusEffect();
+                else if(evt.getNewValue() == Characters.JESTER) expertController.jesterEffect();
+                else if(evt.getNewValue() == Characters.THIEF) expertController.thiefEffect();
+                else if(evt.getNewValue() == Characters.MINESTREL) expertController.minestrelEffect();
+                else if(evt.getNewValue() == Characters.MONK) expertController.monkEffect();
+                else if(evt.getNewValue() == Characters.GRANNY_HERBS) expertController.grannyHerbsEffect();
+                else if(evt.getNewValue() == Characters.MAGIC_POSTMAN) expertController.magicPostmanEffect();
+                else if(evt.getNewValue() == Characters.SPOILED_PRINCESS) expertController.spoiledPrincessEffect();
 
 
-                 */
+
+            }
+
+            case "PickPawnType" -> {
+                turnController.setPawnTypeChosen((PawnType) evt.getNewValue());
             }
 
             case "CheckInfluence" -> {

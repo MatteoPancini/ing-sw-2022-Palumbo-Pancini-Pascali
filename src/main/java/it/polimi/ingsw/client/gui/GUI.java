@@ -2,10 +2,17 @@ package it.polimi.ingsw.client.gui;
 
 import com.sun.scenario.effect.Blend;
 import it.polimi.ingsw.client.ActionHandler;
+import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.ListenerInterface;
 import it.polimi.ingsw.client.ModelView;
 import it.polimi.ingsw.client.gui.controllers.GUIController;
+import it.polimi.ingsw.client.gui.controllers.LoadingController;
+import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
+import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
+import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.model.Game;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -17,6 +24,7 @@ import javafx.util.Duration;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 
@@ -24,9 +32,11 @@ import java.util.*;
 public class GUI extends Application implements ListenerInterface {
 
 
-    private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private final ModelView modelView;
     private final ActionHandler actionHandler;
+    private ClientConnection clientConnection;
+
     private boolean activeGame;
     private Stage stage;
     private Scene currentScene;
@@ -38,7 +48,7 @@ public class GUI extends Application implements ListenerInterface {
 
     private static final String MAIN_MENU = "mainMenu.fxml";
     private static final String SETUP = "setup.fxml";
-    private static final String LOADING_PAGE = "loadingPage.fxml";
+    private static final String LOADING_PAGE = "loading.fxml";
     private static final String WIZARD_MENU = "wizardMenu.fxml";
     private static final String MAIN_SCENE = "mainScene.fxml";
 
@@ -60,6 +70,9 @@ public class GUI extends Application implements ListenerInterface {
     }
 
 
+    public PropertyChangeSupport getVirtualClient() {
+        return virtualClient;
+    }
 
     public void run() {
         stage.setTitle("Eriantys");
@@ -76,6 +89,8 @@ public class GUI extends Application implements ListenerInterface {
 
          */
         //musica
+
+        /*
         Media pick = new Media(Objects.requireNonNull(getClass().getClassLoader()
                 .getResource("media/Epic_Battle_Speech.mp3")).toExternalForm());
         mediaPlayer = new MediaPlayer(pick);
@@ -86,6 +101,8 @@ public class GUI extends Application implements ListenerInterface {
             mediaPlayer.seek(Duration.ZERO);
             mediaPlayer.play();
         });
+
+         */
 
     }
 
@@ -100,6 +117,17 @@ public class GUI extends Application implements ListenerInterface {
         //currentScene.heightProperty().addListener(resize.getHeightListener());
     }
 
+    public void changeStage(String newScene) {
+        currentScene = nameMapScene.get(newScene);
+        stage.setScene(currentScene);
+        stage.show();
+        /*
+        ResizeHandler resize = new ResizeHandler((Pane) currentScene.lookup("#mainPane"));
+        currentScene.widthProperty().addListener(resize.getWidthListener());
+        currentScene.heightProperty().addListener(resize.getHeightListener());
+
+         */
+    }
 
     @Override
     public void start(Stage stage) {
@@ -111,24 +139,100 @@ public class GUI extends Application implements ListenerInterface {
 
 
     public void setupGui() {
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, MAIN_SCENE));
+        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE));
         try {
             for(String pathFxml : fxmlList) {
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + pathFxml));
                 nameMapScene.put(pathFxml, new Scene(loader.load()));
                 GUIController controller = loader.getController();
+                controller.setGui(this);
                 nameMapController.put(pathFxml, controller);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         currentScene = nameMapScene.get(MAIN_MENU);
     }
 
+    public GUIController getControllerFromName(String name) {
+        return nameMapController.get(name);
+    }
+
+    public ActionHandler getActionHandler() {
+        return actionHandler;
+    }
+
+    public ClientConnection getClientConnection() {
+        return clientConnection;
+    }
+
+    public void setClientConnection(ClientConnection clientConnection) {
+        this.clientConnection = clientConnection;
+    }
+
+    public void initialGamePhaseHandler(String serverCommand) {
+        //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
+        switch(serverCommand) {
+
+            case "RequestPlayerNumber" -> Platform.runLater(() -> {
+                LoadingController controller = (LoadingController) getControllerFromName(LOADING_PAGE);
+                controller.askPlayerNumber(((NumOfPlayerRequest) modelView.getServerAnswer()).getMessage());
+            });
+
+            case "ExpertModeAnswer" -> Platform.runLater(() -> {
+                LoadingController controller = (LoadingController) getControllerFromName(LOADING_PAGE);
+                controller.askExpertMode(((ExpertModeAnswer) modelView.getServerAnswer()).getMessage());
+            }) ;
+            case "RequestWizard" -> Platform.runLater(() -> {
+                LoadingController controller = (LoadingController) getControllerFromName(LOADING_PAGE);
+                controller.askWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
+            });
+
+            default -> System.out.println("Nothing to do");
+
+        }
+    }
+
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(PropertyChangeEvent changeEvent) {
+        String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
+        //System.out.println("PropertyChange arrivato: " + serverCommand);
+        switch(changeEvent.getPropertyName()) {
+            case "InitialGamePhase" -> {
+                assert serverCommand != null;
+                //System.out.println("Sono in property change e ho letto:" + serverCommand);
+                initialGamePhaseHandler(serverCommand);
+            }
+            /*
+            case "DynamicAnswer" -> //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
+                    showServerMessage(modelView.getServerAnswer());
+            case "ActionPhase" -> {
+                assert serverCommand != null;
+                actionHandler.makeAction(serverCommand);
+            }
+            case "UpdateModelView" -> {
+                assert serverCommand != null;
+                modelView.setGameCopy((Game) changeEvent.getNewValue());
+                showIslands();
+                showClouds();
+                showAvailableCharacters();
+                showMotherNature();
+                showCoins();
+                showDiningRooms();
+            }
+            case "WinMessage" -> {
+                assert serverCommand != null;
+                showWinMessage();
+            }
+            case "LoseMessage" -> {
+                assert serverCommand != null;
+                showLoseMessage(changeEvent.getNewValue().toString());
+            }
 
+             */
+            default -> System.out.println("Unknown answer from server");
+        }
     }
 }
