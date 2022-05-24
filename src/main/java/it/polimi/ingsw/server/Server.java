@@ -115,6 +115,7 @@ public class Server {
         getGameFromID(clientID).unregisterPlayer(clientID);
         VirtualClientView client = idMapVirtualClient.get(clientID);
         System.out.println("Unregistering client " + client.getClientNickname() + "...");
+        //TODO M -> potrebbe starci di non rimuovere tutto, così da poterlo far rigiocare, tanto si basa tutto su activePlayers
         idMapVirtualClient.remove(clientID);
         nicknameMapID.remove(client.getClientNickname());
         waitingPlayersConnection.remove(virtualClientToClientConnection.get(client));
