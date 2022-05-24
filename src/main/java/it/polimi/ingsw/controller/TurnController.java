@@ -125,10 +125,9 @@ public class TurnController {
                 "|  _/| || o || \\\\ || || _| | |( (_ | o || | | |( o )| \\\\ | |  _/|   || o |\\_ \\| _| \n" +
                 "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
                 "                                                                                   ", false));
+        putStudentsOnCloud();
 
         gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
-
-        putStudentsOnCloud();
 
         askAssistantCard();
 
@@ -213,6 +212,7 @@ public class TurnController {
                 controller.getGame().getGameBoard().removeStudents(0);
             }
             cloud.setStudents(newStudents);
+            System.out.println("Cloud " + controller.getGame().getGameBoard().getClouds().get(0).getStudents().get(0));
         }
     }
 

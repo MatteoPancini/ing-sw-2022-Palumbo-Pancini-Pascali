@@ -344,37 +344,43 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
     public void showCoins() {
-        System.out.println(">You have " + ANSI_YELLOW + modelView.getGameCopy().getCurrentPlayer().getCoins() + " coins left." + ANSI_RESET);
+        if (modelView.getGameCopy().isExpertMode()) {
+            System.out.println(">You have " + ANSI_YELLOW + modelView.getGameCopy().getCurrentPlayer().getCoins() + " coins left." + ANSI_RESET);
+        }
     }
-    public int[] getPlayerDiningRoom(int id) {
+    public int[] getPlayerDiningRoom(String name) {
         int r=0, p=0, g=0, y=0, b=0;
         int[] students = new int[11];
-        for(Table t : modelView.getGameCopy().getPlayers().get(id).getBoard().getDiningRoom().getDiningRoom()) {
-            for(int i=0; i < t.getTable().size(); i++) {
-                if(t.getTable().get(i).hasStudent()) {
-                    if(t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
-                        b++;
-                    }
-                    else if(t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
-                        g++;
-                    }
-                    else if(t.getTable().get(i).getBoardCellType() == PawnType.RED) {
-                        r++;
-                    }
-                    else if(t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
-                        p++;
-                    }
-                    else if(t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
-                        y++;
+        for(Player pl : modelView.getGameCopy().getActivePlayers()) {
+            if(pl.getNickname().equals(name)) {
+                for(Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
+                    for(int i=0; i < t.getTable().size(); i++) {
+                        if(t.getTable().get(i).hasStudent()) {
+                            if(t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                                b++;
+                            }
+                            else if(t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                                g++;
+                            }
+                            else if(t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                                r++;
+                            }
+                            else if(t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                                p++;
+                            }
+                            else if(t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                                y++;
+                            }
+                        }
                     }
                 }
+                students[0] = b;
+                students[1] = g;
+                students[2] = r;
+                students[3] = p;
+                students[4] = y;
+                }
             }
-        }
-        students[0] = b;
-        students[1] = g;
-        students[2] = r;
-        students[3] = p;
-        students[4] = y;
         return students;
     }
 
@@ -392,9 +398,12 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }*/
 
-    public void showDiningRooms() {
+    public void showOtherDiningRooms() {
         System.out.println(">Take a look at the other players' dining rooms!");
-        CLITable st = new CLITable();
+        for (Player p : modelView.getGameCopy().getActivePlayers()) {
+            showDiningRoom(p);
+        }
+        /*CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
         ArrayList<Player> players = modelView.getGameCopy().getActivePlayers();
         if(players.size()==4) {
@@ -412,7 +421,18 @@ public class CLI implements Runnable, ListenerInterface {
             st.addRow(ANSI_PURPLE + "Pink: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[3]) + ANSI_RESET);
             st.addRow(ANSI_YELLOW + "Yellow: ", Integer.toString(getPlayerDiningRoom(p.getPlayerID())[4]) + ANSI_RESET);
             st.print();
-        }
+        }*/
+    }
+
+    public void showDiningRoom(Player p) {
+        CLITable st = new CLITable();
+        st.setHeaders(p.getNickname().toString());
+        st.addRow(ANSI_BLUE + "Blue: " + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "Green: " + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + ANSI_RESET);
+        st.addRow(ANSI_RED + "Red: " + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "Pink: " + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "Yellow: " + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + ANSI_RESET);
+        st.print();
     }
 
     public void showPawnType() {
@@ -719,7 +739,7 @@ public class CLI implements Runnable, ListenerInterface {
                 showAvailableCharacters();
                 showMotherNature();
                 showCoins();
-                showDiningRooms();
+                showOtherDiningRooms();
             }
             case "WinMessage" -> {
                 assert serverCommand != null;

@@ -19,10 +19,6 @@ public class Player implements Serializable {
     private int coins;
     private int islandInfluence;
 
-    public String getNicknamePlayer() {
-        return nicknamePlayer;
-    }
-
     public boolean isPlaying() {
         return isPlaying;
     }
