@@ -7,6 +7,7 @@ import it.polimi.ingsw.client.ListenerInterface;
 import it.polimi.ingsw.client.ModelView;
 import it.polimi.ingsw.client.gui.controllers.GUIController;
 import it.polimi.ingsw.client.gui.controllers.LoadingController;
+import it.polimi.ingsw.client.gui.controllers.ResizeController;
 import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
@@ -81,13 +82,13 @@ public class GUI extends Application implements ListenerInterface {
         stage.show();
 
         //resizing
-        /*
-        ResizeHandler resize = new ResizeHandler((Pane) currentScene.lookup("#mainPane"));
+
+        ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
 
 
-         */
+
         //musica
 
         /*
@@ -112,21 +113,21 @@ public class GUI extends Application implements ListenerInterface {
         stage.setScene(currentScene);
 
         //resizing
-        //ResizeHandler resize = new ResizeHandler((Pane) currentScene.lookup("#mainPane"));
-        //currentScene.widthProperty().addListener(resize.getWidthListener());
-        //currentScene.heightProperty().addListener(resize.getHeightListener());
+        ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
+        currentScene.widthProperty().addListener(resize.getWidthListener());
+        currentScene.heightProperty().addListener(resize.getHeightListener());
     }
 
     public void changeStage(String newScene) {
         currentScene = nameMapScene.get(newScene);
         stage.setScene(currentScene);
         stage.show();
-        /*
-        ResizeHandler resize = new ResizeHandler((Pane) currentScene.lookup("#mainPane"));
+
+        ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
 
-         */
+
     }
 
     @Override
