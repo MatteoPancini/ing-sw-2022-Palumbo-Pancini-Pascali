@@ -126,8 +126,16 @@ public class TurnController {
                 "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
                 "                                                                                   ", false));
         putStudentsOnCloud();
+        GameCopy gameCopy = new GameCopy(controller.getGame());
+        if(gameCopy.getMessage().getCurrentPlayer().getAssistantDeck().getDeck() == null) {
+            System.out.println("Deck null");
+        }
 
-        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
+        for(AssistantCard a : gameCopy.getMessage().getCurrentPlayer().getAssistantDeck().getDeck()){
+            System.out.println(a.getName());
+        }
+        gameHandler.sendBroadcast(gameCopy);
+
 
         askAssistantCard();
 
@@ -234,6 +242,7 @@ public class TurnController {
             resetPianificationPhase();
 
             GameCopy gameCopy = new GameCopy(controller.getGame());
+
             gameHandler.sendBroadcast(gameCopy);
 
             startActionPhase();

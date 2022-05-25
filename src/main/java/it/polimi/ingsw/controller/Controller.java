@@ -27,7 +27,6 @@ public class Controller implements PropertyChangeListener {
     private final TurnController turnController;
     private final ExpertController expertController;
 
-
     public Controller(Game game, GameHandler gameHandler) {
         this.game = game;
         this.gameHandler = gameHandler;

@@ -13,12 +13,13 @@ import java.util.ArrayList;
 public class ModelView {
     private CLI cli;
     private GUI gui;
-
     private Answer serverAnswer;
     private boolean activeInput = false;
     private Game gameCopy;
     private String playerNickname;
     private boolean startPlaying = false;
+    private String wizardName;
+    private boolean gameStarted;
 
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
@@ -56,9 +57,6 @@ public class ModelView {
         this.cli = cli;
     }
 
-    private String wizardName;
-    private boolean gameStarted;
-
     public ModelView(CLI cli)  {
         this.cli = cli;
     }
@@ -67,7 +65,6 @@ public class ModelView {
         this.gui = gui;
         this.cli = null;
     }
-
 
     public Answer getServerAnswer() {
         return serverAnswer;
@@ -80,7 +77,6 @@ public class ModelView {
     public Game getGameCopy() {
         return gameCopy;
     }
-
 
     public boolean getActiveInput() {
         return activeInput;
@@ -141,8 +137,6 @@ public class ModelView {
         return green;
     }
 
-
-
     public String hasYellowProfessor(Player p) {
         String yellowProfessor;
         if(p.getBoard().getProfessorTable().getProfessorTable().get(4).hasProfessor()) {
@@ -197,7 +191,6 @@ public class ModelView {
         }
         return redProfessor;
     }
-
 
     public void setActivateInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;

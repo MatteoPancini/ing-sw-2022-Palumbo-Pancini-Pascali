@@ -462,8 +462,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void printPlayerDeck() {
         System.out.println(">Take a look at your deck before choosing: ");
-        for (AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-            System.out.println("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
+        for (AssistantCard c : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
+            System.out.println("(Name: " + String.valueOf(c.getName()) + ", " + "Value: " + c.getValue() + ", " + "Moves: " + c.getMoves());
         }
     }
 
@@ -472,7 +472,7 @@ public class CLI implements Runnable, ListenerInterface {
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size() > 0) {
             showLastAssistantsUsed();
         }
-        System.out.println(">Pick an assistant from your deck by typing its name.: ");
+        System.out.println(">Pick an assistant from your deck by typing its name: ");
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()>=1) {
             System.out.println(">Remember: you can't play an assistant already played by another player!");
         }

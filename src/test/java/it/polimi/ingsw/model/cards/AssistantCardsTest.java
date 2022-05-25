@@ -59,6 +59,11 @@ public class AssistantCardsTest {
         assertEquals(10, deckTest.getDeck().size());
         deckTest.removeCard(assistant1);
         assertEquals(9, deckTest.getDeck().size());
+
+        player1.setWizard(Wizards.FOREST);
+        for(AssistantCard a : player1.getAssistantDeck().getDeck()){
+            System.out.println(a.getName() + " " + a.getMoves() + " " + a.getValue() + " " + a.getOwner().getNickname());
+        }
     }
 
 }
