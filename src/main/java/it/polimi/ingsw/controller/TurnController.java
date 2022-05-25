@@ -126,14 +126,9 @@ public class TurnController {
                 "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
                 "                                                                                   ", false));
         putStudentsOnCloud();
-        GameCopy gameCopy = new GameCopy(controller.getGame());
-        if(gameCopy.getMessage().getCurrentPlayer().getAssistantDeck().getDeck() == null) {
-            System.out.println("Deck null");
-        }
 
-        for(AssistantCard a : gameCopy.getMessage().getCurrentPlayer().getAssistantDeck().getDeck()){
-            System.out.println(a.getName());
-        }
+        GameCopy gameCopy = new GameCopy(controller.getGame());
+
         gameHandler.sendBroadcast(gameCopy);
 
 
@@ -561,5 +556,3 @@ public class TurnController {
         return false;
     }
 }
-
-

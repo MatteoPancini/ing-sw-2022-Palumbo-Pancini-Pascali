@@ -76,7 +76,6 @@ public class Controller implements PropertyChangeListener {
             colorsCounter4P = 0;
         }
 
-
         for(Player p : game.getPlayers()) {
             //System.out.println("Inizio setup di " + p.getNickname());
 
@@ -91,17 +90,17 @@ public class Controller implements PropertyChangeListener {
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
+                    if(colorsCounter3P < 2) colorsCounter3P++;
                 }
-                colorsCounter3P++;
             } else if(game.getPlayersNumber() == 2) {
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
+                    if(colorsCounter2P < 1) colorsCounter2P++;
                 }
-                colorsCounter2P++;
             } else if(game.getPlayersNumber() == 4) {
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
-                    colorsCounter4P++;
+                    if(colorsCounter4P < 3) colorsCounter4P++;
                 }
             }
         }

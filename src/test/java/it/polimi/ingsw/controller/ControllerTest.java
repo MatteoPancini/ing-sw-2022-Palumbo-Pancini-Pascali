@@ -56,8 +56,13 @@ public class ControllerTest {
     @BeforeEach
     void initialization() {
         game = new Game();
-        game.createNewPlayer(new PlayerStub("Francesco", 1));
-        game.createNewPlayer(new PlayerStub("Matteo", 2));
+        game.setPlayersNumber(2);
+        PlayerStub player1 = new PlayerStub("Francesco", 1);
+        PlayerStub player2 = new PlayerStub("Matteo", 2);
+        game.createNewPlayer(player1);
+        game.createNewPlayer(player2);
+        game.addPlayer(player1);
+        game.addPlayer(player2);
         game.setCurrentPlayer(game.getActivePlayers().get(0));
         cStub = new ControllerStub(game, new GameHandlerStub(new Server()));
     }
@@ -65,6 +70,10 @@ public class ControllerTest {
     @Test
     void setupTest() {
         cStub.newSetupGame();
+        System.out.println(cStub.getGame().getPlayersNumber());
+        System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
+        //cStub.getGame().switchToNextPlayer();
+        //System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
     }
 
     @Test

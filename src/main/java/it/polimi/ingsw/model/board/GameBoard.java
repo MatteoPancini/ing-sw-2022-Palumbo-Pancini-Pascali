@@ -20,6 +20,7 @@ public class GameBoard implements Serializable {
 
     public GameBoard (Game game) {
         this.game = game;
+
         clouds = new ArrayList<CloudTile>();
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));

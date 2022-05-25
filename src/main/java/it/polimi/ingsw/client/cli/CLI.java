@@ -278,6 +278,7 @@ public class CLI implements Runnable, ListenerInterface {
             out.println("Name: " + ass.getName() + "Value: " + ass.getValue() + "Maximum moves: " + ass.getMoves());
         }
     }*/
+
     public Player[] getPlayersByAssistantUsed() {
         Player[] players = new Player[4];
         for(int i=0; i < modelView.getGameCopy().getActivePlayers().size() ; i++) {
@@ -304,7 +305,7 @@ public class CLI implements Runnable, ListenerInterface {
                 nicknames[2].getChosenAssistant().getName().toString(), nicknames[3].getChosenAssistant().getName().toString());
         st.print();
     }
-    public void printStudentsOnCLoud(int ID) {
+    public void printStudentsOnCloud(int ID) {
         for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
             System.out.print("-" + s.getType());
         }
@@ -313,7 +314,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Clouds status of this turn: ");
         for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
             System.out.println("ID: " + c.getID() + "Students: ");
-            printStudentsOnCLoud(c.getID());
+            printStudentsOnCloud(c.getID());
         }
     }
 
@@ -572,8 +573,6 @@ public class CLI implements Runnable, ListenerInterface {
                 System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
                 //out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
-
-
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid parameter, it must be a numeric value.");

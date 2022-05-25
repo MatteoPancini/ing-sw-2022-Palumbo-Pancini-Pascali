@@ -69,9 +69,10 @@ public class Island implements Serializable {
             island.setStudents(null);
         } else {
             island.getMergedTowers().add(this.tower);
-            for(Student s : island.getStudents()) {
+            for(Student s : getStudents()) {
                 island.addStudent(s);
             }
+            island.mergedIsland.add(this);
             this.mergedIsland = null;
             this.students = null;
         }
@@ -152,8 +153,8 @@ public class Island implements Serializable {
     public void moveTowerToArea(TowerArea towerArea) {
         for(Tower t : mergedTowers) {
             towerArea.addTowers(t);
-            mergedTowers.remove(t);
         }
 
+        mergedTowers.clear();
     }
 }

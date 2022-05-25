@@ -19,7 +19,7 @@ public class AssistantDeck implements Serializable {
     private static List<AssistantCard> deck = new ArrayList<AssistantCard>();
     public AssistantDeck(Wizards wizard) {
         try {
-            File myObj = new File("src/main/java/it/polimi/ingsw/model/cards/AssistantDeck.java");
+            File myObj = new File("src/main/resources/cards/assistantCards.txt");
             Scanner myReader = new Scanner(myObj);
             String data = myReader.nextLine();
 

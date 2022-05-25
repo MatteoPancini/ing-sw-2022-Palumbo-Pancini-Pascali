@@ -115,8 +115,8 @@ public class Player implements Serializable {
         this.assistantDeck = new AssistantDeck(wizard);
         for(AssistantCard a : assistantDeck.getDeck()){
             a.setOwner(this);
-            System.out.println(a.getName() + " " + a.getOwner().getNickname());
         }
+
     }
 
     public Wizards getWizard() {

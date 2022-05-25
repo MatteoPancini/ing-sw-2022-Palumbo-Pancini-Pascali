@@ -18,14 +18,6 @@ public class Game implements Serializable {
     private Player currentPlayer;
     private int currentPlayerNumber;
 
-    public int getCurrentPlayerNumber() {
-        return currentPlayerNumber;
-    }
-
-    public void setCurrentPlayerNumber(int currentPlayerNumber) {
-        this.currentPlayerNumber = currentPlayerNumber;
-    }
-
     public Game() {
         this.gameBoard = new GameBoard(this);
     }
@@ -61,6 +53,7 @@ public class Game implements Serializable {
         players.add(newPlayer);
         activePlayers.add(newPlayer);
     }
+
     public void createNewPlayer(Player newPlayer) {
         players.add(newPlayer);
         activePlayers.add(newPlayer);
@@ -124,8 +117,6 @@ public class Game implements Serializable {
         return gameBoard;
     }
 
-
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -143,8 +134,8 @@ public class Game implements Serializable {
 
     public void setCurrentPlayer(Player newPlayer) {
         currentPlayer = newPlayer;
+        currentPlayerNumber = activePlayers.indexOf(currentPlayer);
     }
-
 
     public boolean canPlayAssistant(Assistants ass) {
         for (AssistantCard card : gameBoard.getLastAssistantUsed()) {
@@ -160,7 +151,7 @@ public class Game implements Serializable {
     }
 
     public void switchToNextPlayer() {
-        currentPlayerNumber = (currentPlayerNumber == activePlayers.size() - 1 || currentPlayerNumber < activePlayers.size() - 1) ? 0 : currentPlayerNumber + 1;
+        currentPlayerNumber = (currentPlayerNumber == (activePlayers.size() - 1)) ? 0 : currentPlayerNumber + 1;
         setCurrentPlayer(activePlayers.get(currentPlayerNumber));
     }
 
