@@ -1,8 +1,14 @@
 package it.polimi.ingsw.messages.servertoclient;
 
 public class StartAction implements Answer {
+    String startMessage;
+
+    public StartAction() {
+        this.startMessage = "It's your turn :)";
+
+    }
     @Override
-    public Object getMessage() {
-        return null;
+    public String getMessage() {
+        return startMessage;
     }
 }

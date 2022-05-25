@@ -16,6 +16,8 @@ public class PickStudent implements UserAction {
         this.chosenStudent = new Student(stud.getType());
     }
 
+
+
     public Action getAction() {
         return action;
     }
@@ -23,5 +25,7 @@ public class PickStudent implements UserAction {
     public Student getChosenStudent() {
         return chosenStudent;
     }
+
+
 }
 

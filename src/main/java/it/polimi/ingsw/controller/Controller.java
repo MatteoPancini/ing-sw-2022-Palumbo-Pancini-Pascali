@@ -33,12 +33,17 @@ public class Controller implements PropertyChangeListener {
         turnController = new TurnController(this, gameHandler);
         if(gameHandler.getExpertMode()) {
             expertController = new ExpertController(game, game.getGameBoard(), turnController);
+            turnController.setExpertController(expertController);
         } else
             expertController = null;
     }
 
     public Game getGame() {
         return game;
+    }
+
+    public ExpertController getExpertController() {
+        return expertController;
     }
 
     public void setPlayerWizard(int playerID, Wizards chosenWizard) {
@@ -164,7 +169,6 @@ public class Controller implements PropertyChangeListener {
 
             case "PickDestinationIsland" -> turnController.moveStudentToIsland((Island) evt.getNewValue());
 
-
             case "PickMovesNumber" -> turnController.moveMotherNature((Integer) evt.getNewValue());
 
             case "PickCloud" -> turnController.fromCloudToEntrance((CloudTile) evt.getNewValue());
@@ -184,13 +188,15 @@ public class Controller implements PropertyChangeListener {
                 else if(evt.getNewValue() == Characters.GRANNY_HERBS) expertController.grannyHerbsEffect();
                 else if(evt.getNewValue() == Characters.MAGIC_POSTMAN) expertController.magicPostmanEffect();
                 else if(evt.getNewValue() == Characters.SPOILED_PRINCESS) expertController.spoiledPrincessEffect();
+            }
 
-
-
+            case "GrannyHerbsTile" -> {
+                expertController.setGrannyHerbsTile((Island) evt.getNewValue());
             }
 
             case "PickPawnType" -> {
-                turnController.setPawnTypeChosen((PawnType) evt.getNewValue());
+                expertController.setPawnTypeChosen((PawnType) evt.getNewValue());
+                expertController.activeThiefEffect();
             }
 
             case "CheckInfluence" -> {

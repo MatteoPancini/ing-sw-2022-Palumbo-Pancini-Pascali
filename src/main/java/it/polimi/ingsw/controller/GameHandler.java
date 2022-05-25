@@ -256,6 +256,10 @@ public class GameHandler {
 
             }
 
+            case "GrannyHerbsTile" -> {
+                gameHandlerListener.firePropertyChange("GrannyHerbsTile", null, ((PickDestination) userAction).getChosenIsland());
+            }
+
             case "PickMovesNumber" -> gameHandlerListener.firePropertyChange("PickMovesNumber", null, ((PickMovesNumber) userAction).getMoves());
 
             case "PickCloud" -> gameHandlerListener.firePropertyChange("PickCloud", null, ((PickCloud) userAction).getChosenCloud());

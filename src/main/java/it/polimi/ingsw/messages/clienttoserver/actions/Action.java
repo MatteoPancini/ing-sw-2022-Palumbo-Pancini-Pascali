@@ -8,5 +8,6 @@ public enum Action {
     PICK_STUDENT,
     PICK_DESTINATION,
     PICK_ISLAND,
-    PICK_PAWN_TYPE;
+    PICK_PAWN_TYPE,
+    PICK_MONK_STUDENT;
 }

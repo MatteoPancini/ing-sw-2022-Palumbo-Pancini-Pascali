@@ -21,6 +21,7 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
+import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
 import java.io.PrintStream;
@@ -48,7 +49,7 @@ public class CLI implements Runnable, ListenerInterface {
     //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
-    private final boolean activeGame;
+    private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
 
@@ -62,11 +63,20 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public String printTower(Island isl) {
+        String towers = "";
+
         if(isl.hasTower()) {
-            return "yes";
+            for(Tower t : isl.getMergedTowers()) {
+                towers = towers ;
+            }
         }
-        return "false";
+        return towers;
     }
+
+    public void setActiveGame(boolean activeGame) {
+        this.activeGame = activeGame;
+    }
+
     public Scanner getIn() {
         return in;
     }
@@ -265,9 +275,9 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Here's a little description of the islands in the game board: ");
         CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
-        st.setHeaders("Island ID", "Merged Islands", "Students");
+        st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
-            st.addRow(Integer.toString(island.getIslandID()), isMerged(island).toString(), studentsOnIsland(island).toString());
+            st.addRow(Integer.toString(island.getIslandID()), isMerged(island).toString(), studentsOnIsland(island).toString(), printTower(island));
         }
         st.print();
     }
@@ -530,6 +540,14 @@ public class CLI implements Runnable, ListenerInterface {
 
     }
 
+    public void askStudentMonk(CharacterCard monk) {
+        System.out.println(">Choose a student from monk's students: ");
+        for(Student s : monk.getStudents()) {
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+        }
+
+    }
+
     public void showMotherNature() {
         System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
@@ -595,6 +613,13 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Game Over! You lost :(");
         System.out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
     }
+
+    public void endGameMessage() {
+        System.out.println("Thanks to have played Eriantys!");
+        System.out.println("Application will now close...");
+        System.exit(0);
+    }
+
     public void userNicknameSetup() {
         //System.out.println("Entro in usernameSetup");
 
@@ -631,6 +656,7 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener("action", new Parser(clientConnection, modelView));
     }
 
+    /*
     public void noActionsLoop() {
         in.reset();
         String cmd = in.nextLine();
@@ -638,18 +664,28 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.firePropertyChange("noAction", null, cmd);
     }
 
+     */
+
     @Override
     public void run() {
         //System.out.println("Entro in run");
 
         userNicknameSetup();
+        /*
         while (isActiveGame()) {
-            //TODO M e CICIO: QUESTA PARTE E' DA CONTROLLARE SE FUNZIONA E CAMBIARE
+            //TODO: (maybe) permettere di scrivere sempre
             if(modelView.isGameStarted()) {
                 if (!modelView.isStartPlaying()) {
                     System.out.println("Entro dentro all'action");
                     noActionsLoop();
                 }
+            }
+        }
+
+         */
+        while(true) {
+            if(!activeGame) {
+                break;
             }
         }
         in.close();
@@ -710,7 +746,7 @@ public class CLI implements Runnable, ListenerInterface {
         CLI cli = new CLI();
 
         cli.run();
-        System.out.println("Arrivo dopo qui");
+        //System.out.println("Arrivo dopo qui");
 
     }
 
@@ -742,11 +778,16 @@ public class CLI implements Runnable, ListenerInterface {
             }
             case "WinMessage" -> {
                 assert serverCommand != null;
+                setActiveGame(false);
                 showWinMessage();
+                endGameMessage();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
+                setActiveGame(false);
                 showLoseMessage(changeEvent.getNewValue().toString());
+                endGameMessage();
+
             }
             default -> System.out.println("Unknown answer from server");
         }
