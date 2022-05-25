@@ -158,7 +158,6 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
-
     public void actionHandler(Message userMessage) {
         if(userMessage instanceof NicknameChoice) {
             checkConnection((NicknameChoice) userMessage);
@@ -180,7 +179,6 @@ public class SocketClientConnection implements Runnable {
         }
 
     }
-
 
     public void actionHandler(UserAction userAction) {
         if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
@@ -230,12 +228,7 @@ public class SocketClientConnection implements Runnable {
             } else {
                 server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }
-
-
         }
-
-
-
     }
 
     public void setActiveConnection(boolean activeConnection) {

@@ -122,10 +122,6 @@ public class Player implements Serializable {
 
     public void setWizard(Wizards wizard) {
         this.wizard = wizard;
-        this.assistantDeck = new AssistantDeck(wizard);
-        for(AssistantCard a : assistantDeck.getDeck()) {
-            a.setOwner(this);
-        }
     }
 
     public Wizards getWizard() {

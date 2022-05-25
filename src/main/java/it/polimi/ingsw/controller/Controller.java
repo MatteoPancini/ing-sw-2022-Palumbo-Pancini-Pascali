@@ -21,14 +21,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-
-
 public class Controller implements PropertyChangeListener {
     private final Game game;
     private final GameHandler gameHandler;
     private final TurnController turnController;
     private final ExpertController expertController;
-
 
     public Controller(Game game, GameHandler gameHandler) {
         this.game = game;
@@ -52,7 +49,6 @@ public class Controller implements PropertyChangeListener {
     public void setPlayerWizard(int playerID, Wizards chosenWizard) {
         game.getPlayerByID(playerID).setWizard(chosenWizard);
     }
-
 
     public void newSetupGame() {
         System.out.println("Starting setupGame");
@@ -87,16 +83,16 @@ public class Controller implements PropertyChangeListener {
 
 
         for(Player p : game.getPlayers()) {
-            System.out.println("Inizio setup di " + p.getNickname());
+            //System.out.println("Inizio setup di " + p.getNickname());
 
-            System.out.println("metto students nell'entrance");
+            //System.out.println("metto students nell'entrance");
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
                 p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
                 game.getGameBoard().removeStudents(0);
             }
 
-            System.out.println("metto torri");
+            //System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
@@ -113,10 +109,9 @@ public class Controller implements PropertyChangeListener {
                     colorsCounter4P++;
                 }
             }
-
-
         }
-        System.out.println("metto madre natura");
+
+        //System.out.println("metto madre natura");
 
         int maximum = 11;
         SecureRandom r = new SecureRandom();
@@ -131,133 +126,36 @@ public class Controller implements PropertyChangeListener {
             mnPosOpposite = (mnPos + 6) % 12;
         }
 
-        System.out.println("mn = " + mnPos + " mnOpp = " + mnPosOpposite);
+        //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
 
-        for(int s = 1; s < 13; s++) {
-            System.out.println(s);
-
+        for(int s = 1; s <= 12; s++) {
             if(s != mnPos && s != mnPosOpposite) {
                 //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
                 Collections.shuffle(game.getGameBoard().getSetupStudentsBag());
                 game.getGameBoard().getIslands().get(s - 1).addStudent(game.getGameBoard().getSetupStudentsBag().get(0));
                 game.getGameBoard().removeSetupStudents(0);
-                System.out.println("Put student " + game.getGameBoard().getIslands().get(s - 1).getStudents().get(0).getType());
             }
             //n++;
         }
 
+        for(int p = 1; p <= 12; p++){
+            if(p != mnPos && p != mnPosOpposite) {
+                System.out.println(p + ", " + "Student " + game.getGameBoard().getIslands().get(p - 1).getStudents().get(0).getType());
+            }
+
+            if(p == mnPos){
+                System.out.println(p + ", " + "Mother nature is here");
+            }
+
+            if(p == mnPosOpposite){
+                System.out.println(p + ", " + "This island is empty");
+            }
+        }
+
         System.out.println("Finished setupGame");
 
         turnController.startPianificationPhase();
-
-
-
     }
-    /*
-    public void setupGame() {
-        System.out.println("Starting setupGame");
-
-
-
-
-        ArrayList<SchoolBoard> schoolBoards = new ArrayList<SchoolBoard>();
-        for(int p = 1; p <= game.getPlayersNumber(); p++){
-            SchoolBoard newSchoolBoard = new SchoolBoard(p);
-
-            schoolBoards.add(newSchoolBoard);
-            game.getPlayers().get(p - 1).setBoard(newSchoolBoard);
-            game.getPlayers().get(p - 1).setIdPlayer(p);
-        }
-        System.out.println("Created schoolboards");
-
-
-
-
-
-        Collections.shuffle(game.getPlayers());
-        game.setCurrentPlayer(game.getPlayers().get(0));
-
-
-
-        //turnController.putStudentsOnCloud();
-
-        int studentsNumber;
-        if(game.getPlayersNumber() == 3) {
-            studentsNumber = 9;
-        }
-        else {
-            studentsNumber = 7;
-        }
-
-        for(SchoolBoard s : schoolBoards){
-            for(int i = 1; i <= studentsNumber; i++){
-                Collections.shuffle(game.getGameBoard().getStudentsBag());
-                s.getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
-                game.getGameBoard().removeStudents(0);
-            }
-        }
-
-        int towersNumber;
-        ArrayList<TowerColor> allTowerColors = new ArrayList<TowerColor>();
-        allTowerColors.add(TowerColor.WHITE);
-        allTowerColors.add(TowerColor.BLACK);
-        allTowerColors.add(TowerColor.GREY);
-
-        if(game.getPlayersNumber() == 3) {
-            towersNumber = 6;
-            int colorsCounter3P = 0;
-            for(SchoolBoard s : schoolBoards){
-                for(int i = 1; i <= towersNumber; i++) {
-                    s.getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                }
-                colorsCounter3P++;
-            }
-        }
-
-        if(game.getPlayersNumber() == 2) {
-            towersNumber = 8;
-            int colorsCounter2P = 0;
-            for(SchoolBoard s : schoolBoards){
-                for(int k = 1; k <= towersNumber; k++) {
-                    s.getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                }
-                colorsCounter2P++;
-            }
-        }
-
-        if(game.getPlayersNumber() == 4){
-            towersNumber = 8;
-            int colorsCounter4P = 0;
-            for(Player p : game.getPlayers()){
-                if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
-                    p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
-                    colorsCounter4P++;
-                }
-            }
-        }
-
-        int maximum = 11;
-        Random r = new Random();
-        game.getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
-        int n = 1;
-        for(int s = 1; s <= 11; s++){
-            if(n != 6){
-                int pos;
-                pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
-                Collections.shuffle(game.getGameBoard().getStudentsBag());
-                game.getGameBoard().getIslands().get(pos - 1).addStudent(game.getGameBoard().getStudentsBag().get(0));;
-                game.getGameBoard().removeStudents(0);
-            }
-            n++;
-        }
-        System.out.println("Finished setupGame");
-
-        turnController.startPianificationPhase();
-
-    }
-    */
-
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch(evt.getPropertyName()) {
@@ -313,5 +211,3 @@ public class Controller implements PropertyChangeListener {
     }
 
 }
-
-

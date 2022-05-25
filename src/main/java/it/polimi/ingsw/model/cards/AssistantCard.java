@@ -73,17 +73,13 @@ public class AssistantCard implements Serializable {
         }
     }*/
 
-    public Assistants getName() {
-        return name;
-    }
+    public Assistants getName() { return name; }
 
     public int getValue() {
         return orderValue;
     }
 
-    public int getMoves() {
-        return motherNatureMoves;
-    }
+    public int getMoves() { return motherNatureMoves; }
 
     public Player getOwner() {
         return owner;

@@ -16,6 +16,7 @@ public class Game implements Serializable {
     private final ArrayList<Player> players = new ArrayList<>();
     private final ArrayList<Player> activePlayers = new ArrayList<>();
     private Player currentPlayer;
+    private int currentPlayerNumber;
 
     public int getCurrentPlayerNumber() {
         return currentPlayerNumber;
@@ -24,10 +25,6 @@ public class Game implements Serializable {
     public void setCurrentPlayerNumber(int currentPlayerNumber) {
         this.currentPlayerNumber = currentPlayerNumber;
     }
-
-    private int currentPlayerNumber;
-
-
 
     public Game() {
         this.gameBoard = new GameBoard(this);
@@ -59,7 +56,6 @@ public class Game implements Serializable {
     }
 
      */
-
 
     public void addPlayer(Player newPlayer) {
         players.add(newPlayer);
