@@ -31,6 +31,14 @@ public class AssistantCardsTest {
         assistant3 = new AssistantCard(Assistants.CHEETAH, 1, 1);
         deckTest = new AssistantDeck(Wizards.FOREST);
 
+        /*
+        for(AssistantCard a : deckTest.getDeck()){
+            System.out.println(a.getName() + " " + a.getMoves() + " " + a.getValue() );
+
+        }
+
+         */
+
         assertEquals(assistant1.getValue(), deckTest.getDeck().get(3).getValue());
         assertEquals(assistant2.getValue(), deckTest.getDeck().get(2).getValue());
         assertEquals(assistant3.getValue(), deckTest.getDeck().get(4).getValue());
@@ -59,6 +67,15 @@ public class AssistantCardsTest {
         assertEquals(10, deckTest.getDeck().size());
         deckTest.removeCard(assistant1);
         assertEquals(9, deckTest.getDeck().size());
+
+
+
+        player1.setWizard(Wizards.KING);
+        for(AssistantCard a : player1.getAssistantDeck().getDeck()) {
+            System.out.println(a.getName() + " " + a.getMoves() + " " + a.getValue() + " " + a.getWizard() + " " + a.getOwner().getNickname());
+        }
+
+
     }
 
 }

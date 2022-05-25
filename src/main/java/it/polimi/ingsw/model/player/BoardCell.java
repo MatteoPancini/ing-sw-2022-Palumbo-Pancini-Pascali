@@ -42,6 +42,11 @@ public class BoardCell implements Serializable {
     }
 
 
+    public void removeStudent() {
+        this.student = null;
+    }
+
+
     public void setProfessor(Professor professor){
         this.professor = professor;
     }

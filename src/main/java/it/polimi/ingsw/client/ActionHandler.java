@@ -6,6 +6,7 @@ import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.player.Table;
 
 import java.beans.PropertyChangeSupport;
@@ -54,8 +55,11 @@ public class ActionHandler {
             view.firePropertyChange("UpdateModelView", null, answer.getMessage());
         } else if(answer instanceof StartAction) {
             modelView.setStartPlaying(true);
+            cli.showServerMessage(modelView.getServerAnswer());
         } else if(answer instanceof EndAction) {
             modelView.setStartPlaying(false);
+            cli.showServerMessage(modelView.getServerAnswer());
+
         }
     }
 
@@ -86,6 +90,7 @@ public class ActionHandler {
                 cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
 
             }
+
             case "PICK_CHARACTER" -> {
                 cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
 
@@ -98,6 +103,14 @@ public class ActionHandler {
             case "PICK_PAWN_TYPE" -> {
                 cli.askPawnType();
 
+            }
+
+            case "PICK_STUDENT_MONK" -> {
+                for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters().getDeck()) {
+                    if(c.getName().toString() == "MONK") {
+                        cli.askStudentMonk(c);
+                    }
+                }
             }
 
 

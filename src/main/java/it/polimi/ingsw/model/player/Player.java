@@ -9,7 +9,7 @@ public class Player implements Serializable {
     private String nicknamePlayer;
     private int playerID;
     private Wizards wizard;
-    private final AssistantDeck assistantDeck;
+    private AssistantDeck assistantDeck;
     private SchoolBoard board;
     private boolean isPlaying;
     private boolean isWinner;
@@ -122,6 +122,10 @@ public class Player implements Serializable {
 
     public void setWizard(Wizards wizard) {
         this.wizard = wizard;
+        this.assistantDeck = new AssistantDeck(wizard);
+        for(AssistantCard a : assistantDeck.getDeck()) {
+            a.setOwner(this);
+        }
     }
 
     public Wizards getWizard() {

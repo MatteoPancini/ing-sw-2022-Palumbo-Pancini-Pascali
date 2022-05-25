@@ -27,19 +27,6 @@ public class TurnController {
 
     private int studentRequest;
 
-    private boolean centaurEffect;
-
-    private boolean fungarusEffect;
-
-    private PawnType pawnTypeChosen;
-
-    public void setCentaurEffect(boolean centaurEffect) {
-        this.centaurEffect = centaurEffect;
-    }
-
-    public void setFungarusEffect(boolean fungarusEffect) {
-        this.fungarusEffect = fungarusEffect;
-    }
 
     private boolean isActionPhase;
 
@@ -47,11 +34,12 @@ public class TurnController {
 
     private boolean isPianificationPhase;
 
-    public void setPawnTypeChosen(PawnType pawnTypeChosen) {
-        this.pawnTypeChosen = pawnTypeChosen;
-    }
 
     private Student studentToMove;
+
+    public Controller getController() {
+        return controller;
+    }
 
     public GameHandler getGameHandler() {
         return gameHandler;
@@ -68,6 +56,10 @@ public class TurnController {
         isActionPhase = false;
         actionPhaseNum = 0;
 
+    }
+
+    public void setExpertController(ExpertController expertController) {
+        this.expertController = expertController;
     }
 
     public boolean isPianificationPhase() {
@@ -365,7 +357,11 @@ public class TurnController {
         int newPosition = (currPosition + moves) % 12;
         controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
 
-        checkIslandInfluence(newPosition);
+        if(!expertController.isGrannyHerbsEffect()) {
+            checkIslandInfluence(newPosition);
+        } else {
+            expertController.setGrannyHerbsEffect(false);
+        }
 
         askCloud();
     }
@@ -384,8 +380,8 @@ public class TurnController {
          */
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
-            if(fungarusEffect) {
-                if(!studentType.equals(pawnTypeChosen)) {
+            if(expertController.isFungarusEffect()) {
+                if(!studentType.equals(expertController.getPawnTypeChosen())) {
                     Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                     studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                 }
@@ -396,7 +392,7 @@ public class TurnController {
 
         }
 
-        if(!centaurEffect) {
+        if(!expertController.isCentaurEffect()) {
             TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
             for (Player p : controller.getGame().getActivePlayers()) {
                 if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
@@ -446,11 +442,11 @@ public class TurnController {
             p.setIslandInfluence(0);
         }
 
-        if(centaurEffect) {
-            setCentaurEffect(false);
+        if(expertController.isCentaurEffect()) {
+            expertController.setCentaurEffect(false);
         }
-        if(fungarusEffect) {
-            setFungarusEffect(false);
+        if(expertController.isFungarusEffect()) {
+            expertController.setFungarusEffect(false);
         }
 
     }

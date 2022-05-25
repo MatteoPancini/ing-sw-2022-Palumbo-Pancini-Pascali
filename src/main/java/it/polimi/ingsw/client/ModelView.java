@@ -61,6 +61,8 @@ public class ModelView {
 
     public ModelView(CLI cli)  {
         this.cli = cli;
+        this.gui = null;
+
     }
 
     public ModelView(GUI gui) {
