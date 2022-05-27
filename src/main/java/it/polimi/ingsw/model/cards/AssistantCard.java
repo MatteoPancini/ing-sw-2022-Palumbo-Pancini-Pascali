@@ -14,68 +14,91 @@ public class AssistantCard implements Serializable {
     private Wizards wizard = null;
     private Player owner;
 
+
     public AssistantCard(Assistants name, int orderValue, int motherNatureMoves) {
         this.name = name;
         this.orderValue = orderValue;
         this.motherNatureMoves = motherNatureMoves;
         owner = null;
     }
+
+
     //costruttore per la model view
-    /*public AssistantCard(Assistants assistantName, int value, int moves) {
+    /*
+    public AssistantCard(Assistants assistantName, int orderValue, int motherNatureMoves) {
         name = assistantName;
-        this.value = value;
-        this.moves = moves;
+        this.orderValue = orderValue;
+        this.motherNatureMoves = motherNatureMoves;
         this.wizard = null;
         owner = null;
     }
 
-    public AssistantCard(Assistants ass) {
+    public AssistantCard(Assistants ass, Wizards wizard) {
         this.name = ass;
         if(ass.equals(Assistants.EAGLE)) {
-            this.moves = 2;
-            this.value = 4;
+            this.motherNatureMoves = 2;
+            this.orderValue = 4;
+            this.wizard = wizard;
         }
         else if(ass.equals(Assistants.DOG)) {
-            this.moves = 4;
-            this.value = 8;
+            this.motherNatureMoves = 4;
+            this.orderValue = 8;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.ELEPHANT)) {
-            this.moves = 5;
-            this.value = 9;
+            this.motherNatureMoves = 5;
+            this.orderValue = 9;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.CAT)) {
-            this.moves = 2;
-            this.value = 3;
+            this.motherNatureMoves = 2;
+            this.orderValue = 3;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.CHEETAH)) {
-            this.moves = 1;
-            this.value = 1;
+            this.motherNatureMoves = 1;
+            this.orderValue = 1;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.LIZARD)) {
-            this.moves = 3;
-            this.value = 6;
+            this.motherNatureMoves = 3;
+            this.orderValue = 6;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.OCTOPUS)) {
-            this.moves = 4;
-            this.value = 7;
+            this.motherNatureMoves = 4;
+            this.orderValue = 7;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.OSTRICH)) {
-            this.moves = 1;
-            this.value = 2;
+            this.motherNatureMoves = 1;
+            this.orderValue = 2;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.TURTLE)) {
-            this.moves = 5;
-            this.value = 10;
+            this.motherNatureMoves = 5;
+            this.orderValue = 10;
+            this.wizard = wizard;
+
         }
         else if(ass.equals(Assistants.FOX)) {
-            this.moves = 3;
-            this.value = 5;
-        }
-    }*/
+            this.motherNatureMoves = 3;
+            this.orderValue = 5;
+            this.wizard = wizard;
 
-    public Assistants getName() {
-        return name;
+        }
     }
+
+     */
+
+    public Assistants getName() { return name; }
 
     public int getValue() {
         return orderValue;

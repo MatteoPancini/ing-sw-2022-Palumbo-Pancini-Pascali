@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.servertoclient.RequestAction;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
+import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
@@ -17,6 +18,46 @@ public class ExpertController {
     private final Game game;
     private final GameBoard board;
     private final TurnController turnController;
+
+    private boolean centaurEffect;
+
+    private boolean fungarusEffect;
+
+    private boolean grannyHerbsEffect;
+
+    private PawnType pawnTypeChosen;
+
+    public void setCentaurEffect(boolean centaurEffect) {
+        this.centaurEffect = centaurEffect;
+    }
+
+    public void setFungarusEffect(boolean fungarusEffect) {
+        this.fungarusEffect = fungarusEffect;
+    }
+
+    public void setGrannyHerbsEffect(boolean grannyHerbsEffect) {
+        this.grannyHerbsEffect = grannyHerbsEffect;
+    }
+
+    public boolean isGrannyHerbsEffect() {
+        return grannyHerbsEffect;
+    }
+
+    public boolean isCentaurEffect() {
+        return centaurEffect;
+    }
+
+    public boolean isFungarusEffect() {
+        return fungarusEffect;
+    }
+
+    public PawnType getPawnTypeChosen() {
+        return pawnTypeChosen;
+    }
+
+    public void setPawnTypeChosen(PawnType pawnTypeChosen) {
+        this.pawnTypeChosen = pawnTypeChosen;
+    }
 
 
     public ExpertController(Game game, GameBoard board, TurnController turnController) {
@@ -41,7 +82,7 @@ public class ExpertController {
     }
 
     public void centaurEffect() {
-        turnController.setCentaurEffect(true);
+        centaurEffect = true;
 
         turnController.askMotherNatureMoves();
 
@@ -71,44 +112,82 @@ public class ExpertController {
 
 
     public void fungarusEffect() {
-        turnController.setFungarusEffect(true);
+        fungarusEffect = true;
 
-        //TODO M -> FAI VEDERE A CICIO PER AGGIUNGERE ACTION
         RequestAction islandDestination = new RequestAction(Action.PICK_PAWN_TYPE);
         turnController.getGameHandler().sendSinglePlayer(islandDestination, turnController.getCurrentPlayer().getPlayerID());
 
     }
 
+    //TODO M -> JESTER
     public void jesterEffect() {
 
-        //TODO M -> CHIEDI A CICIO COME FAR VEDERE GLI STUDENTI IN UNA CARTA
-
 
     }
 
-    //TODO M -> finire le actions
     public void thiefEffect() {
+        RequestAction pawnRequest = new RequestAction(Action.PICK_PAWN_TYPE);
+        turnController.getGameHandler().sendSinglePlayer(pawnRequest, turnController.getCurrentPlayer().getPlayerID());
+
 
     }
 
+
+    //TODO M -> MINESTREL
     public void minestrelEffect() {
+
+
+
 
     }
 
     public void monkEffect() {
+        RequestAction studentRequest = new RequestAction(Action.PICK_MONK_STUDENT);
+        turnController.getGameHandler().sendSinglePlayer(studentRequest, turnController.getCurrentPlayer().getPlayerID());
 
     }
 
     public void grannyHerbsEffect() {
 
+        grannyHerbsEffect = true;
+        RequestAction studentRequest = new RequestAction(Action.PICK_MONK_STUDENT);
+        turnController.getGameHandler().sendSinglePlayer(studentRequest, turnController.getCurrentPlayer().getPlayerID());
+
+
     }
+
+    public void setGrannyHerbsTile(Island island) {
+        for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
+            if(is.getIslandID() == island.getIslandID()) {
+                is.setNoEntry(true);
+            }
+        }
+
+
+    }
+
+    //TODO M -> MAGICPOSTMAN
 
     public void magicPostmanEffect() {
 
     }
 
+    //TODO M -> SPOILEDPRINCESS
     public void spoiledPrincessEffect() {
 
+    }
+
+
+    public void activeThiefEffect() {
+        for(Player p : turnController.getController().getGame().getActivePlayers()) {
+            for(int i = 0; i < 3; i++) {
+                if(p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).getTable().size() > 0) {
+                    turnController.getController().getGame().getGameBoard().getStudentsBag().add(new Student(pawnTypeChosen));
+                    p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).removeStudent();
+                }
+            }
+
+        }
     }
 
 

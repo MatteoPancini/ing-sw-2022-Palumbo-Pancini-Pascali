@@ -147,17 +147,17 @@ public class SocketClientConnection implements Runnable {
 
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
-        System.out.println("Leggo da client messaggio " + clientInput.message.toString());
         if(clientInput.message != null) {
-            Message userCommand = clientInput.message;
-            actionHandler(userCommand);
+            System.out.println("Leggo da client messaggio " + clientInput.message.toString());
+            Message userMessage = clientInput.message;
+            actionHandler(userMessage);
 
         } else if (clientInput.userAction != null) {
+            System.out.println("Leggo da client action " + clientInput.userAction.toString());
             UserAction userAction = clientInput.userAction;
             actionHandler(userAction);
         }
     }
-
 
     public void actionHandler(Message userMessage) {
         if(userMessage instanceof NicknameChoice) {
@@ -181,7 +181,6 @@ public class SocketClientConnection implements Runnable {
 
     }
 
-
     public void actionHandler(UserAction userAction) {
         if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
             server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTYOURTURN), clientID);
@@ -189,6 +188,7 @@ public class SocketClientConnection implements Runnable {
         else {
             if(server.getGameFromID(clientID).isMatchStarted()) {
                 if(userAction instanceof PickAssistant) {
+                    System.out.println("Mi arriva pickassistant");
                     server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
 
                 }
@@ -198,7 +198,12 @@ public class SocketClientConnection implements Runnable {
                 }
 
                 if(userAction instanceof PickDestination) {
-                    server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
+                    if(server.getGameFromID(clientID).getController().getExpertController().isGrannyHerbsEffect()) {
+                        server.getGameFromID(clientID).parseActions(userAction, "GrannyHerbsTile");
+                    } else {
+                        server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
+                    }
+
                 }
 
                 if(userAction instanceof PickMovesNumber) {
@@ -225,12 +230,7 @@ public class SocketClientConnection implements Runnable {
             } else {
                 server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }
-
-
         }
-
-
-
     }
 
     public void setActiveConnection(boolean activeConnection) {

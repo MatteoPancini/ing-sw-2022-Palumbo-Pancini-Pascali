@@ -28,6 +28,19 @@ public class Table implements Serializable {
         return table.get(0).getBoardCellType();
     }
 
+    /*
+    public BoardCell getLastPosition() {
+        return this.getTable().get(this.getTable().size());
+    }
+
+     */
+    public void removeStudent() {
+
+        this.getTable().get(lastPosition).removeStudent();
+    }
+
+
+
     public void addStudent(Student stud){
         this.getTable().get(lastPosition).setStudent(stud);
         lastPosition++;
@@ -35,4 +48,3 @@ public class Table implements Serializable {
     }
 
 }
-

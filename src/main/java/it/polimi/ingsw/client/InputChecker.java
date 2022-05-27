@@ -103,6 +103,8 @@ public class InputChecker {
                 }
             }
             case "FOX" -> {
+                System.out.println("Entro in foxx");
+
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.FOX)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX);
                 } else {
@@ -256,6 +258,9 @@ public class InputChecker {
             }
             case "SPOILED_PRINCESS" -> {
                 action = new PickCharacter(Characters.SPOILED_PRINCESS);
+            }
+            case "NONE" -> {
+                action = new PickCharacter(null);
             }
             default -> action = new PickCharacter();
         }

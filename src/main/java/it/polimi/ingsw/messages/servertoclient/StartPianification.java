@@ -1,11 +1,10 @@
 package it.polimi.ingsw.messages.servertoclient;
 
-public class StartAction implements Answer {
-    String startMessage;
+public class StartPianification implements Answer {
+    private String startMessage;
 
-    public StartAction() {
+    public StartPianification() {
         this.startMessage = "It's your turn :)";
-
     }
     @Override
     public String getMessage() {

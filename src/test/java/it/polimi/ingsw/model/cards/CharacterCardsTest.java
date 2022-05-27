@@ -83,5 +83,8 @@ public class CharacterCardsTest {
         assertEquals(4, deckTest.getDeck().get(8).getStudents().size());
         assertEquals(4, deckTest.getDeck().get(11).getStudents().size());
         assertEquals(6, deckTest.getDeck().get(5).getStudents().size());
+
+        card1.incrementPrice();
+        assertEquals(4, card1.getInitialCost());
     }
 }

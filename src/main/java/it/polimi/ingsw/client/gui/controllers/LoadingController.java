@@ -90,9 +90,7 @@ public class LoadingController implements GUIController {
         wizardsList.forEach(n -> buttons.put(n.toString(), new ButtonType(n.toString())));
         alert.getButtonTypes().setAll(buttons.values());
         Optional<ButtonType> result = alert.showAndWait();
-        result.ifPresent(
-                buttonType ->
-                        gui.getClientConnection().sendUserInput(new WizardChoice(Wizards.parseWizardInput(buttonType.getText()))));
+        result.ifPresent(buttonType -> gui.getClientConnection().sendUserInput(new WizardChoice(Wizards.parseWizardInput(buttonType.getText()))));
     }
 
 

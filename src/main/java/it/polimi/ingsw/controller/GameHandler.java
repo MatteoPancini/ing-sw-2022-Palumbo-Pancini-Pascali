@@ -45,6 +45,8 @@ public class GameHandler {
 
     }
 
+
+
     public void setTeamMode(boolean teamMode) {
         isTeamMode = teamMode;
     }
@@ -175,6 +177,7 @@ public class GameHandler {
     }
 
     public void setPlayersNumber(int playersNumber) {
+        System.err.println("setting players of game to " + playersNumber);
         this.playersNumber = playersNumber;
         game.setPlayersNumber(playersNumber);
     }
@@ -224,7 +227,8 @@ public class GameHandler {
         setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
         SecureRandom randomGenerator = new SecureRandom();
-        game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
+        //game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
+        game.setCurrentPlayer(game.getActivePlayers().get(0));
         System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
         controller.newSetupGame();
     }
@@ -238,8 +242,15 @@ public class GameHandler {
     }
 
     public void parseActions(UserAction userAction, String actionType) {
+        System.out.println(actionType);
+
         switch(actionType) {
-            case "PickAssistant" -> gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
+            case "PickAssistant" -> {
+                System.out.println("Entro nel gameHandler e parso pickassistnat");
+                System.out.println(((PickAssistant) userAction).getChosenAssistant().toString());
+
+                gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
+            }
 
             case "PickStudent" -> gameHandlerListener.firePropertyChange("PickStudent", null, ((PickStudent) userAction).getChosenStudent());
 
@@ -254,6 +265,10 @@ public class GameHandler {
                 }
 
 
+            }
+
+            case "GrannyHerbsTile" -> {
+                gameHandlerListener.firePropertyChange("GrannyHerbsTile", null, ((PickDestination) userAction).getChosenIsland());
             }
 
             case "PickMovesNumber" -> gameHandlerListener.firePropertyChange("PickMovesNumber", null, ((PickMovesNumber) userAction).getMoves());
@@ -424,7 +439,7 @@ import java.util.Random;
         }
 
         Collections.shuffle(game.getPlayers());
-        game.setCurrentPlayer(game.getPlayers().get(0));
+        game.switchPlayer(game.getPlayers().get(0));
 
         putStudentsOnCloud();
 

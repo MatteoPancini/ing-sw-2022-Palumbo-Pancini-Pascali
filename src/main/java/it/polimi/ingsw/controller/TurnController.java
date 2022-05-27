@@ -6,10 +6,13 @@ import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
+
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,19 +30,6 @@ public class TurnController {
 
     private int studentRequest;
 
-    private boolean centaurEffect;
-
-    private boolean fungarusEffect;
-
-    private PawnType pawnTypeChosen;
-
-    public void setCentaurEffect(boolean centaurEffect) {
-        this.centaurEffect = centaurEffect;
-    }
-
-    public void setFungarusEffect(boolean fungarusEffect) {
-        this.fungarusEffect = fungarusEffect;
-    }
 
     private boolean isActionPhase;
 
@@ -47,11 +37,12 @@ public class TurnController {
 
     private boolean isPianificationPhase;
 
-    public void setPawnTypeChosen(PawnType pawnTypeChosen) {
-        this.pawnTypeChosen = pawnTypeChosen;
-    }
 
     private Student studentToMove;
+
+    public Controller getController() {
+        return controller;
+    }
 
     public GameHandler getGameHandler() {
         return gameHandler;
@@ -68,6 +59,10 @@ public class TurnController {
         isActionPhase = false;
         actionPhaseNum = 0;
 
+    }
+
+    public void setExpertController(ExpertController expertController) {
+        this.expertController = expertController;
     }
 
     public boolean isPianificationPhase() {
@@ -125,9 +120,27 @@ public class TurnController {
                 "|  _/| || o || \\\\ || || _| | |( (_ | o || | | |( o )| \\\\ | |  _/|   || o |\\_ \\| _| \n" +
                 "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
                 "                                                                                   ", false));
+
+
+
         putStudentsOnCloud();
 
-        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
+        /*
+        for(AssistantCard a : controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck()) {
+                System.out.println("(Name: " + String.valueOf(a.getName()) + ", " + "Value: " + a.getValue() + ", " + "Moves: " + a.getMoves());
+        }
+
+         */
+        /*
+        for(int i = 0; i < ; i++) {
+            System.out.println("(Name: " + String.valueOf(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(i).getName()));
+
+        }
+
+         */
+
+        System.out.println(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size());
+
 
         askAssistantCard();
 
@@ -149,14 +162,14 @@ public class TurnController {
                     "                                                      ", false));
         }
 
-        if(actionPhaseNum == gameHandler.getPlayersNumber()) {
-
+        if(actionPhaseNum == controller.getGame().getActivePlayers().size()) {
             startPianificationPhase();
         } else {
             setActionPhase();
             gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
+            gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
 
-            studentRequest = 0;
+            studentRequest = 1;
 
             askStudent(studentRequest);
         }
@@ -168,10 +181,7 @@ public class TurnController {
     }
 
     public void askStudent(int studentNum) {
-        if(studentNum == 0) {
-            setCurrentPlayer();
-        }
-        if(studentNum < 3) {
+        if(studentNum <= 3) {
             RequestAction studentAction = new RequestAction(Action.PICK_STUDENT);
             gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
             gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a student to move!", false), currentPlayer.getPlayerID());
@@ -200,7 +210,9 @@ public class TurnController {
     }
 
     public void putStudentsOnCloud() {
+        //System.out.println("entro in PutStudentsOnCloud");
         for (CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
+            System.out.println();
             ArrayList<Student> newStudents = new ArrayList<>();
             Collections.shuffle(controller.getGame().getGameBoard().getStudentsBag());
             int studentsNumber;
@@ -208,19 +220,35 @@ public class TurnController {
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
                 newStudents.add(controller.getGame().getGameBoard().getStudentsBag().get(0));
+                //System.out.println(newStudents.get(j).getType());
                 //newStudents.get(j) = gameHandler.getGame().getGameBoard().getStudentsBag().get(0);
                 controller.getGame().getGameBoard().removeStudents(0);
             }
             cloud.setStudents(newStudents);
-            System.out.println("Cloud " + controller.getGame().getGameBoard().getClouds().get(0).getStudents().get(0));
         }
+        for(Student s : controller.getGame().getGameBoard().getClouds().get(0).getStudents()){
+            System.out.println(s.getType());
+        }
+        for(Student s : controller.getGame().getGameBoard().getClouds().get(1).getStudents()){
+            System.out.println(s.getType());
+        }
+
+        //System.out.println("Esco da setStudents");
     }
 
 
     public void askAssistantCard() {
+        //System.out.println("Chiedo assitant");
+        //System.out.println("LA" + controller.getGame().getGameBoard().getLastAssistantUsed().size() + " " + controller.getGame().getActivePlayers().size());
+        //currentPlayer = controller.getGame().getCurrentPlayer();
+        //System.out.println(currentPlayer.getNickname());
         if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
-            setCurrentPlayer();
-            gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
+            //System.out.println("Entro");
+            gameHandler.sendSinglePlayer(new StartPianification(), currentPlayer.getPlayerID());
+            //System.out.println("Mando StartPianification");
+            gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            //System.out.println("Mando Game");
+
 
             RequestAction assistantAction = new RequestAction(Action.PICK_ASSISTANT);
             gameHandler.sendSinglePlayer(assistantAction, currentPlayer.getPlayerID());
@@ -233,15 +261,17 @@ public class TurnController {
 
             resetPianificationPhase();
 
-            GameCopy gameCopy = new GameCopy(controller.getGame());
-            gameHandler.sendBroadcast(gameCopy);
+            gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0), false));
 
             startActionPhase();
         }
 
+        switchPlayer();
+
+
     }
 
-    public void setCurrentPlayer() {
+    public void switchPlayer() {
         controller.getGame().switchToNextPlayer();
         this.currentPlayer = controller.getGame().getCurrentPlayer();
         gameHandler.setCurrentPlayerId(currentPlayer.getPlayerID());
@@ -254,27 +284,41 @@ public class TurnController {
         gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing where to move his student!", false), currentPlayer.getPlayerID());
     }
 
-    public void playAssistantCard(AssistantCard cardPlayed) {
+    public void playAssistantCard(Assistants nameCardPlayed) {
+        AssistantCard cardPlayed = null;
+        for(AssistantCard c : controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck()) {
+            if(c.getName() == nameCardPlayed) {
+                cardPlayed = c;
+            }
+        }
+        System.out.println("SOno in playAssistantCard di " + cardPlayed);
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
+            System.out.println("aggiungo carta");
+
             controller.getGame().getGameBoard().getLastAssistantUsed().add(cardPlayed);
+            System.out.println("SOno in playAssistantCard");
+
             controller.getGame().getCurrentPlayer().getAssistantDeck().removeCard(cardPlayed);
 
 
             //ordino
-            for(int j = 0; j < controller.getGame().getGameBoard().getLastAssistantUsed().size(); j++) {
-                boolean flag = false;
-                for (int k = 0; k < controller.getGame().getGameBoard().getLastAssistantUsed().size() - 1; k++) {
-                    if (controller.getGame().getGameBoard().getLastAssistantUsed().get(j).getValue() > controller.getGame().getGameBoard().getLastAssistantUsed().get(j + 1).getValue()) {
-                        AssistantCard ac = controller.getGame().getGameBoard().getLastAssistantUsed().get(j);
-                        controller.getGame().getGameBoard().setLastAssistantUsed(j, controller.getGame().getGameBoard().getLastAssistantUsed().get(j + 1));
-                        controller.getGame().getGameBoard().setLastAssistantUsed(j + 1, ac);
-                        flag = true;
+            if(controller.getGame().getGameBoard().getLastAssistantUsed().size() > 1) {
+                for (int j = 0; j < controller.getGame().getGameBoard().getLastAssistantUsed().size(); j++) {
+                    //boolean flag = false;
+                    for (int k = j; k < controller.getGame().getGameBoard().getLastAssistantUsed().size(); k++) {
+                        if (controller.getGame().getGameBoard().getLastAssistantUsed().get(j).getValue() > controller.getGame().getGameBoard().getLastAssistantUsed().get(k).getValue()) {
+                            AssistantCard ac = controller.getGame().getGameBoard().getLastAssistantUsed().get(j);
+                            controller.getGame().getGameBoard().setLastAssistantUsed(j, controller.getGame().getGameBoard().getLastAssistantUsed().get(k));
+                            controller.getGame().getGameBoard().setLastAssistantUsed(k, ac);
+                            //flag = true;
+                        }
                     }
+                    //if (!flag) break;
                 }
-                if (!flag) break;
             }
-            gameHandler.sendSinglePlayer(new EndAction(), currentPlayer.getPlayerID());
+
+
 
             askAssistantCard();
         }
@@ -365,7 +409,11 @@ public class TurnController {
         int newPosition = (currPosition + moves) % 12;
         controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
 
-        checkIslandInfluence(newPosition);
+        if(!expertController.isGrannyHerbsEffect()) {
+            checkIslandInfluence(newPosition);
+        } else {
+            expertController.setGrannyHerbsEffect(false);
+        }
 
         askCloud();
     }
@@ -384,8 +432,8 @@ public class TurnController {
          */
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
-            if(fungarusEffect) {
-                if(!studentType.equals(pawnTypeChosen)) {
+            if(expertController.isFungarusEffect()) {
+                if(!studentType.equals(expertController.getPawnTypeChosen())) {
                     Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                     studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                 }
@@ -396,7 +444,7 @@ public class TurnController {
 
         }
 
-        if(!centaurEffect) {
+        if(!expertController.isCentaurEffect()) {
             TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
             for (Player p : controller.getGame().getActivePlayers()) {
                 if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
@@ -446,11 +494,11 @@ public class TurnController {
             p.setIslandInfluence(0);
         }
 
-        if(centaurEffect) {
-            setCentaurEffect(false);
+        if(expertController.isCentaurEffect()) {
+            expertController.setCentaurEffect(false);
         }
-        if(fungarusEffect) {
-            setFungarusEffect(false);
+        if(expertController.isFungarusEffect()) {
+            expertController.setFungarusEffect(false);
         }
 
     }
@@ -507,6 +555,10 @@ public class TurnController {
 
      */
 
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
     public void fromCloudToEntrance(CloudTile cloud) {
         /*
         int studentsToMove;
@@ -531,11 +583,14 @@ public class TurnController {
         for(AssistantCard card : controller.getGame().getGameBoard().getLastAssistantUsed()) {
             controller.getGame().getGameBoard().getLastAssistantUsed().remove(card);
         }
-        gameHandler.sendSinglePlayer(new EndAction(), currentPlayer.getPlayerID());
-        setCurrentPlayer();
+        switchPlayer();
 
 
-        actionPhaseNum++;
+        if(actionPhaseNum == controller.getGame().getPlayersNumber() - 1) {
+            actionPhaseNum = 0;
+        } else {
+            actionPhaseNum++;
+        }
         startActionPhase();
     }
 
