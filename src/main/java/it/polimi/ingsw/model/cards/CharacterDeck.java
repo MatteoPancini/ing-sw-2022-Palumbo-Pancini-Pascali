@@ -18,7 +18,7 @@ public class CharacterDeck implements Serializable {
     private static Game game;
 
     private CharacterDeck() {
-        throw new IllegalStateException();
+        //cards = null;
     }
 
     public CharacterDeck(Game game) {
@@ -58,15 +58,16 @@ public class CharacterDeck implements Serializable {
         }
     }
 
-    public static List<CharacterCard> getPlayableCards() {
-        CharacterDeck deck = new CharacterDeck();
+    public static CharacterDeck getPlayableCards(Game game) {
+        CharacterDeck deck = new CharacterDeck(game);
 
-        List<CharacterCard> playableCards = new ArrayList<>();
+        CharacterDeck playableCards = new CharacterDeck();
 
         Collections.shuffle(deck.getDeck());
 
         for(int i = 1; i <= 3; i++){
-            playableCards.add(deck.getDeck().get(i));
+            playableCards.getDeck().add(deck.getDeck().get(i));
+            //playableCards.add(deck.getDeck().get(i));
         }
 
         return playableCards;

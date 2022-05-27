@@ -5,6 +5,7 @@ import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.Message;
 import it.polimi.ingsw.messages.clienttoserver.NicknameChoice;
+import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.SerializedMessage;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.ConnectionResult;
@@ -98,7 +99,7 @@ public class ClientConnection {
     public void sendUserInput(Message message) {
         SerializedMessage userInput = new SerializedMessage(message);
         try {
-            //System.out.println("Invio messaggio al server: " + userInput.message.toString());
+            System.out.println("Invio messaggio al server: " + userInput.message.toString());
             outputStream.reset();
             outputStream.writeObject(userInput);
             outputStream.flush();
@@ -110,11 +111,13 @@ public class ClientConnection {
 
 
     public void sendUserInput(UserAction action) {
-        SerializedMessage output = new SerializedMessage(action);
+        SerializedMessage userInput = new SerializedMessage(action);
         try {
+            System.out.println("Invio : " + userInput.userAction.toString());
             outputStream.reset();
-            outputStream.writeObject(output);
+            outputStream.writeObject(userInput);
             outputStream.flush();
+            System.out.println("action inviata");
         } catch (IOException e) {
             System.err.println("Error during send process.");
         }

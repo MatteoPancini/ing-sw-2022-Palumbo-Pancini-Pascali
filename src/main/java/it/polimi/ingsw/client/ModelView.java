@@ -20,6 +20,25 @@ public class ModelView {
     private boolean startPlaying = false;
     private String wizardName;
     private boolean gameStarted;
+    private boolean pianification = false;
+    private boolean action = false;
+
+
+    public boolean isAction() {
+        return action;
+    }
+
+    public boolean isPianification() {
+        return pianification;
+    }
+
+    public void setPianification(boolean pianification) {
+        this.pianification = pianification;
+    }
+
+    public void setAction(boolean action) {
+        this.action = action;
+    }
 
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;

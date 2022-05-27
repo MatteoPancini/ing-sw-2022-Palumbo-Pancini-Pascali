@@ -54,12 +54,19 @@ public class ActionHandler {
         } else if (answer instanceof GameCopy) {
             view.firePropertyChange("UpdateModelView", null, answer.getMessage());
         } else if(answer instanceof StartAction) {
-            modelView.setStartPlaying(true);
+            modelView.setActivateInput(true);
+            modelView.setAction(true);
+            modelView.setPianification(false);
             cli.showServerMessage(modelView.getServerAnswer());
         } else if(answer instanceof EndAction) {
             modelView.setStartPlaying(false);
             cli.showServerMessage(modelView.getServerAnswer());
 
+        } else if(answer instanceof StartPianification) {
+            modelView.setActivateInput(true);
+            modelView.setPianification(true);
+            modelView.setAction(false);
+            cli.showServerMessage(modelView.getServerAnswer());
         }
     }
 

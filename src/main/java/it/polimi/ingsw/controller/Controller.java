@@ -5,10 +5,7 @@ import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.*;
-import it.polimi.ingsw.model.enumerations.Characters;
-import it.polimi.ingsw.model.enumerations.PawnType;
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
@@ -48,6 +45,10 @@ public class Controller implements PropertyChangeListener {
 
     public void setPlayerWizard(int playerID, Wizards chosenWizard) {
         game.getPlayerByID(playerID).setWizard(chosenWizard);
+    }
+
+    public TurnController getTurnController() {
+        return turnController;
     }
 
     public void newSetupGame() {
@@ -153,13 +154,18 @@ public class Controller implements PropertyChangeListener {
         }
 
         System.out.println("Finished setupGame");
+        turnController.setCurrentPlayer(game.getCurrentPlayer());
 
         turnController.startPianificationPhase();
     }
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("propertyChange del controller" + evt.getPropertyName());
+
         switch(evt.getPropertyName()) {
-            case "PickAssistant" -> turnController.playAssistantCard((AssistantCard) evt.getNewValue());
+            case "PickAssistant" -> {
+                turnController.playAssistantCard((Assistants) evt.getNewValue());
+            }
 
             case "PickStudent" -> {
                 turnController.setStudentToMove((Student) evt.getNewValue());
@@ -189,6 +195,7 @@ public class Controller implements PropertyChangeListener {
                 else if(evt.getNewValue() == Characters.GRANNY_HERBS) expertController.grannyHerbsEffect();
                 else if(evt.getNewValue() == Characters.MAGIC_POSTMAN) expertController.magicPostmanEffect();
                 else if(evt.getNewValue() == Characters.SPOILED_PRINCESS) expertController.spoiledPrincessEffect();
+                else if(evt.getNewValue() == null) turnController.askMotherNatureMoves();
             }
 
             case "GrannyHerbsTile" -> {

@@ -9,22 +9,33 @@ import it.polimi.ingsw.model.Game;
 
 public class GameBoard implements Serializable {
     private Game game;
-    private ArrayList<CloudTile> clouds;
+    private ArrayList<CloudTile> clouds = new ArrayList<CloudTile>();;
     private ArrayList<Island> islands;
     private ArrayList<Professor> professors;
     private MotherNature motherNature;
     private CharacterDeck playableCharacters = null;
-    private ArrayList<AssistantCard> lastAssistantUsed;
+    private ArrayList<AssistantCard> lastAssistantUsed = new ArrayList<>();
     private ArrayList<Student> studentsBag;
     private ArrayList<Student>  setupStudentsBag;
 
     public GameBoard (Game game) {
         this.game = game;
-        clouds = new ArrayList<CloudTile>();
+        System.err.println("Inizializzo GAMEBOARD");
+
+
+        System.out.println("Numero di giocatori : " + game.getPlayersNumber());
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
-            if (game.getPlayersNumber() == 3) clouds.add(new CloudTile(CloudSide.THREE));
-            else clouds.add(new CloudTile(CloudSide.TWO_FOUR));
+            if (game.getPlayersNumber() == 3) {
+                this.clouds.add(new CloudTile(CloudSide.THREE));
+            }
+            else {
+                this.clouds.add(new CloudTile(CloudSide.TWO_FOUR));
+            }
+            clouds.get(i -1).setID(i);
+            System.out.println(clouds.get(i - 1).getSide().toString());
         }
+
+
 
         islands = new ArrayList<Island>();
         for (int j = 1; j <= 12; j++){
@@ -55,12 +66,15 @@ public class GameBoard implements Serializable {
 
         motherNature = MotherNature.getMotherNature();
 
+        /*
         if(game.isExpertMode() == true) {
-            CharacterDeck.getPlayableCards();
+            playableCharacters = CharacterDeck.getPlayableCards(game);
         }
         else playableCharacters = null;
 
-        lastAssistantUsed = new ArrayList<AssistantCard>();
+
+         */
+        //lastAssistantUsed = new ArrayList<AssistantCard>();
     }
 
     public Game getGame() {
@@ -75,7 +89,13 @@ public class GameBoard implements Serializable {
         return studentsBag;
     }
 
-    public void removeStudents(int index){ studentsBag.remove(index); }
+    public void removeStudents(int index) {
+        studentsBag.remove(index);
+    }
+
+    public void setPlayableCharacters() {
+        playableCharacters = CharacterDeck.getPlayableCards(game);
+    }
 
     public void removeSetupStudents(int index) {
         setupStudentsBag.remove(index);
@@ -86,6 +106,7 @@ public class GameBoard implements Serializable {
     public ArrayList<CloudTile> getClouds() {
         return clouds;
     }
+
 
     public ArrayList<Professor> getProfessors() {
         return professors;

@@ -147,12 +147,13 @@ public class SocketClientConnection implements Runnable {
 
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
-        System.out.println("Leggo da client messaggio " + clientInput.message.toString());
         if(clientInput.message != null) {
-            Message userCommand = clientInput.message;
-            actionHandler(userCommand);
+            System.out.println("Leggo da client messaggio " + clientInput.message.toString());
+            Message userMessage = clientInput.message;
+            actionHandler(userMessage);
 
         } else if (clientInput.userAction != null) {
+            System.out.println("Leggo da client action " + clientInput.userAction.toString());
             UserAction userAction = clientInput.userAction;
             actionHandler(userAction);
         }
@@ -187,6 +188,7 @@ public class SocketClientConnection implements Runnable {
         else {
             if(server.getGameFromID(clientID).isMatchStarted()) {
                 if(userAction instanceof PickAssistant) {
+                    System.out.println("Mi arriva pickassistant");
                     server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
 
                 }

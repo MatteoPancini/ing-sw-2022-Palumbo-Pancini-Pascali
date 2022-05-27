@@ -53,7 +53,6 @@ public class Player implements Serializable {
 
     public Player(String nickname, int playerID) {
         this.nicknamePlayer = nickname;
-        assistantDeck = null;
         //board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
         this.playerID = playerID;
         this.wizard = null;
@@ -121,7 +120,14 @@ public class Player implements Serializable {
     }
 
     public void setWizard(Wizards wizard) {
+        //System.out.println("C'è un problema qua...");
         this.wizard = wizard;
+        System.out.println("Il wizard è " + wizard);
+        assistantDeck = new AssistantDeck(wizard);
+        for(AssistantCard a : assistantDeck.getDeck()) {
+            a.setOwner(this);
+            System.out.println("Setting card: " + a.getName() + " " + a.getValue() + " " + a.getMoves() + " " + a.getWizard() + " " + a.getOwner().getNickname());
+        }
     }
 
     public Wizards getWizard() {

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable {
-    private final GameBoard gameBoard;
+    private GameBoard gameBoard;
     private int playersNumber;
     private boolean expertMode;
     private final ArrayList<Player> players = new ArrayList<>();
@@ -27,11 +27,15 @@ public class Game implements Serializable {
     }
 
     public Game() {
-        this.gameBoard = new GameBoard(this);
+        //this.gameBoard = new GameBoard(this);
     }
 
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
+        System.out.println("GAME OF: " + playersNumber + " PLAYERS");
+        this.gameBoard = new GameBoard(this);
+        currentPlayerNumber = 0;
+
     }
 
     public int getPlayersNumber() {
@@ -40,6 +44,9 @@ public class Game implements Serializable {
 
     public void setExpertMode(boolean expertMode) {
         this.expertMode = expertMode;
+        if(expertMode == true) {
+            gameBoard.setPlayableCharacters();
+        }
     }
 
     public boolean isExpertMode() {
@@ -81,7 +88,7 @@ public class Game implements Serializable {
             activePlayers.remove(player);
             if (!activePlayers.isEmpty()) {
                 if (currentPlayerN == activePlayers.size()) currentPlayerN = 0;
-                setCurrentPlayer(activePlayers.get(currentPlayerN));
+                switchPlayer(activePlayers.get(currentPlayerN));
             }
             return;
         }
@@ -96,7 +103,7 @@ public class Game implements Serializable {
         activePlayers.remove(player);
         if (!activePlayers.isEmpty()) {
             if (currentPlayerN == activePlayers.size()) currentPlayerN = 0;
-            setCurrentPlayer(activePlayers.get(currentPlayerN));
+            switchPlayer(activePlayers.get(currentPlayerN));
         }
 
          */
@@ -160,8 +167,9 @@ public class Game implements Serializable {
     }
 
     public void switchToNextPlayer() {
-        currentPlayerNumber = (currentPlayerNumber == activePlayers.size() - 1 || currentPlayerNumber < activePlayers.size() - 1) ? 0 : currentPlayerNumber + 1;
+        currentPlayerNumber = (currentPlayerNumber == activePlayers.size() - 1) ? 0 : currentPlayerNumber + 1;
         setCurrentPlayer(activePlayers.get(currentPlayerNumber));
+        System.out.println("Current player is: " + currentPlayer.getNickname());
     }
 
 }

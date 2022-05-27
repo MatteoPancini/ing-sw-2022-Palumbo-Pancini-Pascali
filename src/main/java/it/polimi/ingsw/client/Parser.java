@@ -11,12 +11,12 @@ import java.beans.Transient;
 
 
 public class Parser implements PropertyChangeListener {
-    private ClientConnection connectionSocket;
+    private ClientConnection clientConnection;
     private ModelView modelView;
     private InputChecker inputChecker;
 
     public Parser(ClientConnection conn, ModelView mv) {
-        this.connectionSocket = conn;
+        this.clientConnection = conn;
         this.modelView = mv;
         this.inputChecker = new InputChecker(mv, getModelView().getCli(), conn);
     }
@@ -26,7 +26,7 @@ public class Parser implements PropertyChangeListener {
     }
 
     public ClientConnection getConnectionSocket() {
-        return connectionSocket;
+        return clientConnection;
     }
 
 
@@ -63,10 +63,15 @@ public class Parser implements PropertyChangeListener {
     }
 
     public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
+        System.out.println("Entro in action");
         UserAction action = null;
         switch(actionName.toUpperCase()) {
             case "PICKASSISTANT" -> {
+                System.out.println("Sono in pickAssistant");
+
                 action = inputChecker.checkAssistant(chosenValue);
+                System.out.println("action creata: " + action.toString());
+
             }
             case "PICKCLOUD" -> {
                 action = inputChecker.checkCloud(chosenValue);
@@ -101,7 +106,8 @@ public class Parser implements PropertyChangeListener {
         }
 
         if(action!=null) {
-            connectionSocket.sendUserInput(action);
+            System.out.println("invio action");
+            clientConnection.sendUserInput(action);
             return true;
         }
         return false;
