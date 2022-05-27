@@ -5,7 +5,6 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.server.Server;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,14 +56,13 @@ public class ControllerTest {
     @BeforeEach
     void initialization() {
         game = new Game();
-        game.createNewPlayer(new PlayerStub("Francesco", 1));
-        game.createNewPlayer(new PlayerStub("Matteo", 2));
         game.setPlayersNumber(2);
-        for(Player p : game.getPlayers()) {
-            p.setBoard(new SchoolBoard(p.getPlayerID()));
-        }
-        game.getPlayers().get(0).setWizard(Wizards.KING);
-        game.getPlayers().get(1).setWizard(Wizards.WITCH);
+        PlayerStub player1 = new PlayerStub("Francesco", 1);
+        PlayerStub player2 = new PlayerStub("Matteo", 2);
+        game.createNewPlayer(player1);
+        game.createNewPlayer(player2);
+        game.addPlayer(player1);
+        game.addPlayer(player2);
         game.setCurrentPlayer(game.getActivePlayers().get(0));
         cStub = new ControllerStub(game, new GameHandlerStub(new Server()));
     }
@@ -72,8 +70,10 @@ public class ControllerTest {
     @Test
     void setupTest() {
         cStub.newSetupGame();
-        System.out.println(game.getPlayersNumber());
-        System.out.println(game.getCurrentPlayer().getNickname());
+        System.out.println(cStub.getGame().getPlayersNumber());
+        System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
+        //cStub.getGame().switchToNextPlayer();
+        //System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
     }
 
     @Test

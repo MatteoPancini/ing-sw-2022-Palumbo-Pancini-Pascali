@@ -68,7 +68,7 @@ public class GameBoardTest {
     void studColorTest(){
         stud1 = new Student(PawnType.PINK);
         stud2 = new Student(PawnType.BLUE);
-        assertEquals(stud1.getType(), gameBTest.getStudentsBag().get(129).getType());
+        assertEquals(stud1.getType(), gameBTest.getStudentsBag().get(119).getType());
         assertEquals(stud2.getType(), gameBTest.getStudentsBag().get(0).getType());
     }
     @Test
@@ -123,18 +123,6 @@ public class GameBoardTest {
     }
 
     @Test
-    @DisplayName("Last assistant used check")
-    void lastAssistantUsedTest() {
-        AssistantCard card1 = new AssistantCard(Assistants.CAT, 3, 2);
-        AssistantCard card2 = new AssistantCard(Assistants.ELEPHANT, 9, 5);
-
-        gameBTest.getLastAssistantUsed().add(card1);
-        gameBTest.setLastAssistantUsed(0, card2);
-
-        assertEquals(card2, gameBTest.getLastAssistantUsed().get(0));
-    }
-
-    @Test
     @DisplayName("Islands test")
     void islandsTest(){
         Tower tower1 = new Tower(TowerColor.BLACK);
@@ -167,20 +155,39 @@ public class GameBoardTest {
         assertEquals(true, gameBTest.getIslands().get(4).hasLeft());
 
         gameBTest.getIslands().get(0).setTower(tower1);
+        gameBTest.getIslands().get(0).setNoEntry(false);
         gameBTest.getIslands().get(11).setTower(tower2);
+        gameBTest.getIslands().get(1).setTower(tower3);
+
+        gameBTest.getIslands().get(11).merge(gameBTest.getIslands().get(0));
+        gameBTest.getIslands().get(0).merge(gameBTest.getIslands().get(1));
+
         Tower tower4 = new Tower(TowerColor.WHITE);
         Tower tower5 = new Tower(TowerColor.WHITE);
 
+        assertEquals(false, gameBTest.getIslands().get(0).getNoEntry());
         assertEquals(true, gameBTest.getIslands().get(0).hasLeft());
         assertEquals(true, gameBTest.getIslands().get(11).hasRight());
-        assertEquals(false, gameBTest.getIslands().get(0).hasRight());
+        assertEquals(true, gameBTest.getIslands().get(0).hasRight());
         assertEquals(false, gameBTest.getIslands().get(11).hasLeft());
+
+        assertEquals(gameBTest.getIslands().get(11), gameBTest.getIslands().get(0).getMergedIslands().get(0));
+        assertEquals(gameBTest.getIslands().get(1), gameBTest.getIslands().get(0).getMergedIslands().get(1));
+
+        List<Tower> towers = new ArrayList<>();
+        towers.add(tower1);
+        towers.add(tower2);
+        towers.add(tower3);
+        assertEquals(towers, gameBTest.getIslands().get(0).getMergedTowers());
+
+        gameBTest.getIslands().get(0).moveTowerToArea(players.get(0).getBoard().getTowerArea());
+        assertEquals(tower3, players.get(0).getBoard().getTowerArea().getTowerArea().get(players.get(0).getBoard().getTowerArea().getTowerArea().size() - 1));
     }
 
     @Test
     @DisplayName("Verify students bag size")
     void studentsBagTest(){
         gameBTest = new GameBoard(game);
-        assertEquals(130, gameBTest.getStudentsBag().size());
+        assertEquals(120, gameBTest.getStudentsBag().size());
     }
 }
