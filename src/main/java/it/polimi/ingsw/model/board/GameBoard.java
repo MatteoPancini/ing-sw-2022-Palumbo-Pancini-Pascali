@@ -17,6 +17,7 @@ public class GameBoard implements Serializable {
     private ArrayList<AssistantCard> lastAssistantUsed = new ArrayList<>();
     private ArrayList<Student> studentsBag;
     private ArrayList<Student>  setupStudentsBag;
+    private int islandCounter;
 
     public GameBoard (Game game) {
         this.game = game;
@@ -65,6 +66,8 @@ public class GameBoard implements Serializable {
         }
 
         motherNature = MotherNature.getMotherNature();
+
+        islandCounter = 12;
 
         /*
         if(game.isExpertMode() == true) {
@@ -145,4 +148,8 @@ public class GameBoard implements Serializable {
         }
         return null;
     }
+
+    public int getIslandCounter(){ return islandCounter; }
+
+    public void decrementIslandCounter(){ islandCounter--; }
 }
