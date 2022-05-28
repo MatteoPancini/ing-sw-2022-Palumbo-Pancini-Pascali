@@ -329,21 +329,20 @@ public class CLI implements Runnable, ListenerInterface {
             assitants.add(a.getName().toString());
         }
 
-        switch (modelView.getGameCopy().getActivePlayers().size()) {
+        switch (modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()) {
+            case 1 -> {
+                st.setHeaders(nicknames.get(0));
+                st.addRow(assitants.get(0));
+            }
+
             case 2 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1));
                 st.addRow(assitants.get(0), assitants.get(1));
             }
 
             case 3 -> {
-                st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2), nicknames.get(3));
+                st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2));
                 st.addRow(assitants.get(0), assitants.get(1), assitants.get(2));
-            }
-
-            case 4 -> {
-                st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2), nicknames.get(3));
-                st.addRow(assitants.get(0), assitants.get(1),
-                        assitants.get(2), assitants.get(3));
             }
         }
 

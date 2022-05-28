@@ -68,7 +68,14 @@ public class ControllerTest {
         game.createNewPlayer(player2);
         game.addPlayer(player1);
         game.addPlayer(player2);
+
+        player1.setWizard(Wizards.FOREST);
+        player2.setWizard(Wizards.KING);
+
         game.setCurrentPlayer(game.getActivePlayers().get(0));
+        player1.setBoard(new SchoolBoard(1));
+        player2.setBoard(new SchoolBoard(2));
+
         cStub = new ControllerStub(game, new GameHandlerStub(new Server()));
     }
 

@@ -258,16 +258,16 @@ public class TurnController {
             //riordina per ogni assistantCard giocata anche gli active players
             for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
                 controller.getGame().getActivePlayers().set(i, controller.getGame().getGameBoard().getLastAssistantUsed().get(i).getOwner());
+                System.out.println(controller.getGame().getActivePlayers().get(i).getNickname());
             }
 
             resetPianificationPhase();
 
-            gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0), false));
+            gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0).getNickname(), false));
+            currentPlayer = controller.getGame().getActivePlayers().get(0);
 
             startActionPhase();
         }
-
-        switchPlayer();
 
 
     }
@@ -319,7 +319,7 @@ public class TurnController {
                 }
             }
 
-
+            switchPlayer();
 
             askAssistantCard();
         }
@@ -418,7 +418,7 @@ public class TurnController {
                 expertController.setGrannyHerbsEffect(false);
             }
 
-        }
+        } else checkIslandInfluence(newPosition);
 
         askCloud();
     }

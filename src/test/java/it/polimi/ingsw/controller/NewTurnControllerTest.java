@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.beans.PropertyChangeEvent;
 import java.net.Socket;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -29,23 +30,25 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class NewTurnControllerTest {
-    final PlayerStub matteo = new PlayerStub("Matteo", 1);
-    final PlayerStub cisco = new PlayerStub("Cisco", 2);
-    final PlayerStub gigiox = new PlayerStub("Gigiox", 3);
-    final PlayerStub mario = new PlayerStub("Mario", 4);
+    final PlayerStub matteo = new PlayerStub("matteo", 1);
+    final PlayerStub cisco = new PlayerStub("cisco", 2);
+    final PlayerStub gigiox = new PlayerStub("gigiox", 3);
+    final PlayerStub mario = new PlayerStub("mario", 3);
+
+
     final Socket socket = new Socket();
     final ServerStub server = new ServerStub();
     final GameHandlerStub gameHandlerStub = new GameHandlerStub(server);
     final SocketClientConnectionStub socketClientConnectionStub =
             new SocketClientConnectionStub(socket, server);
     final VirtualClientView virtualClient =
-            new VirtualClientView(1, "Matteo", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(1, "matteo", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient2 =
-            new VirtualClientView(2, "Cisco", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(2, "cisco", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient3 =
-            new VirtualClientView(3, "Gigiox", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(3, "gigiox", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient4 =
-            new VirtualClientView(4, "Mario", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(4, "mario", socketClientConnectionStub, gameHandlerStub);
     final HashMap<Integer, VirtualClientView> idMapID =
             new HashMap<>() {
                 {
@@ -60,9 +63,12 @@ public class NewTurnControllerTest {
 
     final ControllerStub controllerStub = new ControllerStub(gameHandlerStub.getGame(), gameHandlerStub);
 
+
+
     @Test
     @DisplayName("Setup 3 players")
     public void init3Players() {
+
         matteo.setWizard(Wizards.KING);
         System.out.println("\n");
         cisco.setWizard(Wizards.MONACH);
@@ -78,11 +84,14 @@ public class NewTurnControllerTest {
         controllerStub.getGame().setPlayersNumber(3);
         controllerStub.getGame().setCurrentPlayer(matteo);
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+
     }
 
     @Test
@@ -105,6 +114,7 @@ public class NewTurnControllerTest {
         controllerStub.getGame().addPlayer(gigiox);
         controllerStub.getGame().addPlayer(mario);
 
+
         controllerStub.getGame().setPlayersNumber(4);
         assertEquals(gameHandlerStub.getController(), controllerStub);
 
@@ -112,6 +122,9 @@ public class NewTurnControllerTest {
         assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
         gameHandlerStub.setTeamMode(true);
         gameHandlerStub.setupTeams();
+
+
+
 
         for(Player p : controllerStub.getGame().getActivePlayers()) {
             System.out.println(p.getNickname() + " " + p.getIdTeam() + " " + p.isTeamLeader());
@@ -226,6 +239,59 @@ public class NewTurnControllerTest {
         controllerStub.getTurnController().fromCloudToEntrance(controllerStub.getGame().getGameBoard().getClouds().get(0));
 
     }
+
+
+    @Test
+    @DisplayName("Action Phase Test")
+    public void actionWithPropertyChange() {
+
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        controllerStub.getTurnController().startPianificationPhase();
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev3);
+        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev4);
+        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev5);
+        PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev6);
+        PropertyChangeEvent ev7 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev7);
+        PropertyChangeEvent ev8 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev8);
+        PropertyChangeEvent ev9 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
+        controllerStub.propertyChange(ev9);
+        PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
+        controllerStub.propertyChange(ev10);
+    }
+
+
+
+
 
     public void setupGame() {
         System.out.println("Starting setupGame");
