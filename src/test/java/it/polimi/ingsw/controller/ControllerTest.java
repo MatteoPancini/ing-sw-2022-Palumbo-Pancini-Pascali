@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.server.Server;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,7 +64,14 @@ public class ControllerTest {
         game.createNewPlayer(player2);
         game.addPlayer(player1);
         game.addPlayer(player2);
+
+        player1.setWizard(Wizards.FOREST);
+        player2.setWizard(Wizards.KING);
+
         game.setCurrentPlayer(game.getActivePlayers().get(0));
+        player1.setBoard(new SchoolBoard(1));
+        player2.setBoard(new SchoolBoard(2));
+
         cStub = new ControllerStub(game, new GameHandlerStub(new Server()));
     }
 

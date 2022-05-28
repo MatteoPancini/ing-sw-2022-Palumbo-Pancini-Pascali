@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +39,11 @@ public class GameBoardTest {
         players.add(player1);
         players.add(player2);
         players.add(player3);
+
+        player1.setBoard(new SchoolBoard(1));
+        player2.setBoard(new SchoolBoard(2));
+        player3.setBoard(new SchoolBoard(3));
+
     }
 
     @Test
@@ -182,6 +188,13 @@ public class GameBoardTest {
 
         gameBTest.getIslands().get(0).moveTowerToArea(players.get(0).getBoard().getTowerArea());
         assertEquals(tower3, players.get(0).getBoard().getTowerArea().getTowerArea().get(players.get(0).getBoard().getTowerArea().getTowerArea().size() - 1));
+
+        for(Island i : gameBTest.getIslands()) {
+            if(i.getMergedIslands() != null) {
+                System.out.println("Island "+ i.getIslandID() + " with: " + i.getMergedIslands().size());
+            }
+        }
+        assertEquals(gameBTest.getIslands().size(), 12);
     }
 
     @Test

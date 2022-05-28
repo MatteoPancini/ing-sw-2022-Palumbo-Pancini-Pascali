@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.beans.PropertyChangeEvent;
 import java.net.Socket;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -239,6 +240,46 @@ public class NewTurnControllerTest {
 
     }
 
+
+    @Test
+    @DisplayName("Action Phase Test")
+    public void actionWithPropertyChange() {
+
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        controllerStub.getTurnController().startPianificationPhase();
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev3);
+        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev4);
+        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev5);
+        PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev6);
+    }
 
 
 
