@@ -418,7 +418,7 @@ public class TurnController {
                 expertController.setGrannyHerbsEffect(false);
             }
 
-        }
+        } else checkIslandInfluence(newPosition);
 
         askCloud();
     }
