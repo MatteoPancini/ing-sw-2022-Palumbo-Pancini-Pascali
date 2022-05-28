@@ -30,10 +30,10 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class NewTurnControllerTest {
-    final PlayerStub matteo = new PlayerStub("matteo", 1);
-    final PlayerStub cisco = new PlayerStub("cisco", 2);
-    final PlayerStub gigiox = new PlayerStub("gigiox", 3);
-    final PlayerStub mario = new PlayerStub("mario", 3);
+    final PlayerStub matteo = new PlayerStub("Matteo", 1);
+    final PlayerStub cisco = new PlayerStub("Cisco", 2);
+    final PlayerStub gigiox = new PlayerStub("Gigiox", 3);
+    final PlayerStub mario = new PlayerStub("Mario", 4);
 
 
     final Socket socket = new Socket();
@@ -42,13 +42,13 @@ public class NewTurnControllerTest {
     final SocketClientConnectionStub socketClientConnectionStub =
             new SocketClientConnectionStub(socket, server);
     final VirtualClientView virtualClient =
-            new VirtualClientView(1, "matteo", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(1, "Matteo", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient2 =
-            new VirtualClientView(2, "cisco", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(2, "Cisco", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient3 =
-            new VirtualClientView(3, "gigiox", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(3, "Gigiox", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient4 =
-            new VirtualClientView(4, "mario", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(4, "Mario", socketClientConnectionStub, gameHandlerStub);
     final HashMap<Integer, VirtualClientView> idMapID =
             new HashMap<>() {
                 {
@@ -68,7 +68,6 @@ public class NewTurnControllerTest {
     @Test
     @DisplayName("Setup 3 players")
     public void init3Players() {
-
         matteo.setWizard(Wizards.KING);
         System.out.println("\n");
         cisco.setWizard(Wizards.MONACH);
@@ -84,14 +83,11 @@ public class NewTurnControllerTest {
         controllerStub.getGame().setPlayersNumber(3);
         controllerStub.getGame().setCurrentPlayer(matteo);
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
-
-
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
-
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
     }
 
     @Test
@@ -114,7 +110,6 @@ public class NewTurnControllerTest {
         controllerStub.getGame().addPlayer(gigiox);
         controllerStub.getGame().addPlayer(mario);
 
-
         controllerStub.getGame().setPlayersNumber(4);
         assertEquals(gameHandlerStub.getController(), controllerStub);
 
@@ -122,9 +117,6 @@ public class NewTurnControllerTest {
         assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
         gameHandlerStub.setTeamMode(true);
         gameHandlerStub.setupTeams();
-
-
-
 
         for(Player p : controllerStub.getGame().getActivePlayers()) {
             System.out.println(p.getNickname() + " " + p.getIdTeam() + " " + p.isTeamLeader());
@@ -159,11 +151,11 @@ public class NewTurnControllerTest {
         controllerStub.getGame().setPlayersNumber(3);
         controllerStub.getGame().setCurrentPlayer(matteo);
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
         controllerStub.getTurnController().playAssistantCard(Assistants.ELEPHANT);
         controllerStub.getTurnController().playAssistantCard(Assistants.LIZARD);
         controllerStub.getTurnController().playAssistantCard(Assistants.CHEETAH);
@@ -172,9 +164,9 @@ public class NewTurnControllerTest {
             System.out.println("Card: " + a.getName() + " " + a.getValue() + " by " + a.getOwner().getNickname());
         }
 
-        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getNickname(), "gigiox");
-        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getNickname(), "cisco");
-        assertEquals(controllerStub.getGame().getActivePlayers().get(2).getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getNickname(), "Gigiox");
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getNickname(), "Cisco");
+        assertEquals(controllerStub.getGame().getActivePlayers().get(2).getNickname(), "Matteo");
 
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getAssistantDeck().getDeck().size(), 9);
     }
@@ -199,7 +191,7 @@ public class NewTurnControllerTest {
 
         setupGame();
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
@@ -208,7 +200,7 @@ public class NewTurnControllerTest {
         }
 
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().startActionPhase();
 
@@ -259,8 +251,7 @@ public class NewTurnControllerTest {
 
         setupGame();
 
-
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
