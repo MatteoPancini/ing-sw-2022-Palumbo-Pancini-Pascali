@@ -186,6 +186,8 @@ public class GameBoardTest {
         towers.add(tower3);
         assertEquals(towers, gameBTest.getIslands().get(0).getMergedTowers());
 
+        SchoolBoard schoolB = new SchoolBoard(players.get(0).getPlayerID());
+        players.get(0).setBoard(schoolB);
         gameBTest.getIslands().get(0).moveTowerToArea(players.get(0).getBoard().getTowerArea());
         assertEquals(tower3, players.get(0).getBoard().getTowerArea().getTowerArea().get(players.get(0).getBoard().getTowerArea().getTowerArea().size() - 1));
 

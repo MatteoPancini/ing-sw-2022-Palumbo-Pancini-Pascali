@@ -77,7 +77,7 @@ public class Island implements Serializable {
             this.students = null;
         }
 
-
+        board.decrementIslandCounter();
     }
 
 

@@ -292,13 +292,13 @@ public class TurnController {
                 cardPlayed = c;
             }
         }
-        System.out.println("SOno in playAssistantCard di " + cardPlayed);
+        System.out.println("Sono in playAssistantCard di " + cardPlayed);
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
             System.out.println("aggiungo carta");
 
             controller.getGame().getGameBoard().getLastAssistantUsed().add(cardPlayed);
-            System.out.println("SOno in playAssistantCard");
+            System.out.println("Sono in playAssistantCard");
 
             controller.getGame().getCurrentPlayer().getAssistantDeck().removeCard(cardPlayed);
 
@@ -608,7 +608,7 @@ public class TurnController {
     }
 
     public boolean checkWin() {
-        if(controller.getGame().getGameBoard().getIslands().size() == 3){
+        if(controller.getGame().getGameBoard().getIslandCounter() == 3){
             return true;
         }
 
@@ -620,5 +620,3 @@ public class TurnController {
         return false;
     }
 }
-
-
