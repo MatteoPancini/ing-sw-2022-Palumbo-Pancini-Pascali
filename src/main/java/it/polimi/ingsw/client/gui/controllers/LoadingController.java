@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 
 import java.awt.*;
@@ -27,8 +28,7 @@ public class LoadingController implements GUIController {
 
     private GUI gui;
     @FXML private Label status;
-
-
+    @FXML private ImageView loadingImage;
 
     public void setText(String text) {
         status.setText(text.toUpperCase());

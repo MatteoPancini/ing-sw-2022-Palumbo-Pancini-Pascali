@@ -165,12 +165,20 @@ public class CLI implements Runnable, ListenerInterface {
         st.setShowVerticalLines(true);
         st.addRow("Effect: ");
         st.addRow("Cost: ");
-        for(CharacterCard c : CharacterDeck.getPlayableCards()) {
+        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters().getDeck()) {
             st.setHeader(c.getName().toString());
             st.addRow(c.getEffect());
             st.addRow(Integer.toString(c.getInitialCost()));
             st.print();
         }
+    }
+
+    public void askStudentMonk(CharacterCard monk) {
+        System.out.println(">Choose a student from monk's students: ");
+        for(Student s : monk.getStudents()) {
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+        }
+
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
