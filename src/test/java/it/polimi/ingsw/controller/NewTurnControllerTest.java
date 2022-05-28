@@ -240,11 +240,9 @@ public class NewTurnControllerTest {
 
     }
 
-
     @Test
     @DisplayName("Action Phase Test")
     public void actionWithPropertyChange() {
-
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
         server.setIdMapID(idMapID);
