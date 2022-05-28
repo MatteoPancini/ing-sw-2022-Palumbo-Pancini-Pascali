@@ -32,10 +32,9 @@ public class Game implements Serializable {
 
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
-        System.out.println("GAME OF: " + playersNumber + " PLAYERS");
+        System.out.println("Number of players: " + playersNumber);
         this.gameBoard = new GameBoard(this);
         currentPlayerNumber = 0;
-
     }
 
     public int getPlayersNumber() {

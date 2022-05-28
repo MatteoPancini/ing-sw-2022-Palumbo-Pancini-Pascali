@@ -64,8 +64,11 @@ public class NewTurnControllerTest {
     @DisplayName("Setup 3 players")
     public void init3Players() {
         matteo.setWizard(Wizards.KING);
+        System.out.println("\n");
         cisco.setWizard(Wizards.MONACH);
+        System.out.println("\n");
         gigiox.setWizard(Wizards.FOREST);
+        System.out.println("\n");
         server.setIdMapID(idMapID);
 
         controllerStub.getGame().getActivePlayers().add(matteo);
@@ -88,9 +91,13 @@ public class NewTurnControllerTest {
         gameHandlerStub.setControllerStub(controllerStub);
 
         matteo.setWizard(Wizards.KING);
+        System.out.println("\n");
         cisco.setWizard(Wizards.MONACH);
+        System.out.println("\n");
         gigiox.setWizard(Wizards.FOREST);
+        System.out.println("\n");
         mario.setWizard(Wizards.WITCH);
+        System.out.println("\n");
         server.setIdMapID(idMapID);
 
         controllerStub.getGame().addPlayer(matteo);
@@ -118,11 +125,8 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(2).isTeamLeader(), false);
         assertEquals(controllerStub.getGame().getActivePlayers().get(3).isTeamLeader(), false);
 
-
-
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard(), controllerStub.getGame().getActivePlayers().get(2).getBoard());
         assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard(), controllerStub.getGame().getActivePlayers().get(3).getBoard());
-
     }
 
 
@@ -146,8 +150,6 @@ public class NewTurnControllerTest {
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
-
-
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
         controllerStub.getTurnController().playAssistantCard(Assistants.ELEPHANT);
         controllerStub.getTurnController().playAssistantCard(Assistants.LIZARD);
@@ -162,7 +164,6 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(2).getNickname(), "matteo");
 
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getAssistantDeck().getDeck().size(), 9);
-
     }
 
 
@@ -184,7 +185,6 @@ public class NewTurnControllerTest {
         }
 
         setupGame();
-
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
 
