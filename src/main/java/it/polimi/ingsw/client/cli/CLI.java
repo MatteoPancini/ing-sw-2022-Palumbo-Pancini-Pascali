@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.ExpertModeChoice;
 import it.polimi.ingsw.messages.clienttoserver.PlayersNumberChoice;
 import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
+import it.polimi.ingsw.messages.clienttoserver.actions.Action;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickCharacterActionsNum;
+import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
@@ -163,7 +166,7 @@ public class CLI implements Runnable, ListenerInterface {
         st.setShowVerticalLines(true);
         st.addRow("Effect: ");
         st.addRow("Cost: ");
-        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters().getDeck()) {
+        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             st.setHeader(c.getName().toString());
             st.addRow(c.getEffect());
             st.addRow(Integer.toString(c.getInitialCost()));
@@ -578,7 +581,7 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
     }
 
-    public void askCharacterCard(CharacterDeck cards) {
+    public void askCharacterCard(ArrayList<CharacterCard> cards) {
         if (modelView.getGameCopy().isExpertMode()) {
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
             showCharactersDescription();
@@ -608,6 +611,49 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : monk.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        chosenStudent = in.nextLine();
+        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+
+    }
+
+    public void askStudentJester(CharacterCard jester) {
+        System.out.println(">Choose a student from jester's students: ");
+        for(Student s : jester.getStudents()) {
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+        }
+        chosenStudent = in.nextLine();
+        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+
+    }
+
+    public void askStudentMinestrel(CharacterCard minestrel) {
+        System.out.println(">Choose a student from minestrel's students: ");
+        for(Student s : minestrel.getStudents()) {
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+        }
+        chosenStudent = in.nextLine();
+        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+
+    }
+
+
+    public void askCharacterActionsNumber() {
+        System.out.println("How many students from dining room to entrance do you want to change? [1,2]");
+        int moves = 0;
+        while(true) {
+            System.out.println(">");
+            moves = in.nextInt();
+            if(moves == 1 || moves == 2) break;
+        }
+        clientConnection.sendUserInput(new PickCharacterActionsNum(moves));
+    }
+    public void askStudentPrincess(CharacterCard princess) {
+        System.out.println(">Choose a student from princess's students: ");
+        for(Student s : princess.getStudents()) {
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+        }
+        chosenStudent = in.nextLine();
+        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
 
     }
 

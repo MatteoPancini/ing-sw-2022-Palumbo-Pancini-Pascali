@@ -227,6 +227,11 @@ public class SocketClientConnection implements Runnable {
                     server.getGameFromID(clientID).parseActions(userAction, "PickPawnType");
                 }
 
+                if(userAction instanceof PickCharacterActionsNum) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickCharacterActionsNum");
+
+                }
+
             } else {
                 server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }

@@ -14,18 +14,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CharacterDeck implements Serializable {
-    private static List<CharacterCard> cards = null;
+    private static List<CharacterCard> cards;
     private static Game game;
 
-    private CharacterDeck() {
-        //cards = null;
+    public CharacterDeck() {
+        cards = null;
+        game = null;
     }
 
     public CharacterDeck(Game game) {
         this.game = game;
 
         try{
-            File myObj = new File("./src/main/resources/characterCards.txt");
+            File myObj = new File("./src/main/resources/cards/characterCards.txt");
             Scanner myReader = new Scanner(myObj);
             String data = myReader.nextLine();
 
@@ -60,17 +61,18 @@ public class CharacterDeck implements Serializable {
 
     public static CharacterDeck getPlayableCards(Game game) {
         CharacterDeck deck = new CharacterDeck(game);
+        //System.out.println(deck.getDeck().size());
 
-        CharacterDeck playableCards = new CharacterDeck();
+        CharacterDeck playableCards = null;
 
         Collections.shuffle(deck.getDeck());
 
         for(int i = 1; i <= 3; i++){
-            playableCards.getDeck().add(deck.getDeck().get(i));
+            //playableCards.getDeck().add(deck.getDeck().get(i));
             //playableCards.add(deck.getDeck().get(i));
         }
 
-        return playableCards;
+        return deck;
     }
 
     public List<CharacterCard> getDeck(){

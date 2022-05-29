@@ -12,7 +12,6 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 
-import java.util.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -187,7 +186,7 @@ public class TurnController {
             gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
             //gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a student to move!", false), currentPlayer.getPlayerID());
         } else {
-            if(gameHandler.getExpertMode()) {
+            if(controller.getGame().isExpertMode()) {
                 askCharacterCard();
             } else {
                 askMotherNatureMoves();
@@ -198,6 +197,12 @@ public class TurnController {
 
     }
 
+    public void askStudent() {
+        RequestAction studentAction = new RequestAction(Action.PICK_STUDENT);
+        gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
+    }
+
+
     public void askCharacterCard() {
         RequestAction characterAction = new RequestAction(Action.PICK_CHARACTER);
         gameHandler.sendSinglePlayer(characterAction, currentPlayer.getPlayerID());
@@ -206,7 +211,7 @@ public class TurnController {
     public void askMotherNatureMoves() {
         RequestAction moveMotherNatureAction = new RequestAction(Action.PICK_MOVES_NUMBER);
         gameHandler.sendSinglePlayer(moveMotherNatureAction, currentPlayer.getPlayerID());
-        gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing where to move mother nature!", false), currentPlayer.getPlayerID());
+        //gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing where to move mother nature!", false), currentPlayer.getPlayerID());
 
     }
 
@@ -282,7 +287,7 @@ public class TurnController {
     public void askStudentDestination() {
         RequestAction studentDestinationAction = new RequestAction(Action.PICK_DESTINATION);
         gameHandler.sendSinglePlayer(studentDestinationAction, currentPlayer.getPlayerID());
-        gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing where to move his student!", false), currentPlayer.getPlayerID());
+        //gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing where to move his student!", false), currentPlayer.getPlayerID());
     }
 
     public void playAssistantCard(Assistants nameCardPlayed) {
@@ -355,7 +360,7 @@ public class TurnController {
 
 
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
-        chosenDiningRoom.setDiningRoom(studentToMove);
+        chosenDiningRoom.setStudentToDiningRoom(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
         askStudent(studentRequest);
@@ -398,8 +403,17 @@ public class TurnController {
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
         chosenIsland.addStudent(studentToMove);
-        studentRequest++;
-        askStudent(studentRequest);
+        if(expertController != null) {
+            if(expertController.isMonkEffect()) {
+                expertController.setMonkEffect(false);
+                askMotherNatureMoves();
+            }
+        } else {
+            studentRequest++;
+            askStudent(studentRequest);
+        }
+
+
 
 
     }
@@ -407,7 +421,15 @@ public class TurnController {
 
     public void moveMotherNature(int moves) {
         int currPosition = controller.getGame().getGameBoard().getMotherNature().getPosition();
-        int newPosition = (currPosition + moves) % 12;
+        int newPosition;
+
+
+        if(currPosition > 12) {
+            newPosition = (currPosition + moves) % 12;
+        } else {
+            newPosition = currPosition + moves;
+        }
+
         controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
 
         //TODO: CONTROLLO EXPERT MODE
@@ -418,7 +440,9 @@ public class TurnController {
                 expertController.setGrannyHerbsEffect(false);
             }
 
-        } else checkIslandInfluence(newPosition);
+        } else {
+            checkIslandInfluence(newPosition);
+        }
 
         askCloud();
     }
@@ -515,7 +539,7 @@ public class TurnController {
     public void askCloud() {
         RequestAction cloudAction = new RequestAction(Action.PICK_CLOUD);
         gameHandler.sendSinglePlayer(cloudAction, currentPlayer.getPlayerID());
-        gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a cloud to take!", false), currentPlayer.getPlayerID());
+        //gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a cloud to take!", false), currentPlayer.getPlayerID());
     }
 
     /*

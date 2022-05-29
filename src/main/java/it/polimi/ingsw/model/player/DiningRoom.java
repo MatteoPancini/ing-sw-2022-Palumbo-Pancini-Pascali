@@ -27,7 +27,7 @@ public class DiningRoom implements Serializable {
         return diningRoom;
     }
 
-    public void setDiningRoom(Student student) {
+    public void setStudentToDiningRoom(Student student) {
         PawnType type = student.getType();
         for(int i=0; i<5; i++) {
             if(this.getDiningRoom().get(i).getColor().equals(type)) {

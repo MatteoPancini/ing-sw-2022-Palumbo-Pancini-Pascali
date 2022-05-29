@@ -26,4 +26,8 @@ public class Entrance implements Serializable {
 
     public void setStudents(Student newStudent) { students.add(newStudent); }
 
+    public void removeStudent(Student studentToRemove) {
+        students.remove(studentToRemove);
+    }
+
 }
