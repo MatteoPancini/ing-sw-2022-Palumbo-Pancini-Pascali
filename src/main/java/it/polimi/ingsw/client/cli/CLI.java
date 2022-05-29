@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.ExpertModeChoice;
 import it.polimi.ingsw.messages.clienttoserver.PlayersNumberChoice;
 import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickCharacterActionsNum;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
@@ -16,6 +17,7 @@ import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.cards.CharacterDeck;
 import it.polimi.ingsw.model.enumerations.PawnType;
+import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
@@ -63,7 +65,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     }
 
-    public String printTower(Island isl) {
+    public String printTowers(Island isl) {
         String towers = "";
         if(isl.hasTower()) {
             for(Tower t : isl.getMergedTowers()) {
@@ -574,7 +576,7 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
     }
 
-    public void askCharacterCard(CharacterDeck cards) {
+    public void askCharacterCard(ArrayList<CharacterCard> cards) {
         if (modelView.getGameCopy().isExpertMode()) {
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
             showCharactersDescription();
