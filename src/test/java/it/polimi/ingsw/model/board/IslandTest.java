@@ -36,7 +36,7 @@ public class IslandTest {
         game = new Game();
     }
 
-/*    @Test
+    @Test
     @DisplayName("Verify if islands are merged")
     void islandTest(){
         board = new GameBoard(game);
@@ -46,5 +46,5 @@ public class IslandTest {
         board.getIslands().get(0).setTower(new Tower(TowerColor.BLACK));
         board.getIslands().get(1).setTower(new Tower(TowerColor.BLACK));
         assertEquals(islands, board.getIslands().get(1).getMergedIslands());
-    }*/
+    }
 }

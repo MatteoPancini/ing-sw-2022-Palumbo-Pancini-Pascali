@@ -31,8 +31,11 @@ public class Controller implements PropertyChangeListener {
         if(gameHandler.getExpertMode()) {
             expertController = new ExpertController(game, game.getGameBoard(), turnController);
             turnController.setExpertController(expertController);
-        } else
+        } else {
             expertController = null;
+            turnController.setExpertController(null);
+        }
+
     }
 
     public Game getGame() {

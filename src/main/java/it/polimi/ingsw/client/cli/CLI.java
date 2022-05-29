@@ -50,7 +50,7 @@ public class CLI implements Runnable, ListenerInterface {
     //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
-    private final boolean activeGame;
+    private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
 
@@ -171,14 +171,6 @@ public class CLI implements Runnable, ListenerInterface {
             st.addRow(Integer.toString(c.getInitialCost()));
             st.print();
         }
-    }
-
-    public void askStudentMonk(CharacterCard monk) {
-        System.out.println(">Choose a student from monk's students: ");
-        for(Student s : monk.getStudents()) {
-            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
-        }
-
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
@@ -314,7 +306,8 @@ public class CLI implements Runnable, ListenerInterface {
         return assistants;
     }
 
-    public void showLastAssistantsUsed() {
+    /* old version
+        public void showLastAssistantsUsed() {
         System.out.println(">These are all the assistants used in this turn: ");
         CLITable st = new CLITable();
         Player[] nicknames = getPlayersByAssistantUsed();
@@ -323,7 +316,46 @@ public class CLI implements Runnable, ListenerInterface {
         st.addRow(nicknames[0].getChosenAssistant().getName().toString(), nicknames[1].getChosenAssistant().getName().toString(),
                 nicknames[2].getChosenAssistant().getName().toString(), nicknames[3].getChosenAssistant().getName().toString());
         st.print();
+    } */
+
+    public void showLastAssistantsUsed() {
+        System.out.println(">These are all the assistants used in this turn: ");
+        CLITable st = new CLITable();
+        st.setShowVerticalLines(true);
+        /*
+        Player[] nicknames = getPlayersByAssistantUsed();
+        String[] assistants = getAssistantUsedByOwner();
+
+         */
+        ArrayList<String> nicknames = new ArrayList<>();
+        ArrayList<String> assitants = new ArrayList<>();
+        for(AssistantCard a : modelView.getGameCopy().getGameBoard().getLastAssistantUsed()) {
+            nicknames.add(a.getOwner().getNickname());
+            assitants.add(a.getName().toString());
+        }
+
+        switch (modelView.getGameCopy().getActivePlayers().size()) {
+            case 2 -> {
+                st.setHeaders(nicknames.get(0), nicknames.get(1));
+                st.addRow(assitants.get(0), assitants.get(1));
+            }
+
+            case 3 -> {
+                st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2), nicknames.get(3));
+                st.addRow(assitants.get(0), assitants.get(1), assitants.get(2));
+            }
+
+            case 4 -> {
+                st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2), nicknames.get(3));
+                st.addRow(assitants.get(0), assitants.get(1),
+                        assitants.get(2), assitants.get(3));
+            }
+        }
+
+        st.print();
     }
+
+
     public String printStudentsOnCLoud(int ID) {
         StringBuilder str = new StringBuilder();
         for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
@@ -671,8 +703,9 @@ public class CLI implements Runnable, ListenerInterface {
         //System.out.println("Entro in run");
 
         userNicknameSetup();
+        /*
         while (isActiveGame()) {
-            //TODO M e CICIO: QUESTA PARTE E' DA CONTROLLARE SE FUNZIONA E CAMBIARE
+            //TODO: (maybe) permettere di scrivere sempre
             if(modelView.isGameStarted()) {
                 if (!modelView.isStartPlaying()) {
                     System.out.println("Entro dentro all'action");
@@ -680,13 +713,38 @@ public class CLI implements Runnable, ListenerInterface {
                 }
             }
         }
-        in.close();
+
+         */
+        while(true) {
+            if(!activeGame) {
+                break;
+            }
+        }
+        //in.close();
         out.close();
     }
 
     public boolean isActiveGame() {
         return activeGame;
     }
+
+    public void setActiveGame(boolean activeGame) {
+        this.activeGame = activeGame;
+    }
+
+    public void askStudentMonk(CharacterCard monk) {
+        System.out.println(">Choose a student from monk's students: ");
+        for(Student s : monk.getStudents()) {
+            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
+        }
+
+    }
+    public void endGameMessage() {
+        System.out.println("Thanks to have played Eriantys!");
+        System.out.println("Application will now close...");
+        System.exit(0);
+    }
+
 
 
     public void initialGamePhaseHandler(String serverCommand) {
@@ -738,8 +796,18 @@ public class CLI implements Runnable, ListenerInterface {
         CLI cli = new CLI();
 
         cli.run();
-        System.out.println("Arrivo dopo qui");
+        //System.out.println("Arrivo dopo qui");
 
+    }
+
+    public void showCharacters(AssistantDeck deck) {
+        System.out.println(">Take a look at your deck before choosing: ");
+        System.out.println(deck.getDeck().size());
+
+        for(int i = 0; i < 10; i++) {
+            System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
+
+        }
     }
 
     @Override
@@ -761,20 +829,33 @@ public class CLI implements Runnable, ListenerInterface {
             case "UpdateModelView" -> {
                 assert serverCommand != null;
                 modelView.setGameCopy((Game) changeEvent.getNewValue());
-                showIslandsTable();
-                showClouds();
-                showAvailableCharacters();
-                showMotherNature();
-                showCoins();
-                showOtherDiningRooms();
+                if(modelView.isAction()) {
+                    showIslandsTable();
+                    showClouds();
+                    showMotherNature();
+                    showAvailableCharacters();
+                    showCoins();
+                    showOtherDiningRooms();
+                }
+                if(modelView.isPianification()) {
+                    showAvailableCharacters();
+                }
+
             }
+
+
             case "WinMessage" -> {
                 assert serverCommand != null;
+                setActiveGame(false);
                 showWinMessage();
+                endGameMessage();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
+                setActiveGame(false);
                 showLoseMessage(changeEvent.getNewValue().toString());
+                endGameMessage();
+
             }
             default -> System.out.println("Unknown answer from server");
         }

@@ -122,11 +122,12 @@ public class Player implements Serializable {
     public void setWizard(Wizards wizard) {
         //System.out.println("C'è un problema qua...");
         this.wizard = wizard;
-        System.out.println("Il wizard è " + wizard);
+        System.out.println(nicknamePlayer + "'s wizard is " + wizard);
         assistantDeck = new AssistantDeck(wizard);
+        System.out.println("Setting " + nicknamePlayer + "'s cards:");
         for(AssistantCard a : assistantDeck.getDeck()) {
             a.setOwner(this);
-            System.out.println("Setting card: " + a.getName() + " " + a.getValue() + " " + a.getMoves() + " " + a.getWizard() + " " + a.getOwner().getNickname());
+            System.out.println(" " + a.getName() + " " + a.getValue() + " " + a.getMoves() + " " + a.getWizard());
         }
     }
 

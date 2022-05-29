@@ -47,6 +47,7 @@ public class GameHandler {
 
 
 
+
     public void setTeamMode(boolean teamMode) {
         isTeamMode = teamMode;
     }
@@ -89,7 +90,10 @@ public class GameHandler {
         sendBroadcast(new DynamicAnswer("Setting up teams...", false));
         int teamID1 = 1;
         int teamID2 = 2;
-        for(int i = 0; i < playersNumber; i++) {
+        System.out.println("Arrivo qui " + game.getPlayers().size());
+
+        for(int i = 0; i < game.getPlayers().size(); i++) {
+
             if(i % 2 == 0) {
                 game.getPlayers().get(i).setIdTeam(teamID1);
             } else {
@@ -101,6 +105,7 @@ public class GameHandler {
             } else if(i == 1) {
                 game.getPlayers().get(i).setTeamLeader(true);
             }
+            System.out.println("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam());
 
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }

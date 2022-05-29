@@ -3,10 +3,15 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.GameBoard;
+import it.polimi.ingsw.model.board.Island;
+import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Assistants;
+import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
+import it.polimi.ingsw.model.player.Tower;
 import it.polimi.ingsw.server.Server;
 import it.polimi.ingsw.server.SocketClientConnection;
 import it.polimi.ingsw.server.VirtualClientView;
@@ -17,14 +22,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.beans.PropertyChangeEvent;
 import java.net.Socket;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class NewTurnControllerTest {
-    final PlayerStub matteo = new PlayerStub("matteo", 1);
-    final PlayerStub cisco = new PlayerStub("cisco", 2);
-    final PlayerStub gigiox = new PlayerStub("gigiox", 3);
-    final PlayerStub mario = new PlayerStub("mario", 3);
+    final PlayerStub matteo = new PlayerStub("Matteo", 1);
+    final PlayerStub cisco = new PlayerStub("Cisco", 2);
+    final PlayerStub gigiox = new PlayerStub("Gigiox", 3);
+    final PlayerStub mario = new PlayerStub("Mario", 4);
 
 
     final Socket socket = new Socket();
@@ -33,13 +42,13 @@ public class NewTurnControllerTest {
     final SocketClientConnectionStub socketClientConnectionStub =
             new SocketClientConnectionStub(socket, server);
     final VirtualClientView virtualClient =
-            new VirtualClientView(1, "matteo", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(1, "Matteo", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient2 =
-            new VirtualClientView(2, "cisco", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(2, "Cisco", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient3 =
-            new VirtualClientView(3, "gigiox", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(3, "Gigiox", socketClientConnectionStub, gameHandlerStub);
     final VirtualClientView virtualClient4 =
-            new VirtualClientView(4, "mario", socketClientConnectionStub, gameHandlerStub);
+            new VirtualClientView(4, "Mario", socketClientConnectionStub, gameHandlerStub);
     final HashMap<Integer, VirtualClientView> idMapID =
             new HashMap<>() {
                 {
@@ -52,17 +61,83 @@ public class NewTurnControllerTest {
 
     final Game game = new Game();
 
-    //final GameBoard board = new GameBoard(this.game);
-
-    final ControllerStub controllerStub = new ControllerStub(game, gameHandlerStub);
-    final TurnController turnController =
-            new TurnController(new Controller(game, gameHandlerStub), gameHandlerStub);
+    final ControllerStub controllerStub = new ControllerStub(gameHandlerStub.getGame(), gameHandlerStub);
 
 
 
     @Test
     @DisplayName("Setup 3 players")
     public void init3Players() {
+        matteo.setWizard(Wizards.KING);
+        System.out.println("\n");
+        cisco.setWizard(Wizards.MONACH);
+        System.out.println("\n");
+        gigiox.setWizard(Wizards.FOREST);
+        System.out.println("\n");
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+        controllerStub.getGame().getActivePlayers().add(gigiox);
+
+        controllerStub.getGame().setPlayersNumber(3);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+    }
+
+    @Test
+    @DisplayName("Setup 4 players")
+    public void init4Players() {
+        gameHandlerStub.setControllerStub(controllerStub);
+
+        matteo.setWizard(Wizards.KING);
+        System.out.println("\n");
+        cisco.setWizard(Wizards.MONACH);
+        System.out.println("\n");
+        gigiox.setWizard(Wizards.FOREST);
+        System.out.println("\n");
+        mario.setWizard(Wizards.WITCH);
+        System.out.println("\n");
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().addPlayer(matteo);
+        controllerStub.getGame().addPlayer(cisco);
+        controllerStub.getGame().addPlayer(gigiox);
+        controllerStub.getGame().addPlayer(mario);
+
+        controllerStub.getGame().setPlayersNumber(4);
+        assertEquals(gameHandlerStub.getController(), controllerStub);
+
+        assertEquals(gameHandlerStub.getController(), controllerStub);
+        assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
+        gameHandlerStub.setTeamMode(true);
+        gameHandlerStub.setupTeams();
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            System.out.println(p.getNickname() + " " + p.getIdTeam() + " " + p.isTeamLeader());
+        }
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getIdTeam(), controllerStub.getGame().getActivePlayers().get(2).getIdTeam());
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getIdTeam(), controllerStub.getGame().getActivePlayers().get(3).getIdTeam());
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).isTeamLeader(), true);
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).isTeamLeader(), true);
+        assertEquals(controllerStub.getGame().getActivePlayers().get(2).isTeamLeader(), false);
+        assertEquals(controllerStub.getGame().getActivePlayers().get(3).isTeamLeader(), false);
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard(), controllerStub.getGame().getActivePlayers().get(2).getBoard());
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard(), controllerStub.getGame().getActivePlayers().get(3).getBoard());
+    }
+
+
+    @Test
+    @DisplayName("Pianification Phase")
+    public void pianificationPhase() {
 
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
@@ -76,49 +151,11 @@ public class NewTurnControllerTest {
         controllerStub.getGame().setPlayersNumber(3);
         controllerStub.getGame().setCurrentPlayer(matteo);
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
-
-
-        assertEquals(game.getCurrentPlayer().getNickname(), "matteo");
-
-    }
-
-    @Test
-    @DisplayName("Setup 3 players")
-    public void init4Players() {
-
-        matteo.setWizard(Wizards.KING);
-        cisco.setWizard(Wizards.MONACH);
-        gigiox.setWizard(Wizards.FOREST);
-        mario.setWizard(Wizards.WITCH);
-        server.setIdMapID(idMapID);
-
-        controllerStub.getGame().getActivePlayers().add(matteo);
-        controllerStub.getGame().getActivePlayers().add(cisco);
-        controllerStub.getGame().getActivePlayers().add(gigiox);
-        controllerStub.getGame().getActivePlayers().add(mario);
-
-
-        controllerStub.getGame().setPlayersNumber(4);
-        controllerStub.getGame().setCurrentPlayer(matteo);
-
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "matteo");
-
-        controllerStub.getTurnController().setCurrentPlayer(matteo);
-
-
-
-        assertEquals(game.getCurrentPlayer().getNickname(), "matteo");
-
-    }
-
-
-    @Test
-    @DisplayName("Pianification Phase")
-    public void pianificationPhase() {
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
         controllerStub.getTurnController().playAssistantCard(Assistants.ELEPHANT);
         controllerStub.getTurnController().playAssistantCard(Assistants.LIZARD);
         controllerStub.getTurnController().playAssistantCard(Assistants.CHEETAH);
@@ -127,15 +164,227 @@ public class NewTurnControllerTest {
             System.out.println("Card: " + a.getName() + " " + a.getValue() + " by " + a.getOwner().getNickname());
         }
 
-        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getNickname(), "gigiox");
-        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getNickname(), "cisco");
-        assertEquals(controllerStub.getGame().getActivePlayers().get(2).getNickname(), "matteo");
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getNickname(), "Gigiox");
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getNickname(), "Cisco");
+        assertEquals(controllerStub.getGame().getActivePlayers().get(2).getNickname(), "Matteo");
 
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getAssistantDeck().getDeck().size(), 9);
-
     }
 
 
+    @Test
+    @DisplayName("Action Phase Test")
+    public void standardActionPhase() {
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        for(Student t : controllerStub.getTurnController().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
+            System.out.println(t.getType());
+        }
+
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().startActionPhase();
+
+        System.out.println(matteo.getBoard().getEntrance().getStudents().get(0).getType());
+        controllerStub.getTurnController().setStudentToMove(matteo.getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getTurnController().moveStudentToIsland(controllerStub.getGame().getGameBoard().getIslandById(2));
+
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            System.out.println("Island " + i.getIslandID() + ": " + i.getStudents().size());
+        }
+        //assertEquals(controllerStub.getGame().getGameBoard().getIslandById(2).getStudents().size(), 2);
+
+        controllerStub.getTurnController().setStudentToMove(matteo.getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getTurnController().moveStudentToIsland(controllerStub.getGame().getGameBoard().getIslandById(3));
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            System.out.println("Island " + i.getIslandID() + ": " + i.getStudents().size());
+        }
+        controllerStub.getTurnController().setStudentToMove(matteo.getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getTurnController().moveStudentToIsland(controllerStub.getGame().getGameBoard().getIslandById(10));
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            System.out.println("Island " + i.getIslandID() + ": " + i.getStudents().size());
+        }
+
+        controllerStub.getTurnController().moveMotherNature(2);
+
+        System.out.println("MN is in island: " + controllerStub.getGame().getGameBoard().getMotherNature().getPosition());
+
+        controllerStub.getTurnController().fromCloudToEntrance(controllerStub.getGame().getGameBoard().getClouds().get(0));
+
+    }
+
+    @Test
+    @DisplayName("Action Phase Test")
+    public void actionWithPropertyChange() {
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        controllerStub.getTurnController().startPianificationPhase();
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev3);
+        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev4);
+        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev5);
+        PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev6);
+        PropertyChangeEvent ev7 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev7);
+        PropertyChangeEvent ev8 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev8);
+        PropertyChangeEvent ev9 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
+        controllerStub.propertyChange(ev9);
+        PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
+        controllerStub.propertyChange(ev10);
+    }
+
+
+
+
+
+    public void setupGame() {
+        System.out.println("Starting setupGame");
+
+        int studentsNumber;
+        if(controllerStub.getGame().getPlayersNumber() == 3) {
+            studentsNumber = 9;
+        }
+        else {
+            studentsNumber = 7;
+        }
+
+        int towersNumber = 0;
+        int colorsCounter3P = 0;
+        int colorsCounter2P = 0;
+        int colorsCounter4P = 0;
+        ArrayList<TowerColor> allTowerColors = new ArrayList<TowerColor>();
+        allTowerColors.add(TowerColor.WHITE);
+        allTowerColors.add(TowerColor.BLACK);
+        allTowerColors.add(TowerColor.GREY);
+
+        if(controllerStub.getGame().getPlayersNumber() == 3) {
+            towersNumber = 6;
+            colorsCounter3P = 0;
+        } else if(controllerStub.getGame().getPlayersNumber() == 2) {
+            towersNumber = 8;
+            colorsCounter2P = 0;
+        } else if(controllerStub.getGame().getPlayersNumber() == 4) {
+            towersNumber = 8;
+            colorsCounter4P = 0;
+        }
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            //System.out.println("Inizio setup di " + p.getNickname());
+
+            //System.out.println("metto students nell'entrance");
+            for(int i = 1; i <= studentsNumber; i++){
+                Collections.shuffle(controllerStub.getGame().getGameBoard().getStudentsBag());
+                p.getBoard().getEntrance().getStudents().add(controllerStub.getGame().getGameBoard().getStudentsBag().get(0));
+                controllerStub.getGame().getGameBoard().removeStudents(0);
+            }
+
+            //System.out.println("metto torri");
+            if(controllerStub.getGame().getActivePlayers().size() == 3) {
+                for(int i = 1; i <= towersNumber; i++) {
+                    p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
+                    if(colorsCounter3P < 2) colorsCounter3P++;
+                }
+            } else if(controllerStub.getGame().getActivePlayers().size() == 2) {
+                for(int k = 1; k <= towersNumber; k++) {
+                    p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
+                    if(colorsCounter2P < 1) colorsCounter2P++;
+                }
+            } else if(controllerStub.getGame().getActivePlayers().size() == 4) {
+                if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
+                    p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
+                    if(colorsCounter4P < 3) colorsCounter4P++;
+                }
+            }
+        }
+
+        //System.out.println("metto madre natura");
+
+        int maximum = 11;
+        SecureRandom r = new SecureRandom();
+        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
+        //int n = 1;
+        int mnPos = controllerStub.getGame().getGameBoard().getMotherNature().getPosition();
+
+        int mnPosOpposite = -1;
+        if(mnPos <= 6) {
+            mnPosOpposite = mnPos + 6;
+        } else {
+            mnPosOpposite = (mnPos + 6) % 12;
+        }
+
+        //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
+
+        for(int s = 1; s <= 12; s++) {
+            if(s != mnPos && s != mnPosOpposite) {
+                //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
+                Collections.shuffle(controllerStub.getGame().getGameBoard().getSetupStudentsBag());
+                controllerStub.getGame().getGameBoard().getIslands().get(s - 1).addStudent(controllerStub.getGame().getGameBoard().getSetupStudentsBag().get(0));
+                controllerStub.getGame().getGameBoard().removeSetupStudents(0);
+            }
+            //n++;
+        }
+
+        for(int p = 1; p <= 12; p++){
+            if(p != mnPos && p != mnPosOpposite) {
+                System.out.println(p + ", " + "Student " + controllerStub.getGame().getGameBoard().getIslands().get(p - 1).getStudents().get(0).getType());
+            }
+
+            if(p == mnPos){
+                System.out.println(p + ", " + "Mother nature is here");
+            }
+
+            if(p == mnPosOpposite){
+                System.out.println(p + ", " + "This island is empty");
+            }
+        }
+
+        System.out.println("Finished setupGame");
+    }
 
     /** Class GameHandlerStub defines a stub for GameHandler class */
     public class GameHandlerStub extends GameHandler {
@@ -149,6 +398,7 @@ public class NewTurnControllerTest {
             super(server);
         }
 
+        ControllerStub controllerStub;
         /**
          * Method singleSend sends a message to a client, identified by his ID number, through the
          * server socket.
@@ -176,6 +426,15 @@ public class NewTurnControllerTest {
             return game.getCurrentPlayer().getPlayerID();
         }
 
+        @Override
+        public ControllerStub getController() {
+            return controllerStub;
+        }
+
+        public void setControllerStub(ControllerStub controllerStub) {
+            this.controllerStub = controllerStub;
+        }
+
         /**
          * Method sendAll does the same as the previous method, but it iterates on all the clients
          * present in the game. It's a full effects broadcast.
@@ -183,10 +442,19 @@ public class NewTurnControllerTest {
          * @param message of type Answer - the message to broadcast (at single match participants'
          *     level).
          */
+
+
         @Override
         public void sendBroadcast(Answer message) {
             System.out.println(message.getMessage());
         }
+
+        @Override
+        public void sendExcept(Answer serverAnswer, int id) {
+            System.out.println(serverAnswer.getMessage());
+        }
+
+
     }
 
     /** Class ControllerStub defines a stub for Controller class. */

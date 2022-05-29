@@ -5,6 +5,7 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.server.Server;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,18 +60,29 @@ public class ControllerTest {
         game.setPlayersNumber(2);
         PlayerStub player1 = new PlayerStub("Francesco", 1);
         PlayerStub player2 = new PlayerStub("Matteo", 2);
+        SchoolBoard schoolB1 = new SchoolBoard(player1.getPlayerID());
+        SchoolBoard schoolB2 = new SchoolBoard(player2.getPlayerID());
+        player1.setBoard(schoolB1);
+        player2.setBoard(schoolB2);
         game.createNewPlayer(player1);
         game.createNewPlayer(player2);
         game.addPlayer(player1);
         game.addPlayer(player2);
+
+        player1.setWizard(Wizards.FOREST);
+        player2.setWizard(Wizards.KING);
+
         game.setCurrentPlayer(game.getActivePlayers().get(0));
+        player1.setBoard(new SchoolBoard(1));
+        player2.setBoard(new SchoolBoard(2));
+
         cStub = new ControllerStub(game, new GameHandlerStub(new Server()));
     }
 
     @Test
     void setupTest() {
         cStub.newSetupGame();
-        System.out.println(cStub.getGame().getPlayersNumber());
+        assertEquals(2, cStub.getGame().getPlayersNumber());
         System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
         //cStub.getGame().switchToNextPlayer();
         //System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());

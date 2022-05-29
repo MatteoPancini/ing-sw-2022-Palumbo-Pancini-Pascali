@@ -168,6 +168,7 @@ public class TurnController {
             setActionPhase();
             gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
             gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            gameHandler.sendExcept(new DynamicAnswer("Please wait: " + currentPlayer.getNickname() + " is playing his action phase", false), currentPlayer.getPlayerID());
 
             studentRequest = 1;
 
@@ -184,7 +185,7 @@ public class TurnController {
         if(studentNum <= 3) {
             RequestAction studentAction = new RequestAction(Action.PICK_STUDENT);
             gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
-            gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a student to move!", false), currentPlayer.getPlayerID());
+            //gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing a student to move!", false), currentPlayer.getPlayerID());
         } else {
             if(gameHandler.getExpertMode()) {
                 askCharacterCard();
@@ -257,16 +258,16 @@ public class TurnController {
             //riordina per ogni assistantCard giocata anche gli active players
             for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
                 controller.getGame().getActivePlayers().set(i, controller.getGame().getGameBoard().getLastAssistantUsed().get(i).getOwner());
+                System.out.println(controller.getGame().getActivePlayers().get(i).getNickname());
             }
 
             resetPianificationPhase();
 
-            gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0), false));
+            gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0).getNickname(), false));
+            currentPlayer = controller.getGame().getActivePlayers().get(0);
 
             startActionPhase();
         }
-
-        switchPlayer();
 
 
     }
@@ -291,13 +292,13 @@ public class TurnController {
                 cardPlayed = c;
             }
         }
-        System.out.println("SOno in playAssistantCard di " + cardPlayed);
+        System.out.println("Sono in playAssistantCard di " + cardPlayed);
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
             System.out.println("aggiungo carta");
 
             controller.getGame().getGameBoard().getLastAssistantUsed().add(cardPlayed);
-            System.out.println("SOno in playAssistantCard");
+            System.out.println("Sono in playAssistantCard");
 
             controller.getGame().getCurrentPlayer().getAssistantDeck().removeCard(cardPlayed);
 
@@ -318,7 +319,7 @@ public class TurnController {
                 }
             }
 
-
+            switchPlayer();
 
             askAssistantCard();
         }
@@ -409,11 +410,15 @@ public class TurnController {
         int newPosition = (currPosition + moves) % 12;
         controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
 
-        if(!expertController.isGrannyHerbsEffect()) {
-            checkIslandInfluence(newPosition);
-        } else {
-            expertController.setGrannyHerbsEffect(false);
-        }
+        //TODO: CONTROLLO EXPERT MODE
+        if(expertController != null) {
+            if(!expertController.isGrannyHerbsEffect()) {
+                checkIslandInfluence(newPosition);
+            } else {
+                expertController.setGrannyHerbsEffect(false);
+            }
+
+        } else checkIslandInfluence(newPosition);
 
         askCloud();
     }
@@ -432,34 +437,35 @@ public class TurnController {
          */
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
-            if(expertController.isFungarusEffect()) {
-                if(!studentType.equals(expertController.getPawnTypeChosen())) {
+            if(expertController != null) {
+                if(expertController.isFungarusEffect()) {
+                    if(!studentType.equals(expertController.getPawnTypeChosen())) {
+                        Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
+                        studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
+                    }
+                } else {
                     Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                     studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                 }
-            } else {
-                Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
-                studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
             }
 
-        }
 
-        if(!expertController.isCentaurEffect()) {
-            TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
-            for (Player p : controller.getGame().getActivePlayers()) {
-                if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
-                    p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size());
+        }
+        if(expertController != null) {
+            if(!expertController.isCentaurEffect()) {
+                TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
+                for (Player p : controller.getGame().getActivePlayers()) {
+                    if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
+                        p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size());
+                    }
                 }
             }
         }
 
-
-
         int islandInfluence = 0;
 
-
         for(Player player : controller.getGame().getActivePlayers()) {
-            if(player.getIslandInfluence() > islandInfluence || (player.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) && player.getIslandInfluence() >= islandInfluence) {
+            if(player.getIslandInfluence() > islandInfluence || (controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() != null && player.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) && player.getIslandInfluence() >= islandInfluence) {
                 islandInfluence = player.getIslandInfluence();
             }
         }
@@ -471,7 +477,7 @@ public class TurnController {
                 currentPlayer.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslandById(islandId));
             } else {
                 for(Player p : controller.getGame().getActivePlayers()) {
-                    if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
+                    if(controller.getGame().getGameBoard().getIslandById(islandId).getTower() != null && p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
                         controller.getGame().getGameBoard().getIslandById(islandId).moveTowerToArea(p.getBoard().getTowerArea());
                         break;
                     }
@@ -494,12 +500,15 @@ public class TurnController {
             p.setIslandInfluence(0);
         }
 
-        if(expertController.isCentaurEffect()) {
-            expertController.setCentaurEffect(false);
+        if(expertController != null) {
+            if(expertController.isCentaurEffect()) {
+                expertController.setCentaurEffect(false);
+            }
+            if(expertController.isFungarusEffect()) {
+                expertController.setFungarusEffect(false);
+            }
         }
-        if(expertController.isFungarusEffect()) {
-            expertController.setFungarusEffect(false);
-        }
+
 
     }
 
@@ -595,7 +604,7 @@ public class TurnController {
     }
 
     public boolean checkWin() {
-        if(controller.getGame().getGameBoard().getIslands().size() == 3){
+        if(controller.getGame().getGameBoard().getIslandCounter() == 3){
             return true;
         }
 
@@ -607,5 +616,3 @@ public class TurnController {
         return false;
     }
 }
-
-

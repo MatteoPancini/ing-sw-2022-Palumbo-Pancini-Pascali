@@ -76,6 +76,8 @@ public class Island implements Serializable {
             this.mergedIsland = null;
             this.students = null;
         }
+
+        board.decrementIslandCounter();
     }
 
 
@@ -125,7 +127,11 @@ public class Island implements Serializable {
     }
 
     public Tower getTower() {
-        return mergedTowers.get(0);
+        if(hasTower()) {
+            return mergedTowers.get(0);
+        } else
+            return tower;
+
     }
 
     private void setStudents(ArrayList<Student> students) {
