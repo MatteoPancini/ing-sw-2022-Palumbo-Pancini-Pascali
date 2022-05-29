@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 import java.awt.*;
@@ -23,7 +24,12 @@ public class MainMenuController implements GUIController {
     @FXML private TextField ipAddress;
     @FXML private TextField port;
     @FXML private Label confirmationLabel;
-
+    @FXML private ImageView menuBackground;
+    @FXML private ImageView cranioLogo;
+    @FXML private Label authors;
+    @FXML private ImageView eriantys;
+    @FXML private Button startButton;
+    @FXML private Button quitButton;
 
 
     /** Method quit kills the application when the "Quit" button is pressed. */

@@ -87,7 +87,7 @@ public class ActionHandler {
     public void makeAction(String serverCommand) {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
-                cli.askAssistant(modelView.getGameCopy().getCurrentPlayer().getAssistantDeck());
+                cli.askAssistant();
 
             }
             case "PICK_CLOUD" -> {

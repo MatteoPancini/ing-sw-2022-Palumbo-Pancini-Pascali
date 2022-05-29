@@ -3,17 +3,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainMenuController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainMenuController">
    <children>
-      <TextField fx:id="username" layoutX="184.0" layoutY="84.0" />
-      <TextField fx:id="ipAddress" layoutX="213.0" layoutY="152.0" />
-      <TextField fx:id="port" layoutX="158.0" layoutY="229.0" />
-      <Label layoutX="14.0" layoutY="97.0" text="Insert your nickname:" underline="true" />
-      <Label layoutX="14.0" layoutY="165.0" text="Insert a server IP address:" textAlignment="CENTER" underline="true" />
-      <Label layoutX="14.0" layoutY="242.0" text="Insert a server port:" textAlignment="CENTER" underline="true" />
-      <Label fx:id="confirmationLabel" layoutX="91.0" layoutY="293.0" prefHeight="18.0" prefWidth="439.0" text="Insert your nickname, IP address and server port.. then join match" />
-      <Button layoutX="279.0" layoutY="344.0" mnemonicParsing="false" onAction="#start" text="JOIN MATCH" />
+      <ImageView fitHeight="414.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@../graphics/forest.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="username" layoutX="225.0" layoutY="84.0" />
+      <TextField fx:id="ipAddress" layoutX="225.0" layoutY="161.0" />
+      <TextField fx:id="port" layoutX="225.0" layoutY="254.0" />
+      <Label layoutX="11.0" layoutY="83.0" prefHeight="27.0" prefWidth="263.0" text="Insert your nickname:" textFill="#b18989">
+         <font>
+            <Font name="Palatino Linotype" size="18.0" />
+         </font></Label>
+      <Label layoutX="11.0" layoutY="163.0" text="Insert a server IP address:" textAlignment="CENTER" textFill="#b18989">
+         <font>
+            <Font name="Palatino Linotype" size="17.0" />
+         </font></Label>
+      <Label layoutX="30.0" layoutY="255.0" text="Insert a server port:" textAlignment="CENTER" textFill="#b18989">
+         <font>
+            <Font name="Palatino Linotype" size="18.0" />
+         </font></Label>
+      <Button layoutX="230.0" layoutY="335.0" mnemonicParsing="false" onAction="#start" text="JOIN MATCH" textFill="#b18989">
+         <font>
+            <Font name="Palatino Linotype" size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>
