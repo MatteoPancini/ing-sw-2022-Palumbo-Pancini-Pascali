@@ -40,6 +40,7 @@ public class CharacterCardsTest {
     @DisplayName("Deck test")
     void deckTest(){
         game = new Game();
+        game.setPlayersNumber(3);
         card1 = new CharacterCard(Characters.HERALD, " ", 3);
         card2 = new CharacterCard(Characters.KNIGHT, " ", 2);
         card3 = new CharacterCard(Characters.CENTAUR, " ", 3);

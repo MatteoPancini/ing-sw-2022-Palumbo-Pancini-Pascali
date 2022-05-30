@@ -67,6 +67,14 @@ public class ActionHandler {
             modelView.setPianification(true);
             modelView.setAction(false);
             cli.showServerMessage(modelView.getServerAnswer());
+        } else if(answer instanceof MagicPostmanAction) {
+            modelView.setMagicPostmanAction(true);
+        } else if(answer instanceof MinestrelAction) {
+            modelView.setMinestrelAction(true);
+            cli.askCharacterActionsNumber();
+        } else if(answer instanceof JesterAction) {
+            modelView.setJesterAction(true);
+            cli.askCharacterActionsNumber();
         }
     }
 
@@ -79,7 +87,7 @@ public class ActionHandler {
     public void makeAction(String serverCommand) {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
-                cli.askAssistant(modelView.getGameCopy().getCurrentPlayer().getAssistantDeck());
+                cli.askAssistant();
 
             }
             case "PICK_CLOUD" -> {
@@ -90,7 +98,36 @@ public class ActionHandler {
                 cli.askDestination();
             }
             case "PICK_STUDENT" -> {
-                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                if(modelView.isJesterAction()) {
+                    if(modelView.getCharacterAction() % 2 == 0) {
+                        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                            if(c.getName().toString() == "JESTER") {
+                                cli.askStudentJester(c);
+                                break;
+                            }
+                        }
+                    } else {
+                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                    }
+                    modelView.setCharacterAction(modelView.getCharacterAction() + 1);
+
+                } else if(modelView.isMinestrelAction()) {
+                    if(modelView.getCharacterAction() % 2 == 0) {
+                        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                            if(c.getName().toString() == "MINESTREL") {
+                                cli.askStudentMinestrel(c);
+                                break;
+                            }
+                        }
+                    } else {
+                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+
+                    }
+                    modelView.setCharacterAction(modelView.getCharacterAction() + 1);
+
+                } else {
+                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                }
 
             }
             case "PICK_MOVES_NUMBER" -> {
@@ -113,9 +150,19 @@ public class ActionHandler {
             }
 
             case "PICK_STUDENT_MONK" -> {
-                for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters().getDeck()) {
+                for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
                     if(c.getName().toString() == "MONK") {
                         cli.askStudentMonk(c);
+                        break;
+                    }
+                }
+            }
+
+            case "PICK_PRINCESS_STUDENT" -> {
+                for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                    if(c.getName().toString() == "SPOILED_PRINCESS") {
+                        cli.askStudentPrincess(c);
+                        break;
                     }
                 }
             }

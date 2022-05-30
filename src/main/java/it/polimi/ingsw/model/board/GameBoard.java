@@ -9,11 +9,12 @@ import it.polimi.ingsw.model.Game;
 
 public class GameBoard implements Serializable {
     private Game game;
-    private ArrayList<CloudTile> clouds = new ArrayList<CloudTile>();;
+    private ArrayList<CloudTile> clouds = new ArrayList<>();;
     private ArrayList<Island> islands;
     private ArrayList<Professor> professors;
     private MotherNature motherNature;
-    private CharacterDeck playableCharacters = null;
+    private ArrayList<CharacterCard> playableCharacters = new ArrayList<>();
+    private CharacterDeck characterDeck = null;
     private ArrayList<AssistantCard> lastAssistantUsed = new ArrayList<>();
     private ArrayList<Student> studentsBag;
     private ArrayList<Student>  setupStudentsBag;
@@ -84,7 +85,7 @@ public class GameBoard implements Serializable {
         return game;
     }
 
-    public CharacterDeck getPlayableCharacters() {
+    public ArrayList<CharacterCard> getPlayableCharacters() {
         return playableCharacters;
     }
 
@@ -97,7 +98,20 @@ public class GameBoard implements Serializable {
     }
 
     public void setPlayableCharacters() {
-        playableCharacters = CharacterDeck.getPlayableCards(game);
+        characterDeck = CharacterDeck.getPlayableCards(game);
+
+        /*
+        for(int i = 3; i <= 12; i++){
+            playableCharacters.getDeck().remove(i);
+        }
+        System.out.println(playableCharacters.getDeck().size());
+
+
+         */
+        for(int i = 0; i < 3; i++) {
+            playableCharacters.add(characterDeck.getDeck().get(i));
+
+        }
     }
 
     public void removeSetupStudents(int index) {

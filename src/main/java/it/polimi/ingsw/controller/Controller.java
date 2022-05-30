@@ -169,8 +169,35 @@ public class Controller implements PropertyChangeListener {
             }
 
             case "PickStudent" -> {
-                turnController.setStudentToMove((Student) evt.getNewValue());
-                turnController.askStudentDestination();
+                if(expertController == null) {
+                    turnController.setStudentToMove((Student) evt.getNewValue());
+                    turnController.askStudentDestination();
+                } else {
+                    expertController.setStudentChosen((Student) evt.getNewValue());
+                    if (expertController.isMonkEffect()) {
+                        expertController.activeMonkEffect();
+                    } else if(expertController.isSpoiledPrincessEffect()) {
+                        expertController.activeSpoiledPrincessEffect();
+                    } else if(expertController.isJesterEffect()) {
+                        expertController.setJesterReqNum(expertController.getJesterReqNum() - 1);
+                        if(expertController.getJesterReqNum() % 2 == 1) {
+                            expertController.setStudentOne((Student) evt.getNewValue());
+                        } else if(expertController.getJesterReqNum() % 2 == 0) {
+                            expertController.setStudentTwo((Student) evt.getNewValue());
+                        }
+                        expertController.activeJesterEffect();
+                    } else if(expertController.isMinestrelEffect()) {
+                        expertController.setMinestrelReqNum(expertController.getMinestrelReqNum() - 1);
+                        if(expertController.getMinestrelReqNum() % 2 == 1) {
+                            expertController.setStudentOne((Student) evt.getNewValue());
+                        } else if (expertController.getMinestrelReqNum() % 2 == 0) {
+                            expertController.setStudentTwo((Student) evt.getNewValue());
+                        }
+                        expertController.activeMinestrelEffect();
+                    }
+                }
+
+
             }
 
             case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom((DiningRoom) evt.getNewValue());
@@ -204,12 +231,24 @@ public class Controller implements PropertyChangeListener {
 
             case "PickPawnType" -> {
                 expertController.setPawnTypeChosen((PawnType) evt.getNewValue());
-                expertController.activeThiefEffect();
+                if (expertController.isThiefEffect()) {
+                    expertController.activeThiefEffect();
+                }
+
             }
 
             case "CheckInfluence" -> {
                 int islandId = ((Island) evt.getNewValue()).getIslandID();
                 turnController.checkIslandInfluence(islandId);
+            }
+
+            case "PickCharacterActionsNum" -> {
+                if(expertController.isMinestrelEffect()) {
+                    expertController.setMinestrelReqNum((Integer) evt.getNewValue() * 2);
+                    expertController.activeMinestrelEffect();
+                } else if(expertController.isJesterEffect()) {
+                    expertController.setJesterReqNum((Integer) evt.getNewValue() * 2);
+                }
             }
 
 

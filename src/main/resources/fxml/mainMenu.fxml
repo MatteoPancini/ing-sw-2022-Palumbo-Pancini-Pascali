@@ -5,45 +5,37 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainMenuPanel" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainMenuController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="599.0" styleClass="mainMenuPanel" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainMenuController">
    <children>
-      <ImageView fitHeight="74.0" fitWidth="99.0" layoutX="274.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="menuBackground" fitHeight="360.0" fitWidth="609.0" pickOnBounds="true">
+         <image>
+            <Image url="@../graphics/menuBackground.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cranioLogo" fitHeight="74.0" fitWidth="99.0" layoutX="274.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/logo_cranio.png" />
          </image></ImageView>
-      <ImageView fitHeight="106.0" fitWidth="257.0" layoutX="172.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="startButton" layoutX="58.0" layoutY="183.0" mnemonicParsing="false" onMouseClicked="#play" prefHeight="61.0" prefWidth="111.0" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="START" textFill="#714646">
+         <font>
+            <Font name="Georgia Pro" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="quitButton" layoutX="444.0" layoutY="183.0" mnemonicParsing="false" onAction="#quit" prefHeight="61.0" prefWidth="111.0" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="QUIT" textFill="#714646">
+         <font>
+            <Font name="Georgia Pro" size="17.0" />
+         </font></Button>
+      <Label fx:id="authors" layoutX="396.0" layoutY="339.0" prefHeight="14.0" prefWidth="257.0" styleClass="credit" stylesheets="@../css/mainMenu.css" text="Francesco Palumbo, Matteo Pancini, Luigi Pascali">
+         <font>
+            <Font name="Felix Titling" size="7.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="eriantys" fitHeight="106.0" fitWidth="257.0" layoutX="179.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/eriantys_text_logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="128.0" layoutY="152.0" mnemonicParsing="false" onMouseClicked="#play" prefHeight="61.0" prefWidth="111.0" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="SETUP">
-         <textFill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.6842105388641357" green="0.554337203502655" blue="0.554337203502655" />
-                     </color>
-                  </Stop>
-               </stops>
-            </RadialGradient>
-         </textFill>
-      </Button>
-      <Button layoutX="361.0" layoutY="152.0" mnemonicParsing="false" onAction="#quit" prefHeight="61.0" prefWidth="111.0" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="QUIT" textFill="#ad8e8e" />
-      <Label layoutX="114.0" layoutY="277.0" styleClass="credit" stylesheets="@../css/mainMenu.css" text="Francesco Palumbo, Matteo Pancini, Luigi Pascali">
-         <font>
-            <Font name="Big Caslon Medium" size="18.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

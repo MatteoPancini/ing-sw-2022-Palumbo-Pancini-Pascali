@@ -285,7 +285,7 @@ public class GameHandler {
             case "PickPawnType" -> gameHandlerListener.firePropertyChange("PickPawnType", null, ((PickPawnType) userAction).getType());
 
 
-
+            case "PickCharacterActionsNum" -> gameHandlerListener.firePropertyChange("PickCharacterActionsNum", null, ((PickCharacterActionsNum) userAction).getNumber());
 
         }
 
