@@ -35,7 +35,6 @@ public class Controller implements PropertyChangeListener {
             expertController = null;
             turnController.setExpertController(null);
         }
-
     }
 
     public Game getGame() {
@@ -182,7 +181,6 @@ public class Controller implements PropertyChangeListener {
 
             case "PickCloud" -> turnController.fromCloudToEntrance((CloudTile) evt.getNewValue());
 
-
             case "PickCharacter" -> {
 
                 if(evt.getNewValue() == Characters.HERALD) expertController.heraldEffect();
@@ -218,5 +216,4 @@ public class Controller implements PropertyChangeListener {
             default -> System.err.println("Unrecognized message!");
         }
     }
-
 }
