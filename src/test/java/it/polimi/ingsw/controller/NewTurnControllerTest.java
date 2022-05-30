@@ -63,8 +63,6 @@ public class NewTurnControllerTest {
 
     final ControllerStub controllerStub = new ControllerStub(gameHandlerStub.getGame(), gameHandlerStub);
 
-
-
     @Test
     @DisplayName("Setup 3 players")
     public void init3Players() {
@@ -134,11 +132,9 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard(), controllerStub.getGame().getActivePlayers().get(3).getBoard());
     }
 
-
     @Test
     @DisplayName("Pianification Phase")
     public void pianificationPhase() {
-
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
         gigiox.setWizard(Wizards.FOREST);
@@ -171,7 +167,6 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getAssistantDeck().getDeck().size(), 9);
     }
 
-
     @Test
     @DisplayName("Action Phase Test")
     public void standardActionPhase() {
@@ -198,7 +193,6 @@ public class NewTurnControllerTest {
         for(Student t : controllerStub.getTurnController().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.println(t.getType());
         }
-
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
@@ -277,10 +271,6 @@ public class NewTurnControllerTest {
         PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev10);
     }
-
-
-
-
 
     public void setupGame() {
         System.out.println("Starting setupGame");
