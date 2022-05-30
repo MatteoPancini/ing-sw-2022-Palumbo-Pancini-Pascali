@@ -81,17 +81,6 @@ public class LoadingController implements GUIController {
     }
 
 
-    public void askWizard(List<Wizards> wizardsList) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Wizard Setup");
-        alert.setHeaderText("Choose your wizard!");
-        alert.setContentText("Click one of the wizards below!");
-        HashMap<String, ButtonType> buttons = new HashMap<>();
-        wizardsList.forEach(n -> buttons.put(n.toString(), new ButtonType(n.toString())));
-        alert.getButtonTypes().setAll(buttons.values());
-        Optional<ButtonType> result = alert.showAndWait();
-        result.ifPresent(buttonType -> gui.getClientConnection().sendUserInput(new WizardChoice(Wizards.parseWizardInput(buttonType.getText()))));
-    }
 
 
     @Override

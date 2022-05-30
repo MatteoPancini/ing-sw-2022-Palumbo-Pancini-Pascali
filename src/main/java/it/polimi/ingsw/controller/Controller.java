@@ -22,7 +22,7 @@ public class Controller implements PropertyChangeListener {
     private final Game game;
     private final GameHandler gameHandler;
     private final TurnController turnController;
-    private final ExpertController expertController;
+    private ExpertController expertController;
 
     public Controller(Game game, GameHandler gameHandler) {
         this.game = game;
@@ -36,6 +36,11 @@ public class Controller implements PropertyChangeListener {
             turnController.setExpertController(null);
         }
 
+    }
+
+
+    public void setExpertController(ExpertController expertController) {
+        this.expertController = expertController;
     }
 
     public Game getGame() {
@@ -211,7 +216,6 @@ public class Controller implements PropertyChangeListener {
 
 
             case "PickCharacter" -> {
-
                 if(evt.getNewValue() == Characters.HERALD) expertController.heraldEffect();
                 else if(evt.getNewValue() == Characters.KNIGHT) expertController.knightEffect();
                 else if(evt.getNewValue() == Characters.CENTAUR) expertController.centaurEffect();
@@ -235,6 +239,8 @@ public class Controller implements PropertyChangeListener {
                 expertController.setPawnTypeChosen((PawnType) evt.getNewValue());
                 if (expertController.isThiefEffect()) {
                     expertController.activeThiefEffect();
+                } else if(expertController.isFungarusEffect()) {
+                    turnController.askMotherNatureMoves();
                 }
 
             }

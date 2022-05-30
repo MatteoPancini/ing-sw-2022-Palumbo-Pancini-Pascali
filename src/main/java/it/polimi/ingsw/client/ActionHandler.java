@@ -75,6 +75,9 @@ public class ActionHandler {
         } else if(answer instanceof JesterAction) {
             modelView.setJesterAction(true);
             cli.askCharacterActionsNumber();
+        } else if(answer instanceof GrannyHerbsAction) {
+            modelView.setGrannyHerbsAction(true);
+            cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
         }
     }
 
@@ -141,7 +144,6 @@ public class ActionHandler {
             }
             case "PICK_ISLAND" -> {
                 cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
-
             }
 
             case "PICK_PAWN_TYPE" -> {

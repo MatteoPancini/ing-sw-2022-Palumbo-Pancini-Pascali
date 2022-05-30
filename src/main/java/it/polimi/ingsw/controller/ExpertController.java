@@ -1,10 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.messages.clienttoserver.actions.Action;
-import it.polimi.ingsw.messages.servertoclient.JesterAction;
-import it.polimi.ingsw.messages.servertoclient.MagicPostmanAction;
-import it.polimi.ingsw.messages.servertoclient.MinestrelAction;
-import it.polimi.ingsw.messages.servertoclient.RequestAction;
+import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
@@ -35,6 +32,7 @@ public class ExpertController {
         this.turnController = turnController;
     }
 
+
     public void setStudentChosen(Student studentChosen) {
         this.studentChosen = studentChosen;
     }
@@ -62,7 +60,6 @@ public class ExpertController {
     public void setCentaurEffect(boolean centaurEffect) {
         this.centaurEffect = centaurEffect;
     }
-
     public boolean isCentaurEffect() {
         return centaurEffect;
     }
@@ -96,11 +93,10 @@ public class ExpertController {
         jesterEffect = true;
         jesterReqNum = 0;
         turnController.getGameHandler().sendSinglePlayer(new JesterAction(), turnController.getCurrentPlayer().getPlayerID());
-        turnController.askStudent();
     }
 
     public void activeJesterEffect() {
-        if(studentOne != null || studentTwo != null) {
+        if(studentOne == null || studentTwo == null) {
             turnController.askStudent();
         } else {
             //student 1 = jester
@@ -111,17 +107,18 @@ public class ExpertController {
                     c.addStudent(studentTwo);
                 }
             }
-            game.getCurrentPlayer().getBoard().getEntrance().getStudents().remove(studentTwo);
-            game.getCurrentPlayer().getBoard().getEntrance().getStudents().add(studentOne);
+            game.getCurrentPlayer().getBoard().getEntrance().removeStudent(studentTwo);
+            game.getCurrentPlayer().getBoard().getEntrance().setStudents(studentOne);
 
             studentOne = null;
             studentTwo = null;
+            if(jesterReqNum == 0) {
+                turnController.askMotherNatureMoves();
+            } else {
+                turnController.askStudent();
+            }
         }
-        if(minestrelReqNum == 0) {
-            turnController.askMotherNatureMoves();
-        } else {
-            turnController.askStudent();
-        }
+
     }
     //------------------------------------------------------------------------------------------------------------------
 
@@ -173,6 +170,7 @@ public class ExpertController {
                 break;
             }
         }
+        turnController.askMotherNatureMoves();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -195,12 +193,15 @@ public class ExpertController {
     public void activeThiefEffect() {
         for(Player p : turnController.getController().getGame().getActivePlayers()) {
             for(int i = 0; i < 3; i++) {
-                if(p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).getTable().size() > 0) {
+                if(p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).getTableStudentsNum() > 0) {
+                    //System.out.println(pawnTypeChosen.getPawnID());
                     turnController.getController().getGame().getGameBoard().getStudentsBag().add(new Student(pawnTypeChosen));
                     p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).removeStudent();
                 }
             }
         }
+
+        turnController.askMotherNatureMoves();
     }
     //------------------------------------------------------------------------------------------------------------------
 
@@ -226,6 +227,8 @@ public class ExpertController {
             }
         }
 
+        turnController.askMotherNatureMoves();
+
     }
     //------------------------------------------------------------------------------------------------------------------
 
@@ -249,30 +252,32 @@ public class ExpertController {
         minestrelEffect = true;
         minestrelReqNum = 0;
         turnController.getGameHandler().sendSinglePlayer(new MinestrelAction(), turnController.getCurrentPlayer().getPlayerID());
-        turnController.askStudent();
     }
 
     public void activeMinestrelEffect() {
-        if(studentOne != null || studentTwo != null) {
+        if(studentOne == null || studentTwo == null) {
             turnController.askStudent();
         } else {
             //student 1 = dining room
             //student 2 = entrance
+            System.out.println("Entro nell'active minestreler");
             game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(studentOne.getType().getPawnID()).removeStudent();
-            game.getCurrentPlayer().getBoard().getEntrance().getStudents().remove(studentTwo);
+            game.getCurrentPlayer().getBoard().getEntrance().removeStudent(studentTwo);
 
             game.getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentTwo);
-            game.getCurrentPlayer().getBoard().getEntrance().getStudents().add(studentOne);
+            game.getCurrentPlayer().getBoard().getEntrance().setStudents(studentOne);
 
             studentOne = null;
             studentTwo = null;
+
+            if(minestrelReqNum == 0) {
+                turnController.askMotherNatureMoves();
+            } else {
+                turnController.askStudent();
+            }
         }
 
-        if(minestrelReqNum == 0) {
-            turnController.askMotherNatureMoves();
-        } else {
-            turnController.askStudent();
-        }
+
     }
     //------------------------------------------------------------------------------------------------------------------
 
@@ -289,15 +294,18 @@ public class ExpertController {
     }
     public void grannyHerbsEffect() {
         grannyHerbsEffect = true;
+        turnController.getGameHandler().sendSinglePlayer(new GrannyHerbsAction(), turnController.getCurrentPlayer().getPlayerID());
+        /*
         RequestAction islandRequest = new RequestAction(Action.PICK_ISLAND);
         turnController.getGameHandler().sendSinglePlayer(islandRequest, turnController.getCurrentPlayer().getPlayerID());
+
+         */
     }
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
-            if(is.getIslandID() == island.getIslandID()) {
-                is.setNoEntry(true);
-            }
+            is.setNoEntry(true);
         }
+        turnController.askMotherNatureMoves();
     }
     //------------------------------------------------------------------------------------------------------------------
 
@@ -306,14 +314,21 @@ public class ExpertController {
 
     //HERALD
     //------------------------------------------------------------------------------------------------------------------
+    private boolean heraldEffect;
+
     public void heraldEffect() {
+        heraldEffect = true;
         RequestAction islandDestination = new RequestAction(Action.PICK_ISLAND);
         turnController.getGameHandler().sendSinglePlayer(islandDestination, turnController.getCurrentPlayer().getPlayerID());
-
-
-        turnController.askMotherNatureMoves();
     }
 
+    public boolean isHeraldEffect() {
+        return heraldEffect;
+    }
+
+    public void setHeraldEffect(boolean heraldEffect) {
+        this.heraldEffect = heraldEffect;
+    }
     //------------------------------------------------------------------------------------------------------------------
 
 
@@ -337,8 +352,8 @@ public class ExpertController {
     public void fungarusEffect() {
         fungarusEffect = true;
 
-        RequestAction islandDestination = new RequestAction(Action.PICK_PAWN_TYPE);
-        turnController.getGameHandler().sendSinglePlayer(islandDestination, turnController.getCurrentPlayer().getPlayerID());
+        RequestAction pawnTypeReq = new RequestAction(Action.PICK_PAWN_TYPE);
+        turnController.getGameHandler().sendSinglePlayer(pawnTypeReq, turnController.getCurrentPlayer().getPlayerID());
     }
     public void setFungarusEffect(boolean fungarusEffect) {
         this.fungarusEffect = fungarusEffect;

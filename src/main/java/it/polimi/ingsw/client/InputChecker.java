@@ -192,6 +192,7 @@ public class InputChecker {
             cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                     "the remaining islands");
         }
+
         return action;
     }
 

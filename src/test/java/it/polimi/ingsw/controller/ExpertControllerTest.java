@@ -7,16 +7,14 @@ import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.cards.CharacterDeck;
-import it.polimi.ingsw.model.enumerations.Assistants;
-import it.polimi.ingsw.model.enumerations.Characters;
-import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 import it.polimi.ingsw.server.Server;
 import it.polimi.ingsw.server.SocketClientConnection;
 import it.polimi.ingsw.server.VirtualClientView;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -63,13 +61,13 @@ public class ExpertControllerTest {
 
     final ControllerStub controllerStub = new ControllerStub(gameHandlerStub.getGame(), gameHandlerStub);
 
+    final ExpertController expertController = new ExpertController(controllerStub.getGame(), controllerStub.getGame().getGameBoard(), controllerStub.getTurnController());
 
 
 
 
 
-
-    @Test
+    @BeforeEach
     @DisplayName("Expert Mode Tets")
     public void expertModeGame() {
         matteo.setWizard(Wizards.KING);
@@ -77,60 +75,311 @@ public class ExpertControllerTest {
         cisco.setWizard(Wizards.MONACH);
         System.out.println("\n");
         server.setIdMapID(idMapID);
-
         controllerStub.getGame().getActivePlayers().add(matteo);
         controllerStub.getGame().getActivePlayers().add(cisco);
-
         controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+        setupGame();
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+        controllerStub.getTurnController().setExpertController(expertController);
+        controllerStub.setExpertController(expertController);
+    }
+
+    @Test
+    @DisplayName("Herald Test")
+    public void heraldTest() {
         //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.HERALD, " ", 3));
-        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.KNIGHT, " ", 3));
-        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.CENTAUR, " ", 3));
-
+        /*
         System.out.println("\n" + controllerStub.getGame().getGameBoard().getPlayableCharacters().size());
         for(CharacterCard c : controllerStub.getGame().getGameBoard().getPlayableCharacters()) {
             System.out.println(c.getName() + " ");
         }
-        controllerStub.getGame().setCurrentPlayer(matteo);
-
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
-
-        for(Player p : controllerStub.getGame().getActivePlayers()) {
-            p.setBoard(new SchoolBoard(p.getPlayerID()));
-        }
-
-        setupGame();
-
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
-
-        controllerStub.getTurnController().setCurrentPlayer(matteo);
-
-        controllerStub.getTurnController().startPianificationPhase();
-        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
-        controllerStub.propertyChange(ev1);
-        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
-        controllerStub.propertyChange(ev2);
-        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
-        controllerStub.propertyChange(ev3);
-        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
-        controllerStub.propertyChange(ev4);
-        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
-        controllerStub.propertyChange(ev5);
-        PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
-        controllerStub.propertyChange(ev6);
-        PropertyChangeEvent ev7 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
-        controllerStub.propertyChange(ev7);
-        PropertyChangeEvent ev8 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
-        controllerStub.propertyChange(ev8);
-        PropertyChangeEvent ev9 = new PropertyChangeEvent(1, "PickCharacter", null, null);
-        controllerStub.propertyChange(ev9);
-        /*
-        PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
-        controllerStub.propertyChange(ev10);
-        PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
-        controllerStub.propertyChange(ev11);
 
          */
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.HERALD);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "CheckInfluence", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev2);
+    }
+
+    @Test
+    @DisplayName("Centaur Test")
+    public void centaurTest() {
+        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.CENTAUR, " ", 3));
+        /*
+        System.out.println("\n" + controllerStub.getGame().getGameBoard().getPlayableCharacters().size());
+        for(CharacterCard c : controllerStub.getGame().getGameBoard().getPlayableCharacters()) {
+            System.out.println(c.getName() + " ");
+        }
+
+         */
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().get(0).getColor().toString());
+
+
+        controllerStub.getGame().getGameBoard().getIslands().get(2).setTower(controllerStub.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().get(0));
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.CENTAUR);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickMovesNumber", null, 2);
+        controllerStub.propertyChange(ev2);
+
+    }
+
+    @Test
+    @DisplayName("Knight Test")
+    public void knightTest() {
+        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.KNIGHT, " ", 2));
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.KNIGHT);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickMovesNumber", null, 2);
+        controllerStub.propertyChange(ev2);
+    }
+
+    @Test
+    @DisplayName("Thief Test")
+    public void thiefTest() {
+        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.THIEF, " ", 3));
+
+        System.err.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum());
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getColor(), PawnType.BLUE);
+        System.err.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum());
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum(), 4);
+
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.THIEF);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickPawnType", null, PawnType.BLUE);
+        controllerStub.propertyChange(ev2);
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum(), 1);
+    }
+
+    @Test
+    @DisplayName("Fungarus Test")
+    public void fungarusTest() {
+        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.FUNGARUS, " ", 3));
+
+
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE).setOwner(controllerStub.getGame().getCurrentPlayer());
+        controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED).setOwner(controllerStub.getGame().getCurrentPlayer());
+
+        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.RED));
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.FUNGARUS);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickPawnType", null, PawnType.BLUE);
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickMovesNumber", null, 2);
+        controllerStub.propertyChange(ev3);
+
+    }
+
+    @Test
+    @DisplayName("Farmer Test")
+    public void farmerTest() {
+        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.FARMER, " ", 2));
+
+
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE).setOwner(controllerStub.getGame().getActivePlayers().get(1));
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(PawnType.BLUE.getPawnID()).getTableStudentsNum(), 2);
+
+        controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+        controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
+
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().getDiningRoom().get(PawnType.BLUE.getPawnID()).getTableStudentsNum(), 2);
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.FARMER);
+        controllerStub.propertyChange(ev1);
+
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).hasProfessor(), true);
+    }
+
+    @Test
+    @DisplayName("MagicPostman Test")
+    public void magicPostmanTest() {
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MONK, " ", 1));
+        Student s = new Student(PawnType.BLUE);
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MONK);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickStudent", null, s);
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(6));
+        controllerStub.propertyChange(ev3);
+
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getStudents().size(), 1);
+
+
+    }
+
+    @Test
+    @DisplayName("Monk Test")
+    public void monkTest() {
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MAGIC_POSTMAN, " ", 1));
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MAGIC_POSTMAN);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickMovesNumber", null, 4);
+        controllerStub.propertyChange(ev2);
+
+    }
+
+
+    @Test
+    @DisplayName("GrannyHerbs Test")
+    public void grannyHerbsTest() {
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.GRANNY_HERBS, " ", 2));
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.GRANNY_HERBS);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "GrannyHerbsTile", null, controllerStub.getGame().getGameBoard().getIslands().get(6));
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickMovesNumber", null, 6);
+        controllerStub.propertyChange(ev3);
+
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getNoEntry(), true);
+    }
+
+    @Test
+    @DisplayName("Minestrel Test")
+    public void minestrelTest() {
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MINESTREL, " ", 1));
+        Student s1 = new Student(PawnType.BLUE); //DINING
+        Student s2 = new Student(PawnType.RED); //ENTRANCE
+
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s2);
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MINESTREL);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickCharacterActionsNum", null, 1);
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, s1);
+        controllerStub.propertyChange(ev3);
+        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickStudent", null, s2);
+        controllerStub.propertyChange(ev4);
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(PawnType.RED.getPawnID()).getTableStudentsNum(), 1);
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0).getType(), PawnType.BLUE);
+
+    }
+
+    @Test
+    @DisplayName("Spoiled Princess Test")
+    public void spoiledPrincessTest() {
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.SPOILED_PRINCESS, " ", 2));
+        Student s1 = new Student(PawnType.BLUE);
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.SPOILED_PRINCESS);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickStudent", null, s1);
+        controllerStub.propertyChange(ev2);
+    }
+
+    @Test
+    @DisplayName("Jester Test")
+    public void jesterTest() {
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.JESTER, " ", 1));
+        Student s1 = new Student(PawnType.BLUE); //JESTER
+        Student s2 = new Student(PawnType.YELLOW); //JESTER
+
+        Student s3 = new Student(PawnType.RED); //ENTRANCE
+        Student s4 = new Student(PawnType.GREEN); //ENTRANCE
+
+
+        for(Student s : controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents()) {
+            controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents().remove(s);
+        }
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).addStudent(s1);
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).addStudent(s2);
+
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
+
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s3);
+        controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s4);
+
+
+        assertEquals(controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents().size(), 2);
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size(), 2);
+
+
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.JESTER);
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickCharacterActionsNum", null, 2);
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, s1);
+        controllerStub.propertyChange(ev3);
+        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickStudent", null, s3);
+        controllerStub.propertyChange(ev4);
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(1).getType(), PawnType.BLUE);
+
+        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, s2);
+        controllerStub.propertyChange(ev5);
+        PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickStudent", null, s4);
+        controllerStub.propertyChange(ev6);
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size(), 2);
+        assertEquals(controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents().size(), 2);
+
+
+
+
     }
 
 
@@ -201,7 +450,7 @@ public class ExpertControllerTest {
 
         int maximum = 11;
         SecureRandom r = new SecureRandom();
-        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
+        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(1);
         //int n = 1;
         int mnPos = controllerStub.getGame().getGameBoard().getMotherNature().getPosition();
 
@@ -265,7 +514,7 @@ public class ExpertControllerTest {
         public void sendSinglePlayer(Answer message, int id) {
             String print;
             if (message.getMessage() == null) {
-                print = "Start/End/Move/SelectBuild/BuildSelectMove action";
+                print = "Not useraction";
             } else print = message.getMessage().toString();
             System.out.println(print);
         }

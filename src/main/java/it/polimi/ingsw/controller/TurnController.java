@@ -432,11 +432,11 @@ public class TurnController {
 
         controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
 
-        //TODO: CONTROLLO EXPERT MODE
         if(expertController != null) {
             if(!expertController.isGrannyHerbsEffect()) {
                 checkIslandInfluence(newPosition);
             } else {
+                System.err.println("Me ne vado senza fare niente");
                 expertController.setGrannyHerbsEffect(false);
             }
 
@@ -459,30 +459,44 @@ public class TurnController {
         }
 
          */
+
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
             if(expertController != null) {
                 if(expertController.isFungarusEffect()) {
                     if(!studentType.equals(expertController.getPawnTypeChosen())) {
+                        if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
+                            Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
+                            studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
+                        }
+
+                    }
+                } else {
+                    if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
                         Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                         studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                     }
-                } else {
+
+                }
+            } else {
+                if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
                     Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                     studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                 }
             }
-
-
         }
+
         if(expertController != null) {
             if(!expertController.isCentaurEffect()) {
-                TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
-                for (Player p : controller.getGame().getActivePlayers()) {
-                    if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
-                        p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size());
+                if(controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers() != null) {
+                    TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor();
+                    for (Player p : controller.getGame().getActivePlayers()) {
+                        if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
+                            p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size());
+                        }
                     }
                 }
+
             }
         }
 
@@ -519,6 +533,8 @@ public class TurnController {
 
         }
 
+        System.err.println(controller.getGame().getCurrentPlayer().getIslandInfluence());
+
         //RESET ISLAND INFLUENCE
         for(Player p : controller.getGame().getPlayers()) {
             p.setIslandInfluence(0);
@@ -531,8 +547,11 @@ public class TurnController {
             if(expertController.isFungarusEffect()) {
                 expertController.setFungarusEffect(false);
             }
+            if(expertController.isHeraldEffect()) {
+                askMotherNatureMoves();
+                expertController.setHeraldEffect(false);
+            }
         }
-
 
     }
 

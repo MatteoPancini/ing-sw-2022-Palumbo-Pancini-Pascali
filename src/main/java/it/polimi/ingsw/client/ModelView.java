@@ -23,8 +23,19 @@ public class ModelView {
     private boolean pianification = false;
     private boolean action = false;
     private boolean magicPostmanAction = false;
+    private boolean grannyHerbsAction;
+
+    public boolean isGrannyHerbsAction() {
+        return grannyHerbsAction;
+    }
+
+    public void setGrannyHerbsAction(boolean grannyHerbsAction) {
+        this.grannyHerbsAction = grannyHerbsAction;
+    }
 
     private int characterAction = 0;
+
+
 
     public int getCharacterAction() {
         return characterAction;

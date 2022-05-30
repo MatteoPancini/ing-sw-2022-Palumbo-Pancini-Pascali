@@ -28,6 +28,8 @@ public class Entrance implements Serializable {
 
     public void removeStudent(Student studentToRemove) {
         students.remove(studentToRemove);
+        System.out.println("Rimuovo studente -> " + students.size());
+
     }
 
 }
