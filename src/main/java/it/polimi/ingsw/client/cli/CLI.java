@@ -42,13 +42,8 @@ import static it.polimi.ingsw.constants.Constants.*;
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
-    private String chosenAssistant;
-    private String chosenCloud;
     private String chosenStudent;
-    private String chosenDestination;
-    private String chosenIsland;
     private String chosenCharacter;
-    private String chosenPawnType;
     //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
@@ -371,7 +366,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public String printStudentsOnCLoud(int ID) {
         StringBuilder str = new StringBuilder();
-        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
+        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID-1).getStudents()) {
             //System.out.print("-" + s.getType());
             str.append(printColor(s.getType())).append("•").append(ANSI_RESET);
         }
@@ -549,13 +544,13 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.println(">Remember: you can't play an assistant already played by another player!");
         }
         printPlayerDeck();
-        chosenAssistant = in.nextLine();
+        String chosenAssistant = in.nextLine();
         virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
     }
 
     public void askCloud(ArrayList<CloudTile> clouds) {
         System.out.println(">Pick a cloud by typing its ID: ");
-        chosenCloud = in.nextLine();
+        String chosenCloud = in.nextLine();
         virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
     }
 
@@ -571,8 +566,10 @@ public class CLI implements Runnable, ListenerInterface {
 
     //prende come input lo studente scelto nella richiesta precedente
     public void askDestination() {
-        System.out.println(">Pick a destination between your DiningRoom or an island: ");
-        chosenDestination = in.nextLine();
+        System.out.println(">Pick a destination between your DiningRoom or an island [DiningRoom / islandId]:");
+        System.out.print(">");
+        Scanner input = new Scanner(System.in);
+        String chosenDestination = input.nextLine();
         virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
     }
 
@@ -591,7 +588,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.println(">Choose an island by typing its ID: ");
         showIslandsTable();
-        chosenIsland = in.nextLine();
+        String chosenIsland = in.nextLine();
         virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
         modelView.setGrannyHerbsAction(false);
     }
@@ -599,10 +596,8 @@ public class CLI implements Runnable, ListenerInterface {
     public void askPawnType() {
         System.out.println(">Choose a pawn type: ");
         showPawnType();
-        chosenPawnType = in.nextLine();
+        String chosenPawnType = in.nextLine();
         virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
-
-
     }
 
     public void askStudentMonk(CharacterCard monk) {
