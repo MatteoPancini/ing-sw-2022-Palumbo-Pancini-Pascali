@@ -274,8 +274,6 @@ public class TurnController {
 
             startActionPhase();
         }
-
-
     }
 
     public void switchPlayer() {
@@ -365,7 +363,6 @@ public class TurnController {
         currentPlayer.getBoard().getEntrance().removeStudent(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
-        System.err.println("Current player has " + controller.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size() + " students on entrance");
         gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
         askStudent(studentRequest);
 
@@ -406,12 +403,10 @@ public class TurnController {
 
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
-        for(Island i : controller.getGame().getGameBoard().getIslands()) {
-            if(chosenIsland.getIslandID() == i.getIslandID()) {
-                i.addStudent(studentToMove);
-            }
+        for(Island i : controller.getGame().getGameBoard().getIslands()){
+            if(chosenIsland.getIslandID() == i.getIslandID()) i.addStudent(studentToMove);
         }
-        //chosenIsland.addStudent(studentToMove);
+
         controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
         if(expertController != null) {
             if(expertController.isMonkEffect()) {
@@ -420,7 +415,6 @@ public class TurnController {
             }
         } else {
             studentRequest++;
-            System.err.println("Current player has " + controller.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size() + " students on entrance");
             gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             askStudent(studentRequest);
         }
@@ -434,7 +428,6 @@ public class TurnController {
     public void moveMotherNature(int moves) {
         int currPosition = controller.getGame().getGameBoard().getMotherNature().getPosition();
         int newPosition;
-
 
         if(currPosition + moves > 12) {
             newPosition = (currPosition + moves) % 12;
@@ -637,8 +630,8 @@ public class TurnController {
             currentPlayer.getBoard().getEntrance().setStudents(s);
         }
 
-        for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()) {
-            if(cloudTile.getID() == cloud.getID()) {
+        for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()){
+            if(cloudTile.getID() == cloud.getID()){
                 cloudTile.removeStudents();
             }
         }

@@ -18,8 +18,6 @@ public class ActionHandler {
     private GUI gui;
     private int showGame = 0;
 
-
-
     private final PropertyChangeSupport view = new PropertyChangeSupport(this);
 
 
