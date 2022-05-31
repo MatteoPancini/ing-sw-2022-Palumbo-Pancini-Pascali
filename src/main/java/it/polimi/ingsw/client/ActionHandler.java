@@ -61,7 +61,7 @@ public class ActionHandler {
             if(showGame == 1) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             }
-            System.out.println("non aggiorno");
+            //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
             modelView.setActivateInput(true);
             modelView.setAction(true);

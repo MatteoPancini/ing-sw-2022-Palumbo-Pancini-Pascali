@@ -268,6 +268,8 @@ public class TurnController {
             resetPianificationPhase();
 
             gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0).getNickname(), false));
+
+            controller.getGame().setCurrentPlayer(controller.getGame().getActivePlayers().get(0));
             currentPlayer = controller.getGame().getActivePlayers().get(0);
 
             startActionPhase();
@@ -359,10 +361,11 @@ public class TurnController {
 
 
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
-        chosenDiningRoom.setStudentToDiningRoom(studentToMove);
+        currentPlayer.getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
         currentPlayer.getBoard().getEntrance().removeStudent(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
+        System.err.println("Current player has " + controller.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size() + " students on entrance");
         gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
         askStudent(studentRequest);
 
@@ -403,8 +406,13 @@ public class TurnController {
 
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
-        chosenIsland.addStudent(studentToMove);
-        currentPlayer.getBoard().getEntrance().removeStudent(studentToMove);
+        for(Island i : controller.getGame().getGameBoard().getIslands()) {
+            if(chosenIsland.getIslandID() == i.getIslandID()) {
+                i.addStudent(studentToMove);
+            }
+        }
+        //chosenIsland.addStudent(studentToMove);
+        controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
         if(expertController != null) {
             if(expertController.isMonkEffect()) {
                 expertController.setMonkEffect(false);
@@ -412,6 +420,7 @@ public class TurnController {
             }
         } else {
             studentRequest++;
+            System.err.println("Current player has " + controller.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size() + " students on entrance");
             gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             askStudent(studentRequest);
         }
@@ -427,7 +436,7 @@ public class TurnController {
         int newPosition;
 
 
-        if(currPosition > 12) {
+        if(currPosition + moves > 12) {
             newPosition = (currPosition + moves) % 12;
         } else {
             newPosition = currPosition + moves;
@@ -627,7 +636,13 @@ public class TurnController {
         for (Student s : newStudents) {
             currentPlayer.getBoard().getEntrance().setStudents(s);
         }
-        cloud.removeStudents();
+
+        for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()) {
+            if(cloudTile.getID() == cloud.getID()) {
+                cloudTile.removeStudents();
+            }
+        }
+        //cloud.removeStudents();
 
         if(checkWin()) {
             gameHandler.sendSinglePlayer(new WinNotification(), currentPlayer.getPlayerID());

@@ -528,7 +528,7 @@ public class CLI implements Runnable, ListenerInterface {
         in.reset();
         System.out.print(">");
         String chosenMoves = in.nextLine();
-        virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
+        virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
     }
 
     public void printPlayerDeck() {

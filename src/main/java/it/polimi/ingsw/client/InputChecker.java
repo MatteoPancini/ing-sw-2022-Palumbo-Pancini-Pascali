@@ -187,6 +187,7 @@ public class InputChecker {
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
+
             }
         }
         return action;

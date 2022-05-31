@@ -34,7 +34,7 @@ public class GameBoard implements Serializable {
                 this.clouds.add(new CloudTile(CloudSide.TWO_FOUR));
             }
             clouds.get(i -1).setID(i);
-            System.out.println(clouds.get(i - 1).getSide().toString());
+            System.out.println(clouds.get(i - 1).getSide().toString() + clouds.get(i-1).getID());
         }
 
 
