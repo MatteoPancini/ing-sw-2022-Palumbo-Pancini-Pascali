@@ -676,10 +676,10 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void chooseExpertMode() {
         String expertModeChoice;
-        System.out.println("Sono in chooseExpertMode");
+        //System.out.println("Sono in chooseExpertMode");
         System.out.print(">");
         expertModeChoice = in.nextLine();
-        System.out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
+        //System.out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
         clientConnection.sendUserInput(new ExpertModeChoice(expertModeChoice));
     }
 
@@ -704,7 +704,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
     public void choosePlayerNumber() {
-        System.out.println("Sono in choosePlayerNumber");
+        //System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
         while (true) {
             try {
@@ -903,6 +903,7 @@ public class CLI implements Runnable, ListenerInterface {
             case "UpdateModelView" -> {
                 assert serverCommand != null;
 
+                System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
                     showIslandsTable();
                     showClouds();
