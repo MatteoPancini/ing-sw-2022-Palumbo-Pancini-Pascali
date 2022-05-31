@@ -18,6 +18,11 @@ public class Player implements Serializable {
     private boolean teamLeader;
     private int coins;
     private int islandInfluence;
+    private int myCoins;
+
+    public void setMyCoins(int myCoins) {
+        this.myCoins = myCoins;
+    }
 
     public String getNicknamePlayer() {
         return nicknamePlayer;
@@ -137,5 +142,9 @@ public class Player implements Serializable {
 
     public boolean isTeamLeader() {
         return teamLeader;
+    }
+
+    public int getMyCoins() {
+        return myCoins;
     }
 }
