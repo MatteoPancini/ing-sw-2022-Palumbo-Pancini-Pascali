@@ -536,7 +536,8 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.println(">Remember: you can't play an assistant already played by another player!");
         }
         printPlayerDeck();
-        chosenAssistant = in.nextLine();
+        modelView.setActivateInput(true);
+        chosenAssistant = in.next();
         virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
     }
 
