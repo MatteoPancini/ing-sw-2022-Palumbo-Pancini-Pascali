@@ -62,7 +62,6 @@ public class CLI implements Runnable, ListenerInterface {
         modelView = new ModelView(this);
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
-
     }
 
     public String printTowers(Island isl) {
@@ -371,7 +370,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public String printStudentsOnCLoud(int ID) {
         StringBuilder str = new StringBuilder();
-        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID).getStudents()) {
+        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID - 1).getStudents()) {
             //System.out.print("-" + s.getType());
             str.append(printColor(s.getType())).append("•").append(ANSI_RESET);
         }
@@ -581,7 +580,7 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
             showCharactersDescription();
             String chosenCharacter = in.nextLine();
-            virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
+            virtualClient.firePropertyChange("PickCharacter", null, chosenCharacter);
         }
     }
 
@@ -601,8 +600,6 @@ public class CLI implements Runnable, ListenerInterface {
         showPawnType();
         chosenPawnType = in.nextLine();
         virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
-
-
     }
 
     public void askStudentMonk(CharacterCard monk) {
@@ -632,7 +629,6 @@ public class CLI implements Runnable, ListenerInterface {
         }
         chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
-
     }
 
 
@@ -646,6 +642,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         clientConnection.sendUserInput(new PickCharacterActionsNum(moves));
     }
+
     public void askStudentPrincess(CharacterCard princess) {
         System.out.println(">Choose a student from princess's students: ");
         for(Student s : princess.getStudents()) {

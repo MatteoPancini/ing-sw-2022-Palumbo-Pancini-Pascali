@@ -116,9 +116,6 @@ public class InputChecker {
         return action;
     }
 
-
-
-
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
         int maxMoves;
