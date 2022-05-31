@@ -337,26 +337,26 @@ public class CLI implements Runnable, ListenerInterface {
 
          */
         ArrayList<String> nicknames = new ArrayList<>();
-        ArrayList<String> assitants = new ArrayList<>();
+        ArrayList<String> assistants = new ArrayList<>();
         for(AssistantCard a : modelView.getGameCopy().getGameBoard().getLastAssistantUsed()) {
             nicknames.add(a.getOwner().getNickname());
-            assitants.add(a.getName().toString());
+            assistants.add(a.getName().toString());
         }
 
         switch (modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()) {
             case 1 -> {
                 st.setHeaders(nicknames.get(0));
-                st.addRow(assitants.get(0));
+                st.addRow(assistants.get(0));
             }
 
             case 2 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1));
-                st.addRow(assitants.get(0), assitants.get(1));
+                st.addRow(assistants.get(0), assistants.get(1));
             }
 
             case 3 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2));
-                st.addRow(assitants.get(0), assitants.get(1), assitants.get(2));
+                st.addRow(assistants.get(0), assistants.get(1), assistants.get(2));
             }
         }
 
@@ -377,9 +377,13 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Clouds status of this turn: ");
         CLITable st = new CLITable();
         st.setHeaders("Cloud ID", "Students");
-        System.out.println(modelView.getGameCopy().getGameBoard().getClouds().size());
-        for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
-            if(c.getStudents() != null) st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getClouds().size(); i++) {
+            if(modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents() != null) {
+                for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents()) {
+                    System.out.println(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID() + ", " + s.getType().toString());
+                }
+                //st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+            }
         }
     }
 
