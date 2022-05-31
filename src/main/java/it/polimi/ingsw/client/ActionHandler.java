@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
@@ -15,6 +16,9 @@ public class ActionHandler {
     private ModelView modelView;
     private CLI cli;
     private GUI gui;
+    private int showGame = 0;
+
+
 
     private final PropertyChangeSupport view = new PropertyChangeSupport(this);
 
@@ -52,11 +56,17 @@ public class ActionHandler {
             String actionType = answer.getMessage().toString();
             view.firePropertyChange("ActionPhase", null, actionType);
         } else if (answer instanceof GameCopy) {
-            view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+            modelView.setGameCopy((Game) answer.getMessage());
+            showGame = showGame + 1;
+            if(showGame == 1) {
+                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+            }
+            System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
             modelView.setActivateInput(true);
             modelView.setAction(true);
             modelView.setPianification(false);
+            showGame = 0;
             cli.showServerMessage(modelView.getServerAnswer());
         } else if(answer instanceof EndAction) {
             modelView.setStartPlaying(false);
@@ -66,6 +76,7 @@ public class ActionHandler {
             modelView.setActivateInput(true);
             modelView.setPianification(true);
             modelView.setAction(false);
+            showGame = showGame + 1;
             cli.showServerMessage(modelView.getServerAnswer());
         } else if(answer instanceof MagicPostmanAction) {
             modelView.setMagicPostmanAction(true);

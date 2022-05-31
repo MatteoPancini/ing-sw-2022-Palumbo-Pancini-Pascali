@@ -124,7 +124,7 @@ public class Parser implements PropertyChangeListener {
         } else {
             try {
                 if (action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    System.err.println("action giusta: " + evt.getNewValue().toString() + " <-questa");
+                    //System.err.println("action giusta: " + evt.getNewValue().toString() + " <-questa");
                     //modelView.setActivateInput(false);
                 } else {
                     modelView.setActivateInput(true);

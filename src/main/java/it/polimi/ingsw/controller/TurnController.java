@@ -82,7 +82,6 @@ public class TurnController {
 
     public void setStudentToMove(Student studentToMove) {
         this.studentToMove = studentToMove;
-        askStudentDestination();
     }
 
     public boolean isActionPhase() {
@@ -166,6 +165,7 @@ public class TurnController {
             setActionPhase();
             gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
             gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+
             gameHandler.sendExcept(new DynamicAnswer("Please wait: " + currentPlayer.getNickname() + " is playing his action phase", false), currentPlayer.getPlayerID());
 
             studentRequest = 1;
@@ -360,8 +360,10 @@ public class TurnController {
 
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
         chosenDiningRoom.setStudentToDiningRoom(studentToMove);
+        currentPlayer.getBoard().getEntrance().removeStudent(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
+        gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
         askStudent(studentRequest);
 
         /*
@@ -402,6 +404,7 @@ public class TurnController {
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
         chosenIsland.addStudent(studentToMove);
+        currentPlayer.getBoard().getEntrance().removeStudent(studentToMove);
         if(expertController != null) {
             if(expertController.isMonkEffect()) {
                 expertController.setMonkEffect(false);
@@ -409,6 +412,7 @@ public class TurnController {
             }
         } else {
             studentRequest++;
+            gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             askStudent(studentRequest);
         }
 

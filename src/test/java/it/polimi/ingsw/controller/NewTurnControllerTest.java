@@ -202,6 +202,8 @@ public class NewTurnControllerTest {
         controllerStub.getTurnController().setStudentToMove(matteo.getBoard().getEntrance().getStudents().get(0));
         controllerStub.getTurnController().moveStudentToIsland(controllerStub.getGame().getGameBoard().getIslandById(2));
 
+        assertEquals(controllerStub.getTurnController().getCurrentPlayer().getBoard().getEntrance().getStudents().size(), 6);
+
         for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
             System.out.println("Island " + i.getIslandID() + ": " + i.getStudents().size());
         }
@@ -223,6 +225,8 @@ public class NewTurnControllerTest {
         System.out.println("MN is in island: " + controllerStub.getGame().getGameBoard().getMotherNature().getPosition());
 
         controllerStub.getTurnController().fromCloudToEntrance(controllerStub.getGame().getGameBoard().getClouds().get(0));
+
+        assertEquals(controllerStub.getTurnController().getCurrentPlayer().getBoard().getEntrance().getStudents().size(), 7);
 
     }
 

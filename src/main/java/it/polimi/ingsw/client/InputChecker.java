@@ -168,16 +168,21 @@ public class InputChecker {
                 action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
             }
             case "ISLAND" -> {
+                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                return null;
+                /*
                 int island = Integer.parseInt(destination);
                 if (island > 0 && island < 13) {
-                    action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(Integer.parseInt(destination)));
+                    action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(island - 1));
                 } else {
                     cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                             "the remaining islands");
                 }
+
+                 */
             }
             default -> {
-                cli.showError("Error: type a destination for your student by choosing between 'dining room'" +
+                cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
             }
         }
@@ -188,7 +193,9 @@ public class InputChecker {
         PickDestination action = null;
         int island = Integer.parseInt(islandID);
         if (island > 0 && island < 13) {
-            action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(Integer.parseInt(islandID)));
+            int realIsland = island - 1;
+            System.out.println("invio island" + realIsland);
+            action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(realIsland));
         } else {
             cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                     "the remaining islands");
