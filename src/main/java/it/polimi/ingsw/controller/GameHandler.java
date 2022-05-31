@@ -261,12 +261,19 @@ public class GameHandler {
 
             case "PickDestination" -> {
                 if(((PickDestination) userAction).getAction() == Action.PICK_ISLAND) {
-                    gameHandlerListener.firePropertyChange("CheckIslandInfluence", null, ((PickDestination) userAction).getChosenIsland());
+                    if(controller.getExpertController() != null) {
+                        if(controller.getExpertController().isHeraldEffect()) {
+                            gameHandlerListener.firePropertyChange("CheckIslandInfluence", null, ((PickDestination) userAction).getChosenIsland());
+                        } else {
+                            gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
+                        }
+                    } else {
+                        System.out.println("ENTRO QUA");
+                        gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
+                    }
                 }
                 else if (((PickDestination) userAction).getDestination() instanceof DiningRoom) {
                     gameHandlerListener.firePropertyChange("PickDestinationDiningRoom", null, ((PickDestination) userAction).getDestination());
-                } else {
-                    gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
                 }
 
 

@@ -60,6 +60,7 @@ public class AssistantDeck implements Serializable {
         for(AssistantCard c : this.getDeck()) {
             if(card.getName() == c.getName()){
                 deck.remove(c);
+                c.getOwner().setChosenAssistant(c);
                 return;
             }
         }

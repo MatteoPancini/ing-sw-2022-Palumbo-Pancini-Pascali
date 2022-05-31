@@ -15,6 +15,7 @@ public class PickDestination implements UserAction {
     }
 
     public PickDestination(Island island) {
+        this.action = Action.PICK_ISLAND;
         this.chosenIsland = island;
         this.diningRoom = null;
     }

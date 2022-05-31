@@ -198,11 +198,17 @@ public class SocketClientConnection implements Runnable {
                 }
 
                 if(userAction instanceof PickDestination) {
-                    if(server.getGameFromID(clientID).getController().getExpertController().isGrannyHerbsEffect()) {
-                        server.getGameFromID(clientID).parseActions(userAction, "GrannyHerbsTile");
+                    if(server.getGameFromID(clientID).getController().getExpertController() != null) {
+                        if(server.getGameFromID(clientID).getController().getExpertController().isGrannyHerbsEffect()) {
+                            server.getGameFromID(clientID).parseActions(userAction, "GrannyHerbsTile");
+                        } else {
+                            server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
+                        }
                     } else {
+                        System.out.println("Devo essere entrato qua");
                         server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
                     }
+
 
                 }
 

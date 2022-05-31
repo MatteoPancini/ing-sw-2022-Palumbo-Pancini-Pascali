@@ -376,6 +376,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Clouds status of this turn: ");
         CLITable st = new CLITable();
         st.setHeaders("Cloud ID", "Students");
+        System.out.println(modelView.getGameCopy().getGameBoard().getClouds().size());
         for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
             st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
         }
@@ -403,9 +404,11 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showEntrance() {
         System.out.println(">Here's a summary of the students in your entrance: ");
+        System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.println("\n");
     }
 
     public void showCoins() {
@@ -562,7 +565,7 @@ public class CLI implements Runnable, ListenerInterface {
     //che verrà poi usata per la chosenDestination nella userAction successiva
     public void askStudent(SchoolBoard schoolB) {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
-        System.out.print("[RED, BLUE, YELLOW, GREEN, PINK]");
+        System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
         System.out.print(">");
         chosenStudent = in.nextLine();
@@ -571,7 +574,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     //prende come input lo studente scelto nella richiesta precedente
     public void askDestination() {
-        System.out.println(">Pick a destination between your DiningRoom or an island [DiningRoom / islandId]:");
+        System.out.println(">Pick a destination between your DiningRoom or an island [DiningRoom / island]:");
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenDestination = input.nextLine();
@@ -899,7 +902,7 @@ public class CLI implements Runnable, ListenerInterface {
             }
             case "UpdateModelView" -> {
                 assert serverCommand != null;
-                modelView.setGameCopy((Game) changeEvent.getNewValue());
+
                 if(modelView.isAction()) {
                     showIslandsTable();
                     showClouds();
@@ -910,6 +913,7 @@ public class CLI implements Runnable, ListenerInterface {
                 }
                 if(modelView.isPianification()) {
                     showAvailableCharacters();
+
                 }
 
             }

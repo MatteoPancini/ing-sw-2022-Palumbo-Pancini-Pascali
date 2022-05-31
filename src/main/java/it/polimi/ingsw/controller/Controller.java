@@ -202,7 +202,6 @@ public class Controller implements PropertyChangeListener {
                     }
                 }
 
-
             }
 
             case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom((DiningRoom) evt.getNewValue());
