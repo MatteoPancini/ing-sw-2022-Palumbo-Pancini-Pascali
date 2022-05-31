@@ -364,7 +364,7 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
 
-    public String printStudentsOnCLoud(int ID) {
+    public String printStudentsOnCloud(int ID) {
         StringBuilder str = new StringBuilder();
         for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID-1).getStudents()) {
             //System.out.print("-" + s.getType());
@@ -377,7 +377,7 @@ public class CLI implements Runnable, ListenerInterface {
         CLITable st = new CLITable();
         st.setHeaders("Cloud ID", "Students");
         for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
-            st.addRow(Integer.toString(c.getID()), printStudentsOnCLoud(c.getID()));
+            st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
         }
     }
 
@@ -512,6 +512,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(PawnType type : pawns) {
             System.out.println(printColor(type) + type.toString() + ANSI_RESET);
         }
+        System.out.println("\n");
     }
 
     public void askMoves(AssistantCard card) {
@@ -522,6 +523,7 @@ public class CLI implements Runnable, ListenerInterface {
         //private String chosenWizard;
         //private String chosenNickname;
         in.reset();
+        System.out.print(">");
         String chosenMoves = in.nextLine();
         virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
     }
@@ -529,7 +531,7 @@ public class CLI implements Runnable, ListenerInterface {
     public void printPlayerDeck() {
         System.out.println(">Take a look at your deck before choosing: ");
         for (AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-            System.out.println("(Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
+            System.out.println("-Name: " + card.getName() + "," + "Value: " + card.getValue() + "," + "Moves: " + card.getMoves());
         }
     }
 
@@ -544,12 +546,14 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.println(">Remember: you can't play an assistant already played by another player!");
         }
         printPlayerDeck();
+        System.out.print(">");
         String chosenAssistant = in.nextLine();
         virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
     }
 
     public void askCloud(ArrayList<CloudTile> clouds) {
         System.out.println(">Pick a cloud by typing its ID: ");
+        System.out.print(">");
         String chosenCloud = in.nextLine();
         virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
     }
@@ -560,6 +564,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
         System.out.print("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
+        System.out.print(">");
         chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
     }
@@ -577,6 +582,7 @@ public class CLI implements Runnable, ListenerInterface {
         if (modelView.getGameCopy().isExpertMode()) {
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
             showCharactersDescription();
+            System.out.print(">");
             String chosenCharacter = in.nextLine();
             virtualClient.firePropertyChange("PickCharachter", null, chosenCharacter);
         }
@@ -588,6 +594,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.println(">Choose an island by typing its ID: ");
         showIslandsTable();
+        System.out.print(">");
         String chosenIsland = in.nextLine();
         virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
         modelView.setGrannyHerbsAction(false);
@@ -596,6 +603,7 @@ public class CLI implements Runnable, ListenerInterface {
     public void askPawnType() {
         System.out.println(">Choose a pawn type: ");
         showPawnType();
+        System.out.print(">");
         String chosenPawnType = in.nextLine();
         virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
     }
@@ -605,6 +613,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : monk.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.print(">");
         chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
 
@@ -615,6 +624,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : jester.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.print(">");
         chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
 
@@ -625,6 +635,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : minestrel.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.print(">");
         chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
 
@@ -632,12 +643,16 @@ public class CLI implements Runnable, ListenerInterface {
 
 
     public void askCharacterActionsNumber() {
-        System.out.println("How many students from dining room to entrance do you want to change? [1,2]");
+        System.out.println("How many students from dining room to entrance do you want to change? [1,2 for Minestrel, 1,2,3, for Jester]");
         int moves = 0;
         while(true) {
-            System.out.println(">");
+            System.out.print(">");
             moves = in.nextInt();
-            if(moves == 1 || moves == 2) break;
+            if((moves == 1 || moves == 2) && modelView.isMinestrelAction()) break;
+            else if((moves == 1 || moves == 2 || moves == 3) && modelView.isJesterAction()) break;
+            else {
+                System.out.println("Choose [1,2] for Minestrel, [1,2,3] for Jester");
+            }
         }
         clientConnection.sendUserInput(new PickCharacterActionsNum(moves));
     }
@@ -646,6 +661,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : princess.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.print(">");
         chosenStudent = in.nextLine();
         virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
 

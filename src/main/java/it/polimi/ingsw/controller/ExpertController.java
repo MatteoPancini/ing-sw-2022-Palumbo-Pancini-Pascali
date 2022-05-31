@@ -13,8 +13,6 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 
 
-//TODO M: da capire se fare turnController.askMotherNature() subito qui oppure dopo aver fatto l'azione nel turnController
-//          magari settando un boolean CharacterEffect
 public class ExpertController {
     private final Game game;
     private final GameBoard board;
