@@ -372,6 +372,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return str.toString();
     }
+
     public void showClouds() {
         System.out.println(">Clouds status of this turn: ");
         CLITable st = new CLITable();
@@ -703,6 +704,7 @@ public class CLI implements Runnable, ListenerInterface {
             }
         }
     }
+
     public void choosePlayerNumber() {
         System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
@@ -724,19 +726,24 @@ public class CLI implements Runnable, ListenerInterface {
         clientConnection.sendUserInput(new PlayersNumberChoice(numOfPlayer));
 
     }
+
     public void showServerMessage(Answer serverAnswer) {
         System.out.println(serverAnswer.getMessage());
     }
+
     public void showError(String message) {
         System.out.println(ANSI_RED + ">Warning! " + message + ANSI_RESET);
     }
+
     public void showWinMessage() {
         System.out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
     }
+
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
         System.out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
     }
+
     public void userNicknameSetup() {
         //System.out.println("Entro in usernameSetup");
 
@@ -779,9 +786,7 @@ public class CLI implements Runnable, ListenerInterface {
         String cmd = in.nextLine();
         //showError("It's not your turn :(");
         virtualClient.firePropertyChange("noAction", null, cmd);
-    }
-
-     */
+    }*/
 
     @Override
     public void run() {

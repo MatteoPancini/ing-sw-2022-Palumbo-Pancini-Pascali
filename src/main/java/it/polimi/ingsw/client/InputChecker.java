@@ -120,10 +120,10 @@ public class InputChecker {
         PickMovesNumber action = null;
         int maxMoves;
         if(modelView.isMagicPostmanAction()) {
-            maxMoves = modelView.getGameCopy().getGameBoard().getLastAssistantUsed().get(modelView.getGameCopy().getCurrentPlayer().getPlayerID()).getMoves() + 2;
+            maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2;
             modelView.setMagicPostmanAction(false);
         } else {
-            maxMoves = modelView.getGameCopy().getGameBoard().getLastAssistantUsed().get(modelView.getGameCopy().getCurrentPlayer().getPlayerID()).getMoves();
+            maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves();
         }
         int moves = Integer.parseInt(input);
         if (moves > 0 && moves < maxMoves) {
