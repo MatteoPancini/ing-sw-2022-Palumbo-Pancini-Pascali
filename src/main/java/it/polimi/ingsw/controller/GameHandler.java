@@ -76,6 +76,7 @@ public class GameHandler {
 
     public void addGamePlayer(String playerNickname, int playerID) {
         game.createNewPlayer(new Player(playerNickname, playerID));
+
     }
 
     public void setCurrentPlayerId(int currentPlayerId) {

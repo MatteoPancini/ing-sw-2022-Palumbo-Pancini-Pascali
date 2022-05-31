@@ -38,6 +38,7 @@ public class InputChecker {
      */
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
         PickAssistant action;
+        //TODO -> da gestire le exception e richiedere l'assistant
         switch (input.toUpperCase()) {
             case "EAGLE" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.EAGLE)) {
@@ -122,13 +123,16 @@ public class InputChecker {
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
         int maxMoves;
+        System.out.println("My input: " + input);
         if(modelView.isMagicPostmanAction()) {
             maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2;
             modelView.setMagicPostmanAction(false);
         } else {
             maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves();
         }
+
         int moves = Integer.parseInt(input);
+        System.out.println("Parso " + moves);
         if (moves > 0 && moves <= maxMoves) {
             action = new PickMovesNumber(moves);
         }
@@ -151,9 +155,9 @@ public class InputChecker {
 
     public boolean isStudentInEntrance(String input) {
         PawnType type = toPawnType(input);
-        System.out.println("Tipo passato: " + type.toString());
+        //System.out.println("Tipo passato: " + type.toString());
         for(int i = 0; i < modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size(); i++) {
-            System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
+            //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
 
             if(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().equals(type)) {
                 return true;
@@ -187,6 +191,7 @@ public class InputChecker {
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
+                cli.askDestination();
             }
         }
         return action;
@@ -202,6 +207,7 @@ public class InputChecker {
         } else {
             cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                     "the remaining islands");
+            cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
         }
 
         return action;
@@ -211,6 +217,8 @@ public class InputChecker {
         PickStudent action = null;
         if (isStudentInEntrance(studentType)) {
             action = new PickStudent(new Student(toPawnType(studentType)));
+        } else {
+            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
         }
         return action;
     }
@@ -230,12 +238,11 @@ public class InputChecker {
         int cloudID = Integer.parseInt(input);
         //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
         //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
-        if(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1).getStudents() != null) {
-            action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1));
+        if(!modelView.getGameCopy().getGameBoard().getClouds().get(cloudID).getStudents().isEmpty()) {
+            action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID));
         }
         else {
             cli.showError("Error: the cloud has already been taken! Choose another one");
-            cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
         }
         return action;
     }
@@ -244,45 +251,106 @@ public class InputChecker {
         PickCharacter action = null;
         switch(input.toUpperCase()) {
             case "HERALD" -> {
-                action = new PickCharacter(Characters.HERALD);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
+                    action = new PickCharacter(Characters.HERALD);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
+
             }
             case "KNIGHT" -> {
-                action = new PickCharacter(Characters.KNIGHT);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
+                    action = new PickCharacter(Characters.KNIGHT);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "CENTAUR" -> {
-                action = new PickCharacter(Characters.CENTAUR);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
+                    action = new PickCharacter(Characters.CENTAUR);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "FARMER" -> {
-                action = new PickCharacter(Characters.FARMER);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
+                    action = new PickCharacter(Characters.FARMER);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "FUNGARUS" -> {
-                action = new PickCharacter(Characters.FUNGARUS);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
+                    action = new PickCharacter(Characters.FUNGARUS);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "JESTER" -> {
-                action = new PickCharacter(Characters.JESTER);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
+                    action = new PickCharacter(Characters.JESTER);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "THIEF" -> {
-                action = new PickCharacter(Characters.THIEF);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
+                    action = new PickCharacter(Characters.THIEF);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "MINESTREL" -> {
-                action = new PickCharacter(Characters.MINESTREL);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
+                    action = new PickCharacter(Characters.MINESTREL);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "MONK" -> {
-                action = new PickCharacter(Characters.MONK);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
+                    action = new PickCharacter(Characters.MONK);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "GRANNY_HERBS" -> {
-                action = new PickCharacter(Characters.GRANNY_HERBS);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
+                    action = new PickCharacter(Characters.GRANNY_HERBS);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "MAGIC_POSTMAN" -> {
-                action = new PickCharacter(Characters.MAGIC_POSTMAN);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
+                    action = new PickCharacter(Characters.MAGIC_POSTMAN);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "SPOILED_PRINCESS" -> {
-                action = new PickCharacter(Characters.SPOILED_PRINCESS);
+                if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
+                    action = new PickCharacter(Characters.SPOILED_PRINCESS);
+                } else {
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                }
             }
             case "NONE" -> {
                 action = new PickCharacter(null);
             }
-            default -> action = new PickCharacter();
+            default -> action = null;
         }
         return action;
     }

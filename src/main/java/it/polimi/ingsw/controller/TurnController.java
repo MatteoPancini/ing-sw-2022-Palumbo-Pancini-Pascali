@@ -340,14 +340,19 @@ public class TurnController {
         int professorWinnerId = 0;
 
         for(Player p : controller.getGame().getActivePlayers()) {
+            System.out.println("P_ " + p.getNickname());
             for(int i = 0; i < 5; i++) {
                 if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getColor() == studentToMove.getType()) {
-                    if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().size() > currentPlayerStudents) {
+                    System.out.println("Player " + p.getNickname() + " has " + p.getBoard().getDiningRoom().getDiningRoom().get(i).getTableStudentsNum() + " students of type " + p.getBoard().getDiningRoom().getDiningRoom().get(i).getColor());
+
+                    if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTableStudentsNum() > currentPlayerStudents) {
                         professorWinnerId = p.getPlayerID();
                     }
                 }
             }
         }
+
+        System.out.println(professorWinnerId);
 
         if(currentPlayer.getPlayerID() == professorWinnerId) {
             for(Player p : controller.getGame().getActivePlayers()) {
@@ -365,6 +370,16 @@ public class TurnController {
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
         System.out.println("Studente " + studentToMove.getType());
         controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
+        //System.out.println(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin());
+
+        if(expertController != null) {
+            if(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin()) {
+                //System.out.println("Entro");
+                controller.getGame().getCurrentPlayer().setMyCoins(controller.getGame().getCurrentPlayer().getMyCoins() + 1);
+                controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setTakeCoin(false);
+            }
+        }
+
         controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
