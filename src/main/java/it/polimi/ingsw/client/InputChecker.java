@@ -184,6 +184,7 @@ public class InputChecker {
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
+                cli.askDestination();
             }
         }
         return action;
@@ -227,11 +228,12 @@ public class InputChecker {
         int cloudID = Integer.parseInt(input);
         //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
         //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
-        if(!modelView.getGameCopy().getGameBoard().getClouds().get(cloudID).getStudents().isEmpty()) {
-            action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID));
+        if(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1).getStudents() != null) {
+            action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1));
         }
         else {
             cli.showError("Error: the cloud has already been taken! Choose another one");
+            cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
         }
         return action;
     }

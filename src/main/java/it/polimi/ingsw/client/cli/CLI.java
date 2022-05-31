@@ -366,7 +366,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public String printStudentsOnCloud(int ID) {
         StringBuilder str = new StringBuilder();
-        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID-1).getStudents()) {
+        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID - 1).getStudents()) {
             //System.out.print("-" + s.getType());
             str.append(printColor(s.getType())).append("•").append(ANSI_RESET);
         }
@@ -378,7 +378,7 @@ public class CLI implements Runnable, ListenerInterface {
         st.setHeaders("Cloud ID", "Students");
         System.out.println(modelView.getGameCopy().getGameBoard().getClouds().size());
         for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
-            st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+            if(c.getStudents() != null) st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
         }
     }
 
@@ -528,7 +528,7 @@ public class CLI implements Runnable, ListenerInterface {
         in.reset();
         System.out.print(">");
         String chosenMoves = in.nextLine();
-        virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
+        virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
     }
 
     public void printPlayerDeck() {
