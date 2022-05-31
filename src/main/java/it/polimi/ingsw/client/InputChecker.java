@@ -146,10 +146,13 @@ public class InputChecker {
         return type;
     }
 
-    public boolean isStudentInEntrance(String input, Player player) {
+    public boolean isStudentInEntrance(String input) {
         PawnType type = toPawnType(input);
-        for(Student s : player.getBoard().getEntrance().getStudents()) {
-            if(s.getType().equals(type)) {
+        System.out.println("Tipo passato: " + type.toString());
+        for(int i = 0; i < modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size(); i++) {
+            System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
+
+            if(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().equals(type)) {
                 return true;
             }
         }
@@ -159,6 +162,7 @@ public class InputChecker {
     //se action == null ri-chiedo l'input
     public PickDestination checkDestination(String destination) {
         PickDestination action = null;
+        System.out.println(destination.toUpperCase());
         switch(destination.toUpperCase()) {
             case "DININGROOM" -> {
                 action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
@@ -195,7 +199,7 @@ public class InputChecker {
 
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
-        if (isStudentInEntrance(studentType, modelView.getGameCopy().getCurrentPlayer())) {
+        if (isStudentInEntrance(studentType)) {
             action = new PickStudent(new Student(toPawnType(studentType)));
         }
         return action;
@@ -203,6 +207,7 @@ public class InputChecker {
 
     public PickPawnType checkPawnType(String pawnType) {
         PickPawnType action = null;
+        System.out.println("Entro in check");
         if(pawnType.toUpperCase().equalsIgnoreCase("GREEN") || pawnType.toUpperCase().equalsIgnoreCase("RED") || pawnType.toUpperCase().equalsIgnoreCase("YELLOW") || pawnType.toUpperCase().equalsIgnoreCase("PINK")  || pawnType.toUpperCase().equalsIgnoreCase("BLUE")) {
             action = new PickPawnType(toPawnType(pawnType));
         }

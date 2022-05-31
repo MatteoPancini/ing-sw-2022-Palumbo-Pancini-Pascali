@@ -80,6 +80,7 @@ public class Parser implements PropertyChangeListener {
                 action = inputChecker.checkMoves(chosenValue);
             }
             case "PICKSTUDENT" -> {
+                System.out.println("Entro in pickStudent");
                 action = inputChecker.checkStudent(chosenValue);
             }
             case "PICKDESTINATION" -> {
@@ -123,7 +124,8 @@ public class Parser implements PropertyChangeListener {
         } else {
             try {
                 if (action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    modelView.setActivateInput(false);
+                    System.err.println("action giusta: " + evt.getNewValue().toString() + " <-questa");
+                    //modelView.setActivateInput(false);
                 } else {
                     modelView.setActivateInput(true);
                 }

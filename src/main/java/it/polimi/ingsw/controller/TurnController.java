@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-//TODO M -> spostare tutti gli attributi relativi alle carte nell'expertController
 public class TurnController {
     private final Controller controller;
 
@@ -217,8 +216,8 @@ public class TurnController {
 
     public void putStudentsOnCloud() {
         //System.out.println("entro in PutStudentsOnCloud");
-        for (CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
-            System.out.println();
+        for(CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
+            System.out.println("Putting students on cloud");
             ArrayList<Student> newStudents = new ArrayList<>();
             Collections.shuffle(controller.getGame().getGameBoard().getStudentsBag());
             int studentsNumber;
@@ -232,14 +231,14 @@ public class TurnController {
             }
             cloud.setStudents(newStudents);
         }
-        for(Student s : controller.getGame().getGameBoard().getClouds().get(0).getStudents()){
-            System.out.println(s.getType());
-        }
-        for(Student s : controller.getGame().getGameBoard().getClouds().get(1).getStudents()){
-            System.out.println(s.getType());
+
+        for(CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
+            System.out.println("Cloud " + cloud.getID() + " has students: ");
+            for (Student s : cloud.getStudents()) {
+                System.out.println(s.getType());
+            }
         }
 
-        //System.out.println("Esco da setStudents");
     }
 
 

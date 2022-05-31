@@ -336,7 +336,7 @@ public class NewTurnControllerTest {
 
         int maximum = 11;
         SecureRandom r = new SecureRandom();
-        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
+        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(1);
         //int n = 1;
         int mnPos = controllerStub.getGame().getGameBoard().getMotherNature().getPosition();
 
