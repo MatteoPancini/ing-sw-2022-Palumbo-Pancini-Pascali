@@ -63,8 +63,6 @@ public class NewTurnControllerTest {
 
     final ControllerStub controllerStub = new ControllerStub(gameHandlerStub.getGame(), gameHandlerStub);
 
-
-
     @Test
     @DisplayName("Setup 3 players")
     public void init3Players() {
@@ -134,11 +132,9 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard(), controllerStub.getGame().getActivePlayers().get(3).getBoard());
     }
 
-
     @Test
     @DisplayName("Pianification Phase")
     public void pianificationPhase() {
-
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
         gigiox.setWizard(Wizards.FOREST);
@@ -171,7 +167,6 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getAssistantDeck().getDeck().size(), 9);
     }
 
-
     @Test
     @DisplayName("Action Phase Test")
     public void standardActionPhase() {
@@ -198,7 +193,6 @@ public class NewTurnControllerTest {
         for(Student t : controllerStub.getTurnController().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.println(t.getType());
         }
-
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
@@ -278,10 +272,6 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev10);
     }
 
-
-
-
-
     public void setupGame() {
         System.out.println("Starting setupGame");
 
@@ -346,7 +336,7 @@ public class NewTurnControllerTest {
 
         int maximum = 11;
         SecureRandom r = new SecureRandom();
-        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
+        controllerStub.getGame().getGameBoard().getMotherNature().setPosition(1);
         //int n = 1;
         int mnPos = controllerStub.getGame().getGameBoard().getMotherNature().getPosition();
 

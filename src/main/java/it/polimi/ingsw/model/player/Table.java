@@ -35,16 +35,29 @@ public class Table implements Serializable {
 
      */
     public void removeStudent() {
+        table.get(lastPosition - 1).removeStudent();
+        lastPosition--;
+        System.err.println(lastPosition);
 
-        this.getTable().get(lastPosition).removeStudent();
     }
 
 
 
     public void addStudent(Student stud){
-        this.getTable().get(lastPosition).setStudent(stud);
+        table.get(lastPosition).setStudent(stud);
         lastPosition++;
         return;
+    }
+
+    public int getTableStudentsNum() {
+        int studentsNum = 0;
+        for(BoardCell b : table) {
+            if(b.hasStudent()) {
+                studentsNum++;
+            }
+        }
+
+        return studentsNum;
     }
 
 }

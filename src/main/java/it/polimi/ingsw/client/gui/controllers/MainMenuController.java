@@ -40,7 +40,7 @@ public class MainMenuController implements GUIController {
 
 
     public void play() {
-        gui.changeState("setup.fxml");
+        gui.changeStage("setup.fxml");
     }
 
     public void start() {
@@ -60,7 +60,7 @@ public class MainMenuController implements GUIController {
             }
 
             try {
-                gui.changeState("loading.fxml");
+                gui.changeStage("loading.fxml");
                 loadingController = (LoadingController) gui.getControllerFromName("loading.fxml");
                 loadingController.setText("Configuring connection socket...");
                 ClientConnection clientConnection = new ClientConnection();

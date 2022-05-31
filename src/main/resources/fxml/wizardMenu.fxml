@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.WizardMenuController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.WizardMenuController">
    <children>
       <ImageView fx:id="wizardBackground" fitHeight="400.0" fitWidth="611.0" pickOnBounds="true">
          <image>
@@ -19,7 +17,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="king" fitHeight="163.0" fitWidth="108.0" layoutX="26.0" layoutY="125.0" onMouseDragged="#liftWIzard" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
+      <ImageView fx:id="king" fitHeight="163.0" fitWidth="108.0" layoutX="26.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
          <image>
             <Image url="@../graphics/wizards/king.png" />
          </image>
@@ -27,7 +25,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="king1" fitHeight="163.0" fitWidth="108.0" layoutX="175.0" layoutY="125.0" onMouseDragged="#liftWizard" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
+      <ImageView fx:id="king1" fitHeight="163.0" fitWidth="108.0" layoutX="175.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
          <image>
             <Image url="@../graphics/wizards/sorcerer.png" />
          </image>
@@ -35,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="king2" fitHeight="163.0" fitWidth="108.0" layoutX="329.0" layoutY="125.0" onMouseDragged="#liftWizard" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
+      <ImageView fx:id="king2" fitHeight="163.0" fitWidth="108.0" layoutX="329.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
          <image>
             <Image url="@../graphics/wizards/wizard.png" />
          </image>
@@ -43,7 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="king3" fitHeight="163.0" fitWidth="108.0" layoutX="478.0" layoutY="125.0" onMouseDragged="#liftWizard" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
+      <ImageView fx:id="king3" fitHeight="163.0" fitWidth="108.0" layoutX="478.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" styleClass="wizard">
          <image>
             <Image url="@../graphics/wizards/pixie.png" />
          </image>
@@ -51,7 +49,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Button fx:id="kingButton" layoutX="49.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseWIzard" text="KING" textFill="#ac6868">
+      <Button fx:id="kingButton" layoutX="49.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseKing" text="KING" textFill="#ac6868">
          <font>
             <Font name="Palatino Linotype" size="15.0" />
          </font>
@@ -62,7 +60,7 @@
             <ColorAdjust saturation="-0.04" />
          </effect>
       </Button>
-      <Button fx:id="forestButton" layoutX="190.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseWizard" text="FOREST" textFill="#ac6868">
+      <Button fx:id="forestButton" layoutX="190.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseForest" text="FOREST" textFill="#ac6868">
          <font>
             <Font name="Palatino Linotype" size="15.0" />
          </font>
@@ -73,7 +71,7 @@
             <ColorAdjust saturation="-0.04" />
          </effect>
       </Button>
-      <Button fx:id="monachButton" layoutX="335.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseWizard" text="MONACH" textFill="#ac6868">
+      <Button fx:id="monachButton" layoutX="335.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseMonach" text="MONACH" textFill="#ac6868">
          <font>
             <Font name="Palatino Linotype" size="15.0" />
          </font>
@@ -84,7 +82,7 @@
             <ColorAdjust saturation="-0.04" />
          </effect>
       </Button>
-      <Button fx:id="witchButton" layoutX="501.0" layoutY="300.0" mnemonicParsing="false" onMouseDragged="#chooseWizard" text="WITCH" textFill="#ac6868">
+      <Button fx:id="witchButton" layoutX="501.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#chooseWitch" text="WITCH" textFill="#ac6868">
          <font>
             <Font name="Palatino Linotype" size="15.0" />
          </font>

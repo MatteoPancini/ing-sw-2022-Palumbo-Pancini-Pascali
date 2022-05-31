@@ -22,7 +22,56 @@ public class ModelView {
     private boolean gameStarted;
     private boolean pianification = false;
     private boolean action = false;
+    private boolean magicPostmanAction = false;
+    private boolean grannyHerbsAction;
 
+    public boolean isGrannyHerbsAction() {
+        return grannyHerbsAction;
+    }
+
+    public void setGrannyHerbsAction(boolean grannyHerbsAction) {
+        this.grannyHerbsAction = grannyHerbsAction;
+    }
+
+    private int characterAction = 0;
+
+
+
+    public int getCharacterAction() {
+        return characterAction;
+    }
+
+    public void setCharacterAction(int characterAction) {
+        this.characterAction = characterAction;
+    }
+
+    private boolean minestrelAction = false;
+
+    private boolean jesterAction = false;
+
+    public void setJesterAction(boolean jesterAction) {
+        this.jesterAction = jesterAction;
+    }
+
+    public boolean isJesterAction() {
+        return jesterAction;
+    }
+
+    public void setMinestrelAction(boolean minestrelAction) {
+        this.minestrelAction = minestrelAction;
+    }
+
+    public boolean isMinestrelAction() {
+        return minestrelAction;
+    }
+
+    public boolean isMagicPostmanAction() {
+        return magicPostmanAction;
+    }
+
+    public void setMagicPostmanAction(boolean magicPostmanAction) {
+        this.magicPostmanAction = magicPostmanAction;
+    }
 
     public boolean isAction() {
         return action;

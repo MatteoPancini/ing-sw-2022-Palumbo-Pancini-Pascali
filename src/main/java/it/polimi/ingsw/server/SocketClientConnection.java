@@ -182,10 +182,10 @@ public class SocketClientConnection implements Runnable {
     }
 
     public void actionHandler(UserAction userAction) {
-        if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
-            server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTYOURTURN), clientID);
-        }
-        else {
+        //if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
+            //server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTYOURTURN), clientID);
+        //}
+        //else {
             if(server.getGameFromID(clientID).isMatchStarted()) {
                 if(userAction instanceof PickAssistant) {
                     System.out.println("Mi arriva pickassistant");
@@ -227,10 +227,15 @@ public class SocketClientConnection implements Runnable {
                     server.getGameFromID(clientID).parseActions(userAction, "PickPawnType");
                 }
 
+                if(userAction instanceof PickCharacterActionsNum) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickCharacterActionsNum");
+
+                }
+
             } else {
                 server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }
-        }
+        //}
     }
 
     public void setActiveConnection(boolean activeConnection) {

@@ -8,6 +8,7 @@ import it.polimi.ingsw.client.ModelView;
 import it.polimi.ingsw.client.gui.controllers.GUIController;
 import it.polimi.ingsw.client.gui.controllers.LoadingController;
 import it.polimi.ingsw.client.gui.controllers.ResizeController;
+import it.polimi.ingsw.client.gui.controllers.WizardMenuController;
 import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
@@ -16,6 +17,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -44,6 +46,7 @@ public class GUI extends Application implements ListenerInterface {
     private HashMap<String, Scene> nameMapScene = new HashMap<>();
     private final HashMap<String, GUIController> nameMapController = new HashMap<>();
 
+    private Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
 
     private MediaPlayer mediaPlayer;
 
@@ -108,15 +111,6 @@ public class GUI extends Application implements ListenerInterface {
     }
 
 
-    public void changeState(String newFXMLScene) {
-        currentScene = nameMapScene.get(newFXMLScene);
-        stage.setScene(currentScene);
-
-        //resizing
-        ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
-        currentScene.widthProperty().addListener(resize.getWidthListener());
-        currentScene.heightProperty().addListener(resize.getHeightListener());
-    }
 
     public void changeStage(String newScene) {
         currentScene = nameMapScene.get(newScene);
@@ -126,7 +120,6 @@ public class GUI extends Application implements ListenerInterface {
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
-
 
     }
 
@@ -140,7 +133,7 @@ public class GUI extends Application implements ListenerInterface {
 
 
     public void setupGui() {
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE));
+        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU));
         try {
             for(String pathFxml : fxmlList) {
 
@@ -186,7 +179,7 @@ public class GUI extends Application implements ListenerInterface {
                 controller.askExpertMode(((ExpertModeAnswer) modelView.getServerAnswer()).getMessage());
             }) ;
             case "RequestWizard" -> Platform.runLater(() -> {
-                LoadingController controller = (LoadingController) getControllerFromName(LOADING_PAGE);
+                WizardMenuController controller = (WizardMenuController) getControllerFromName(WIZARD_MENU);
                 controller.askWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             });
 
@@ -206,9 +199,15 @@ public class GUI extends Application implements ListenerInterface {
                 //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
             }
+
+            case "DynamicAnswer" -> Platform.runLater(() -> {
+                infoAlert.setTitle("INFO");
+                infoAlert.setHeaderText("Information from server");
+                infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
+                infoAlert.show();
+            });
+                    //showServerMessage(modelView.getServerAnswer());
             /*
-            case "DynamicAnswer" -> //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
-                    showServerMessage(modelView.getServerAnswer());
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);
