@@ -1,8 +1,9 @@
 # ERYANTIS - Software Engineering Final Project 2021/2022
 The project consists of a Java implementation of the board game Eryantis, made by Cranio Creations.
 
+![This is an image](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.craniocreations.it%2Fprodotto%2Feriantys%2F&psig=AOvVaw1-3EBMUsARPtPzUM9YuMHp&ust=1654188712435000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCMCCtqfbjPgCFQAAAAAdAAAAABAf)
 
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.craniocreations.it%2Fprodotto%2Feriantys%2F&psig=AOvVaw1-3EBMUsARPtPzUM9YuMHp&ust=1654188712435000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCMCCtqfbjPgCFQAAAAAdAAAAABAf" width=200px height=200px  alt="Eriantys Image"/>
+
 
 ## GroupID: GC31
 + Francesco Palumbo
