@@ -360,10 +360,12 @@ public class TurnController {
 
         if (controller.getGame().getCurrentPlayer().getPlayerID() == professorWinnerId) {
             if (controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner() == null) {
+                System.out.println("Setto prof " + studentToMove.getType().toString() + " to" + controller.getGame().getCurrentPlayer().getNickname());
                 currentPlayer.getBoard().getProfessorTable().getCellByColor(studentToMove.getType()).setProfessor(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()));
                 controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).setOwner(controller.getGame().getCurrentPlayer());
             } else {
                 if(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner().getPlayerID() != professorWinnerId) {
+                    System.out.println("Setto prof " + studentToMove.getType().toString() + " to" + controller.getGame().getCurrentPlayer().getNickname());
 
                     controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner().getBoard().getProfessorTable().getCellByColor(studentToMove.getType()).resetProfessor();
 
@@ -583,29 +585,31 @@ public class TurnController {
 
         System.out.println("Max island influence" + islandInfluence);
 
-        if(controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
-            //controllare che non abbia già costruito
-            if(controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() == null) {
-                //aggiunge torre ev
-                controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslandById(islandId));
-            } else {
-                for(Player p : controller.getGame().getActivePlayers()) {
-                    if(controller.getGame().getGameBoard().getIslandById(islandId).getTower() != null && p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
-                        controller.getGame().getGameBoard().getIslandById(islandId).moveTowerToArea(p.getBoard().getTowerArea());
-                        break;
+        if(islandInfluence != 0) {
+            if (controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
+                //controllare che non abbia già costruito
+                if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() == null) {
+                    //aggiunge torre ev
+                    controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
+                } else {
+                    for (Player p : controller.getGame().getActivePlayers()) {
+                        if (controller.getGame().getGameBoard().getIslandById(islandId).getTower() != null && p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
+                            controller.getGame().getGameBoard().getIslandById(islandId).moveTowerToArea(p.getBoard().getTowerArea());
+                            break;
+                        }
                     }
+                    controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
+
                 }
-                controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslandById(islandId));
+
+                if (controller.getGame().getGameBoard().getIslandById(islandId).hasLeft()) {
+                    controller.getGame().getGameBoard().getIslandById(islandId).merge(controller.getGame().getGameBoard().getIslandById(islandId - 1));
+                }
+                if (controller.getGame().getGameBoard().getIslandById(islandId).hasRight()) {
+                    controller.getGame().getGameBoard().getIslandById(islandId).merge(controller.getGame().getGameBoard().getIslandById(islandId + 1));
+                }
 
             }
-
-            if(controller.getGame().getGameBoard().getIslandById(islandId).hasLeft()) {
-                controller.getGame().getGameBoard().getIslandById(islandId).merge(controller.getGame().getGameBoard().getIslandById(islandId - 1));
-            }
-            if(controller.getGame().getGameBoard().getIslandById(islandId).hasRight()) {
-                controller.getGame().getGameBoard().getIslandById(islandId).merge(controller.getGame().getGameBoard().getIslandById(islandId + 1));
-            }
-
         }
 
         System.err.println(controller.getGame().getCurrentPlayer().getIslandInfluence());
@@ -713,18 +717,28 @@ public class TurnController {
             gameHandler.endGame();
         }
 
+
+        for(int i= 0; i< controller.getGame().getGameBoard().getLastAssistantUsed().size(); i++) {
+            controller.getGame().getGameBoard().getLastAssistantUsed().remove(i);
+        }
+
+        /*
         for(AssistantCard card : controller.getGame().getGameBoard().getLastAssistantUsed()) {
             controller.getGame().getGameBoard().getLastAssistantUsed().remove(card);
         }
+
+         */
         switchPlayer();
 
 
-        if(actionPhaseNum == controller.getGame().getPlayersNumber() - 1) {
+        if(actionPhaseNum == controller.getGame().getActivePlayers().size() - 1) {
             actionPhaseNum = 0;
+            startPianificationPhase();
         } else {
             actionPhaseNum++;
+            startActionPhase();
         }
-        startActionPhase();
+
     }
 
     public boolean checkWin() {

@@ -25,6 +25,7 @@ public class Island implements Serializable {
         tower = null;
         mergedIsland = new ArrayList<Island>();
         mergedIsland.add(this);
+        System.out.println(mergedIsland.size());
         students = new ArrayList<Student>();
         noEntry = false;
         owner = null;
@@ -60,6 +61,7 @@ public class Island implements Serializable {
     }
 
     public void merge(Island island) {
+        System.out.println("Faccio merge");
         mergedIsland.add(island);
         if(this.islandID < island.islandID) {
             mergedTowers.add(island.getTower());

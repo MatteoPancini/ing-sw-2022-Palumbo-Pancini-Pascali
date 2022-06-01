@@ -346,8 +346,6 @@ public class NewTurnControllerTest {
         controllerStub.getTurnController().moveMotherNature(2);
         System.err.println(controllerStub.getGame().getGameBoard().getMotherNature().getPosition());
 
-        controllerStub.getGame().getGameBoard().getIslands().get(3).getTower().getColor().toString();
-
 
 
 
@@ -360,6 +358,10 @@ public class NewTurnControllerTest {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
         server.setIdMapID(idMapID);
+
+
+        controllerStub.getGame().getPlayers().add(matteo);
+        controllerStub.getGame().getPlayers().add(cisco);
 
         controllerStub.getGame().getActivePlayers().add(matteo);
         controllerStub.getGame().getActivePlayers().add(cisco);
@@ -398,6 +400,26 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev9);
         PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev10);
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard().getEntrance().getStudents().size(), 7);
+
+        PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev11);
+        PropertyChangeEvent ev12 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev12);
+        PropertyChangeEvent ev13 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev13);
+        PropertyChangeEvent ev14 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev14);
+        PropertyChangeEvent ev15 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev15);
+        PropertyChangeEvent ev16 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev16);
+        PropertyChangeEvent ev17 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
+        controllerStub.propertyChange(ev17);
+        PropertyChangeEvent ev18 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(1));
+        controllerStub.propertyChange(ev18);
+
     }
 
     public void setupGame() {
@@ -420,13 +442,13 @@ public class NewTurnControllerTest {
         allTowerColors.add(TowerColor.BLACK);
         allTowerColors.add(TowerColor.GREY);
 
-        if(controllerStub.getGame().getPlayersNumber() == 3) {
+        if(controllerStub.getGame().getActivePlayers().size() == 3) {
             towersNumber = 6;
             colorsCounter3P = 0;
-        } else if(controllerStub.getGame().getPlayersNumber() == 2) {
+        } else if(controllerStub.getGame().getActivePlayers().size() == 2) {
             towersNumber = 8;
             colorsCounter2P = 0;
-        } else if(controllerStub.getGame().getPlayersNumber() == 4) {
+        } else if(controllerStub.getGame().getActivePlayers().size() == 4) {
             towersNumber = 8;
             colorsCounter4P = 0;
         }
@@ -441,18 +463,26 @@ public class NewTurnControllerTest {
                 controllerStub.getGame().getGameBoard().removeStudents(0);
             }
 
-            //System.out.println("metto torri");
-            if(controllerStub.getGame().getActivePlayers().size() == 3) {
+            System.out.println("metto torri");
+            if(controllerStub.getGame().getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                    if(colorsCounter3P < 2) colorsCounter3P++;
+                    if(colorsCounter3P < 2) {
+                        colorsCounter3P++;
+                        System.out.println("change");
+
+                    }
                 }
-            } else if(controllerStub.getGame().getActivePlayers().size() == 2) {
+            } else if(controllerStub.getGame().getPlayersNumber() == 2) {
+                System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                    if(colorsCounter2P < 1) colorsCounter2P++;
+                    if(k == towersNumber) {
+                        System.out.println("change");
+                        colorsCounter2P++;
+                    }
                 }
-            } else if(controllerStub.getGame().getActivePlayers().size() == 4) {
+            } else if(controllerStub.getGame().getPlayersNumber() == 4) {
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
                     if(colorsCounter4P < 3) colorsCounter4P++;
