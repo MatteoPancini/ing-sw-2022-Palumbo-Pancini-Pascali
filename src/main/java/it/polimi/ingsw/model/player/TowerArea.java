@@ -18,8 +18,11 @@ public class TowerArea implements Serializable {
     public void addTowers (Tower tower) { myTowers.add(tower); };
 
     public void moveTowerToIsland(Island island) {
-        island.setTower(myTowers.get(myTowers.size() - 1));
-        myTowers.remove(myTowers.get(myTowers.size() - 1));
+        for(int i = 0; i < island.getMergedTowers().size(); i++) {
+            island.getMergedTowers().add(myTowers.get(myTowers.size() - 1));
+            myTowers.remove(myTowers.get(myTowers.size() - 1));
+        }
+
     }
 
 }

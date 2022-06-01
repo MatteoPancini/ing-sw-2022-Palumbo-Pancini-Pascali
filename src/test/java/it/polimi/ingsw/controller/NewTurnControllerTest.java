@@ -272,13 +272,16 @@ public class NewTurnControllerTest {
         System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor());
 
         controllerStub.getTurnController().setCurrentPlayer(cisco);
+        controllerStub.getGame().setCurrentPlayer(cisco);
+
 
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s4);
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s5);
         controllerStub.getTurnController().checkProfessorInfluence();
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), false);
-        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
+        System.out.println(controllerStub.getGame().getActivePlayers().get(0).getNickname());
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), false);
 
     }
 
@@ -333,6 +336,20 @@ public class NewTurnControllerTest {
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).hasProfessor(), true);
+
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().size());
+
+        System.out.println("muvo mn");
+        controllerStub.getTurnController().moveMotherNature(2);
+        System.err.println(controllerStub.getGame().getGameBoard().getMotherNature().getPosition());
+
+        controllerStub.getGame().getGameBoard().getIslands().get(3).getTower().getColor().toString();
+
+
+
 
 
     }

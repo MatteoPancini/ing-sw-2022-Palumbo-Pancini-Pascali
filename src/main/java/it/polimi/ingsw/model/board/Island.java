@@ -24,6 +24,7 @@ public class Island implements Serializable {
         islandID = ID;
         tower = null;
         mergedIsland = new ArrayList<Island>();
+        mergedIsland.add(this);
         students = new ArrayList<Student>();
         noEntry = false;
         owner = null;
