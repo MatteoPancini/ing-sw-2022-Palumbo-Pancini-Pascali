@@ -62,15 +62,13 @@ public class CLI implements Runnable, ListenerInterface {
     public String printTowers(Island isl) {
         String towers = "";
         if(isl.hasTower()) {
-            for(Tower t : isl.getMergedTowers()) {
+            for (Tower t : isl.getMergedTowers()) {
                 if (t.getColor().equals(TowerColor.WHITE)) {
                     towers = towers + "○";
-                }
-                else if(t.getColor().equals(TowerColor.BLACK)) {
-                    towers = towers +  ANSI_WHITE + "█" + ANSI_RESET;
-                }
-                else if(t.getColor().equals(TowerColor.GREY)) {
-                    towers = towers +  ANSI_WHITE + "▲" + ANSI_RESET;
+                } else if (t.getColor().equals(TowerColor.BLACK)) {
+                    towers = towers + ANSI_WHITE + "█" + ANSI_RESET;
+                } else if (t.getColor().equals(TowerColor.GREY)) {
+                    towers = towers + ANSI_WHITE + "▲" + ANSI_RESET;
                 }
             }
         }
@@ -336,32 +334,31 @@ public class CLI implements Runnable, ListenerInterface {
 
          */
         ArrayList<String> nicknames = new ArrayList<>();
-        ArrayList<String> assitants = new ArrayList<>();
+        ArrayList<String> assistants = new ArrayList<>();
         for(AssistantCard a : modelView.getGameCopy().getGameBoard().getLastAssistantUsed()) {
             nicknames.add(a.getOwner().getNickname());
-            assitants.add(a.getName().toString());
+            assistants.add(a.getName().toString());
         }
 
         switch (modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()) {
             case 1 -> {
                 st.setHeaders(nicknames.get(0));
-                st.addRow(assitants.get(0));
+                st.addRow(assistants.get(0));
             }
 
             case 2 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1));
-                st.addRow(assitants.get(0), assitants.get(1));
+                st.addRow(assistants.get(0), assistants.get(1));
             }
 
             case 3 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2));
-                st.addRow(assitants.get(0), assitants.get(1), assitants.get(2));
+                st.addRow(assistants.get(0), assistants.get(1), assistants.get(2));
             }
         }
 
         st.print();
     }
-
 
     public String printStudentsOnCloud(int ID) {
         StringBuilder str = new StringBuilder();
@@ -371,13 +368,18 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return str.toString();
     }
+
     public void showClouds() {
         System.out.println(">Clouds status of this turn: ");
         CLITable st = new CLITable();
         st.setHeaders("Cloud ID", "Students");
-        System.out.println(modelView.getGameCopy().getGameBoard().getClouds().size());
-        for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
-            if(c.getStudents() != null) st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getClouds().size(); i++) {
+            if(modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents() != null) {
+                for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents()) {
+                    System.out.println(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID() + ", " + s.getType().toString());
+                }
+                //st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+            }
         }
     }
 
@@ -702,6 +704,7 @@ public class CLI implements Runnable, ListenerInterface {
             }
         }
     }
+
     public void choosePlayerNumber() {
         //System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
@@ -723,19 +726,24 @@ public class CLI implements Runnable, ListenerInterface {
         clientConnection.sendUserInput(new PlayersNumberChoice(numOfPlayer));
 
     }
+
     public void showServerMessage(Answer serverAnswer) {
         System.out.println(serverAnswer.getMessage());
     }
+
     public void showError(String message) {
         System.out.println(ANSI_RED + ">Warning! " + message + ANSI_RESET);
     }
+
     public void showWinMessage() {
         System.out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
     }
+
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
         System.out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
     }
+
     public void userNicknameSetup() {
         //System.out.println("Entro in usernameSetup");
 
@@ -778,9 +786,7 @@ public class CLI implements Runnable, ListenerInterface {
         String cmd = in.nextLine();
         //showError("It's not your turn :(");
         virtualClient.firePropertyChange("noAction", null, cmd);
-    }
-
-     */
+    }*/
 
     @Override
     public void run() {
@@ -817,8 +823,6 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println("Application will now close...");
         System.exit(0);
     }
-
-
 
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
@@ -913,11 +917,9 @@ public class CLI implements Runnable, ListenerInterface {
                 }
                 if(modelView.isPianification()) {
                     showAvailableCharacters();
-
                 }
 
             }
-
 
             case "WinMessage" -> {
                 assert serverCommand != null;
