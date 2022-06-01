@@ -63,15 +63,13 @@ public class CLI implements Runnable, ListenerInterface {
     public String printTowers(Island isl) {
         String towers = "";
         if(isl.hasTower()) {
-            for(Tower t : isl.getMergedTowers()) {
+            for (Tower t : isl.getMergedTowers()) {
                 if (t.getColor().equals(TowerColor.WHITE)) {
                     towers = towers + "○";
-                }
-                else if(t.getColor().equals(TowerColor.BLACK)) {
-                    towers = towers +  ANSI_WHITE + "█" + ANSI_RESET;
-                }
-                else if(t.getColor().equals(TowerColor.GREY)) {
-                    towers = towers +  ANSI_WHITE + "▲" + ANSI_RESET;
+                } else if (t.getColor().equals(TowerColor.BLACK)) {
+                    towers = towers + ANSI_WHITE + "█" + ANSI_RESET;
+                } else if (t.getColor().equals(TowerColor.GREY)) {
+                    towers = towers + ANSI_WHITE + "▲" + ANSI_RESET;
                 }
             }
         }
@@ -362,7 +360,6 @@ public class CLI implements Runnable, ListenerInterface {
 
         st.print();
     }
-
 
     public String printStudentsOnCloud(int ID) {
         StringBuilder str = new StringBuilder();
@@ -828,8 +825,6 @@ public class CLI implements Runnable, ListenerInterface {
         System.exit(0);
     }
 
-
-
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
         switch(serverCommand) {
@@ -923,11 +918,9 @@ public class CLI implements Runnable, ListenerInterface {
                 }
                 if(modelView.isPianification()) {
                     showAvailableCharacters();
-
                 }
 
             }
-
 
             case "WinMessage" -> {
                 assert serverCommand != null;

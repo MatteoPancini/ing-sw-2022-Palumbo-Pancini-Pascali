@@ -38,7 +38,7 @@ public class Island implements Serializable {
     }
 
     public boolean hasTower(){
-        if(mergedTowers != null) return true;
+        if(tower != null) return true;
         else return false;
     }
 
