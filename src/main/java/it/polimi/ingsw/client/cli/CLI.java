@@ -57,7 +57,6 @@ public class CLI implements Runnable, ListenerInterface {
         modelView = new ModelView(this);
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
-
     }
 
     public String printTowers(Island isl) {

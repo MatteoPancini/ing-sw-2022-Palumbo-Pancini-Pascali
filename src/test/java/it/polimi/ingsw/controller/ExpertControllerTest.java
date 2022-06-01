@@ -275,10 +275,8 @@ public class ExpertControllerTest {
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickStudent", null, s);
         controllerStub.propertyChange(ev2);
-        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(6));
-        controllerStub.propertyChange(ev3);
 
-        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getStudents().size(), 1);
+
 
 
     }
