@@ -353,7 +353,7 @@ public class NewTurnControllerTest {
     }
 
     @Test
-    @DisplayName("Action Phase Test")
+    @DisplayName("Action Phase Test with PC")
     public void actionWithPropertyChange() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
