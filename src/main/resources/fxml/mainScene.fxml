@@ -1,14 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.MainSceneController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="881.0" prefWidth="1383.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
+   <children>
+      <ImageView fitHeight="887.0" fitWidth="1537.0" layoutX="-9.0" layoutY="-6.0" opacity="0.75" pickOnBounds="true">
+         <image>
+            <Image url="@../graphics/lightbluesky.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island4" fitHeight="124.0" fitWidth="134.0" layoutX="869.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island11" fitHeight="124.0" fitWidth="134.0" layoutX="458.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island10" fitHeight="124.0" fitWidth="134.0" layoutX="408.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island9" fitHeight="124.0" fitWidth="134.0" layoutX="444.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island8" fitHeight="124.0" fitWidth="134.0" layoutX="532.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island7" fitHeight="124.0" fitWidth="134.0" layoutX="636.0" layoutY="524.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island6" fitHeight="124.0" fitWidth="134.0" layoutX="752.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island5" fitHeight="124.0" fitWidth="134.0" layoutX="844.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island2" fitHeight="124.0" fitWidth="134.0" layoutX="740.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island3" fitHeight="124.0" fitWidth="134.0" layoutX="844.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island1" fitHeight="124.0" fitWidth="134.0" layoutX="636.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="island12" fitHeight="124.0" fitWidth="134.0" layoutX="526.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/island1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rightBoard" fitHeight="227.0" fitWidth="722.0" layoutX="979.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+         <image>
+            <Image url="@../graphics/boards/Plancia_DEF2.png" />
+         </image>
+         <rotationAxis>
+            <Point3D z="10.0" />
+         </rotationAxis>
+      </ImageView>
+      <ImageView fx:id="myBoard" fitHeight="227.0" fitWidth="722.0" layoutX="408.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/boards/Plancia_DEF2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="leftBoard" fitHeight="227.0" fitWidth="722.0" layoutX="-116.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../graphics/boards/Plancia_DEF2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cloud1" fitHeight="84.0" fitWidth="98.0" layoutX="656.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/cloud_card_2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cloud2" fitHeight="84.0" fitWidth="98.0" layoutX="656.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/cloud_card_2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cloud3" fitHeight="84.0" fitWidth="98.0" layoutX="740.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/cloud_card_2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cloud4" fitHeight="84.0" fitWidth="98.0" layoutX="563.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/cloud_card_2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character1" fitHeight="113.0" fitWidth="76.0" layoutX="531.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/characters/jester.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character2" fitHeight="113.0" fitWidth="76.0" layoutX="641.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/characters/knight.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="character3" fitHeight="113.0" fitWidth="76.0" layoutX="757.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/characters/centarus.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="leftWizard" fitHeight="127.0" fitWidth="91.0" layoutX="101.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../graphics/wizards/king_no_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rightWizard" fitHeight="159.0" fitWidth="108.0" layoutX="1217.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+         <image>
+            <Image url="@../graphics/wizards/pixie_no_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="myWizard" fitHeight="157.0" fitWidth="107.0" layoutX="291.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wizards/sorcerer_no_bg.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

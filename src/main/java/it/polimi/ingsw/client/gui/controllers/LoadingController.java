@@ -76,8 +76,6 @@ public class LoadingController implements GUIController {
             choice = "y";
         }
         gui.getClientConnection().sendUserInput(new ExpertModeChoice(choice));
-
-
     }
 
 
