@@ -12,6 +12,7 @@ public class CharacterCard implements Serializable {
     private int initialCost;
     private final String effect;
     private ArrayList<Student> students = new ArrayList<Student>();
+    private int cost = initialCost;
 
     public CharacterCard(Characters name, String effect, int initialCost){
         this.name = name;
@@ -25,6 +26,10 @@ public class CharacterCard implements Serializable {
 
     public Characters getName() {
         return name;
+    }
+
+    public void resetCost() {
+        initialCost = cost;
     }
 
     public String getEffect() { return effect; }

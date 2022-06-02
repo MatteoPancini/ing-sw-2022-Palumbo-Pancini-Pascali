@@ -733,6 +733,12 @@ public class TurnController {
 
         if(actionPhaseNum == controller.getGame().getActivePlayers().size() - 1) {
             actionPhaseNum = 0;
+            if(expertController != null) {
+                for(int i = 0; i < controller.getGame().getGameBoard().getPlayableCharacters().size(); i++) {
+                    controller.getGame().getGameBoard().getPlayableCharacters().get(i).resetCost();
+                }
+            }
+
             startPianificationPhase();
         } else {
             actionPhaseNum++;

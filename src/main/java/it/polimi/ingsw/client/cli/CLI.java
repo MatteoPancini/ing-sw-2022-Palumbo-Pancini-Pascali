@@ -162,14 +162,26 @@ public class CLI implements Runnable, ListenerInterface {
     public void showCharactersDescription() {
         CLITable st = new CLITable();
         st.setShowVerticalLines(true);
-        st.addRow("Effect: ");
-        st.addRow("Cost: ");
+        //st.addRow("Effect: ");
+        //st.addRow("Cost: ");
+        //TODO -> Sistemare stampa perchè mostra ogni volta anche tutti gli effetti precedenti
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getPlayableCharacters().size(); i++) {
+            st.setHeaders(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getName().toString());
+            st.addRow("Effect: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getEffect());
+            st.addRow("Cost: " + Integer.toString(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost()));
+            st.print();
+        }
+
+
+        /*
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             st.setHeader(c.getName().toString());
             st.addRow(c.getEffect());
             st.addRow(Integer.toString(c.getInitialCost()));
             st.print();
         }
+
+         */
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
