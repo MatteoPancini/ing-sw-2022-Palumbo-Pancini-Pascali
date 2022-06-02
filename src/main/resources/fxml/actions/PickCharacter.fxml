@@ -15,7 +15,7 @@
             <Image url="@../../graphics/purpleSky.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="169.0" fitWidth="130.0" layoutX="110.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="character1" fitHeight="169.0" fitWidth="130.0" layoutX="110.0" layoutY="142.0" onMouseClicked="#playCharacter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../graphics/characters/thief.png" />
          </image>
@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="169.0" fitWidth="130.0" layoutX="407.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="character3" fitHeight="169.0" fitWidth="130.0" layoutX="407.0" layoutY="142.0" onMouseClicked="#playCharacter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../graphics/characters/farmer.png" />
          </image>
@@ -31,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="169.0" fitWidth="130.0" layoutX="259.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="character2" fitHeight="169.0" fitWidth="130.0" layoutX="259.0" layoutY="142.0" onMouseClicked="#playCharacter" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../graphics/characters/minestrel.png" />
          </image>

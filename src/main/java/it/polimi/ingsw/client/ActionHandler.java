@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.player.Table;
 
 import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
 public class ActionHandler {
     private ModelView modelView;
@@ -99,8 +100,13 @@ public class ActionHandler {
     public void makeAction(String serverCommand) {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
-                cli.askAssistant();
-
+                if(cli!=null) {
+                    cli.askAssistant();
+                }
+                else if (gui!=null) {
+                    System.out.println("Entro in pick assistant");
+                    gui.changeStage("actions/PickAssistant.fxml");
+                }
             }
             case "PICK_CLOUD" -> {
                 cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
@@ -113,7 +119,7 @@ public class ActionHandler {
                 if(modelView.isJesterAction()) {
                     if(modelView.getCharacterAction() % 2 == 0) {
                         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                            if(c.getName().toString() == "JESTER") {
+                            if(Objects.equals(c.getName().toString(), "JESTER")) {
                                 cli.askStudentJester(c);
                                 break;
                             }
@@ -126,7 +132,7 @@ public class ActionHandler {
                 } else if(modelView.isMinestrelAction()) {
                     if(modelView.getCharacterAction() % 2 == 0) {
                         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                            if(c.getName().toString() == "MINESTREL") {
+                            if(Objects.equals(c.getName().toString(), "MINESTREL")) {
                                 cli.askStudentMinestrel(c);
                                 break;
                             }

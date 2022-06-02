@@ -45,7 +45,7 @@ public class MainMenuController implements GUIController {
 
     public void start() {
         if (username.getText().equals("") || ipAddress.getText().equals("") || port.getText().equals("")) {
-            confirmationLabel.setText("Attention: missing parameters!!!");
+            confirmationLabel.setText("Attention: missing parameters!");
         } else if (ipAddress.getText().contains(" ")) {
             confirmationLabel.setText("Attention: address must not contain spaces!");
         } else {
@@ -89,12 +89,6 @@ public class MainMenuController implements GUIController {
             }
         }
     }
-
-
-
-
-
-
 
     @Override
     public void setGui(GUI gui) {
