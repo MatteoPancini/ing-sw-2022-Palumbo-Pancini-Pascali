@@ -7,6 +7,7 @@ public class ExpertPlayer extends Player implements Serializable {
 
     public ExpertPlayer(String name, int playerID) {
         super(name, playerID);
+        myCoins = 1;
     }
 
     public int getMyCoins() {

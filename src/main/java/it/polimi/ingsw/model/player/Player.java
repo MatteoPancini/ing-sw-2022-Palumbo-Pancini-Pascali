@@ -18,6 +18,11 @@ public class Player implements Serializable {
     private boolean teamLeader;
     private int coins;
     private int islandInfluence;
+    private int myCoins;
+
+    public void setMyCoins(int myCoins) {
+        this.myCoins = myCoins;
+    }
 
     public String getNicknamePlayer() {
         return nicknamePlayer;
@@ -56,6 +61,7 @@ public class Player implements Serializable {
         //board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
         this.playerID = playerID;
         this.wizard = null;
+        islandInfluence = 0;
         //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
     }
 
@@ -109,8 +115,6 @@ public class Player implements Serializable {
         this.islandInfluence = islandInfluence;
     }
 
-
-
     public void setIdPlayer(int playerID) {
         this.playerID = playerID;
     }
@@ -137,5 +141,9 @@ public class Player implements Serializable {
 
     public boolean isTeamLeader() {
         return teamLeader;
+    }
+
+    public int getMyCoins() {
+        return myCoins;
     }
 }

@@ -20,6 +20,10 @@ public class Table implements Serializable {
         }
     }
 
+    public int getLastPosition() {
+        return lastPosition;
+    }
+
     public ArrayList<BoardCell> getTable() {
         return table;
     }
@@ -46,6 +50,7 @@ public class Table implements Serializable {
     public void addStudent(Student stud){
         table.get(lastPosition).setStudent(stud);
         lastPosition++;
+        System.out.println("Last pos" + lastPosition);
         return;
     }
 

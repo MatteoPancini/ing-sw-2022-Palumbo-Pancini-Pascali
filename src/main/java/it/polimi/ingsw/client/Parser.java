@@ -65,6 +65,7 @@ public class Parser implements PropertyChangeListener {
     public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
         System.out.println("Entro in action");
         UserAction action = null;
+        System.out.println(actionName.toUpperCase());
         switch(actionName.toUpperCase()) {
             case "PICKASSISTANT" -> {
                 System.out.println("Sono in pickAssistant");
@@ -77,6 +78,7 @@ public class Parser implements PropertyChangeListener {
                 action = inputChecker.checkCloud(chosenValue);
             }
             case "PICKMOVESNUMBER" -> {
+                System.out.println("Entro in pickmovesnumbero");
                 action = inputChecker.checkMoves(chosenValue);
             }
             case "PICKSTUDENT" -> {
@@ -124,7 +126,7 @@ public class Parser implements PropertyChangeListener {
         } else {
             try {
                 if (action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    System.err.println("action giusta: " + evt.getNewValue().toString() + " <-questa");
+                    //System.err.println("action giusta: " + evt.getNewValue().toString() + " <-questa");
                     //modelView.setActivateInput(false);
                 } else {
                     modelView.setActivateInput(true);

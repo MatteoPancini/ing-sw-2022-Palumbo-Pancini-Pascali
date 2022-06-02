@@ -15,11 +15,22 @@ public class TowerArea implements Serializable {
 
     public ArrayList<Tower> getTowerArea() { return myTowers; }
 
-    public void addTowers (Tower tower) { myTowers.add(tower); };
+    public void addTowers (Tower tower) {
+        myTowers.add(tower);
+        System.out.println("add tower" + tower.getColor().toString());
+    }
 
     public void moveTowerToIsland(Island island) {
-        island.setTower(myTowers.get(myTowers.size() - 1));
-        myTowers.remove(myTowers.get(myTowers.size() - 1));
+        if(island.getMergedTowers() != null) {
+            for (int i = 0; i < island.getMergedTowers().size(); i++) {
+                island.getMergedTowers().add(myTowers.get(myTowers.size() - 1));
+                myTowers.remove(myTowers.get(myTowers.size() - 1));
+            }
+        } else {
+            island.setTower(myTowers.get(myTowers.size() - 1));
+            myTowers.remove(myTowers.get(myTowers.size() - 1));
+        }
+
     }
 
 }

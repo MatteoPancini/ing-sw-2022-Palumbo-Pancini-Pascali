@@ -90,6 +90,41 @@ public class ExpertControllerTest {
         controllerStub.setExpertController(expertController);
     }
 
+
+
+    @Test
+    public void coinTest() {
+
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(PawnType.RED.getPawnID()).getTableStudentsNum());
+
+        Student s1 = new Student(PawnType.RED);
+        Student s2 = new Student(PawnType.RED);
+        Student s3 = new Student(PawnType.RED);
+        controllerStub.getGame().getCurrentPlayer().setMyCoins(1);
+
+
+
+        controllerStub.getTurnController().setStudentToMove(s1);
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
+        controllerStub.getTurnController().setStudentToMove(s2);
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s2);
+        controllerStub.getTurnController().setStudentToMove(s3);
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s3);
+
+        if(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin()) {
+            controllerStub.getGame().getCurrentPlayer().setMyCoins(controllerStub.getGame().getCurrentPlayer().getMyCoins() + 1);
+            controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setTakeCoin(false);
+        }
+
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(PawnType.RED.getPawnID()).getTableStudentsNum());
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getMyCoins(), 2);
+
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getMyCoins());
+    }
+
     @Test
     @DisplayName("Herald Test")
     public void heraldTest() {
@@ -240,10 +275,8 @@ public class ExpertControllerTest {
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickStudent", null, s);
         controllerStub.propertyChange(ev2);
-        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(6));
-        controllerStub.propertyChange(ev3);
 
-        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getStudents().size(), 1);
+
 
 
     }

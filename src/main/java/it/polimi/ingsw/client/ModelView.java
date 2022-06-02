@@ -153,6 +153,7 @@ public class ModelView {
     }
 
     public void setGameCopy(Game game) {
+        System.out.println("Setto nuova gameCopy");
         this.gameCopy = game;
     }
 

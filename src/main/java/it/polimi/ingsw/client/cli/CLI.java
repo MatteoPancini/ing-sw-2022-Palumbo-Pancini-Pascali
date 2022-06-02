@@ -57,21 +57,18 @@ public class CLI implements Runnable, ListenerInterface {
         modelView = new ModelView(this);
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
-
     }
 
     public String printTowers(Island isl) {
         String towers = "";
         if(isl.hasTower()) {
-            for(Tower t : isl.getMergedTowers()) {
+            for (Tower t : isl.getMergedTowers()) {
                 if (t.getColor().equals(TowerColor.WHITE)) {
                     towers = towers + "○";
-                }
-                else if(t.getColor().equals(TowerColor.BLACK)) {
-                    towers = towers +  ANSI_WHITE + "█" + ANSI_RESET;
-                }
-                else if(t.getColor().equals(TowerColor.GREY)) {
-                    towers = towers +  ANSI_WHITE + "▲" + ANSI_RESET;
+                } else if (t.getColor().equals(TowerColor.BLACK)) {
+                    towers = towers + ANSI_WHITE + "█" + ANSI_RESET;
+                } else if (t.getColor().equals(TowerColor.GREY)) {
+                    towers = towers + ANSI_WHITE + "▲" + ANSI_RESET;
                 }
             }
         }
@@ -165,14 +162,26 @@ public class CLI implements Runnable, ListenerInterface {
     public void showCharactersDescription() {
         CLITable st = new CLITable();
         st.setShowVerticalLines(true);
-        st.addRow("Effect: ");
-        st.addRow("Cost: ");
+        //st.addRow("Effect: ");
+        //st.addRow("Cost: ");
+        //TODO -> Sistemare stampa perchè mostra ogni volta anche tutti gli effetti precedenti
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getPlayableCharacters().size(); i++) {
+            st.setHeaders(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getName().toString());
+            st.addRow("Effect: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getEffect());
+            st.addRow("Cost: " + Integer.toString(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost()));
+            st.print();
+        }
+
+
+        /*
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             st.setHeader(c.getName().toString());
             st.addRow(c.getEffect());
             st.addRow(Integer.toString(c.getInitialCost()));
             st.print();
         }
+
+         */
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
@@ -220,27 +229,39 @@ public class CLI implements Runnable, ListenerInterface {
     public String studentsOnIsland(Island i) {
         String[] stud = new String[10];
         StringBuilder s = new StringBuilder();
+        boolean y = false;
+        boolean b = false;
+        boolean p = false;
+        boolean g = false;
+        boolean r = false;
+
         for (int t=0; t < i.getStudents().size(); t++) {
-            if(i.getStudents().get(t).getType() == PawnType.YELLOW) {
+            if(i.getStudents().get(t).getType() == PawnType.YELLOW && !y) {
                 stud[t] = ANSI_YELLOW + "• [" + printYellowStudentsOnIsland(i) + "]" + ANSI_RESET;
+                y = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.BLUE) {
+            else if(i.getStudents().get(t).getType() == PawnType.BLUE && !b) {
                 stud[t] = ANSI_BLUE + "• [" + printBlueStudentsOnIsland(i) + "]" + ANSI_RESET;
+                b = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.PINK) {
+            else if(i.getStudents().get(t).getType() == PawnType.PINK && !p) {
                 stud[t] = ANSI_PURPLE + "• [" + printPinkStudentsOnIsland(i) + "]" + ANSI_RESET;
+                p = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.GREEN) {
+            else if(i.getStudents().get(t).getType() == PawnType.GREEN && !g) {
                 stud[t] = ANSI_GREEN + "• [" + printGreenStudentsOnIsland(i) + "]" + ANSI_RESET;
+                g = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.RED) {
+            else if(i.getStudents().get(t).getType() == PawnType.RED && !r) {
                 stud[t] = ANSI_RED + "• [" + printRedStudentsOnIsland(i) + "]" + ANSI_RESET;
+                r = true;
             }
             //stud[t] = printColor(i.getStudents().get(t).getType()) + i.getStudents().get(t).getType() + ANSI_RESET ;
         }
         for(int j=0; j < stud.length; j++) {
             if (stud[j] != null) {
                 if(j==0) {
+
                     s = new StringBuilder(stud[0].toString());
                 }
                 else {
@@ -281,9 +302,16 @@ public class CLI implements Runnable, ListenerInterface {
         CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
         st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+        }
+        /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
             st.addRow(Integer.toString(island.getIslandID()), isMerged(island).toString(), studentsOnIsland(island).toString(), printTowers(island));
         }
+
+         */
+        showMotherNature();
         st.print();
     }
 
@@ -337,48 +365,57 @@ public class CLI implements Runnable, ListenerInterface {
 
          */
         ArrayList<String> nicknames = new ArrayList<>();
-        ArrayList<String> assitants = new ArrayList<>();
+        ArrayList<String> assistants = new ArrayList<>();
         for(AssistantCard a : modelView.getGameCopy().getGameBoard().getLastAssistantUsed()) {
             nicknames.add(a.getOwner().getNickname());
-            assitants.add(a.getName().toString());
+            assistants.add(a.getName().toString());
         }
 
         switch (modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()) {
             case 1 -> {
                 st.setHeaders(nicknames.get(0));
-                st.addRow(assitants.get(0));
+                st.addRow(assistants.get(0));
             }
 
             case 2 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1));
-                st.addRow(assitants.get(0), assitants.get(1));
+                st.addRow(assistants.get(0), assistants.get(1));
             }
 
             case 3 -> {
                 st.setHeaders(nicknames.get(0), nicknames.get(1), nicknames.get(2));
-                st.addRow(assitants.get(0), assitants.get(1), assitants.get(2));
+                st.addRow(assistants.get(0), assistants.get(1), assistants.get(2));
             }
         }
 
         st.print();
     }
 
-
     public String printStudentsOnCloud(int ID) {
         StringBuilder str = new StringBuilder();
-        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID-1).getStudents()) {
+        for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID - 1).getStudents()) {
             //System.out.print("-" + s.getType());
             str.append(printColor(s.getType())).append("•").append(ANSI_RESET);
         }
         return str.toString();
     }
+
     public void showClouds() {
         System.out.println(">Clouds status of this turn: ");
         CLITable st = new CLITable();
         st.setHeaders("Cloud ID", "Students");
-        for(CloudTile c : modelView.getGameCopy().getGameBoard().getClouds()) {
-            st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getClouds().size(); i++) {
+            if(modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents() != null) {
+                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID()), printStudentsOnCloud(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID()));
+                /*
+                for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents()) {
+                    System.out.println(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID() + ", " + s.getType().toString());
+                }
+                 */
+                //st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
+            }
         }
+        st.print();
     }
 
     public String printColor(PawnType p){
@@ -403,9 +440,11 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showEntrance() {
         System.out.println(">Here's a summary of the students in your entrance: ");
+        System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.println("\n");
     }
 
     public void showCoins() {
@@ -493,11 +532,11 @@ public class CLI implements Runnable, ListenerInterface {
     public void showDiningRoom(Player p) {
         CLITable st = new CLITable();
         st.setHeaders(p.getNickname().toString());
-        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + ANSI_RESET);
+        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
         st.print();
     }
 
@@ -525,7 +564,7 @@ public class CLI implements Runnable, ListenerInterface {
         in.reset();
         System.out.print(">");
         String chosenMoves = in.nextLine();
-        virtualClient.firePropertyChange("PickMoves", null, chosenMoves);
+        virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
     }
 
     public void printPlayerDeck() {
@@ -553,6 +592,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askCloud(ArrayList<CloudTile> clouds) {
         System.out.println(">Pick a cloud by typing its ID: ");
+        showClouds();
         System.out.print(">");
         String chosenCloud = in.nextLine();
         virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
@@ -562,7 +602,7 @@ public class CLI implements Runnable, ListenerInterface {
     //che verrà poi usata per la chosenDestination nella userAction successiva
     public void askStudent(SchoolBoard schoolB) {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
-        System.out.print("[RED, BLUE, YELLOW, GREEN, PINK]");
+        System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
         System.out.print(">");
         chosenStudent = in.nextLine();
@@ -571,7 +611,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     //prende come input lo studente scelto nella richiesta precedente
     public void askDestination() {
-        System.out.println(">Pick a destination between your DiningRoom or an island [DiningRoom / islandId]:");
+        System.out.println(">Pick a destination between your DiningRoom or an island [DiningRoom / island]:");
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenDestination = input.nextLine();
@@ -673,10 +713,10 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void chooseExpertMode() {
         String expertModeChoice;
-        System.out.println("Sono in chooseExpertMode");
+        //System.out.println("Sono in chooseExpertMode");
         System.out.print(">");
         expertModeChoice = in.nextLine();
-        System.out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
+        //System.out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
         clientConnection.sendUserInput(new ExpertModeChoice(expertModeChoice));
     }
 
@@ -700,8 +740,9 @@ public class CLI implements Runnable, ListenerInterface {
             }
         }
     }
+
     public void choosePlayerNumber() {
-        System.out.println("Sono in choosePlayerNumber");
+        //System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
         while (true) {
             try {
@@ -721,19 +762,24 @@ public class CLI implements Runnable, ListenerInterface {
         clientConnection.sendUserInput(new PlayersNumberChoice(numOfPlayer));
 
     }
+
     public void showServerMessage(Answer serverAnswer) {
         System.out.println(serverAnswer.getMessage());
     }
+
     public void showError(String message) {
         System.out.println(ANSI_RED + ">Warning! " + message + ANSI_RESET);
     }
+
     public void showWinMessage() {
         System.out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
     }
+
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
         System.out.println("The winner is " + ANSI_RED + winnerNickname + ANSI_RESET);
     }
+
     public void userNicknameSetup() {
         //System.out.println("Entro in usernameSetup");
 
@@ -776,9 +822,7 @@ public class CLI implements Runnable, ListenerInterface {
         String cmd = in.nextLine();
         //showError("It's not your turn :(");
         virtualClient.firePropertyChange("noAction", null, cmd);
-    }
-
-     */
+    }*/
 
     @Override
     public void run() {
@@ -815,8 +859,6 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println("Application will now close...");
         System.exit(0);
     }
-
-
 
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
@@ -899,7 +941,8 @@ public class CLI implements Runnable, ListenerInterface {
             }
             case "UpdateModelView" -> {
                 assert serverCommand != null;
-                modelView.setGameCopy((Game) changeEvent.getNewValue());
+
+                System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
                     showIslandsTable();
                     showClouds();
@@ -913,7 +956,6 @@ public class CLI implements Runnable, ListenerInterface {
                 }
 
             }
-
 
             case "WinMessage" -> {
                 assert serverCommand != null;

@@ -91,7 +91,6 @@ public class Controller implements PropertyChangeListener {
 
         for(Player p : game.getPlayers()) {
             //System.out.println("Inizio setup di " + p.getNickname());
-
             //System.out.println("metto students nell'entrance");
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
@@ -99,22 +98,35 @@ public class Controller implements PropertyChangeListener {
                 game.getGameBoard().removeStudents(0);
             }
 
-            //System.out.println("metto torri");
+            System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                    if(colorsCounter3P < 2) colorsCounter3P++;
+                    if(colorsCounter3P < 2) {
+                        colorsCounter3P++;
+                        System.out.println("change");
+
+                    }
                 }
             } else if(game.getPlayersNumber() == 2) {
+                System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                    if(colorsCounter2P < 1) colorsCounter2P++;
+                    if(colorsCounter2P < 2) {
+                        System.out.println("change");
+                        colorsCounter2P++;
+                    }
                 }
             } else if(game.getPlayersNumber() == 4) {
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
                     if(colorsCounter4P < 3) colorsCounter4P++;
                 }
+            }
+
+
+            if(game.isExpertMode()) {
+                p.setMyCoins(1);
             }
         }
 
@@ -159,6 +171,8 @@ public class Controller implements PropertyChangeListener {
             }
         }
 
+
+
         System.out.println("Finished setupGame");
         turnController.setCurrentPlayer(game.getCurrentPlayer());
 
@@ -202,7 +216,6 @@ public class Controller implements PropertyChangeListener {
                     }
                 }
 
-
             }
 
             case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom((DiningRoom) evt.getNewValue());
@@ -214,18 +227,65 @@ public class Controller implements PropertyChangeListener {
             case "PickCloud" -> turnController.fromCloudToEntrance((CloudTile) evt.getNewValue());
 
             case "PickCharacter" -> {
-                if(evt.getNewValue() == Characters.HERALD) expertController.heraldEffect();
-                else if(evt.getNewValue() == Characters.KNIGHT) expertController.knightEffect();
-                else if(evt.getNewValue() == Characters.CENTAUR) expertController.centaurEffect();
-                else if(evt.getNewValue() == Characters.FARMER) expertController.farmerEffect();
-                else if(evt.getNewValue() == Characters.FUNGARUS) expertController.fungarusEffect();
-                else if(evt.getNewValue() == Characters.JESTER) expertController.jesterEffect();
-                else if(evt.getNewValue() == Characters.THIEF) expertController.thiefEffect();
-                else if(evt.getNewValue() == Characters.MINESTREL) expertController.minestrelEffect();
-                else if(evt.getNewValue() == Characters.MONK) expertController.monkEffect();
-                else if(evt.getNewValue() == Characters.GRANNY_HERBS) expertController.grannyHerbsEffect();
-                else if(evt.getNewValue() == Characters.MAGIC_POSTMAN) expertController.magicPostmanEffect();
-                else if(evt.getNewValue() == Characters.SPOILED_PRINCESS) expertController.spoiledPrincessEffect();
+                if(evt.getNewValue() == Characters.HERALD) {
+                    expertController.heraldEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
+                }
+                else if(evt.getNewValue() == Characters.KNIGHT) {
+                    expertController.knightEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 2);
+
+                }
+                else if(evt.getNewValue() == Characters.CENTAUR) {
+                    expertController.centaurEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
+
+                }
+                else if(evt.getNewValue() == Characters.FARMER) {
+                    expertController.farmerEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 2);
+
+                }
+                else if(evt.getNewValue() == Characters.FUNGARUS) {
+                    expertController.fungarusEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
+
+                }
+                else if(evt.getNewValue() == Characters.JESTER) {
+                    expertController.jesterEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 1);
+
+                }
+                else if(evt.getNewValue() == Characters.THIEF) {
+                    expertController.thiefEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
+
+                }
+                else if(evt.getNewValue() == Characters.MINESTREL) {
+                    expertController.minestrelEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 1);
+
+                }
+                else if(evt.getNewValue() == Characters.MONK) {
+                    expertController.monkEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 1);
+
+                }
+                else if(evt.getNewValue() == Characters.GRANNY_HERBS) {
+                    expertController.grannyHerbsEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 2);
+
+                }
+                else if(evt.getNewValue() == Characters.MAGIC_POSTMAN) {
+                    expertController.magicPostmanEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 1);
+
+                }
+                else if(evt.getNewValue() == Characters.SPOILED_PRINCESS) {
+                    expertController.spoiledPrincessEffect();
+                    game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 2);
+
+                }
                 else if(evt.getNewValue() == null) turnController.askMotherNatureMoves();
             }
 

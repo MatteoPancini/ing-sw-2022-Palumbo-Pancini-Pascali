@@ -22,5 +22,4 @@ public class MotherNature implements Serializable {
     public void setPosition(int position) {
         this.position = position;
     }
-
 }
