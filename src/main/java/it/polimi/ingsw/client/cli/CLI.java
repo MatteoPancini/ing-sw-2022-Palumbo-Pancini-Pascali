@@ -217,27 +217,39 @@ public class CLI implements Runnable, ListenerInterface {
     public String studentsOnIsland(Island i) {
         String[] stud = new String[10];
         StringBuilder s = new StringBuilder();
+        boolean y = false;
+        boolean b = false;
+        boolean p = false;
+        boolean g = false;
+        boolean r = false;
+
         for (int t=0; t < i.getStudents().size(); t++) {
-            if(i.getStudents().get(t).getType() == PawnType.YELLOW) {
+            if(i.getStudents().get(t).getType() == PawnType.YELLOW && !y) {
                 stud[t] = ANSI_YELLOW + "• [" + printYellowStudentsOnIsland(i) + "]" + ANSI_RESET;
+                y = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.BLUE) {
+            else if(i.getStudents().get(t).getType() == PawnType.BLUE && !b) {
                 stud[t] = ANSI_BLUE + "• [" + printBlueStudentsOnIsland(i) + "]" + ANSI_RESET;
+                b = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.PINK) {
+            else if(i.getStudents().get(t).getType() == PawnType.PINK && !p) {
                 stud[t] = ANSI_PURPLE + "• [" + printPinkStudentsOnIsland(i) + "]" + ANSI_RESET;
+                p = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.GREEN) {
+            else if(i.getStudents().get(t).getType() == PawnType.GREEN && !g) {
                 stud[t] = ANSI_GREEN + "• [" + printGreenStudentsOnIsland(i) + "]" + ANSI_RESET;
+                g = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.RED) {
+            else if(i.getStudents().get(t).getType() == PawnType.RED && !r) {
                 stud[t] = ANSI_RED + "• [" + printRedStudentsOnIsland(i) + "]" + ANSI_RESET;
+                r = true;
             }
             //stud[t] = printColor(i.getStudents().get(t).getType()) + i.getStudents().get(t).getType() + ANSI_RESET ;
         }
         for(int j=0; j < stud.length; j++) {
             if (stud[j] != null) {
                 if(j==0) {
+
                     s = new StringBuilder(stud[0].toString());
                 }
                 else {
@@ -278,9 +290,16 @@ public class CLI implements Runnable, ListenerInterface {
         CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
         st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+        }
+        /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
             st.addRow(Integer.toString(island.getIslandID()), isMerged(island).toString(), studentsOnIsland(island).toString(), printTowers(island));
         }
+
+         */
+        showMotherNature();
         st.print();
     }
 
@@ -375,12 +394,16 @@ public class CLI implements Runnable, ListenerInterface {
         st.setHeaders("Cloud ID", "Students");
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getClouds().size(); i++) {
             if(modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents() != null) {
+                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID()), printStudentsOnCloud(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID()));
+                /*
                 for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents()) {
                     System.out.println(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID() + ", " + s.getType().toString());
                 }
+                 */
                 //st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
             }
         }
+        st.print();
     }
 
     public String printColor(PawnType p){
@@ -497,11 +520,11 @@ public class CLI implements Runnable, ListenerInterface {
     public void showDiningRoom(Player p) {
         CLITable st = new CLITable();
         st.setHeaders(p.getNickname().toString());
-        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + ANSI_RESET);
+        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
         st.print();
     }
 
@@ -557,6 +580,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askCloud(ArrayList<CloudTile> clouds) {
         System.out.println(">Pick a cloud by typing its ID: ");
+        showClouds();
         System.out.print(">");
         String chosenCloud = in.nextLine();
         virtualClient.firePropertyChange("PickCloud", null, chosenCloud);

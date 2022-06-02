@@ -353,7 +353,7 @@ public class NewTurnControllerTest {
     }
 
     @Test
-    @DisplayName("Action Phase Test with PC")
+    @DisplayName("Action Phase Test with PropertyChange")
     public void actionWithPropertyChange() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
@@ -402,6 +402,10 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev10);
 
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard().getEntrance().getStudents().size(), 7);
+        for(int i=0; i< controllerStub.getGame().getGameBoard().getIslands().size(); i++) {
+            System.out.println("Island " + controllerStub.getGame().getGameBoard().getIslands().get(i).getIslandID() + " has tower: " + controllerStub.getGame().getGameBoard().getIslands().get(i).hasTower());
+            if(controllerStub.getGame().getGameBoard().getIslands().get(i).hasTower()) System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(i).getTower().getColor().toString());
+        }
 
         PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
         controllerStub.propertyChange(ev11);
