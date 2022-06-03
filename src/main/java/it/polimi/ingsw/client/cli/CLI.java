@@ -8,6 +8,8 @@ import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
 import it.polimi.ingsw.messages.clienttoserver.actions.PickCharacterActionsNum;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
@@ -31,6 +33,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static it.polimi.ingsw.constants.Constants.*;
@@ -38,6 +41,8 @@ import static it.polimi.ingsw.constants.Constants.*;
 //CLI riceve UserAction dal Controller, switch(userAction.getPropertyName()) e nei case usa ask...()
 //es: controller.send(new PickAssistant(Actions.PICKASSISTANT))
 //    cli.receiveCommand(??) ???
+
+//TODO M -> SERVERERROR handler
 
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
@@ -505,8 +510,15 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showOtherDiningRooms() {
         System.out.println(">Take a look at the other players' dining rooms!\n");
-        for (Player p : modelView.getGameCopy().getActivePlayers()) {
-            showDiningRoom(p);
+        if(!modelView.isFourPlayers()) {
+            for (Player p : modelView.getGameCopy().getActivePlayers()) {
+                showDiningRoom(p);
+            }
+        } else {
+            for (int i=0; i<modelView.getGameCopy().getActivePlayers().size(); i++) {
+                if(modelView.getGameCopy().getActivePlayers().get(i).isTeamLeader())
+                    showDiningRoom(modelView.getGameCopy().getActivePlayers().get(i));
+            }
         }
         /*CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
@@ -531,7 +543,17 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showDiningRoom(Player p) {
         CLITable st = new CLITable();
-        st.setHeaders(p.getNickname().toString());
+        if(!modelView.isFourPlayers()) {
+            st.setHeaders(p.getNickname().toString());
+        } else {
+            String otherPlayer = " ";
+            for(Player other : modelView.getGameCopy().getActivePlayers()) {
+                if(other.getIdTeam() == p.getIdTeam() && other.getNickname() != p.getNickname()) {
+                    otherPlayer = other.getNickname();
+                }
+            }
+            st.setHeaders(p.getNickname().toString() + otherPlayer);
+        }
         st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
         st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
         st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
@@ -751,7 +773,9 @@ public class CLI implements Runnable, ListenerInterface {
                 System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
                 //out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
-
+                if(numOfPlayer == 4) {
+                    modelView.setFourPlayers(true);
+                }
 
                 break;
             } catch (NumberFormatException e) {
@@ -920,6 +944,13 @@ public class CLI implements Runnable, ListenerInterface {
         for(int i = 0; i < 10; i++) {
             System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
 
+        }
+    }
+
+    public void showServerError() {
+        if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
+            showError("Server is full... please try again later!");
+            System.exit(-1);
         }
     }
 

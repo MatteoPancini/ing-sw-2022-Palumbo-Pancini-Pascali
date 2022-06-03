@@ -17,7 +17,6 @@ import it.polimi.ingsw.server.Server;
 import java.beans.PropertyChangeSupport;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameHandler {
     private static Game game;
@@ -221,7 +220,6 @@ public class GameHandler {
                 sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
                 sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
             }
-            return;
         } else {
             startGame();
 
@@ -232,7 +230,6 @@ public class GameHandler {
         //GESTISCI MESSAGGIO PER METTERE GAMESTARTED IN MODELVIEW
         setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
-        SecureRandom randomGenerator = new SecureRandom();
         //game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         game.setCurrentPlayer(game.getActivePlayers().get(0));
         System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
@@ -332,7 +329,7 @@ public class GameHandler {
                 for(Player p : game.getActivePlayers()) {
                     sendSinglePlayer(new DynamicAnswer("TIMEOUT EXPIRED! Game is finished!", false), p.getPlayerID());
                 }
-                endGame();
+            endGame();
             }
         }
 

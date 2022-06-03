@@ -234,6 +234,7 @@ public class NewTurnControllerTest {
 
 
     @Test
+    @DisplayName("Check professor test")
     public void professorCheck() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
@@ -287,6 +288,7 @@ public class NewTurnControllerTest {
 
 
     @Test
+    @DisplayName("Check islands Test")
     public void checkIslands() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
@@ -312,7 +314,6 @@ public class NewTurnControllerTest {
         Student s2 = new Student(PawnType.RED);
         Student s3 = new Student(PawnType.BLUE);
         Student s4 = new Student(PawnType.RED);
-        Student s5 = new Student(PawnType.BLUE);
 
 
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
@@ -343,9 +344,17 @@ public class NewTurnControllerTest {
         System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().size());
 
         System.out.println("muvo mn");
-        controllerStub.getTurnController().moveMotherNature(2);
-        System.err.println(controllerStub.getGame().getGameBoard().getMotherNature().getPosition());
+        //Qui sposto in island 2
+        controllerStub.getTurnController().moveMotherNature(1);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).hasTower(), true);
+        //Qui sposto in island 3
+        controllerStub.getTurnController().moveMotherNature(1);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 2);
 
+        //Qui sposto in island 4
+        controllerStub.getTurnController().moveMotherNature(1);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 3);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().size(), 3);
 
 
 
@@ -511,9 +520,23 @@ public class NewTurnControllerTest {
 
         //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
 
+        controllerStub.getGame().getGameBoard().getIslands().get(1).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(3).addStudent(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(4).addStudent(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(5).addStudent(new Student(PawnType.YELLOW));
+        controllerStub.getGame().getGameBoard().getIslands().get(7).addStudent(new Student(PawnType.YELLOW));
+        controllerStub.getGame().getGameBoard().getIslands().get(8).addStudent(new Student(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getIslands().get(9).addStudent(new Student(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getIslands().get(10).addStudent(new Student(PawnType.GREEN));
+        controllerStub.getGame().getGameBoard().getIslands().get(11).addStudent(new Student(PawnType.GREEN));
+
+
+        /*
         for(int s = 1; s <= 12; s++) {
             if(s != mnPos && s != mnPosOpposite) {
                 //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
+
                 Collections.shuffle(controllerStub.getGame().getGameBoard().getSetupStudentsBag());
                 controllerStub.getGame().getGameBoard().getIslands().get(s - 1).addStudent(controllerStub.getGame().getGameBoard().getSetupStudentsBag().get(0));
                 controllerStub.getGame().getGameBoard().removeSetupStudents(0);
@@ -521,15 +544,15 @@ public class NewTurnControllerTest {
             //n++;
         }
 
+
+         */
         for(int p = 1; p <= 12; p++){
             if(p != mnPos && p != mnPosOpposite) {
                 System.out.println(p + ", " + "Student " + controllerStub.getGame().getGameBoard().getIslands().get(p - 1).getStudents().get(0).getType());
             }
-
             if(p == mnPos){
                 System.out.println(p + ", " + "Mother nature is here");
             }
-
             if(p == mnPosOpposite){
                 System.out.println(p + ", " + "This island is empty");
             }

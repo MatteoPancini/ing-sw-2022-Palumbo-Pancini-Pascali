@@ -26,8 +26,4 @@ public class ServerError implements Answer {
     public Object getMessage() {
         return errorMessage;
     }
-
-    public ServerErrorTypes getServerError() {
-        return serverError;
-    }
 }

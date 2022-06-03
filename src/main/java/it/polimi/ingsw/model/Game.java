@@ -83,30 +83,6 @@ public class Game implements Serializable {
 
     public void removePlayer(Player player) {
         activePlayers.remove(player);
-        /*
-        if (player.getWorkers().isEmpty()) {
-            activePlayers.remove(player);
-            if (!activePlayers.isEmpty()) {
-                if (currentPlayerN == activePlayers.size()) currentPlayerN = 0;
-                switchPlayer(activePlayers.get(currentPlayerN));
-            }
-            return;
-        }
-        for (int i = Constants.GRID_MIN_SIZE; i < Constants.GRID_MAX_SIZE; i++) {
-            for (int j = Constants.GRID_MIN_SIZE; j < Constants.GRID_MAX_SIZE; j++) {
-                if (gameBoard.getSpace(i, j).getWorker() == player.getWorkers().get(0)
-                        || gameBoard.getSpace(i, j).getWorker() == player.getWorkers().get(1)) {
-                    gameBoard.getSpace(i, j).setWorker(null);
-                }
-            }
-        }
-        activePlayers.remove(player);
-        if (!activePlayers.isEmpty()) {
-            if (currentPlayerN == activePlayers.size()) currentPlayerN = 0;
-            switchPlayer(activePlayers.get(currentPlayerN));
-        }
-
-         */
     }
 
     public Player getPlayerByID(int idPlayer) {

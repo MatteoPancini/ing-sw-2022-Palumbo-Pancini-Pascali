@@ -28,6 +28,8 @@ public class InputChecker {
         return clientConnection;
     }
 
+    //TODO: Per ogni possibile input bisogna permettere di scrivere QUIT!!!
+
 
     /**
      * prende in input i chosen values e ritorna una UserAction da inviare al server

@@ -4,6 +4,8 @@ import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
@@ -88,6 +90,10 @@ public class ActionHandler {
         } else if(answer instanceof GrannyHerbsAction) {
             modelView.setGrannyHerbsAction(true);
             cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+        } else if(answer instanceof ServerError) {
+
+            cli.showServerError();
+
         }
     }
 

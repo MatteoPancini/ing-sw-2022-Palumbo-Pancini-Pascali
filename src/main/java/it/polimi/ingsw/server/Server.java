@@ -50,8 +50,6 @@ public class Server {
 
         Thread thread = new Thread(this::socketQuitting);
         thread.start();
-
-
     }
 
     //method used to add a connection
@@ -96,15 +94,11 @@ public class Server {
             }
         } else { //client già registrato con quel nickname (quindi ID != null)
             VirtualClientView registeredClient = idMapVirtualClient.get(clientID);
-            if (socketClientConnection != null) {
+            if (registeredClient.getSocketClientConnection() != null) {
                 SerializedAnswer duplicateNicknameError = new SerializedAnswer();
                 duplicateNicknameError.setServerAnswer(new ServerError(ServerErrorTypes.DUPLICATENICKNAME));
                 socketClientConnection.sendServerMessage(duplicateNicknameError);
                 return null;
-            } else {
-                //TODO M -> RIAGGIUNGI PLAYER AL GIOCO
-                //Attenzione alla gestione delle varie hashmap, che potrebbero risultare comode
-
             }
         }
 
@@ -193,15 +187,11 @@ public class Server {
                     p.setBoard(new SchoolBoard(p.getPlayerID()));
                 }
             }
-
-
             gameHandler.initializeWizards();
 
         } else {
             gameHandler.sendBroadcast(new DynamicAnswer("There are " + (totalGamePlayers - waitingPlayersConnection.size()) + " slots left!", false));
         }
-
-
 
     }
 

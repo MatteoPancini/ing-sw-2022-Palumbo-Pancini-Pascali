@@ -1,4 +1,5 @@
 package it.polimi.ingsw.server;
+import it.polimi.ingsw.controller.GameHandler;
 import it.polimi.ingsw.exceptions.OutOfBoundException;
 import it.polimi.ingsw.messages.clienttoserver.*;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
@@ -176,7 +177,7 @@ public class SocketClientConnection implements Runnable {
         } else if (userMessage instanceof QuitGame) {
             server.getGameFromID(clientID).sendExcept(new DynamicAnswer("Player " + server.getNicknameFromID(clientID) + " has disconnected from the game!", false), clientID);
             server.getGameFromID(clientID).endPlayerGame(server.getNicknameFromID(clientID));
-
+            closeConnection();
         }
 
     }
@@ -188,7 +189,7 @@ public class SocketClientConnection implements Runnable {
         //else {
             if(server.getGameFromID(clientID).isMatchStarted()) {
                 if(userAction instanceof PickAssistant) {
-                    System.out.println("Mi arriva pickassistant");
+                    //System.out.println("Mi arriva pickassistant");
                     server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
 
                 }
@@ -205,11 +206,9 @@ public class SocketClientConnection implements Runnable {
                             server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
                         }
                     } else {
-                        System.out.println("Devo essere entrato qua");
+                        //System.out.println("Devo essere entrato qua");
                         server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
                     }
-
-
                 }
 
                 if(userAction instanceof PickMovesNumber) {
@@ -223,7 +222,6 @@ public class SocketClientConnection implements Runnable {
                 if(userAction instanceof PickCharacter) {
                     if(server.getGameFromID(clientID).getExpertMode()) {
                         server.getGameFromID(clientID).parseActions(userAction, "PickCharacter");
-
                     } else {
                         server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT, "Game is in standard mode! You can't play a character card!"), clientID);
                     }
@@ -235,9 +233,7 @@ public class SocketClientConnection implements Runnable {
 
                 if(userAction instanceof PickCharacterActionsNum) {
                     server.getGameFromID(clientID).parseActions(userAction, "PickCharacterActionsNum");
-
                 }
-
             } else {
                 server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }
@@ -270,18 +266,20 @@ public class SocketClientConnection implements Runnable {
                 readClientStream();
             }
         } catch(IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            GameHandler game = server.getGameFromID(clientID);
+            String player = server.getNicknameFromID(clientID);
+            server.unregisterPlayer(clientID);
+            if (game.isMatchStarted()) {
+                game.endPlayerGame(player);
+            }
         } catch(ClassNotFoundException e) {
             e.printStackTrace();
-
         }
         SerializedAnswer serverOut = new SerializedAnswer();
         serverOut.setServerAnswer(new ServerError(ServerErrorTypes.SERVEROUT));
         sendServerMessage(serverOut);
     }
-
-
-
 }
 
 
