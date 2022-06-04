@@ -91,9 +91,10 @@ public class ActionHandler {
             modelView.setGrannyHerbsAction(true);
             cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
         } else if(answer instanceof ServerError) {
-
             cli.showServerError();
 
+        } else if(answer instanceof NoWinnerGameNotification) {
+            cli.noWinnerGame();
         }
     }
 

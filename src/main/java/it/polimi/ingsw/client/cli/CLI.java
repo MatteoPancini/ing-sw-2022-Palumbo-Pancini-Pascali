@@ -583,10 +583,15 @@ public class CLI implements Runnable, ListenerInterface {
         //private Parser parser;
         //private String chosenWizard;
         //private String chosenNickname;
-        in.reset();
+        //in.reset();
         System.out.print(">");
         String chosenMoves = in.nextLine();
-        virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
+        if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, null);
+        } else {
+            virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
+        }
+
     }
 
     public void printPlayerDeck() {
@@ -731,6 +736,10 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showMotherNature() {
         System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
+    }
+
+    public void noWinnerGame() {
+        System.exit(0);
     }
 
     public void chooseExpertMode() {

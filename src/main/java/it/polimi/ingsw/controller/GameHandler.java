@@ -5,6 +5,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
+import it.polimi.ingsw.messages.servertoclient.NoWinnerGameNotification;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
@@ -297,6 +298,7 @@ public class GameHandler {
     }
 
 
+    /*
     public void endPlayerGame(String playerDisconnected) {
         server.getVirtualClientFromID(server.getIDFromNickname(playerDisconnected)).getSocketClientConnection().closeConnection();
         for(Player p : game.getActivePlayers()) {
@@ -306,7 +308,7 @@ public class GameHandler {
             }
         }
 
-        //in caso di disconesssione rimuove la carta giocata
+        //in caso di disconessione rimuove la carta giocata
 
         for(AssistantCard a : game.getGameBoard().getLastAssistantUsed()) {
             if(a.getOwner().getNickname() == playerDisconnected) {
@@ -334,6 +336,17 @@ public class GameHandler {
         }
 
     }
+
+     */
+
+    public void endPlayerGame(String playerDisconnected) {
+        sendBroadcast(new DynamicAnswer("Player " + playerDisconnected + " has disconnected :( Game will finish without a winner! Thanks to have played Eriantys! Hope to see you soon ;)", false));
+        sendBroadcast(new NoWinnerGameNotification());
+        for(Player p  : game.getActivePlayers()) {
+            server.getVirtualClientFromID(p.getPlayerID()).getSocketClientConnection().closeConnection();
+        }
+    }
+
 
     public void endGame() {
         while(!game.getActivePlayers().isEmpty()) {

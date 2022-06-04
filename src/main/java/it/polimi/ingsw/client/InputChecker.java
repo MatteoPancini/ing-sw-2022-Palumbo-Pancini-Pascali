@@ -123,6 +123,10 @@ public class InputChecker {
                     cli.askAssistant();
                 }
             }
+
+            case "QUIT" -> {
+                quitGame();
+            }
             default -> action = new PickAssistant();
         }
         return action;
@@ -201,6 +205,9 @@ public class InputChecker {
                 }
 
                  */
+            }
+            case "QUIT" -> {
+                quitGame();
             }
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
@@ -377,6 +384,10 @@ public class InputChecker {
             }
             case "NONE" -> {
                 action = new PickCharacter(null);
+            }
+
+            case "QUIT" -> {
+                quitGame();
             }
             default -> action = null;
         }
