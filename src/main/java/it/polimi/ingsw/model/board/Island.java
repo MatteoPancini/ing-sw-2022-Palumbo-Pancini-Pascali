@@ -168,9 +168,18 @@ public class Island implements Serializable {
     }
 
     public boolean hasRight() {
-        if(islandID != 12) {
-            for(int i= 0; i<board.getIslands().size(); i++) {
-                if(board.getIslands().get(i).getIslandID() == islandID) {
+        for(int i= 0; i<board.getIslands().size(); i++) {
+            if(board.getIslands().get(i).getIslandID() == islandID) {
+                if(board.getIslands().get(i+1) == null) { //sono nell'ultima
+                    System.out.println("Analizzo "+ board.getIslands().get(i).getIslandID());
+                    if(board.getIslands().get(0).hasTower()) {
+                        if(board.getIslands().get(0).getTower().getColor() == tower.getColor()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
                     System.out.println("Analizzo "+ board.getIslands().get(i+1).getIslandID());
                     if(board.getIslands().get(i+1).hasTower()) {
                         if(board.getIslands().get(i+1).getTower().getColor() == tower.getColor())
@@ -178,9 +187,11 @@ public class Island implements Serializable {
                         else
                             return false;
                     }
-
                 }
+
+
             }
+        }
             /*
             Island island1 = board.getIslands().get(islandID);
             Island island2 = board.getIslands().get(islandID - 1);
@@ -198,15 +209,7 @@ public class Island implements Serializable {
             else return false;
 
              */
-        } else {
-            if(board.getIslands().get(0).hasTower()) {
-                if(board.getIslands().get(0).getTower().getColor() == tower.getColor()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
+
         return false;
 
     }
