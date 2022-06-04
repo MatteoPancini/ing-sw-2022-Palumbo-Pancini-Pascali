@@ -126,6 +126,9 @@ public class Island implements Serializable {
                 board.getIslands().remove(i);
             }
         }
+        board.decrementIslandCounter();
+        board.decrementIslandCounter();
+
 
 
     }
