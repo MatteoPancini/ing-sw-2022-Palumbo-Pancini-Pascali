@@ -357,6 +357,11 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().size(), 3);
 
 
+        controllerStub.getTurnController().moveMotherNature(8);
+
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().size(), 10);
+
+        controllerStub.getTurnController().moveMotherNature(1);
 
 
     }

@@ -623,22 +623,28 @@ public class TurnController {
 
                 if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasLeft()) {
                     System.out.println("merge a sx");
-                    controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId - 2));
-                }
-                if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasRight()) {
+                    if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasRight()) {
+                        System.out.println("merge a dx");
+                        controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId - 2));
+                        controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslandById(islandId + 1));
+                    } else {
+                        controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId - 2));
+                    }
+                } else if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasRight()) {
                     System.out.println("merge a dx");
-
                     controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslandById(islandId + 2));
                 }
+
 
             }
         }
 
-        System.err.println(controller.getGame().getCurrentPlayer().getIslandInfluence());
+        //System.err.println(controller.getGame().getCurrentPlayer().getIslandInfluence());
 
         //RESET ISLAND INFLUENCE
-        for(Player p : controller.getGame().getPlayers()) {
+        for(Player p : controller.getGame().getActivePlayers()) {
             p.setIslandInfluence(0);
+            System.out.println(p.getNickname() + " influence is reset to " + p.getIslandInfluence());
         }
 
         if(expertController != null) {

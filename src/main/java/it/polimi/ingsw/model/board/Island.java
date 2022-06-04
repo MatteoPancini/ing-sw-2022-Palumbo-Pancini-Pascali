@@ -170,8 +170,8 @@ public class Island implements Serializable {
     public boolean hasRight() {
         for(int i= 0; i<board.getIslands().size(); i++) {
             if(board.getIslands().get(i).getIslandID() == islandID) {
-                if(board.getIslands().get(i+1) == null) { //sono nell'ultima
-                    System.out.println("Analizzo "+ board.getIslands().get(i).getIslandID());
+                if(board.getIslands().get(i).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) { //sono nell'ultima
+                    System.out.println("Sono nell'ultima Analizzo "+ board.getIslands().get(0).getIslandID());
                     if(board.getIslands().get(0).hasTower()) {
                         if(board.getIslands().get(0).getTower().getColor() == tower.getColor()) {
                             return true;
@@ -180,7 +180,7 @@ public class Island implements Serializable {
                         }
                     }
                 } else {
-                    System.out.println("Analizzo "+ board.getIslands().get(i+1).getIslandID());
+                    System.out.println("Non ultima Analizzo "+ board.getIslands().get(i+1).getIslandID());
                     if(board.getIslands().get(i+1).hasTower()) {
                         if(board.getIslands().get(i+1).getTower().getColor() == tower.getColor())
                             return true;
