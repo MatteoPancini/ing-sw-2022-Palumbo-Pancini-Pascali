@@ -78,6 +78,58 @@ public class Island implements Serializable {
         return isMerged;
     }
 
+    public void doubleMerge() {
+        System.out.println("Faccio doble merge");
+        Island iBefore = null;
+        Island iAfter = null;
+        for(int i=0; i<board.getIslands().size(); i++) {
+            if(board.getIslands().get(i+1).getIslandID() == islandID) {
+                iBefore = board.getIslands().get(i);
+                if(board.getIslands().get(i+1).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) { //sono nell'ultima
+                    iBefore = board.getIslands().get(0);
+                    iAfter = board.getIslands().get(i);
+                } else {
+                    iAfter = board.getIslands().get(i+2);
+                }
+                break;
+            }
+
+        }
+        System.out.println("Island before: " + iBefore.getIslandID());
+        System.out.println("Island after: " + iAfter.getIslandID());
+
+        System.out.println("Aggiungo " + islandID + " e " + iAfter.getIslandID() + " a " + iBefore.getIslandID());
+        iBefore.getMergedIslands().add(this);
+        iBefore.getMergedIslands().add(iAfter);
+        iBefore.getMergedTowers().add(tower);
+        iBefore.getMergedTowers().add(iAfter.getTower());
+
+        for(Student s : students) {
+            iBefore.getStudents().add(s);
+        }
+        for(Student s : iAfter.getStudents()) {
+            iBefore.getStudents().add(s);
+        }
+
+        this.mergedIsland = null;
+        iAfter.setMergedIsland(null);
+        this.students = null;
+        iAfter.setStudents(null);
+
+        System.out.println("Rimuovo " + iAfter.getIslandID() + " , " + islandID);
+
+        for(int i=0; i<board.getIslands().size(); i++) {
+            if(board.getIslands().get(i).getIslandID() == islandID) {
+                board.getIslands().remove(i);
+            }
+            if(board.getIslands().get(i).getIslandID() == iAfter.getIslandID()) {
+                board.getIslands().remove(i);
+            }
+        }
+
+
+    }
+
     public void merge(Island island) {
         System.out.println("Faccio merge");
         if(this.islandID < island.getIslandID()) {
