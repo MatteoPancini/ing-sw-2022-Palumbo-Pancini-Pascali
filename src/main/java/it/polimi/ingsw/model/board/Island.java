@@ -131,7 +131,6 @@ public class Island implements Serializable {
             return mergedTowers.get(0);
         } else
             return tower;
-
     }
 
     private void setStudents(ArrayList<Student> students) {

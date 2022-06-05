@@ -883,7 +883,6 @@ public class CLI implements Runnable, ListenerInterface {
 
         for(int i = 0; i < 10; i++) {
             System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
-
         }
     }
 
@@ -918,7 +917,6 @@ public class CLI implements Runnable, ListenerInterface {
                 if(modelView.isPianification()) {
                     showAvailableCharacters();
                 }
-
             }
 
             case "WinMessage" -> {

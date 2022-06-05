@@ -38,7 +38,6 @@ public class GameBoard implements Serializable {
         }
 
 
-
         islands = new ArrayList<Island>();
         for (int j = 1; j <= 12; j++){
             islands.add(new Island(this, j));

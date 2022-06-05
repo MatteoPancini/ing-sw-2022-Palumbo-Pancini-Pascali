@@ -344,11 +344,9 @@ public class TurnController {
             for(int i = 0; i < 5; i++) {
                 if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getColor() == studentToMove.getType()) {
                     System.out.println("Player " + p.getNickname() + " has " + p.getBoard().getDiningRoom().getDiningRoom().get(i).getTableStudentsNum() + " students of type " + p.getBoard().getDiningRoom().getDiningRoom().get(i).getColor());
-
                     if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTableStudentsNum() > currentPlayerStudentsMax) {
                         currentPlayerStudentsMax = p.getBoard().getDiningRoom().getDiningRoom().get(i).getTableStudentsNum();
                         professorWinnerId = p.getPlayerID();
-
                     }
                 }
             }
@@ -456,9 +454,6 @@ public class TurnController {
             askStudent(studentRequest);
         }
 
-
-
-
     }
 
 
@@ -498,9 +493,7 @@ public class TurnController {
 
                 }
             }
-        }
-
-         */
+        }*/
 
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandId - 1).getStudents()) {
             PawnType studentType = student.getType();
@@ -565,7 +558,6 @@ public class TurnController {
                     }
                 }
                 controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslandById(islandId));
-
             }
 
             if(controller.getGame().getGameBoard().getIslandById(islandId).hasLeft()) {
