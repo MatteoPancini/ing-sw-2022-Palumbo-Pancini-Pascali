@@ -777,7 +777,6 @@ public class CLI implements Runnable, ListenerInterface {
         int numOfPlayer;
         while (true) {
             try {
-
                 Scanner inputNum = new Scanner(System.in);
                 System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
@@ -790,10 +789,8 @@ public class CLI implements Runnable, ListenerInterface {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid parameter, it must be a numeric value.");
             }
-
         }
         clientConnection.sendUserInput(new PlayersNumberChoice(numOfPlayer));
-
     }
 
     public void showServerMessage(Answer serverAnswer) {
@@ -913,7 +910,6 @@ public class CLI implements Runnable, ListenerInterface {
             }
             default -> out.println("Nothing to do");
         }
-
     }
 
     public static void main(String[] args) {

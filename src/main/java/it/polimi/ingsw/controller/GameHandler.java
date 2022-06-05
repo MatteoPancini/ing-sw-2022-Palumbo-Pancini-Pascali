@@ -208,22 +208,21 @@ public class GameHandler {
             String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size() + 1).getNickname();
             sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
             sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
-        } else if (playersNumber == 4) {
-            if (Wizards.notChosen().size() == 1) {
+        } else if (playersNumber == 4 && Wizards.notChosen().size() > 0) {
+            /*if (Wizards.notChosen().size() == 1) {
                 String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size()).getNickname();
                 game.getPlayerByNickname(playerNickname).setWizard(Wizards.notChosen().get(0));
                 sendSinglePlayer(new WizardAnswer("You are the last player in the lobby, so the game will choose for you."), server.getIDFromNickname(playerNickname));
                 sendSinglePlayer(new WizardAnswer(null, "Wizard selection completed! You are " + Wizards.notChosen().get(0)), server.getIDFromNickname(playerNickname));
                 Wizards.removeAvailableWizard(Wizards.notChosen().get(0));
                 startGame();
-            } else {
-                String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size() + 1).getNickname();
+            } else {*/
+                String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size()).getNickname();
                 sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
                 sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
-            }
+            //}
         } else {
             startGame();
-
         }
     }
 
