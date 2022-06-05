@@ -234,6 +234,7 @@ public class NewTurnControllerTest {
 
 
     @Test
+    @DisplayName("Check professor test")
     public void professorCheck() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
@@ -272,18 +273,22 @@ public class NewTurnControllerTest {
         System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor());
 
         controllerStub.getTurnController().setCurrentPlayer(cisco);
+        controllerStub.getGame().setCurrentPlayer(cisco);
+
 
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s4);
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s5);
         controllerStub.getTurnController().checkProfessorInfluence();
 
-        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), false);
-        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
+        System.out.println(controllerStub.getGame().getActivePlayers().get(0).getNickname());
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), false);
 
     }
 
 
     @Test
+    @DisplayName("Check islands Test")
     public void checkIslands() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
@@ -309,7 +314,6 @@ public class NewTurnControllerTest {
         Student s2 = new Student(PawnType.RED);
         Student s3 = new Student(PawnType.BLUE);
         Student s4 = new Student(PawnType.RED);
-        Student s5 = new Student(PawnType.BLUE);
 
 
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
@@ -334,15 +338,48 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).hasProfessor(), true);
 
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().size());
+
+        System.out.println("muvo mn");
+        //Qui sposto in island 2
+        controllerStub.getTurnController().moveMotherNature(1);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).hasTower(), true);
+        //Qui sposto in island 3
+        //controllerStub.getTurnController().moveMotherNature(1);
+        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 2);
+
+        //Qui sposto in island 4
+        controllerStub.getTurnController().moveMotherNature(2);
+        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 3);
+        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().size(), 3);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 1);
+
+
+
+        controllerStub.getTurnController().moveMotherNature(8);
+
+        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().size(), 10);
+
+        controllerStub.getTurnController().moveMotherNature(3);
+
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().size(), 10);
+
 
     }
 
     @Test
-    @DisplayName("Action Phase Test")
+    @DisplayName("Action Phase Test with PropertyChange")
     public void actionWithPropertyChange() {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
         server.setIdMapID(idMapID);
+
+
+        controllerStub.getGame().getPlayers().add(matteo);
+        controllerStub.getGame().getPlayers().add(cisco);
 
         controllerStub.getGame().getActivePlayers().add(matteo);
         controllerStub.getGame().getActivePlayers().add(cisco);
@@ -381,6 +418,30 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev9);
         PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev10);
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard().getEntrance().getStudents().size(), 7);
+        for(int i=0; i< controllerStub.getGame().getGameBoard().getIslands().size(); i++) {
+            System.out.println("Island " + controllerStub.getGame().getGameBoard().getIslands().get(i).getIslandID() + " has tower: " + controllerStub.getGame().getGameBoard().getIslands().get(i).hasTower());
+            if(controllerStub.getGame().getGameBoard().getIslands().get(i).hasTower()) System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(i).getTower().getColor().toString());
+        }
+
+        PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev11);
+        PropertyChangeEvent ev12 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev12);
+        PropertyChangeEvent ev13 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev13);
+        PropertyChangeEvent ev14 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev14);
+        PropertyChangeEvent ev15 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev15);
+        PropertyChangeEvent ev16 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev16);
+        PropertyChangeEvent ev17 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
+        controllerStub.propertyChange(ev17);
+        PropertyChangeEvent ev18 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(1));
+        controllerStub.propertyChange(ev18);
+
     }
 
     public void setupGame() {
@@ -403,13 +464,13 @@ public class NewTurnControllerTest {
         allTowerColors.add(TowerColor.BLACK);
         allTowerColors.add(TowerColor.GREY);
 
-        if(controllerStub.getGame().getPlayersNumber() == 3) {
+        if(controllerStub.getGame().getActivePlayers().size() == 3) {
             towersNumber = 6;
             colorsCounter3P = 0;
-        } else if(controllerStub.getGame().getPlayersNumber() == 2) {
+        } else if(controllerStub.getGame().getActivePlayers().size() == 2) {
             towersNumber = 8;
             colorsCounter2P = 0;
-        } else if(controllerStub.getGame().getPlayersNumber() == 4) {
+        } else if(controllerStub.getGame().getActivePlayers().size() == 4) {
             towersNumber = 8;
             colorsCounter4P = 0;
         }
@@ -424,18 +485,26 @@ public class NewTurnControllerTest {
                 controllerStub.getGame().getGameBoard().removeStudents(0);
             }
 
-            //System.out.println("metto torri");
-            if(controllerStub.getGame().getActivePlayers().size() == 3) {
+            System.out.println("metto torri");
+            if(controllerStub.getGame().getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                    if(colorsCounter3P < 2) colorsCounter3P++;
+                    if(colorsCounter3P < 2) {
+                        colorsCounter3P++;
+                        System.out.println("change");
+
+                    }
                 }
-            } else if(controllerStub.getGame().getActivePlayers().size() == 2) {
+            } else if(controllerStub.getGame().getPlayersNumber() == 2) {
+                System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                    if(colorsCounter2P < 1) colorsCounter2P++;
+                    if(k == towersNumber) {
+                        System.out.println("change");
+                        colorsCounter2P++;
+                    }
                 }
-            } else if(controllerStub.getGame().getActivePlayers().size() == 4) {
+            } else if(controllerStub.getGame().getPlayersNumber() == 4) {
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
                     if(colorsCounter4P < 3) colorsCounter4P++;
@@ -460,9 +529,23 @@ public class NewTurnControllerTest {
 
         //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
 
+        controllerStub.getGame().getGameBoard().getIslands().get(1).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(3).addStudent(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(4).addStudent(new Student(PawnType.BLUE));
+        controllerStub.getGame().getGameBoard().getIslands().get(5).addStudent(new Student(PawnType.YELLOW));
+        controllerStub.getGame().getGameBoard().getIslands().get(7).addStudent(new Student(PawnType.YELLOW));
+        controllerStub.getGame().getGameBoard().getIslands().get(8).addStudent(new Student(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getIslands().get(9).addStudent(new Student(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getIslands().get(10).addStudent(new Student(PawnType.GREEN));
+        controllerStub.getGame().getGameBoard().getIslands().get(11).addStudent(new Student(PawnType.GREEN));
+
+
+        /*
         for(int s = 1; s <= 12; s++) {
             if(s != mnPos && s != mnPosOpposite) {
                 //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
+
                 Collections.shuffle(controllerStub.getGame().getGameBoard().getSetupStudentsBag());
                 controllerStub.getGame().getGameBoard().getIslands().get(s - 1).addStudent(controllerStub.getGame().getGameBoard().getSetupStudentsBag().get(0));
                 controllerStub.getGame().getGameBoard().removeSetupStudents(0);
@@ -470,15 +553,15 @@ public class NewTurnControllerTest {
             //n++;
         }
 
+
+         */
         for(int p = 1; p <= 12; p++){
             if(p != mnPos && p != mnPosOpposite) {
                 System.out.println(p + ", " + "Student " + controllerStub.getGame().getGameBoard().getIslands().get(p - 1).getStudents().get(0).getType());
             }
-
             if(p == mnPos){
                 System.out.println(p + ", " + "Mother nature is here");
             }
-
             if(p == mnPosOpposite){
                 System.out.println(p + ", " + "This island is empty");
             }

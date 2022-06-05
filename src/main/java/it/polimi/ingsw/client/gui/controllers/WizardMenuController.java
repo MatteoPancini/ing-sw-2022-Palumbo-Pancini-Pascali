@@ -50,7 +50,6 @@ public class WizardMenuController implements GUIController {
     public void askWizard(List<Wizards> wizards) {
         gui.changeStage("wizardMenu.fxml");
 
-
         kingButton.setVisible(false);
         witchButton.setVisible(false);
         forestButton.setVisible(false);
@@ -67,9 +66,6 @@ public class WizardMenuController implements GUIController {
                 monachButton.setVisible(true);
             }
         }
-
-
-
     }
 
     public void chooseMonach() {

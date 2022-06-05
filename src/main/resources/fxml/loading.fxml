@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.LoadingController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.LoadingController">
    <children>
-      <ImageView fx:id="loadingImage" fitHeight="409.0" fitWidth="600.0" pickOnBounds="true">
+      <ImageView fx:id="loadingImage" fitHeight="580.0" fitWidth="819.0" layoutX="-3.0" layoutY="-4.0" pickOnBounds="true">
          <image>
             <Image url="@../graphics/forest.jpg" />
          </image>
       </ImageView>
-      <ProgressBar layoutX="200.0" layoutY="210.0" prefWidth="200.0" progress="0.0" />
-      <Label fx:id="status" blendMode="HARD_LIGHT" contentDisplay="CENTER" layoutX="252.0" layoutY="243.0" prefHeight="17.0" prefWidth="296.0" text="LOADING..." textAlignment="CENTER" textFill="#d9d9d9">
+      <ProgressBar layoutX="296.0" layoutY="286.0" prefWidth="200.0" progress="0.0" />
+      <Label fx:id="status" blendMode="HARD_LIGHT" contentDisplay="CENTER" layoutX="346.0" layoutY="322.0" prefHeight="23.0" prefWidth="433.0" text="LOADING..." textAlignment="CENTER" textFill="#d9d9d9">
          <effect>
             <DropShadow />
          </effect>
@@ -24,7 +24,7 @@
             <Font name="Palatino Linotype" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="296.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/eriantys_text_logo.png" />
          </image>

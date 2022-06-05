@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.PickController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.69" pickOnBounds="true">
+         <image>
+            <Image url="@../../graphics/lightbluesky.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="167.0" fitWidth="169.0" layoutX="67.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/wooden_pieces/island2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="180.0" fitWidth="128.0" layoutX="370.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../../graphics/boards/diningroom.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="islandButton" layoutX="101.0" layoutY="290.0" mnemonicParsing="false" onAction="#pickIsland" text="ISLAND" textFill="#664d4d">
+         <font>
+            <Font name="Palatino Linotype" size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="diningRoomButton" layoutX="309.0" layoutY="290.0" mnemonicParsing="false" onAction="#pickDiningRoom" text="YOUR DINING ROOM" textFill="#664d4d">
+         <font>
+            <Font name="Palatino Linotype" size="19.0" />
+         </font>
+      </Button>
+      <Label layoutX="185.0" layoutY="47.0" text="SELECT DESTINATION" textFill="WHITE">
+         <font>
+            <Font name="Palatino Linotype" size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -91,7 +91,6 @@ public class Controller implements PropertyChangeListener {
 
         for(Player p : game.getPlayers()) {
             //System.out.println("Inizio setup di " + p.getNickname());
-
             //System.out.println("metto students nell'entrance");
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
@@ -99,16 +98,24 @@ public class Controller implements PropertyChangeListener {
                 game.getGameBoard().removeStudents(0);
             }
 
-            //System.out.println("metto torri");
+            System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                    if(colorsCounter3P < 2) colorsCounter3P++;
+                    if(colorsCounter3P < 2) {
+                        colorsCounter3P++;
+                        System.out.println("change");
+
+                    }
                 }
             } else if(game.getPlayersNumber() == 2) {
+                System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                    if(colorsCounter2P < 1) colorsCounter2P++;
+                    if(colorsCounter2P < 2) {
+                        System.out.println("change");
+                        colorsCounter2P++;
+                    }
                 }
             } else if(game.getPlayersNumber() == 4) {
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {

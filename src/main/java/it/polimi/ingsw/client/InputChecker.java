@@ -28,6 +28,8 @@ public class InputChecker {
         return clientConnection;
     }
 
+    //TODO: Per ogni possibile input bisogna permettere di scrivere QUIT!!!
+
 
     /**
      * prende in input i chosen values e ritorna una UserAction da inviare al server
@@ -37,70 +39,78 @@ public class InputChecker {
      * @throws AlreadyPlayedAssistantException
      */
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
-        PickAssistant action;
-        //TODO -> da gestire le exception e richiedere l'assistant
+        PickAssistant action = null;
         switch (input.toUpperCase()) {
             case "EAGLE" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.EAGLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.EAGLE);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "DOG" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.DOG)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.DOG);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "ELEPHANT" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.ELEPHANT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.ELEPHANT);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "CAT" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.CAT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CAT);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "CHEETAH" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.CHEETAH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CHEETAH);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "LIZARD" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.LIZARD)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.LIZARD);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "OCTOPUS" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.OCTOPUS)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OCTOPUS);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "OSTRICH" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.OSTRICH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OSTRICH);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "TURTLE" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.TURTLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.TURTLE);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
             }
             case "FOX" -> {
@@ -109,8 +119,13 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.FOX)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX);
                 } else {
-                    throw new AlreadyPlayedAssistantException();
+                    cli.showError("Error: you chose an assistant card already played by another player!");
+                    cli.askAssistant();
                 }
+            }
+
+            case "QUIT" -> {
+                quitGame();
             }
             default -> action = new PickAssistant();
         }
@@ -127,12 +142,18 @@ public class InputChecker {
         } else {
             maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves();
         }
-
-        int moves = Integer.parseInt(input);
-        System.out.println("Parso " + moves);
-        if (moves > 0 && moves <= maxMoves) {
-            action = new PickMovesNumber(moves);
+        try {
+            int moves = Integer.parseInt(input);
+            System.out.println("Parso " + moves);
+            if (moves > 0 && moves <= maxMoves) {
+                action = new PickMovesNumber(moves);
+            }
+        } catch (NumberFormatException e) {
+            cli.showError("Error: NumberFormatException. Please insert a number!");
+            cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
         }
+
+
         return action;
     }
 
@@ -185,6 +206,9 @@ public class InputChecker {
 
                  */
             }
+            case "QUIT" -> {
+                quitGame();
+            }
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
@@ -196,14 +220,19 @@ public class InputChecker {
 
     public PickDestination checkIsland(String islandID) {
         PickDestination action = null;
-        int island = Integer.parseInt(islandID);
-        if (island > 0 && island < 13) {
-            int realIsland = island - 1;
-            System.out.println("invio island" + realIsland);
-            action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(realIsland));
-        } else {
-            cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
-                    "the remaining islands");
+        try {
+            int island = Integer.parseInt(islandID);
+            if (island > 0 && island < 13) {
+                int realIsland = island - 1;
+                System.out.println("invio island" + realIsland);
+                action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(realIsland));
+            } else {
+                cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
+                        "the remaining islands");
+                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+            }
+        } catch(NumberFormatException e) {
+            cli.showError("Error: NumberFormatException. Please insert a number!");
             cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
         }
 
@@ -232,17 +261,25 @@ public class InputChecker {
 
     public PickCloud checkCloud(String input) {
         PickCloud action = null;
-        int cloudID = Integer.parseInt(input);
-        //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
-        //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
-        if(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1).getStudents() != null) {
-            action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1));
-        }
-        else {
-            cli.showError("Error: the cloud has already been taken! Choose another one");
+        int cloudID;
+        try {
+            cloudID = Integer.parseInt(input);
+            //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
+            //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
+            if(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1).getStudents() != null) {
+                action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1));
+            }
+            else {
+                cli.showError("Error: the cloud has already been taken! Choose another one");
+                cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+            }
+        } catch(NumberFormatException e) {
+            cli.showError("Error: NumberFormatException. Please insert a number!");
             cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
         }
+
         return action;
+
     }
 
     public PickCharacter checkCharacter(String input) {
@@ -347,6 +384,10 @@ public class InputChecker {
             }
             case "NONE" -> {
                 action = new PickCharacter(null);
+            }
+
+            case "QUIT" -> {
+                quitGame();
             }
             default -> action = null;
         }

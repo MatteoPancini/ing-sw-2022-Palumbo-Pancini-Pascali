@@ -8,6 +8,8 @@ import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
 import it.polimi.ingsw.messages.clienttoserver.actions.PickCharacterActionsNum;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
@@ -31,6 +33,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static it.polimi.ingsw.constants.Constants.*;
@@ -38,6 +41,8 @@ import static it.polimi.ingsw.constants.Constants.*;
 //CLI riceve UserAction dal Controller, switch(userAction.getPropertyName()) e nei case usa ask...()
 //es: controller.send(new PickAssistant(Actions.PICKASSISTANT))
 //    cli.receiveCommand(??) ???
+
+//TODO M -> SERVERERROR handler
 
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
@@ -162,14 +167,26 @@ public class CLI implements Runnable, ListenerInterface {
     public void showCharactersDescription() {
         CLITable st = new CLITable();
         st.setShowVerticalLines(true);
-        st.addRow("Effect: ");
-        st.addRow("Cost: ");
+        //st.addRow("Effect: ");
+        //st.addRow("Cost: ");
+        //TODO -> Sistemare stampa perchè mostra ogni volta anche tutti gli effetti precedenti
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getPlayableCharacters().size(); i++) {
+            st.setHeaders(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getName().toString());
+            st.addRow("Effect: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getEffect());
+            st.addRow("Cost: " + Integer.toString(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost()));
+            st.print();
+        }
+
+
+        /*
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             st.setHeader(c.getName().toString());
             st.addRow(c.getEffect());
             st.addRow(Integer.toString(c.getInitialCost()));
             st.print();
         }
+
+         */
     }
 
     //scrivere diversi show per ogni parte del modello da mostrare
@@ -217,27 +234,39 @@ public class CLI implements Runnable, ListenerInterface {
     public String studentsOnIsland(Island i) {
         String[] stud = new String[10];
         StringBuilder s = new StringBuilder();
+        boolean y = false;
+        boolean b = false;
+        boolean p = false;
+        boolean g = false;
+        boolean r = false;
+
         for (int t=0; t < i.getStudents().size(); t++) {
-            if(i.getStudents().get(t).getType() == PawnType.YELLOW) {
+            if(i.getStudents().get(t).getType() == PawnType.YELLOW && !y) {
                 stud[t] = ANSI_YELLOW + "• [" + printYellowStudentsOnIsland(i) + "]" + ANSI_RESET;
+                y = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.BLUE) {
+            else if(i.getStudents().get(t).getType() == PawnType.BLUE && !b) {
                 stud[t] = ANSI_BLUE + "• [" + printBlueStudentsOnIsland(i) + "]" + ANSI_RESET;
+                b = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.PINK) {
+            else if(i.getStudents().get(t).getType() == PawnType.PINK && !p) {
                 stud[t] = ANSI_PURPLE + "• [" + printPinkStudentsOnIsland(i) + "]" + ANSI_RESET;
+                p = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.GREEN) {
+            else if(i.getStudents().get(t).getType() == PawnType.GREEN && !g) {
                 stud[t] = ANSI_GREEN + "• [" + printGreenStudentsOnIsland(i) + "]" + ANSI_RESET;
+                g = true;
             }
-            else if(i.getStudents().get(t).getType() == PawnType.RED) {
+            else if(i.getStudents().get(t).getType() == PawnType.RED && !r) {
                 stud[t] = ANSI_RED + "• [" + printRedStudentsOnIsland(i) + "]" + ANSI_RESET;
+                r = true;
             }
             //stud[t] = printColor(i.getStudents().get(t).getType()) + i.getStudents().get(t).getType() + ANSI_RESET ;
         }
         for(int j=0; j < stud.length; j++) {
             if (stud[j] != null) {
                 if(j==0) {
+
                     s = new StringBuilder(stud[0].toString());
                 }
                 else {
@@ -278,9 +307,16 @@ public class CLI implements Runnable, ListenerInterface {
         CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
         st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
+        for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+        }
+        /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
             st.addRow(Integer.toString(island.getIslandID()), isMerged(island).toString(), studentsOnIsland(island).toString(), printTowers(island));
         }
+
+         */
+        showMotherNature();
         st.print();
     }
 
@@ -375,12 +411,16 @@ public class CLI implements Runnable, ListenerInterface {
         st.setHeaders("Cloud ID", "Students");
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getClouds().size(); i++) {
             if(modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents() != null) {
+                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID()), printStudentsOnCloud(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID()));
+                /*
                 for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(i).getStudents()) {
                     System.out.println(modelView.getGameCopy().getGameBoard().getClouds().get(i).getID() + ", " + s.getType().toString());
                 }
+                 */
                 //st.addRow(Integer.toString(c.getID()), printStudentsOnCloud(c.getID()));
             }
         }
+        st.print();
     }
 
     public String printColor(PawnType p){
@@ -470,8 +510,15 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showOtherDiningRooms() {
         System.out.println(">Take a look at the other players' dining rooms!\n");
-        for (Player p : modelView.getGameCopy().getActivePlayers()) {
-            showDiningRoom(p);
+        if(!modelView.isFourPlayers()) {
+            for (Player p : modelView.getGameCopy().getActivePlayers()) {
+                showDiningRoom(p);
+            }
+        } else {
+            for (int i=0; i<modelView.getGameCopy().getActivePlayers().size(); i++) {
+                if(modelView.getGameCopy().getActivePlayers().get(i).isTeamLeader())
+                    showDiningRoom(modelView.getGameCopy().getActivePlayers().get(i));
+            }
         }
         /*CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
@@ -496,12 +543,22 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showDiningRoom(Player p) {
         CLITable st = new CLITable();
-        st.setHeaders(p.getNickname().toString());
-        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + ANSI_RESET);
-        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + ANSI_RESET);
+        if(!modelView.isFourPlayers()) {
+            st.setHeaders(p.getNickname().toString());
+        } else {
+            String otherPlayer = " ";
+            for(Player other : modelView.getGameCopy().getActivePlayers()) {
+                if(other.getIdTeam() == p.getIdTeam() && other.getNickname() != p.getNickname()) {
+                    otherPlayer = other.getNickname();
+                }
+            }
+            st.setHeaders(p.getNickname().toString() + otherPlayer);
+        }
+        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
         st.print();
     }
 
@@ -526,10 +583,15 @@ public class CLI implements Runnable, ListenerInterface {
         //private Parser parser;
         //private String chosenWizard;
         //private String chosenNickname;
-        in.reset();
+        //in.reset();
         System.out.print(">");
         String chosenMoves = in.nextLine();
-        virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
+        if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, null);
+        } else {
+            virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
+        }
+
     }
 
     public void printPlayerDeck() {
@@ -557,6 +619,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askCloud(ArrayList<CloudTile> clouds) {
         System.out.println(">Pick a cloud by typing its ID: ");
+        showClouds();
         System.out.print(">");
         String chosenCloud = in.nextLine();
         virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
@@ -675,6 +738,10 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
 
+    public void noWinnerGame() {
+        System.exit(0);
+    }
+
     public void chooseExpertMode() {
         String expertModeChoice;
         //System.out.println("Sono in chooseExpertMode");
@@ -715,7 +782,9 @@ public class CLI implements Runnable, ListenerInterface {
                 System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
                 //out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
-
+                if(numOfPlayer == 4) {
+                    modelView.setFourPlayers(true);
+                }
 
                 break;
             } catch (NumberFormatException e) {
@@ -883,6 +952,13 @@ public class CLI implements Runnable, ListenerInterface {
 
         for(int i = 0; i < 10; i++) {
             System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
+        }
+    }
+
+    public void showServerError() {
+        if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
+            showError("Server is full... please try again later!");
+            System.exit(-1);
         }
     }
 

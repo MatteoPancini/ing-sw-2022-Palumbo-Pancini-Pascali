@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.PickController">
+   <children>
+      <ImageView fitHeight="460.0" fitWidth="600.0" layoutY="-21.0" opacity="0.93" pickOnBounds="true">
+         <image>
+            <Image url="@../../graphics/forest.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cheetah" fitHeight="112.0" fitWidth="78.0" layoutX="34.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (1).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="turtle" fitHeight="112.0" fitWidth="78.0" layoutX="499.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (10).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="elephant" fitHeight="112.0" fitWidth="78.0" layoutX="388.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (9).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="dog" fitHeight="112.0" fitWidth="78.0" layoutX="271.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (8).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="octopus" fitHeight="112.0" fitWidth="78.0" layoutX="158.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (7).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="lizard" fitHeight="112.0" fitWidth="78.0" layoutX="34.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (6).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="ostrich" fitHeight="112.0" fitWidth="78.0" layoutX="158.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (2).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="cat" fitHeight="112.0" fitWidth="78.0" layoutX="271.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (3).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="eagle" fitHeight="112.0" fitWidth="78.0" layoutX="388.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (4).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="fox" fitHeight="112.0" fitWidth="78.0" layoutX="499.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../graphics/assistants/Assistente (5).png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="133.0" layoutY="26.0" text="SELECT AN ASSISTANT FROM YOUR DECK" textFill="#f2dbdb">
+         <font>
+            <Font name="Palatino Linotype" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
