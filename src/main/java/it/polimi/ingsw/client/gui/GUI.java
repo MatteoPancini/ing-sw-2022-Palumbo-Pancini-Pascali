@@ -13,6 +13,8 @@ import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.enumerations.Assistants;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,75 @@ public class GUI extends Application implements ListenerInterface {
     private Scene currentScene;
     private HashMap<String, Scene> nameMapScene = new HashMap<>();
     private final HashMap<String, GUIController> nameMapController = new HashMap<>();
+
+    public boolean isActiveGame() {
+        return activeGame;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
+    public HashMap<String, Scene> getNameMapScene() {
+        return nameMapScene;
+    }
+
+    public HashMap<String, GUIController> getNameMapController() {
+        return nameMapController;
+    }
+
+    public Alert getInfoAlert() {
+        return infoAlert;
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public AssistantCard getAssistantFromDeck(Assistants a) {
+        for(AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
+            if(a.equals(card.getName())) {
+                return card;
+            }
+        }
+        return null;
+    }
+
+    public int getIDFromIslandImage(String s) {
+        int id = -1;
+        switch(s) {
+            case "island1" -> {
+                id = 1;
+            } case "island2" -> {
+                id = 2;
+            } case "island3" -> {
+                id = 3;
+            } case "island4" -> {
+                id = 4;
+            } case "island5" -> {
+                id = 5;
+            } case "island6" -> {
+                id = 6;
+            } case "island7" -> {
+                id = 7;
+            } case "island8" -> {
+                id = 8;
+            } case "island9" -> {
+                id = 9;
+            } case "island10" -> {
+                id = 10;
+            } case "island11" -> {
+                id = 11;
+            } case "island12" -> {
+                id = 12;
+            }
+        }
+        return id;
+    }
 
     private Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
 
@@ -207,11 +278,11 @@ public class GUI extends Application implements ListenerInterface {
                 infoAlert.show();
             });
                     //showServerMessage(modelView.getServerAnswer());
-            /*
+
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);
-            }
+            } /*
             case "UpdateModelView" -> {
                 assert serverCommand != null;
                 modelView.setGameCopy((Game) changeEvent.getNewValue());
