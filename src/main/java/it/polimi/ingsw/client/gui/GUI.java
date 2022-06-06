@@ -128,8 +128,6 @@ public class GUI extends Application implements ListenerInterface {
     private static final String MAIN_SCENE = "mainScene.fxml";
 
 
-
-
     public GUI() {
         this.modelView = new ModelView(this);
         actionHandler = new ActionHandler(this, modelView);
@@ -181,8 +179,6 @@ public class GUI extends Application implements ListenerInterface {
 
     }
 
-
-
     public void changeStage(String newScene) {
         currentScene = nameMapScene.get(newScene);
         stage.setScene(currentScene);
@@ -191,7 +187,6 @@ public class GUI extends Application implements ListenerInterface {
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
-
     }
 
     @Override

@@ -54,6 +54,12 @@ public class PickController implements GUIController{
     @FXML ImageView cloud2;
     @FXML ImageView cloud3;
     @FXML ImageView cloud4;
+    @FXML ImageView character1;
+    @FXML ImageView character2;
+    @FXML ImageView character3;
+    @FXML Button effect1;
+    @FXML Button effect2;
+    @FXML Button effect3;
 
     @Override
     public void setGui(GUI gui) {
@@ -167,6 +173,16 @@ public class PickController implements GUIController{
         }
     }
 
+    public void askCharacter() {
+        gui.changeStage("PickCharacter.fxml");
+        character1 = setCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0));
+        character2 = setCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1));
+        character3 = setCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2));
+        character1.setVisible(true);
+        character2.setVisible(true);
+        character3.setVisible(true);
+    }
+
     public void pickCloud(ActionEvent e) {
         UserAction action = null;
         ImageView img = (ImageView) e.getSource();
@@ -208,7 +224,7 @@ public class PickController implements GUIController{
         }
     }
 
-    public void askAssistant(ArrayList<AssistantCard> assistants) {
+    public void askAssistant() {
         gui.changeStage("PickAssistant.fxml");
     }
     public void askDestination() {
@@ -270,7 +286,7 @@ public class PickController implements GUIController{
                 cloud1.setVisible(true);
                 for(Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1).getStudents()) {
                     ImageView stud = null;
-                    setStudentsImage(s);
+                    stud = setStudentsImage(s);
                     stud.setLayoutX(cloud1.getLayoutX() + offsetX);
                     stud.setLayoutY(cloud1.getLayoutY() + offsetY);
                     offsetX+=5;
@@ -280,9 +296,16 @@ public class PickController implements GUIController{
             // COPIARE PER IL RESTO DELLE ISOLE
         }
     }
+    public void askStudent() {
+        gui.changeStage("PickStudent.fxml");
+    }
 
-    public void setStudentsImage(Student s) {
-        ImageView stud;
+    public void askPawnType() {
+        gui.changeStage("PickPawnType.fxml");
+    }
+
+    public ImageView setStudentsImage(Student s) {
+        ImageView stud = null;
         switch(s.getType().toString()) {
             case "BLUE" -> {
                 stud = new ImageView("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
@@ -296,6 +319,66 @@ public class PickController implements GUIController{
                 stud = new ImageView("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
             }
         }
+        return stud;
     }
 
+
+    public ImageView setCharacterImage(CharacterCard c) {
+        ImageView character = null;
+        String effect = null;
+        switch(c.getName().toString()) {
+            case "HERALD" -> {
+                character = new ImageView("@../../graphics/characters/herald.png");
+            } case "KNIGHT" -> {
+                character = new ImageView("@../../graphics/characters/knight.png");
+            } case "CENTAUR" -> {
+                character = new ImageView("@../../graphics/characters/centaur.png");
+            } case "FARMER" -> {
+                character = new ImageView("@../../graphics/characters/farmer.png");
+            } case "FUNGARUS" -> {
+                character = new ImageView("@../../graphics/characters/fungarus.png");
+            } case "JESTER" -> {
+                character = new ImageView("@../../graphics/characters/jester.png");
+            } case "THIEF" -> {
+                character = new ImageView("@../../graphics/characters/thief.png");
+            } case "MINESTREL" -> {
+                character = new ImageView("@../../graphics/characters/minestrel.png");
+            } case "GRANNY_HERBS" -> {
+                character = new ImageView("@../../graphics/characters/grannyHerbs.png");
+            } case "MAGIC_POSTMAN" -> {
+                character = new ImageView("@../../graphics/characters/magicPostman.png");
+            } case "SPOILED_PRINCESS" -> {
+                character = new ImageView("@../../graphics/characters/spoiledPrincess.png");
+            } case "MONK" -> {
+                character = new ImageView("@../../graphics/characters/monk.png");
+            }
+        }
+        return character;
+    }
+
+    //TODO continuare gli effetti per gli altri characters
+    public String setCharacterEffect(CharacterCard c) {
+        String effect = null;
+        switch(c.getName().toString()) {
+            case "HERALD" -> {
+                effect = "Choose an island and calculate the majority as if Mother Nature had finished her move there. In this turn Mother Nature will move as usual and on the Island where her movement ends, the majority will normally be calculated.";
+            } case "KNIGHT" -> {
+                effect = "This turn, you have 2 additional influence points when calculating influence.";
+            } case "CENTAUR" -> {
+                effect = "When counting the influence on an Island (or a group of Islands), the Towers present are not counted.";
+            } case "FARMER" -> {
+                effect = "During this turn, you take control of Professors even if you have the same number of Students in your Dining Room as the player currently controlling them.";
+            } case "FUNGARUS" -> {
+                effect = "Choose a Student color; this turn, that color provides no influence when calculating influence.";
+            } case "JESTER" -> {
+            } /*case "THIEF" -> {
+            } case "MINESTREL" -> {
+            } case "GRANNY_HERBS" -> {
+            } case "MAGIC_POSTMAN" -> {
+            } case "SPOILED_PRINCESS" -> {
+            } case "MONK" -> {
+            }*/
+        }
+        return effect;
+    }
 }
