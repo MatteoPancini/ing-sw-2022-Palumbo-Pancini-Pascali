@@ -5,6 +5,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
+import it.polimi.ingsw.messages.servertoclient.NoWinnerGameNotification;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
@@ -17,7 +18,6 @@ import it.polimi.ingsw.server.Server;
 import java.beans.PropertyChangeSupport;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameHandler {
     private static Game game;
@@ -44,8 +44,6 @@ public class GameHandler {
         gameHandlerListener.addPropertyChangeListener(controller);
 
     }
-
-
 
 
     public void setTeamMode(boolean teamMode) {
@@ -111,8 +109,11 @@ public class GameHandler {
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }
 
+        System.out.println("Setto le board");
         for(int i = 0; i < playersNumber; i++) {
+            System.out.println(game.getPlayers().get(i).getNickname() + " setting");
             if(game.getPlayers().get(i).isTeamLeader()) {
+                System.out.println(game.getPlayers().get(i).getNickname() + " leader");
                 game.getPlayers().get(i).setBoard(new SchoolBoard(game.getPlayers().get(i).getPlayerID()));
             } else {
                 for(int j = 0; j < playersNumber; j++){
@@ -208,23 +209,21 @@ public class GameHandler {
             String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size() + 1).getNickname();
             sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
             sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
-        } else if (playersNumber == 4) {
-            if (Wizards.notChosen().size() == 1) {
+        } else if (playersNumber == 4 && Wizards.notChosen().size() > 0) {
+            /*if (Wizards.notChosen().size() == 1) {
                 String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size()).getNickname();
                 game.getPlayerByNickname(playerNickname).setWizard(Wizards.notChosen().get(0));
                 sendSinglePlayer(new WizardAnswer("You are the last player in the lobby, so the game will choose for you."), server.getIDFromNickname(playerNickname));
                 sendSinglePlayer(new WizardAnswer(null, "Wizard selection completed! You are " + Wizards.notChosen().get(0)), server.getIDFromNickname(playerNickname));
                 Wizards.removeAvailableWizard(Wizards.notChosen().get(0));
                 startGame();
-            } else {
-                String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size() + 1).getNickname();
+            } else {*/
+                String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size()).getNickname();
                 sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
                 sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
-            }
-            return;
+            //}
         } else {
             startGame();
-
         }
     }
 
@@ -232,7 +231,6 @@ public class GameHandler {
         //GESTISCI MESSAGGIO PER METTERE GAMESTARTED IN MODELVIEW
         setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
-        SecureRandom randomGenerator = new SecureRandom();
         //game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         game.setCurrentPlayer(game.getActivePlayers().get(0));
         System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
@@ -300,6 +298,7 @@ public class GameHandler {
     }
 
 
+    /*
     public void endPlayerGame(String playerDisconnected) {
         server.getVirtualClientFromID(server.getIDFromNickname(playerDisconnected)).getSocketClientConnection().closeConnection();
         for(Player p : game.getActivePlayers()) {
@@ -309,7 +308,7 @@ public class GameHandler {
             }
         }
 
-        //in caso di disconesssione rimuove la carta giocata
+        //in caso di disconessione rimuove la carta giocata
 
         for(AssistantCard a : game.getGameBoard().getLastAssistantUsed()) {
             if(a.getOwner().getNickname() == playerDisconnected) {
@@ -332,11 +331,22 @@ public class GameHandler {
                 for(Player p : game.getActivePlayers()) {
                     sendSinglePlayer(new DynamicAnswer("TIMEOUT EXPIRED! Game is finished!", false), p.getPlayerID());
                 }
-                endGame();
+            endGame();
             }
         }
 
     }
+
+     */
+
+    public void endPlayerGame(String playerDisconnected) {
+        sendBroadcast(new DynamicAnswer("Player " + playerDisconnected + " has disconnected :( Game will finish without a winner! Thanks to have played Eriantys! Hope to see you soon ;)", false));
+        sendBroadcast(new NoWinnerGameNotification());
+        for(Player p  : game.getActivePlayers()) {
+            server.getVirtualClientFromID(p.getPlayerID()).getSocketClientConnection().closeConnection();
+        }
+    }
+
 
     public void endGame() {
         while(!game.getActivePlayers().isEmpty()) {

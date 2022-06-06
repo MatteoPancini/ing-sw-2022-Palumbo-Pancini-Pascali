@@ -52,6 +52,7 @@ public class SchoolBoardTest {
     }
 
     @Test
+    @BeforeEach
     void setupTowers(){
         ArrayList<Tower> towers = new ArrayList<Tower>();
         towers.add(tower1);
@@ -69,14 +70,14 @@ public class SchoolBoardTest {
 
     @Test
     void populateTowerArea(){
-        schoolBTest.getTowerArea().addTowers(tower1);
-        schoolBTest.getTowerArea().addTowers(tower2);
-        schoolBTest.getTowerArea().addTowers(tower3);
-        schoolBTest.getTowerArea().addTowers(tower4);
-        schoolBTest.getTowerArea().addTowers(tower5);
-        schoolBTest.getTowerArea().addTowers(tower6);
-        schoolBTest.getTowerArea().addTowers(tower7);
-        schoolBTest.getTowerArea().addTowers(tower8);
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
+        schoolBTest.getTowerArea().addTowers(new Tower(TowerColor.BLACK));
     }
 
     @Test

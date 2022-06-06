@@ -18,6 +18,8 @@ public class Island implements Serializable {
     private boolean noEntry;
     private Player owner;
     private boolean motherNature;
+    private boolean isMerged;
+    private int leaderIsland = -1;
 
     public Island(GameBoard board, int ID){
         this.board = board;
@@ -60,24 +62,111 @@ public class Island implements Serializable {
         students.add(newStudent);
     }
 
+    public int getLeaderIsland() {
+        return leaderIsland;
+    }
+
+    public void setMerged(boolean merged) {
+        isMerged = merged;
+    }
+
+    public void setLeaderIsland(int leaderIsland) {
+        this.leaderIsland = leaderIsland;
+    }
+
+    public boolean isMerged() {
+        return isMerged;
+    }
+
+    public void doubleMerge() {
+        System.out.println("Faccio doble merge");
+        Island iBefore = null;
+        Island iAfter = null;
+        for(int i=0; i<board.getIslands().size(); i++) {
+            if(board.getIslands().get(i+1).getIslandID() == islandID) {
+                iBefore = board.getIslands().get(i);
+                if(board.getIslands().get(i+1).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) { //sono nell'ultima
+                    iBefore = board.getIslands().get(0);
+                    iAfter = board.getIslands().get(i);
+                } else {
+                    iAfter = board.getIslands().get(i+2);
+                }
+                break;
+            }
+
+        }
+        System.out.println("Island before: " + iBefore.getIslandID());
+        System.out.println("Island after: " + iAfter.getIslandID());
+
+        System.out.println("Aggiungo " + islandID + " e " + iAfter.getIslandID() + " a " + iBefore.getIslandID());
+        iBefore.getMergedIslands().add(this);
+        iBefore.getMergedIslands().add(iAfter);
+        iBefore.getMergedTowers().add(tower);
+        iBefore.getMergedTowers().add(iAfter.getTower());
+
+        for(Student s : students) {
+            iBefore.getStudents().add(s);
+        }
+        for(Student s : iAfter.getStudents()) {
+            iBefore.getStudents().add(s);
+        }
+
+        this.mergedIsland = null;
+        iAfter.setMergedIsland(null);
+        this.students = null;
+        iAfter.setStudents(null);
+
+        System.out.println("Rimuovo " + iAfter.getIslandID() + " , " + islandID);
+
+        for(int i=0; i<board.getIslands().size(); i++) {
+            if(board.getIslands().get(i).getIslandID() == islandID) {
+                board.getIslands().remove(i);
+            }
+            if(board.getIslands().get(i).getIslandID() == iAfter.getIslandID()) {
+                board.getIslands().remove(i);
+            }
+        }
+        board.decrementIslandCounter();
+        board.decrementIslandCounter();
+
+
+
+    }
+
     public void merge(Island island) {
         System.out.println("Faccio merge");
-        mergedIsland.add(island);
-        if(this.islandID < island.islandID) {
+        if(this.islandID < island.getIslandID()) {
+            System.out.println("Aggiungo " + island.getIslandID() + " a " + islandID);
+            mergedIsland.add(island);
+            System.err.println("Merged island " + mergedIsland.size());
             mergedTowers.add(island.getTower());
             for(Student s : island.getStudents()) {
                 students.add(s);
             }
             island.setMergedIsland(null);
             island.setStudents(null);
+            for(int i=0; i<board.getIslands().size(); i++) {
+                if(board.getIslands().get(i).getIslandID() == island.getIslandID()) {
+                    board.getIslands().remove(i);
+                    break;
+                }
+            }
         } else {
+            System.out.println("Aggiungo " + islandID + " a " + island.getIslandID());
+            island.getMergedIslands().add(this);
+            System.err.println("Merged island " + island.getMergedIslands().size());
             island.getMergedTowers().add(this.tower);
             for(Student s : getStudents()) {
                 island.addStudent(s);
             }
-            island.mergedIsland.add(this);
             this.mergedIsland = null;
             this.students = null;
+            for(int i=0; i<board.getIslands().size(); i++) {
+                if(board.getIslands().get(i).getIslandID() == islandID) {
+                    board.getIslands().remove(i);
+                    break;
+                }
+            }
         }
 
         board.decrementIslandCounter();
@@ -86,47 +175,98 @@ public class Island implements Serializable {
 
     public boolean hasLeft(){
         if(islandID != 1) {
+            /*
             Island island1 = board.getIslands().get(islandID - 2);
+            System.out.println("Controllo prima " + );
             Island island2 = board.getIslands().get(islandID - 1);
-            if(island1.hasTower() == true){
-                if(island1.getTower().getColor() == island2.getTower().getColor())
-                    return true;
-                else
-                    return false;
-            }
 
-            else return false;
+             */
+            for(int i=0; i<board.getIslands().size(); i++) {
+                if(board.getIslands().get(i).getIslandID() == islandID) {
+                    System.out.println("Analizzo "+ board.getIslands().get(i-1).getIslandID());
+                    if(board.getIslands().get(i-1).hasTower() == true){
+                        if(board.getIslands().get(i-1).getTower().getColor() == tower.getColor())
+                            return true;
+                        else
+                            return false;
+                    }
+                    else return false;
+                }
+            }
         }
 
         else {
+            /*
             if(board.getIslands().get(11).hasTower() == true) {
                 if(board.getIslands().get(11).getTower().getColor() == board.getIslands().get(0).getTower().getColor()) return true;
                 else return false;
             }
 
             else return false;
+
+             */
+            for(int i=0; i<board.getIslands().size(); i++) {
+                if(board.getIslands().get(i) == null) {
+                    if(board.getIslands().get(i-1).hasTower() == true) {
+                        if(board.getIslands().get(i-1).getTower().getColor() == tower.getColor()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
+                    return false;
+                }
+            }
         }
+        return false;
     }
 
     public boolean hasRight() {
-        if(islandID != 12) {
+        for(int i= 0; i<board.getIslands().size(); i++) {
+            if(board.getIslands().get(i).getIslandID() == islandID) {
+                if(board.getIslands().get(i).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) { //sono nell'ultima
+                    System.out.println("Sono nell'ultima Analizzo "+ board.getIslands().get(0).getIslandID());
+                    if(board.getIslands().get(0).hasTower()) {
+                        if(board.getIslands().get(0).getTower().getColor() == tower.getColor()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
+                    System.out.println("Non ultima Analizzo "+ board.getIslands().get(i+1).getIslandID());
+                    if(board.getIslands().get(i+1).hasTower()) {
+                        if(board.getIslands().get(i+1).getTower().getColor() == tower.getColor())
+                            return true;
+                        else
+                            return false;
+                    }
+                }
+
+
+            }
+        }
+            /*
             Island island1 = board.getIslands().get(islandID);
             Island island2 = board.getIslands().get(islandID - 1);
-            if(island1.hasTower() == true){
+            if(island1.hasTower() == true) {
                 if(island1.getTower().getColor() == island2.getTower().getColor()) return true;
                 else return false;
             }
 
             else return false;
-        }
-
-        else {
+        } else {
             if(board.getIslands().get(0).hasTower() == true){
                 if(board.getIslands().get(0).getTower().getColor() == board.getIslands().get(11).getTower().getColor()) return true;
                 else return false;
             }
             else return false;
-        }
+
+             */
+
+        return false;
+
     }
 
     public Tower getTower() {
@@ -134,7 +274,6 @@ public class Island implements Serializable {
             return mergedTowers.get(0);
         } else
             return tower;
-
     }
 
     private void setStudents(ArrayList<Student> students) {

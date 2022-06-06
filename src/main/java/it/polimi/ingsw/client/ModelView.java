@@ -35,7 +35,15 @@ public class ModelView {
 
     private int characterAction = 0;
 
+    private boolean isFourPlayers;
 
+    public void setFourPlayers(boolean fourPlayers) {
+        isFourPlayers = fourPlayers;
+    }
+
+    public boolean isFourPlayers() {
+        return isFourPlayers;
+    }
 
     public int getCharacterAction() {
         return characterAction;

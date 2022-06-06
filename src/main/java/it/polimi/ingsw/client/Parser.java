@@ -71,7 +71,7 @@ public class Parser implements PropertyChangeListener {
                 System.out.println("Sono in pickAssistant");
 
                 action = inputChecker.checkAssistant(chosenValue);
-                System.out.println("action creata: " + action.toString());
+                //System.out.println("action creata: " + action.toString());
 
             }
             case "PICKCLOUD" -> {
