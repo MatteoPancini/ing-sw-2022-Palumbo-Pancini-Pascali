@@ -16,6 +16,7 @@ public class PlayerTest {
     @BeforeEach
     void setupPlayer() {
         testPlayer = new Player(nickname, playerID);
+        testPlayer.setBoard(new SchoolBoard(playerID));
     }
 
     @Test

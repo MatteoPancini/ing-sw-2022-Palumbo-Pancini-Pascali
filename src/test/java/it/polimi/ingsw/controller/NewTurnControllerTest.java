@@ -109,9 +109,9 @@ public class NewTurnControllerTest {
         controllerStub.getGame().addPlayer(gigiox);
         controllerStub.getGame().addPlayer(mario);
 
-        controllerStub.getGame().setPlayersNumber(4);
+        //controllerStub.getGame().setPlayersNumber(4);
+        gameHandlerStub.setPlayersNumber(4);
         assertEquals(gameHandlerStub.getController(), controllerStub);
-
         assertEquals(gameHandlerStub.getController(), controllerStub);
         assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
         gameHandlerStub.setTeamMode(true);
@@ -131,6 +131,10 @@ public class NewTurnControllerTest {
 
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard(), controllerStub.getGame().getActivePlayers().get(2).getBoard());
         assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard(), controllerStub.getGame().getActivePlayers().get(3).getBoard());
+
+        controllerStub.getGame().setCurrentPlayer(matteo);
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+        controllerStub.newSetupGame();
     }
 
     @Test

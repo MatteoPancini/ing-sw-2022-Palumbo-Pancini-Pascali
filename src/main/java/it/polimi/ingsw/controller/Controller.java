@@ -92,34 +92,48 @@ public class Controller implements PropertyChangeListener {
         for(Player p : game.getPlayers()) {
             //System.out.println("Inizio setup di " + p.getNickname());
             //System.out.println("metto students nell'entrance");
-            for(int i = 1; i <= studentsNumber; i++){
-                Collections.shuffle(game.getGameBoard().getStudentsBag());
-                p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
-                game.getGameBoard().removeStudents(0);
+            if(game.getPlayersNumber() == 4) {
+                if(p.isTeamLeader()) {
+                    System.err.println(p.getNickname());
+                    for(int i = 1; i <= studentsNumber; i++) {
+                        Collections.shuffle(game.getGameBoard().getStudentsBag());
+                        p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
+                        game.getGameBoard().removeStudents(0);
+                    }
+                }
+            } else {
+                for(int i = 1; i <= studentsNumber; i++) {
+                    Collections.shuffle(game.getGameBoard().getStudentsBag());
+                    p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
+                    game.getGameBoard().removeStudents(0);
+                }
             }
+
 
             System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                    if(colorsCounter3P < 2) {
-                        colorsCounter3P++;
-                        System.out.println("change");
-
-                    }
+                }
+                if(colorsCounter3P < 2) {
+                    colorsCounter3P++;
+                    System.out.println("change");
                 }
             } else if(game.getPlayersNumber() == 2) {
                 System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                    if(colorsCounter2P < 2) {
-                        System.out.println("change");
-                        colorsCounter2P++;
-                    }
+                }
+                if(colorsCounter2P < 2) {
+                    System.out.println("change");
+                    colorsCounter2P++;
                 }
             } else if(game.getPlayersNumber() == 4) {
+                System.out.println("Entro QUI");
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
-                    p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
+                    for(int l=1; l<= towersNumber; l++) {
+                        p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
+                    }
                     if(colorsCounter4P < 3) colorsCounter4P++;
                 }
             }

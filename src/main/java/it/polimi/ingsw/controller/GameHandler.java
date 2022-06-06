@@ -46,8 +46,6 @@ public class GameHandler {
     }
 
 
-
-
     public void setTeamMode(boolean teamMode) {
         isTeamMode = teamMode;
     }
@@ -111,8 +109,11 @@ public class GameHandler {
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }
 
+        System.out.println("Setto le board");
         for(int i = 0; i < playersNumber; i++) {
+            System.out.println(game.getPlayers().get(i).getNickname() + " setting");
             if(game.getPlayers().get(i).isTeamLeader()) {
+                System.out.println(game.getPlayers().get(i).getNickname() + " leader");
                 game.getPlayers().get(i).setBoard(new SchoolBoard(game.getPlayers().get(i).getPlayerID()));
             } else {
                 for(int j = 0; j < playersNumber; j++){

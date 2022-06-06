@@ -136,7 +136,7 @@ public class TurnController {
 
          */
 
-        System.out.println(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size());
+        //System.out.println(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size());
 
 
         askAssistantCard();
@@ -784,7 +784,7 @@ public class TurnController {
             return true;
         }
 
-        for(Player p: controller.getGame().getActivePlayers()){
+        for(Player p: controller.getGame().getActivePlayers()) {
             if(p.getBoard().getTowerArea().getTowerArea().size() == 0) return true;
             if(p.getAssistantDeck().getDeck().size() == 0) return true;
         }
