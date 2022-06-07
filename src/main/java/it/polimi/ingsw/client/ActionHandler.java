@@ -113,6 +113,8 @@ public class ActionHandler {
             } /*else if(gui != null) {
                 gui.get
             }*/
+        } else if(answer instanceof FourPModeNotification) {
+            modelView.setFourPlayers(true);
         }
     }
 

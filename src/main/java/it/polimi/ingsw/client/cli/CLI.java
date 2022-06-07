@@ -789,9 +789,12 @@ public class CLI implements Runnable, ListenerInterface {
                 System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
                 //out.println("Ho fatto l'assegnamento del player"); //SPOILER: NON CI ARRIVA!
+                /*
                 if(numOfPlayer == 4) {
                     modelView.setFourPlayers(true);
                 }
+
+                 */
 
                 break;
             } catch (NumberFormatException e) {

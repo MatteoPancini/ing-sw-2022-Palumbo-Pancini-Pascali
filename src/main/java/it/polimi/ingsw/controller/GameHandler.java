@@ -3,10 +3,7 @@ package it.polimi.ingsw.controller;
 
 
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
-import it.polimi.ingsw.messages.servertoclient.Answer;
-import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
-import it.polimi.ingsw.messages.servertoclient.NoWinnerGameNotification;
-import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Wizards;
@@ -231,6 +228,9 @@ public class GameHandler {
         //GESTISCI MESSAGGIO PER METTERE GAMESTARTED IN MODELVIEW
         setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
+        if(playersNumber == 4) {
+            sendBroadcast(new FourPModeNotification());
+        }
         //game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         game.setCurrentPlayer(game.getActivePlayers().get(0));
         System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
