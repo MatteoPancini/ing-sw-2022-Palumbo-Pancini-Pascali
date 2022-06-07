@@ -257,7 +257,7 @@ public class PickController implements GUIController{
                     island1.setFitHeight(145);
                     island1.setImage(new Image("@../../graphics/wooden_pieces/island2.png"));
                 }
-                for(Student s : gui.getModelView().getGameCopy().getGameBoard().getIslandById(0).getStudents()) {
+                for(Student s : gui.getModelView().getGameCopy().getGameBoard().getIslandById(1).getStudents()) {
                     ImageView stud = new ImageView();
                     setStudentsImage(s);
                     stud.setFitHeight(height);
