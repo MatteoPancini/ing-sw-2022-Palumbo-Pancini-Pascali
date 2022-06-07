@@ -79,6 +79,8 @@ public class LoadingController implements GUIController {
     }
 
 
+    //TODO metodi di ask
+
 
 
     @Override

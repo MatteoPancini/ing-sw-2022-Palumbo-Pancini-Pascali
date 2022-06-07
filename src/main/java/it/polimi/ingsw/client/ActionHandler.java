@@ -4,13 +4,12 @@ import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
-import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
-import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.player.Table;
+import javafx.scene.control.Alert;
 
 import java.beans.PropertyChangeSupport;
 import java.util.Objects;
@@ -68,17 +67,37 @@ public class ActionHandler {
             modelView.setAction(true);
             modelView.setPianification(false);
             showGame = 0;
-            cli.showServerMessage(modelView.getServerAnswer());
-        } else if(answer instanceof EndAction) {
+            if (cli != null) {
+                cli.showServerMessage(modelView.getServerAnswer());
+            } else if (gui != null) {
+                gui.getInfoAlert().setTitle("INFO");
+                gui.getInfoAlert().setHeaderText("Information from server");
+                gui.getInfoAlert().setContentText(modelView.getServerAnswer().getMessage().toString());
+                gui.getInfoAlert().show();
+            }
+        }else if(answer instanceof EndAction) {
             modelView.setStartPlaying(false);
-            cli.showServerMessage(modelView.getServerAnswer());
-
+            if (cli != null) {
+                cli.showServerMessage(modelView.getServerAnswer());
+            } else if (gui != null) {
+                gui.getInfoAlert().setTitle("INFO");
+                gui.getInfoAlert().setHeaderText("Information from server");
+                gui.getInfoAlert().setContentText(modelView.getServerAnswer().getMessage().toString());
+                gui.getInfoAlert().show();
+            }
         } else if(answer instanceof StartPianification) {
             modelView.setActivateInput(true);
             modelView.setPianification(true);
             modelView.setAction(false);
             showGame = showGame + 1;
-            cli.showServerMessage(modelView.getServerAnswer());
+            if (cli != null) {
+                cli.showServerMessage(modelView.getServerAnswer());
+            } else if (gui != null) {
+                gui.getInfoAlert().setTitle("INFO");
+                gui.getInfoAlert().setHeaderText("Information from server");
+                gui.getInfoAlert().setContentText(modelView.getServerAnswer().getMessage().toString());
+                gui.getInfoAlert().show();
+            }
         } else if(answer instanceof MagicPostmanAction) {
             modelView.setMagicPostmanAction(true);
         } else if(answer instanceof MinestrelAction) {
@@ -89,12 +108,11 @@ public class ActionHandler {
             cli.askCharacterActionsNumber();
         } else if(answer instanceof GrannyHerbsAction) {
             modelView.setGrannyHerbsAction(true);
-            cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
-        } else if(answer instanceof ServerError) {
-            cli.showServerError();
-
-        } else if(answer instanceof NoWinnerGameNotification) {
-            cli.noWinnerGame();
+            if (cli != null) {
+                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+            } /*else if(gui != null) {
+                gui.get
+            }*/
         }
     }
 
