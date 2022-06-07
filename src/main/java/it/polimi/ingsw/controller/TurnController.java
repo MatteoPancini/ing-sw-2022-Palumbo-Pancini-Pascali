@@ -693,6 +693,24 @@ public class TurnController {
             }
         }
 
+        if(controller.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().size() == 0) {
+            if(controller.getGame().getPlayers().size() == 4) {
+                for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
+                    if(controller.getGame().getActivePlayers().get(i).getIdTeam() == controller.getGame().getCurrentPlayer().getIdTeam()) {
+                        gameHandler.sendSinglePlayer(new WinNotification(), controller.getGame().getActivePlayers().get(i).getPlayerID());
+                    } else {
+                        gameHandler.sendSinglePlayer(new LoseNotification(controller.getGame().getCurrentPlayer().getNickname()), controller.getGame().getActivePlayers().get(i).getPlayerID());
+                    }
+                }
+            } else {
+                gameHandler.sendSinglePlayer(new WinNotification(), controller.getGame().getCurrentPlayer().getPlayerID());
+                gameHandler.sendExcept(new LoseNotification(controller.getGame().getCurrentPlayer().getNickname()), controller.getGame().getCurrentPlayer().getPlayerID());
+            }
+
+            gameHandler.endGame();
+
+        }
+
     }
 
     public void askCloud() {
@@ -785,7 +803,7 @@ public class TurnController {
                         gameHandler.sendSinglePlayer(new LoseNotification(winner.getNickname()), controller.getGame().getActivePlayers().get(i).getPlayerID());
                     }
                 }
-            }else {
+            } else {
                 gameHandler.sendSinglePlayer(new WinNotification(), winner.getPlayerID());
                 gameHandler.sendExcept(new LoseNotification(winner.getNickname()), winner.getPlayerID());
             }
@@ -824,15 +842,7 @@ public class TurnController {
     }
 
     public boolean checkWin() {
-        if(lastRound) { // se si è avverata la condizione di lastRound faccio il check solo per l'ultimo giocatore
-            for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
-                if(i != controller.getGame().getActivePlayers().size() - 1) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }
+
 
 
         if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
@@ -844,6 +854,15 @@ public class TurnController {
             //if(p.getAssistantDeck().getDeck().size() == 0) return true;
         }
 
+        if(lastRound) { // se si è avverata la condizione di lastRound faccio il check solo per l'ultimo giocatore
+            for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
+                if(i != controller.getGame().getActivePlayers().size() - 1) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
 
         return false;
     }
