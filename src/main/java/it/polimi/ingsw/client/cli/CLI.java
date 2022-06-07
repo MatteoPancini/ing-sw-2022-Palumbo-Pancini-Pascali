@@ -512,15 +512,10 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showOtherDiningRooms() {
         System.out.println(">Take a look at the other players' dining rooms!\n");
-        if(!modelView.isFourPlayers()) {
-            for (Player p : modelView.getGameCopy().getActivePlayers()) {
-                showDiningRoom(p);
-            }
-        } else {
-            for (int i=0; i<modelView.getGameCopy().getActivePlayers().size(); i++) {
-                if(modelView.getGameCopy().getActivePlayers().get(i).isTeamLeader())
-                    showDiningRoom(modelView.getGameCopy().getActivePlayers().get(i));
-            }
+
+        for (int i=0; i<modelView.getGameCopy().getActivePlayers().size(); i++) {
+            if(modelView.getGameCopy().getActivePlayers().get(i).isTeamLeader())
+                showDiningRoom(modelView.getGameCopy().getActivePlayers().get(i));
         }
         /*CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
@@ -545,17 +540,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showDiningRoom(Player p) {
         CLITable st = new CLITable();
-        if(!modelView.isFourPlayers()) {
-            st.setHeaders(p.getNickname().toString());
-        } else {
-            String otherPlayer = " ";
-            for(Player other : modelView.getGameCopy().getActivePlayers()) {
-                if(other.getIdTeam() == p.getIdTeam() && other.getNickname() != p.getNickname()) {
-                    otherPlayer = other.getNickname();
-                }
-            }
-            st.setHeaders(p.getNickname().toString() + otherPlayer);
-        }
+
+        st.setHeaders(p.getNickname().toString());
         st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
         st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
         st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);

@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 
 
+import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
@@ -106,6 +107,7 @@ public class GameHandler {
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }
 
+        /*
         System.out.println("Setto le board");
         for(int i = 0; i < playersNumber; i++) {
             System.out.println(game.getPlayers().get(i).getNickname() + " setting");
@@ -121,6 +123,8 @@ public class GameHandler {
 
             }
         }
+
+         */
 
     }
 

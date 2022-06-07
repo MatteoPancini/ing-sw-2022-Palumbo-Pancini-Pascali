@@ -1,15 +1,12 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.messages.servertoclient.FourPModeNotification;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
@@ -17,7 +14,6 @@ import java.beans.PropertyChangeListener;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class Controller implements PropertyChangeListener {
     private final Game game;

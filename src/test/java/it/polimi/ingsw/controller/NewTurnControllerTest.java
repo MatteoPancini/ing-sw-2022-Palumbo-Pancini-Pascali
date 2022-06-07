@@ -117,6 +117,10 @@ public class NewTurnControllerTest {
         gameHandlerStub.setTeamMode(true);
         gameHandlerStub.setupTeams();
 
+        for(Player p : controllerStub.getGame().getPlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
         for(Player p : controllerStub.getGame().getActivePlayers()) {
             System.out.println(p.getNickname() + " " + p.getIdTeam() + " " + p.isTeamLeader());
         }
@@ -128,9 +132,6 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(1).isTeamLeader(), true);
         assertEquals(controllerStub.getGame().getActivePlayers().get(2).isTeamLeader(), false);
         assertEquals(controllerStub.getGame().getActivePlayers().get(3).isTeamLeader(), false);
-
-        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard(), controllerStub.getGame().getActivePlayers().get(2).getBoard());
-        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard(), controllerStub.getGame().getActivePlayers().get(3).getBoard());
 
         controllerStub.getGame().setCurrentPlayer(matteo);
         controllerStub.getTurnController().setCurrentPlayer(matteo);
