@@ -137,4 +137,14 @@ public class Player implements Serializable {
     public int getMyCoins() {
         return myCoins;
     }
+
+    private int profInfluence;
+
+    public void setProfInfluence(int profInfluence) {
+        this.profInfluence = profInfluence;
+    }
+
+    public int getProfInfluence() {
+        return profInfluence;
+    }
 }
