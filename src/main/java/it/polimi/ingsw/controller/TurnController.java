@@ -841,7 +841,7 @@ public class TurnController {
                 gameHandler.sendExcept(new LoseNotification(winner.getNickname()), winner.getPlayerID());
             }
 
-            //gameHandler.endGame();
+            gameHandler.endGame();
         }
 
         System.err.println(checkWin());
