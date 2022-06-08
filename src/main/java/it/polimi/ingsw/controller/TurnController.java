@@ -656,9 +656,7 @@ public class TurnController {
         }
 
         if(influenceWinner != null)
-            System.out.println("\nMax island influence " + islandInfluence + " di " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
-
-
+            System.out.println("\nMax island influence " + islandInfluence + " of " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
 
         if(islandInfluence != 0) {
             //if (controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
