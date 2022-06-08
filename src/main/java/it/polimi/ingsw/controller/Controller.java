@@ -89,6 +89,7 @@ public class Controller implements PropertyChangeListener {
         for(Player p : game.getPlayers()) {
             //System.out.println("Inizio setup di " + p.getNickname());
             //System.out.println("metto students nell'entrance");
+            /*
             if(game.getPlayersNumber() == 4) {
                 if(p.isTeamLeader()) {
                     System.err.println(p.getNickname());
@@ -104,7 +105,15 @@ public class Controller implements PropertyChangeListener {
                     p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
                     game.getGameBoard().removeStudents(0);
                 }
+
+             */
+            for(int i = 1; i <= studentsNumber; i++) {
+                Collections.shuffle(game.getGameBoard().getStudentsBag());
+                p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
+                game.getGameBoard().removeStudents(0);
             }
+
+
 
 
             System.out.println("metto torri");
@@ -138,6 +147,13 @@ public class Controller implements PropertyChangeListener {
 
             if(game.isExpertMode()) {
                 p.setMyCoins(1);
+            }
+        }
+
+        for(Player q : game.getPlayers()) {
+            System.out.println("Player " + q.getNickname() + " has students:");
+            for(Student s : q.getBoard().getEntrance().getStudents()) {
+                System.out.println(s.getType().toString());
             }
         }
 
