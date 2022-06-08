@@ -181,6 +181,7 @@ public class Server {
             waitingPlayersConnection.clear();
             Wizards.reset();
 
+            /*
             if(gameHandler.isTeamMode()) {
                 gameHandler.setupTeams();
             } else {
@@ -188,6 +189,12 @@ public class Server {
                     p.setBoard(new SchoolBoard(p.getPlayerID()));
                 }
             }
+
+             */
+            for(Player p : gameHandler.getGame().getPlayers()) {
+                p.setBoard(new SchoolBoard(p.getPlayerID()));
+            }
+
             gameHandler.initializeWizards();
 
         } else {

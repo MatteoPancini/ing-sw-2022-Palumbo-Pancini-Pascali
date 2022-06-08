@@ -26,7 +26,7 @@ public class Eriantys {
             case 0 -> Server.main(null);
             case 1 -> CLI.main(null);
             case 2 -> {
-                System.out.println("Enjoy Eryantis!\nStarting...");
+                System.out.println("Enjoy Eriantys!\nStarting...");
                 GUI.main(null);
             }
             default -> System.err.println("Invalid argument!\n Please try again :(");

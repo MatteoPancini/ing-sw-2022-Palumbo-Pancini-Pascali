@@ -147,6 +147,8 @@ public class InputChecker {
             System.out.println("Parso " + moves);
             if (moves > 0 && moves <= maxMoves) {
                 action = new PickMovesNumber(moves);
+            } else {
+                cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
             }
         } catch (NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");

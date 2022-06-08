@@ -1,14 +1,13 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
@@ -16,7 +15,6 @@ import java.beans.PropertyChangeListener;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class Controller implements PropertyChangeListener {
     private final Game game;
@@ -92,6 +90,7 @@ public class Controller implements PropertyChangeListener {
         for(Player p : game.getPlayers()) {
             //System.out.println("Inizio setup di " + p.getNickname());
             //System.out.println("metto students nell'entrance");
+            /*
             if(game.getPlayersNumber() == 4) {
                 if(p.isTeamLeader()) {
                     System.err.println(p.getNickname());
@@ -107,7 +106,15 @@ public class Controller implements PropertyChangeListener {
                     p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
                     game.getGameBoard().removeStudents(0);
                 }
+
+             */
+            for(int i = 1; i <= studentsNumber; i++) {
+                Collections.shuffle(game.getGameBoard().getStudentsBag());
+                p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
+                game.getGameBoard().removeStudents(0);
             }
+
+
 
 
             System.out.println("metto torri");
@@ -141,6 +148,13 @@ public class Controller implements PropertyChangeListener {
 
             if(game.isExpertMode()) {
                 p.setMyCoins(1);
+            }
+        }
+
+        for(Player q : game.getPlayers()) {
+            System.out.println("Player " + q.getNickname() + " has students:");
+            for(Student s : q.getBoard().getEntrance().getStudents()) {
+                System.out.println(s.getType().toString());
             }
         }
 
@@ -190,6 +204,7 @@ public class Controller implements PropertyChangeListener {
         System.out.println("Finished setupGame");
         turnController.setCurrentPlayer(game.getCurrentPlayer());
 
+        gameHandler.sendBroadcast(new DynamicAnswer("REMEMBER: During your turn type \"QUIT\" to quit the game!\n", false));
         turnController.startPianificationPhase();
     }
     @Override

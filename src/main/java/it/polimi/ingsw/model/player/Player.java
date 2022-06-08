@@ -16,7 +16,6 @@ public class Player implements Serializable {
     private int idTeam;
     private AssistantCard chosenAssistant;
     private boolean teamLeader;
-    private int coins;
     private int islandInfluence;
     private int myCoins;
 
@@ -46,14 +45,6 @@ public class Player implements Serializable {
 
     public void setChosenAssistant(AssistantCard chosenAssistant) {
         this.chosenAssistant = chosenAssistant;
-    }
-
-    public int getCoins() {
-        return coins;
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
     }
 
     public Player(String nickname, int playerID) {
@@ -145,5 +136,15 @@ public class Player implements Serializable {
 
     public int getMyCoins() {
         return myCoins;
+    }
+
+    private int profInfluence;
+
+    public void setProfInfluence(int profInfluence) {
+        this.profInfluence = profInfluence;
+    }
+
+    public int getProfInfluence() {
+        return profInfluence;
     }
 }

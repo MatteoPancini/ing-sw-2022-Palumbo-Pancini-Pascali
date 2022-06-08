@@ -28,6 +28,8 @@ public class TurnController {
 
     private int studentRequest;
 
+    private boolean lastRound;
+
 
     private boolean isActionPhase;
 
@@ -219,11 +221,20 @@ public class TurnController {
         for(CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
             System.out.println("Putting students on cloud");
             ArrayList<Student> newStudents = new ArrayList<>();
+            if(controller.getGame().getGameBoard().getStudentsBag().size() == 0) {
+                lastRound = true;
+                return;
+            }
             Collections.shuffle(controller.getGame().getGameBoard().getStudentsBag());
+
             int studentsNumber;
             if(controller.getGame().getPlayersNumber() == 3) studentsNumber = 4;
             else studentsNumber = 3;
             for (int j = 0; j < studentsNumber; j++) {
+                if(controller.getGame().getGameBoard().getStudentsBag().size() == 0) {
+                    lastRound = true;
+                    return;
+                }
                 newStudents.add(controller.getGame().getGameBoard().getStudentsBag().get(0));
                 //System.out.println(newStudents.get(j).getType());
                 //newStudents.get(j) = gameHandler.getGame().getGameBoard().getStudentsBag().get(0);
@@ -232,12 +243,15 @@ public class TurnController {
             cloud.setStudents(newStudents);
         }
 
+        /*
         for(CloudTile cloud : controller.getGame().getGameBoard().getClouds()) {
             System.out.println("Cloud " + cloud.getID() + " has students: ");
             for (Student s : cloud.getStudents()) {
                 System.out.println(s.getType());
             }
         }
+
+         */
 
     }
 
@@ -300,7 +314,7 @@ public class TurnController {
                 cardPlayed = c;
             }
         }
-        System.out.println("Sono in playAssistantCard di " + cardPlayed);
+        System.out.println("Sono in playAssistantCard di " + cardPlayed.getName());
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
             System.out.println("aggiungo carta");
@@ -326,9 +340,14 @@ public class TurnController {
                     //if (!flag) break;
                 }
             }
+            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size() == 0) {
+                lastRound = true;
+            }
 
             switchPlayer();
 
+            askAssistantCard();
+        } else {
             askAssistantCard();
         }
 
@@ -527,7 +546,13 @@ public class TurnController {
             }
         }
 
-        askCloud();
+
+        if(lastRound) {
+            fromCloudToEntrance(null);
+        } else {
+            askCloud();
+        }
+
     }
 
     public void checkIslandInfluence(int islandId) {
@@ -594,22 +619,55 @@ public class TurnController {
         }
 
         int islandInfluence = 0;
+        Player influenceWinner = null;
 
         for(Player player : controller.getGame().getActivePlayers()) {
             if(player.getIslandInfluence() > islandInfluence || (controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() != null && player.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) && player.getIslandInfluence() >= islandInfluence) {
                 islandInfluence = player.getIslandInfluence();
+                influenceWinner = player;
             }
         }
 
-        System.out.println("\nMax island influence " + islandInfluence + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
+        int team1 = 0;
+        int team2 = 0;
+        if(controller.getGame().getPlayers().size() == 4) {
+            for(Player p : controller.getGame().getActivePlayers()) {
+                if(p.getIdTeam() == 1) {
+                    team1 = team1 + p.getIslandInfluence();
+                } else if(p.getIdTeam() == 2) {
+                    team2 = team2 + p.getIslandInfluence();
+                }
+            }
+
+            if(team1 > team2) {
+                for(Player p : controller.getGame().getActivePlayers()) {
+                    if(p.getIdTeam() == 1 && p.isTeamLeader()) {
+                        influenceWinner = p;
+                        break;
+                    }
+                }
+            } else if(team2 > team1) {
+                for(Player p : controller.getGame().getActivePlayers()) {
+                    if(p.getIdTeam() == 2 && p.isTeamLeader()) {
+                        influenceWinner = p;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if(influenceWinner != null)
+            System.out.println("\nMax island influence " + islandInfluence + " di " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
+
+
 
         if(islandInfluence != 0) {
-            if (controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
+            //if (controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
                 //controllare che non abbia già costruito
                 if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() == null) {
                     //aggiunge torre ev
                     System.out.println("aggiungo torre");
-                    controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
+                    influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
                 } else {
                     for (Player p : controller.getGame().getActivePlayers()) {
                         if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() != null && p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
@@ -617,7 +675,7 @@ public class TurnController {
                             break;
                         }
                     }
-                    controller.getGame().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
+                    influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
 
                 }
 
@@ -640,7 +698,7 @@ public class TurnController {
                 }
 
 
-            }
+            //}
         }
 
         //System.err.println(controller.getGame().getCurrentPlayer().getIslandInfluence());
@@ -663,6 +721,27 @@ public class TurnController {
                 expertController.setHeraldEffect(false);
             }
         }
+
+        if(influenceWinner != null) {
+            if(influenceWinner.getBoard().getTowerArea().getTowerArea().size() == 0) {
+                if(controller.getGame().getPlayers().size() == 4) {
+                    for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
+                        if(controller.getGame().getActivePlayers().get(i).getIdTeam() == controller.getGame().getCurrentPlayer().getIdTeam()) {
+                            gameHandler.sendSinglePlayer(new WinNotification(), controller.getGame().getActivePlayers().get(i).getPlayerID());
+                        } else {
+                            gameHandler.sendSinglePlayer(new LoseNotification(controller.getGame().getCurrentPlayer().getNickname()), controller.getGame().getActivePlayers().get(i).getPlayerID());
+                        }
+                    }
+                } else {
+                    gameHandler.sendSinglePlayer(new WinNotification(), controller.getGame().getCurrentPlayer().getPlayerID());
+                    gameHandler.sendExcept(new LoseNotification(controller.getGame().getCurrentPlayer().getNickname()), controller.getGame().getCurrentPlayer().getPlayerID());
+                }
+
+                gameHandler.endGame();
+
+            }
+        }
+
 
     }
 
@@ -731,23 +810,45 @@ public class TurnController {
             studentsToMove = 3;
 
          */
-        ArrayList<Student> newStudents = cloud.getStudents();
-        for (Student s : newStudents) {
-            controller.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s);
-        }
+        if(cloud != null) {
+            ArrayList<Student> newStudents = cloud.getStudents();
+            for (Student s : newStudents) {
+                controller.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s);
+            }
 
-        for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()){
-            if(cloudTile.getID() == cloud.getID()){
-                cloudTile.removeStudents();
+            for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()){
+                if(cloudTile.getID() == cloud.getID()){
+                    cloudTile.removeStudents();
+                }
             }
         }
+
         //cloud.removeStudents();
 
+
         if(checkWin()) {
-            gameHandler.sendSinglePlayer(new WinNotification(), currentPlayer.getPlayerID());
-            gameHandler.sendExcept(new LoseNotification(currentPlayer.getNickname()), currentPlayer.getPlayerID());
-            gameHandler.endGame();
+            Player winner = checkWinner();
+            if(controller.getGame().getPlayers().size() == 4) {
+                for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
+                    if(controller.getGame().getActivePlayers().get(i).getIdTeam() == winner.getIdTeam()) {
+                        gameHandler.sendSinglePlayer(new WinNotification(), controller.getGame().getActivePlayers().get(i).getPlayerID());
+                    } else {
+                        gameHandler.sendSinglePlayer(new LoseNotification(winner.getNickname()), controller.getGame().getActivePlayers().get(i).getPlayerID());
+                    }
+                }
+            } else {
+                gameHandler.sendSinglePlayer(new WinNotification(), winner.getPlayerID());
+                gameHandler.sendExcept(new LoseNotification(winner.getNickname()), winner.getPlayerID());
+            }
+
+            //gameHandler.endGame();
         }
+
+        System.err.println(checkWin());
+
+
+
+
 
 
         for(int i= 0; i< controller.getGame().getGameBoard().getLastAssistantUsed().size(); i++) {
@@ -780,15 +881,97 @@ public class TurnController {
     }
 
     public boolean checkWin() {
-        if(controller.getGame().getGameBoard().getIslandCounter() == 3){
+        System.out.println("Entro in checkWin");
+
+
+
+        if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
+            System.out.println("Enrtro 1");
             return true;
         }
 
         for(Player p: controller.getGame().getActivePlayers()) {
-            if(p.getBoard().getTowerArea().getTowerArea().size() == 0) return true;
-            if(p.getAssistantDeck().getDeck().size() == 0) return true;
+            if(controller.getGame().getPlayers().size() == 4) {
+                if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
+                    System.out.println("Enrtro 2");
+
+                    return true;
+                }
+            } else {
+                if(p.getBoard().getTowerArea().getTowerArea().size() == 0) {
+                    System.out.println("Enrtro 2");
+
+                    return true;
+                }
+            }
+
+            //if(p.getAssistantDeck().getDeck().size() == 0) return true;
+        }
+
+        if(lastRound) { // se si è avverata la condizione di lastRound faccio il check solo per l'ultimo giocatore
+            System.out.println("Enrtro 3");
+
+            for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
+                if(i != controller.getGame().getActivePlayers().size() - 1) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         }
 
         return false;
+    }
+
+    public Player checkWinner() {
+        if(controller.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().size() == 0) {
+            return controller.getGame().getCurrentPlayer();
+        }
+
+        //1 controllo il numero di torri messe -> se ce ne sono di numero uguale vado avanti
+        boolean twoEquals = false;
+        Player towerPWinner = controller.getGame().getActivePlayers().get(0);
+
+        for(Player p : controller.getGame().getActivePlayers()) {
+            if(p.getBoard().getTowerArea().getTowerArea().size() < towerPWinner.getBoard().getTowerArea().getTowerArea().size()) {
+                towerPWinner = p;
+                twoEquals = false;
+            } else if(p.getBoard().getTowerArea().getTowerArea().size() == towerPWinner.getBoard().getTowerArea().getTowerArea().size()) {
+                twoEquals = true;
+            }
+        }
+
+        if(!twoEquals) {
+            return towerPWinner;
+        }
+
+        //2 controllo l'influenza dei professori
+        int profInfluence = 0;
+        Player influenceWinner = null;
+
+        for(Player player : controller.getGame().getActivePlayers()) {
+            player.setProfInfluence(0);
+            for(PawnType p : PawnType.values()) {
+                if(player.getBoard().getProfessorTable().getCellByColor(p).hasProfessor() == true) {
+                    player.setProfInfluence(player.getProfInfluence() + 1);
+                }
+            }
+        }
+
+        for(Player p : controller.getGame().getActivePlayers()) {
+            if(p.getProfInfluence() > profInfluence) {
+                profInfluence = p.getProfInfluence();
+                influenceWinner = p;
+            }
+        }
+
+        return influenceWinner;
+
+
+
+
+
+
+
     }
 }
