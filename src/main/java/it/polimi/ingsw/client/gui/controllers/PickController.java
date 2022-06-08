@@ -244,9 +244,9 @@ public class PickController implements GUIController{
         island10.setVisible(false);
         island11.setVisible(false);
         island12.setVisible(false);
+        double height = 22;
+        double width = 22;
         for(Island i : islands) {
-            double height = 22;
-            double width = 22;
             if(i.getIslandID() == gui.getIDFromIslandImage(island1.toString())) {
                 double layoutX = island1.getLayoutX();
                 double layoutY = island1.getLayoutY();
@@ -257,9 +257,8 @@ public class PickController implements GUIController{
                     island1.setFitHeight(145);
                     island1.setImage(new Image("@../../graphics/wooden_pieces/island2.png"));
                 }
-                for(Student s : gui.getModelView().getGameCopy().getGameBoard().getIslandById(1).getStudents()) {
-                    ImageView stud = new ImageView();
-                    setStudentsImage(s);
+                for(Student s : gui.getModelView().getGameCopy().getGameBoard().getIslandById(0).getStudents()) {
+                    ImageView stud = setStudentsImage(s);
                     stud.setFitHeight(height);
                     stud.setFitWidth(width);
                     stud.setLayoutX(layoutX + offsetX);
@@ -269,8 +268,6 @@ public class PickController implements GUIController{
                 }
                 island1.setVisible(true);
             } /* COPIARE PER TUTTE LE 12 ISOLE else if(...) */
-
-
         }
     }
     public void askCloud() {
@@ -321,7 +318,6 @@ public class PickController implements GUIController{
         }
         return stud;
     }
-
 
     public ImageView setCharacterImage(CharacterCard c) {
         ImageView character = null;

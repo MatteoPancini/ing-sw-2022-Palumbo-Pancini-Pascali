@@ -514,8 +514,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Take a look at the other players' dining rooms!\n");
 
         for (int i=0; i<modelView.getGameCopy().getActivePlayers().size(); i++) {
-            if(modelView.getGameCopy().getActivePlayers().get(i).isTeamLeader())
-                showDiningRoom(modelView.getGameCopy().getActivePlayers().get(i));
+            showDiningRoom(modelView.getGameCopy().getActivePlayers().get(i));
         }
         /*CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
@@ -575,7 +574,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         String chosenMoves = in.nextLine();
         if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
-            virtualClient.firePropertyChange("Quit", null, null);
+            virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
         }
@@ -603,7 +602,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         String chosenAssistant = in.nextLine();
         if(chosenAssistant.equalsIgnoreCase("QUIT")) {
-            virtualClient.firePropertyChange("Quit", null, null);
+            virtualClient.firePropertyChange("Quit", null, "Quit");
         }
         virtualClient.firePropertyChange("PickAssistant", null, chosenAssistant);
     }
@@ -613,7 +612,12 @@ public class CLI implements Runnable, ListenerInterface {
         showClouds();
         System.out.print(">");
         String chosenCloud = in.nextLine();
-        virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
+        if(chosenCloud.toUpperCase().equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
+
+        }
     }
 
     //chiamato dal controller, quando ritorna lo studente esso viene salvato in una variabile
@@ -624,7 +628,11 @@ public class CLI implements Runnable, ListenerInterface {
         showEntrance();
         System.out.print(">");
         chosenStudent = in.nextLine();
-        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        if(chosenStudent.toUpperCase().equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        }
     }
 
     //prende come input lo studente scelto nella richiesta precedente
@@ -633,7 +641,11 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenDestination = input.nextLine();
-        virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
+        if(chosenDestination.toUpperCase().equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
+        }
     }
 
     public void askCharacterCard(ArrayList<CharacterCard> cards) {
@@ -643,9 +655,10 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.print(">");
             String chosenCharacter = in.nextLine();
             if(chosenCharacter.equalsIgnoreCase("QUIT")) {
-                virtualClient.firePropertyChange("Quit", null, null);
+                virtualClient.firePropertyChange("Quit", null, "Quit");
+            } else {
+                virtualClient.firePropertyChange("PickCharacter", null, chosenCharacter);
             }
-            virtualClient.firePropertyChange("PickCharacter", null, chosenCharacter);
         }
     }
 
@@ -657,8 +670,15 @@ public class CLI implements Runnable, ListenerInterface {
         showIslandsTable();
         System.out.print(">");
         String chosenIsland = in.nextLine();
-        virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
-        modelView.setGrannyHerbsAction(false);
+        if(chosenIsland.equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickIsland", null, chosenIsland);
+        }
+
+        if(modelView.isGrannyHerbsAction()) {
+            modelView.setGrannyHerbsAction(false);
+        }
     }
 
     public void askPawnType() {
@@ -666,7 +686,11 @@ public class CLI implements Runnable, ListenerInterface {
         showPawnType();
         System.out.print(">");
         String chosenPawnType = in.nextLine();
-        virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
+        if(chosenPawnType.equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
+        }
     }
 
     public void askStudentMonk(CharacterCard monk) {
@@ -676,7 +700,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.print(">");
         chosenStudent = in.nextLine();
-        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        }
 
     }
 
@@ -687,7 +715,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.print(">");
         chosenStudent = in.nextLine();
-        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        }
 
     }
 
@@ -698,7 +730,12 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.print(">");
         chosenStudent = in.nextLine();
-        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+
+        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        }
 
     }
 
@@ -707,13 +744,19 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println("How many students from dining room to entrance do you want to change? [1,2 for Minestrel, 1,2,3, for Jester]");
         int moves = 0;
         while(true) {
-            System.out.print(">");
-            moves = in.nextInt();
-            if((moves == 1 || moves == 2) && modelView.isMinestrelAction()) break;
-            else if((moves == 1 || moves == 2 || moves == 3) && modelView.isJesterAction()) break;
-            else {
-                System.out.println("Choose [1,2] for Minestrel, [1,2,3] for Jester");
+            try {
+                System.out.print(">");
+                moves = in.nextInt();
+                if((moves == 1 || moves == 2) && modelView.isMinestrelAction()) break;
+                else if((moves == 1 || moves == 2 || moves == 3) && modelView.isJesterAction()) break;
+                else {
+                    System.out.println("Choose [1,2] for Minestrel, [1,2,3] for Jester");
+                }
+            } catch(NumberFormatException e) {
+                showError("Error: NumberFormatException. Please insert a number!");
+                askCharacterActionsNumber();
             }
+
         }
         clientConnection.sendUserInput(new PickCharacterActionsNum(moves));
     }
@@ -724,7 +767,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.print(">");
         chosenStudent = in.nextLine();
-        virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+            virtualClient.firePropertyChange("Quit", null, "Quit");
+        } else {
+            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+        }
 
     }
 
@@ -785,6 +832,7 @@ public class CLI implements Runnable, ListenerInterface {
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid parameter, it must be a numeric value.");
+                choosePlayerNumber();
             }
         }
         clientConnection.sendUserInput(new PlayersNumberChoice(numOfPlayer));
@@ -996,11 +1044,22 @@ public class CLI implements Runnable, ListenerInterface {
                 System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
                     showIslandsTable();
+                    System.out.println("\n");
                     showClouds();
+                    System.out.println("\n");
+
                     showMotherNature();
+                    System.out.println("\n");
+
                     showAvailableCharacters();
+                    System.out.println("\n");
+
                     showCoins();
+                    System.out.println("\n");
+
                     showOtherDiningRooms();
+                    System.out.println("\n");
+
                 }
                 if(modelView.isPianification()) {
                     showAvailableCharacters();

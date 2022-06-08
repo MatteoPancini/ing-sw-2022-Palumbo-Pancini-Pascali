@@ -116,6 +116,8 @@ public class ActionHandler {
             }*/
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);
+        } else if(answer instanceof NoWinnerGameNotification) {
+            cli.endGameMessage();
         }
     }
 
@@ -144,39 +146,78 @@ public class ActionHandler {
                 cli.askDestination();
             }
             case "PICK_STUDENT" -> {
-                if(modelView.isJesterAction()) {
-                    if(modelView.getCharacterAction() % 2 == 0) {
-                        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                            if(Objects.equals(c.getName().toString(), "JESTER")) {
-                                cli.askStudentJester(c);
-                                break;
+                if(cli != null) {
+                    if(modelView.isJesterAction()) {
+                        if(modelView.getCharacterAction() % 2 == 0) {
+                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                                if(Objects.equals(c.getName().toString(), "JESTER")) {
+                                    cli.askStudentJester(c);
+                                    break;
+                                }
                             }
+                        } else {
+                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                         }
+                        modelView.setCharacterAction(modelView.getCharacterAction() + 1);
+
+                    } else if(modelView.isMinestrelAction()) {
+                        if(modelView.getCharacterAction() % 2 == 0) {
+                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                                if(Objects.equals(c.getName().toString(), "MINESTREL")) {
+                                    cli.askStudentMinestrel(c);
+                                    break;
+                                }
+                            }
+                        } else {
+                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+
+                        }
+                        modelView.setCharacterAction(modelView.getCharacterAction() + 1);
+
                     } else {
                         cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     }
-                    modelView.setCharacterAction(modelView.getCharacterAction() + 1);
-
-                } else if(modelView.isMinestrelAction()) {
-                    if(modelView.getCharacterAction() % 2 == 0) {
-                        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                            if(Objects.equals(c.getName().toString(), "MINESTREL")) {
-                                cli.askStudentMinestrel(c);
-                                break;
+                } else if(gui != null) {
+                    if(modelView.isJesterAction()) {
+                        if(modelView.getCharacterAction() % 2 == 0) {
+                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                                if(Objects.equals(c.getName().toString(), "JESTER")) {
+                                    cli.askStudentJester(c);
+                                    break;
+                                }
                             }
+                        } else {
+                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                         }
+                        modelView.setCharacterAction(modelView.getCharacterAction() + 1);
+
+                    } else if(modelView.isMinestrelAction()) {
+                        if(modelView.getCharacterAction() % 2 == 0) {
+                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                                if(Objects.equals(c.getName().toString(), "MINESTREL")) {
+                                    cli.askStudentMinestrel(c);
+                                    break;
+                                }
+                            }
+                        } else {
+                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+
+                        }
+                        modelView.setCharacterAction(modelView.getCharacterAction() + 1);
+
                     } else {
-                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
-
+                        gui.changeStage("actions/PickStudent.fxml");
                     }
-                    modelView.setCharacterAction(modelView.getCharacterAction() + 1);
-
-                } else {
-                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                 }
+
 
             }
             case "PICK_MOVES_NUMBER" -> {
+                if(modelView.isJesterAction()) {
+                    modelView.setJesterAction(false);
+                } else if(modelView.isMinestrelAction()) {
+                    modelView.setMinestrelAction(false);
+                }
                 cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
 
             }

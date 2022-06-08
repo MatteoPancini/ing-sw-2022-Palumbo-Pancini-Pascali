@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.messages.servertoclient.DynamicAnswer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
@@ -203,6 +204,7 @@ public class Controller implements PropertyChangeListener {
         System.out.println("Finished setupGame");
         turnController.setCurrentPlayer(game.getCurrentPlayer());
 
+        gameHandler.sendBroadcast(new DynamicAnswer("REMEMBER: During your turn type \"QUIT\" to quit the game!\n", false));
         turnController.startPianificationPhase();
     }
     @Override
