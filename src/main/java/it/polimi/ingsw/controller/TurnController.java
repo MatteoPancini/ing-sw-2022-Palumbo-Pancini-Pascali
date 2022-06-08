@@ -314,7 +314,7 @@ public class TurnController {
                 cardPlayed = c;
             }
         }
-        System.out.println("Sono in playAssistantCard di " + cardPlayed);
+        System.out.println("Sono in playAssistantCard di " + cardPlayed.getName());
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
             System.out.println("aggiungo carta");
@@ -545,6 +545,7 @@ public class TurnController {
                 }
             }
         }
+
 
         if(lastRound) {
             fromCloudToEntrance(null);
@@ -824,6 +825,7 @@ public class TurnController {
 
         //cloud.removeStudents();
 
+
         if(checkWin()) {
             Player winner = checkWinner();
             if(controller.getGame().getPlayers().size() == 4) {
@@ -839,8 +841,14 @@ public class TurnController {
                 gameHandler.sendExcept(new LoseNotification(winner.getNickname()), winner.getPlayerID());
             }
 
-            gameHandler.endGame();
+            //gameHandler.endGame();
         }
+
+        System.err.println(checkWin());
+
+
+
+
 
 
         for(int i= 0; i< controller.getGame().getGameBoard().getLastAssistantUsed().size(); i++) {
@@ -873,19 +881,36 @@ public class TurnController {
     }
 
     public boolean checkWin() {
+        System.out.println("Entro in checkWin");
 
 
 
         if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
+            System.out.println("Enrtro 1");
             return true;
         }
 
         for(Player p: controller.getGame().getActivePlayers()) {
-            if(p.getBoard().getTowerArea().getTowerArea().size() == 0) return true;
+            if(controller.getGame().getPlayers().size() == 4) {
+                if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
+                    System.out.println("Enrtro 2");
+
+                    return true;
+                }
+            } else {
+                if(p.getBoard().getTowerArea().getTowerArea().size() == 0) {
+                    System.out.println("Enrtro 2");
+
+                    return true;
+                }
+            }
+
             //if(p.getAssistantDeck().getDeck().size() == 0) return true;
         }
 
         if(lastRound) { // se si è avverata la condizione di lastRound faccio il check solo per l'ultimo giocatore
+            System.out.println("Enrtro 3");
+
             for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
                 if(i != controller.getGame().getActivePlayers().size() - 1) {
                     return false;

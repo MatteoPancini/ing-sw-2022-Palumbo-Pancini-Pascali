@@ -139,6 +139,90 @@ public class NewTurnControllerTest {
     }
 
     @Test
+    @DisplayName("Turn 4 players")
+    public void fourPTurn() {
+        gameHandlerStub.setControllerStub(controllerStub);
+
+        matteo.setWizard(Wizards.KING);
+        System.out.println("\n");
+        cisco.setWizard(Wizards.MONACH);
+        System.out.println("\n");
+        gigiox.setWizard(Wizards.FOREST);
+        System.out.println("\n");
+        mario.setWizard(Wizards.WITCH);
+        System.out.println("\n");
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().addPlayer(matteo);
+        controllerStub.getGame().addPlayer(cisco);
+        controllerStub.getGame().addPlayer(gigiox);
+        controllerStub.getGame().addPlayer(mario);
+
+        //controllerStub.getGame().setPlayersNumber(4);
+        gameHandlerStub.setPlayersNumber(4);
+        assertEquals(gameHandlerStub.getController(), controllerStub);
+        assertEquals(gameHandlerStub.getController(), controllerStub);
+        assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
+        gameHandlerStub.setTeamMode(true);
+        gameHandlerStub.setupTeams();
+
+        for(Player p : controllerStub.getGame().getPlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            System.out.println(p.getNickname() + " " + p.getIdTeam() + " " + p.isTeamLeader());
+        }
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).getIdTeam(), controllerStub.getGame().getActivePlayers().get(2).getIdTeam());
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).getIdTeam(), controllerStub.getGame().getActivePlayers().get(3).getIdTeam());
+
+        assertEquals(controllerStub.getGame().getActivePlayers().get(0).isTeamLeader(), true);
+        assertEquals(controllerStub.getGame().getActivePlayers().get(1).isTeamLeader(), true);
+        assertEquals(controllerStub.getGame().getActivePlayers().get(2).isTeamLeader(), false);
+        assertEquals(controllerStub.getGame().getActivePlayers().get(3).isTeamLeader(), false);
+
+        controllerStub.getGame().setCurrentPlayer(matteo);
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+        controllerStub.newSetupGame();
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
+        controllerStub.propertyChange(ev1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
+        controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(1).getName());
+        controllerStub.propertyChange(ev3);
+        PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(2).getName());
+        controllerStub.propertyChange(ev4);
+        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev5);
+        PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev6);
+
+        PropertyChangeEvent ev7 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev7);
+        PropertyChangeEvent ev8 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        controllerStub.propertyChange(ev8);
+
+        PropertyChangeEvent ev9 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        controllerStub.propertyChange(ev9);
+        PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.propertyChange(ev10);
+
+        PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
+        controllerStub.propertyChange(ev11);
+
+
+
+        PropertyChangeEvent ev12 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
+        controllerStub.propertyChange(ev12);
+
+
+
+
+    }
+
+    @Test
     @DisplayName("Pianification Phase")
     public void pianificationPhase() {
         matteo.setWizard(Wizards.KING);
