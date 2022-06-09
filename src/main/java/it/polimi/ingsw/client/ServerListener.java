@@ -58,6 +58,7 @@ public class ServerListener implements Runnable {
             } catch(IOException | ClassNotFoundException e) {
                 System.out.println("Errore nella deserializzazione");
                 e.printStackTrace();
+                closeConnection();
                 break;
             }
         }

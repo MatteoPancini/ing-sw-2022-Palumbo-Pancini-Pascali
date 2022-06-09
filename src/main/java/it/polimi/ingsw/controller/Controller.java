@@ -60,6 +60,7 @@ public class Controller implements PropertyChangeListener {
         System.out.println("Starting setupGame");
 
         int studentsNumber;
+        System.out.println(game.getPlayersNumber());
         if(game.getPlayersNumber() == 3) {
             studentsNumber = 9;
         }

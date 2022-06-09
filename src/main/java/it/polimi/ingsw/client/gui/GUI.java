@@ -126,6 +126,14 @@ public class GUI extends Application implements ListenerInterface {
     private static final String LOADING_PAGE = "loading.fxml";
     private static final String WIZARD_MENU = "wizardMenu.fxml";
     private static final String MAIN_SCENE = "mainScene.fxml";
+    private static final String PICK_ASSISTANT = "PickAssistant.fxml";
+    private static final String PICK_CHARACTER = "PickAssistant.fxml";
+    private static final String PICK_CLOUD = "PickAssistant.fxml";
+    private static final String PICK_DESTINATION = "PickAssistant.fxml";
+    private static final String PICK_ISLAND = "PickAssistant.fxml";
+    private static final String PICK_PAWN_TYPE = "PickAssistant.fxml";
+    private static final String PICK_STUDENT = "PickAssistant.fxml";
+
 
 
     public GUI() {
@@ -199,7 +207,7 @@ public class GUI extends Application implements ListenerInterface {
 
 
     public void setupGui() {
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU));
+        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT, PICK_CHARACTER, PICK_CLOUD, PICK_DESTINATION, PICK_ISLAND, PICK_PAWN_TYPE, PICK_STUDENT));
         try {
             for(String pathFxml : fxmlList) {
 

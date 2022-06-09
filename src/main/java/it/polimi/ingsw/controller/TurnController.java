@@ -505,6 +505,7 @@ public class TurnController {
 
 
     public void moveMotherNature(int moves) {
+        System.out.println("entro in moveMotherNature");
         int currPosition = controller.getGame().getGameBoard().getMotherNature().getPosition();
         int newPosition;
 
@@ -526,6 +527,7 @@ public class TurnController {
 
 
         if(expertController != null) {
+            System.out.println("Non devo esserci entrato");
             if(!expertController.isGrannyHerbsEffect()) {
                 for(int i = 0; i< controller.getGame().getGameBoard().getIslands().size(); i++) {
                     if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
@@ -533,15 +535,17 @@ public class TurnController {
                     }
                 }
             } else {
-                System.err.println("Me ne vado senza fare niente");
+                System.out.println("Me ne vado senza fare niente");
                 expertController.setGrannyHerbsEffect(false);
             }
 
         } else {
+            System.out.println("Entro pre-checkIslandInfluence");
             //checkIslandInfluence(newPosition);
             for(int i = 0; i< controller.getGame().getGameBoard().getIslands().size(); i++) {
                 if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
                     checkIslandInfluence(i+1);
+                    break;
                 }
             }
         }
@@ -568,7 +572,7 @@ public class TurnController {
 
          */
 
-        System.err.println("Entro in checkIsland di " + controller.getGame().getGameBoard().getIslands().get(islandId-1).getIslandID());
+        System.out.println("Entro in checkIsland di " + controller.getGame().getGameBoard().getIslands().get(islandId-1).getIslandID());
 
         System.out.println("island ha " + controller.getGame().getGameBoard().getIslands().get(islandId-1).getStudents().size());
 
@@ -656,6 +660,9 @@ public class TurnController {
             }
         }
 
+        System.out.println("\nTeam 1: "+ team1);
+        System.out.println("Team 2: "+ team2);
+
         if(influenceWinner != null)
             System.out.println("\nMax island influence " + islandInfluence + " of " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
 
@@ -722,6 +729,7 @@ public class TurnController {
 
         if(influenceWinner != null) {
             if(influenceWinner.getBoard().getTowerArea().getTowerArea().size() == 0) {
+                System.out.println("Entro qua");
                 if(controller.getGame().getPlayers().size() == 4) {
                     for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
                         if(controller.getGame().getActivePlayers().get(i).getIdTeam() == controller.getGame().getCurrentPlayer().getIdTeam()) {
@@ -839,10 +847,10 @@ public class TurnController {
                 gameHandler.sendExcept(new LoseNotification(winner.getNickname()), winner.getPlayerID());
             }
 
-            //gameHandler.endGame();
+            gameHandler.endGame();
         }
 
-        System.err.println(checkWin());
+        //System.err.println(checkWin());
 
 
 
