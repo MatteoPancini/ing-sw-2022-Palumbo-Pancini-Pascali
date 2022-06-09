@@ -22,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.prefs.NodeChangeEvent;
 
 public class PickController implements GUIController{
@@ -298,6 +299,65 @@ public class PickController implements GUIController{
     }
     public void askStudent() {
         gui.changeStage("PickStudent.fxml");
+        redButton.setVisible(false);
+        yellowButton.setVisible(false);
+        blueButton.setVisible(false);
+        greenButton.setVisible(false);
+        pinkButton.setVisible(false);
+
+        if(gui.getModelView().isJesterAction()) {
+            if(gui.getModelView().getCharacterAction() % 2 == 0) {
+                for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
+                    if(Objects.equals(c.getName().toString(), "JESTER")) {
+                        printStudentButtons(c);
+                    }
+                }
+            } else {
+                askStudent();
+            }
+            gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
+
+        } else if(gui.getModelView().isMinestrelAction()) {
+            if(gui.getModelView().getCharacterAction() % 2 == 0) {
+                for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
+                    if(Objects.equals(c.getName().toString(), "MINESTREL")) {
+                        printStudentButtons(c);
+                    }
+                }
+            } else {
+                askStudent();
+
+            }
+            gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
+
+        } else {
+            for(Student s : gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
+                printStudentButton(s);
+            }
+        }
+
+    }
+
+    private void printStudentButton(Student s) {
+        switch(s.getType().toString()) {
+            case "BLUE" -> {
+                blueButton.setVisible(true);
+            } case "RED" -> {
+                ;redButton.setVisible(true);
+            } case "GREEN" -> {
+                ;greenButton.setVisible(true);
+            } case "PINK" -> {
+                pinkButton.setVisible(true);
+            } case "YELLOW" -> {
+                yellowButton.setVisible(true);
+            }
+        }
+    }
+
+    private void printStudentButtons(CharacterCard c) {
+        for(Student s : c.getStudents()) {
+            printStudentButton(s);
+        }
     }
 
     public void askPawnType() {

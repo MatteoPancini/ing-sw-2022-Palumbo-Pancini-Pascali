@@ -2,6 +2,8 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
+import it.polimi.ingsw.client.gui.controllers.LoadingController;
+import it.polimi.ingsw.client.gui.controllers.PickController;
 import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
@@ -178,6 +180,7 @@ public class ActionHandler {
                         cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     }
                 } else if(gui != null) {
+                    /*
                     if(modelView.isJesterAction()) {
                         if(modelView.getCharacterAction() % 2 == 0) {
                             for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
@@ -206,8 +209,13 @@ public class ActionHandler {
                         modelView.setCharacterAction(modelView.getCharacterAction() + 1);
 
                     } else {
-                        gui.changeStage("actions/PickStudent.fxml");
+                        PickController controller = (PickController) gui.getControllerFromName("PickStudent.fxml");
+                        controller.askStudent();
                     }
+
+                     */
+                    PickController controller = (PickController) gui.getControllerFromName("PickStudent.fxml");
+                    controller.askStudent();
                 }
 
 

@@ -540,7 +540,12 @@ public class CLI implements Runnable, ListenerInterface {
     public void showDiningRoom(Player p) {
         CLITable st = new CLITable();
 
-        st.setHeaders(p.getNickname().toString());
+        if(modelView.isFourPlayers()) {
+            st.setHeaders(p.getNickname().toString() + " team " + p.getIdTeam());
+        } else {
+            st.setHeaders(p.getNickname().toString());
+        }
+
         st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
         st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
         st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
@@ -1044,22 +1049,11 @@ public class CLI implements Runnable, ListenerInterface {
                 System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
                     showIslandsTable();
-                    System.out.println("\n");
                     showClouds();
-                    System.out.println("\n");
-
-                    showMotherNature();
-                    System.out.println("\n");
-
+                    //showMotherNature();
                     showAvailableCharacters();
-                    System.out.println("\n");
-
                     showCoins();
-                    System.out.println("\n");
-
                     showOtherDiningRooms();
-                    System.out.println("\n");
-
                 }
                 if(modelView.isPianification()) {
                     showAvailableCharacters();

@@ -234,6 +234,7 @@ public class GameHandler {
         sendBroadcast(new DynamicAnswer("Game is started", false));
         if(playersNumber == 4) {
             sendBroadcast(new FourPModeNotification());
+            setupTeams();
         }
         //game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         game.setCurrentPlayer(game.getActivePlayers().get(0));

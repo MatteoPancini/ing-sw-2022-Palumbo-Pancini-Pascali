@@ -78,15 +78,25 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getActivePlayers().add(matteo);
         controllerStub.getGame().getActivePlayers().add(cisco);
         controllerStub.getGame().getActivePlayers().add(gigiox);
+        controllerStub.getGame().getPlayers().add(matteo);
+        controllerStub.getGame().getPlayers().add(cisco);
+        controllerStub.getGame().getPlayers().add(gigiox);
+
+        for(Player p : controllerStub.getGame().getPlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
 
         controllerStub.getGame().setPlayersNumber(3);
         controllerStub.getGame().setCurrentPlayer(matteo);
+        controllerStub.newSetupGame();
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
         controllerStub.getTurnController().setCurrentPlayer(matteo);
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
     }
 
     @Test
@@ -184,7 +194,7 @@ public class NewTurnControllerTest {
 
         controllerStub.getGame().setCurrentPlayer(matteo);
         controllerStub.getTurnController().setCurrentPlayer(matteo);
-        controllerStub.newSetupGame();
+        setupGame();
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
         controllerStub.propertyChange(ev1);
@@ -194,20 +204,24 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev3);
         PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(2).getName());
         controllerStub.propertyChange(ev4);
-        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        PropertyChangeEvent ev5 = new PropertyChangeEvent(1, "PickStudent", null, new Student(PawnType.RED));
         controllerStub.propertyChange(ev5);
         PropertyChangeEvent ev6 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
         controllerStub.propertyChange(ev6);
 
-        PropertyChangeEvent ev7 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        PropertyChangeEvent ev7 = new PropertyChangeEvent(1, "PickStudent", null, new Student(PawnType.RED));
         controllerStub.propertyChange(ev7);
-        PropertyChangeEvent ev8 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
+        PropertyChangeEvent ev8 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
         controllerStub.propertyChange(ev8);
 
-        PropertyChangeEvent ev9 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(PawnType.RED.getPawnID()).getTableStudentsNum(), 2);
+
+        PropertyChangeEvent ev9 = new PropertyChangeEvent(1, "PickStudent", null, new Student(PawnType.RED));
         controllerStub.propertyChange(ev9);
-        PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        PropertyChangeEvent ev10 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(1));
         controllerStub.propertyChange(ev10);
+
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getStudents().size(), 2);
 
         PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
         controllerStub.propertyChange(ev11);
@@ -578,27 +592,30 @@ public class NewTurnControllerTest {
             if(controllerStub.getGame().getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
-                    if(colorsCounter3P < 2) {
-                        colorsCounter3P++;
-                        System.out.println("change");
-
-                    }
+                }
+                if(colorsCounter3P < 2) {
+                    colorsCounter3P++;
+                    System.out.println("change");
                 }
             } else if(controllerStub.getGame().getPlayersNumber() == 2) {
                 System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
-                    if(k == towersNumber) {
-                        System.out.println("change");
-                        colorsCounter2P++;
-                    }
+                }
+                if(colorsCounter2P < 2) {
+                    System.out.println("change");
+                    colorsCounter2P++;
                 }
             } else if(controllerStub.getGame().getPlayersNumber() == 4) {
+                System.out.println("Entro QUI");
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
-                    p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
+                    for(int l=1; l<= towersNumber; l++) {
+                        p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
+                    }
                     if(colorsCounter4P < 3) colorsCounter4P++;
                 }
             }
+
         }
 
         //System.out.println("metto madre natura");
