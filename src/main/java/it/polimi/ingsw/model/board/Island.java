@@ -79,19 +79,25 @@ public class Island implements Serializable {
     }
 
     public void doubleMerge() {
-        System.out.println("Faccio doble merge");
+        System.out.println("Faccio doble merge DI " + islandID);
         Island iBefore = null;
         Island iAfter = null;
+
         for(int i=0; i<board.getIslands().size(); i++) {
-            if(board.getIslands().get(i+1).getIslandID() == islandID) {
-                iBefore = board.getIslands().get(i);
-                if(board.getIslands().get(i+1).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) { //sono nell'ultima
-                    iBefore = board.getIslands().get(0);
-                    iAfter = board.getIslands().get(i);
-                } else {
-                    iAfter = board.getIslands().get(i+2);
+            if(islandID != 1) {
+                if(board.getIslands().get(i+1).getIslandID() == islandID) {
+                    iBefore = board.getIslands().get(i);
+                    if(board.getIslands().get(i+1).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) { //sono nell'ultima
+                        iBefore = board.getIslands().get(0);
+                        iAfter = board.getIslands().get(i);
+                    } else {
+                        iAfter = board.getIslands().get(i+2);
+                    }
+                    break;
                 }
-                break;
+            } else {
+                iAfter = board.getIslands().get(1);
+                iBefore = board.getIslands().get(board.getIslands().size() - 1);
             }
 
         }
@@ -195,31 +201,33 @@ public class Island implements Serializable {
                     else return false;
                 }
             }
-        }
-
-        else {
-            /*
-            if(board.getIslands().get(11).hasTower() == true) {
-                if(board.getIslands().get(11).getTower().getColor() == board.getIslands().get(0).getTower().getColor()) return true;
-                else return false;
+        } else {
+            System.out.println("Sono nella prima");
+            if(board.getIslands().get(board.getIslands().size() -1).hasTower() == true) {
+                if(board.getIslands().get(board.getIslands().size() -1).getTower().getColor() == tower.getColor()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-
-            else return false;
-
-             */
+            /*
             for(int i=0; i<board.getIslands().size(); i++) {
-                if(board.getIslands().get(i) == null) {
-                    if(board.getIslands().get(i-1).hasTower() == true) {
-                        if(board.getIslands().get(i-1).getTower().getColor() == tower.getColor()) {
+                System.out.println(board.getIslands().size() + " , " + i);
+                if(i == board.getIslands().size() - 1) {
+                    System.out.println("ENTRO");
+                    if(board.getIslands().get(i).hasTower() == true) {
+                        if(board.getIslands().get(i).getTower().getColor() == tower.getColor()) {
                             return true;
                         } else {
                             return false;
                         }
                     }
-                } else {
-                    return false;
                 }
+
+
             }
+
+             */
         }
         return false;
     }
@@ -301,6 +309,7 @@ public class Island implements Serializable {
     }
 
     public void moveTowerToArea(TowerArea towerArea) {
+        System.out.println("Muovo torre to area ");
         for(Tower t : mergedTowers) {
             towerArea.addTowers(t);
         }

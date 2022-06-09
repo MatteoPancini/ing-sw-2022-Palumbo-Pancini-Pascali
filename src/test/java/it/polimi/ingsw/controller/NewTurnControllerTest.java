@@ -4,6 +4,7 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
+import it.polimi.ingsw.model.board.Professor;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Assistants;
@@ -226,13 +227,8 @@ public class NewTurnControllerTest {
         PropertyChangeEvent ev11 = new PropertyChangeEvent(1, "PickMovesNumber", null, 1);
         controllerStub.propertyChange(ev11);
 
-
-
         PropertyChangeEvent ev12 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev12);
-
-
-
 
     }
 
@@ -470,6 +466,16 @@ public class NewTurnControllerTest {
 
         assertEquals(controllerStub.getGame().getGameBoard().getIslands().size(), 10);
 
+        cisco.getBoard().getProfessorTable().getCellByColor(PawnType.GREEN).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.GREEN));
+        cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
+        cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.GREEN).setOwner(cisco);
+        controllerStub.getGame().getGameBoard().getIslands().get(9).addStudent(new Student(PawnType.GREEN));
+        controllerStub.getTurnController().moveMotherNature(9);
+        controllerStub.getGame().getGameBoard().getIslands().get(0).addStudent(new Student(PawnType.GREEN));
+        controllerStub.getTurnController().moveMotherNature(1);
+
+
 
     }
 
@@ -544,6 +550,57 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev17);
         PropertyChangeEvent ev18 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(1));
         controllerStub.propertyChange(ev18);
+
+    }
+
+
+    @Test
+    @DisplayName("Change Island Influence Test")
+    public void changeIslandInfluence() {
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+
+        for(Student t : controllerStub.getTurnController().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
+            System.out.println(t.getType());
+        }
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        cisco.getBoard().getProfessorTable().getCellByColor(PawnType.RED).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED).setOwner(cisco);
+        cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.RED.getPawnID()).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(1).addStudent(new Student(PawnType.RED));
+
+        controllerStub.getTurnController().checkIslandInfluence(2);
+
+        System.err.println(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().get(0).getColor().toString());
+        System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(1).getStudents().size());
+
+        matteo.getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.RED));
+        matteo.getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.RED));
+        matteo.getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.RED));
+        controllerStub.getTurnController().setStudentToMove(new Student(PawnType.RED));
+        controllerStub.getTurnController().checkProfessorInfluence();
+        controllerStub.getTurnController().moveMotherNature(1);
+
+        System.out.println("Island 1 has: " + controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().size() + " towers di colore " + controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().get(0).getColor().toString());
 
     }
 

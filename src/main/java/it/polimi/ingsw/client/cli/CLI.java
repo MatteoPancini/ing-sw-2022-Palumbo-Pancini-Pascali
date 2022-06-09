@@ -810,6 +810,8 @@ public class CLI implements Runnable, ListenerInterface {
                     return;
                 } else {
                     System.out.println("Wizard not available!");
+                    System.out.println(">Choose your wizard!");
+                    System.out.print(">");
                 }
             } catch (IllegalArgumentException e) {
                 System.err.println(ANSI_RED + "Invalid input! Please provide one of the accepted wizards."+ ANSI_RESET);

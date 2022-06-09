@@ -162,19 +162,25 @@ public class InputChecker {
     //trasforma un input in un pawntype (es: 'y' -> 'YELLOW')
     public PawnType toPawnType(String input) {
         PawnType type = null;
-        char firstLetter = input.charAt(0);
-        switch(Character.toUpperCase(firstLetter)) {
-            case 'Y' -> type = PawnType.YELLOW;
-            case 'B' -> type = PawnType.BLUE;
-            case 'P' -> type = PawnType.PINK;
-            case 'R' -> type = PawnType.RED;
-            case 'G' -> type = PawnType.GREEN;
+        try {
+            char firstLetter = input.charAt(0);
+            switch(Character.toUpperCase(firstLetter)) {
+                case 'Y' -> type = PawnType.YELLOW;
+                case 'B' -> type = PawnType.BLUE;
+                case 'P' -> type = PawnType.PINK;
+                case 'R' -> type = PawnType.RED;
+                case 'G' -> type = PawnType.GREEN;
+            }
+        } catch(StringIndexOutOfBoundsException e) {
+            return null;
         }
+
         return type;
     }
 
     public boolean isStudentInEntrance(String input) {
         PawnType type = toPawnType(input);
+        if(type == null) return false;
         //System.out.println("Tipo passato: " + type.toString());
         for(int i = 0; i < modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size(); i++) {
             //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
@@ -227,7 +233,17 @@ public class InputChecker {
             if (island > 0 && island < 13) {
                 int realIsland = island - 1;
                 System.out.println("invio island" + realIsland);
-                action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(realIsland));
+                for(int i=0; i<modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
+                    if(realIsland == modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID() - 1) {
+                        action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(realIsland));
+                        break;
+                    }
+                }
+                if(action == null) {
+                    cli.showError("Error: merged island! Choose a valid number ID");
+                    cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                }
+
             } else {
                 cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                         "the remaining islands");
@@ -244,7 +260,12 @@ public class InputChecker {
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
         if (isStudentInEntrance(studentType)) {
-            action = new PickStudent(new Student(toPawnType(studentType)));
+            PawnType type = toPawnType(studentType);
+            if(type == null) {
+                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+            } else {
+                action = new PickStudent(new Student(type));
+            }
         } else {
             cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
         }
