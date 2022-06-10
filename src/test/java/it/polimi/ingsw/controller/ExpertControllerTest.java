@@ -128,6 +128,11 @@ public class ExpertControllerTest {
         assertEquals(controllerStub.getGame().getCurrentPlayer().getMyCoins(), 2);
 
         System.out.println(controllerStub.getGame().getCurrentPlayer().getMyCoins());
+        System.out.println("Prima" + controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getInitialCost());
+
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).incrementPrice();
+
+        System.out.println("Dopo" + controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getInitialCost());
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev1);
