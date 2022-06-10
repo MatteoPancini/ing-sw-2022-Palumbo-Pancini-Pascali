@@ -428,7 +428,13 @@ public class TurnController {
 
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
         System.out.println("Studente " + studentToMove.getType());
-        controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
+        if(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(studentToMove.getType().getPawnID()).getTableStudentsNum() == 9) {
+            gameHandler.sendSinglePlayer(new DynamicAnswer("Your DiningRoom is full. Please choose an island!", false), controller.getGame().getCurrentPlayer().getPlayerID());
+            askStudentDestination();
+        } else {
+            controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
+        }
+
         //System.out.println(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin());
 
         if(expertController != null) {
@@ -486,7 +492,10 @@ public class TurnController {
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
         for(Island i : controller.getGame().getGameBoard().getIslands()){
-            if(chosenIsland.getIslandID() == i.getIslandID()) i.addStudent(studentToMove);
+            if(chosenIsland.getIslandID() == i.getIslandID()) {
+                System.out.println("Put student on island " + i.getIslandID());
+                i.addStudent(studentToMove);
+            }
         }
 
         controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);

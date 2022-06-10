@@ -105,10 +105,20 @@ public class Island implements Serializable {
         System.out.println("Island after: " + iAfter.getIslandID());
 
         System.out.println("Aggiungo " + islandID + " e " + iAfter.getIslandID() + " a " + iBefore.getIslandID());
-        iBefore.getMergedIslands().add(this);
-        iBefore.getMergedIslands().add(iAfter);
-        iBefore.getMergedTowers().add(tower);
-        iBefore.getMergedTowers().add(iAfter.getTower());
+        for(Island i : mergedIsland) {
+            iBefore.getMergedIslands().add(i);
+        }
+        for(Island i : iAfter.getMergedIslands()) {
+            iBefore.getMergedIslands().add(i);
+        }
+
+        for(Tower t : mergedTowers) {
+            iBefore.getMergedTowers().add(t);
+        }
+
+        for(Tower t : iAfter.getMergedTowers()) {
+            iBefore.getMergedTowers().add(t);
+        }
 
         for(Student s : students) {
             iBefore.getStudents().add(s);
@@ -143,10 +153,20 @@ public class Island implements Serializable {
         System.out.println("Faccio merge");
         if(this.islandID < island.getIslandID()) {
             System.out.println("Aggiungo " + island.getIslandID() + " a " + islandID);
-            mergedIsland.add(island);
-            System.err.println("Merged island " + mergedIsland.size());
-            mergedTowers.add(island.getTower());
+            for(Island i : island.getMergedIslands()) {
+                System.out.println("Aggiungo isola");
+                mergedIsland.add(i);
+            }
+
+
+            System.out.println("Merged island size " + island.getMergedIslands().size());
+            System.out.println(island.getMergedTowers().size());
+            for(Tower t : island.getMergedTowers()) {
+                System.out.println("Aggiungo torre");
+                mergedTowers.add(t);
+            }
             for(Student s : island.getStudents()) {
+                System.out.println("Aggiungo stude");
                 students.add(s);
             }
             island.setTower(null);
@@ -160,10 +180,20 @@ public class Island implements Serializable {
             }
         } else {
             System.out.println("Aggiungo " + islandID + " a " + island.getIslandID());
-            island.getMergedIslands().add(this);
-            System.err.println("Merged island " + island.getMergedIslands().size());
-            island.getMergedTowers().add(this.tower);
+            for(Island i : mergedIsland) {
+                System.out.println("Aggiungo isola");
+
+                island.getMergedIslands().add(i);
+            }
+
+            for(Tower t : mergedTowers) {
+                System.out.println("Aggiungo torre");
+                island.getMergedTowers().add(t);
+            }
+
             for(Student s : getStudents()) {
+                System.out.println("Aggiungo studenti");
+
                 island.addStudent(s);
             }
             this.tower = null;
@@ -303,6 +333,7 @@ public class Island implements Serializable {
     }
 
     public void setTower(Tower tower) {
+        System.out.println("Setto torre");
         this.tower = tower;
         mergedTowers = new ArrayList<Tower>();
         mergedTowers.add(tower);

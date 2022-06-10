@@ -601,7 +601,6 @@ public class NewTurnControllerTest {
         controllerStub.getTurnController().moveMotherNature(1);
 
         System.out.println("Island 1 has: " + controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().size() + " towers di colore " + controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().get(0).getColor().toString());
-
     }
 
     public void setupGame() {

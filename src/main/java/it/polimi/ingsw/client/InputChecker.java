@@ -127,7 +127,10 @@ public class InputChecker {
             case "QUIT" -> {
                 quitGame();
             }
-            default -> action = new PickAssistant();
+            default -> {
+                cli.showError("Error: you chose an assistant card already played by another player!");
+                cli.askAssistant();
+            }
         }
         return action;
     }
@@ -231,11 +234,12 @@ public class InputChecker {
         try {
             int island = Integer.parseInt(islandID);
             if (island > 0 && island < 13) {
-                int realIsland = island - 1;
-                System.out.println("invio island" + realIsland);
+                //int realIsland = island - 1;
+                //System.out.println("invio island" + island);
                 for(int i=0; i<modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
-                    if(realIsland == modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID() - 1) {
-                        action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(realIsland));
+                    if(island == modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()) {
+                        action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(i));
+                        System.out.println("invio island" + island);
                         break;
                     }
                 }
