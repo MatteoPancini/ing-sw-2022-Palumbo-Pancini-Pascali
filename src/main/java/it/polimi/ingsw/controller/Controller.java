@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
+import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
@@ -267,8 +268,15 @@ public class Controller implements PropertyChangeListener {
 
             case "PickCharacter" -> {
                 System.out.println(evt.getNewValue());
+                for(CharacterCard c : game.getGameBoard().getPlayableCharacters()) {
+                    if(c.getName() == evt.getNewValue()) {
+                        c.incrementPrice();
+                        break;
+                    }
+                }
                 if(evt.getNewValue() == Characters.HERALD) {
                     expertController.heraldEffect();
+
                     game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
                 }
                 else if(evt.getNewValue() == Characters.KNIGHT) {
