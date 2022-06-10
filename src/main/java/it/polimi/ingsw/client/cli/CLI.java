@@ -233,7 +233,7 @@ public class CLI implements Runnable, ListenerInterface {
     }*/
 
     public String studentsOnIsland(Island i) {
-        String[] stud = new String[10];
+        String[] stud = new String[100];
         StringBuilder s = new StringBuilder();
         boolean y = false;
         boolean b = false;
@@ -309,7 +309,7 @@ public class CLI implements Runnable, ListenerInterface {
         //st.setShowVerticalLines(true);
         st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
-            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
         }
         /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
