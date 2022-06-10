@@ -31,6 +31,7 @@ public class CharacterCard implements Serializable {
     }
 
     public void resetCost() {
+        System.out.print("Reset cost to " + cost);
         initialCost = cost;
     }
 

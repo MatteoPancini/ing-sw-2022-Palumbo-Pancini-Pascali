@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.annotation.processing.SupportedSourceVersion;
 import java.beans.PropertyChangeEvent;
 import java.net.Socket;
 import java.security.SecureRandom;
@@ -101,6 +102,10 @@ public class ExpertControllerTest {
         Student s2 = new Student(PawnType.RED);
         Student s3 = new Student(PawnType.RED);
         controllerStub.getGame().getCurrentPlayer().setMyCoins(1);
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.HERALD, " ", 3));
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.GRANNY_HERBS, " ", 2));
+        controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.FUNGARUS, " ", 3));
+
 
 
 
@@ -123,7 +128,19 @@ public class ExpertControllerTest {
         assertEquals(controllerStub.getGame().getCurrentPlayer().getMyCoins(), 2);
 
         System.out.println(controllerStub.getGame().getCurrentPlayer().getMyCoins());
+
+        PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
+        controllerStub.propertyChange(ev1);
+        for(int i = 0; i < controllerStub.getGame().getGameBoard().getPlayableCharacters().size(); i++) {
+            controllerStub.getGame().getGameBoard().getPlayableCharacters().get(i).resetCost();
+        }
+        for(CharacterCard c : controllerStub.getGame().getGameBoard().getPlayableCharacters()) {
+            System.out.println(c.getName() + " " + c.getInitialCost());
+        }
+
     }
+
+
 
     @Test
     @DisplayName("Herald Test")
@@ -141,6 +158,7 @@ public class ExpertControllerTest {
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "CheckInfluence", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
         controllerStub.propertyChange(ev2);
+
     }
 
     @Test

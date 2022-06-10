@@ -215,14 +215,17 @@ public class ExpertController {
         pawns.add(PawnType.PINK);
 
         for(PawnType type : pawns) {
-            for(Player p : game.getActivePlayers()) {
-                if(!p.equals(game.getCurrentPlayer())) {
-                    if(game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTable().size() == p.getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTable().size() && !game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).hasProfessor()) {
-                        game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).setProfessor(game.getGameBoard().getProfessorByColor(type));
-                        p.getBoard().getProfessorTable().getCellByColor(type).resetProfessor();
+            if(game.getGameBoard().getProfessorByColor(type).getOwner() != null) {
+                for(Player p : game.getActivePlayers()) {
+                    if(!p.equals(game.getCurrentPlayer())) {
+                        if(game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTable().size() == p.getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTable().size() && !game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).hasProfessor()) {
+                            game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).setProfessor(game.getGameBoard().getProfessorByColor(type));
+                            p.getBoard().getProfessorTable().getCellByColor(type).resetProfessor();
+                        }
                     }
                 }
             }
+
         }
 
         turnController.askMotherNatureMoves();
