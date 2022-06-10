@@ -738,18 +738,6 @@ public class TurnController {
             System.out.println(p.getNickname() + " influence is reset to " + p.getIslandInfluence());
         }
 
-        if(expertController != null) {
-            if(expertController.isCentaurEffect()) {
-                expertController.setCentaurEffect(false);
-            }
-            if(expertController.isFungarusEffect()) {
-                expertController.setFungarusEffect(false);
-            }
-            if(expertController.isHeraldEffect()) {
-                askMotherNatureMoves();
-                expertController.setHeraldEffect(false);
-            }
-        }
 
         if(influenceWinner != null) {
             if(influenceWinner.getBoard().getTowerArea().getTowerArea().size() == 0) {
@@ -768,6 +756,20 @@ public class TurnController {
                 }
 
                 gameHandler.endGame();
+
+            }
+        }
+
+        if(expertController != null) {
+            if(expertController.isCentaurEffect()) {
+                expertController.setCentaurEffect(false);
+            }
+            if(expertController.isFungarusEffect()) {
+                expertController.setFungarusEffect(false);
+            }
+            if(expertController.isHeraldEffect()) {
+                expertController.setHeraldEffect(false);
+                askMotherNatureMoves();
 
             }
         }

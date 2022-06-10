@@ -352,7 +352,7 @@ public class Controller implements PropertyChangeListener {
 
             }
 
-            case "CheckInfluence" -> {
+            case "CheckIslandInfluence" -> {
                 int islandId = ((Island) evt.getNewValue()).getIslandID();
                 turnController.checkIslandInfluence(islandId);
             }
