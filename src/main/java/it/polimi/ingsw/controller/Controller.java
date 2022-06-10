@@ -363,6 +363,7 @@ public class Controller implements PropertyChangeListener {
                     expertController.activeMinestrelEffect();
                 } else if(expertController.isJesterEffect()) {
                     expertController.setJesterReqNum((Integer) evt.getNewValue() * 2);
+                    expertController.activeJesterEffect();
                 }
             }
 
