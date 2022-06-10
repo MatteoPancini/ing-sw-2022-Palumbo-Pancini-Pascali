@@ -504,6 +504,10 @@ public class TurnController {
             if(expertController.isMonkEffect()) {
                 expertController.setMonkEffect(false);
                 askMotherNatureMoves();
+            } else {
+                studentRequest++;
+                gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+                askStudent(studentRequest);
             }
         } else {
             studentRequest++;

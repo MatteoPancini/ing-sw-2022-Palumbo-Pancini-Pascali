@@ -12,12 +12,14 @@ public class CharacterCard implements Serializable {
     private int initialCost;
     private final String effect;
     private ArrayList<Student> students = new ArrayList<Student>();
-    private int cost = initialCost;
+    private int cost;
+
 
     public CharacterCard(Characters name, String effect, int initialCost){
         this.name = name;
         this.initialCost = initialCost;
         this.effect = effect;
+        this.cost = initialCost;
     }
 
     public void incrementPrice(){
