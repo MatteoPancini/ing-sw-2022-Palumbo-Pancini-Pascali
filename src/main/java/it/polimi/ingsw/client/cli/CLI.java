@@ -570,8 +570,14 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askMoves(AssistantCard card) {
         showMotherNature();
-        System.out.println(">Pick a number of mother nature moves between 1 and "
-                + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
+        if(modelView.isMagicPostmanAction()) {
+            System.out.println(">Pick a number of mother nature moves between 1 and "
+                    + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2);
+        } else {
+            System.out.println(">Pick a number of mother nature moves between 1 and "
+                    + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
+        }
+
         //private Parser parser;
         //private String chosenWizard;
         //private String chosenNickname;
