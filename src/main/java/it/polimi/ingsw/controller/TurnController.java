@@ -422,12 +422,8 @@ public class TurnController {
              */
     }
 
-
-
-
-
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
-        System.out.println("Studente " + studentToMove.getType());
+        System.out.println("Student " + studentToMove.getType());
         controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
         //System.out.println(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin());
 
@@ -444,40 +440,6 @@ public class TurnController {
         studentRequest++;
         gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
         askStudent(studentRequest);
-
-        /*
-        chosenDiningRoom.getDiningRoom()
-        //message1 = colore studente, message2 = destinazione (isola o diningroom)
-        Student studentToMove = new Student(message1);
-        GameBoard board;
-        PawnType studType = message1;
-        int destinationIsland;
-        //putStudentsDiningRoom o putStudentsIsland
-        for(int i = 0; i < 3; i++) {
-            studentToMove = player.pickStudent();
-
-            //switch oppure if in cui il player dove spostarlo
-            //se lo sposta in island -> destinationIsland:
-            if(message2 == "island") {
-                destinationIsland = player.pickIsland().islandID;
-                for (Island island : gameBoard.getIslands()) {
-                    if (island.getIslandID() == destinationIsland) {
-                        island.setStudent(studentToMove);
-                    }
-
-                }
-                destinationIsland.setStudent(studentToMove);
-            }
-            //se lo sposta nella DiningRoom -> studType
-            else if(message2 == "dining room") {
-                //try ... catch se ha già il tavolo pieno
-                studType = studentToMove.getType();
-                player.getBoard().diningRoom.setStudent(studentToMove);
-            }
-        }
-
-         */
-
     }
 
     /**
@@ -889,23 +851,21 @@ public class TurnController {
     public boolean checkWin() {
         System.out.println("Entro in checkWin");
 
-
-
         if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
-            System.out.println("Enrtro 1");
+            System.out.println("Entro 1");
             return true;
         }
 
         for(Player p: controller.getGame().getActivePlayers()) {
             if(controller.getGame().getPlayers().size() == 4) {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
-                    System.out.println("Enrtro 2");
+                    System.out.println("The winner is " + p.getNickname());
 
                     return true;
                 }
             } else {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0) {
-                    System.out.println("Enrtro 2");
+                    System.out.println("The winner is " + p.getNickname());
 
                     return true;
                 }
@@ -972,12 +932,5 @@ public class TurnController {
         }
 
         return influenceWinner;
-
-
-
-
-
-
-
     }
 }
