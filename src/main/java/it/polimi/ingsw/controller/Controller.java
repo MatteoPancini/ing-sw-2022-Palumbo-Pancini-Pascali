@@ -26,18 +26,24 @@ public class Controller implements PropertyChangeListener {
         this.game = game;
         this.gameHandler = gameHandler;
         turnController = new TurnController(this, gameHandler);
-        if(gameHandler.getExpertMode()) {
+        /*
+        if(game.isExpertMode()) {
+            System.out.println("Setto EXPERT MODE");
             expertController = new ExpertController(game, game.getGameBoard(), turnController);
             turnController.setExpertController(expertController);
         } else {
+            System.out.println("NON SETTO EXPERT MODE");
             expertController = null;
             turnController.setExpertController(null);
         }
+
+         */
     }
 
 
     public void setExpertController(ExpertController expertController) {
         this.expertController = expertController;
+        this.turnController.setExpertController(expertController);
     }
 
     public Game getGame() {
@@ -243,6 +249,9 @@ public class Controller implements PropertyChangeListener {
                             expertController.setStudentTwo((Student) evt.getNewValue());
                         }
                         expertController.activeMinestrelEffect();
+                    } else {
+                        turnController.setStudentToMove((Student) evt.getNewValue());
+                        turnController.askStudentDestination();
                     }
                 }
 
@@ -257,6 +266,7 @@ public class Controller implements PropertyChangeListener {
             case "PickCloud" -> turnController.fromCloudToEntrance((CloudTile) evt.getNewValue());
 
             case "PickCharacter" -> {
+                System.out.println(evt.getNewValue());
                 if(evt.getNewValue() == Characters.HERALD) {
                     expertController.heraldEffect();
                     game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
@@ -267,6 +277,7 @@ public class Controller implements PropertyChangeListener {
 
                 }
                 else if(evt.getNewValue() == Characters.CENTAUR) {
+                    System.out.println("Entro qui");
                     expertController.centaurEffect();
                     game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
 
