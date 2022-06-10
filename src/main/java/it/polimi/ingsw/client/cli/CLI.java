@@ -694,8 +694,13 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void askPawnType() {
-        System.out.println(">Choose a pawn type: ");
-        showPawnType();
+        if(modelView.isMinestrelAction()) {
+            System.out.println(">Choose a pawn type of a student from your diningroom: ");
+            showDiningRoom(modelView.getGameCopy().getCurrentPlayer());
+        } else {
+            System.out.println(">Choose a pawn type: ");
+            showPawnType();
+        }
         System.out.print(">");
         String chosenPawnType = in.nextLine();
         if(chosenPawnType.equalsIgnoreCase("QUIT")) {
@@ -710,6 +715,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : monk.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.println("\n");
         System.out.print(">");
         chosenStudent = in.nextLine();
         if(chosenStudent.equalsIgnoreCase("QUIT")) {
@@ -725,6 +731,7 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : jester.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.println("\n");
         System.out.print(">");
         chosenStudent = in.nextLine();
         if(chosenStudent.equalsIgnoreCase("QUIT")) {

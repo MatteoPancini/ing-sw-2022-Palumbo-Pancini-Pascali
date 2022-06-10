@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
+import it.polimi.ingsw.model.enumerations.Characters;
 import it.polimi.ingsw.model.player.Table;
 import javafx.scene.control.Alert;
 
@@ -150,9 +151,10 @@ public class ActionHandler {
             case "PICK_STUDENT" -> {
                 if(cli != null) {
                     if(modelView.isJesterAction()) {
+                        System.out.println(modelView.getCharacterAction());
                         if(modelView.getCharacterAction() % 2 == 0) {
                             for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                                if(Objects.equals(c.getName().toString(), "JESTER")) {
+                                if(c.getName() == Characters.JESTER) {
                                     cli.askStudentJester(c);
                                     break;
                                 }
@@ -164,12 +166,7 @@ public class ActionHandler {
 
                     } else if(modelView.isMinestrelAction()) {
                         if(modelView.getCharacterAction() % 2 == 0) {
-                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                                if(Objects.equals(c.getName().toString(), "MINESTREL")) {
-                                    cli.askStudentMinestrel(c);
-                                    break;
-                                }
-                            }
+                            cli.askPawnType();
                         } else {
                             cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
 
@@ -252,7 +249,7 @@ public class ActionHandler {
                 }
             }
 
-            case "PICK_PRINCESS_STUDENT" -> {
+            case "PICK_STUDENT_PRINCESS" -> {
                 for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
                     if(c.getName().toString() == "SPOILED_PRINCESS") {
                         cli.askStudentPrincess(c);
