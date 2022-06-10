@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.CharacterCard;
+import it.polimi.ingsw.model.enumerations.Characters;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
@@ -154,7 +155,8 @@ public class ExpertController {
 
     public void spoiledPrincessEffect() {
         spoiledPrincessEffect = true;
-        RequestAction princessRequest = new RequestAction(Action.PICK_STUDENT_PRINCESS);
+        turnController.getGameHandler().sendSinglePlayer(new PrincessAction(), turnController.getCurrentPlayer().getPlayerID() );
+        RequestAction princessRequest = new RequestAction(Action.PICK_STUDENT);
         turnController.getGameHandler().sendSinglePlayer(princessRequest, turnController.getCurrentPlayer().getPlayerID());
     }
 
@@ -162,9 +164,13 @@ public class ExpertController {
         game.getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentChosen);
 
         for(CharacterCard c : game.getGameBoard().getPlayableCharacters()) {
-            if(c.getName().toString() == "SPOILED_PRINCESS") {
+            if(c.getName() ==  Characters.SPOILED_PRINCESS) {
                 c.removeStudent(studentChosen);
                 c.addStudent(game.getGameBoard().getStudentsBag().get(0));
+                turnController.setStudentToMove(studentChosen);
+                turnController.checkProfessorInfluence();
+                game.getGameBoard().removeStudents(0);
+                spoiledPrincessEffect = false;
                 break;
             }
         }

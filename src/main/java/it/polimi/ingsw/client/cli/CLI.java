@@ -47,7 +47,6 @@ import static it.polimi.ingsw.constants.Constants.*;
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
-    private String chosenStudent;
     private String chosenCharacter;
     //private String chosenTeam;
     private ClientConnection clientConnection;
@@ -447,7 +446,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showEntrance() {
         System.out.println(">Here's a summary of the students in your entrance: ");
-        System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
+        //System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
@@ -637,8 +636,9 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
         System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
+        in.reset();
         System.out.print(">");
-        chosenStudent = in.nextLine();
+        String chosenStudent = in.nextLine();
         if(chosenStudent.toUpperCase().equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -717,11 +717,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.println("\n");
         System.out.print(">");
-        chosenStudent = in.nextLine();
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        String monkStudent = in.nextLine();
+        if(monkStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, monkStudent);
         }
 
     }
@@ -733,11 +733,12 @@ public class CLI implements Runnable, ListenerInterface {
         }
         System.out.println("\n");
         System.out.print(">");
-        chosenStudent = in.nextLine();
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        in.reset();
+        String jesterStudent = in.nextLine();
+        if(jesterStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, jesterStudent);
         }
 
     }
@@ -748,12 +749,12 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
         System.out.print(">");
-        chosenStudent = in.nextLine();
+        String minestrelStudent = in.nextLine();
 
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        if(minestrelStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, minestrelStudent);
         }
 
     }
@@ -784,12 +785,13 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : princess.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.println("\n");
         System.out.print(">");
-        chosenStudent = in.nextLine();
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        String princessStudent = in.nextLine();
+        if(princessStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, princessStudent);
         }
 
     }

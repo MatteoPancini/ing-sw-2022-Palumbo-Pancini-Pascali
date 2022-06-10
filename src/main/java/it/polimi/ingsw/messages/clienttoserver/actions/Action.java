@@ -14,5 +14,4 @@ public enum Action {
     PICK_JESTER_TYPE,
     PICK_ENTRANCE,
     PICK_DINING_TYPE,
-    PICK_STUDENT_PRINCESS;
 }
