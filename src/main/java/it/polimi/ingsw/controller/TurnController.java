@@ -422,9 +422,19 @@ public class TurnController {
              */
     }
 
+
+
+
+
     public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
-        System.out.println("Student " + studentToMove.getType());
-        controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
+        System.out.println("Studente " + studentToMove.getType());
+        if(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(studentToMove.getType().getPawnID()).getTableStudentsNum() == 9) {
+            gameHandler.sendSinglePlayer(new DynamicAnswer("Your DiningRoom is full. Please choose an island!", false), controller.getGame().getCurrentPlayer().getPlayerID());
+            askStudentDestination();
+        } else {
+            controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
+        }
+
         //System.out.println(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin());
 
         if(expertController != null) {
@@ -440,6 +450,40 @@ public class TurnController {
         studentRequest++;
         gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
         askStudent(studentRequest);
+
+        /*
+        chosenDiningRoom.getDiningRoom()
+        //message1 = colore studente, message2 = destinazione (isola o diningroom)
+        Student studentToMove = new Student(message1);
+        GameBoard board;
+        PawnType studType = message1;
+        int destinationIsland;
+        //putStudentsDiningRoom o putStudentsIsland
+        for(int i = 0; i < 3; i++) {
+            studentToMove = player.pickStudent();
+
+            //switch oppure if in cui il player dove spostarlo
+            //se lo sposta in island -> destinationIsland:
+            if(message2 == "island") {
+                destinationIsland = player.pickIsland().islandID;
+                for (Island island : gameBoard.getIslands()) {
+                    if (island.getIslandID() == destinationIsland) {
+                        island.setStudent(studentToMove);
+                    }
+
+                }
+                destinationIsland.setStudent(studentToMove);
+            }
+            //se lo sposta nella DiningRoom -> studType
+            else if(message2 == "dining room") {
+                //try ... catch se ha già il tavolo pieno
+                studType = studentToMove.getType();
+                player.getBoard().diningRoom.setStudent(studentToMove);
+            }
+        }
+
+         */
+
     }
 
     /**
@@ -448,7 +492,10 @@ public class TurnController {
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
         for(Island i : controller.getGame().getGameBoard().getIslands()){
-            if(chosenIsland.getIslandID() == i.getIslandID()) i.addStudent(studentToMove);
+            if(chosenIsland.getIslandID() == i.getIslandID()) {
+                System.out.println("Put student on island " + i.getIslandID());
+                i.addStudent(studentToMove);
+            }
         }
 
         controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
@@ -626,7 +673,9 @@ public class TurnController {
         System.out.println("Team 2: "+ team2);
 
         if(influenceWinner != null)
-            System.out.println("\nMax island influence " + islandInfluence + " of " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
+            System.out.println("\nMax island influence " + islandInfluence + " di " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandId - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandId-1).hasTower());
+
+
 
         if(islandInfluence != 0) {
             //if (controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
@@ -636,13 +685,15 @@ public class TurnController {
                     System.out.println("aggiungo torre");
                     influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
                 } else {
+                    int mergedTowers = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size();
                     for (Player p : controller.getGame().getActivePlayers()) {
-                        if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower() != null && p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
+                        if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
                             controller.getGame().getGameBoard().getIslands().get(islandId - 1).moveTowerToArea(p.getBoard().getTowerArea());
+                            System.out.println("Spostata in tower area di " + p.getNickname());
                             break;
                         }
                     }
-                    influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
+                    influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1), mergedTowers);
 
                 }
 
@@ -657,7 +708,13 @@ public class TurnController {
 
                          */
                     } else {
-                        controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId - 2));
+                        if(islandId != 1) {
+                            controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId - 2));
+                        } else {
+                            System.out.println("Merge a sx di isola 1");
+                            controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() -1));
+                        }
+
                     }
                 } else if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasRight()) {
                     System.out.println("merge a dx");
@@ -851,21 +908,23 @@ public class TurnController {
     public boolean checkWin() {
         System.out.println("Entro in checkWin");
 
+
+
         if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
-            System.out.println("Entro 1");
+            System.out.println("Enrtro 1");
             return true;
         }
 
         for(Player p: controller.getGame().getActivePlayers()) {
             if(controller.getGame().getPlayers().size() == 4) {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
-                    System.out.println("The winner is " + p.getNickname());
+                    System.out.println("Enrtro 2");
 
                     return true;
                 }
             } else {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0) {
-                    System.out.println("The winner is " + p.getNickname());
+                    System.out.println("Enrtro 2");
 
                     return true;
                 }
@@ -932,5 +991,12 @@ public class TurnController {
         }
 
         return influenceWinner;
+
+
+
+
+
+
+
     }
 }

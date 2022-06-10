@@ -800,8 +800,8 @@ public class CLI implements Runnable, ListenerInterface {
     public void chooseWizard(List<Wizards> availableWizards) {
         while (true) {
             System.out.println(">Choose your wizard!");
-            System.out.print(">");
             try {
+                System.out.print(">");
                 String wizardTyped = in.nextLine();
                 Wizards wizardChosen = Wizards.parseWizardInput(wizardTyped);
                 if(availableWizards.contains(wizardChosen)) {
@@ -810,6 +810,7 @@ public class CLI implements Runnable, ListenerInterface {
                     return;
                 } else {
                     System.out.println("Wizard not available!");
+                    System.out.println(">Choose your wizard!");
                 }
             } catch (IllegalArgumentException e) {
                 System.err.println(ANSI_RED + "Invalid input! Please provide one of the accepted wizards."+ ANSI_RESET);
