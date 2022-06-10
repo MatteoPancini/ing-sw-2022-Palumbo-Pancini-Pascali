@@ -655,6 +655,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askCharacterCard(ArrayList<CharacterCard> cards) {
         if (modelView.getGameCopy().isExpertMode()) {
+            showCoins();
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
             showCharactersDescription();
             System.out.print(">");
