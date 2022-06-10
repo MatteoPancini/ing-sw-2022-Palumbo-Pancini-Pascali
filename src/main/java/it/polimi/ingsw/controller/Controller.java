@@ -26,13 +26,18 @@ public class Controller implements PropertyChangeListener {
         this.game = game;
         this.gameHandler = gameHandler;
         turnController = new TurnController(this, gameHandler);
-        if(gameHandler.getExpertMode()) {
+        /*
+        if(game.isExpertMode()) {
+            System.out.println("Setto EXPERT MODE");
             expertController = new ExpertController(game, game.getGameBoard(), turnController);
             turnController.setExpertController(expertController);
         } else {
+            System.out.println("NON SETTO EXPERT MODE");
             expertController = null;
             turnController.setExpertController(null);
         }
+
+         */
     }
 
 

@@ -62,6 +62,7 @@ public class TurnController {
     }
 
     public void setExpertController(ExpertController expertController) {
+        System.out.println("SETTO EXPERT CONTROLLER");
         this.expertController = expertController;
     }
 
@@ -439,7 +440,7 @@ public class TurnController {
 
         if(expertController != null) {
             if(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin()) {
-                //System.out.println("Entro");
+                System.out.println("Aggiungo coin");
                 controller.getGame().getCurrentPlayer().setMyCoins(controller.getGame().getCurrentPlayer().getMyCoins() + 1);
                 controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setTakeCoin(false);
             }
