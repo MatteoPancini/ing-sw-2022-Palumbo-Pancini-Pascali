@@ -564,8 +564,18 @@ public class TurnController {
                     }
                 }
             } else {
-                System.out.println("Me ne vado senza fare niente");
-                expertController.setGrannyHerbsEffect(false);
+                for(int i = 0; i< controller.getGame().getGameBoard().getIslands().size(); i++) {
+                    if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
+                        if(controller.getGame().getGameBoard().getIslands().get(i).getNoEntry()) {
+                            System.out.println("Me ne vado senza fare niente");
+                            expertController.setGrannyHerbsEffect(false);
+                            controller.getGame().getGameBoard().getIslands().get(i).setNoEntry(false);
+                        } else {
+                            checkIslandInfluence(i+1);
+                        }
+                    }
+                }
+
             }
 
         } else {

@@ -699,10 +699,11 @@ public class CLI implements Runnable, ListenerInterface {
             showDiningRoom(modelView.getGameCopy().getCurrentPlayer());
         } else {
             System.out.println(">Choose a pawn type: ");
-            showPawnType();
         }
+        showPawnType();
         System.out.print(">");
         String chosenPawnType = in.nextLine();
+        System.out.println(chosenPawnType);
         if(chosenPawnType.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -712,12 +713,11 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askStudentMonk(CharacterCard monk) {
         System.out.println(">Choose a student from monk's students: ");
-        for(Student s : monk.getStudents()) {
-            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
-        }
+        showCharacterStudent(monk);
         System.out.println("\n");
         System.out.print(">");
         String monkStudent = in.nextLine();
+        System.out.println(monkStudent);
         if(monkStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -726,15 +726,19 @@ public class CLI implements Runnable, ListenerInterface {
 
     }
 
-    public void askStudentJester(CharacterCard jester) {
-        System.out.println(">Choose a student from jester's students: ");
-        for(Student s : jester.getStudents()) {
+    public void showCharacterStudent(CharacterCard card) {
+        for(Student s : card.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+    }
+    public void askStudentJester(CharacterCard jester) {
+        System.out.println(">Choose a student from jester's students: ");
+        showCharacterStudent(jester);
         System.out.println("\n");
         System.out.print(">");
         in.reset();
         String jesterStudent = in.nextLine();
+        System.out.println(jesterStudent);
         if(jesterStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {

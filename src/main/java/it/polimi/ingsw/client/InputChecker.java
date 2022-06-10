@@ -370,6 +370,8 @@ public class InputChecker {
                 }
             }
 
+        } else if(modelView.isMonkAction()) {
+
         } else {
             if (isStudentInEntrance(studentType)) {
                 PawnType type = toPawnType(studentType);
