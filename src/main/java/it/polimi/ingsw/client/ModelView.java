@@ -44,6 +44,16 @@ public class ModelView {
 
     private int characterAction = 0;
 
+    private boolean monkAction;
+
+    public boolean isMonkAction() {
+        return monkAction;
+    }
+
+    public void setMonkAction(boolean monkAction) {
+        this.monkAction = monkAction;
+    }
+
     private boolean isFourPlayers;
 
     public void setFourPlayers(boolean fourPlayers) {

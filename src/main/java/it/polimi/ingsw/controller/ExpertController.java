@@ -310,7 +310,10 @@ public class ExpertController {
     }
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
-            is.setNoEntry(true);
+            if(is.getIslandID() == island.getIslandID()) {
+                is.setNoEntry(true);
+                break;
+            }
         }
         turnController.askMotherNatureMoves();
     }
