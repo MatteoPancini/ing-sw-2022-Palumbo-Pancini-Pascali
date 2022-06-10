@@ -243,7 +243,7 @@ public class ActionHandler {
 
             }
 
-            case "PICK_STUDENT_MONK" -> {
+            case "PICK_MONK_STUDENT" -> {
                 for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
                     if(c.getName().toString() == "MONK") {
                         cli.askStudentMonk(c);
