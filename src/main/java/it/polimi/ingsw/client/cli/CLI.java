@@ -54,6 +54,10 @@ public class CLI implements Runnable, ListenerInterface {
     private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
+    private boolean firstTurn = true;
+    private String whiteP = "";
+    private String greyP = "";
+    private String blackP = "";
 
     public CLI() {
         in = new Scanner(System.in);
@@ -304,13 +308,19 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void showIslandsTable() {
-        System.out.println(">Here's a little description of the islands in the game board. [Towers' legend: ▲ = Grey , █ = Black , ○ = White]");
+        //System.out.println(">Here's a little description of the islands in the game board. [Towers' legend: ▲ = Grey , █ = Black , ○ = White]");
+        System.out.println(">Here's a little description of the islands in the game board. [Towers' legend: ▲ = Grey \"" + greyP + "\", █ = Black \"" + blackP + "\", ○ = White \"" + whiteP + "\"]");
+
         CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
-        st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
+        //st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
+        st.setHeaders("Island ID", "Merged Islands", "Students & Towers");
+
         //TODO: fix towers
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
-            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            //st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+
         }
         /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
@@ -682,6 +692,10 @@ public class CLI implements Runnable, ListenerInterface {
         if(modelView.isGrannyHerbsAction()) {
             System.out.println("GrannyHerbs action phase... put a tile into an island!\n");
         }
+        if(modelView.isMonkAction()) {
+            System.out.println("Monk action phase... choose an island where in which you want to put monk's student!\n");
+
+        }
         System.out.println(">Choose an island by typing its ID: ");
         showIslandsTable();
         System.out.print(">");
@@ -695,6 +709,9 @@ public class CLI implements Runnable, ListenerInterface {
 
         if(modelView.isGrannyHerbsAction()) {
             modelView.setGrannyHerbsAction(false);
+        }
+        if(modelView.isMonkAction()) {
+            modelView.setMonkAction(false);
         }
     }
 
@@ -1044,6 +1061,21 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
 
+    public void attributeTowers() {
+        for(Player p : modelView.getGameCopy().getActivePlayers()) {
+            if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.BLACK) {
+                blackP = p.getNickname();
+
+            } else if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.GREY) {
+                greyP = p.getNickname();
+
+
+            } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.WHITE) {
+                whiteP = p.getNickname();
+            }
+        }
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
@@ -1065,6 +1097,10 @@ public class CLI implements Runnable, ListenerInterface {
 
                 System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
+                    if(firstTurn) {
+                        attributeTowers();
+                        firstTurn = false;
+                    }
                     showIslandsTable();
                     showClouds();
                     //showMotherNature();
@@ -1074,6 +1110,7 @@ public class CLI implements Runnable, ListenerInterface {
                 }
                 if(modelView.isPianification()) {
                     showAvailableCharacters();
+
                 }
             }
 

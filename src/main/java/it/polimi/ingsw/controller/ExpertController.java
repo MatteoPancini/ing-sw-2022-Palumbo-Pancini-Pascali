@@ -303,9 +303,6 @@ public class ExpertController {
     //GRANNY HERBS
     //------------------------------------------------------------------------------------------------------------------
     private boolean grannyHerbsEffect;
-    public void setGrannyHerbsEffect(boolean grannyHerbsEffect) {
-        this.grannyHerbsEffect = grannyHerbsEffect;
-    }
     public boolean isGrannyHerbsEffect() {
         return grannyHerbsEffect;
     }
@@ -325,6 +322,7 @@ public class ExpertController {
                 break;
             }
         }
+        grannyHerbsEffect = false;
         turnController.askMotherNatureMoves();
     }
     //------------------------------------------------------------------------------------------------------------------

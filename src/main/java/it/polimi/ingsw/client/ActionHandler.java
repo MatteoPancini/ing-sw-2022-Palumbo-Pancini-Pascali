@@ -189,7 +189,6 @@ public class ActionHandler {
                         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
                             if(c.getName() == Characters.MONK) {
                                 cli.askStudentMonk(c);
-                                modelView.setMonkAction(false);
                                 break;
                             }
                         }
