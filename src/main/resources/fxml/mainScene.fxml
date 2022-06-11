@@ -683,5 +683,6 @@
             </Group>
          </children>
       </Group>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -717,16 +717,17 @@ public class TurnController {
                     System.out.println("aggiungo torre");
                     influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
                 } else {
-                    int mergedTowers = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size();
-                    for (Player p : controller.getGame().getActivePlayers()) {
-                        if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
-                            controller.getGame().getGameBoard().getIslands().get(islandId - 1).moveTowerToArea(p.getBoard().getTowerArea());
-                            System.out.println("Spostata in tower area di " + p.getNickname());
-                            break;
+                    if(influenceWinner.getNickname() != controller.getGame().getCurrentPlayer().getNickname()) {
+                        int mergedTowers = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size();
+                        for (Player p : controller.getGame().getActivePlayers()) {
+                            if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
+                                controller.getGame().getGameBoard().getIslands().get(islandId - 1).moveTowerToArea(p.getBoard().getTowerArea());
+                                System.out.println("Spostata in tower area di " + p.getNickname());
+                                break;
+                            }
                         }
+                        influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1), mergedTowers);
                     }
-                    influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1), mergedTowers);
-
                 }
 
                 if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasLeft()) {
