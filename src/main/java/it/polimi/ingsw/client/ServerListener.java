@@ -56,8 +56,8 @@ public class ServerListener implements Runnable {
                 SerializedAnswer serializedAnswer = (SerializedAnswer) objectInputStream.readObject();
                 readAnswerFromServer(serializedAnswer);
             } catch(IOException | ClassNotFoundException e) {
-                System.out.println("Errore nella deserializzazione");
-                e.printStackTrace();
+                System.out.println("Server is out... disconnecting from the game :(");
+                //e.printStackTrace();
                 closeConnection();
                 break;
             }

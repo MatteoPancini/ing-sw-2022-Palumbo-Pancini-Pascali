@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Point3D?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="1185.0" prefWidth="1397.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
+<AnchorPane prefHeight="1185.0" prefWidth="1397.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
    <children>
       <ImageView fitHeight="1303.0" fitWidth="1397.0" layoutX="-9.0" layoutY="-118.0" opacity="0.75" pickOnBounds="true">
          <image>
@@ -405,7 +404,7 @@
             <Image url="@../graphics/wizards/wizard_no_bg.png" />
          </image>
       </ImageView>
-      <Group layoutX="42.0" layoutY="632.0" rotate="92.3">
+      <Group layoutX="-92.0" layoutY="582.0" rotate="92.3">
          <children>
             <ImageView fx:id="myBoard1" fitHeight="227.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true">
                <image>

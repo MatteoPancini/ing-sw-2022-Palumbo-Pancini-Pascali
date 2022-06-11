@@ -109,7 +109,11 @@ public class GameBoard implements Serializable {
          */
         for(int i = 0; i < 3; i++) {
             playableCharacters.add(characterDeck.getDeck().get(i));
+        }
 
+        for(CharacterCard c : playableCharacters) {
+            c.setResetCost(c.getInitialCost());
+            System.out.println("RESET: " + c.getResetCost());
         }
     }
 

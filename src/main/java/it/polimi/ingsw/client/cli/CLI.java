@@ -47,7 +47,6 @@ import static it.polimi.ingsw.constants.Constants.*;
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
-    private String chosenStudent;
     private String chosenCharacter;
     //private String chosenTeam;
     private ClientConnection clientConnection;
@@ -234,7 +233,7 @@ public class CLI implements Runnable, ListenerInterface {
     }*/
 
     public String studentsOnIsland(Island i) {
-        String[] stud = new String[10];
+        String[] stud = new String[100];
         StringBuilder s = new StringBuilder();
         boolean y = false;
         boolean b = false;
@@ -310,7 +309,7 @@ public class CLI implements Runnable, ListenerInterface {
         //st.setShowVerticalLines(true);
         st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
-            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
         }
         /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
@@ -447,7 +446,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showEntrance() {
         System.out.println(">Here's a summary of the students in your entrance: ");
-        System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
+        //System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
@@ -637,8 +636,9 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
         System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
+        in.reset();
         System.out.print(">");
-        chosenStudent = in.nextLine();
+        String chosenStudent = in.nextLine();
         if(chosenStudent.toUpperCase().equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -694,10 +694,16 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void askPawnType() {
-        System.out.println(">Choose a pawn type: ");
+        if(modelView.isMinestrelAction()) {
+            System.out.println(">Choose a pawn type of a student from your diningroom: ");
+            showDiningRoom(modelView.getGameCopy().getCurrentPlayer());
+        } else {
+            System.out.println(">Choose a pawn type: ");
+        }
         showPawnType();
         System.out.print(">");
         String chosenPawnType = in.nextLine();
+        System.out.println(chosenPawnType);
         if(chosenPawnType.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -707,30 +713,36 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askStudentMonk(CharacterCard monk) {
         System.out.println(">Choose a student from monk's students: ");
-        for(Student s : monk.getStudents()) {
-            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
-        }
+        showCharacterStudent(monk);
+        System.out.println("\n");
         System.out.print(">");
-        chosenStudent = in.nextLine();
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        String monkStudent = in.nextLine();
+        System.out.println(monkStudent);
+        if(monkStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, monkStudent);
         }
 
     }
 
-    public void askStudentJester(CharacterCard jester) {
-        System.out.println(">Choose a student from jester's students: ");
-        for(Student s : jester.getStudents()) {
+    public void showCharacterStudent(CharacterCard card) {
+        for(Student s : card.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+    }
+    public void askStudentJester(CharacterCard jester) {
+        System.out.println(">Choose a student from jester's students: ");
+        showCharacterStudent(jester);
+        System.out.println("\n");
         System.out.print(">");
-        chosenStudent = in.nextLine();
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        in.reset();
+        String jesterStudent = in.nextLine();
+        System.out.println(jesterStudent);
+        if(jesterStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, jesterStudent);
         }
 
     }
@@ -741,12 +753,12 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
         System.out.print(">");
-        chosenStudent = in.nextLine();
+        String minestrelStudent = in.nextLine();
 
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        if(minestrelStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, minestrelStudent);
         }
 
     }
@@ -777,12 +789,13 @@ public class CLI implements Runnable, ListenerInterface {
         for(Student s : princess.getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
+        System.out.println("\n");
         System.out.print(">");
-        chosenStudent = in.nextLine();
-        if(chosenStudent.equalsIgnoreCase("QUIT")) {
+        String princessStudent = in.nextLine();
+        if(princessStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
+            virtualClient.firePropertyChange("PickStudent", null, princessStudent);
         }
 
     }

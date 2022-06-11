@@ -6,8 +6,10 @@ import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Table;
 
 public class InputChecker {
     private ClientConnection clientConnection;
@@ -195,6 +197,56 @@ public class InputChecker {
         return false;
     }
 
+
+    public boolean isStudentInJester(String input) {
+        PawnType type = toPawnType(input);
+        if(type == null) return false;
+        //System.out.println("Tipo passato: " + type.toString());
+        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+            if(c.getName() == Characters.JESTER) {
+                for(Student s : c.getStudents()) {
+                    //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
+                    if(s.getType().equals(type)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isStudentInPrincess(String input) {
+        PawnType type = toPawnType(input);
+        if(type == null) return false;
+        //System.out.println("Tipo passato: " + type.toString());
+        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+            if(c.getName() == Characters.SPOILED_PRINCESS) {
+                for(Student s : c.getStudents()) {
+                    //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
+                    if(s.getType().equals(type)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean checkStudentInDiningRoom(String input) {
+        PawnType type = toPawnType(input);
+        if(type == null) return false;
+        //System.out.println("Tipo passato: " + type.toString());
+        for(Table t : modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
+            if(t.getTableStudentsNum() > 0) {
+                if(t.getTable().get(0).getBoardCellType() == type) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     //se action == null ri-chiedo l'input
     public PickDestination checkDestination(String destination) {
         PickDestination action = null;
@@ -263,17 +315,78 @@ public class InputChecker {
 
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
-        if (isStudentInEntrance(studentType)) {
-            PawnType type = toPawnType(studentType);
-            if(type == null) {
-                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+        if(modelView.isJesterAction()) {
+            if(isStudentInJester(studentType)) {
+                PawnType type = toPawnType(studentType);
+                if(type == null) {
+                    for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                        if(c.getName() == Characters.JESTER) {
+                            cli.showError("PawnType error! Try again!");
+                            cli.askStudentJester(c);
+                            break;
+                        }
+                    }
+                } else {
+                    action = new PickStudent(new Student(type));
+                }
             } else {
-                action = new PickStudent(new Student(type));
+                cli.showError("No such student in Jester! Please enter a valid student!");
+                for (CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                    if (c.getName() == Characters.JESTER) {
+                        cli.askStudentJester(c);
+                        break;
+                    }
+                }
             }
+
+        } else if(modelView.isMinestrelAction()) {
+            if(checkStudentInDiningRoom(studentType)) {
+                action = new PickStudent(new Student(toPawnType(studentType)));
+            } else {
+                cli.showError("Invalid pawn type! Please insert a valid pawn type");
+                cli.askPawnType();
+            }
+        } else if(modelView.isPrincessAction()) {
+            if(isStudentInPrincess(studentType)) {
+                PawnType type = toPawnType(studentType);
+                if(type == null) {
+                    for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                        if(c.getName() == Characters.SPOILED_PRINCESS) {
+                            cli.showError("PawnType error! Try again!");
+                            cli.askStudentPrincess(c);
+                            break;
+                        }
+                    }
+                } else {
+                    action = new PickStudent(new Student(type));
+                }
+            } else {
+                cli.showError("No such student in Jester! Please enter a valid student!");
+                for (CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                    if (c.getName() == Characters.JESTER) {
+                        cli.askStudentJester(c);
+                        break;
+                    }
+                }
+            }
+
+        } else if(modelView.isMonkAction()) {
+
         } else {
-            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+            if (isStudentInEntrance(studentType)) {
+                PawnType type = toPawnType(studentType);
+                if(type == null) {
+                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                } else {
+                    action = new PickStudent(new Student(type));
+                }
+            } else {
+                cli.showError("No such student in your entrance! Please enter a valid student!");
+                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+            }
         }
         return action;
+
     }
 
     public PickPawnType checkPawnType(String pawnType) {
@@ -281,6 +394,9 @@ public class InputChecker {
         System.out.println("Entro in check");
         if(pawnType.toUpperCase().equalsIgnoreCase("GREEN") || pawnType.toUpperCase().equalsIgnoreCase("RED") || pawnType.toUpperCase().equalsIgnoreCase("YELLOW") || pawnType.toUpperCase().equalsIgnoreCase("PINK")  || pawnType.toUpperCase().equalsIgnoreCase("BLUE")) {
             action = new PickPawnType(toPawnType(pawnType));
+        } else {
+            cli.showError("Invalid pawn type! Please insert a valid pawn type");
+            cli.askPawnType();
         }
 
         return action;

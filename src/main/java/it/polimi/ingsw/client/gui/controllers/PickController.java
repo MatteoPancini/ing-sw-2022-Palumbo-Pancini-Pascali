@@ -212,16 +212,15 @@ public class PickController implements GUIController{
         gui.changeStage("/actions/PickIsland.fxml");
     }
 
-    //TODO come faccio a passargli le isole se sono mergiate? es: se faccio islands.get(2)
-    // potrebbe essere stata mergiata con la 1 e non la trova
+
     public void pickID(ActionEvent e) {
         UserAction action = null;
         ImageView img = (ImageView) e.getSource();
         String island = img.getId();
         switch(island) {
             case "island1" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0));
-            } //copiare aumentando l'indice
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslandById(1));
+            } //copiare aumentando l'id dell'isola
         }
     }
 

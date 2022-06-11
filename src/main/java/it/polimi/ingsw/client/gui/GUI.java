@@ -126,13 +126,13 @@ public class GUI extends Application implements ListenerInterface {
     private static final String LOADING_PAGE = "loading.fxml";
     private static final String WIZARD_MENU = "wizardMenu.fxml";
     private static final String MAIN_SCENE = "mainScene.fxml";
-    private static final String PICK_ASSISTANT = "PickAssistant.fxml";
-    private static final String PICK_CHARACTER = "PickAssistant.fxml";
-    private static final String PICK_CLOUD = "PickAssistant.fxml";
-    private static final String PICK_DESTINATION = "PickAssistant.fxml";
-    private static final String PICK_ISLAND = "PickAssistant.fxml";
-    private static final String PICK_PAWN_TYPE = "PickAssistant.fxml";
-    private static final String PICK_STUDENT = "PickAssistant.fxml";
+    private static final String PICK_ASSISTANT = "/actions/PickAssistant.fxml";
+    private static final String PICK_CHARACTER = "/actions/PickAssistant.fxml";
+    private static final String PICK_CLOUD = "/actions/PickAssistant.fxml";
+    private static final String PICK_DESTINATION = "/actions/PickAssistant.fxml";
+    private static final String PICK_ISLAND = "/actions/PickAssistant.fxml";
+    private static final String PICK_PAWN_TYPE = "/actions/PickAssistant.fxml";
+    private static final String PICK_STUDENT = "/actions/PickAssistant.fxml";
 
 
 

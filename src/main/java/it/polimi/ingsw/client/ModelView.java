@@ -24,6 +24,15 @@ public class ModelView {
     private boolean action = false;
     private boolean magicPostmanAction = false;
     private boolean grannyHerbsAction;
+    private boolean princessAction;
+
+    public boolean isPrincessAction() {
+        return princessAction;
+    }
+
+    public void setPrincessAction(boolean princessAction) {
+        this.princessAction = princessAction;
+    }
 
     public boolean isGrannyHerbsAction() {
         return grannyHerbsAction;
@@ -34,6 +43,16 @@ public class ModelView {
     }
 
     private int characterAction = 0;
+
+    private boolean monkAction;
+
+    public boolean isMonkAction() {
+        return monkAction;
+    }
+
+    public void setMonkAction(boolean monkAction) {
+        this.monkAction = monkAction;
+    }
 
     private boolean isFourPlayers;
 
