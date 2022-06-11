@@ -96,12 +96,16 @@ public class ExpertController {
 
     public void activeJesterEffect() {
         if(studentOne == null || studentTwo == null) {
+            turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
             turnController.askStudent();
         } else {
             //student 1 = jester
             //student 2 = entrance
+            System.out.println("Stud 1: " + studentOne.getType());
+            System.out.println("Stud 2: " + studentTwo.getType());
+
             for(CharacterCard c : game.getGameBoard().getPlayableCharacters()) {
-                if(c.getName().toString() == "JESTER") {
+                if(c.getName() == Characters.JESTER) {
                     c.removeStudent(studentOne);
                     c.addStudent(studentTwo);
                 }
@@ -112,8 +116,10 @@ public class ExpertController {
             studentOne = null;
             studentTwo = null;
             if(jesterReqNum == 0) {
+                jesterEffect = false;
                 turnController.askMotherNatureMoves();
             } else {
+                turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
                 turnController.askStudent();
             }
         }
@@ -133,7 +139,8 @@ public class ExpertController {
     }
     public void monkEffect() {
         monkEffect = true;
-        RequestAction studentRequest = new RequestAction(Action.PICK_MONK_STUDENT);
+        turnController.getGameHandler().sendSinglePlayer(new MonkAction(), turnController.getCurrentPlayer().getPlayerID());
+        RequestAction studentRequest = new RequestAction(Action.PICK_STUDENT);
         turnController.getGameHandler().sendSinglePlayer(studentRequest, turnController.getCurrentPlayer().getPlayerID());
     }
     public void activeMonkEffect() {
@@ -263,6 +270,7 @@ public class ExpertController {
 
     public void activeMinestrelEffect() {
         if(studentOne == null || studentTwo == null) {
+            turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
             turnController.askStudent();
         } else {
             //student 1 = dining room
@@ -278,8 +286,10 @@ public class ExpertController {
             studentTwo = null;
 
             if(minestrelReqNum == 0) {
+                minestrelEffect = false;
                 turnController.askMotherNatureMoves();
             } else {
+                turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
                 turnController.askStudent();
             }
         }

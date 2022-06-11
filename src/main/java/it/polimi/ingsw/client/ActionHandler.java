@@ -123,6 +123,8 @@ public class ActionHandler {
             cli.endGameMessage();
         } else if(answer instanceof PrincessAction) {
             modelView.setPrincessAction(true);
+        } else if(answer instanceof MonkAction) {
+            modelView.setMonkAction(true);
         }
     }
 
@@ -179,10 +181,19 @@ public class ActionHandler {
                         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
                             if(c.getName() == Characters.SPOILED_PRINCESS) {
                                 cli.askStudentPrincess(c);
+                                modelView.setPrincessAction(false);
                                 break;
                             }
                         }
-                    } else {
+                    } else if(modelView.isMonkAction()) {
+                        for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                            if(c.getName() == Characters.MONK) {
+                                cli.askStudentMonk(c);
+                                modelView.setMonkAction(false);
+                                break;
+                            }
+                        }
+                    }else {
                         cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     }
                 } else if(gui != null) {
@@ -247,15 +258,6 @@ public class ActionHandler {
             case "PICK_PAWN_TYPE" -> {
                 cli.askPawnType();
 
-            }
-
-            case "PICK_MONK_STUDENT" -> {
-                for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                    if(c.getName() == Characters.MONK) {
-                        cli.askStudentMonk(c);
-                        break;
-                    }
-                }
             }
 
 

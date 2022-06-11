@@ -54,10 +54,18 @@ public class CharacterCard implements Serializable {
     public int getInitialCost() { return initialCost; }
 
     public void removeStudent(Student stud) {
-        students.remove(stud);
+        for(Student s : students) {
+            if(s.getType() == stud.getType()) {
+                System.out.println("Removing stud " + stud.getType());
+
+                students.remove(s);
+                break;
+            }
+        }
     }
 
     public void addStudent(Student stud) {
+        System.out.println("Adding stud " + stud.getType());
         students.add(stud);
     }
 
