@@ -572,7 +572,7 @@ public class CLI implements Runnable, ListenerInterface {
         showMotherNature();
         if(modelView.isMagicPostmanAction()) {
             System.out.println(">Pick a number of mother nature moves between 1 and "
-                    + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2);
+                    + (modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2));
         } else {
             System.out.println(">Pick a number of mother nature moves between 1 and "
                     + modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves());
