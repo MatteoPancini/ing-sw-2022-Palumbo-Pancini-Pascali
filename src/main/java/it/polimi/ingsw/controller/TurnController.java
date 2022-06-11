@@ -501,7 +501,7 @@ public class TurnController {
             }
         }
 
-        controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
+
         if(expertController != null) {
             if(expertController.isMonkEffect()) {
                 for(CharacterCard c : controller.getGame().getGameBoard().getPlayableCharacters()) {
@@ -520,11 +520,13 @@ public class TurnController {
                 expertController.setMonkEffect(false);
                 askMotherNatureMoves();
             } else {
+                controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
                 studentRequest++;
                 gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
                 askStudent(studentRequest);
             }
         } else {
+            controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
             studentRequest++;
             gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             askStudent(studentRequest);

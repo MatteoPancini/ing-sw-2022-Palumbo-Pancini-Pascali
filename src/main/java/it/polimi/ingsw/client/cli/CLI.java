@@ -308,8 +308,9 @@ public class CLI implements Runnable, ListenerInterface {
         CLITable st = new CLITable();
         //st.setShowVerticalLines(true);
         st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
+        //TODO: fix towers
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
-            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
         }
         /*
         for(Island island : modelView.getGameCopy().getGameBoard().getIslands()) {
@@ -582,7 +583,8 @@ public class CLI implements Runnable, ListenerInterface {
         //private String chosenNickname;
         //in.reset();
         System.out.print(">");
-        String chosenMoves = in.nextLine();
+        Scanner input = new Scanner(System.in);
+        String chosenMoves = input.nextLine();
         if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -603,14 +605,14 @@ public class CLI implements Runnable, ListenerInterface {
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size() > 0) {
             showLastAssistantsUsed();
         }
-        //TODO non posso fare il controllo dell'if perché il game non mi viene inviato subito
         System.out.println(">Pick an assistant from your deck by typing its name ");
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size()>=1) {
             System.out.println(">Remember: you can't play an assistant already played by another player!");
         }
         printPlayerDeck();
         System.out.print(">");
-        String chosenAssistant = in.nextLine();
+        Scanner input = new Scanner(System.in);
+        String chosenAssistant = input.nextLine();
         if(chosenAssistant.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         }
@@ -621,7 +623,8 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Pick a cloud by typing its ID: ");
         showClouds();
         System.out.print(">");
-        String chosenCloud = in.nextLine();
+        Scanner input = new Scanner(System.in);
+        String chosenCloud = input.nextLine();
         if(chosenCloud.toUpperCase().equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -636,9 +639,9 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
         System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
-        in.reset();
         System.out.print(">");
-        String chosenStudent = in.nextLine();
+        Scanner input = new Scanner(System.in);
+        String chosenStudent = input.nextLine();
         if(chosenStudent.toUpperCase().equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -665,7 +668,8 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
             showCharactersDescription();
             System.out.print(">");
-            String chosenCharacter = in.nextLine();
+            Scanner input = new Scanner(System.in);
+            String chosenCharacter = input.nextLine();
             if(chosenCharacter.equalsIgnoreCase("QUIT")) {
                 virtualClient.firePropertyChange("Quit", null, "Quit");
             } else {
@@ -681,7 +685,8 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.println(">Choose an island by typing its ID: ");
         showIslandsTable();
         System.out.print(">");
-        String chosenIsland = in.nextLine();
+        Scanner input = new Scanner(System.in);
+        String chosenIsland = input.nextLine();
         if(chosenIsland.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -697,17 +702,23 @@ public class CLI implements Runnable, ListenerInterface {
         if(modelView.isMinestrelAction()) {
             System.out.println(">Choose a pawn type of a student from your diningroom: ");
             showDiningRoom(modelView.getGameCopy().getCurrentPlayer());
-        } else {
-            System.out.println(">Choose a pawn type: ");
         }
+        System.out.println(">Choose a pawn type: ");
         showPawnType();
         System.out.print(">");
-        String chosenPawnType = in.nextLine();
-        System.out.println(chosenPawnType);
+        Scanner input = new Scanner(System.in);
+        String chosenPawnType = input.nextLine();
+        System.out.println("Typed " + chosenPawnType);
         if(chosenPawnType.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
-            virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
+            if(modelView.isMinestrelAction()) {
+                virtualClient.firePropertyChange("PickStudent", null, chosenPawnType);
+            } else {
+                virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
+
+            }
+
         }
     }
 
@@ -716,8 +727,9 @@ public class CLI implements Runnable, ListenerInterface {
         showCharacterStudent(monk);
         System.out.println("\n");
         System.out.print(">");
-        String monkStudent = in.nextLine();
-        System.out.println(monkStudent);
+        Scanner input = new Scanner(System.in);
+        String monkStudent = input.nextLine();
+        System.out.println("Typed " + monkStudent);
         if(monkStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -731,34 +743,20 @@ public class CLI implements Runnable, ListenerInterface {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
     }
+
+
     public void askStudentJester(CharacterCard jester) {
         System.out.println(">Choose a student from jester's students: ");
         showCharacterStudent(jester);
         System.out.println("\n");
         System.out.print(">");
-        in.reset();
-        String jesterStudent = in.nextLine();
-        System.out.println(jesterStudent);
+        Scanner input = new Scanner(System.in);
+        String jesterStudent = input.nextLine();
+        System.out.println("Typed " + jesterStudent);
         if(jesterStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickStudent", null, jesterStudent);
-        }
-
-    }
-
-    public void askStudentMinestrel(CharacterCard minestrel) {
-        System.out.println(">Choose a student from minestrel's students: ");
-        for(Student s : minestrel.getStudents()) {
-            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
-        }
-        System.out.print(">");
-        String minestrelStudent = in.nextLine();
-
-        if(minestrelStudent.equalsIgnoreCase("QUIT")) {
-            virtualClient.firePropertyChange("Quit", null, "Quit");
-        } else {
-            virtualClient.firePropertyChange("PickStudent", null, minestrelStudent);
         }
 
     }
@@ -786,18 +784,16 @@ public class CLI implements Runnable, ListenerInterface {
     }
     public void askStudentPrincess(CharacterCard princess) {
         System.out.println(">Choose a student from princess's students: ");
-        for(Student s : princess.getStudents()) {
-            System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
-        }
+        showCharacterStudent(princess);
         System.out.println("\n");
         System.out.print(">");
-        String princessStudent = in.nextLine();
+        Scanner input = new Scanner(System.in);
+        String princessStudent = input.nextLine();
         if(princessStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickStudent", null, princessStudent);
         }
-
     }
 
     public void showMotherNature() {
