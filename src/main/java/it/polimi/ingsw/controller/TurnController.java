@@ -998,12 +998,5 @@ public class TurnController {
         }
 
         return influenceWinner;
-
-
-
-
-
-
-
     }
 }
