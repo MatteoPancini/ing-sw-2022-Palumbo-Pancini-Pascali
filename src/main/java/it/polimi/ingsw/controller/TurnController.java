@@ -317,6 +317,11 @@ public class TurnController {
                 cardPlayed = c;
             }
         }
+        if(cardPlayed == null) {
+            gameHandler.sendSinglePlayer(new DynamicAnswer("Error: card already played. Please type another card!", false), controller.getGame().getCurrentPlayer().getPlayerID());
+            askAssistantCard();
+            return;
+        }
         System.out.println("Sono in playAssistantCard di " + cardPlayed.getName());
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
@@ -360,6 +365,16 @@ public class TurnController {
     public void checkProfessorInfluence() {
         int currentPlayerStudentsMax = 0;
         int professorWinnerId = 0;
+
+
+        for(Player p : controller.getGame().getActivePlayers()) {
+            if(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner() != null) {
+                if(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner().getNickname() == p.getNickname()) {
+                    currentPlayerStudentsMax = p.getBoard().getDiningRoom().getDiningRoom().get(studentToMove.getType().getPawnID()).getTableStudentsNum();
+                    professorWinnerId = p.getPlayerID();
+                }
+            }
+        }
 
         for (Player p : controller.getGame().getActivePlayers()) {
             System.out.println("P_ " + p.getNickname());
@@ -497,7 +512,12 @@ public class TurnController {
         for(Island i : controller.getGame().getGameBoard().getIslands()){
             if(chosenIsland.getIslandID() == i.getIslandID()) {
                 System.out.println("Put student on island " + i.getIslandID());
-                i.addStudent(studentToMove);
+                if(expertController.isMonkEffect()) {
+                    i.addStudent(expertController.getStudentChosen());
+                } else {
+                    i.addStudent(studentToMove);
+                }
+
             }
         }
 
@@ -507,7 +527,7 @@ public class TurnController {
                 for(CharacterCard c : controller.getGame().getGameBoard().getPlayableCharacters()) {
                     if(c.getName() == Characters.MONK) {
                         for(Student s : c.getStudents()) {
-                            if(s.getType() == studentToMove.getType()) {
+                            if(s.getType() == expertController.getStudentChosen().getType()) {
                                 c.removeStudent(s);
                                 break;
                             }
@@ -732,7 +752,8 @@ public class TurnController {
                     System.out.println("aggiungo torre");
                     influenceWinner.getBoard().getTowerArea().moveTowerToIsland(controller.getGame().getGameBoard().getIslands().get(islandId - 1));
                 } else {
-                    if(influenceWinner.getNickname() != controller.getGame().getCurrentPlayer().getNickname()) {
+                    if(influenceWinner.getBoard().getTowerArea().getTowerArea().get(0).getColor() != controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor()) {
+                        System.out.println("Cambio di influenza");
                         int mergedTowers = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size();
                         for (Player p : controller.getGame().getActivePlayers()) {
                             if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
