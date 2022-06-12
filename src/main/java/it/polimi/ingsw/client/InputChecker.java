@@ -402,6 +402,7 @@ public class InputChecker {
             }
 
         } else if(modelView.isMonkAction()) {
+            System.out.println("Controllo monk");
             if(isStudentInMonk(studentType)) {
                 PawnType type = toPawnType(studentType);
                 if(type == null) {
@@ -413,7 +414,16 @@ public class InputChecker {
                         }
                     }
                 } else {
+                    System.out.println("Invio monk student " + type);
                     action = new PickStudent(new Student(type));
+                }
+            }  else {
+                cli.showError("No such student in monk! Please enter a valid student!");
+                for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
+                    if(c.getName() == Characters.MONK) {
+                        cli.askStudentMonk(c);
+                        break;
+                    }
                 }
             }
         } else {

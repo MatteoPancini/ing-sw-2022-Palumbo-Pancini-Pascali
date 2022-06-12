@@ -690,10 +690,10 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askIsland(ArrayList<Island> islands) {
         if(modelView.isGrannyHerbsAction()) {
-            System.out.println("GrannyHerbs action phase... put a tile into an island!\n");
+            System.out.println("GrannyHerbs action phase... put a tile into an island!");
         }
         if(modelView.isMonkAction()) {
-            System.out.println("Monk action phase... choose an island where in which you want to put monk's student!\n");
+            System.out.println("Monk action phase... choose an island where in which you want to put monk's student!");
 
         }
         System.out.println(">Choose an island by typing its ID: ");

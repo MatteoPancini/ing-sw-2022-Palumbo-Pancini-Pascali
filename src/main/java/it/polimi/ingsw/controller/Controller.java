@@ -229,6 +229,7 @@ public class Controller implements PropertyChangeListener {
                     turnController.setStudentToMove((Student) evt.getNewValue());
                     turnController.askStudentDestination();
                 } else {
+                    System.out.println("Setto studentChosen " + evt.getNewValue());
                     expertController.setStudentChosen((Student) evt.getNewValue());
                     if (expertController.isMonkEffect()) {
                         expertController.activeMonkEffect();
