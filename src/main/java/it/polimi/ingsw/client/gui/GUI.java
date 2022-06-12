@@ -5,16 +5,17 @@ import it.polimi.ingsw.client.ActionHandler;
 import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.ListenerInterface;
 import it.polimi.ingsw.client.ModelView;
-import it.polimi.ingsw.client.gui.controllers.GUIController;
-import it.polimi.ingsw.client.gui.controllers.LoadingController;
-import it.polimi.ingsw.client.gui.controllers.ResizeController;
-import it.polimi.ingsw.client.gui.controllers.WizardMenuController;
+import it.polimi.ingsw.client.gui.controllers.*;
 import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Assistants;
+import it.polimi.ingsw.model.enumerations.PawnType;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Table;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +42,7 @@ public class GUI extends Application implements ListenerInterface {
     private final ModelView modelView;
     private final ActionHandler actionHandler;
     private ClientConnection clientConnection;
+    private MainSceneController mainSceneController;
 
     private boolean activeGame;
     private Stage stage;
@@ -126,13 +128,13 @@ public class GUI extends Application implements ListenerInterface {
     private static final String LOADING_PAGE = "loading.fxml";
     private static final String WIZARD_MENU = "wizardMenu.fxml";
     private static final String MAIN_SCENE = "mainScene.fxml";
-    private static final String PICK_ASSISTANT = "/actions/PickAssistant.fxml";
-    private static final String PICK_CHARACTER = "/actions/PickAssistant.fxml";
-    private static final String PICK_CLOUD = "/actions/PickAssistant.fxml";
-    private static final String PICK_DESTINATION = "/actions/PickAssistant.fxml";
-    private static final String PICK_ISLAND = "/actions/PickAssistant.fxml";
-    private static final String PICK_PAWN_TYPE = "/actions/PickAssistant.fxml";
-    private static final String PICK_STUDENT = "/actions/PickAssistant.fxml";
+    private static final String PICK_ASSISTANT = "actions/PickAssistant.fxml";
+    private static final String PICK_CHARACTER = "actions/PickAssistant.fxml";
+    private static final String PICK_CLOUD = "actions/PickAssistant.fxml";
+    private static final String PICK_DESTINATION = "actions/PickAssistant.fxml";
+    private static final String PICK_ISLAND = "actions/PickAssistant.fxml";
+    private static final String PICK_PAWN_TYPE = "actions/PickAssistant.fxml";
+    private static final String PICK_STUDENT = "actions/PickAssistant.fxml";
 
 
 
@@ -191,7 +193,6 @@ public class GUI extends Application implements ListenerInterface {
         currentScene = nameMapScene.get(newScene);
         stage.setScene(currentScene);
         stage.show();
-
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
@@ -263,6 +264,15 @@ public class GUI extends Application implements ListenerInterface {
     }
 
 
+
+    public void updateMainScene() {
+        mainSceneController.updateIslands();
+        mainSceneController.updateTowers();
+        mainSceneController.updateWizard();
+        mainSceneController.updateClouds();
+        mainSceneController.updateDiningRooms();
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
@@ -285,18 +295,14 @@ public class GUI extends Application implements ListenerInterface {
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);
-            } /*
+            }
             case "UpdateModelView" -> {
                 assert serverCommand != null;
                 modelView.setGameCopy((Game) changeEvent.getNewValue());
-                showIslands();
-                showClouds();
-                showAvailableCharacters();
-                showMotherNature();
-                showCoins();
-                showDiningRooms();
+                updateMainScene();
+                //this.changeStage();
             }
-            case "WinMessage" -> {
+            /*case "WinMessage" -> {
                 assert serverCommand != null;
                 showWinMessage();
             }
