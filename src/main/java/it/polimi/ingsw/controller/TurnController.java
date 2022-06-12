@@ -512,7 +512,8 @@ public class TurnController {
                                 break;
                             }
                         }
-                        c.addStudent(controller.getGame().getGameBoard().getSetupStudentsBag().get(0));
+                        System.out.println("Ora aggiungo");
+                        c.addStudent(controller.getGame().getGameBoard().getStudentsBag().get(0));
                         controller.getGame().getGameBoard().removeStudents(0);
                         break;
                     }
@@ -559,6 +560,7 @@ public class TurnController {
 
         if(expertController != null) {
             System.out.println("Non devo esserci entrato");
+            /*
             if(!expertController.isGrannyHerbsEffect()) {
                 for(int i = 0; i< controller.getGame().getGameBoard().getIslands().size(); i++) {
                     if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
@@ -570,7 +572,7 @@ public class TurnController {
                     if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
                         if(controller.getGame().getGameBoard().getIslands().get(i).getNoEntry()) {
                             System.out.println("Me ne vado senza fare niente");
-                            expertController.setGrannyHerbsEffect(false);
+                            //expertController.setGrannyHerbsEffect(false);
                             controller.getGame().getGameBoard().getIslands().get(i).setNoEntry(false);
                         } else {
                             checkIslandInfluence(i+1);
@@ -578,6 +580,19 @@ public class TurnController {
                     }
                 }
 
+            }
+
+             */
+            for(int i = 0; i< controller.getGame().getGameBoard().getIslands().size(); i++) {
+                if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
+                    if(controller.getGame().getGameBoard().getIslands().get(i).getNoEntry()) {
+                        System.out.println("Me ne vado senza fare niente");
+                        //expertController.setGrannyHerbsEffect(false);
+                        controller.getGame().getGameBoard().getIslands().get(i).setNoEntry(false);
+                    } else {
+                        checkIslandInfluence(i+1);
+                    }
+                }
             }
 
         } else {

@@ -142,7 +142,7 @@ public class InputChecker {
         int maxMoves;
         System.out.println("My input: " + input);
         if(modelView.isMagicPostmanAction()) {
-            maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2;
+            maxMoves = (modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2);
             modelView.setMagicPostmanAction(false);
         } else {
             maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves();

@@ -288,16 +288,18 @@ public class ExpertControllerTest {
     }
 
     @Test
-    @DisplayName("MagicPostman Test")
-    public void magicPostmanTest() {
+    @DisplayName("Monk Test")
+    public void monkTest() {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MONK, " ", 1));
         Student s = new Student(PawnType.BLUE);
 
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MONK);
         controllerStub.propertyChange(ev1);
-        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickStudent", null, s);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickDestinationIsland", null, controllerStub.getGame().getGameBoard().getIslands().get(1));
         controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, s);
+        controllerStub.propertyChange(ev3);
 
 
 
@@ -305,13 +307,14 @@ public class ExpertControllerTest {
     }
 
     @Test
-    @DisplayName("Monk Test")
-    public void monkTest() {
+    @DisplayName("MagicPostman Test")
+    public void magicPostmanTest() {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MAGIC_POSTMAN, " ", 1));
 
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MAGIC_POSTMAN);
         controllerStub.propertyChange(ev1);
+
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickMovesNumber", null, 4);
         controllerStub.propertyChange(ev2);
 
