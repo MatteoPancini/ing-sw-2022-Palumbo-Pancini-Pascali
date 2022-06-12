@@ -160,11 +160,12 @@ public class Island implements Serializable {
 
 
             System.out.println("Merged island size " + island.getMergedIslands().size());
-            System.out.println(island.getMergedTowers().size());
             for(Tower t : island.getMergedTowers()) {
                 System.out.println("Aggiungo torre");
                 mergedTowers.add(t);
             }
+            System.out.println(island.getMergedTowers().size());
+
             for(Student s : island.getStudents()) {
                 System.out.println("Aggiungo stude");
                 students.add(s);
