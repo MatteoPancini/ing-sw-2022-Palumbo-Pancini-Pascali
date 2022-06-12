@@ -32,6 +32,10 @@ public class ExpertController {
     }
 
 
+    public Student getStudentChosen() {
+        return studentChosen;
+    }
+
     public void setStudentChosen(Student studentChosen) {
         this.studentChosen = studentChosen;
     }
@@ -231,7 +235,7 @@ public class ExpertController {
             if(game.getGameBoard().getProfessorByColor(type).getOwner() != null) {
                 for(Player p : game.getActivePlayers()) {
                     if(!p.equals(game.getCurrentPlayer())) {
-                        if(game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTable().size() == p.getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTable().size() && !game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).hasProfessor()) {
+                        if(game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTableStudentsNum() == p.getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTableStudentsNum() && !game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).hasProfessor()) {
                             game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).setProfessor(game.getGameBoard().getProfessorByColor(type));
                             p.getBoard().getProfessorTable().getCellByColor(type).resetProfessor();
                         }
