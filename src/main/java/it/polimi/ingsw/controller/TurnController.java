@@ -169,7 +169,8 @@ public class TurnController {
         } else {
             setActionPhase();
             gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
-            gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
 
             gameHandler.sendExcept(new DynamicAnswer("Please wait: " + currentPlayer.getNickname() + " is playing his action phase", false), currentPlayer.getPlayerID());
 
@@ -268,7 +269,8 @@ public class TurnController {
             //System.out.println("Entro");
             gameHandler.sendSinglePlayer(new StartPianification(), currentPlayer.getPlayerID());
             //System.out.println("Mando StartPianification");
-            gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
             //System.out.println("Mando Game");
 
 
@@ -466,7 +468,9 @@ public class TurnController {
         controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
         checkProfessorInfluence();
         studentRequest++;
-        gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+        //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
+
         askStudent(studentRequest);
 
         /*
@@ -543,13 +547,17 @@ public class TurnController {
             } else {
                 controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
                 studentRequest++;
-                gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+                //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+                gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
+
                 askStudent(studentRequest);
             }
         } else {
             controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
             studentRequest++;
-            gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
+            gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
+
             askStudent(studentRequest);
         }
 
