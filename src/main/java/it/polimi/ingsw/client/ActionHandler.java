@@ -96,11 +96,6 @@ public class ActionHandler {
             showGame = showGame + 1;
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
-            } else if (gui != null) {
-                gui.getInfoAlert().setTitle("INFO");
-                gui.getInfoAlert().setHeaderText("Information from server");
-                gui.getInfoAlert().setContentText(modelView.getServerAnswer().getMessage().toString());
-                gui.getInfoAlert().show();
             }
         } else if(answer instanceof MagicPostmanAction) {
             modelView.setMagicPostmanAction(true);
@@ -142,7 +137,7 @@ public class ActionHandler {
                 }
                 else if (gui!=null) {
                     System.out.println("Entro in pick assistant");
-                    gui.changeStage("actions/PickAssistant.fxml");
+                    gui.changeStage("/fxml/actions/PickAssistant.fxml");
                 }
             }
             case "PICK_CLOUD" -> {

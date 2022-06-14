@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="610.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.actions.Board">
+   <children>
+      <ImageView fitHeight="741.0" fitWidth="1018.0" layoutX="-8.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../graphics/lightbluesky.jpg" />
+         </image>
+      </ImageView>
+      <Group layoutX="246.0" layoutY="506.0">
+         <children>
+            <ImageView fitHeight="208.0" fitWidth="499.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../graphics/boards/Plancia_DEF2.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="85.0" layoutY="95.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="129.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="163.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="26.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="60.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="-112.0" layoutY="266.0" rotate="90.0">
+         <children>
+            <ImageView fitHeight="208.0" fitWidth="499.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../graphics/boards/Plancia_DEF2.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="85.0" layoutY="27.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="60.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="95.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="129.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="163.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="604.0" layoutY="246.0" rotate="-90.0">
+         <children>
+            <ImageView fitHeight="208.0" fitWidth="499.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../graphics/boards/Plancia_DEF2.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="85.0" layoutY="95.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="129.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="163.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="26.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="85.0" layoutY="60.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="162.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="186.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../graphics/wooden_pieces/3D/redStudent3D.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
