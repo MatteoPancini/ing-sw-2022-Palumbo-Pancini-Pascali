@@ -213,6 +213,12 @@ public class ExpertController {
                     turnController.getController().getGame().getGameBoard().getStudentsBag().add(new Student(pawnTypeChosen));
                     p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).removeStudent();
                 }
+                if(p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).getTableStudentsNum() == 0 && turnController.getController().getGame().getGameBoard().getProfessorByColor(pawnTypeChosen).getOwner() == p) {
+                    turnController.getController().getGame().getGameBoard().getProfessorByColor(pawnTypeChosen).setOwner(null);
+                    p.getBoard().getProfessorTable().getCellByColor(pawnTypeChosen).resetProfessor();
+                    break;
+                }
+
             }
         }
 
@@ -238,6 +244,7 @@ public class ExpertController {
                         if(game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTableStudentsNum() == p.getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTableStudentsNum() && !game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).hasProfessor()) {
                             game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).setProfessor(game.getGameBoard().getProfessorByColor(type));
                             p.getBoard().getProfessorTable().getCellByColor(type).resetProfessor();
+                            game.getGameBoard().getProfessorByColor(type).setOwner(game.getCurrentPlayer());
                         }
                     }
                 }

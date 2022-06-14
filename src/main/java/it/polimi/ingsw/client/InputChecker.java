@@ -143,7 +143,6 @@ public class InputChecker {
         System.out.println("My input: " + input);
         if(modelView.isMagicPostmanAction()) {
             maxMoves = (modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2);
-            modelView.setMagicPostmanAction(false);
         } else {
             maxMoves = modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves();
         }
@@ -152,6 +151,9 @@ public class InputChecker {
             System.out.println("Parso " + moves);
             if (moves > 0 && moves <= maxMoves) {
                 action = new PickMovesNumber(moves);
+                if(modelView.isMagicPostmanAction()) {
+                    modelView.setMagicPostmanAction(false);
+                }
             } else {
                 cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
             }
