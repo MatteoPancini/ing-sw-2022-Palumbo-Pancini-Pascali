@@ -517,8 +517,12 @@ public class TurnController {
         for(Island i : controller.getGame().getGameBoard().getIslands()){
             if(chosenIsland.getIslandID() == i.getIslandID()) {
                 System.out.println("Put student on island " + i.getIslandID());
-                if(expertController.isMonkEffect()) {
-                    i.addStudent(expertController.getStudentChosen());
+                if(expertController != null) {
+                    if(expertController.isMonkEffect()) {
+                        i.addStudent(expertController.getStudentChosen());
+                    } else {
+                        i.addStudent(studentToMove);
+                    }
                 } else {
                     i.addStudent(studentToMove);
                 }
