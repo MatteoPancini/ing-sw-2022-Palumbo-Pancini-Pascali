@@ -350,10 +350,12 @@ public class TurnController {
                     //if (!flag) break;
                 }
             }
-            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size() == 0) {
+            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().isEmpty()) {
+                System.out.println("Sono nqui");
                 lastRound = true;
             }
 
+            System.out.println("LAST" + lastRound);
             switchPlayer();
 
             askAssistantCard();
@@ -1006,13 +1008,11 @@ public class TurnController {
             if(controller.getGame().getPlayers().size() == 4) {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
                     System.out.println("Enrtro 2");
-
                     return true;
                 }
             } else {
-                if(p.getBoard().getTowerArea().getTowerArea().size() == 0) {
+                if(p.getBoard().getTowerArea().getTowerArea().isEmpty()) {
                     System.out.println("Enrtro 2");
-
                     return true;
                 }
             }
@@ -1024,7 +1024,7 @@ public class TurnController {
             System.out.println("Enrtro 3");
 
             for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
-                if(i != controller.getGame().getActivePlayers().size() - 1) {
+                if(controller.getGame().getCurrentPlayer().getNickname() != controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname()) {
                     return false;
                 } else {
                     return true;

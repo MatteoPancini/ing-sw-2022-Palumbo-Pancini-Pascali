@@ -144,9 +144,33 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(2).isTeamLeader(), false);
         assertEquals(controllerStub.getGame().getActivePlayers().get(3).isTeamLeader(), false);
 
-        controllerStub.getGame().setCurrentPlayer(matteo);
-        controllerStub.getTurnController().setCurrentPlayer(matteo);
+        controllerStub.getGame().setCurrentPlayer(gigiox);
+        controllerStub.getTurnController().setCurrentPlayer(gigiox);
         controllerStub.newSetupGame();
+
+        System.out.println(gigiox.getBoard().getTowerArea().getTowerArea().isEmpty());
+        System.out.println(gigiox.getBoard().getTowerArea().getTowerArea().size());
+
+        assertEquals(gigiox.getBoard().getTowerArea().getTowerArea().size(), 0);
+
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        PropertyChangeEvent ev16 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(0).getName());
+        controllerStub.propertyChange(ev16);
+
+        //gigiox.getAssistantDeck().getDeck().remove(0);
+
+        System.out.println(gigiox.getAssistantDeck().getDeck().size());
+        System.out.println(gigiox.getAssistantDeck().getDeck().isEmpty());
+
+
     }
 
     @Test
