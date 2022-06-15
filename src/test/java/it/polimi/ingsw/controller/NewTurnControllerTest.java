@@ -470,10 +470,11 @@ public class NewTurnControllerTest {
         cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
         cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
         controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.GREEN).setOwner(cisco);
-        controllerStub.getGame().getGameBoard().getIslands().get(9).addStudent(new Student(PawnType.GREEN));
-        controllerStub.getTurnController().moveMotherNature(9);
-        controllerStub.getGame().getGameBoard().getIslands().get(0).addStudent(new Student(PawnType.GREEN));
-        controllerStub.getTurnController().moveMotherNature(1);
+        controllerStub.getGame().getGameBoard().getIslands().get(8).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(8).setTower(new Tower(TowerColor.WHITE));
+        controllerStub.getGame().getGameBoard().getIslands().get(7).addStudent(new Student(PawnType.RED));
+        controllerStub.getTurnController().moveMotherNature(7);
+        //controllerStub.getTurnController().moveMotherNature(1);
 
 
 
