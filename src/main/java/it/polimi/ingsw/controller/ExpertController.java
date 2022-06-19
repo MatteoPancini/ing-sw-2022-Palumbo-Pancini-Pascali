@@ -213,6 +213,12 @@ public class ExpertController {
                     turnController.getController().getGame().getGameBoard().getStudentsBag().add(new Student(pawnTypeChosen));
                     p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).removeStudent();
                 }
+                if(p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).getTableStudentsNum() == 0 && turnController.getController().getGame().getGameBoard().getProfessorByColor(pawnTypeChosen).getOwner() == p) {
+                    turnController.getController().getGame().getGameBoard().getProfessorByColor(pawnTypeChosen).setOwner(null);
+                    p.getBoard().getProfessorTable().getCellByColor(pawnTypeChosen).resetProfessor();
+                    break;
+                }
+
             }
         }
 
@@ -238,6 +244,7 @@ public class ExpertController {
                         if(game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTableStudentsNum() == p.getBoard().getDiningRoom().getDiningRoom().get(type.getPawnID()).getTableStudentsNum() && !game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).hasProfessor()) {
                             game.getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(type).setProfessor(game.getGameBoard().getProfessorByColor(type));
                             p.getBoard().getProfessorTable().getCellByColor(type).resetProfessor();
+                            game.getGameBoard().getProfessorByColor(type).setOwner(game.getCurrentPlayer());
                         }
                     }
                 }
@@ -279,7 +286,7 @@ public class ExpertController {
         } else {
             //student 1 = dining room
             //student 2 = entrance
-            System.out.println("Entro nell'active minestreler");
+            System.out.println("Entro nell'active minestrel");
             game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(studentOne.getType().getPawnID()).removeStudent();
             game.getCurrentPlayer().getBoard().getEntrance().removeStudent(studentTwo);
 
@@ -313,11 +320,6 @@ public class ExpertController {
     public void grannyHerbsEffect() {
         grannyHerbsEffect = true;
         turnController.getGameHandler().sendSinglePlayer(new GrannyHerbsAction(), turnController.getCurrentPlayer().getPlayerID());
-        /*
-        RequestAction islandRequest = new RequestAction(Action.PICK_ISLAND);
-        turnController.getGameHandler().sendSinglePlayer(islandRequest, turnController.getCurrentPlayer().getPlayerID());
-
-         */
     }
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {

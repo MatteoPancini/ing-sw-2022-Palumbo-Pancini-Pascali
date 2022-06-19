@@ -350,13 +350,16 @@ public class TurnController {
                     //if (!flag) break;
                 }
             }
-            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size() == 0) {
+            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().isEmpty()) {
+                System.out.println("Sono nqui");
                 lastRound = true;
             }
 
+            System.out.println("LAST" + lastRound);
             switchPlayer();
 
             askAssistantCard();
+
         } else {
             askAssistantCard();
         }
@@ -516,8 +519,12 @@ public class TurnController {
         for(Island i : controller.getGame().getGameBoard().getIslands()){
             if(chosenIsland.getIslandID() == i.getIslandID()) {
                 System.out.println("Put student on island " + i.getIslandID());
-                if(expertController.isMonkEffect()) {
-                    i.addStudent(expertController.getStudentChosen());
+                if(expertController != null) {
+                    if(expertController.isMonkEffect()) {
+                        i.addStudent(expertController.getStudentChosen());
+                    } else {
+                        i.addStudent(studentToMove);
+                    }
                 } else {
                     i.addStudent(studentToMove);
                 }
@@ -666,19 +673,20 @@ public class TurnController {
             System.out.println(studentType.toString());
             if(expertController != null) {
                 if(expertController.isFungarusEffect()) {
+                    System.out.println("F - Effect of " + expertController.getPawnTypeChosen());
                     if(!studentType.equals(expertController.getPawnTypeChosen())) {
+                        System.out.println("F - Effect of " + expertController.getPawnTypeChosen());
+
                         if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
                             Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                             studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                         }
-
                     }
                 } else {
                     if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
                         Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                         studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                     }
-
                 }
             } else {
                 System.out.println("DEVO ESSER QUI");
@@ -764,7 +772,9 @@ public class TurnController {
                         System.out.println("Cambio di influenza");
                         int mergedTowers = controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().size();
                         for (Player p : controller.getGame().getActivePlayers()) {
-                            if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslandById(islandId).getTower().getColor()) {
+                            System.out.println(p.getBoard().getTowerArea().getTowerArea().get(0).getColor());
+                            System.out.println(controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor());
+                            if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() != controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) {
                                 controller.getGame().getGameBoard().getIslands().get(islandId - 1).moveTowerToArea(p.getBoard().getTowerArea());
                                 System.out.println("Spostata in tower area di " + p.getNickname());
                                 break;
@@ -795,7 +805,7 @@ public class TurnController {
                     }
                 } else if (controller.getGame().getGameBoard().getIslands().get(islandId - 1).hasRight()) {
                     System.out.println("merge a dx");
-                    controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslandById(islandId + 2));
+                    controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId));
                 }
 
 
@@ -998,13 +1008,11 @@ public class TurnController {
             if(controller.getGame().getPlayers().size() == 4) {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
                     System.out.println("Enrtro 2");
-
                     return true;
                 }
             } else {
-                if(p.getBoard().getTowerArea().getTowerArea().size() == 0) {
+                if(p.getBoard().getTowerArea().getTowerArea().isEmpty()) {
                     System.out.println("Enrtro 2");
-
                     return true;
                 }
             }
@@ -1016,7 +1024,7 @@ public class TurnController {
             System.out.println("Enrtro 3");
 
             for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
-                if(i != controller.getGame().getActivePlayers().size() - 1) {
+                if(controller.getGame().getCurrentPlayer().getNickname() != controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname()) {
                     return false;
                 } else {
                     return true;

@@ -23,9 +23,9 @@ public class BoardCell implements Serializable {
         }
         return false;
     }
-    public boolean hasCoin(){
+    public boolean hasCoin() {
         return coinCell;
-    };
+    }
 
     public void setCoinCell() { coinCell = true; }
 

@@ -144,9 +144,33 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getActivePlayers().get(2).isTeamLeader(), false);
         assertEquals(controllerStub.getGame().getActivePlayers().get(3).isTeamLeader(), false);
 
-        controllerStub.getGame().setCurrentPlayer(matteo);
-        controllerStub.getTurnController().setCurrentPlayer(matteo);
+        controllerStub.getGame().setCurrentPlayer(gigiox);
+        controllerStub.getTurnController().setCurrentPlayer(gigiox);
         controllerStub.newSetupGame();
+
+        System.out.println(gigiox.getBoard().getTowerArea().getTowerArea().isEmpty());
+        System.out.println(gigiox.getBoard().getTowerArea().getTowerArea().size());
+
+        assertEquals(gigiox.getBoard().getTowerArea().getTowerArea().size(), 0);
+
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        gigiox.getAssistantDeck().getDeck().remove(0);
+        PropertyChangeEvent ev16 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(0).getName());
+        controllerStub.propertyChange(ev16);
+
+        //gigiox.getAssistantDeck().getDeck().remove(0);
+
+        System.out.println(gigiox.getAssistantDeck().getDeck().size());
+        System.out.println(gigiox.getAssistantDeck().getDeck().isEmpty());
+
+
     }
 
     @Test
@@ -470,10 +494,11 @@ public class NewTurnControllerTest {
         cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
         cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
         controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.GREEN).setOwner(cisco);
-        controllerStub.getGame().getGameBoard().getIslands().get(9).addStudent(new Student(PawnType.GREEN));
-        controllerStub.getTurnController().moveMotherNature(9);
-        controllerStub.getGame().getGameBoard().getIslands().get(0).addStudent(new Student(PawnType.GREEN));
-        controllerStub.getTurnController().moveMotherNature(1);
+        controllerStub.getGame().getGameBoard().getIslands().get(8).addStudent(new Student(PawnType.RED));
+        controllerStub.getGame().getGameBoard().getIslands().get(8).setTower(new Tower(TowerColor.WHITE));
+        controllerStub.getGame().getGameBoard().getIslands().get(7).addStudent(new Student(PawnType.RED));
+        controllerStub.getTurnController().moveMotherNature(7);
+        //controllerStub.getTurnController().moveMotherNature(1);
 
 
 
