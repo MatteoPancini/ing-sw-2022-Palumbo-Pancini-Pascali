@@ -6,15 +6,12 @@ import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.server.Server;
 
 import java.beans.PropertyChangeSupport;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class GameHandler {

@@ -27,18 +27,6 @@ public class Controller implements PropertyChangeListener {
         this.game = game;
         this.gameHandler = gameHandler;
         turnController = new TurnController(this, gameHandler);
-        /*
-        if(game.isExpertMode()) {
-            System.out.println("Setto EXPERT MODE");
-            expertController = new ExpertController(game, game.getGameBoard(), turnController);
-            turnController.setExpertController(expertController);
-        } else {
-            System.out.println("NON SETTO EXPERT MODE");
-            expertController = null;
-            turnController.setExpertController(null);
-        }
-
-         */
     }
 
 
@@ -79,43 +67,20 @@ public class Controller implements PropertyChangeListener {
         int colorsCounter3P = 0;
         int colorsCounter2P = 0;
         int colorsCounter4P = 0;
-        ArrayList<TowerColor> allTowerColors = new ArrayList<TowerColor>();
+        ArrayList<TowerColor> allTowerColors = new ArrayList<>();
         allTowerColors.add(TowerColor.WHITE);
         allTowerColors.add(TowerColor.BLACK);
         allTowerColors.add(TowerColor.GREY);
 
         if(game.getPlayersNumber() == 3) {
             towersNumber = 6;
-            colorsCounter3P = 0;
         } else if(game.getPlayersNumber() == 2) {
             towersNumber = 8;
-            colorsCounter2P = 0;
         } else if(game.getPlayersNumber() == 4) {
             towersNumber = 8;
-            colorsCounter4P = 0;
         }
 
         for(Player p : game.getPlayers()) {
-            //System.out.println("Inizio setup di " + p.getNickname());
-            //System.out.println("metto students nell'entrance");
-            /*
-            if(game.getPlayersNumber() == 4) {
-                if(p.isTeamLeader()) {
-                    System.err.println(p.getNickname());
-                    for(int i = 1; i <= studentsNumber; i++) {
-                        Collections.shuffle(game.getGameBoard().getStudentsBag());
-                        p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
-                        game.getGameBoard().removeStudents(0);
-                    }
-                }
-            } else {
-                for(int i = 1; i <= studentsNumber; i++) {
-                    Collections.shuffle(game.getGameBoard().getStudentsBag());
-                    p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
-                    game.getGameBoard().removeStudents(0);
-                }
-
-             */
             for(int i = 1; i <= studentsNumber; i++) {
                 Collections.shuffle(game.getGameBoard().getStudentsBag());
                 p.getBoard().getEntrance().getStudents().add(game.getGameBoard().getStudentsBag().get(0));
@@ -166,7 +131,6 @@ public class Controller implements PropertyChangeListener {
             }
         }
 
-        //System.out.println("metto madre natura");
 
         int maximum = 11;
         SecureRandom r = new SecureRandom();
@@ -174,7 +138,7 @@ public class Controller implements PropertyChangeListener {
         //int n = 1;
         int mnPos = game.getGameBoard().getMotherNature().getPosition();
 
-        int mnPosOpposite = -1;
+        int mnPosOpposite;
         if(mnPos <= 6) {
             mnPosOpposite = mnPos + 6;
         } else {
@@ -220,9 +184,7 @@ public class Controller implements PropertyChangeListener {
         System.out.println("propertyChange del controller" + evt.getPropertyName());
 
         switch(evt.getPropertyName()) {
-            case "PickAssistant" -> {
-                turnController.playAssistantCard((Assistants) evt.getNewValue());
-            }
+            case "PickAssistant" -> turnController.playAssistantCard((Assistants) evt.getNewValue());
 
             case "PickStudent" -> {
                 if(expertController == null) {
@@ -339,9 +301,7 @@ public class Controller implements PropertyChangeListener {
                 else if(evt.getNewValue() == null) turnController.askMotherNatureMoves();
             }
 
-            case "GrannyHerbsTile" -> {
-                expertController.setGrannyHerbsTile((Island) evt.getNewValue());
-            }
+            case "GrannyHerbsTile" -> expertController.setGrannyHerbsTile((Island) evt.getNewValue());
 
             case "PickPawnType" -> {
                 expertController.setPawnTypeChosen((PawnType) evt.getNewValue());

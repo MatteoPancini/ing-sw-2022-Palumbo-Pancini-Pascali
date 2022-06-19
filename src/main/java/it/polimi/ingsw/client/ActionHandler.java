@@ -187,7 +187,7 @@ public class ActionHandler {
                                 break;
                             }
                         }
-                    }else {
+                    } else {
                         cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     }
                 } else if(gui != null) {

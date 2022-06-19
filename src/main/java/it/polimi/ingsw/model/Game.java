@@ -18,9 +18,6 @@ public class Game implements Serializable {
     private Player currentPlayer;
     private int currentPlayerNumber;
 
-    public int getCurrentPlayerNumber() {
-        return currentPlayerNumber;
-    }
 
     public void setCurrentPlayerNumber(int currentPlayerNumber) {
         this.currentPlayerNumber = currentPlayerNumber;
@@ -44,7 +41,7 @@ public class Game implements Serializable {
 
     public void setExpertMode(boolean expertMode) {
         this.expertMode = expertMode;
-        if(expertMode == true) {
+        if(expertMode) {
             gameBoard.setPlayableCharacters();
         }
     }
@@ -52,17 +49,6 @@ public class Game implements Serializable {
     public boolean isExpertMode() {
         return expertMode;
     }
-    /*
-    public Game(int playersNumber, boolean expertMode, ArrayList<Player> players, ArrayList<Player> activePlayers) {
-        gameBoard = new GameBoard(this);
-        this.playersNumber = playersNumber;
-        this.expertMode = expertMode;
-        this.players = players;
-        this.activePlayers = activePlayers;
-        currentPlayer = null;
-    }
-
-     */
 
     public void addPlayer(Player newPlayer) {
         players.add(newPlayer);
@@ -94,15 +80,6 @@ public class Game implements Serializable {
         return null;
     }
 
-    public Player getPlayerByNickname(String playerNickname) {
-        for (Player player : activePlayers) {
-            if (player.getNickname() == playerNickname) {
-                return player;
-            }
-        }
-        return null;
-    }
-
     public GameBoard getGameBoard() {
         return gameBoard;
     }
@@ -112,17 +89,6 @@ public class Game implements Serializable {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-    /*
-
-    public int getPlayersNumber() {
-        return playersNumber;
-    }
-
-    public boolean isExpertMode() {
-        return expertMode;
-    }
-
-     */
 
     public void setCurrentPlayer(Player newPlayer) {
         currentPlayer = newPlayer;

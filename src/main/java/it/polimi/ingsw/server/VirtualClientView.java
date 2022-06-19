@@ -7,14 +7,14 @@ import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
 public class VirtualClientView {
 
-    //VirtualClientView manages comunication between server and client, representing a virtual instance of the client.
+    //VirtualClientView manages communication between server and client, representing a virtual instance of the client.
     //Useful to prepare server messages for client
 
 
-    private int clientID;
-    private String clientNickname;
-    private SocketClientConnection socketClientConnection;
-    private GameHandler gameHandler;
+    private final int clientID;
+    private final String clientNickname;
+    private final SocketClientConnection socketClientConnection;
+    private final GameHandler gameHandler;
 
     public VirtualClientView( int clientID, String clientNickname, SocketClientConnection socketClientConnection, GameHandler gameHandler) {
         this.clientID = clientID;
