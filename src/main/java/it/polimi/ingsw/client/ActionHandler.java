@@ -61,8 +61,6 @@ public class ActionHandler {
             showGame = showGame + 1;
             if(showGame == 1) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }else if(modelView.isPianification()) {
-                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             }
             //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
@@ -132,6 +130,7 @@ public class ActionHandler {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
                 if(cli!=null) {
+                    view.firePropertyChange("UpdateModelView", null, modelView.getServerAnswer());
                     cli.askAssistant();
                 }
                 else if (gui!=null) {

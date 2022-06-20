@@ -1078,8 +1078,9 @@ public class CLI implements Runnable, ListenerInterface {
                     showOtherDiningRooms();
                 }
                 if(modelView.isPianification()) {
-                    showAvailableCharacters();
-
+                    showIslandsTable();
+                    showClouds();
+                    showOtherDiningRooms();
                 }
             }
 
