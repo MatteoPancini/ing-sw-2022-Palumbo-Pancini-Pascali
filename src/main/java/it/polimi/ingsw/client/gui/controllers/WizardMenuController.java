@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class WizardMenuController implements GUIController {
 
@@ -56,13 +57,13 @@ public class WizardMenuController implements GUIController {
         monachButton.setVisible(false);
 
         for(Wizards w : wizards) {
-            if(w.toString() == "KING") {
+            if(Objects.equals(w.toString(), "KING")) {
                 kingButton.setVisible(true);
-            }else if(w.toString() == "WITCH") {
+            }else if(Objects.equals(w.toString(), "WITCH")) {
                 witchButton.setVisible(true);
-            }else if(w.toString() == "FOREST") {
+            }else if(Objects.equals(w.toString(), "FOREST")) {
                 forestButton.setVisible(true);
-            }else if(w.toString() == "MONACH") {
+            }else if(Objects.equals(w.toString(), "MONACH")) {
                 monachButton.setVisible(true);
             }
         }

@@ -2,21 +2,18 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
-import it.polimi.ingsw.client.gui.controllers.LoadingController;
+import it.polimi.ingsw.client.gui.controllers.MainSceneController;
 import it.polimi.ingsw.client.gui.controllers.PickController;
+import it.polimi.ingsw.client.gui.controllers.WizardMenuController;
 import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
-import it.polimi.ingsw.messages.clienttoserver.actions.*;
+import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Characters;
-import it.polimi.ingsw.model.player.Table;
-import javafx.scene.control.Alert;
+import javafx.application.Platform;
 
 import java.beans.PropertyChangeSupport;
-import java.util.Objects;
 
 public class ActionHandler {
     private ModelView modelView;
@@ -136,16 +133,32 @@ public class ActionHandler {
                     cli.askAssistant();
                 }
                 else if (gui!=null) {
-                    System.out.println("Entro in pick assistant");
-                    gui.changeStage("/fxml/actions/PickAssistant.fxml");
+                    Platform.runLater(() -> {
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        controller.update(serverCommand);
+                    });
                 }
             }
             case "PICK_CLOUD" -> {
-                cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+                if(cli!=null) {
+                    cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+                } else if (gui!=null) {
+                    Platform.runLater(() -> {
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        controller.update(serverCommand);
+                    });
+                }
 
             }
             case "PICK_DESTINATION" -> {
-                cli.askDestination();
+                if(cli!=null) {
+                    cli.askDestination();
+                } else if (gui!=null) {
+                    Platform.runLater(() -> {
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        controller.update(serverCommand);
+                    });
+                }
             }
             case "PICK_STUDENT" -> {
                 if(cli != null) {
@@ -187,71 +200,61 @@ public class ActionHandler {
                                 break;
                             }
                         }
-                    }else {
+                    } else {
                         cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     }
-                } else if(gui != null) {
-                    /*
-                    if(modelView.isJesterAction()) {
-                        if(modelView.getCharacterAction() % 2 == 0) {
-                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                                if(Objects.equals(c.getName().toString(), "JESTER")) {
-                                    cli.askStudentJester(c);
-                                    break;
-                                }
-                            }
-                        } else {
-                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
-                        }
-                        modelView.setCharacterAction(modelView.getCharacterAction() + 1);
-
-                    } else if(modelView.isMinestrelAction()) {
-                        if(modelView.getCharacterAction() % 2 == 0) {
-                            for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
-                                if(Objects.equals(c.getName().toString(), "MINESTREL")) {
-                                    cli.askStudentMinestrel(c);
-                                    break;
-                                }
-                            }
-                        } else {
-                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
-
-                        }
-                        modelView.setCharacterAction(modelView.getCharacterAction() + 1);
-
-                    } else {
-                        PickController controller = (PickController) gui.getControllerFromName("PickStudent.fxml");
-                        controller.askStudent();
-                    }
-
-                     */
-                    PickController controller = (PickController) gui.getControllerFromName("PickStudent.fxml");
-                    controller.askStudent();
+                } else if (gui!=null) {
+                    Platform.runLater(() -> {
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        controller.update(serverCommand);
+                    });
                 }
-
-
             }
             case "PICK_MOVES_NUMBER" -> {
-                if(modelView.isJesterAction()) {
-                    modelView.setJesterAction(false);
-                } else if(modelView.isMinestrelAction()) {
-                    modelView.setMinestrelAction(false);
-                }
-                cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
-
+               if(cli!=null) {
+                   if (modelView.isJesterAction()) {
+                       modelView.setJesterAction(false);
+                   } else if (modelView.isMinestrelAction()) {
+                       modelView.setMinestrelAction(false);
+                   }
+                   cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
+               } else if (gui!=null) {
+                   Platform.runLater(() -> {
+                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                       controller.update(serverCommand);
+                   });
+               }
             }
 
             case "PICK_CHARACTER" -> {
-                cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
-
+               if(cli!=null) {
+                   cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+               } else if (gui!=null) {
+                   Platform.runLater(() -> {
+                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                       controller.update(serverCommand);
+                   });
+               }
             }
             case "PICK_ISLAND" -> {
-                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                if(cli!=null) {
+                    cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                } else if (gui!=null) {
+                    Platform.runLater(() -> {
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        controller.update(serverCommand);
+                    });
+                }
             }
-
             case "PICK_PAWN_TYPE" -> {
-                cli.askPawnType();
-
+                if(cli!=null) {
+                    cli.askPawnType();
+                } else if (gui!=null) {
+                    Platform.runLater(() -> {
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        controller.update(serverCommand);
+                    });
+                }
             }
 
 

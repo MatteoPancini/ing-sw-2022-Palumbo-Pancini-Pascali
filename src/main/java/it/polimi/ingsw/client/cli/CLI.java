@@ -10,14 +10,12 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
-import it.polimi.ingsw.model.cards.CharacterDeck;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
@@ -29,20 +27,12 @@ import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
 import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 import static it.polimi.ingsw.constants.Constants.*;
-
-//CLI riceve UserAction dal Controller, switch(userAction.getPropertyName()) e nei case usa ask...()
-//es: controller.send(new PickAssistant(Actions.PICKASSISTANT))
-//    cli.receiveCommand(??) ???
-
-//TODO M -> SERVERERROR handler
 
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
@@ -90,14 +80,7 @@ public class CLI implements Runnable, ListenerInterface {
     public Scanner getIn() {
         return in;
     }
-    public ModelView getModelView() {
-        return modelView;
-    }
-    /*public Parser getParser() {
-        return parser;
-    }
 
-     */
     public PrintStream getOutput() {
         return out;
     }
@@ -148,12 +131,6 @@ public class CLI implements Runnable, ListenerInterface {
         return r;
     }
 
-    /*public void printCharacters() {
-        for(CharacterCard c : CharacterDeck.getPlayableCards()) {
-            out.println(ANSI_CYAN + c.getName() + "," + ANSI_RESET);
-        }
-    }*/
-
     public void showAvailableCharacters() {
         if (modelView.getGameCopy().isExpertMode()) {
             System.out.println(">The available characters for this match are: ");
@@ -172,7 +149,6 @@ public class CLI implements Runnable, ListenerInterface {
         //st.setShowVerticalLines(true);
         //st.addRow("Effect: ");
         //st.addRow("Cost: ");
-        //TODO -> Sistemare stampa perchè mostra ogni volta anche tutti gli effetti precedenti
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getPlayableCharacters().size(); i++) {
             CLITable st = new CLITable();
             st.setShowVerticalLines(true);
@@ -316,10 +292,14 @@ public class CLI implements Runnable, ListenerInterface {
         //st.setHeaders("Island ID", "Merged Islands", "Students", "Towers");
         st.setHeaders("Island ID", "Merged Islands", "Students & Towers");
 
-        //TODO: fix towers
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
             //st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
-            st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            if(modelView.getGameCopy().getGameBoard().getIslands().get(i).getNoEntry()) {
+                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()) + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+            } else {
+                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+
+            }
 
         }
         /*
@@ -733,7 +713,6 @@ public class CLI implements Runnable, ListenerInterface {
                 virtualClient.firePropertyChange("PickStudent", null, chosenPawnType);
             } else {
                 virtualClient.firePropertyChange("PickPawnType", null, chosenPawnType);
-
             }
 
         }
@@ -741,17 +720,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askStudentMonk(CharacterCard monk) {
         System.out.println(">Choose a student from monk's students: ");
-        showCharacterStudent(monk);
-        System.out.println("\n");
-        System.out.print(">");
-        Scanner input = new Scanner(System.in);
-        String monkStudent = input.nextLine();
-        System.out.println("Typed " + monkStudent);
-        if(monkStudent.equalsIgnoreCase("QUIT")) {
-            virtualClient.firePropertyChange("Quit", null, "Quit");
-        } else {
-            virtualClient.firePropertyChange("PickStudent", null, monkStudent);
-        }
+        showCharacterStudents(monk);
 
     }
 
@@ -764,7 +733,12 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void askStudentJester(CharacterCard jester) {
         System.out.println(">Choose a student from jester's students: ");
-        showCharacterStudent(jester);
+        showCharacterStudents(jester);
+
+    }
+
+    private void showCharacterStudents(CharacterCard card) {
+        showCharacterStudent(card);
         System.out.println("\n");
         System.out.print(">");
         Scanner input = new Scanner(System.in);
@@ -775,13 +749,12 @@ public class CLI implements Runnable, ListenerInterface {
         } else {
             virtualClient.firePropertyChange("PickStudent", null, jesterStudent);
         }
-
     }
 
 
     public void askCharacterActionsNumber() {
         System.out.println("How many students from dining room to entrance do you want to change? [1,2 for Minestrel, 1,2,3, for Jester]");
-        int moves = 0;
+        int moves;
         while(true) {
             try {
                 System.out.print(">");
@@ -981,10 +954,6 @@ public class CLI implements Runnable, ListenerInterface {
         }
         //in.close();
         out.close();
-    }
-
-    public boolean isActiveGame() {
-        return activeGame;
     }
 
     public void endGameMessage() {

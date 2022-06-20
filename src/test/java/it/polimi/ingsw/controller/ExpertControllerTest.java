@@ -242,10 +242,10 @@ public class ExpertControllerTest {
         controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED));
         controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED).setOwner(controllerStub.getGame().getCurrentPlayer());
 
+        //controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
+        //controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
         controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
-        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
-        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
-        controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.RED));
+        //controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.RED));
 
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.FUNGARUS);

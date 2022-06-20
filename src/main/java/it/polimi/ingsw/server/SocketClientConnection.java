@@ -20,11 +20,9 @@ public class SocketClientConnection implements Runnable {
     // receiving messages.
 
     private final Socket socket;
-    private Server server;
+    private final Server server;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
-    private String nickname;
-    private int playersNum;
     private Integer clientID;
     private boolean activeConnection;
 
@@ -37,7 +35,7 @@ public class SocketClientConnection implements Runnable {
             inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            System.err.println("Error catched while initializing the client: " + e.getMessage());
+            System.err.println("Error caught while initializing the client: " + e.getMessage());
         }
 
     }
@@ -51,13 +49,6 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
-    private synchronized boolean isActiveConnection(){
-        return activeConnection;
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
 
     public Integer getClientID() {
         return clientID;
@@ -84,13 +75,6 @@ public class SocketClientConnection implements Runnable {
 
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Players number officially set to " + playersNumber, false));
 
-                        /*
-                        SerializedAnswer expertModeChoice = new SerializedAnswer();
-                        expertModeChoice.setServerAnswer(new ExpertModeAnswer("Do you want to play in expert mode or not?[y/n]"));
-                        sendServerMessage(expertModeChoice);
-
-
-                         */
                         break;
                     } catch(OutOfBoundException e) {
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Please insert a value between 2 and 4", true));
@@ -109,7 +93,7 @@ public class SocketClientConnection implements Runnable {
     public void setupGameMode(ExpertModeAnswer answer) throws IOException, ClassNotFoundException {
         SerializedAnswer serverAns = new SerializedAnswer();
         serverAns.setServerAnswer(answer);
-        System.out.println("Inizio setup gamemode");
+        System.out.println("Inizio setup game mode");
         sendServerMessage(serverAns);
         while (true) {
             SerializedMessage input = (SerializedMessage) inputStream.readObject();
@@ -136,7 +120,7 @@ public class SocketClientConnection implements Runnable {
 
     public void sendServerMessage(SerializedAnswer serverMessage) {
         try {
-            System.out.println("Ho inviato l'answer: " + serverMessage.getServerAnswer().getMessage());
+            System.out.println("Ho inviato answer: " + serverMessage.getServerAnswer().getMessage());
             outputStream.reset();
             outputStream.writeObject(serverMessage);
             outputStream.flush();
@@ -149,12 +133,12 @@ public class SocketClientConnection implements Runnable {
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
         if(clientInput.message != null) {
-            System.out.println("Leggo da client messaggio " + clientInput.message.toString());
+            System.out.println("Leggo da client messaggio " + clientInput.message);
             Message userMessage = clientInput.message;
             actionHandler(userMessage);
 
         } else if (clientInput.userAction != null) {
-            System.out.println("Leggo da client action " + clientInput.userAction.toString());
+            System.out.println("Leggo da client action " + clientInput.userAction);
             UserAction userAction = clientInput.userAction;
             actionHandler(userAction);
         }
@@ -166,7 +150,6 @@ public class SocketClientConnection implements Runnable {
         } else if(userMessage instanceof WizardChoice) {
             if(Wizards.isChosen(((WizardChoice) userMessage).getWizardChosen())) {
                 server.getVirtualClientFromID(clientID).sendAnswerToClient(new WizardAnswer("Sorry, this wizard has already been chosen. Please choose another wizard!"));
-                return;
             } else {
                 server.getGameFromID(clientID).getController().setPlayerWizard(clientID, ((WizardChoice) userMessage).getWizardChosen());
                 Wizards.removeAvailableWizard(((WizardChoice) userMessage).getWizardChosen());
@@ -183,66 +166,52 @@ public class SocketClientConnection implements Runnable {
     }
 
     public void actionHandler(UserAction userAction) {
-        //if(server.getGameFromID(clientID).getCurrentPlayerId() != clientID) {
-            //server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTYOURTURN), clientID);
-        //}
-        //else {
-            if(server.getGameFromID(clientID).isMatchStarted()) {
-                if(userAction instanceof PickAssistant) {
-                    //System.out.println("Mi arriva pickassistant");
-                    server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
+        if(server.getGameFromID(clientID).isMatchStarted()) {
+            if(userAction instanceof PickAssistant) {
+                server.getGameFromID(clientID).parseActions(userAction, "PickAssistant");
+            }
+            if(userAction instanceof PickStudent) {
+                server.getGameFromID(clientID).parseActions(userAction, "PickStudent");
+            }
 
-                }
-
-                if(userAction instanceof PickStudent) {
-                    server.getGameFromID(clientID).parseActions(userAction, "PickStudent");
-                }
-
-                if(userAction instanceof PickDestination) {
-                    if(server.getGameFromID(clientID).getController().getExpertController() != null) {
-                        if(server.getGameFromID(clientID).getController().getExpertController().isGrannyHerbsEffect()) {
-                            server.getGameFromID(clientID).parseActions(userAction, "GrannyHerbsTile");
-                        } else {
-                            server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
-                        }
+            if(userAction instanceof PickDestination) {
+                if(server.getGameFromID(clientID).getController().getExpertController() != null) {
+                    if(server.getGameFromID(clientID).getController().getExpertController().isGrannyHerbsEffect()) {
+                        server.getGameFromID(clientID).parseActions(userAction, "GrannyHerbsTile");
                     } else {
-                        //System.out.println("Devo essere entrato qua");
                         server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
                     }
+                } else {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickDestination");
                 }
-
-                if(userAction instanceof PickMovesNumber) {
-                    server.getGameFromID(clientID).parseActions(userAction, "PickMovesNumber");
-                }
-
-                if(userAction instanceof PickCloud) {
-                    server.getGameFromID(clientID).parseActions(userAction, "PickCloud");
-                }
-
-                if(userAction instanceof PickCharacter) {
-                    if(server.getGameFromID(clientID).getExpertMode()) {
-                        server.getGameFromID(clientID).parseActions(userAction, "PickCharacter");
-                    } else {
-                        server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT, "Game is in standard mode! You can't play a character card!"), clientID);
-                    }
-                }
-
-                if(userAction instanceof PickPawnType) {
-                    server.getGameFromID(clientID).parseActions(userAction, "PickPawnType");
-                }
-
-                if(userAction instanceof PickCharacterActionsNum) {
-                    server.getGameFromID(clientID).parseActions(userAction, "PickCharacterActionsNum");
-                }
-            } else {
-                server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
             }
-        //}
+
+            if(userAction instanceof PickMovesNumber) {
+                server.getGameFromID(clientID).parseActions(userAction, "PickMovesNumber");
+            }
+            if(userAction instanceof PickCloud) {
+                server.getGameFromID(clientID).parseActions(userAction, "PickCloud");
+            }
+
+            if(userAction instanceof PickCharacter) {
+                if(server.getGameFromID(clientID).getExpertMode()) {
+                    server.getGameFromID(clientID).parseActions(userAction, "PickCharacter");
+                } else {
+                    server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT, "Game is in standard mode! You can't play a character card!"), clientID);
+                }
+            }
+
+            if(userAction instanceof PickPawnType) {
+                server.getGameFromID(clientID).parseActions(userAction, "PickPawnType");
+            }
+            if(userAction instanceof PickCharacterActionsNum) {
+                server.getGameFromID(clientID).parseActions(userAction, "PickCharacterActionsNum");
+            }
+        } else {
+            server.getGameFromID(clientID).sendSinglePlayer(new ServerError(ServerErrorTypes.NOTVALIDINPUT), clientID);
+        }
     }
 
-    public void setActiveConnection(boolean activeConnection) {
-        this.activeConnection = activeConnection;
-    }
 
     private void checkConnection(NicknameChoice nickname) {
         try {

@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.enumerations.TowerColor;
 
 public class TowerArea implements Serializable {
-    private ArrayList<Tower> myTowers = new ArrayList<Tower>();
+    private final ArrayList<Tower> myTowers;
 
     public TowerArea () {
-        myTowers = new ArrayList<Tower>();
+        myTowers = new ArrayList<>();
     }
 
     public ArrayList<Tower> getTowerArea() { return myTowers; }
@@ -28,7 +27,7 @@ public class TowerArea implements Serializable {
     }
 
     public void moveTowerToIsland(Island island, int mergedTowers) {
-        System.out.println("Entro towersss");
+        System.out.println("Entro towers");
         for (int i = 0; i < mergedTowers; i++) {
             island.getMergedTowers().add(myTowers.get(myTowers.size() - 1));
             myTowers.remove(myTowers.get(myTowers.size() - 1));

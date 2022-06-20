@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import java.io.IOException;
 
-//TODO M -> sistemare le riconnessioni
 public class Server {
     private final ServerSocketHandler serverSocketHandler;
 
@@ -110,7 +109,6 @@ public class Server {
         getGameFromID(clientID).unregisterPlayer(clientID);
         VirtualClientView client = idMapVirtualClient.get(clientID);
         System.out.println("Unregistering client " + client.getClientNickname() + "...");
-        //TODO M -> potrebbe starci di non rimuovere tutto, così da poterlo far rigiocare, tanto si basa tutto su activePlayers
         idMapVirtualClient.remove(clientID);
         nicknameMapID.remove(client.getClientNickname());
         waitingPlayersConnection.remove(virtualClientToClientConnection.get(client));
@@ -181,17 +179,7 @@ public class Server {
             waitingPlayersConnection.clear();
             Wizards.reset();
 
-            /*
-            if(gameHandler.isTeamMode()) {
-                gameHandler.setupTeams();
-            } else {
-                for(Player p : gameHandler.getGame().getPlayers()) {
-                    p.setBoard(new SchoolBoard(p.getPlayerID()));
-                }
-            }
-
-             */
-            for(Player p : gameHandler.getGame().getPlayers()) {
+            for(Player p : GameHandler.getGame().getPlayers()) {
                 p.setBoard(new SchoolBoard(p.getPlayerID()));
             }
 
@@ -219,11 +207,12 @@ public class Server {
 
     public static void main(String[] args) {
         
-        System.out.println(" ____  ____  ____    __    _  _  ____  _  _  ___    ___  ____  ____  _  _  ____  ____ \n" +
-                "( ___)(  _ \\(_  _)  /__\\  ( \\( )(_  _)( \\/ )/ __)  / __)( ___)(  _ \\( \\/ )( ___)(  _ \\\n" +
-                " )__)  )   / _)(_  /(__)\\  )  (   )(   \\  / \\__ \\  \\__ \\ )__)  )   / \\  /  )__)  )   /\n" +
-                "(____)(_)\\_)(____)(__)(__)(_)\\_) (__)  (__) (___/  (___/(____)(_)\\_)  \\/  (____)(_)\\_)");
-        System.out.print("This is the Server of Eryantis: Welcome!");
+        System.out.println("""
+                 ____  ____  ____    __    _  _  ____  _  _  ___    ___  ____  ____  _  _  ____  ____\s
+                ( ___)(  _ \\(_  _)  /__\\  ( \\( )(_  _)( \\/ )/ __)  / __)( ___)(  _ \\( \\/ )( ___)(  _ \\
+                 )__)  )   / _)(_  /(__)\\  )  (   )(   \\  / \\__ \\  \\__ \\ )__)  )   / \\  /  )__)  )   /
+                (____)(_)\\_)(____)(__)(__)(_)\\_) (__)  (__) (___/  (___/(____)(_)\\_)  \\/  (____)(_)\\_)""");
+        System.out.print("This is the Server of Eriantys: Welcome!");
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nDo you want to use a server default configuration?[y/n]");

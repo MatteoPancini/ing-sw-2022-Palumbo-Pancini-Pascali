@@ -183,7 +183,6 @@ public class Island implements Serializable {
             System.out.println("Aggiungo " + islandID + " a " + island.getIslandID());
             for(Island i : mergedIsland) {
                 System.out.println("Aggiungo isola");
-
                 island.getMergedIslands().add(i);
             }
 
@@ -343,6 +342,7 @@ public class Island implements Serializable {
     public void moveTowerToArea(TowerArea towerArea) {
         System.out.println("Muovo torre to area ");
         for(Tower t : mergedTowers) {
+            System.out.println(t.getColor());
             towerArea.addTowers(t);
         }
 

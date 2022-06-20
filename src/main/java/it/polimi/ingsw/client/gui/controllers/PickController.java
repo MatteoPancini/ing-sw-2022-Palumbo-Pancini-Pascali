@@ -5,28 +5,18 @@ import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.PawnType;
-import it.polimi.ingsw.model.enumerations.Wizards;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Table;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.prefs.NodeChangeEvent;
 
 public class PickController implements GUIController{
 
@@ -177,6 +167,138 @@ public class PickController implements GUIController{
         }
     }
 
+
+    public void updateMotherNature() {
+        ImageView motherNature = null;
+        Image img = new Image("@../../graphics/wooden_pieces/mother_nature.png");
+        motherNature.setImage(img);
+        motherNature.setFitHeight(45);
+        motherNature.setFitWidth(45);
+        int motherNaturePosition = gui.getModelView().getGameCopy().getGameBoard().getMotherNature().getPosition();
+
+        switch (motherNaturePosition) {
+            case 1 -> {
+                motherNature.setLayoutX(289);
+                motherNature.setLayoutY(-5);
+            }
+            case 2 -> {
+                motherNature.setLayoutX(397);
+                motherNature.setLayoutY(21);
+            }
+            case 3 -> {
+                motherNature.setLayoutX(501);
+                motherNature.setLayoutY(82);
+            }
+            case 4 -> {
+                motherNature.setLayoutX(526);
+                motherNature.setLayoutY(192);
+            }
+            case 5 -> {
+                motherNature.setLayoutX(501);
+                motherNature.setLayoutY(284);
+            }
+            case 6 -> {
+                motherNature.setLayoutX(414);
+                motherNature.setLayoutY(358);
+            }
+            case 7 -> {
+                motherNature.setLayoutX(295);
+                motherNature.setLayoutY(382);
+            }
+
+            case 8 -> {
+                motherNature.setLayoutX(190);
+                motherNature.setLayoutY(358);
+            }
+
+            case 9 -> {
+                motherNature.setLayoutX(104);
+                motherNature.setLayoutY(284);
+            }
+
+            case 10 -> {
+                motherNature.setLayoutX(65);
+                motherNature.setLayoutY(188);
+            }
+
+            case 11 -> {
+                motherNature.setLayoutX(115);
+                motherNature.setLayoutY(87);
+            }
+
+            case 12 -> {
+                motherNature.setLayoutX(184);
+                motherNature.setLayoutY(18);
+            }
+        }
+
+    }
+
+
+    public void updateNoEntryTile() {
+        ImageView noEntryTile = null;
+        Image img = new Image("@../../graphics/wooden_pieces/deny_island_icon.png");
+
+        for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
+            if(i.getNoEntry()) {
+                noEntryTile = new ImageView();
+                noEntryTile.setImage(img);
+                noEntryTile.setFitHeight(45);
+                noEntryTile.setFitWidth(45);
+            }
+            switch (i.getIslandID()) {
+                case 1 -> {
+                    noEntryTile.setLayoutX(289);
+                    noEntryTile.setLayoutY(31);
+                }
+                case 2 -> {
+                    noEntryTile.setLayoutX(397);
+                    noEntryTile.setLayoutY(55);
+                }
+                case 3 -> {
+                    noEntryTile.setLayoutX(501);
+                    noEntryTile.setLayoutY(120);
+                }
+                case 4 -> {
+                    noEntryTile.setLayoutX(526);
+                    noEntryTile.setLayoutY(226);
+                }
+                case 5 -> {
+                    noEntryTile.setLayoutX(501);
+                    noEntryTile.setLayoutY(323);
+                }
+                case 6 -> {
+                    noEntryTile.setLayoutX(414);
+                    noEntryTile.setLayoutY(396);
+                }
+                case 7 -> {
+                    noEntryTile.setLayoutX(295);
+                    noEntryTile.setLayoutY(417);
+                }
+                case 8 -> {
+                    noEntryTile.setLayoutX(190);
+                    noEntryTile.setLayoutY(396);
+                }
+                case 9 -> {
+                    noEntryTile.setLayoutX(104);
+                    noEntryTile.setLayoutY(318);
+                }
+                case 10 -> {
+                    noEntryTile.setLayoutX(65);
+                    noEntryTile.setLayoutY(224);
+                }
+                case 11 -> {
+                    noEntryTile.setLayoutX(115);
+                    noEntryTile.setLayoutY(128);
+                }
+                case 12 -> {
+                    noEntryTile.setLayoutX(184);
+                    noEntryTile.setLayoutY(58);
+                }
+            }
+        }
+    }
+
     public void askCharacter() {
         gui.changeStage("PickCharacter.fxml");
         character1 = setCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0));
@@ -185,6 +307,38 @@ public class PickController implements GUIController{
         character1.setVisible(true);
         character2.setVisible(true);
         character3.setVisible(true);
+    }
+
+
+    public void pickBluePawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.BLUE));
+    }
+    public void pickRedPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.RED));
+    }
+    public void pickYellowPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.YELLOW));
+    }
+    public void pickGreenPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.GREEN));
+    }
+    public void pickPinkPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.PINK));
+    }
+    public void pickBlueStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.BLUE)));
+    }
+    public void pickRedStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.RED)));
+    }
+    public void pickYellowStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.YELLOW)));
+    }
+    public void pickGreenStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.GREEN)));
+    }
+    public void pickPinkStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.PINK)));
     }
 
     public void pickCloud(ActionEvent e) {
@@ -211,20 +365,27 @@ public class PickController implements GUIController{
     }
 
     //TODO controllare la selection box delle isole
+    /*
     public void pickIsland(ActionEvent e) {
         gui.changeStage("/actions/PickIsland.fxml");
     }
 
+     */
 
-    public void pickID(ActionEvent e) {
-        UserAction action = null;
-        ImageView img = (ImageView) e.getSource();
-        String island = img.getId();
-        switch(island) {
-            case "island1" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslandById(1));
-            } //copiare aumentando l'id dell'isola
-        }
+
+
+
+    public void pickCloud1() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0)));
+    }
+    public void pickCloud2() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1)));
+    }
+    public void pickCloud3() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2)));
+    }
+    public void pickCloud4() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3)));
     }
 
     public void askAssistant() {
@@ -342,9 +503,9 @@ public class PickController implements GUIController{
             case "BLUE" -> {
                 blueButton.setVisible(true);
             } case "RED" -> {
-                ;redButton.setVisible(true);
+                redButton.setVisible(true);
             } case "GREEN" -> {
-                ;greenButton.setVisible(true);
+                greenButton.setVisible(true);
             } case "PINK" -> {
                 pinkButton.setVisible(true);
             } case "YELLOW" -> {

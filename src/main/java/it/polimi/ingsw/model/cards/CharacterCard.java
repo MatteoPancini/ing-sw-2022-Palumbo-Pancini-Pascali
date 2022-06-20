@@ -38,6 +38,10 @@ public class CharacterCard implements Serializable {
         this.resetCost = resetCost;
     }
 
+    public int differentialCost() {
+        return (initialCost - resetCost);
+    }
+
     public String getEffect() { return effect; }
 
     public ArrayList<Student> getStudents() { return students; }
