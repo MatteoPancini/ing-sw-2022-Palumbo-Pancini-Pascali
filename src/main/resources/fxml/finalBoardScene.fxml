@@ -788,7 +788,7 @@
                     <font>
                         <Font name="Palatino" size="13.0" />
                     </font></Button>
-                <Button fx:id="diningRoomButton" layoutX="263.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#pickDIningRoomDestination" text="Pick Dininig Room">
+                <Button fx:id="diningRoomButton" layoutX="263.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#pickDiningRoomDestination" text="Pick Dininig Room">
                     <font>
                         <Font name="Palatino" size="13.0" />
                     </font>
