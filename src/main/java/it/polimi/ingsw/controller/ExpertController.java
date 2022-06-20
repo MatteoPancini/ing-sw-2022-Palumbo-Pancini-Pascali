@@ -324,6 +324,7 @@ public class ExpertController {
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
             if(is.getIslandID() == island.getIslandID()) {
+                System.out.println("Setting granny " + is.getIslandID());
                 is.setNoEntry(true);
                 break;
             }

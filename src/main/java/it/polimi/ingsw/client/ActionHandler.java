@@ -132,6 +132,7 @@ public class ActionHandler {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
                 if(cli!=null) {
+                    view.firePropertyChange("UpdateModelView", null, modelView.getServerAnswer());
                     cli.askAssistant();
                 }
                 else if (gui!=null) {

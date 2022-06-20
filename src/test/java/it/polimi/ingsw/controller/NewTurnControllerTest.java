@@ -164,6 +164,8 @@ public class NewTurnControllerTest {
         gigiox.getAssistantDeck().getDeck().remove(0);
         PropertyChangeEvent ev16 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(0).getName());
         controllerStub.propertyChange(ev16);
+        PropertyChangeEvent ev17 = new PropertyChangeEvent(1, "CheckIslandInfluence", null, controllerStub.getGame().getGameBoard().getIslands().get(5));
+        controllerStub.propertyChange(ev17);
 
         //gigiox.getAssistantDeck().getDeck().remove(0);
 

@@ -559,7 +559,7 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void askMoves(AssistantCard card) {
-        showMotherNature();
+        showIslandsTable();
         if(modelView.isMagicPostmanAction()) {
             System.out.println(">Pick a number of mother nature moves between 1 and "
                     + (modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2));
@@ -1078,8 +1078,9 @@ public class CLI implements Runnable, ListenerInterface {
                     showOtherDiningRooms();
                 }
                 if(modelView.isPianification()) {
-                    showAvailableCharacters();
-
+                    showIslandsTable();
+                    showClouds();
+                    showOtherDiningRooms();
                 }
             }
 
