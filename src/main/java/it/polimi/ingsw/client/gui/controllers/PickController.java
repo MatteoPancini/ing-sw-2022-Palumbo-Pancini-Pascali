@@ -373,74 +373,7 @@ public class PickController implements GUIController{
      */
 
 
-    public void pickIsland(ActionEvent e) {
-        UserAction action = null;
-        ImageView img = (ImageView) e.getSource();
-        String island = img.getId();
-        switch(island) {
-            case "island1Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0));
-                island1Button.setVisible(false);
-            }
-            case "island2Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1));
-                island2Button.setVisible(false);
 
-            }
-            case "island3Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(2));
-                island3Button.setVisible(false);
-
-            }
-            case "island4Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(3));
-                island4Button.setVisible(false);
-
-            }
-            case "island5Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(4));
-                island5Button.setVisible(false);
-
-            }
-            case "island6Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(5));
-                island6Button.setVisible(false);
-
-            }
-            case "island7Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(6));
-                island7Button.setVisible(false);
-
-            }
-            case "island8Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(7));
-                island8Button.setVisible(false);
-
-            }
-            case "island9Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(8));
-                island9Button.setVisible(false);
-
-            }
-            case "island10Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(9));
-                island10Button.setVisible(false);
-
-            }
-            case "island11Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(10));
-                island11Button.setVisible(false);
-
-            }
-            case "island12Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(11));
-                island12Button.setVisible(false);
-
-            }
-        }
-
-        gui.getClientConnection().sendUserInput(action);
-    }
 
     public void pickCloud1() {
         gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0)));
@@ -570,9 +503,9 @@ public class PickController implements GUIController{
             case "BLUE" -> {
                 blueButton.setVisible(true);
             } case "RED" -> {
-                ;redButton.setVisible(true);
+                redButton.setVisible(true);
             } case "GREEN" -> {
-                ;greenButton.setVisible(true);
+                greenButton.setVisible(true);
             } case "PINK" -> {
                 pinkButton.setVisible(true);
             } case "YELLOW" -> {

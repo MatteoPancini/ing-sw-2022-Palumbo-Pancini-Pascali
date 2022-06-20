@@ -149,6 +149,19 @@ public class MainSceneController implements GUIController {
     @FXML ImageView assistant2;
     @FXML ImageView redCloud1;
     @FXML Label redLabelCloud1;
+    @FXML Button island1Button;
+    @FXML Button island2Button;
+    @FXML Button island3Button;
+    @FXML Button island4Button;
+    @FXML Button island5Button;
+    @FXML Button island6Button;
+    @FXML Button island7Button;
+    @FXML Button island8Button;
+    @FXML Button island9Button;
+    @FXML Button island10Button;
+    @FXML Button island11Button;
+    @FXML Button island12Button;
+
 
 
     @Override
@@ -179,7 +192,9 @@ public class MainSceneController implements GUIController {
                 askDestination();
             }
             case "PICK_STUDENT" -> {
-                askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
+                //askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
+                updatePickStudents();
+
             }
             case "PICK_MOVES_NUMBER" -> {
                 if(gui.getModelView().isJesterAction()) {
@@ -288,6 +303,75 @@ public class MainSceneController implements GUIController {
         gui.getClientConnection().sendUserInput(new ExpertModeChoice(choice));
     }*/
 
+    public void pickIsland(ActionEvent e) {
+        UserAction action = null;
+        ImageView img = (ImageView) e.getSource();
+        String island = img.getId();
+        switch(island) {
+            case "island1Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0));
+                island1Button.setVisible(false);
+            }
+            case "island2Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1));
+                island2Button.setVisible(false);
+
+            }
+            case "island3Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(2));
+                island3Button.setVisible(false);
+
+            }
+            case "island4Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(3));
+                island4Button.setVisible(false);
+
+            }
+            case "island5Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(4));
+                island5Button.setVisible(false);
+
+            }
+            case "island6Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(5));
+                island6Button.setVisible(false);
+
+            }
+            case "island7Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(6));
+                island7Button.setVisible(false);
+
+            }
+            case "island8Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(7));
+                island8Button.setVisible(false);
+
+            }
+            case "island9Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(8));
+                island9Button.setVisible(false);
+
+            }
+            case "island10Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(9));
+                island10Button.setVisible(false);
+
+            }
+            case "island11Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(10));
+                island11Button.setVisible(false);
+
+            }
+            case "island12Button" -> {
+                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(11));
+                island12Button.setVisible(false);
+
+            }
+        }
+
+        gui.getClientConnection().sendUserInput(action);
+    }
+
     public void pickDiningRoomDestination() {
         PickDestination action = new PickDestination(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
         diningRoomButton.setVisible(false);
@@ -322,18 +406,18 @@ public class MainSceneController implements GUIController {
     public void askDestination() {
         descriptionLabel.setText("Pick an island or the dining room button to choose the student destination");
         diningRoomButton.setVisible(true);
-        island1.setVisible(true);
-        island2.setVisible(true);
-        island3.setVisible(true);
-        island4.setVisible(true);
-        island5.setVisible(true);
-        island6.setVisible(true);
-        island7.setVisible(true);
-        island8.setVisible(true);
-        island9.setVisible(true);
-        island10.setVisible(true);
-        island11.setVisible(true);
-        island12.setVisible(true);
+        island1Button.setVisible(true);
+        island2Button.setVisible(true);
+        island3Button.setVisible(true);
+        island4Button.setVisible(true);
+        island5Button.setVisible(true);
+        island6Button.setVisible(true);
+        island7Button.setVisible(true);
+        island8Button.setVisible(true);
+        island9Button.setVisible(true);
+        island10Button.setVisible(true);
+        island11Button.setVisible(true);
+        island12Button.setVisible(true);
     }
 
     public void pickCloud(ActionEvent e) {
@@ -695,7 +779,7 @@ public class MainSceneController implements GUIController {
                     }
                 }
             }
-            //TODO COPIARE PER IL RESTO DELLE ISOLE
+            //TODO FINIRE
         }
     }
 
@@ -912,44 +996,17 @@ public class MainSceneController implements GUIController {
         }
     }
 
-    /* creare un parametro che indichi che tipo di action è in corso, passarla come parametro
-    public void updatePickStudents(UserAction action) {
+    //creare un parametro che indichi che tipo di action è in corso, passarla come parametro
+    public void updatePickStudents() {
         green.setVisible(false);
         yellow.setVisible(false);
         pink.setVisible(false);
         blue.setVisible(false);
         red.setVisible(false);
-        if(action instanceof PickStudent) {
-            if(gui.getModelView().isJesterAction()) {
-                if(gui.getModelView().getCharacterAction() % 2 == 0) {
-                    for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
-                        if(c.getName() == Characters.JESTER) {
-                            askStudentCard(c);
-                            break;
-                        }
-                    }
-                } else {
-                    askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
-                }
-                gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
-
-            } else if(gui.getModelView().isMinestrelAction()) {
-                if(gui.getModelView().getCharacterAction() % 2 == 0) {
-                    askStudent(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
-                }
-                gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
-
-            } else if(gui.getModelView().isPrincessAction()) {
+        if(gui.getModelView().isJesterAction()) {
+            if(gui.getModelView().getCharacterAction() % 2 == 0) {
                 for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
-                    if(c.getName() == Characters.SPOILED_PRINCESS) {
-                        askStudentCard(c);
-                        gui.getModelView().setPrincessAction(false);
-                        break;
-                    }
-                }
-            } else if(gui.getModelView().isMonkAction()) {
-                for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
-                    if(c.getName() == Characters.MONK) {
+                    if(c.getName() == Characters.JESTER) {
                         askStudentCard(c);
                         break;
                     }
@@ -957,8 +1014,33 @@ public class MainSceneController implements GUIController {
             } else {
                 askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
             }
+            gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
+
+        } else if(gui.getModelView().isMinestrelAction()) {
+            if(gui.getModelView().getCharacterAction() % 2 == 0) {
+                askStudent(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
+            }
+            gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
+
+        } else if(gui.getModelView().isPrincessAction()) {
+            for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
+                if(c.getName() == Characters.SPOILED_PRINCESS) {
+                    askStudentCard(c);
+                    gui.getModelView().setPrincessAction(false);
+                    break;
+                }
+            }
+        } else if(gui.getModelView().isMonkAction()) {
+            for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
+                if(c.getName() == Characters.MONK) {
+                    askStudentCard(c);
+                    break;
+                }
+            }
+        } else {
+            askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
         }
-    }*/
+    }
 
     public void askStudentEntrance(Entrance e) {
         descriptionLabel.setText("Pick a student from your entrance");
