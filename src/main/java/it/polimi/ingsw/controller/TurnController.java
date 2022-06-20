@@ -774,7 +774,7 @@ public class TurnController {
                         for (Player p : controller.getGame().getActivePlayers()) {
                             System.out.println(p.getBoard().getTowerArea().getTowerArea().get(0).getColor());
                             System.out.println(controller.getGame().getGameBoard().getIslands().get(islandId - 1).getMergedTowers().get(0).getColor());
-                            if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() != controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) {
+                            if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslands().get(islandId - 1).getTower().getColor()) {
                                 controller.getGame().getGameBoard().getIslands().get(islandId - 1).moveTowerToArea(p.getBoard().getTowerArea());
                                 System.out.println("Spostata in tower area di " + p.getNickname());
                                 break;
