@@ -127,7 +127,7 @@ public class GUI extends Application implements ListenerInterface {
     private static final String SETUP = "setup.fxml";
     private static final String LOADING_PAGE = "loading.fxml";
     private static final String WIZARD_MENU = "wizardMenu.fxml";
-    private static final String MAIN_SCENE = "mainScene.fxml";
+    private static final String MAIN_SCENE = "finalBoardScene.fxml";
     private static final String PICK_ASSISTANT = "PickAssistant.fxml";
     /*private static final String PICK_CHARACTER = "actions/PickAssistant.fxml";
     private static final String PICK_CLOUD = "actions/PickAssistant.fxml";
@@ -208,7 +208,7 @@ public class GUI extends Application implements ListenerInterface {
 
 
     public void setupGui() {
-        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT));
+        List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT, MAIN_SCENE));
         try {
             for(String pathFxml : fxmlList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + pathFxml));

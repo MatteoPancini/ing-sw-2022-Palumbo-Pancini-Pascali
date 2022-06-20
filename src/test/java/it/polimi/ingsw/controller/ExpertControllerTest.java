@@ -330,10 +330,20 @@ public class ExpertControllerTest {
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "GrannyHerbsTile", null, controllerStub.getGame().getGameBoard().getIslands().get(6));
         controllerStub.propertyChange(ev2);
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            System.out.println(i.getIslandID() + " " + i.getNoEntry());
+        }
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getNoEntry(), true);
+
         PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickMovesNumber", null, 6);
         controllerStub.propertyChange(ev3);
+        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getNoEntry(), false);
 
-        assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(6).getNoEntry(), true);
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            System.out.println(i.getIslandID() + " " + i.getNoEntry());
+        }
+
+
     }
 
     @Test

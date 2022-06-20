@@ -54,7 +54,9 @@ public class Island implements Serializable {
 
     public boolean getNoEntry(){ return noEntry; }
 
-    public void setNoEntry(boolean noEntry){ this.noEntry = noEntry; }
+    public void setNoEntry(boolean noEntry) {
+        this.noEntry = noEntry;
+    }
 
     public void setOwner(Player owner){ this.owner = owner; }
 
