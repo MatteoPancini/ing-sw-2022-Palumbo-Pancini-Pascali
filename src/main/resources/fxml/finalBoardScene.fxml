@@ -2281,7 +2281,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="character3" fitHeight="112.0" fitWidth="78.0" layoutX="1351.0" layoutY="55.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character3" fitHeight="112.0" fitWidth="78.0" layoutX="1351.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/characters/centarus.png" />
             </image>
@@ -2462,7 +2462,7 @@
                         <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="greenLabelCharacter1" layoutX="5.0" layoutY="17.0" text="0">
+                <Label fx:id="greenLabelCharacter2" layoutX="5.0" layoutY="17.0" text="0">
                     <font>
                         <Font name="Arial Rounded MT Bold" size="13.0" />
                     </font>
