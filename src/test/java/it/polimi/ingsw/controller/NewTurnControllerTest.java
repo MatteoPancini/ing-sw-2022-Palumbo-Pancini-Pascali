@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Professor;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
@@ -357,7 +358,6 @@ public class NewTurnControllerTest {
 
     }
 
-
     @Test
     @DisplayName("Check professor test")
     public void professorCheck() {
@@ -387,19 +387,16 @@ public class NewTurnControllerTest {
         Student s4 = new Student(PawnType.RED);
         Student s5 = new Student(PawnType.RED);
 
-
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s3);
 
         controllerStub.getTurnController().setStudentToMove(s2);
         controllerStub.getTurnController().checkProfessorInfluence();
 
-
         System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor());
 
         controllerStub.getTurnController().setCurrentPlayer(cisco);
         controllerStub.getGame().setCurrentPlayer(cisco);
-
 
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s4);
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s5);
@@ -408,9 +405,143 @@ public class NewTurnControllerTest {
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), true);
         System.out.println(controllerStub.getGame().getActivePlayers().get(0).getNickname());
         assertEquals(controllerStub.getGame().getActivePlayers().get(0).getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor(), false);
-
     }
 
+    @Test
+    @DisplayName("Check Winner Test")
+    public void winnerCheck() {
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for (Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        Student s1 = new Student(PawnType.RED);
+        Student s2 = new Student(PawnType.RED);
+        Student s3 = new Student(PawnType.BLUE);
+        Student s4 = new Student(PawnType.RED);
+        Student s5 = new Student(PawnType.RED);
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s3);
+
+        controllerStub.getTurnController().setStudentToMove(s2);
+        controllerStub.getTurnController().checkProfessorInfluence();
+
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor());
+
+        controllerStub.getTurnController().setCurrentPlayer(cisco);
+        controllerStub.getGame().setCurrentPlayer(cisco);
+
+        controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s4);
+        controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s5);
+        controllerStub.getTurnController().checkProfessorInfluence();
+
+        controllerStub.getTurnController().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().clear();
+
+        controllerStub.getTurnController().checkWinner();
+        assertEquals(cisco, controllerStub.getTurnController().checkWinner());
+
+        for(int i = 1; i <= 8; i++){
+            controllerStub.getTurnController().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().add(new Tower(TowerColor.BLACK));
+        }
+
+        for(int j = 1; j <= 8; j++){
+            if(j % 2 != 0){
+                controllerStub.getTurnController().getCurrentPlayer().getBoard().getTowerArea().moveTowerToIsland(controllerStub.getGame().getGameBoard().getIslands().get(j));
+            }
+
+            if(j % 2 == 0){
+                controllerStub.getGame().getActivePlayers().get(0).getBoard().getTowerArea().moveTowerToIsland(controllerStub.getGame().getGameBoard().getIslands().get(j));
+            }
+        }
+
+        controllerStub.getTurnController().checkWinner();
+        assertEquals(cisco, controllerStub.getTurnController().checkWinner());
+    }
+
+    @Test
+    @DisplayName("Check Win Test")
+    public void winCheck() {
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(matteo);
+
+        for (Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+
+        setupGame();
+
+        assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
+
+        controllerStub.getTurnController().setCurrentPlayer(matteo);
+
+        Student s1 = new Student(PawnType.RED);
+        Student s2 = new Student(PawnType.RED);
+        Student s3 = new Student(PawnType.BLUE);
+        Student s4 = new Student(PawnType.RED);
+        Student s5 = new Student(PawnType.RED);
+
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
+        controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s3);
+
+        controllerStub.getTurnController().setStudentToMove(s2);
+        controllerStub.getTurnController().checkProfessorInfluence();
+
+        System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).hasProfessor());
+
+        controllerStub.getTurnController().setCurrentPlayer(cisco);
+        controllerStub.getGame().setCurrentPlayer(cisco);
+
+        controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s4);
+        controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s5);
+        controllerStub.getTurnController().checkProfessorInfluence();
+
+        controllerStub.getTurnController().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().clear();
+
+        controllerStub.getTurnController().checkWin();
+        assertEquals(true, controllerStub.getTurnController().checkWin());
+
+        for(int i = 1; i <= 8; i++){
+            controllerStub.getTurnController().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().add(new Tower(TowerColor.BLACK));
+        }
+        controllerStub.getTurnController().checkWin();
+        assertEquals(false, controllerStub.getTurnController().checkWin());
+
+        for(int i = 9; i >= 1; i--){
+            controllerStub.getTurnController().getCurrentPlayer().getAssistantDeck().getDeck().remove(controllerStub.getTurnController().getCurrentPlayer().getAssistantDeck().getDeck().get(i));
+        }
+        Assistants assistant = controllerStub.getTurnController().getCurrentPlayer().getAssistantDeck().getDeck().get(0).getName();
+        controllerStub.getTurnController().playAssistantCard(assistant);
+        controllerStub.getTurnController().checkWin();
+        assertEquals(true, controllerStub.getTurnController().checkWin());
+
+        controllerStub.getGame().getGameBoard().getStudentsBag().clear();
+        controllerStub.getTurnController().putStudentsOnCloud();
+        controllerStub.getTurnController().checkWin();
+        assertEquals(true, controllerStub.getTurnController().checkWin());
+    }
 
     @Test
     @DisplayName("Check islands Test")

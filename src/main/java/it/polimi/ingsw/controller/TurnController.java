@@ -350,8 +350,9 @@ public class TurnController {
                     //if (!flag) break;
                 }
             }
-            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().isEmpty()) {
-                System.out.println("Sono nqui");
+
+            if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size() == 0){
+                System.out.println("Sono QUIIIIIIIIIIIIIIIIIIIIII");
                 lastRound = true;
             }
 
@@ -363,8 +364,6 @@ public class TurnController {
         } else {
             askAssistantCard();
         }
-
-
     }
 
     public void checkProfessorInfluence() {
@@ -1041,8 +1040,6 @@ public class TurnController {
     public boolean checkWin() {
         System.out.println("Entro in checkWin");
 
-
-
         if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
             System.out.println("Enrtro 1");
             return true;
@@ -1067,12 +1064,10 @@ public class TurnController {
         if(lastRound) { // se si è avverata la condizione di lastRound faccio il check solo per l'ultimo giocatore
             System.out.println("Enrtro 3");
 
-            for(int i = 0; i< controller.getGame().getActivePlayers().size(); i++) {
-                if(controller.getGame().getCurrentPlayer().getNickname() != controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname()) {
-                    return false;
-                } else {
-                    return true;
-                }
+            if(controller.getGame().getCurrentPlayer().getNickname() != controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname()) {
+                return false;
+            } else {
+                return true;
             }
         }
 
