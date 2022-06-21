@@ -2317,7 +2317,7 @@
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <ImageView fx:id="Character1Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1110.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character1Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1110.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/Moneta_base.png" />
             </image>
