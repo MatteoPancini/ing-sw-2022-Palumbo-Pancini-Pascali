@@ -270,7 +270,18 @@ public class MainSceneController implements GUIController {
     @FXML ImageView greenIsland12;
     @FXML Label greenLabelIsland12;
 
-
+    @FXML ImageView noEntryTile1;
+    @FXML ImageView noEntryTile2;
+    @FXML ImageView noEntryTile3;
+    @FXML ImageView noEntryTile4;
+    @FXML ImageView noEntryTile5;
+    @FXML ImageView noEntryTile6;
+    @FXML ImageView noEntryTile7;
+    @FXML ImageView noEntryTile8;
+    @FXML ImageView noEntryTile9;
+    @FXML ImageView noEntryTile10;
+    @FXML ImageView noEntryTile11;
+    @FXML ImageView noEntryTile12;
 
     @FXML Group myEntrance;
     @FXML Group leftEntrance;
@@ -722,67 +733,94 @@ public class MainSceneController implements GUIController {
 
 
     public void updateNoEntryTile() {
-        ImageView noEntryTile = new ImageView();
         Image img = new Image("@../../graphics/wooden_pieces/deny_island_icon.png");
-        noEntryTile.setVisible(false);
-        for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
-            if(i.getNoEntry()) {
-                noEntryTile = new ImageView();
-                noEntryTile.setImage(img);
-                noEntryTile.setFitHeight(45);
-                noEntryTile.setFitWidth(45);
-                noEntryTile.setVisible(true);
-            } else {
-
-            }
-            switch (i.getIslandID()) {
-                case 1 -> {
-                    noEntryTile.setLayoutX(289);
-                    noEntryTile.setLayoutY(31);
-                }
-                case 2 -> {
-                    noEntryTile.setLayoutX(397);
-                    noEntryTile.setLayoutY(55);
-                }
-                case 3 -> {
-                    noEntryTile.setLayoutX(501);
-                    noEntryTile.setLayoutY(120);
-                }
-                case 4 -> {
-                    noEntryTile.setLayoutX(526);
-                    noEntryTile.setLayoutY(226);
-                }
-                case 5 -> {
-                    noEntryTile.setLayoutX(501);
-                    noEntryTile.setLayoutY(323);
-                }
-                case 6 -> {
-                    noEntryTile.setLayoutX(414);
-                    noEntryTile.setLayoutY(396);
-                }
-                case 7 -> {
-                    noEntryTile.setLayoutX(295);
-                    noEntryTile.setLayoutY(417);
-                }
-                case 8 -> {
-                    noEntryTile.setLayoutX(190);
-                    noEntryTile.setLayoutY(396);
-                }
-                case 9 -> {
-                    noEntryTile.setLayoutX(104);
-                    noEntryTile.setLayoutY(318);
-                }
-                case 10 -> {
-                    noEntryTile.setLayoutX(65);
-                    noEntryTile.setLayoutY(224);
-                }
-                case 11 -> {
-                    noEntryTile.setLayoutX(115);
-                    noEntryTile.setLayoutY(128);
-                }
-                case 12 -> {
-                    noEntryTile.setLayoutX(184);
-                    noEntryTile.setLayoutY(58);
+        noEntryTile1.setVisible(false);
+        noEntryTile2.setVisible(false);
+        noEntryTile3.setVisible(false);
+        noEntryTile4.setVisible(false);
+        noEntryTile5.setVisible(false);
+        noEntryTile6.setVisible(false);
+        noEntryTile7.setVisible(false);
+        noEntryTile8.setVisible(false);
+        noEntryTile9.setVisible(false);
+        noEntryTile10.setVisible(false);
+        noEntryTile11.setVisible(false);
+        noEntryTile12.setVisible(false);
+        for (Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
+            if (i.getNoEntry()) {
+                switch (i.getIslandID()) {
+                    case 1 -> {
+                        noEntryTile1.setLayoutX(289);
+                        noEntryTile1.setLayoutY(31);
+                        noEntryTile1.setImage(img);
+                        noEntryTile1.setVisible(true);
+                    }
+                    case 2 -> {
+                        noEntryTile2.setLayoutX(397);
+                        noEntryTile2.setLayoutY(55);
+                        noEntryTile2.setImage(img);
+                        noEntryTile2.setVisible(true);
+                    }
+                    case 3 -> {
+                        noEntryTile3.setLayoutX(501);
+                        noEntryTile3.setLayoutY(120);
+                        noEntryTile3.setImage(img);
+                        noEntryTile3.setVisible(true);
+                    }
+                    case 4 -> {
+                        noEntryTile4.setLayoutX(526);
+                        noEntryTile4.setLayoutY(226);
+                        noEntryTile4.setImage(img);
+                        noEntryTile4.setVisible(true);
+                    }
+                    case 5 -> {
+                        noEntryTile5.setLayoutX(501);
+                        noEntryTile5.setLayoutY(323);
+                        noEntryTile5.setImage(img);
+                        noEntryTile5.setVisible(true);
+                    }
+                    case 6 -> {
+                        noEntryTile6.setLayoutX(414);
+                        noEntryTile6.setLayoutY(396);
+                        noEntryTile6.setImage(img);
+                        noEntryTile6.setVisible(true);
+                    }
+                    case 7 -> {
+                        noEntryTile7.setLayoutX(295);
+                        noEntryTile7.setLayoutY(417);
+                        noEntryTile7.setImage(img);
+                        noEntryTile7.setVisible(true);
+                    }
+                    case 8 -> {
+                        noEntryTile8.setLayoutX(190);
+                        noEntryTile8.setLayoutY(396);
+                        noEntryTile8.setImage(img);
+                        noEntryTile8.setVisible(true);
+                    }
+                    case 9 -> {
+                        noEntryTile9.setLayoutX(104);
+                        noEntryTile9.setLayoutY(318);
+                        noEntryTile9.setImage(img);
+                        noEntryTile9.setVisible(true);
+                    }
+                    case 10 -> {
+                        noEntryTile10.setLayoutX(65);
+                        noEntryTile10.setLayoutY(224);
+                        noEntryTile10.setImage(img);
+                        noEntryTile10.setVisible(true);
+                    }
+                    case 11 -> {
+                        noEntryTile11.setLayoutX(115);
+                        noEntryTile11.setLayoutY(128);
+                        noEntryTile11.setImage(img);
+                        noEntryTile11.setVisible(true);
+                    }
+                    case 12 -> {
+                        noEntryTile12.setLayoutX(184);
+                        noEntryTile12.setLayoutY(58);
+                        noEntryTile12.setImage(img);
+                        noEntryTile12.setVisible(true);
+                    }
                 }
             }
         }
@@ -1404,13 +1442,6 @@ public class MainSceneController implements GUIController {
         blueLabelIsland12.setVisible(false);
         pinkIsland12.setVisible(false);
         pinkLabelIsland12.setVisible(false);
-
-
-
-
-
-        //TODO settare tutti i bottoni a false e settarli a true nella pickIsland
-
         for (Island isl : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if (isl.getIslandID() == 1) {
                 island1.setVisible(true);
