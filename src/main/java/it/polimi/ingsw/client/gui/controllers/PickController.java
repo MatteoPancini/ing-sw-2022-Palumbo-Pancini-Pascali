@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.gui.controllers;
+/*package it.polimi.ingsw.client.gui.controllers;
 
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
@@ -365,12 +365,10 @@ public class PickController implements GUIController{
     }
 
     //TODO controllare la selection box delle isole
-    /*
     public void pickIsland(ActionEvent e) {
         gui.changeStage("/actions/PickIsland.fxml");
     }
 
-     */
 
 
 
@@ -431,7 +429,7 @@ public class PickController implements GUIController{
                     offsetY+= 5;
                 }
                 island1.setVisible(true);
-            } /* COPIARE PER TUTTE LE 12 ISOLE else if(...) */
+            } /* COPIARE PER TUTTE LE 12 ISOLE else if(...)
         }
     }
     public void askCloud() {
@@ -596,8 +594,8 @@ public class PickController implements GUIController{
             } case "MAGIC_POSTMAN" -> {
             } case "SPOILED_PRINCESS" -> {
             } case "MONK" -> {
-            }*/
+            }
         }
         return effect;
     }
-}
+} */
