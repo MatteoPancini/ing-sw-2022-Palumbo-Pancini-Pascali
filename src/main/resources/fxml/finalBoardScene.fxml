@@ -3043,5 +3043,69 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
+        <ImageView fx:id="motherNature" fitHeight="45.0" fitWidth="45.0" layoutX="973.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry1" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image></ImageView>
+      <ImageView fx:id="noEntry2" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry3" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry4" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry5" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry6" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry7" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry8" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry9" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry10" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry11" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="noEntry12" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
