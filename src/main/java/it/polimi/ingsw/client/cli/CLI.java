@@ -937,7 +937,6 @@ public class CLI implements Runnable, ListenerInterface {
         userNicknameSetup();
         /*
         while (isActiveGame()) {
-            //TODO: (maybe) permettere di scrivere sempre
             if(modelView.isGameStarted()) {
                 if (!modelView.isStartPlaying()) {
                     System.out.println("Entro dentro all'action");

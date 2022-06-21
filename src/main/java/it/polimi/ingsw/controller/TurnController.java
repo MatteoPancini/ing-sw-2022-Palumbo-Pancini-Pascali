@@ -986,6 +986,7 @@ public class TurnController {
 
         if(checkWin()) {
             Player winner = checkWinner();
+            System.out.println("WInner: " + winner.getNickname());
             if(controller.getGame().getPlayers().size() == 4) {
                 for(int i = 0; i < controller.getGame().getActivePlayers().size(); i++) {
                     if(controller.getGame().getActivePlayers().get(i).getIdTeam() == winner.getIdTeam()) {
@@ -1121,12 +1122,11 @@ public class TurnController {
             }
         }
 
-        return influenceWinner;
-
-
-
-
-
+        if(influenceWinner.getBoard().getTowerArea().getTowerArea().size() == towerPWinner.getBoard().getTowerArea().getTowerArea().size()) {
+            return influenceWinner;
+        } else {
+            return towerPWinner;
+        }
 
 
     }
