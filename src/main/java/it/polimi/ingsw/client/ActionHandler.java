@@ -70,11 +70,6 @@ public class ActionHandler {
             showGame = 0;
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
-            } else if (gui != null) {
-                gui.getInfoAlert().setTitle("INFO");
-                gui.getInfoAlert().setHeaderText("Information from server");
-                gui.getInfoAlert().setContentText(modelView.getServerAnswer().getMessage().toString());
-                gui.getInfoAlert().show();
             }
         }else if(answer instanceof EndAction) {
             modelView.setStartPlaying(false);
@@ -145,7 +140,7 @@ public class ActionHandler {
                     cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                         controller.update(serverCommand);
                     });
                 }
@@ -156,7 +151,7 @@ public class ActionHandler {
                     cli.askDestination();
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                         controller.update(serverCommand);
                     });
                 }
@@ -206,7 +201,7 @@ public class ActionHandler {
                     }
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                         controller.update(serverCommand);
                     });
                 }
@@ -221,7 +216,7 @@ public class ActionHandler {
                    cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
                } else if (gui!=null) {
                    Platform.runLater(() -> {
-                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                        controller.update(serverCommand);
                    });
                }
@@ -232,7 +227,7 @@ public class ActionHandler {
                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                } else if (gui!=null) {
                    Platform.runLater(() -> {
-                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                        controller.update(serverCommand);
                    });
                }
@@ -242,7 +237,7 @@ public class ActionHandler {
                     cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                         controller.update(serverCommand);
                     });
                 }
@@ -252,7 +247,7 @@ public class ActionHandler {
                     cli.askPawnType();
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                         controller.update(serverCommand);
                     });
                 }

@@ -540,6 +540,7 @@ public class MainSceneController implements GUIController {
         cloud3Button.setVisible(false);
         cloud4Button.setVisible(false);
         diningRoomButton.setVisible(false);
+        askAssistantButton.setVisible(false);
 
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
@@ -1512,18 +1513,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland1.setVisible(true);
+                        redLabelIsland1.setVisible(true);
                         redLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland1.setVisible(true);
+                        yellowLabelIsland1.setVisible(true);
                         yellowLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland1.setVisible(true);
+                        pinkLabelIsland1.setVisible(true);
                         pinkLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland1.setVisible(true);
+                        blueLabelIsland1.setVisible(true);
                         blueLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland1.setVisible(true);
+                        greenLabelIsland1.setVisible(true);
                         greenLabelIsland1.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1537,18 +1543,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland2.setVisible(true);
+                        redLabelIsland2.setVisible(true);
                         redLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland2.setVisible(true);
+                        yellowLabelIsland2.setVisible(true);
                         yellowLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland2.setVisible(true);
+                        pinkLabelIsland2.setVisible(true);
                         pinkLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland2.setVisible(true);
+                        blueLabelIsland2.setVisible(true);
                         blueLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland2.setVisible(true);
+                        greenLabelIsland2.setVisible(true);
                         greenLabelIsland2.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1562,18 +1573,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(2).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland3.setVisible(true);
+                        redLabelIsland3.setVisible(true);
                         redLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland3.setVisible(true);
+                        yellowLabelIsland3.setVisible(true);
                         yellowLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland3.setVisible(true);
+                        pinkLabelIsland3.setVisible(true);
                         pinkLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland3.setVisible(true);
+                        blueLabelIsland3.setVisible(true);
                         blueLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland3.setVisible(true);
+                        greenLabelIsland3.setVisible(true);
                         greenLabelIsland3.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1587,18 +1603,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(3).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland4.setVisible(true);
+                        redLabelIsland4.setVisible(true);
                         redLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland4.setVisible(true);
+                        yellowLabelIsland4.setVisible(true);
                         yellowLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland4.setVisible(true);
+                        pinkLabelIsland4.setVisible(true);
                         pinkLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland4.setVisible(true);
+                        blueLabelIsland4.setVisible(true);
                         blueLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland4.setVisible(true);
+                        greenLabelIsland4.setVisible(true);
                         greenLabelIsland4.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1612,18 +1633,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(4).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland5.setVisible(true);
+                        redLabelIsland5.setVisible(true);
                         redLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland5.setVisible(true);
+                        yellowLabelIsland5.setVisible(true);
                         yellowLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland5.setVisible(true);
+                        pinkLabelIsland5.setVisible(true);
                         pinkLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland5.setVisible(true);
+                        blueLabelIsland5.setVisible(true);
                         blueLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland5.setVisible(true);
+                        greenLabelIsland5.setVisible(true);
                         greenLabelIsland5.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1637,18 +1663,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(5).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland6.setVisible(true);
+                        redLabelIsland6.setVisible(true);
                         redLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland6.setVisible(true);
+                        yellowLabelIsland6.setVisible(true);
                         yellowLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland6.setVisible(true);
+                        pinkLabelIsland6.setVisible(true);
                         pinkLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland6.setVisible(true);
+                        blueLabelIsland6.setVisible(true);
                         blueLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland6.setVisible(true);
+                        greenLabelIsland6.setVisible(true);
                         greenLabelIsland6.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1662,18 +1693,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(6).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland7.setVisible(true);
+                        redLabelIsland7.setVisible(true);
                         redLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland7.setVisible(true);
+                        yellowLabelIsland7.setVisible(true);
                         yellowLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland7.setVisible(true);
+                        pinkLabelIsland7.setVisible(true);
                         pinkLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland7.setVisible(true);
+                        blueLabelIsland7.setVisible(true);
                         blueLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland7.setVisible(true);
+                        greenLabelIsland7.setVisible(true);
                         greenLabelIsland7.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1687,18 +1723,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(7).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland8.setVisible(true);
+                        redLabelIsland8.setVisible(true);
                         redLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland8.setVisible(true);
+                        yellowLabelIsland8.setVisible(true);
                         yellowLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland8.setVisible(true);
+                        pinkLabelIsland8.setVisible(true);
                         pinkLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland8.setVisible(true);
+                        blueLabelIsland8.setVisible(true);
                         blueLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland8.setVisible(true);
+                        greenLabelIsland8.setVisible(true);
                         greenLabelIsland8.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1712,18 +1753,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(8).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland9.setVisible(true);
+                        redLabelIsland9.setVisible(true);
                         redLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland9.setVisible(true);
+                        yellowLabelIsland9.setVisible(true);
                         yellowLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland9.setVisible(true);
+                        pinkLabelIsland9.setVisible(true);
                         pinkLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland9.setVisible(true);
+                        blueLabelIsland9.setVisible(true);
                         blueLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland9.setVisible(true);
+                        greenLabelIsland9.setVisible(true);
                         greenLabelIsland9.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1737,18 +1783,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(9).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland10.setVisible(true);
+                        redLabelIsland10.setVisible(true);
                         redLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland10.setVisible(true);
+                        yellowLabelIsland10.setVisible(true);
                         yellowLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland10.setVisible(true);
+                        pinkLabelIsland10.setVisible(true);
                         pinkLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland10.setVisible(true);
+                        blueLabelIsland10.setVisible(true);
                         blueLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland10.setVisible(true);
+                        greenLabelIsland10.setVisible(true);
                         greenLabelIsland10.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1762,18 +1813,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(10).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland11.setVisible(true);
+                        redLabelIsland11.setVisible(true);
                         redLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland11.setVisible(true);
+                        yellowLabelIsland11.setVisible(true);
                         yellowLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland11.setVisible(true);
+                        pinkLabelIsland11.setVisible(true);
                         pinkLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland11.setVisible(true);
+                        blueLabelIsland11.setVisible(true);
                         blueLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland11.setVisible(true);
+                        greenLabelIsland11.setVisible(true);
                         greenLabelIsland11.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1787,18 +1843,23 @@ public class MainSceneController implements GUIController {
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(11).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland12.setVisible(true);
+                        redLabelIsland12.setVisible(true);
                         redLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland12.setVisible(true);
+                        yellowLabelIsland12.setVisible(true);
                         yellowLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland12.setVisible(true);
+                        pinkLabelIsland12.setVisible(true);
                         pinkLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland12.setVisible(true);
+                        blueLabelIsland12.setVisible(true);
                         blueLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland12.setVisible(true);
+                        greenLabelIsland12.setVisible(true);
                         greenLabelIsland12.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1865,7 +1926,8 @@ public class MainSceneController implements GUIController {
                 num+= 1;
             }
         }
-        return Integer.toString(num);
+        System.out.println("Number of students " + s.getType() +": " + String.valueOf(num));
+        return String.valueOf(num);
     }
 
     public void updateClouds() {
@@ -2038,7 +2100,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void updateTowers() {
-        for(int i=0; i < 7; i++) {
+        for(int i=0; i < 8; i++) {
             myTowers.getChildren().get(i).setVisible(false);
             leftTowers.getChildren().get(i).setVisible(false);
             rightTowers.getChildren().get(i).setVisible(false);
@@ -2157,7 +2219,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void updateEntrances() {
-        for(int i=0; i < 9; i++) {
+        for(int i=0; i < 10; i++) {
             myEntrance.getChildren().get(i).setVisible(false);
             leftEntrance.getChildren().get(i).setVisible(false);
             topEntrance.getChildren().get(i).setVisible(false);
@@ -2167,38 +2229,30 @@ public class MainSceneController implements GUIController {
         int cont = 0;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) myEntrance.getChildren().get(i)).setImage(pic);
-                        ((ImageView) myEntrance.getChildren().get(i)).setVisible(true);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) myEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) myEntrance.getChildren().get(i)).setVisible(true);
                 }
             } else if(cont == 0) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) topEntrance.getChildren().get(i)).setImage(pic);
-                        ((ImageView) topEntrance.getChildren().get(i)).setVisible(true);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) topEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) topEntrance.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             } else if(cont == 1) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) leftEntrance.getChildren().get(i)).setImage(pic);
-                        ((ImageView) leftEntrance.getChildren().get(i)).setVisible(true);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) leftEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) leftEntrance.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             } else if(cont == 2) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) rightEntrance.getChildren().get(i)).setImage(pic);
-                        ((ImageView) rightEntrance.getChildren().get(i)).setVisible(true);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) rightEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) rightEntrance.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             }
