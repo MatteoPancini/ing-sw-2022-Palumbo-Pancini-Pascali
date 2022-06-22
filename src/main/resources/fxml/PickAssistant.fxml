@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.PickAssistantController">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.PickAssistantController">
    <children>
       <ImageView fitHeight="460.0" fitWidth="600.0" layoutY="-21.0" opacity="0.93" pickOnBounds="true">
          <image>
             <Image url="@../graphics/forest.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="cheetah" fitHeight="112.0" fitWidth="78.0" layoutX="34.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cheetah" fitHeight="112.0" fitWidth="78.0" layoutX="34.0" layoutY="76.0" onMouseClicked="#pickAssistant1" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (1).png" />
          </image>
@@ -22,7 +21,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="turtle" fitHeight="112.0" fitWidth="78.0" layoutX="499.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="turtle" fitHeight="112.0" fitWidth="78.0" layoutX="499.0" layoutY="244.0" onMouseClicked="#pickAssistant10" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (10).png" />
          </image>
@@ -30,7 +29,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="elephant" fitHeight="112.0" fitWidth="78.0" layoutX="388.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="elephant" fitHeight="112.0" fitWidth="78.0" layoutX="388.0" layoutY="244.0" onMouseClicked="#pickAssistant9" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (9).png" />
          </image>
@@ -38,7 +37,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="dog" fitHeight="112.0" fitWidth="78.0" layoutX="271.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dog" fitHeight="112.0" fitWidth="78.0" layoutX="271.0" layoutY="244.0" onMouseClicked="#pickAssistant8" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (8).png" />
          </image>
@@ -46,7 +45,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="octopus" fitHeight="112.0" fitWidth="78.0" layoutX="158.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="octopus" fitHeight="112.0" fitWidth="78.0" layoutX="158.0" layoutY="244.0" onMouseClicked="#pickAssistant7" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (7).png" />
          </image>
@@ -54,7 +53,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="lizard" fitHeight="112.0" fitWidth="78.0" layoutX="34.0" layoutY="244.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lizard" fitHeight="112.0" fitWidth="78.0" layoutX="34.0" layoutY="244.0" onMouseClicked="#pickAssistant6" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (6).png" />
          </image>
@@ -62,7 +61,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="ostrich" fitHeight="112.0" fitWidth="78.0" layoutX="158.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ostrich" fitHeight="112.0" fitWidth="78.0" layoutX="158.0" layoutY="76.0" onMouseClicked="#pickAssistant2" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (2).png" />
          </image>
@@ -70,7 +69,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="cat" fitHeight="112.0" fitWidth="78.0" layoutX="271.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cat" fitHeight="112.0" fitWidth="78.0" layoutX="271.0" layoutY="76.0" onMouseClicked="#pickAssistant3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (3).png" />
          </image>
@@ -78,7 +77,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="eagle" fitHeight="112.0" fitWidth="78.0" layoutX="388.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="eagle" fitHeight="112.0" fitWidth="78.0" layoutX="388.0" layoutY="76.0" onMouseClicked="#pickAssistant4" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (4).png" />
          </image>
@@ -86,7 +85,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="fox" fitHeight="112.0" fitWidth="78.0" layoutX="499.0" layoutY="76.0" onMouseClicked="#pickAssistant" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="fox" fitHeight="112.0" fitWidth="78.0" layoutX="499.0" layoutY="76.0" onMouseClicked="#pickAssistant5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/assistants/Assistente (5).png" />
          </image>

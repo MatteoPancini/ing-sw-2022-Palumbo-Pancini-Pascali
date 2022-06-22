@@ -137,6 +137,126 @@ public class PickAssistantController implements GUIController {
         return img;
     }
 
+    public void backToMainScene() {
+        Platform.runLater(() -> {
+            gui.changeStage("finalBoardScene.fxml");
+            MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+            controller.update("STANDARD_UPDATE");
+        });
+    }
+
+    public void pickAssistant1() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.CHEETAH)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.CHEETAH));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant2() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.OSTRICH)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.OSTRICH));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant3() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.CAT)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.CAT));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant4() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.EAGLE)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.EAGLE));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant5() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.FOX)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant6() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.LIZARD)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.LIZARD));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant7() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.OCTOPUS)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.OCTOPUS));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant8() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.DOG)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.DOG));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant9() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.ELEPHANT)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.ELEPHANT));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+    public void pickAssistant10() {
+        if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.TURTLE)) {
+            gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.TURTLE));
+            backToMainScene();
+        } else {
+            gui.getInfoAlert().setTitle("INFO");
+            gui.getInfoAlert().setHeaderText("Information from server");
+            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
+            gui.getInfoAlert().show();
+        }
+    }
+
+    /*
     public void pickAssistant(ActionEvent e) {
         UserAction action = null;
         ImageView img = (ImageView) e.getSource();
@@ -201,4 +321,6 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+
+     */
 }
