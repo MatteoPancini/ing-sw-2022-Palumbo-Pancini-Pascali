@@ -127,7 +127,7 @@
                                 <Font name="Arial Rounded MT Bold" size="13.0" />
                             </font>
                         </Label>
-                        <Label layoutX="85.0" layoutY="46.0" text="0">
+                        <Label fx:id="blueLabelIsland1" layoutX="85.0" layoutY="46.0" text="0">
                             <font>
                                 <Font name="Arial Rounded MT Bold" size="13.0" />
                             </font>
