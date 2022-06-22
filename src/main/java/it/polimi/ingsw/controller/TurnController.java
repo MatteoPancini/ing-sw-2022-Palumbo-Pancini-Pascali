@@ -678,6 +678,10 @@ public class TurnController {
 
     }
 
+    /**
+     *
+     * @param islandId
+     */
     public void checkIslandInfluence(int islandId) {
         //verifica se l'isola viene conquistata o controllata
         /*

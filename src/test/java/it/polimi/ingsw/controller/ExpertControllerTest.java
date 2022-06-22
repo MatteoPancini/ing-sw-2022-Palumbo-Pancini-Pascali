@@ -4,9 +4,7 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
-import it.polimi.ingsw.model.cards.CharacterDeck;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
@@ -18,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import javax.annotation.processing.SupportedSourceVersion;
 import java.beans.PropertyChangeEvent;
 import java.net.Socket;
 import java.security.SecureRandom;

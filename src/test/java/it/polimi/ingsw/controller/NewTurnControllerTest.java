@@ -2,9 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
-import it.polimi.ingsw.model.board.Professor;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Assistants;
@@ -17,7 +15,6 @@ import it.polimi.ingsw.model.player.Tower;
 import it.polimi.ingsw.server.Server;
 import it.polimi.ingsw.server.SocketClientConnection;
 import it.polimi.ingsw.server.VirtualClientView;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
