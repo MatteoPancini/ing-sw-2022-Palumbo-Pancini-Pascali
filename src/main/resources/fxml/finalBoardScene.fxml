@@ -344,12 +344,12 @@
                         <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="redisland7" fitHeight="22.0" fitWidth="24.0" layoutX="325.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="redIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="325.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="blueisland7" fitHeight="22.0" fitWidth="24.0" layoutX="336.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="blueIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="336.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
                     </image>
