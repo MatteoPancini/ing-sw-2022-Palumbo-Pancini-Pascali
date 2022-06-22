@@ -1627,7 +1627,7 @@
             <children>
                 <ImageView fx:id="topBoard" fitHeight="227.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true" rotate="91.4">
                     <image>
-                        <Image url=@../graphics/boards/Plancia_DEF2.png" />
+                        <Image url="@../graphics/boards/Plancia_DEF2.png" />
                     </image>
                     <rotationAxis>
                         <Point3D />
