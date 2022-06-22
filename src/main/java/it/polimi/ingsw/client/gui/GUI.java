@@ -129,12 +129,6 @@ public class GUI extends Application implements ListenerInterface {
     private static final String WIZARD_MENU = "wizardMenu.fxml";
     private static final String MAIN_SCENE = "finalBoardScene.fxml";
     private static final String PICK_ASSISTANT = "PickAssistant.fxml";
-    /*private static final String PICK_CHARACTER = "actions/PickAssistant.fxml";
-    private static final String PICK_CLOUD = "actions/PickAssistant.fxml";
-    private static final String PICK_DESTINATION = "actions/PickAssistant.fxml";
-    private static final String PICK_ISLAND = "actions/PickAssistant.fxml";
-    private static final String PICK_PAWN_TYPE = "actions/PickAssistant.fxml";
-    private static final String PICK_STUDENT = "actions/PickAssistant.fxml"; */
 
 
 
@@ -266,11 +260,16 @@ public class GUI extends Application implements ListenerInterface {
 
 
     public void updateMainScene() {
+        MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
+        controller.update(null);
+        /*
+        getControllerFromName(MAIN_SCENE).
         mainSceneController.updateIslands();
         mainSceneController.updateTowers();
         mainSceneController.updateWizard();
         mainSceneController.updateClouds();
         mainSceneController.updateDiningRooms();
+         */
     }
 
     @Override
