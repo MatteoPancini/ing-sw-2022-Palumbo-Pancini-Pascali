@@ -2202,7 +2202,7 @@
                 </ImageView>
             </children>
         </Group>
-        <Button fx:id="askAssistantButton" layoutX="704.0" layoutY="883.0" mnemonicParsing="false" onMouseClicked="#askAssistant" text="Pick Assistant">
+        <Button fx:id="askAssistantButton" layoutX="704.0" layoutY="883.0" mnemonicParsing="false" onAction="#askAssistant" text="Pick Assistant">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
@@ -2290,15 +2290,15 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Button fx:id="effect1" layoutX="1154.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#showEffect" text="Effect">
+        <Button fx:id="effect1" layoutX="1154.0" layoutY="27.0" mnemonicParsing="false" onAction="#showEffect" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect2" layoutX="1259.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#showEffect" text="Effect">
+        <Button fx:id="effect2" layoutX="1259.0" layoutY="27.0" mnemonicParsing="false" onAction="#showEffect" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect3" layoutX="1364.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#showEffect" text="Effect">
+        <Button fx:id="effect3" layoutX="1364.0" layoutY="27.0" mnemonicParsing="false" onAction="#showEffect" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
@@ -3049,61 +3049,61 @@
             <Image url="@../graphics/wooden_pieces/mother_nature.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry1" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile1" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image></ImageView>
-      <ImageView fx:id="noEntry2" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile2" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry3" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile3" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry4" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile4" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry5" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile5" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry6" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile6" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry7" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile7" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry8" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile8" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry9" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile9" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry10" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile10" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry11" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile11" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="noEntry12" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="noEntryTile12" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
          </image>

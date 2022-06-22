@@ -50,6 +50,8 @@ public class GUI extends Application implements ListenerInterface {
     private HashMap<String, Scene> nameMapScene = new HashMap<>();
     private final HashMap<String, GUIController> nameMapController = new HashMap<>();
 
+    private boolean firstSetupScene;
+
     public boolean isActiveGame() {
         return activeGame;
     }
@@ -136,6 +138,7 @@ public class GUI extends Application implements ListenerInterface {
         this.modelView = new ModelView(this);
         actionHandler = new ActionHandler(this, modelView);
         activeGame = true;
+        firstSetupScene = true;
     }
 
     public static void main(String[] args) {
@@ -261,7 +264,7 @@ public class GUI extends Application implements ListenerInterface {
 
     public void updateMainScene() {
         MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
-        controller.update(null);
+        controller.update("STANDARD_UPDATE");
         /*
         getControllerFromName(MAIN_SCENE).
         mainSceneController.updateIslands();
@@ -298,7 +301,16 @@ public class GUI extends Application implements ListenerInterface {
             case "UpdateModelView" -> {
                 assert serverCommand != null;
                 modelView.setGameCopy((Game) changeEvent.getNewValue());
-                updateMainScene();
+                if(firstSetupScene) {
+                    Platform.runLater(() -> {
+                        changeStage(MAIN_SCENE);
+                        updateMainScene();
+                    });
+                    firstSetupScene = false;
+                } else {
+                    Platform.runLater(() -> updateMainScene());
+                }
+
                 //this.changeStage();
             }
             /*case "WinMessage" -> {
