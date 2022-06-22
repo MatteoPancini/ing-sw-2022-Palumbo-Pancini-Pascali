@@ -354,16 +354,6 @@ public class MainSceneController implements GUIController {
     @FXML Button character1Button;
     @FXML Button character2Button;
     @FXML Button character3Button;
-    @FXML ImageView cheetah;
-    @FXML ImageView ostrich;
-    @FXML ImageView turtle;
-    @FXML ImageView elephant;
-    @FXML ImageView dog;
-    @FXML ImageView octopus;
-    @FXML ImageView lizard;
-    @FXML ImageView cat;
-    @FXML ImageView eagle;
-    @FXML ImageView fox;
 
     @FXML ImageView redCloud1;
     @FXML Label redLabelCloud1;
@@ -1158,74 +1148,12 @@ public class MainSceneController implements GUIController {
         askAssistantButton.setVisible(true);
     }
 
-    public void askAssistant(ActionEvent e) {
-        cheetah.setVisible(false);
-        ostrich.setVisible(false);
-        cat.setVisible(false);
-        eagle.setVisible(false);
-        fox.setVisible(false);
-        lizard.setVisible(false);
-        octopus.setVisible(false);
-        dog.setVisible(false);
-        elephant.setVisible(false);
-        turtle.setVisible(false);
-
+    public void askAssistant() {
         Platform.runLater(() -> {
-            gui.changeStage("PickAssistant.fxml");
-            for(AssistantCard a : gui.getModelView().getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-                if(a.getName().equals(Assistants.CHEETAH)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        cheetah.setVisible(true);
-                        cheetah.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.OSTRICH)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        ostrich.setVisible(true);
-                        ostrich.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.CAT)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        cat.setVisible(true);
-                        cat.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.EAGLE)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        eagle.setVisible(true);
-                        eagle.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.FOX)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        fox.setVisible(true);
-                        fox.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.LIZARD)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        lizard.setVisible(true);
-                        lizard.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.OCTOPUS)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        octopus.setVisible(true);
-                        octopus.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.DOG)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        dog.setVisible(true);
-                        dog.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.ELEPHANT)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        elephant.setVisible(true);
-                        elephant.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.TURTLE)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        turtle.setVisible(true);
-                        turtle.setImage(setAssistantImage(a));
-                    }
-                }
-            }
+            PickAssistantController controller = (PickAssistantController) gui.getControllerFromName("PickAssistant.fxml");
+            controller.askAssistant();
         });
+
     }
 
     public void updateDiningRooms() {
@@ -2585,31 +2513,31 @@ public class MainSceneController implements GUIController {
         Image img = null;
         switch (a.getName().toString()) {
             case "EAGLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (4)");
+                img = new Image("@../../graphics/assistants/Assistente (4).png");
             }
             case "DOG" -> {
-                img = new Image("@../../graphics/assistants/Assistente (8)");
+                img = new Image("@../../graphics/assistants/Assistente (8).png");
             }
             case "ELEPHANT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (9)");
+                img = new Image("@../../graphics/assistants/Assistente (9).png");
             }
             case "CAT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (3)");
+                img = new Image("@../../graphics/assistants/Assistente (3).png");
             }
             case "CHEETAH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (1)");
+                img = new Image("@../../graphics/assistants/Assistente (1).png");
             }
             case "LIZARD" -> {
-                img = new Image("@../../graphics/assistants/Assistente (6)");
+                img = new Image("@../../graphics/assistants/Assistente (6).png");
             }
             case "OCTOPUS" -> {
-                img = new Image("@../../graphics/assistants/Assistente (7)");
+                img = new Image("@../../graphics/assistants/Assistente (7).png");
             }
             case "OSTRICH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (2)");
+                img = new Image("@../../graphics/assistants/Assistente (2).png");
             }
             case "TURTLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (10)");
+                img = new Image("@../../graphics/assistants/Assistente (10).png");
             }
             case "FOX" -> {
                 img = new Image("@../../graphics/assistants/Assistente (5).png");
