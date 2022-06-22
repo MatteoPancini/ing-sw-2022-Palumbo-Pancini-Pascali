@@ -289,7 +289,7 @@
                         <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="greenisland9" fitHeight="22.0" fitWidth="24.0" layoutX="116.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="greenIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="116.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
                     </image>
