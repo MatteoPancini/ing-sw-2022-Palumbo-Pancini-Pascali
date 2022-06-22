@@ -76,11 +76,11 @@ public class MainSceneController implements GUIController {
     @FXML ImageView rightWizard;
     @FXML Label descriptionLabel;
     @FXML Button askAssistantButton;
-    @FXML ImageView blueStudent;
-    @FXML ImageView redStudent;
-    @FXML ImageView greenStudent;
-    @FXML ImageView pinkStudent;
-    @FXML ImageView yellowStudent;
+    @FXML Button blueStudent;
+    @FXML Button redStudent;
+    @FXML Button greenStudent;
+    @FXML Button pinkStudent;
+    @FXML Button yellowStudent;
     @FXML
     ImageView island1;
     @FXML
@@ -283,6 +283,23 @@ public class MainSceneController implements GUIController {
     @FXML ImageView noEntryTile11;
     @FXML ImageView noEntryTile12;
 
+    @FXML Label yellowLabelCharacter1;
+    @FXML Label blueLabelCharacter1;
+    @FXML Label pinkLabelCharacter1;
+    @FXML Label redLabelCharacter1;
+    @FXML Label greenLabelCharacter1;
+    @FXML Label yellowLabelCharacter2;
+    @FXML Label blueLabelCharacter2;
+    @FXML Label pinkLabelCharacter2;
+    @FXML Label redLabelCharacter2;
+    @FXML Label greenLabelCharacter2;
+    @FXML Label yellowLabelCharacter3;
+    @FXML Label blueLabelCharacter3;
+    @FXML Label pinkLabelCharacter3;
+    @FXML Label redLabelCharacter3;
+    @FXML Label greenLabelCharacter3;
+
+
     @FXML Group myEntrance;
     @FXML Group leftEntrance;
     @FXML Group rightEntrance;
@@ -404,6 +421,20 @@ public class MainSceneController implements GUIController {
     @FXML ImageView topBoard;
     @FXML ImageView leftBoard;
     @FXML ImageView rightBoard;
+    @FXML Button effect1;
+    @FXML Button effect2;
+    @FXML Button effect3;
+    @FXML ImageView character1Coin;
+    @FXML ImageView character2Coin;
+    @FXML ImageView character3Coin;
+    @FXML Label character1LabelCoin;
+    @FXML Label character2LabelCoin;
+    @FXML Label character3LabelCoin;
+    @FXML ImageView myCoins;
+    @FXML Label myCoinsLabel;
+    @FXML ImageView character1Coins;
+    @FXML ImageView character2Coins;
+    @FXML ImageView character3Coins;
 
     @Override
     public void setGui(GUI gui) {
@@ -416,7 +447,34 @@ public class MainSceneController implements GUIController {
         updateWizard();
         updateTowers();
         updateIslands();
-        updateCharacters();
+        if(gui.getModelView().getGameCopy().isExpertMode()) {
+            updateCharacters();
+        } else {
+            character1.setVisible(false);
+            character2.setVisible(false);
+            character3.setVisible(false);
+            character1Button.setVisible(false);
+            character2Button.setVisible(false);
+            character3Button.setVisible(false);
+            effect1.setVisible(false);
+            effect2.setVisible(false);
+            effect3.setVisible(false);
+            greenLabelCharacter1.setVisible(false);
+            blueLabelCharacter1.setVisible(false);
+            pinkLabelCharacter1.setVisible(false);
+            redLabelCharacter1.setVisible(false);
+            yellowLabelCharacter1.setVisible(false);
+            greenLabelCharacter2.setVisible(false);
+            blueLabelCharacter2.setVisible(false);
+            pinkLabelCharacter2.setVisible(false);
+            redLabelCharacter2.setVisible(false);
+            yellowLabelCharacter2.setVisible(false);
+            greenLabelCharacter3.setVisible(false);
+            blueLabelCharacter3.setVisible(false);
+            pinkLabelCharacter3.setVisible(false);
+            redLabelCharacter3.setVisible(false);
+            yellowLabelCharacter3.setVisible(false);
+        }
         updateAssistant();
         updateEntrances();
         updateTowers();
@@ -424,6 +482,11 @@ public class MainSceneController implements GUIController {
         updateNoEntryTile();
         updateProfessors();
         updateBoards();
+        blueStudent.setVisible(false);
+        greenStudent.setVisible(false);
+        pinkStudent.setVisible(false);
+        yellowStudent.setVisible(false);
+        redStudent.setVisible(false);
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
                showAssistantButton();
@@ -470,10 +533,17 @@ public class MainSceneController implements GUIController {
         leftBoard.setVisible(false);
         rightBoard.setVisible(false);
         topBoard.setVisible(false);
+        myCoins.setVisible(false);
+        myCoinsLabel.setVisible(false);
         int cont = 0;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.getNickname().equals(gui.getModelView().getGameCopy().getCurrentPlayer().getNickname())) {
                 myBoard.setVisible(true);
+                if(gui.getModelView().getGameCopy().isExpertMode()) {
+                    myCoinsLabel.setVisible(true);
+                    //myCoinsLabel.setText(gui.getModelView().getGameCopy());
+                    myCoins.setVisible(true);
+                }
             } else if(cont==0) {
                 topBoard.setVisible(true);
                 cont++;
@@ -2320,12 +2390,38 @@ public class MainSceneController implements GUIController {
         character1.setVisible(true);
         character2.setVisible(true);
         character3.setVisible(true);
-        character1Button.setVisible(true);
-        character2Button.setVisible(true);
-        character3Button.setVisible(true);
+        character1Button.setVisible(false);
+        character2Button.setVisible(false);
+        character3Button.setVisible(false);
+        effect1.setVisible(true);
+        effect2.setVisible(true);
+        effect3.setVisible(true);
         character1.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0)));
-        character2.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0)));
-        character3.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0)));
+        character2.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1)));
+        character3.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2)));
+        greenLabelCharacter1.setVisible(false);
+        blueLabelCharacter1.setVisible(false);
+        pinkLabelCharacter1.setVisible(false);
+        redLabelCharacter1.setVisible(false);
+        yellowLabelCharacter1.setVisible(false);
+        greenLabelCharacter2.setVisible(false);
+        blueLabelCharacter2.setVisible(false);
+        pinkLabelCharacter2.setVisible(false);
+        redLabelCharacter2.setVisible(false);
+        yellowLabelCharacter2.setVisible(false);
+        greenLabelCharacter3.setVisible(false);
+        blueLabelCharacter3.setVisible(false);
+        pinkLabelCharacter3.setVisible(false);
+        redLabelCharacter3.setVisible(false);
+        yellowLabelCharacter3.setVisible(false);
+        character1Coins.setVisible(true);
+        character2Coins.setVisible(true);
+        character3Coins.setVisible(true);
+
+        //TODO studenti sulle character cards, coins e rendere visibili i bottoni character1 ecc
+        /*for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
+            if(c.getName().equals())
+        }*/
     }
 
     public void playCharacter(ActionEvent e) {
@@ -2436,5 +2532,53 @@ public class MainSceneController implements GUIController {
         return img;
     }
 
+    public void pickCloud1() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0)));
+    }
+    public void pickCloud2() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1)));
+    }
+    public void pickCloud3() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2)));
+    }
+    public void pickCloud4() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3)));
+    }
+
+    public void pickBluePawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.BLUE));
+    }
+    public void pickRedPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.RED));
+    }
+    public void pickYellowPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.YELLOW));
+    }
+    public void pickGreenPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.GREEN));
+    }
+    public void pickPinkPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.PINK));
+    }
+    public void pickBlueStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.BLUE)));
+    }
+    public void pickRedStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.RED)));
+    }
+    public void pickYellowStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.YELLOW)));
+    }
+    public void pickGreenStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.GREEN)));
+    }
+    public void pickPinkStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.PINK)));
+    }
+
+    public void quitGame() {
+        System.out.println("Thanks for playing! See you next time!");
+        System.exit(0);
+    }
 
 }

@@ -211,6 +211,7 @@ public class GUI extends Application implements ListenerInterface {
         List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT, MAIN_SCENE));
         try {
             for(String pathFxml : fxmlList) {
+                System.out.println(pathFxml);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + pathFxml));
                 nameMapScene.put(pathFxml, new Scene(loader.load()));
                 GUIController controller = loader.getController();

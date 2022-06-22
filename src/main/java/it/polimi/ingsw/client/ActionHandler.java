@@ -3,7 +3,7 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.client.gui.controllers.MainSceneController;
-import it.polimi.ingsw.client.gui.controllers.PickController;
+import it.polimi.ingsw.client.gui.controllers.PickAssistantController;
 import it.polimi.ingsw.client.gui.controllers.WizardMenuController;
 import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
 import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
@@ -135,7 +135,7 @@ public class ActionHandler {
                 }
                 else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("mainScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
                         controller.update(serverCommand);
                     });
                 }

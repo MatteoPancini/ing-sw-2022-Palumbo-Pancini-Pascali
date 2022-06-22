@@ -310,36 +310,7 @@ public class PickController implements GUIController{
     }
 
 
-    public void pickBluePawn() {
-        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.BLUE));
-    }
-    public void pickRedPawn() {
-        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.RED));
-    }
-    public void pickYellowPawn() {
-        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.YELLOW));
-    }
-    public void pickGreenPawn() {
-        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.GREEN));
-    }
-    public void pickPinkPawn() {
-        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.PINK));
-    }
-    public void pickBlueStudent() {
-        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.BLUE)));
-    }
-    public void pickRedStudent() {
-        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.RED)));
-    }
-    public void pickYellowStudent() {
-        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.YELLOW)));
-    }
-    public void pickGreenStudent() {
-        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.GREEN)));
-    }
-    public void pickPinkStudent() {
-        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.PINK)));
-    }
+
 
     public void pickCloud(ActionEvent e) {
         UserAction action = null;
@@ -373,18 +344,7 @@ public class PickController implements GUIController{
 
 
 
-    public void pickCloud1() {
-        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0)));
-    }
-    public void pickCloud2() {
-        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1)));
-    }
-    public void pickCloud3() {
-        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2)));
-    }
-    public void pickCloud4() {
-        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3)));
-    }
+
 
     public void askAssistant() {
         gui.changeStage("PickAssistant.fxml");
