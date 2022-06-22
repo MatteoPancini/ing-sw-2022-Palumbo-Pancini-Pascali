@@ -1796,7 +1796,7 @@
                         </ImageView>
                     </children>
                 </Group>
-                <Group fx:id="topBueStudents" layoutX="93.0" layoutY="180.0">
+                <Group fx:id="topBlueStudents" layoutX="93.0" layoutY="180.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" layoutX="54.0" pickOnBounds="true" preserveRatio="true">
                             <image>
