@@ -221,11 +221,11 @@ public class Island implements Serializable {
             Island island2 = board.getIslands().get(islandID - 1);
 
              */
-            for(int i=0; i<board.getIslands().size(); i++) {
+            for(int i = 0; i < board.getIslands().size(); i++) {
                 if(board.getIslands().get(i).getIslandID() == islandID) {
-                    System.out.println("Analizzo "+ board.getIslands().get(i-1).getIslandID());
-                    if(board.getIslands().get(i-1).hasTower() == true){
-                        if(board.getIslands().get(i-1).getTower().getColor() == tower.getColor())
+                    System.out.println("Analizzo "+ board.getIslands().get(i - 1).getIslandID());
+                    if(board.getIslands().get(i - 1).hasTower() == true){
+                        if(board.getIslands().get(i - 1).getTower().getColor() == tower.getColor())
                             return true;
                         else
                             return false;

@@ -65,6 +65,8 @@ public class ActionHandler {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             } else if (gui != null) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+            } else if(modelView.isPianification()) {
+                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             }
 
             //System.out.println("non aggiorno");

@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Tower;
+import it.polimi.ingsw.server.GameHandler;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

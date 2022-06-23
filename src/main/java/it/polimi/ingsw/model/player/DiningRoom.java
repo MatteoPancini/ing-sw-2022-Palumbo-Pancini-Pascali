@@ -37,12 +37,12 @@ public class DiningRoom implements Serializable {
     }
 
     public void setStudentToDiningRoom(Student student) {
-        System.out.println("Setto student");
+        System.out.println("Setting student");
         PawnType type = student.getType();
-        for(int i=0; i<5; i++) {
+        for(int i = 0; i < 5; i++) {
             if(this.getDiningRoom().get(i).getColor().equals(type)) {
                 getDiningRoom().get(i).addStudent(student);
-                if(getDiningRoom().get(i).getLastPosition()-1 == 2 || getDiningRoom().get(i).getLastPosition()-1 == 5 || getDiningRoom().get(i).getLastPosition()-1 == 8) {
+                if(getDiningRoom().get(i).getLastPosition() - 1 == 2 || getDiningRoom().get(i).getLastPosition() - 1 == 5 || getDiningRoom().get(i).getLastPosition() - 1 == 8) {
                     takeCoin = true;
                 }
                 System.out.println(takeCoin);
