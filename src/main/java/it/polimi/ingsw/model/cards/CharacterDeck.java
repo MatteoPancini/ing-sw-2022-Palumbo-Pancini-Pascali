@@ -25,20 +25,16 @@ public class CharacterDeck implements Serializable {
     public CharacterDeck(Game game) {
         this.game = game;
 
-        try{
-            File myObj = new File("./src/main/resources/cards/characterCards.txt");
-            Scanner myReader = new Scanner(myObj);
-            String data = myReader.nextLine();
+        InputStream stream = CharacterCard.class.getResourceAsStream("src/main/resources/cards/characterCards.txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        Scanner myReader = new Scanner(reader);
+        String data = myReader.nextLine();
 
-            Gson gson = new Gson();
-            Type userListType = new TypeToken<ArrayList<CharacterCard>>(){}.getType();
-            cards = gson.fromJson(data, userListType);
+        Gson gson = new Gson();
+        Type userListType = new TypeToken<ArrayList<CharacterCard>>(){}.getType();
+        cards = gson.fromJson(data, userListType);
 
-            myReader.close();
-        } catch(FileNotFoundException e) {
-            System.out.println("File not found.");
-            e.printStackTrace();
-        }
+        myReader.close();
 
         for(CharacterCard c : cards) {
             if(c.getName() == Characters.MONK || c.getName() == Characters.SPOILED_PRINCESS) {
