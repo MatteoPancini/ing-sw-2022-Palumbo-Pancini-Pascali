@@ -1,11 +1,11 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SchoolBoard;
+import it.polimi.ingsw.server.GameHandler;
 import it.polimi.ingsw.server.Server;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
