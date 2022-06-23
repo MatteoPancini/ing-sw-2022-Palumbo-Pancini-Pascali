@@ -50,6 +50,8 @@ public class GUI extends Application implements ListenerInterface {
     private HashMap<String, Scene> nameMapScene = new HashMap<>();
     private final HashMap<String, GUIController> nameMapController = new HashMap<>();
 
+    private boolean firstSetupScene;
+
     public boolean isActiveGame() {
         return activeGame;
     }
@@ -129,12 +131,6 @@ public class GUI extends Application implements ListenerInterface {
     private static final String WIZARD_MENU = "wizardMenu.fxml";
     private static final String MAIN_SCENE = "finalBoardScene.fxml";
     private static final String PICK_ASSISTANT = "PickAssistant.fxml";
-    /*private static final String PICK_CHARACTER = "actions/PickAssistant.fxml";
-    private static final String PICK_CLOUD = "actions/PickAssistant.fxml";
-    private static final String PICK_DESTINATION = "actions/PickAssistant.fxml";
-    private static final String PICK_ISLAND = "actions/PickAssistant.fxml";
-    private static final String PICK_PAWN_TYPE = "actions/PickAssistant.fxml";
-    private static final String PICK_STUDENT = "actions/PickAssistant.fxml"; */
 
 
 
@@ -142,6 +138,7 @@ public class GUI extends Application implements ListenerInterface {
         this.modelView = new ModelView(this);
         actionHandler = new ActionHandler(this, modelView);
         activeGame = true;
+        firstSetupScene = true;
     }
 
     public static void main(String[] args) {
@@ -211,6 +208,7 @@ public class GUI extends Application implements ListenerInterface {
         List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT, MAIN_SCENE));
         try {
             for(String pathFxml : fxmlList) {
+                System.out.println(pathFxml);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + pathFxml));
                 nameMapScene.put(pathFxml, new Scene(loader.load()));
                 GUIController controller = loader.getController();
@@ -265,11 +263,16 @@ public class GUI extends Application implements ListenerInterface {
 
 
     public void updateMainScene() {
+        MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
+        controller.update("STANDARD_UPDATE");
+        /*
+        getControllerFromName(MAIN_SCENE).
         mainSceneController.updateIslands();
         mainSceneController.updateTowers();
         mainSceneController.updateWizard();
         mainSceneController.updateClouds();
         mainSceneController.updateDiningRooms();
+         */
     }
 
     @Override
@@ -298,7 +301,16 @@ public class GUI extends Application implements ListenerInterface {
             case "UpdateModelView" -> {
                 assert serverCommand != null;
                 modelView.setGameCopy((Game) changeEvent.getNewValue());
-                updateMainScene();
+                if(firstSetupScene) {
+                    Platform.runLater(() -> {
+                        changeStage(MAIN_SCENE);
+                        updateMainScene();
+                    });
+                    firstSetupScene = false;
+                } else {
+                    Platform.runLater(() -> updateMainScene());
+                }
+
                 //this.changeStage();
             }
             /*case "WinMessage" -> {

@@ -76,11 +76,37 @@ public class MainSceneController implements GUIController {
     @FXML ImageView rightWizard;
     @FXML Label descriptionLabel;
     @FXML Button askAssistantButton;
-    @FXML ImageView blueStudent;
-    @FXML ImageView redStudent;
-    @FXML ImageView greenStudent;
-    @FXML ImageView pinkStudent;
-    @FXML ImageView yellowStudent;
+    @FXML Button blueStudent;
+    @FXML Button redStudent;
+    @FXML Button greenStudent;
+    @FXML Button pinkStudent;
+    @FXML Button yellowStudent;
+
+    @FXML Button noCharacterButton;
+    @FXML ImageView character1Coin;
+    @FXML Label character1LabelCoin;
+    @FXML ImageView character2Coin;
+    @FXML Label character2LabelCoin;
+    @FXML ImageView character3Coin;
+    @FXML Label character3LabelCoin;
+    @FXML ImageView greenCharacter1;
+    @FXML ImageView blueCharacter1;
+    @FXML ImageView pinkCharacter1;
+    @FXML ImageView redCharacter1;
+    @FXML ImageView yellowCharacter1;
+    @FXML ImageView greenCharacter2;
+    @FXML ImageView blueCharacter2;
+    @FXML ImageView pinkCharacter2;
+    @FXML ImageView redCharacter2;
+    @FXML ImageView yellowCharacter2;
+    @FXML ImageView greenCharacter3;
+    @FXML ImageView blueCharacter3;
+    @FXML ImageView pinkCharacter3;
+    @FXML ImageView redCharacter3;
+    @FXML ImageView yellowCharacter3;
+
+
+
     @FXML
     ImageView island1;
     @FXML
@@ -270,6 +296,34 @@ public class MainSceneController implements GUIController {
     @FXML ImageView greenIsland12;
     @FXML Label greenLabelIsland12;
 
+    @FXML ImageView noEntryTile1;
+    @FXML ImageView noEntryTile2;
+    @FXML ImageView noEntryTile3;
+    @FXML ImageView noEntryTile4;
+    @FXML ImageView noEntryTile5;
+    @FXML ImageView noEntryTile6;
+    @FXML ImageView noEntryTile7;
+    @FXML ImageView noEntryTile8;
+    @FXML ImageView noEntryTile9;
+    @FXML ImageView noEntryTile10;
+    @FXML ImageView noEntryTile11;
+    @FXML ImageView noEntryTile12;
+
+    @FXML Label yellowLabelCharacter1;
+    @FXML Label blueLabelCharacter1;
+    @FXML Label pinkLabelCharacter1;
+    @FXML Label redLabelCharacter1;
+    @FXML Label greenLabelCharacter1;
+    @FXML Label yellowLabelCharacter2;
+    @FXML Label blueLabelCharacter2;
+    @FXML Label pinkLabelCharacter2;
+    @FXML Label redLabelCharacter2;
+    @FXML Label greenLabelCharacter2;
+    @FXML Label yellowLabelCharacter3;
+    @FXML Label blueLabelCharacter3;
+    @FXML Label pinkLabelCharacter3;
+    @FXML Label redLabelCharacter3;
+    @FXML Label greenLabelCharacter3;
 
 
     @FXML Group myEntrance;
@@ -300,16 +354,6 @@ public class MainSceneController implements GUIController {
     @FXML Button character1Button;
     @FXML Button character2Button;
     @FXML Button character3Button;
-    @FXML ImageView cheetah;
-    @FXML ImageView ostrich;
-    @FXML ImageView turtle;
-    @FXML ImageView elephant;
-    @FXML ImageView dog;
-    @FXML ImageView octopus;
-    @FXML ImageView lizard;
-    @FXML ImageView cat;
-    @FXML ImageView eagle;
-    @FXML ImageView fox;
 
     @FXML ImageView redCloud1;
     @FXML Label redLabelCloud1;
@@ -368,15 +412,45 @@ public class MainSceneController implements GUIController {
     @FXML Button island10Button;
     @FXML Button island11Button;
     @FXML Button island12Button;
+    @FXML ImageView myBlueProfessor;
+    @FXML ImageView myRedProfessor;
+    @FXML ImageView myGreenProfessor;
+    @FXML ImageView myPinkProfessor;
+    @FXML ImageView myYellowProfessor;
+    @FXML ImageView topBlueProfessor;
+    @FXML ImageView topRedProfessor;
+    @FXML ImageView topGreenProfessor;
+    @FXML ImageView topPinkProfessor;
+    @FXML ImageView topYellowProfessor;
+    @FXML ImageView rightBlueProfessor;
+    @FXML ImageView rightRedProfessor;
+    @FXML ImageView rightGreenProfessor;
+    @FXML ImageView rightPinkProfessor;
+    @FXML ImageView rightYellowProfessor;
+    @FXML ImageView leftBlueProfessor;
+    @FXML ImageView leftRedProfessor;
+    @FXML ImageView leftGreenProfessor;
+    @FXML ImageView leftPinkProfessor;
+    @FXML ImageView leftYellowProfessor;
+    @FXML ImageView motherNature;
+    @FXML ImageView myBoard;
+    @FXML ImageView topBoard;
+    @FXML ImageView leftBoard;
+    @FXML ImageView rightBoard;
+    @FXML Button effect1;
+    @FXML Button effect2;
+    @FXML Button effect3;
 
-
+    @FXML ImageView myCoins;
+    @FXML Label myCoinsLabel;
+    @FXML ImageView character1Coins;
+    @FXML ImageView character2Coins;
+    @FXML ImageView character3Coins;
 
     @Override
     public void setGui(GUI gui) {
         this.gui = gui;
     }
-
-
 
     public void update(String serverCommand) {
         updateDiningRooms();
@@ -384,10 +458,90 @@ public class MainSceneController implements GUIController {
         updateWizard();
         updateTowers();
         updateIslands();
-        updateCharacters();
+        if(gui.getModelView().getGameCopy().isExpertMode()) {
+            updateCharacters();
+        } else {
+            character1.setVisible(false);
+            character2.setVisible(false);
+            character3.setVisible(false);
+            character1Button.setVisible(false);
+            character2Button.setVisible(false);
+            character3Button.setVisible(false);
+            effect1.setVisible(false);
+            effect2.setVisible(false);
+            effect3.setVisible(false);
+            greenLabelCharacter1.setVisible(false);
+            blueLabelCharacter1.setVisible(false);
+            pinkLabelCharacter1.setVisible(false);
+            redLabelCharacter1.setVisible(false);
+            yellowLabelCharacter1.setVisible(false);
+            greenLabelCharacter2.setVisible(false);
+            blueLabelCharacter2.setVisible(false);
+            pinkLabelCharacter2.setVisible(false);
+            redLabelCharacter2.setVisible(false);
+            yellowLabelCharacter2.setVisible(false);
+            greenLabelCharacter3.setVisible(false);
+            blueLabelCharacter3.setVisible(false);
+            pinkLabelCharacter3.setVisible(false);
+            redLabelCharacter3.setVisible(false);
+            yellowLabelCharacter3.setVisible(false);
+            noCharacterButton.setVisible(false);
+            noCharacterButton.setVisible(false);
+            character1Coin.setVisible(false);
+            character1LabelCoin.setVisible(false);
+            character2Coin.setVisible(false);
+            character2LabelCoin.setVisible(false);
+            character3Coin.setVisible(false);
+            character3LabelCoin.setVisible(false);
+            greenCharacter1.setVisible(false);
+            blueCharacter1.setVisible(false);
+            pinkCharacter1.setVisible(false);
+            redCharacter1.setVisible(false);
+            yellowCharacter1.setVisible(false);
+            greenCharacter2.setVisible(false);
+            blueCharacter2.setVisible(false);
+            pinkCharacter2.setVisible(false);
+            redCharacter2.setVisible(false);
+            yellowCharacter2.setVisible(false);
+            greenCharacter3.setVisible(false);
+            blueCharacter3.setVisible(false);
+            pinkCharacter3.setVisible(false);
+            redCharacter3.setVisible(false);
+            yellowCharacter3.setVisible(false);
+        }
         updateAssistant();
         updateEntrances();
-        updateTowerAreas();
+        updateTowers();
+        updateMotherNature();
+        updateNoEntryTile();
+        updateProfessors();
+        updateBoards();
+
+        blueStudent.setVisible(false);
+        greenStudent.setVisible(false);
+        pinkStudent.setVisible(false);
+        yellowStudent.setVisible(false);
+        redStudent.setVisible(false);
+
+        blue.setVisible(false);
+        green.setVisible(false);
+        pink.setVisible(false);
+        yellow.setVisible(false);
+        red.setVisible(false);
+
+        bluePawn.setVisible(false);
+        greenPawn.setVisible(false);
+        pinkPawn.setVisible(false);
+        yellowPawn.setVisible(false);
+        redPawn.setVisible(false);
+
+        cloud1Button.setVisible(false);
+        cloud2Button.setVisible(false);
+        cloud3Button.setVisible(false);
+        cloud4Button.setVisible(false);
+        diningRoomButton.setVisible(false);
+        askAssistantButton.setVisible(false);
+
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
                showAssistantButton();
@@ -415,6 +569,8 @@ public class MainSceneController implements GUIController {
                 askPawnType();
             }
             default -> {
+                descriptionLabel.setText("Click the pick assistant button to choose your assistant. " +
+                        "Remember to take a look at the game status to make the best choice!");
                 System.out.println("Update without user actions (server command not in switch cases)");
             }
         }
@@ -429,6 +585,171 @@ public class MainSceneController implements GUIController {
         return moves;
     }
 
+    public void updateBoards() {
+        myBoard.setVisible(false);
+        leftBoard.setVisible(false);
+        rightBoard.setVisible(false);
+        topBoard.setVisible(false);
+        myCoins.setVisible(false);
+        myCoinsLabel.setVisible(false);
+        int cont = 0;
+        for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
+            if(p.getNickname().equals(gui.getModelView().getGameCopy().getCurrentPlayer().getNickname())) {
+                myBoard.setVisible(true);
+                if(gui.getModelView().getGameCopy().isExpertMode()) {
+                    myCoinsLabel.setVisible(true);
+                    //myCoinsLabel.setText(gui.getModelView().getGameCopy());
+                    myCoins.setVisible(true);
+                }
+            } else if(cont==0) {
+                topBoard.setVisible(true);
+                cont++;
+            } else if(cont==1) {
+                leftBoard.setVisible(true);
+                cont++;
+            } else if(cont==2) {
+                rightBoard.setVisible(true);
+                cont++;
+            }
+        }
+    }
+
+    public void updateProfessors() {
+        myBlueProfessor.setVisible(false);
+        myYellowProfessor.setVisible(false);
+        myPinkProfessor.setVisible(false);
+        myGreenProfessor.setVisible(false);
+        myRedProfessor.setVisible(false);
+        rightBlueProfessor.setVisible(false);
+        rightYellowProfessor.setVisible(false);
+        rightPinkProfessor.setVisible(false);
+        rightGreenProfessor.setVisible(false);
+        rightRedProfessor.setVisible(false);
+        leftBlueProfessor.setVisible(false);
+        leftYellowProfessor.setVisible(false);
+        leftPinkProfessor.setVisible(false);
+        leftGreenProfessor.setVisible(false);
+        leftRedProfessor.setVisible(false);
+        topBlueProfessor.setVisible(false);
+        topYellowProfessor.setVisible(false);
+        topPinkProfessor.setVisible(false);
+        topGreenProfessor.setVisible(false);
+        topRedProfessor.setVisible(false);
+        int cont = 0;
+        Image pic = null;
+        for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
+            if (pl.getNickname().equals(gui.getModelView().getGameCopy().getCurrentPlayer().getNickname())) {
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                    if (b.hasProfessor()) {
+                        if (b.getBoardCellType() == PawnType.BLUE) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            myBlueProfessor.setImage(pic);
+                            myBlueProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.GREEN) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            myGreenProfessor.setImage(pic);
+                            myGreenProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.PINK) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            myPinkProfessor.setImage(pic);
+                            myPinkProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.RED) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            myRedProfessor.setImage(pic);
+                            myRedProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            myYellowProfessor.setImage(pic);
+                            myYellowProfessor.setVisible(true);
+                        }
+                    }
+                }
+            } else if (cont == 0) {
+                //top Player corresponding to cont 0
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                    if (b.hasProfessor()) {
+                        if (b.getBoardCellType() == PawnType.BLUE) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            topBlueProfessor.setImage(pic);
+                            topBlueProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.GREEN) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            topGreenProfessor.setImage(pic);
+                            topGreenProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.PINK) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            topPinkProfessor.setImage(pic);
+                            topPinkProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.RED) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            topRedProfessor.setImage(pic);
+                            topRedProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            topYellowProfessor.setImage(pic);
+                            topYellowProfessor.setVisible(true);
+                        }
+                    }
+                }
+                cont++;
+            } else if (cont == 1) {
+                //left Player corresponding to cont 1
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                    if (b.hasProfessor()) {
+                        if (b.getBoardCellType() == PawnType.BLUE) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            leftBlueProfessor.setImage(pic);
+                            leftBlueProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.GREEN) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            leftGreenProfessor.setImage(pic);
+                            leftGreenProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.PINK) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            leftPinkProfessor.setImage(pic);
+                            leftPinkProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.RED) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            leftRedProfessor.setImage(pic);
+                            leftRedProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            leftYellowProfessor.setImage(pic);
+                            leftYellowProfessor.setVisible(true);
+                        }
+                    }
+                }
+                cont++;
+            } else if (cont == 2) {
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                    if (b.hasProfessor()) {
+                        if (b.getBoardCellType() == PawnType.BLUE) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            rightBlueProfessor.setImage(pic);
+                            rightBlueProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.GREEN) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            rightGreenProfessor.setImage(pic);
+                            rightGreenProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.PINK) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            rightPinkProfessor.setImage(pic);
+                            rightPinkProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.RED) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            rightRedProfessor.setImage(pic);
+                            rightRedProfessor.setVisible(true);
+                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            rightYellowProfessor.setImage(pic);
+                            rightYellowProfessor.setVisible(true);
+                        }
+                    }
+                }
+                cont++;
+            }
+        }
+    }
 
      public void askMoves(AssistantCard a) {
          ChoiceBox<String> choiceBox = new ChoiceBox<>();
@@ -462,6 +783,175 @@ public class MainSceneController implements GUIController {
          }
          gui.getClientConnection().sendUserInput(action);
      }
+
+    public void updateMotherNature() {
+        motherNature.setVisible(false);
+        Image img = new Image("@../../graphics/wooden_pieces/mother_nature.png");
+        motherNature.setImage(img);
+        int motherNaturePosition = gui.getModelView().getGameCopy().getGameBoard().getMotherNature().getPosition();
+        switch (motherNaturePosition) {
+            case 1 -> {
+                motherNature.setLayoutX(289);
+                motherNature.setLayoutY(-5);
+                motherNature.setVisible(true);
+            }
+            case 2 -> {
+                motherNature.setLayoutX(397);
+                motherNature.setLayoutY(21);
+                motherNature.setVisible(true);
+            }
+            case 3 -> {
+                motherNature.setLayoutX(501);
+                motherNature.setLayoutY(82);
+                motherNature.setVisible(true);
+            }
+            case 4 -> {
+                motherNature.setLayoutX(526);
+                motherNature.setLayoutY(192);
+                motherNature.setVisible(true);
+            }
+            case 5 -> {
+                motherNature.setLayoutX(501);
+                motherNature.setLayoutY(284);
+                motherNature.setVisible(true);
+            }
+            case 6 -> {
+                motherNature.setLayoutX(414);
+                motherNature.setLayoutY(358);
+                motherNature.setVisible(true);
+            }
+            case 7 -> {
+                motherNature.setLayoutX(295);
+                motherNature.setLayoutY(382);
+                motherNature.setVisible(true);
+            }
+
+            case 8 -> {
+                motherNature.setLayoutX(190);
+                motherNature.setLayoutY(358);
+                motherNature.setVisible(true);
+            }
+
+            case 9 -> {
+                motherNature.setLayoutX(104);
+                motherNature.setLayoutY(284);
+                motherNature.setVisible(true);
+            }
+
+            case 10 -> {
+                motherNature.setLayoutX(65);
+                motherNature.setLayoutY(188);
+                motherNature.setVisible(true);
+            }
+
+            case 11 -> {
+                motherNature.setLayoutX(115);
+                motherNature.setLayoutY(87);
+                motherNature.setVisible(true);
+            }
+
+            case 12 -> {
+                motherNature.setLayoutX(184);
+                motherNature.setLayoutY(18);
+                motherNature.setVisible(true);
+            }
+        }
+    }
+
+
+    public void updateNoEntryTile() {
+        Image img = new Image("@../../graphics/wooden_pieces/deny_island_icon.png");
+        noEntryTile1.setVisible(false);
+        noEntryTile2.setVisible(false);
+        noEntryTile3.setVisible(false);
+        noEntryTile4.setVisible(false);
+        noEntryTile5.setVisible(false);
+        noEntryTile6.setVisible(false);
+        noEntryTile7.setVisible(false);
+        noEntryTile8.setVisible(false);
+        noEntryTile9.setVisible(false);
+        noEntryTile10.setVisible(false);
+        noEntryTile11.setVisible(false);
+        noEntryTile12.setVisible(false);
+        for (Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
+            if (i.getNoEntry()) {
+                switch (i.getIslandID()) {
+                    case 1 -> {
+                        noEntryTile1.setLayoutX(289);
+                        noEntryTile1.setLayoutY(31);
+                        noEntryTile1.setImage(img);
+                        noEntryTile1.setVisible(true);
+                    }
+                    case 2 -> {
+                        noEntryTile2.setLayoutX(397);
+                        noEntryTile2.setLayoutY(55);
+                        noEntryTile2.setImage(img);
+                        noEntryTile2.setVisible(true);
+                    }
+                    case 3 -> {
+                        noEntryTile3.setLayoutX(501);
+                        noEntryTile3.setLayoutY(120);
+                        noEntryTile3.setImage(img);
+                        noEntryTile3.setVisible(true);
+                    }
+                    case 4 -> {
+                        noEntryTile4.setLayoutX(526);
+                        noEntryTile4.setLayoutY(226);
+                        noEntryTile4.setImage(img);
+                        noEntryTile4.setVisible(true);
+                    }
+                    case 5 -> {
+                        noEntryTile5.setLayoutX(501);
+                        noEntryTile5.setLayoutY(323);
+                        noEntryTile5.setImage(img);
+                        noEntryTile5.setVisible(true);
+                    }
+                    case 6 -> {
+                        noEntryTile6.setLayoutX(414);
+                        noEntryTile6.setLayoutY(396);
+                        noEntryTile6.setImage(img);
+                        noEntryTile6.setVisible(true);
+                    }
+                    case 7 -> {
+                        noEntryTile7.setLayoutX(295);
+                        noEntryTile7.setLayoutY(417);
+                        noEntryTile7.setImage(img);
+                        noEntryTile7.setVisible(true);
+                    }
+                    case 8 -> {
+                        noEntryTile8.setLayoutX(190);
+                        noEntryTile8.setLayoutY(396);
+                        noEntryTile8.setImage(img);
+                        noEntryTile8.setVisible(true);
+                    }
+                    case 9 -> {
+                        noEntryTile9.setLayoutX(104);
+                        noEntryTile9.setLayoutY(318);
+                        noEntryTile9.setImage(img);
+                        noEntryTile9.setVisible(true);
+                    }
+                    case 10 -> {
+                        noEntryTile10.setLayoutX(65);
+                        noEntryTile10.setLayoutY(224);
+                        noEntryTile10.setImage(img);
+                        noEntryTile10.setVisible(true);
+                    }
+                    case 11 -> {
+                        noEntryTile11.setLayoutX(115);
+                        noEntryTile11.setLayoutY(128);
+                        noEntryTile11.setImage(img);
+                        noEntryTile11.setVisible(true);
+                    }
+                    case 12 -> {
+                        noEntryTile12.setLayoutX(184);
+                        noEntryTile12.setLayoutY(58);
+                        noEntryTile12.setImage(img);
+                        noEntryTile12.setVisible(true);
+                    }
+                }
+            }
+        }
+    }
 
     /*public void askMoves(AssistantCard a) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -659,136 +1149,37 @@ public class MainSceneController implements GUIController {
         askAssistantButton.setVisible(true);
     }
 
-    public void askAssistant(ActionEvent e) {
-        cheetah.setVisible(false);
-        ostrich.setVisible(false);
-        cat.setVisible(false);
-        eagle.setVisible(false);
-        fox.setVisible(false);
-        lizard.setVisible(false);
-        octopus.setVisible(false);
-        dog.setVisible(false);
-        elephant.setVisible(false);
-        turtle.setVisible(false);
-
+    public void askAssistant() {
         Platform.runLater(() -> {
-            gui.changeStage("PickAssistant.fxml");
-            for(AssistantCard a : gui.getModelView().getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-                if(a.getName().equals(Assistants.CHEETAH)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        cheetah.setVisible(true);
-                        cheetah.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.OSTRICH)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        ostrich.setVisible(true);
-                        ostrich.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.CAT)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        cat.setVisible(true);
-                        cat.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.EAGLE)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        eagle.setVisible(true);
-                        eagle.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.FOX)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        fox.setVisible(true);
-                        fox.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.LIZARD)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        lizard.setVisible(true);
-                        lizard.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.OCTOPUS)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        octopus.setVisible(true);
-                        octopus.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.DOG)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        dog.setVisible(true);
-                        dog.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.ELEPHANT)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        elephant.setVisible(true);
-                        elephant.setImage(setAssistantImage(a));
-                    }
-                } else if(a.getName().equals(Assistants.TURTLE)) {
-                    if(gui.getModelView().getGameCopy().canPlayAssistant(a.getName())) {
-                        turtle.setVisible(true);
-                        turtle.setImage(setAssistantImage(a));
-                    }
-                }
-            }
+            PickAssistantController controller = (PickAssistantController) gui.getControllerFromName("PickAssistant.fxml");
+            controller.askAssistant();
         });
-    }
 
-    public void pickAssistant(ActionEvent e) {
-        UserAction action = null;
-        ImageView img = (ImageView) e.getSource();
-        String picked = (String) img.getId();
-        Assistants assistant = null;
-        switch(picked) {
-            case "cheetah" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CHEETAH);
-                assistant = Assistants.CHEETAH;
-            }
-            case "ostrich" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OSTRICH);
-                assistant = Assistants.OSTRICH;
-            }
-            case "cat" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CAT);
-                assistant = Assistants.CAT;
-            }
-            case "eagle" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.EAGLE);
-                assistant = Assistants.EAGLE;
-            }
-            case "fox" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX);
-                assistant = Assistants.FOX;
-            }
-            case "lizard" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.LIZARD);
-                assistant = Assistants.LIZARD;
-            }
-            case "octopus" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OCTOPUS);
-                assistant = Assistants.OCTOPUS;
-            }
-            case "dog" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.DOG);
-                assistant = Assistants.DOG;
-            }
-            case "elephant" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.ELEPHANT);
-                assistant = Assistants.ELEPHANT;
-            }
-            case "turtle" -> {
-                action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.TURTLE);
-                assistant = Assistants.TURTLE;
-            }
-        }
-        if(gui.getModelView().getGameCopy().canPlayAssistant(assistant)) {
-            if (action != null) {
-                gui.getClientConnection().sendUserInput(action);
-            }
-        } else {
-            gui.getInfoAlert().setTitle("INFO");
-            gui.getInfoAlert().setHeaderText("Information from server");
-            gui.getInfoAlert().setContentText("This assistant has already been chosen by an other player. Please choose another one!");
-            gui.getInfoAlert().show();
-        }
     }
 
     public void updateDiningRooms() {
+        for(int j=0; j < 10; j++) {
+            myBlueStudents.getChildren().get(j).setVisible(false);
+            myRedStudents.getChildren().get(j).setVisible(false);
+            myYellowStudents.getChildren().get(j).setVisible(false);
+            myGreenStudents.getChildren().get(j).setVisible(false);
+            myPinkStudents.getChildren().get(j).setVisible(false);
+            topBlueStudents.getChildren().get(j).setVisible(false);
+            topRedStudents.getChildren().get(j).setVisible(false);
+            topYellowStudents.getChildren().get(j).setVisible(false);
+            topGreenStudents.getChildren().get(j).setVisible(false);
+            topPinkStudents.getChildren().get(j).setVisible(false);
+            rightBlueStudents.getChildren().get(j).setVisible(false);
+            rightRedStudents.getChildren().get(j).setVisible(false);
+            rightYellowStudents.getChildren().get(j).setVisible(false);
+            rightGreenStudents.getChildren().get(j).setVisible(false);
+            rightPinkStudents.getChildren().get(j).setVisible(false);
+            leftBlueStudents.getChildren().get(j).setVisible(false);
+            leftRedStudents.getChildren().get(j).setVisible(false);
+            leftYellowStudents.getChildren().get(j).setVisible(false);
+            leftGreenStudents.getChildren().get(j).setVisible(false);
+            leftPinkStudents.getChildren().get(j).setVisible(false);
+        }
         Image pic;
         ImageView img;
         int cont = 0; //serve per decidere dove posizionare la board del player nella main scene
@@ -1116,31 +1507,29 @@ public class MainSceneController implements GUIController {
         blueLabelIsland12.setVisible(false);
         pinkIsland12.setVisible(false);
         pinkLabelIsland12.setVisible(false);
-
-
-
-
-
-        //TODO settare tutti i bottoni a false e settarli a true nella pickIsland
-
         for (Island isl : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if (isl.getIslandID() == 1) {
                 island1.setVisible(true);
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland1.setVisible(true);
+                        redLabelIsland1.setVisible(true);
                         redLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland1.setVisible(true);
+                        yellowLabelIsland1.setVisible(true);
                         yellowLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland1.setVisible(true);
+                        pinkLabelIsland1.setVisible(true);
                         pinkLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland1.setVisible(true);
+                        blueLabelIsland1.setVisible(true);
                         blueLabelIsland1.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland1.setVisible(true);
+                        greenLabelIsland1.setVisible(true);
                         greenLabelIsland1.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1151,21 +1540,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 2) {
                 island2.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland2.setVisible(true);
+                        redLabelIsland2.setVisible(true);
                         redLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland2.setVisible(true);
+                        yellowLabelIsland2.setVisible(true);
                         yellowLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland2.setVisible(true);
+                        pinkLabelIsland2.setVisible(true);
                         pinkLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland2.setVisible(true);
+                        blueLabelIsland2.setVisible(true);
                         blueLabelIsland2.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland2.setVisible(true);
+                        greenLabelIsland2.setVisible(true);
                         greenLabelIsland2.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1176,21 +1570,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 3) {
                 island3.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(2).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland3.setVisible(true);
+                        redLabelIsland3.setVisible(true);
                         redLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland3.setVisible(true);
+                        yellowLabelIsland3.setVisible(true);
                         yellowLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland3.setVisible(true);
+                        pinkLabelIsland3.setVisible(true);
                         pinkLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland3.setVisible(true);
+                        blueLabelIsland3.setVisible(true);
                         blueLabelIsland3.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland3.setVisible(true);
+                        greenLabelIsland3.setVisible(true);
                         greenLabelIsland3.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1201,21 +1600,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 4) {
                 island4.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(3).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland4.setVisible(true);
+                        redLabelIsland4.setVisible(true);
                         redLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland4.setVisible(true);
+                        yellowLabelIsland4.setVisible(true);
                         yellowLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland4.setVisible(true);
+                        pinkLabelIsland4.setVisible(true);
                         pinkLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland4.setVisible(true);
+                        blueLabelIsland4.setVisible(true);
                         blueLabelIsland4.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland4.setVisible(true);
+                        greenLabelIsland4.setVisible(true);
                         greenLabelIsland4.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1226,21 +1630,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 5) {
                 island5.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(4).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland5.setVisible(true);
+                        redLabelIsland5.setVisible(true);
                         redLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland5.setVisible(true);
+                        yellowLabelIsland5.setVisible(true);
                         yellowLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland5.setVisible(true);
+                        pinkLabelIsland5.setVisible(true);
                         pinkLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland5.setVisible(true);
+                        blueLabelIsland5.setVisible(true);
                         blueLabelIsland5.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland5.setVisible(true);
+                        greenLabelIsland5.setVisible(true);
                         greenLabelIsland5.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1251,21 +1660,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 6) {
                 island6.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(5).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland6.setVisible(true);
+                        redLabelIsland6.setVisible(true);
                         redLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland6.setVisible(true);
+                        yellowLabelIsland6.setVisible(true);
                         yellowLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland6.setVisible(true);
+                        pinkLabelIsland6.setVisible(true);
                         pinkLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland6.setVisible(true);
+                        blueLabelIsland6.setVisible(true);
                         blueLabelIsland6.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland6.setVisible(true);
+                        greenLabelIsland6.setVisible(true);
                         greenLabelIsland6.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1276,21 +1690,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 7) {
                 island7.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(6).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland7.setVisible(true);
+                        redLabelIsland7.setVisible(true);
                         redLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland7.setVisible(true);
+                        yellowLabelIsland7.setVisible(true);
                         yellowLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland7.setVisible(true);
+                        pinkLabelIsland7.setVisible(true);
                         pinkLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland7.setVisible(true);
+                        blueLabelIsland7.setVisible(true);
                         blueLabelIsland7.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland7.setVisible(true);
+                        greenLabelIsland7.setVisible(true);
                         greenLabelIsland7.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1301,21 +1720,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 8) {
                 island8.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(7).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland8.setVisible(true);
+                        redLabelIsland8.setVisible(true);
                         redLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland8.setVisible(true);
+                        yellowLabelIsland8.setVisible(true);
                         yellowLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland8.setVisible(true);
+                        pinkLabelIsland8.setVisible(true);
                         pinkLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland8.setVisible(true);
+                        blueLabelIsland8.setVisible(true);
                         blueLabelIsland8.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland8.setVisible(true);
+                        greenLabelIsland8.setVisible(true);
                         greenLabelIsland8.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1326,21 +1750,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 9) {
                 island9.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(8).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland9.setVisible(true);
+                        redLabelIsland9.setVisible(true);
                         redLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland9.setVisible(true);
+                        yellowLabelIsland9.setVisible(true);
                         yellowLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland9.setVisible(true);
+                        pinkLabelIsland9.setVisible(true);
                         pinkLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland9.setVisible(true);
+                        blueLabelIsland9.setVisible(true);
                         blueLabelIsland9.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland9.setVisible(true);
+                        greenLabelIsland9.setVisible(true);
                         greenLabelIsland9.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1351,21 +1780,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 10) {
                 island10.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(9).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland10.setVisible(true);
+                        redLabelIsland10.setVisible(true);
                         redLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland10.setVisible(true);
+                        yellowLabelIsland10.setVisible(true);
                         yellowLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland10.setVisible(true);
+                        pinkLabelIsland10.setVisible(true);
                         pinkLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland10.setVisible(true);
+                        blueLabelIsland10.setVisible(true);
                         blueLabelIsland10.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland10.setVisible(true);
+                        greenLabelIsland10.setVisible(true);
                         greenLabelIsland10.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1376,21 +1810,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 11) {
                 island11.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(10).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland11.setVisible(true);
+                        redLabelIsland11.setVisible(true);
                         redLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland11.setVisible(true);
+                        yellowLabelIsland11.setVisible(true);
                         yellowLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland11.setVisible(true);
+                        pinkLabelIsland11.setVisible(true);
                         pinkLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland11.setVisible(true);
+                        blueLabelIsland11.setVisible(true);
                         blueLabelIsland11.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland11.setVisible(true);
+                        greenLabelIsland11.setVisible(true);
                         greenLabelIsland11.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1401,21 +1840,26 @@ public class MainSceneController implements GUIController {
 
             } else if (isl.getIslandID() == 12) {
                 island12.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
+                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(11).getStudents()) {
                     if(s.getType().equals(PawnType.RED)) {
                         redIsland12.setVisible(true);
+                        redLabelIsland12.setVisible(true);
                         redLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.YELLOW)) {
                         yellowIsland12.setVisible(true);
+                        yellowLabelIsland12.setVisible(true);
                         yellowLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.PINK)) {
                         pinkIsland12.setVisible(true);
+                        pinkLabelIsland12.setVisible(true);
                         pinkLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.BLUE)) {
                         blueIsland12.setVisible(true);
+                        blueLabelIsland12.setVisible(true);
                         blueLabelIsland12.setText(getStudentsNumber(isl, s));
                     } else if(s.getType().equals(PawnType.GREEN)) {
                         greenIsland12.setVisible(true);
+                        greenLabelIsland12.setVisible(true);
                         greenLabelIsland12.setText(getStudentsNumber(isl, s));
                     }
                 }
@@ -1482,7 +1926,8 @@ public class MainSceneController implements GUIController {
                 num+= 1;
             }
         }
-        return Integer.toString(num);
+        System.out.println("Number of students " + s.getType() +": " + String.valueOf(num));
+        return String.valueOf(num);
     }
 
     public void updateClouds() {
@@ -1655,6 +2100,12 @@ public class MainSceneController implements GUIController {
     }
 
     public void updateTowers() {
+        for(int i=0; i < 8; i++) {
+            myTowers.getChildren().get(i).setVisible(false);
+            leftTowers.getChildren().get(i).setVisible(false);
+            rightTowers.getChildren().get(i).setVisible(false);
+            topTowers.getChildren().get(i).setVisible(false);
+        }
         int cont = 0;
         Image img = null;
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
@@ -1662,23 +2113,27 @@ public class MainSceneController implements GUIController {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) myTowers.getChildren().get(i)).setImage(img);
+                    ((ImageView) myTowers.getChildren().get(i)).setVisible(true);
                 }
             } else if(cont==0) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) topTowers.getChildren().get(i)).setImage(img);
+                    ((ImageView) topTowers.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             } else if(cont==1) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) leftTowers.getChildren().get(i)).setImage(img);
+                    ((ImageView) leftTowers.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             } else if(cont==2) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) rightTowers.getChildren().get(i)).setImage(img);
+                    ((ImageView) rightTowers.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             }
@@ -1706,19 +2161,27 @@ public class MainSceneController implements GUIController {
 
     public void updateWizard() {
         int cont = 0;
+        myWizard.setVisible(false);
+        topWizard.setVisible(false);
+        leftWizard.setVisible(false);
+        rightWizard.setVisible(false);
         Image img = null;
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             img = setWizardImage(p.getWizard());
             if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
                 ((ImageView) myWizard).setImage(img);
+                ((ImageView) myWizard).setVisible(true);
             } else if(cont==0) {
                 ((ImageView) topWizard).setImage(img);
+                ((ImageView) topWizard).setVisible(true);
                 cont++;
             } else if(cont==1) {
                 ((ImageView) leftWizard).setImage(img);
+                ((ImageView) leftWizard).setVisible(true);
                 cont++;
             } else if(cont==2) {
                 ((ImageView) rightWizard).setImage(img);
+                ((ImageView) rightWizard).setVisible(true);
                 cont++;
             }
         }
@@ -1726,64 +2189,77 @@ public class MainSceneController implements GUIController {
 
     public void updateAssistant() {
         int cont = 0;
+        myAssistant.setVisible(false);
+        leftAssistant.setVisible(false);
+        topAssistant.setVisible(false);
+        rightAssistant.setVisible(false);
         Image img = null;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
-            img = setAssistantImage(p.getChosenAssistant());
-            if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
-                ((ImageView) myAssistant).setImage(img);
-            } else if(cont==0) {
-                ((ImageView) topAssistant).setImage(img);
-                cont++;
-            } else if(cont==1) {
-                ((ImageView) leftAssistant).setImage(img);
-                cont++;
-            } else if(cont==2) {
-                ((ImageView) rightAssistant).setImage(img);
-                cont++;
+            if(p.getChosenAssistant() != null) {
+                img = setAssistantImage(p.getChosenAssistant());
+                if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
+                    ((ImageView) myAssistant).setImage(img);
+                    ((ImageView) myAssistant).setVisible(true);
+                } else if(cont==0) {
+                    ((ImageView) topAssistant).setImage(img);
+                    ((ImageView) topAssistant).setVisible(true);
+                    cont++;
+                } else if(cont==1) {
+                    ((ImageView) leftAssistant).setImage(img);
+                    ((ImageView) leftAssistant).setVisible(true);
+                    cont++;
+                } else if(cont==2) {
+                    ((ImageView) rightAssistant).setImage(img);
+                    ((ImageView) rightAssistant).setVisible(true);
+                    cont++;
+                }
             }
+
         }
     }
 
     public void updateEntrances() {
+        for(int i=0; i < 10; i++) {
+            myEntrance.getChildren().get(i).setVisible(false);
+            leftEntrance.getChildren().get(i).setVisible(false);
+            topEntrance.getChildren().get(i).setVisible(false);
+            rightEntrance.getChildren().get(i).setVisible(false);
+        }
         Image pic = null;
         int cont = 0;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) myEntrance.getChildren().get(i)).setImage(pic);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) myEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) myEntrance.getChildren().get(i)).setVisible(true);
                 }
             } else if(cont == 0) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) topEntrance.getChildren().get(i)).setImage(pic);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) topEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) topEntrance.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             } else if(cont == 1) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) leftEntrance.getChildren().get(i)).setImage(pic);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) leftEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) leftEntrance.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             } else if(cont == 2) {
-                for (Student s : p.getBoard().getEntrance().getStudents()) {
-                    for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
-                        pic = setStudentsEntrance(s);
-                        ((ImageView) rightEntrance.getChildren().get(i)).setImage(pic);
-                    }
+                for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
+                    pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
+                    ((ImageView) rightEntrance.getChildren().get(i)).setImage(pic);
+                    ((ImageView) rightEntrance.getChildren().get(i)).setVisible(true);
                 }
                 cont++;
             }
         }
     }
 
-    public void updateTowerAreas() {
+    /*public void updateTowerAreas() {
         Image pic = null;
         int cont = 0;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
@@ -1826,12 +2302,13 @@ public class MainSceneController implements GUIController {
                 for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
                     for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                         ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
+                        ((ImageView) myTowers.getChildren().get(i)).setVisible(false);
                     }
                 }
                 cont++;
             }
         }
-    }
+    }*/
 
     //creare un parametro che indichi che tipo di action è in corso, passarla come parametro
     public void updatePickStudents() {
@@ -1964,12 +2441,55 @@ public class MainSceneController implements GUIController {
         character1.setVisible(true);
         character2.setVisible(true);
         character3.setVisible(true);
-        character1Button.setVisible(true);
-        character2Button.setVisible(true);
-        character3Button.setVisible(true);
+        character1Button.setVisible(false);
+        character2Button.setVisible(false);
+        character3Button.setVisible(false);
+        effect1.setVisible(true);
+        effect2.setVisible(true);
+        effect3.setVisible(true);
         character1.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0)));
-        character2.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0)));
-        character3.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0)));
+        character2.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1)));
+        character3.setImage(getCharacterImage(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2)));
+        greenLabelCharacter1.setVisible(false);
+        blueLabelCharacter1.setVisible(false);
+        pinkLabelCharacter1.setVisible(false);
+        redLabelCharacter1.setVisible(false);
+        yellowLabelCharacter1.setVisible(false);
+        greenLabelCharacter2.setVisible(false);
+        blueLabelCharacter2.setVisible(false);
+        pinkLabelCharacter2.setVisible(false);
+        redLabelCharacter2.setVisible(false);
+        yellowLabelCharacter2.setVisible(false);
+        greenLabelCharacter3.setVisible(false);
+        blueLabelCharacter3.setVisible(false);
+        pinkLabelCharacter3.setVisible(false);
+        redLabelCharacter3.setVisible(false);
+        yellowLabelCharacter3.setVisible(false);
+
+        greenCharacter1.setVisible(false);
+        blueCharacter1.setVisible(false);
+        pinkCharacter1.setVisible(false);
+        redCharacter1.setVisible(false);
+        yellowCharacter1.setVisible(false);
+        greenCharacter2.setVisible(false);
+        blueCharacter2.setVisible(false);
+        pinkCharacter2.setVisible(false);
+        redCharacter2.setVisible(false);
+        yellowCharacter2.setVisible(false);
+        greenCharacter3.setVisible(false);
+        blueCharacter3.setVisible(false);
+        pinkCharacter3.setVisible(false);
+        redCharacter3.setVisible(false);
+        yellowCharacter3.setVisible(false);
+
+        character1Coins.setVisible(true);
+        character2Coins.setVisible(true);
+        character3Coins.setVisible(true);
+
+        //TODO studenti sulle character cards, coins e rendere visibili i bottoni character1 ecc
+        /*for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
+            if(c.getName().equals())
+        }*/
     }
 
     public void playCharacter(ActionEvent e) {
@@ -2047,38 +2567,86 @@ public class MainSceneController implements GUIController {
         Image img = null;
         switch (a.getName().toString()) {
             case "EAGLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (4)");
+                img = new Image("@../../graphics/assistants/Assistente (4).png");
             }
             case "DOG" -> {
-                img = new Image("@../../graphics/assistants/Assistente (8)");
+                img = new Image("@../../graphics/assistants/Assistente (8).png");
             }
             case "ELEPHANT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (9)");
+                img = new Image("@../../graphics/assistants/Assistente (9).png");
             }
             case "CAT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (3)");
+                img = new Image("@../../graphics/assistants/Assistente (3).png");
             }
             case "CHEETAH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (1)");
+                img = new Image("@../../graphics/assistants/Assistente (1).png");
             }
             case "LIZARD" -> {
-                img = new Image("@../../graphics/assistants/Assistente (6)");
+                img = new Image("@../../graphics/assistants/Assistente (6).png");
             }
             case "OCTOPUS" -> {
-                img = new Image("@../../graphics/assistants/Assistente (7)");
+                img = new Image("@../../graphics/assistants/Assistente (7).png");
             }
             case "OSTRICH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (2)");
+                img = new Image("@../../graphics/assistants/Assistente (2).png");
             }
             case "TURTLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (10)");
+                img = new Image("@../../graphics/assistants/Assistente (10).png");
             }
             case "FOX" -> {
-                img = new Image("@../../graphics/assistants/Assistente (5)");
+                img = new Image("@../../graphics/assistants/Assistente (5).png");
             }
         }
         return img;
     }
 
+    public void pickCloud1() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0)));
+    }
+    public void pickCloud2() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1)));
+    }
+    public void pickCloud3() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2)));
+    }
+    public void pickCloud4() {
+        gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3)));
+    }
+
+    public void pickBluePawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.BLUE));
+    }
+    public void pickRedPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.RED));
+    }
+    public void pickYellowPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.YELLOW));
+    }
+    public void pickGreenPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.GREEN));
+    }
+    public void pickPinkPawn() {
+        gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.PINK));
+    }
+    public void pickBlueStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.BLUE)));
+    }
+    public void pickRedStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.RED)));
+    }
+    public void pickYellowStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.YELLOW)));
+    }
+    public void pickGreenStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.GREEN)));
+    }
+    public void pickPinkStudent() {
+        gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.PINK)));
+    }
+
+    public void quitGame() {
+        System.out.println("Thanks for playing! See you next time!");
+        System.exit(0);
+    }
 
 }
