@@ -2219,7 +2219,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void updateEntrances() {
-        for(int i=0; i < 10; i++) {
+        for(int i=0; i < 9; i++) {
             myEntrance.getChildren().get(i).setVisible(false);
             leftEntrance.getChildren().get(i).setVisible(false);
             topEntrance.getChildren().get(i).setVisible(false);
