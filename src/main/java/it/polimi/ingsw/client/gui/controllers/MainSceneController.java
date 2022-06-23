@@ -1144,8 +1144,7 @@ public class MainSceneController implements GUIController {
         cloud4Button.setVisible(false);
     }
     public void showAssistantButton() {
-        descriptionLabel.setText("Click the pick assistant button to choose your assistant. " +
-                "Remember to take a look at the game status to make the best choice!");
+        descriptionLabel.setText("Click the pick assistant button to choose your assistant. ");
         askAssistantButton.setVisible(true);
     }
 

@@ -17,12 +17,4 @@ public enum Assistants {
     OSTRICH,
     TURTLE,
     FOX;
-
-    /* DA VEDERE SE MEGLIO QUI OPPURE NEL PARSER
-    public static createAssistants() {
-        Gson gson = new Gson();
-        Reader reader = new InputStreamReader(Eryantis.class.getResourceAsStream("/json/gods.json"));
-        AssistantCards[] assistantCards = gson.fromJson(reader, AssistantCard[].class);
-    }
-     */
 }

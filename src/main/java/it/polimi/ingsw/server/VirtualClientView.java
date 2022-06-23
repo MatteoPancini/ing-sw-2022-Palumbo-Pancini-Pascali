@@ -42,6 +42,7 @@ public class VirtualClientView {
 
 
     public void sendAnswerToClient(Answer answer) {
+        System.out.println(clientID + " " + clientNickname + " " + socketClientConnection + " " + gameHandler);
         SerializedAnswer serverAnswer = new SerializedAnswer();
         serverAnswer.setServerAnswer(answer);
         socketClientConnection.sendServerMessage(serverAnswer);

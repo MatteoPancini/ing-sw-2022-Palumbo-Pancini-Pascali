@@ -59,9 +59,14 @@ public class ActionHandler {
         } else if (answer instanceof GameCopy) {
             modelView.setGameCopy((Game) answer.getMessage());
             showGame = showGame + 1;
+            System.out.println(showGame);
             if(showGame == 1) {
+                System.out.println("Faccio update");
+                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+            } else if (gui != null) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             }
+
             //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
             modelView.setActivateInput(true);
@@ -86,6 +91,7 @@ public class ActionHandler {
             modelView.setPianification(true);
             modelView.setAction(false);
             showGame = showGame + 1;
+
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
             }
@@ -107,7 +113,11 @@ public class ActionHandler {
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);
         } else if(answer instanceof NoWinnerGameNotification) {
-            cli.endGameMessage();
+            if(cli != null) {
+                cli.endGameMessage();
+            } else if(gui != null) {
+                //TODO FINE GAME
+            }
         } else if(answer instanceof PrincessAction) {
             modelView.setPrincessAction(true);
         } else if(answer instanceof MonkAction) {

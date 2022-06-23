@@ -189,10 +189,17 @@ public class GUI extends Application implements ListenerInterface {
     public void changeStage(String newScene) {
         currentScene = nameMapScene.get(newScene);
         stage.setScene(currentScene);
+        if(newScene.equalsIgnoreCase("finalBoardScene.fxml")) {
+            stage.setResizable(false);
+            //stage.setFullScreen(true);
+        }
         stage.show();
-        ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
-        currentScene.widthProperty().addListener(resize.getWidthListener());
-        currentScene.heightProperty().addListener(resize.getHeightListener());
+        if(!(newScene.equalsIgnoreCase("finalBoardScene.fxml"))) {
+            ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
+            currentScene.widthProperty().addListener(resize.getWidthListener());
+            currentScene.heightProperty().addListener(resize.getHeightListener());
+        }
+
     }
 
     @Override
@@ -300,7 +307,8 @@ public class GUI extends Application implements ListenerInterface {
             }
             case "UpdateModelView" -> {
                 assert serverCommand != null;
-                modelView.setGameCopy((Game) changeEvent.getNewValue());
+                System.out.println("Entro vera update");
+                //modelView.setGameCopy((Game) changeEvent.getNewValue());
                 if(firstSetupScene) {
                     Platform.runLater(() -> {
                         changeStage(MAIN_SCENE);
@@ -308,6 +316,7 @@ public class GUI extends Application implements ListenerInterface {
                     });
                     firstSetupScene = false;
                 } else {
+
                     Platform.runLater(() -> updateMainScene());
                 }
 

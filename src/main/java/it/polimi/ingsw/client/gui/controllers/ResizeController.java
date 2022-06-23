@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.gui.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
