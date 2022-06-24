@@ -61,6 +61,8 @@ public class ActionHandler {
             showGame = showGame + 1;
             if(showGame == 1) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+            } else if(modelView.isPianification()) {
+                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             }
             //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
