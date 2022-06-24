@@ -782,6 +782,7 @@ public class MainSceneController implements GUIController {
                  action = new PickMovesNumber(7);
              }
          }
+
          gui.getClientConnection().sendUserInput(action);
      }
 
@@ -949,73 +950,41 @@ public class MainSceneController implements GUIController {
         gui.getClientConnection().sendUserInput(new ExpertModeChoice(choice));
     }*/
 
-    public void pickIsland(ActionEvent e) {
-        UserAction action = null;
-        ImageView button = (ImageView) e.getSource();
-        String island = button.getId();
-        switch(island) {
-            case "island1Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0));
-                island1Button.setVisible(false);
-            }
-            case "island2Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1));
-                island2Button.setVisible(false);
-
-            }
-            case "island3Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(2));
-                island3Button.setVisible(false);
-
-            }
-            case "island4Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(3));
-                island4Button.setVisible(false);
-
-            }
-            case "island5Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(4));
-                island5Button.setVisible(false);
-
-            }
-            case "island6Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(5));
-                island6Button.setVisible(false);
-
-            }
-            case "island7Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(6));
-                island7Button.setVisible(false);
-
-            }
-            case "island8Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(7));
-                island8Button.setVisible(false);
-
-            }
-            case "island9Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(8));
-                island9Button.setVisible(false);
-
-            }
-            case "island10Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(9));
-                island10Button.setVisible(false);
-
-            }
-            case "island11Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(10));
-                island11Button.setVisible(false);
-
-            }
-            case "island12Button" -> {
-                action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(11));
-                island12Button.setVisible(false);
-
-            }
-        }
-
-        gui.getClientConnection().sendUserInput(action);
+    public void pickIsland1() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0)));
+    }
+    public void pickIsland2() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1)));
+    }
+    public void pickIsland3() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(2)));
+    }
+    public void pickIsland4() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(3)));
+    }
+    public void pickIsland5() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(4)));
+    }
+    public void pickIsland6() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(5)));
+    }
+    public void pickIsland7() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(6)));
+    }
+    public void pickIsland8() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(7)));
+    }
+    public void pickIsland9() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(8)));
+    }
+    public void pickIsland10() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(9)));
+    }
+    public void pickIsland11() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(10)));
+    }
+    public void pickIsland12() {
+        gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(11)));
     }
 
     public void pickDiningRoomDestination() {

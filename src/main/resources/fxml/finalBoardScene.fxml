@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
     <children>
         <ImageView fitHeight="900.0" fitWidth="1600.0" opacity="0.75" pickOnBounds="true">
             <image>
                 <Image url="@../graphics/lightbluesky.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="island1Button" layoutX="697.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#pickIsland1" text="Island 1">
+        <Button fx:id="island1Button" layoutX="697.0" layoutY="218.0" mnemonicParsing="false" onAction="#pickIsland1" text="Island 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -805,57 +805,57 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onMouseClicked="#pickIsland2" text="Island 2">
+        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onAction="#pickIsland2" text="Island 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland3" text="Island 3">
+        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onAction="#pickIsland3" text="Island 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island5Button" layoutX="949.0" layoutY="549.0" mnemonicParsing="false" onMouseClicked="#pickIsland5" text="Island 5">
+        <Button fx:id="island5Button" layoutX="949.0" layoutY="549.0" mnemonicParsing="false" onAction="#pickIsland5" text="Island 5">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onMouseClicked="#pickIsland4" text="Island 4">
+        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onAction="#pickIsland4" text="Island 4">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland6" text="Island 6">
+        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onAction="#pickIsland6" text="Island 6">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island12Button" layoutX="523.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#pickIsland1" text="Island 12">
+        <Button fx:id="island12Button" layoutX="523.0" layoutY="267.0" mnemonicParsing="false" onAction="#pickIsland12" text="Island 12">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island9Button" layoutX="454.0" layoutY="519.0" mnemonicParsing="false" text="Island 9">
+        <Button fx:id="island9Button" layoutX="454.0" layoutY="519.0" mnemonicParsing="false" onAction="#pickIsland9" text="Island 9">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island10Button" layoutX="427.0" layoutY="440.0" mnemonicParsing="false" text="Island 10">
+        <Button fx:id="island10Button" layoutX="427.0" layoutY="440.0" mnemonicParsing="false" onAction="#pickIsland10" text="Island 10">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island11Button" layoutX="462.0" layoutY="352.0" mnemonicParsing="false" text="Island 11">
+        <Button fx:id="island11Button" layoutX="462.0" layoutY="352.0" mnemonicParsing="false" onAction="#pickIsland11" text="Island 11">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island8Button" layoutX="533.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 8">
+        <Button fx:id="island8Button" layoutX="533.0" layoutY="601.0" mnemonicParsing="false" onAction="#pickIsland8" text="Island 8">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island7Button" layoutX="667.0" layoutY="655.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 7">
+        <Button fx:id="island7Button" layoutX="667.0" layoutY="655.0" mnemonicParsing="false" onAction="#pickIsland7" text="Island 7">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
