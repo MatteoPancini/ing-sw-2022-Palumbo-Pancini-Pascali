@@ -3218,5 +3218,6 @@
                 <Font name="Palatino" size="13.0" />
             </font>
         </Label>
+        <ChoiceBox fx:id="pickMovesBox" layoutX="665.0" layoutY="439.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

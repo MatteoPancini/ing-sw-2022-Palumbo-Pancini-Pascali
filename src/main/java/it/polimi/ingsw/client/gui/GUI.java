@@ -291,7 +291,7 @@ public class GUI extends Application implements ListenerInterface {
             case "DynamicAnswer" -> Platform.runLater(() -> {
                 if(modelView.isPianification() || modelView.isAction()) {
                     MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
-                    descriptionLabel.setText(modelView.getServerAnswer().getMessage().toString());
+                    controller.updateDescription(modelView.getServerAnswer().getMessage().toString());
                 } else {
                     infoAlert.setTitle("INFO");
                     infoAlert.setHeaderText("Information from server");

@@ -70,6 +70,7 @@ public class ActionHandler {
 
             //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
+            System.out.println("Setting Action");
             modelView.setActivateInput(true);
             modelView.setAction(true);
             modelView.setPianification(false);
@@ -88,6 +89,7 @@ public class ActionHandler {
                 gui.getInfoAlert().show();
             }
         } else if(answer instanceof StartPianification) {
+            System.out.println("Setting Pianification");
             modelView.setActivateInput(true);
             modelView.setPianification(true);
             modelView.setAction(false);

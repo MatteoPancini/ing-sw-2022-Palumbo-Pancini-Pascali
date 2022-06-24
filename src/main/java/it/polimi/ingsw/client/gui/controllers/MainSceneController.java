@@ -106,6 +106,7 @@ public class MainSceneController implements GUIController {
     @FXML ImageView yellowCharacter3;
 
 
+    @FXML ChoiceBox<String> pickMovesBox;
 
     @FXML
     ImageView island1;
@@ -553,6 +554,7 @@ public class MainSceneController implements GUIController {
         cloud4Button.setVisible(false);
         diningRoomButton.setVisible(false);
         askAssistantButton.setVisible(false);
+        pickMovesBox.setVisible(false);
 
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> showAssistantButton();
@@ -759,32 +761,25 @@ public class MainSceneController implements GUIController {
     }
 
      public void askMoves(AssistantCard a) {
-         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-         PickMovesNumber action = null;
-         ObservableList<String> availableChoices = FXCollections.observableList(getMovesList(a));
-         choiceBox.setItems(availableChoices);
-         choiceBox.show();
-         String choice = choiceBox.getSelectionModel().getSelectedItem();
-         switch(choice) {
-             case "1" -> {
-                 action = new PickMovesNumber(1);
-             } case "2" -> {
-                 action = new PickMovesNumber(2);
-             } case "3" -> {
-                 action = new PickMovesNumber(3);
-             } case "4" -> {
-                 action = new PickMovesNumber(4);
-             } case "5" -> {
-                 action = new PickMovesNumber(5);
-             } case "6" -> {
-                 action = new PickMovesNumber(6);
-             } case "7" -> {
-                 action = new PickMovesNumber(7);
-             }
-         }
-
-         gui.getClientConnection().sendUserInput(action);
+        pickMovesBox.setVisible(true);
+        if(gui.getModelView().isMagicPostmanAction()) {
+            for(int i = 1; i <= (a.getMoves() + 2); i++) {
+                pickMovesBox.getItems().add(String.valueOf(i));
+            }
+        } else {
+            for(int i = 1; i <= a.getMoves(); i++) {
+                pickMovesBox.getItems().add(String.valueOf(i));
+            }
+        }
+        pickMovesBox.setOnAction(this::pickMoves);
      }
+
+     public void pickMoves(ActionEvent e) {
+         int moves = Integer.parseInt(pickMovesBox.getValue());
+         gui.getClientConnection().sendUserInput(new PickMovesNumber(moves));
+     }
+
+
 
     public void updateMotherNature() {
         motherNature1.setVisible(false);
@@ -1802,15 +1797,16 @@ public class MainSceneController implements GUIController {
         }
         return tower;
     }
-    public void askIsland() {
 
+    public void updateDescription(String s) {
+        descriptionLabel.setVisible(true);
+        descriptionLabel.setText(s);
     }
 
     public String getTowersNumber(Island i) {
-        int num = 0;
-        for(Tower r : i.getMergedTowers()) {
-            num+= 1;
-        }
+        int num = i.getMergedTowers().size();
+
+        System.out.println("Island i " + num);
         return Integer.toString(num);
     }
     /*
@@ -1843,7 +1839,6 @@ public class MainSceneController implements GUIController {
                 num+= 1;
             }
         }
-        System.out.println("Number of students " + s.getType() +": " + String.valueOf(num));
         return String.valueOf(num);
     }
 
@@ -1900,102 +1895,110 @@ public class MainSceneController implements GUIController {
         for (CloudTile c : gui.getModelView().getGameCopy().getGameBoard().getClouds()) {
             if (c.getID() == 1) {
                 cloud1.setVisible(true);
-                redLabelCloud1.setVisible(true);
-                greenLabelCloud1.setVisible(true);
-                pinkLabelCloud1.setVisible(true);
-                yellowLabelCloud1.setVisible(true);
-                blueLabelCloud1.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0).getStudents()) {
-                    if(s.getType().equals(PawnType.RED)) {
-                        redCloud1.setVisible(true);
-                        redLabelCloud1.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.GREEN)) {
-                        greenCloud1.setVisible(true);
-                        greenLabelCloud1.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.YELLOW)) {
-                        yellowCloud1.setVisible(true);
-                        yellowLabelCloud1.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.PINK)) {
-                        pinkCloud1.setVisible(true);
-                        pinkLabelCloud1.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.BLUE)) {
-                        blueCloud1.setVisible(true);
-                        blueLabelCloud1.setText(getCloudStudentsNumber(c));
+                if(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0).getStudents() != null) {
+                    for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0).getStudents()) {
+                        if(s.getType().equals(PawnType.RED)) {
+                            redCloud1.setVisible(true);
+                            redLabelCloud1.setVisible(true);
+                            redLabelCloud1.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.GREEN)) {
+                            greenCloud1.setVisible(true);
+                            greenLabelCloud1.setVisible(true);
+                            greenLabelCloud1.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.YELLOW)) {
+                            yellowCloud1.setVisible(true);
+                            yellowLabelCloud1.setVisible(true);
+                            yellowLabelCloud1.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.PINK)) {
+                            pinkCloud1.setVisible(true);
+                            pinkLabelCloud1.setVisible(true);
+                            pinkLabelCloud1.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.BLUE)) {
+                            blueCloud1.setVisible(true);
+                            blueLabelCloud1.setVisible(true);
+                            blueLabelCloud1.setText(getCloudStudentsNumber(c));
+                        }
                     }
                 }
             } else if (c.getID() == 2) {
                 cloud2.setVisible(true);
-                redLabelCloud2.setVisible(true);
-                greenLabelCloud2.setVisible(true);
-                pinkLabelCloud2.setVisible(true);
-                yellowLabelCloud2.setVisible(true);
-                blueLabelCloud2.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1).getStudents()) {
-                    if(s.getType().equals(PawnType.RED)) {
-                        redCloud2.setVisible(true);
-                        redLabelCloud2.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.GREEN)) {
-                        greenCloud2.setVisible(true);
-                        greenLabelCloud2.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.YELLOW)) {
-                        yellowCloud2.setVisible(true);
-                        yellowLabelCloud2.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.PINK)) {
-                        pinkCloud2.setVisible(true);
-                        pinkLabelCloud2.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.BLUE)) {
-                        blueCloud2.setVisible(true);
-                        blueLabelCloud2.setText(getCloudStudentsNumber(c));
+                if(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1).getStudents() != null) {
+                    for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1).getStudents()) {
+                        if(s.getType().equals(PawnType.RED)) {
+                            redCloud2.setVisible(true);
+                            redLabelCloud2.setVisible(true);
+                            redLabelCloud2.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.GREEN)) {
+                            greenCloud2.setVisible(true);
+                            greenLabelCloud2.setVisible(true);
+                            greenLabelCloud2.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.YELLOW)) {
+                            yellowCloud2.setVisible(true);
+                            yellowLabelCloud2.setVisible(true);
+                            yellowLabelCloud2.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.PINK)) {
+                            pinkCloud2.setVisible(true);
+                            pinkLabelCloud2.setVisible(true);
+                            pinkLabelCloud2.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.BLUE)) {
+                            blueCloud2.setVisible(true);
+                            blueLabelCloud2.setVisible(true);
+                            blueLabelCloud2.setText(getCloudStudentsNumber(c));
+                        }
                     }
                 }
             } else if (c.getID() == 3) {
                 cloud3.setVisible(true);
-                redLabelCloud3.setVisible(true);
-                greenLabelCloud3.setVisible(true);
-                pinkLabelCloud3.setVisible(true);
-                yellowLabelCloud3.setVisible(true);
-                blueLabelCloud3.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2).getStudents()) {
-                    if(s.getType().equals(PawnType.RED)) {
-                        redCloud3.setVisible(true);
-                        redLabelCloud3.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.GREEN)) {
-                        greenCloud3.setVisible(true);
-                        greenLabelCloud3.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.YELLOW)) {
-                        yellowCloud3.setVisible(true);
-                        yellowLabelCloud3.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.PINK)) {
-                        pinkCloud3.setVisible(true);
-                        pinkLabelCloud3.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.BLUE)) {
-                        blueCloud3.setVisible(true);
-                        blueLabelCloud3.setText(getCloudStudentsNumber(c));
+                if(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2).getStudents() != null) {
+                    for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2).getStudents()) {
+                        if(s.getType().equals(PawnType.RED)) {
+                            redCloud3.setVisible(true);
+                            redLabelCloud3.setVisible(true);
+                            redLabelCloud3.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.GREEN)) {
+                            greenCloud3.setVisible(true);
+                            greenLabelCloud3.setVisible(true);
+                            greenLabelCloud3.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.YELLOW)) {
+                            yellowCloud3.setVisible(true);
+                            yellowLabelCloud3.setVisible(true);
+                            yellowLabelCloud3.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.PINK)) {
+                            pinkCloud3.setVisible(true);
+                            pinkLabelCloud3.setVisible(true);
+                            pinkLabelCloud3.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.BLUE)) {
+                            blueCloud3.setVisible(true);
+                            blueLabelCloud3.setVisible(true);
+                            blueLabelCloud3.setText(getCloudStudentsNumber(c));
+                        }
                     }
                 }
             } else if (c.getID() == 4) {
                 cloud4.setVisible(true);
-                redLabelCloud4.setVisible(true);
-                greenLabelCloud4.setVisible(true);
-                pinkLabelCloud4.setVisible(true);
-                yellowLabelCloud4.setVisible(true);
-                blueLabelCloud4.setVisible(true);
-                for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3).getStudents()) {
-                    if(s.getType().equals(PawnType.RED)) {
-                        redCloud4.setVisible(true);
-                        redLabelCloud4.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.GREEN)) {
-                        greenCloud4.setVisible(true);
-                        greenLabelCloud4.setText(getCloudStudentsNumber(c));
-                    } else if(s.getType().equals(PawnType.YELLOW)) {
-                        yellowCloud4.setVisible(true);
-                        yellowLabelCloud4.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.PINK)) {
-                        pinkCloud4.setVisible(true);
-                        pinkLabelCloud4.setText(getCloudStudentsNumber(c));
-                    }  else if(s.getType().equals(PawnType.BLUE)) {
-                        blueCloud4.setVisible(true);
-                        blueLabelCloud4.setText(getCloudStudentsNumber(c));
+                if(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3).getStudents() != null) {
+                    for (Student s : gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3).getStudents()) {
+                        if(s.getType().equals(PawnType.RED)) {
+                            redCloud4.setVisible(true);
+                            redLabelCloud4.setVisible(true);
+                            redLabelCloud4.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.GREEN)) {
+                            greenCloud4.setVisible(true);
+                            greenLabelCloud4.setVisible(true);
+                            greenLabelCloud4.setText(getCloudStudentsNumber(c));
+                        } else if(s.getType().equals(PawnType.YELLOW)) {
+                            yellowCloud4.setVisible(true);
+                            yellowLabelCloud4.setVisible(true);
+                            yellowLabelCloud4.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.PINK)) {
+                            pinkCloud4.setVisible(true);
+                            pinkLabelCloud4.setVisible(true);
+                            pinkLabelCloud4.setText(getCloudStudentsNumber(c));
+                        }  else if(s.getType().equals(PawnType.BLUE)) {
+                            blueCloud4.setVisible(true);
+                            blueLabelCloud4.setVisible(true);
+                            blueLabelCloud4.setText(getCloudStudentsNumber(c));
+                        }
                     }
                 }
             }

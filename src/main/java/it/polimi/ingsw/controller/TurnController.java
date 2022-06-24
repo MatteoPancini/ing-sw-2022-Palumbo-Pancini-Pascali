@@ -220,6 +220,8 @@ public class TurnController {
         if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
             //System.out.println("Entro");
             gameHandler.sendSinglePlayer(new StartPianification(), currentPlayer.getPlayerID());
+            gameHandler.sendExcept(new StartPianification(), currentPlayer.getPlayerID());
+
             //System.out.println("Mando StartPianification");
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
             //System.out.println("Mando Game");
