@@ -578,8 +578,7 @@ public class MainSceneController implements GUIController {
                 askPawnType();
             }
             default -> {
-                descriptionLabel.setText("Click the pick assistant button to choose your assistant. " +
-                        "Remember to take a look at the game status to make the best choice!");
+                descriptionLabel.setText("        Click the pick assistant button to choose your assistant");
                 System.out.println("Update without user actions (server command not in switch cases)");
             }
         }
