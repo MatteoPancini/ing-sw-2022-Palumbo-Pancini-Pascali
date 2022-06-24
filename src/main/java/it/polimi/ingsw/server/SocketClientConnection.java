@@ -119,7 +119,6 @@ public class SocketClientConnection implements Runnable {
 
     public void sendServerMessage(SerializedAnswer serverMessage) {
         try {
-            System.out.println("Ho inviato answer: " + serverMessage.getServerAnswer().getMessage());
             outputStream.reset();
             outputStream.writeObject(serverMessage);
             outputStream.flush();

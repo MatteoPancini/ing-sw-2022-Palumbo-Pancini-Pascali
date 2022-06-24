@@ -18,7 +18,7 @@
                 <Image url="@../graphics/lightbluesky.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="island1Button" layoutX="701.6430053710938" layoutY="229.3000030517578" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 1">
+        <Button fx:id="island1Button" layoutX="701.6430053710938" layoutY="229.3000030517578" mnemonicParsing="false" onAction="#pickIsland" text="Island 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -263,7 +263,7 @@
                 <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="greenisland10" fitHeight="22.0" fitWidth="24.0" layoutX="535.2430419921875" layoutY="468.5" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="greenIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="535.2430419921875" layoutY="468.5" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
             </image>
@@ -338,7 +338,7 @@
                 <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="greenisland7" fitHeight="22.0" fitWidth="24.0" layoutX="720.0430297851562" layoutY="618.9000244140625" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="greenIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="720.0430297851562" layoutY="618.9000244140625" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
             </image>
@@ -808,32 +808,32 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 2">
+        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onAction="#pickIsland" text="Island 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 3">
+        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onAction="#pickIsland" text="Island 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island5Button" layoutX="927.2430419921875" layoutY="549.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 5">
+        <Button fx:id="island5Button" layoutX="927.2430419921875" layoutY="549.2999877929688" mnemonicParsing="false" onAction="#pickIsland" text="Island 5">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 4">
+        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onAction="#pickIsland" text="Island 4">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 6">
+        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onAction="#pickIsland" text="Island 6">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island12Button" layoutX="550.4429931640625" layoutY="266.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 12">
+        <Button fx:id="island12Button" layoutX="550.4429931640625" layoutY="266.8999938964844" mnemonicParsing="false" onAction="#pickIsland" text="Island 12">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -853,12 +853,12 @@
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island8Button" layoutX="544.843017578125" layoutY="591.7000122070312" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 8">
+        <Button fx:id="island8Button" layoutX="544.843017578125" layoutY="591.7000122070312" mnemonicParsing="false" onAction="#pickIsland" text="Island 8">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island7Button" layoutX="672.0430297851562" layoutY="650.0999755859375" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 7">
+        <Button fx:id="island7Button" layoutX="672.0430297851562" layoutY="650.0999755859375" mnemonicParsing="false" onAction="#pickIsland" text="Island 7">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -923,17 +923,17 @@
                 <Image url="@../graphics/wooden_pieces/mother_nature.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry12" fitHeight="45.0" fitWidth="45.0" layoutX="616.843017578125" layoutY="297.29998779296875" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile12" fitHeight="45.0" fitWidth="45.0" layoutX="616.843017578125" layoutY="297.29998779296875" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry11" fitHeight="45.0" fitWidth="45.0" layoutX="563.2430419921875" layoutY="355.70001220703125" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile11" fitHeight="45.0" fitWidth="45.0" layoutX="563.2430419921875" layoutY="355.70001220703125" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry10" fitHeight="45.0" fitWidth="45.0" layoutX="523.2430419921875" layoutY="422.8999938964844" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile10" fitHeight="45.0" fitWidth="45.0" layoutX="523.2430419921875" layoutY="422.8999938964844" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
@@ -943,47 +943,47 @@
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <ImageView fx:id="noEntry9" fitHeight="45.0" fitWidth="45.0" layoutX="548.843017578125" layoutY="504.5" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile9" fitHeight="45.0" fitWidth="45.0" layoutX="548.843017578125" layoutY="504.5" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry8" fitHeight="45.0" fitWidth="45.0" layoutX="620.843017578125" layoutY="568.5" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile8" fitHeight="45.0" fitWidth="45.0" layoutX="620.843017578125" layoutY="568.5" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry7" fitHeight="45.0" fitWidth="45.0" layoutX="708.0430297851562" layoutY="589.2999877929688" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile7" fitHeight="45.0" fitWidth="45.0" layoutX="708.0430297851562" layoutY="589.2999877929688" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry6" fitHeight="45.0" fitWidth="45.0" layoutX="803.2430419921875" layoutY="566.0999755859375" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile6" fitHeight="45.0" fitWidth="45.0" layoutX="803.2430419921875" layoutY="566.0999755859375" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry5" fitHeight="45.0" fitWidth="45.0" layoutX="868.0430297851562" layoutY="506.8999938964844" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile5" fitHeight="45.0" fitWidth="45.0" layoutX="868.0430297851562" layoutY="506.8999938964844" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry4" fitHeight="45.0" fitWidth="45.0" layoutX="896.0430297851562" layoutY="425.29998779296875" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile4" fitHeight="45.0" fitWidth="45.0" layoutX="896.0430297851562" layoutY="425.29998779296875" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry3" fitHeight="45.0" fitWidth="45.0" layoutX="869.6430053710938" layoutY="346.1000061035156" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile3" fitHeight="45.0" fitWidth="45.0" layoutX="869.6430053710938" layoutY="346.1000061035156" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry2" fitHeight="45.0" fitWidth="45.0" layoutX="793.6430053710938" layoutY="290.8999938964844" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile2" fitHeight="45.0" fitWidth="45.0" layoutX="793.6430053710938" layoutY="290.8999938964844" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="noEntry1" fitHeight="45.0" fitWidth="45.0" layoutX="700.843017578125" layoutY="275.70001220703125" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="noEntryTile1" fitHeight="45.0" fitWidth="45.0" layoutX="700.843017578125" layoutY="275.70001220703125" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
@@ -2246,7 +2246,7 @@
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <ImageView fx:id="cloud1" fitHeight="142.0" fitWidth="143.0" layoutX="52.0" layoutY="30.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+        <ImageView fx:id="cloud1" fitHeight="142.0" fitWidth="143.0" layoutX="52.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
             <image>
                 <Image url="@../graphics/wooden_pieces/cloud_card.png" />
             </image>
@@ -2279,7 +2279,7 @@
                 <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="cloud3" fitHeight="142.0" fitWidth="143.0" layoutX="177.0" layoutY="1.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+        <ImageView fx:id="cloud3" fitHeight="142.0" fitWidth="143.0" layoutX="177.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
             <image>
                 <Image url="@../graphics/wooden_pieces/cloud_card.png" />
             </image>
@@ -2312,7 +2312,7 @@
                 <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="cloud4" fitHeight="142.0" fitWidth="143.0" layoutX="81.0" layoutY="122.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+        <ImageView fx:id="cloud4" fitHeight="142.0" fitWidth="143.0" layoutX="81.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
             <image>
                 <Image url="@../graphics/wooden_pieces/cloud_card.png" />
             </image>
@@ -2345,7 +2345,7 @@
                 <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="cloud2" fitHeight="142.0" fitWidth="143.0" layoutX="194.0" layoutY="101.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+        <ImageView fx:id="cloud2" fitHeight="142.0" fitWidth="143.0" layoutX="194.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
             <image>
                 <Image url="@../graphics/wooden_pieces/cloud_card.png" />
             </image>
@@ -2422,19 +2422,19 @@
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud1Button" layoutX="47.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#pickCloud1" scaleX="0.8" scaleY="0.8" text="Cloud 1">
+        <Button fx:id="cloud1Button" layoutX="47.0" layoutY="36.0" mnemonicParsing="false" onAction="#pickCloud1" scaleX="0.8" scaleY="0.8" text="Cloud 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud4Button" layoutX="47.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#pickCloud4" scaleX="0.8" scaleY="0.8" text="Cloud 4">
+        <Button fx:id="cloud4Button" layoutX="47.0" layoutY="166.0" mnemonicParsing="false" onAction="#pickCloud4" scaleX="0.8" scaleY="0.8" text="Cloud 4">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud2Button" layoutX="281.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#pickCloud2" scaleX="0.8" scaleY="0.8" text="Cloud 2">
+        <Button fx:id="cloud2Button" layoutX="281.0" layoutY="233.0" mnemonicParsing="false" onAction="#pickCloud2" scaleX="0.8" scaleY="0.8" text="Cloud 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud3Button" layoutX="274.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#pickCloud3" scaleX="0.8" scaleY="0.8" text="Cloud 3">
+        <Button fx:id="cloud3Button" layoutX="274.0" layoutY="23.0" mnemonicParsing="false" onAction="#pickCloud3" scaleX="0.8" scaleY="0.8" text="Cloud 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>

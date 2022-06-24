@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.gui;
 
-import com.sun.scenario.effect.Blend;
 import it.polimi.ingsw.client.ActionHandler;
 import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.ListenerInterface;
@@ -10,27 +9,21 @@ import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Assistants;
-import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Table;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
 
@@ -289,7 +282,6 @@ public class GUI extends Application implements ListenerInterface {
         switch(changeEvent.getPropertyName()) {
             case "InitialGamePhase" -> {
                 assert serverCommand != null;
-                //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
             }
 
@@ -299,7 +291,6 @@ public class GUI extends Application implements ListenerInterface {
                 infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
                 infoAlert.show();
             });
-                    //showServerMessage(modelView.getServerAnswer());
 
             case "ActionPhase" -> {
                 assert serverCommand != null;
@@ -317,25 +308,52 @@ public class GUI extends Application implements ListenerInterface {
                 } else {
                     Platform.runLater(() -> updateMainScene());
                 }
-
-                //this.changeStage();
             }
-            /*case "WinMessage" -> {
+            case "WinMessage" -> {
                 assert serverCommand != null;
-                showWinMessage();
+                showWinGame();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
-                showLoseMessage(changeEvent.getNewValue().toString());
+                showLoseGame(changeEvent.getNewValue().toString());
             }
 
-             */
             default -> System.out.println("Unknown answer from server");
         }
     }
 
     public void showEndGame() {
         infoAlert.setTitle("Game Over");
+        infoAlert.setContentText("Game over! Thanks to have played Eriantys!");
+    }
+
+    public void showWinGame() {
+        infoAlert.setTitle("Game Over");
         infoAlert.setContentText("Game over! Congratulations, you are the winner!");
+    }
+
+    public void showLoseGame(String winnerNickname) {
+        infoAlert.setTitle("Game Over");
+        infoAlert.setContentText("Game over! You lost!");
+        if(modelView.isFourPlayers()) {
+            ArrayList<String> gameWinners = new ArrayList<>();
+            int winnerTeam = -1;
+            for(Player p : modelView.getGameCopy().getPlayers()) {
+                if(p.getNickname() == winnerNickname) {
+                    winnerTeam = p.getIdTeam();
+                }
+            }
+
+            for(Player p : modelView.getGameCopy().getPlayers()) {
+                if(p.getIdTeam() == winnerTeam) {
+                    gameWinners.add(p.getNickname());
+                }
+            }
+
+            infoAlert.setContentText("The winner are " + gameWinners.get(0) + " & " + gameWinners.get(1) +  " from team " + winnerTeam);
+        } else {
+            infoAlert.setContentText("The winner is " + winnerNickname);
+        }
+
     }
 }

@@ -59,15 +59,14 @@ public class ActionHandler {
         } else if (answer instanceof GameCopy) {
             modelView.setGameCopy((Game) answer.getMessage());
             showGame = showGame + 1;
-            System.out.println(showGame);
             if(showGame == 1) {
                 System.out.println("Faccio update");
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             } else if (gui != null) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            } else if(modelView.isPianification()) {
+            }/* else if(modelView.isPianification()) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }
+            }*/
 
             //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
@@ -93,7 +92,6 @@ public class ActionHandler {
             modelView.setPianification(true);
             modelView.setAction(false);
             showGame = showGame + 1;
-
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
             }
@@ -118,7 +116,7 @@ public class ActionHandler {
             if(cli != null) {
                 cli.endGameMessage();
             } else if(gui != null) {
-                //TODO FINE GAME
+                gui.showEndGame();
             }
         } else if(answer instanceof PrincessAction) {
             modelView.setPrincessAction(true);
