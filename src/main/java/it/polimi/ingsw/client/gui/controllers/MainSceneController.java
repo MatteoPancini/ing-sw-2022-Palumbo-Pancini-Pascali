@@ -781,12 +781,6 @@ public class MainSceneController implements GUIController {
                  action = new PickMovesNumber(6);
              } case "7" -> {
                  action = new PickMovesNumber(7);
-             } case "8" -> {
-                 action = new PickMovesNumber(8);
-             } case "9" -> {
-                 action = new PickMovesNumber(9);
-             } case "10" -> {
-                 action = new PickMovesNumber(10);
              }
          }
          gui.getClientConnection().sendUserInput(action);

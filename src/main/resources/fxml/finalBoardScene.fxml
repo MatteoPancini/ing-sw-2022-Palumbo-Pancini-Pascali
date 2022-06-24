@@ -15,7 +15,7 @@
                 <Image url="@../graphics/lightbluesky.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="island1Button" layoutX="701.6430053710938" layoutY="229.3000030517578" mnemonicParsing="false" onAction="#pickIsland" text="Island 1">
+        <Button fx:id="island1Button" layoutX="697.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -110,7 +110,7 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland1" layoutX="760.2430419921875" layoutY="259.29998779296875" text="0">
+        <Label fx:id="redLabelIsland1" layoutX="756.0" layoutY="263.0" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
@@ -120,7 +120,7 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland1" layoutX="768.2430419921875" layoutY="303.29998779296875" text="0">
+        <Label fx:id="blueLabelIsland1" layoutX="760.0" layoutY="288.0" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
@@ -407,282 +407,282 @@
         </ImageView>
         <Label fx:id="yellowLabelIsland1" layoutX="681.6430053710938" layoutY="305.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="pinkLabelIsland2" layoutX="773.6430053710938" layoutY="282.8999938964844" text="0">
+        <Label fx:id="pinkLabelIsland2" layoutX="787.0" layoutY="271.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland2" layoutX="829.6430053710938" layoutY="285.29998779296875" text="0">
+        <Label fx:id="redLabelIsland2" layoutX="834.0" layoutY="285.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="yellowLabelIsland2" layoutX="768.843017578125" layoutY="325.29998779296875" text="0">
+        <Label fx:id="yellowLabelIsland2" layoutX="774.0" layoutY="329.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland2" layoutX="806.4429931640625" layoutY="342.8999938964844" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland2" layoutX="838.4429931640625" layoutY="314.1000061035156" text="0">
+        <Label fx:id="blueLabelIsland2" layoutX="846.0" layoutY="316.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland6" layoutX="852.0430297851562" layoutY="598.0999755859375" text="0">
+        <Label fx:id="blueLabelIsland6" layoutX="855.0" layoutY="598.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland3" layoutX="909.6430053710938" layoutY="335.70001220703125" text="0">
+        <Label fx:id="redLabelIsland3" layoutX="912.0" layoutY="335.70001220703125" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland3" layoutX="852.0430297851562" layoutY="378.8999938964844" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland3" layoutX="904.0430297851562" layoutY="394.8999938964844" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland3" layoutX="921.6430053710938" layoutY="367.70001220703125" text="0">
+        <Label fx:id="blueLabelIsland3" layoutX="930.0" layoutY="367.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland4" layoutX="880.843017578125" layoutY="418.8999938964844" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="redLabelIsland4" layoutX="927.2430419921875" layoutY="414.8999938964844" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland4" layoutX="869.6430053710938" layoutY="458.1000061035156" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland4" layoutX="898.4429931640625" layoutY="475.70001220703125" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="blueLabelIsland4" layoutX="946.4429931640625" layoutY="449.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland5" layoutX="856.843017578125" layoutY="498.1000061035156" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="redLabelIsland5" layoutX="914.4429931640625" layoutY="497.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="yellowLabelIsland5" layoutX="852.0430297851562" layoutY="540.5" text="0">
+        <Label fx:id="yellowLabelIsland5" layoutX="850.0" layoutY="526.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland5" layoutX="889.6430053710938" layoutY="558.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland5" layoutX="921.6430053710938" layoutY="529.2999877929688" text="0">
+        <Label fx:id="blueLabelIsland5" layoutX="927.0" layoutY="529.2999877929688" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland12" layoutX="600.843017578125" layoutY="288.5" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="redLabelIsland12" layoutX="656.843017578125" layoutY="282.8999938964844" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland12" layoutX="596.0430297851562" layoutY="316.5" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland12" layoutX="632.843017578125" layoutY="349.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland12" layoutX="664.843017578125" layoutY="325.29998779296875" text="0">
+        <Label fx:id="blueLabelIsland12" layoutX="668.0" layoutY="331.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland11" layoutX="549.6430053710938" layoutY="346.1000061035156" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="redLabelIsland11" layoutX="606.4429931640625" layoutY="349.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland11" layoutX="545.6430053710938" layoutY="391.70001220703125" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelIsland11" layoutX="584.0430297851562" layoutY="403.70001220703125" text="0">
+        <Label fx:id="greenLabelIsland11" layoutX="587.0" layoutY="409.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="blueLabelIsland11" layoutX="615.2430419921875" layoutY="380.5" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland10" layoutX="513.6430053710938" layoutY="416.5" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland10" layoutX="576.0" layoutY="425.0" text="0">
+        <Label fx:id="redLabelIsland10" layoutX="570.0" layoutY="425.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland10" layoutX="513.6430053710938" layoutY="469.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelIsland10" layoutX="552.0430297851562" layoutY="475.70001220703125" text="0">
+        <Label fx:id="greenLabelIsland10" layoutX="533.0" layoutY="488.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland10" layoutX="582.0" layoutY="453.0" text="0">
+        <Label fx:id="blueLabelIsland10" layoutX="580.0" layoutY="448.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland6" layoutX="791.2430419921875" layoutY="558.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland6" layoutX="844.0430297851562" layoutY="557.2999877929688" text="0">
+        <Label fx:id="redLabelIsland6" layoutX="850.0" layoutY="558.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland6" layoutX="786.4429931640625" layoutY="600.5" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland6" layoutX="824.0430297851562" layoutY="618.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland3" layoutX="865.6430053710938" layoutY="330.1000061035156" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland9" layoutX="536.843017578125" layoutY="503.70001220703125" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland9" layoutX="590.4429931640625" layoutY="497.29998779296875" text="0">
+        <Label fx:id="redLabelIsland9" layoutX="595.0" layoutY="497.29998779296875" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland9" layoutX="532.843017578125" layoutY="540.5" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelIsland9" layoutX="570.4429931640625" layoutY="558.0999755859375" text="0">
+        <Label fx:id="greenLabelIsland9" layoutX="571.0" layoutY="561.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland9" layoutX="602.4429931640625" layoutY="529.2999877929688" text="0">
+        <Label fx:id="blueLabelIsland9" layoutX="612.0" layoutY="529.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland8" layoutX="605.6430053710938" layoutY="566.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland8" layoutX="660.0430297851562" layoutY="559.7000122070312" text="0">
+        <Label fx:id="redLabelIsland8" layoutX="663.0" layoutY="559.7000122070312" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland8" layoutX="603.2430419921875" layoutY="606.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="greenLabelIsland8" layoutX="633.6430053710938" layoutY="626.9000244140625" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelIsland8" layoutX="664.843017578125" layoutY="604.5" text="0">
+        <Label fx:id="blueLabelIsland8" layoutX="678.0" layoutY="593.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="pinkLabelIsland7" layoutX="698.4429931640625" layoutY="570.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelIsland7" layoutX="748.0430297851562" layoutY="574.9000244140625" text="0">
+        <Label fx:id="redLabelIsland7" layoutX="752.0" layoutY="570.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="yellowLabelIsland7" layoutX="690.4429931640625" layoutY="618.0999755859375" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelIsland7" layoutX="728.0430297851562" layoutY="635.7000122070312" text="0">
+        <Label fx:id="greenLabelIsland7" layoutX="736.0" layoutY="640.0" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <Label fx:id="blueLabelIsland7" layoutX="760.0430297851562" layoutY="606.9000244140625" text="0">
             <font>
-                <Font name="Arial Rounded MT Bold" size="13.0" />
+                <Font name="Arial Rounded MT Bold" size="14.0" />
             </font>
         </Label>
         <ImageView fx:id="towerIsland1" fitHeight="30.0" fitWidth="30.0" layoutX="702.4429931640625" layoutY="282.1000061035156" pickOnBounds="true" preserveRatio="true">
@@ -805,57 +805,57 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onAction="#pickIsland" text="Island 2">
+        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onAction="#pickIsland" text="Island 3">
+        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island5Button" layoutX="927.2430419921875" layoutY="549.2999877929688" mnemonicParsing="false" onAction="#pickIsland" text="Island 5">
+        <Button fx:id="island5Button" layoutX="949.0" layoutY="549.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 5">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onAction="#pickIsland" text="Island 4">
+        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 4">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onAction="#pickIsland" text="Island 6">
+        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 6">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island12Button" layoutX="550.4429931640625" layoutY="266.8999938964844" mnemonicParsing="false" onAction="#pickIsland" text="Island 12">
+        <Button fx:id="island12Button" layoutX="523.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 12">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island9Button" layoutX="476.843017578125" layoutY="513.2999877929688" mnemonicParsing="false" text="Island 9">
+        <Button fx:id="island9Button" layoutX="454.0" layoutY="519.0" mnemonicParsing="false" text="Island 9">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island10Button" layoutX="451.2430114746094" layoutY="429.29998779296875" mnemonicParsing="false" text="Island 10">
+        <Button fx:id="island10Button" layoutX="427.0" layoutY="440.0" mnemonicParsing="false" text="Island 10">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island11Button" layoutX="485.64300537109375" layoutY="357.29998779296875" mnemonicParsing="false" text="Island 11">
+        <Button fx:id="island11Button" layoutX="462.0" layoutY="352.0" mnemonicParsing="false" text="Island 11">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island8Button" layoutX="544.843017578125" layoutY="591.7000122070312" mnemonicParsing="false" onAction="#pickIsland" text="Island 8">
+        <Button fx:id="island8Button" layoutX="533.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 8">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island7Button" layoutX="672.0430297851562" layoutY="650.0999755859375" mnemonicParsing="false" onAction="#pickIsland" text="Island 7">
+        <Button fx:id="island7Button" layoutX="667.0" layoutY="655.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 7">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
