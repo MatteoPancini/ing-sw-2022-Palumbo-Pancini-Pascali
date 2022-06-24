@@ -459,6 +459,8 @@ public class MainSceneController implements GUIController {
     @FXML ImageView character2Coins;
     @FXML ImageView character3Coins;
 
+    @FXML ChoiceBox pickMovesBox;
+
     @Override
     public void setGui(GUI gui) {
         this.gui = gui;
@@ -523,7 +525,6 @@ public class MainSceneController implements GUIController {
         }
         updateAssistant();
         updateEntrances();
-        updateTowers();
         updateMotherNature();
         updateNoEntryTile();
         updateProfessors();
@@ -758,7 +759,11 @@ public class MainSceneController implements GUIController {
         }
     }
 
-     public void askMoves(AssistantCard a) {
+    public void askMoves(AssistantCard a) {
+
+    }
+
+     /*public void askMoves(AssistantCard a) {
          ChoiceBox<String> choiceBox = new ChoiceBox<>();
          PickMovesNumber action = null;
          ObservableList<String> availableChoices = FXCollections.observableList(getMovesList(a));
@@ -789,7 +794,7 @@ public class MainSceneController implements GUIController {
              }
          }
          gui.getClientConnection().sendUserInput(action);
-     }
+     }*/
 
     public void updateMotherNature() {
         motherNature1.setVisible(false);
@@ -1489,9 +1494,10 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland1.setVisible(true);
+                    towerIsland1.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland1.setText(getTowersNumber(isl));
+                    towerLabelIsland1.setVisible(true);
                 }
-
             } else if (isl.getIslandID() == 2) {
                 island2.setVisible(true);
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(1).getStudents()) {
@@ -1519,7 +1525,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland2.setVisible(true);
+                    towerIsland2.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland2.setText(getTowersNumber(isl));
+                    towerLabelIsland2.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 3) {
@@ -1549,7 +1557,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland3.setVisible(true);
+                    towerIsland3.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland3.setText(getTowersNumber(isl));
+                    towerLabelIsland3.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 4) {
@@ -1579,7 +1589,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland4.setVisible(true);
+                    towerIsland4.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland4.setText(getTowersNumber(isl));
+                    towerLabelIsland4.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 5) {
@@ -1609,7 +1621,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland5.setVisible(true);
+                    towerIsland5.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland5.setText(getTowersNumber(isl));
+                    towerLabelIsland5.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 6) {
@@ -1639,7 +1653,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland6.setVisible(true);
+                    towerIsland6.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland6.setText(getTowersNumber(isl));
+                    towerLabelIsland6.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 7) {
@@ -1669,7 +1685,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland7.setVisible(true);
+                    towerIsland7.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland7.setText(getTowersNumber(isl));
+                    towerLabelIsland7.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 8) {
@@ -1699,7 +1717,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland8.setVisible(true);
+                    towerIsland8.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland8.setText(getTowersNumber(isl));
+                    towerLabelIsland8.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 9) {
@@ -1729,7 +1749,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland9.setVisible(true);
+                    towerIsland9.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland9.setText(getTowersNumber(isl));
+                    towerLabelIsland9.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 10) {
@@ -1759,7 +1781,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland10.setVisible(true);
+                    towerIsland10.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland10.setText(getTowersNumber(isl));
+                    towerLabelIsland10.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 11) {
@@ -1789,7 +1813,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland11.setVisible(true);
+                    towerIsland11.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland11.setText(getTowersNumber(isl));
+                    towerLabelIsland11.setVisible(true);
                 }
 
             } else if (isl.getIslandID() == 12) {
@@ -1819,7 +1845,9 @@ public class MainSceneController implements GUIController {
                 }
                 if(isl.hasTower()) {
                     towerIsland12.setVisible(true);
+                    towerIsland12.setImage(setTowersImage(isl.getTower()));
                     towerLabelIsland12.setText(getTowersNumber(isl));
+                    towerLabelIsland12.setVisible(true);
                 }
 
             }
@@ -2103,7 +2131,7 @@ public class MainSceneController implements GUIController {
         int cont = 0;
         Image img = null;
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
+            if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) myTowers.getChildren().get(i)).setImage(img);
