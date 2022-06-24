@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.clienttoserver.actions.Action;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.CharacterCard;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 
 public class ExpertController {
     private final Game game;
-    private final GameBoard board;
     private final TurnController turnController;
     private Student studentOne;
     private Student studentTwo;
@@ -25,9 +23,8 @@ public class ExpertController {
 
 
 
-    public ExpertController(Game game, GameBoard board, TurnController turnController) {
+    public ExpertController(Game game, TurnController turnController) {
         this.game = game;
-        this.board = board;
         this.turnController = turnController;
     }
 
@@ -195,7 +192,6 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
     public void thiefEffect() {
         thiefEffect = true;
-
         RequestAction pawnRequest = new RequestAction(Action.PICK_PAWN_TYPE);
         turnController.getGameHandler().sendSinglePlayer(pawnRequest, turnController.getCurrentPlayer().getPlayerID());
     }
@@ -218,7 +214,6 @@ public class ExpertController {
                     p.getBoard().getProfessorTable().getCellByColor(pawnTypeChosen).resetProfessor();
                     break;
                 }
-
             }
         }
 
@@ -304,8 +299,6 @@ public class ExpertController {
                 turnController.askStudent();
             }
         }
-
-
     }
     //------------------------------------------------------------------------------------------------------------------
 

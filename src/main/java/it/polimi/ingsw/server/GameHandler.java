@@ -56,7 +56,7 @@ public class GameHandler {
         isExpertMode = expertMode;
         game.setExpertMode(expertMode);
         if(isExpertMode) {
-            controller.setExpertController(new ExpertController(game, game.getGameBoard(), controller.getTurnController()));
+            controller.setExpertController(new ExpertController(game, controller.getTurnController()));
         } else {
             System.out.println("NON SETTO EXPERT");
         }

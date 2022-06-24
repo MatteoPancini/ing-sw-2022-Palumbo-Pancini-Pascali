@@ -96,6 +96,8 @@ public class NewTurnControllerTest {
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getNickname(), "Matteo");
 
+        PropertyChangeEvent ev16 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(0).getName());
+        controllerStub.propertyChange(ev16);
     }
 
     @Test
@@ -718,8 +720,10 @@ public class NewTurnControllerTest {
         controllerStub.getTurnController().startPianificationPhase();
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
         controllerStub.propertyChange(ev1);
-        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(7).getName());
         controllerStub.propertyChange(ev2);
+        PropertyChangeEvent ev21 = new PropertyChangeEvent(1, "PickAssistant", null, controllerStub.getGame().getCurrentPlayer().getAssistantDeck().getDeck().get(9).getName());
+        controllerStub.propertyChange(ev21);
         PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
         controllerStub.propertyChange(ev3);
         PropertyChangeEvent ev4 = new PropertyChangeEvent(1, "PickDestinationDiningRoom", null, controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());

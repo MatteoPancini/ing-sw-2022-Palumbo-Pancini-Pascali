@@ -23,26 +23,6 @@ public class Player implements Serializable {
         this.myCoins = myCoins;
     }
 
-    public String getNicknamePlayer() {
-        return nicknamePlayer;
-    }
-
-    public boolean isPlaying() {
-        return isPlaying;
-    }
-
-    public void setPlaying(boolean playing) {
-        isPlaying = playing;
-    }
-
-    public boolean isWinner() {
-        return isWinner;
-    }
-
-    public void setWinner(boolean winner) {
-        isWinner = winner;
-    }
-
     public void setChosenAssistant(AssistantCard chosenAssistant) {
         this.chosenAssistant = chosenAssistant;
     }
@@ -104,14 +84,6 @@ public class Player implements Serializable {
 
     public void setIslandInfluence(int islandInfluence) {
         this.islandInfluence = islandInfluence;
-    }
-
-    public void setIdPlayer(int playerID) {
-        this.playerID = playerID;
-    }
-
-    public void setNicknamePlayer(String nicknamePlayer) {
-        this.nicknamePlayer = nicknamePlayer;
     }
 
     public void setWizard(Wizards wizard) {
