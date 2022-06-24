@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.gui.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Bounds;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
@@ -77,14 +78,6 @@ public class ResizeController {
                                             * newSceneWidth.doubleValue();
                             (nodes.get(i))
                                     .setLayoutX(offset + properties.get(i).get(2) * newSceneWidth.doubleValue());
-                        } else if (nodes.get(i) instanceof Region) {
-                            ((Region) nodes.get(i))
-                                    .setPrefWidth(properties.get(i).get(0) * newSceneWidth.intValue());
-                            nodes.get(i).setLayoutX(properties.get(i).get(2) * newSceneWidth.intValue());
-                            if (nodes.get(i) instanceof Labeled || nodes.get(i) instanceof TextField) {
-                                int fontSizeTemp = (int) (properties.get(i).get(4) * newSceneWidth.intValue());
-                                nodes.get(i).setStyle("-fx-font-size: " + fontSizeTemp + "px;");
-                            }
                         }
                     }
                 };

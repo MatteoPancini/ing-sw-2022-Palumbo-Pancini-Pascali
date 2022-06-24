@@ -11,814 +11,1006 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="1241.0" prefWidth="1591.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainSceneController">
     <children>
-        <ImageView fitHeight="1359.0" fitWidth="1600.0" layoutX="-9.0" layoutY="-118.0" opacity="0.75" pickOnBounds="true">
+        <ImageView fitHeight="900.0" fitWidth="1600.0" opacity="0.75" pickOnBounds="true">
             <image>
                 <Image url="@../graphics/lightbluesky.jpg" />
             </image>
         </ImageView>
-        <Group layoutX="381.0" layoutY="318.0">
-            <children>
-                <Button fx:id="island1Button" layoutX="288.0" layoutY="-30.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 1">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font>
-                </Button>
-                <ImageView fx:id="island4" fitHeight="100.0" fitWidth="450.0" layoutX="498.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island11" fitHeight="100.0" fitWidth="450.0" layoutX="87.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island10" fitHeight="100.0" fitWidth="450.0" layoutX="37.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island9" fitHeight="100.0" fitWidth="450.0" layoutX="73.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island8" fitHeight="100.0" fitWidth="450.0" layoutX="161.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island7" fitHeight="100.0" fitWidth="450.0" layoutX="265.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island6" fitHeight="100.0" fitWidth="450.0" layoutX="381.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island5" fitHeight="100.0" fitWidth="450.0" layoutX="473.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island2" fitHeight="100.0" fitWidth="450.0" layoutX="369.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island3" fitHeight="100.0" fitWidth="450.0" layoutX="473.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="island12" fitHeight="100.0" fitWidth="450.0" layoutX="155.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/island1.png" />
-                    </image>
-                </ImageView>
-                <Group layoutX="265.0" layoutY="5.0">
-                    <children>
-                        <ImageView fx:id="island1" fitHeight="100.0" fitWidth="162.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../graphics/wooden_pieces/island1.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="yellowIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="5.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="greenIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="38.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="redIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="52.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="blueIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="63.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fx:id="pinkIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="16.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                            </image>
-                        </ImageView>
-                        <Label fx:id="pinkLabelIsland1" layoutX="4.0" layoutY="7.0" text="0">
-                            <font>
-                                <Font name="Arial Rounded MT Bold" size="13.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="redLabelIsland1" layoutX="77.0" layoutY="2.0" text="0">
-                            <font>
-                                <Font name="Arial Rounded MT Bold" size="13.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="greenLabelIsland1" layoutX="45.0" layoutY="82.0" text="0">
-                            <font>
-                                <Font name="Arial Rounded MT Bold" size="13.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="blueLabelIsland1" layoutX="85.0" layoutY="46.0" text="0">
-                            <font>
-                                <Font name="Arial Rounded MT Bold" size="13.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </Group>
-                <ImageView fx:id="yellowIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="379.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="412.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="426.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="437.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="390.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="165.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="198.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="212.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="223.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="176.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="97.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="130.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="144.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="155.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="108.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="483.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="516.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="530.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="541.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="494.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="508.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="541.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="555.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="566.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="519.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="47.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="80.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="94.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="105.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="58.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="83.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="116.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="130.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="141.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="94.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="171.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="204.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="218.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="229.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="182.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="278.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="311.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="325.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="336.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="289.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="397.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="430.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="444.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="455.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="408.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="483.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="516.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="530.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="blueIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="541.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="494.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="yellowLabelIsland1" layoutX="263.0" layoutY="65.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland2" layoutX="378.0" layoutY="37.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland2" layoutX="448.0" layoutY="40.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland2" layoutX="372.0" layoutY="90.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland2" layoutX="419.0" layoutY="112.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland2" layoutX="459.0" layoutY="76.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland6" layoutX="476.0" layoutY="431.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland3" layoutX="548.0" layoutY="103.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland3" layoutX="476.0" layoutY="157.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland3" layoutX="541.0" layoutY="177.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland3" layoutX="563.0" layoutY="143.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland4" layoutX="512.0" layoutY="207.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland4" layoutX="570.0" layoutY="202.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland4" layoutX="498.0" layoutY="256.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland4" layoutX="534.0" layoutY="278.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland4" layoutX="594.0" layoutY="245.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland5" layoutX="482.0" layoutY="306.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland5" layoutX="554.0" layoutY="305.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland5" layoutX="476.0" layoutY="359.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland5" layoutX="523.0" layoutY="381.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland5" layoutX="563.0" layoutY="345.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland12" layoutX="162.0" layoutY="44.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland12" layoutX="232.0" layoutY="37.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland12" layoutX="156.0" layoutY="79.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland12" layoutX="202.0" layoutY="120.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland12" layoutX="242.0" layoutY="90.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland11" layoutX="98.0" layoutY="116.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland11" layoutX="169.0" layoutY="120.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland11" layoutX="93.0" layoutY="173.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland11" layoutX="141.0" layoutY="188.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland11" layoutX="180.0" layoutY="159.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland10" layoutX="53.0" layoutY="204.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland10" layoutX="116.0" layoutY="218.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland10" layoutX="53.0" layoutY="270.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland10" layoutX="101.0" layoutY="278.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland10" layoutX="126.0" layoutY="242.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland6" layoutX="400.0" layoutY="381.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland6" layoutX="466.0" layoutY="380.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland6" layoutX="394.0" layoutY="434.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland6" layoutX="441.0" layoutY="456.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland3" layoutX="493.0" layoutY="96.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland9" layoutX="82.0" layoutY="313.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland9" layoutX="149.0" layoutY="305.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland9" layoutX="77.0" layoutY="359.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland9" layoutX="124.0" layoutY="381.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland9" layoutX="164.0" layoutY="345.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland8" layoutX="168.0" layoutY="391.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland8" layoutX="236.0" layoutY="383.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland8" layoutX="165.0" layoutY="441.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland8" layoutX="203.0" layoutY="467.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland8" layoutX="242.0" layoutY="439.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="pinkLabelIsland7" layoutX="284.0" layoutY="396.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="redLabelIsland7" layoutX="346.0" layoutY="402.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="yellowLabelIsland7" layoutX="274.0" layoutY="456.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="greenLabelIsland7" layoutX="321.0" layoutY="478.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="blueLabelIsland7" layoutX="361.0" layoutY="442.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <ImageView fx:id="towerIsland1" fitHeight="30.0" fitWidth="30.0" layoutX="289.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="towerLabelIsland1" layoutX="311.0" layoutY="43.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <ImageView fx:id="towerIsland6" fitHeight="30.0" fitWidth="30.0" layoutX="411.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland7" fitHeight="30.0" fitWidth="30.0" layoutX="295.0" layoutY="428.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland8" fitHeight="30.0" fitWidth="30.0" layoutX="189.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland9" fitHeight="30.0" fitWidth="30.0" layoutX="100.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland10" fitHeight="30.0" fitWidth="30.0" layoutX="62.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland11" fitHeight="30.0" fitWidth="30.0" layoutX="115.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland12" fitHeight="30.0" fitWidth="30.0" layoutX="180.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland5" fitHeight="30.0" fitWidth="30.0" layoutX="501.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland4" fitHeight="30.0" fitWidth="30.0" layoutX="523.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland3" fitHeight="30.0" fitWidth="30.0" layoutX="498.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="towerIsland2" fitHeight="30.0" fitWidth="30.0" layoutX="397.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/white_tower.png" />
-                    </image>
-                </ImageView>
-                <Label fx:id="towerLabelIsland3" layoutX="523.0" layoutY="134.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland2" layoutX="422.0" layoutY="65.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland12" layoutX="202.0" layoutY="72.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland11" layoutX="139.0" layoutY="141.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland10" layoutX="82.0" layoutY="240.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland9" layoutX="123.0" layoutY="332.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland8" layoutX="211.0" layoutY="407.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland4" layoutX="545.0" layoutY="237.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland5" layoutX="526.0" layoutY="332.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland6" layoutX="433.0" layoutY="410.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="towerLabelIsland7" layoutX="318.0" layoutY="426.0" text="0">
-                    <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                    </font></Label>
-                <Label fx:id="descriptionLabel" layoutX="226.0" layoutY="144.0" prefHeight="140.0" prefWidth="197.0" text="PHASE DESCRIPTION">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Label>
-                <Button fx:id="island2Button" layoutX="450.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 2">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island3Button" layoutX="558.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 3">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island5Button" layoutX="570.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 5">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island4Button" layoutX="615.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 4">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island6Button" layoutX="480.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 6">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island12Button" layoutX="99.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 12">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island9Button" layoutX="7.0" layoutY="325.0" mnemonicParsing="false" text="Island 9">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island10Button" layoutX="-25.0" layoutY="220.0" mnemonicParsing="false" text="Island 10">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island11Button" layoutX="18.0" layoutY="130.0" mnemonicParsing="false" text="Island 11">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island8Button" layoutX="92.0" layoutY="423.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 8">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="island7Button" layoutX="251.0" layoutY="496.0" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 7">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font></Button>
-                <Button fx:id="diningRoomButton" layoutX="263.0" layoutY="316.0" mnemonicParsing="false" onMouseClicked="#pickDiningRoomDestination" text="Pick Dininig Room">
-                    <font>
-                        <Font name="Palatino" size="13.0" />
-                    </font>
-                </Button>
-            </children>
-        </Group>
-        <ImageView fx:id="leftWizard" fitHeight="127.0" fitWidth="91.0" layoutX="133.0" layoutY="853.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <Button fx:id="island1Button" layoutX="701.6430053710938" layoutY="229.3000030517578" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 1">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <ImageView fx:id="island4" fitHeight="100.0" fitWidth="450.0" layoutX="869.6430053710938" layoutY="409.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island11" fitHeight="100.0" fitWidth="450.0" layoutX="540.843017578125" layoutY="333.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island10" fitHeight="100.0" fitWidth="450.0" layoutX="500.843017578125" layoutY="409.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island9" fitHeight="100.0" fitWidth="450.0" layoutX="529.6430053710938" layoutY="483.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island8" fitHeight="100.0" fitWidth="450.0" layoutX="600.0430297851562" layoutY="547.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island7" fitHeight="100.0" fitWidth="450.0" layoutX="683.2430419921875" layoutY="567.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island6" fitHeight="100.0" fitWidth="450.0" layoutX="776.0430297851562" layoutY="547.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island5" fitHeight="100.0" fitWidth="450.0" layoutX="849.6430053710938" layoutY="490.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island2" fitHeight="100.0" fitWidth="450.0" layoutX="766.4429931640625" layoutY="277.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island3" fitHeight="100.0" fitWidth="450.0" layoutX="849.6430053710938" layoutY="326.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island12" fitHeight="100.0" fitWidth="450.0" layoutX="595.2430419921875" layoutY="277.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="island1" fitHeight="100.0" fitWidth="162.0" layoutX="683.2430419921875" layoutY="257.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/island1.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="688.2430419921875" layoutY="300.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="721.2430419921875" layoutY="321.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="735.2430419921875" layoutY="271.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="746.2430419921875" layoutY="300.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland1" fitHeight="22.0" fitWidth="24.0" layoutX="699.2430419921875" layoutY="271.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="pinkLabelIsland1" layoutX="687.2430419921875" layoutY="264.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland1" layoutX="760.2430419921875" layoutY="259.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland1" layoutX="728.2430419921875" layoutY="339.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland1" layoutX="768.2430419921875" layoutY="303.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="motherNature1" fitHeight="45.0" fitWidth="45.0" layoutX="706.2430419921875" layoutY="245.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="774.4429931640625" layoutY="311.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="800.843017578125" layoutY="328.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="812.0430297851562" layoutY="288.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="820.843017578125" layoutY="311.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland2" fitHeight="22.0" fitWidth="24.0" layoutX="783.2430419921875" layoutY="288.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="603.2430419921875" layoutY="314.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="629.6430053710938" layoutY="331.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="640.843017578125" layoutY="291.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="649.6430053710938" layoutY="314.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland12" fitHeight="22.0" fitWidth="24.0" layoutX="612.0430297851562" layoutY="291.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="548.843017578125" layoutY="372.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="575.2430419921875" layoutY="389.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="586.4429931640625" layoutY="349.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="595.2430419921875" layoutY="372.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland11" fitHeight="22.0" fitWidth="24.0" layoutX="557.6430053710938" layoutY="349.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="857.6430053710938" layoutY="366.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="884.0430297851562" layoutY="383.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="895.2430419921875" layoutY="343.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="904.0430297851562" layoutY="366.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland3" fitHeight="22.0" fitWidth="24.0" layoutX="866.4429931640625" layoutY="343.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="877.6430053710938" layoutY="448.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="904.0430297851562" layoutY="465.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="915.2430419921875" layoutY="425.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="924.0430297851562" layoutY="448.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland4" fitHeight="22.0" fitWidth="24.0" layoutX="886.4429931640625" layoutY="425.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="508.843017578125" layoutY="451.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenisland10" fitHeight="22.0" fitWidth="24.0" layoutX="535.2430419921875" layoutY="468.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="546.4429931640625" layoutY="428.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="555.2430419921875" layoutY="451.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland10" fitHeight="22.0" fitWidth="24.0" layoutX="517.6430053710938" layoutY="428.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="537.6430053710938" layoutY="525.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="564.0430297851562" layoutY="542.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="575.2430419921875" layoutY="502.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="584.0430297851562" layoutY="525.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland9" fitHeight="22.0" fitWidth="24.0" layoutX="546.4429931640625" layoutY="502.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="608.0430297851562" layoutY="590.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="634.4429931640625" layoutY="607.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="645.6430053710938" layoutY="567.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="654.4429931640625" layoutY="590.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland8" fitHeight="22.0" fitWidth="24.0" layoutX="616.843017578125" layoutY="567.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="693.6430053710938" layoutY="602.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenisland7" fitHeight="22.0" fitWidth="24.0" layoutX="720.0430297851562" layoutY="618.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="731.2430419921875" layoutY="578.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="740.0430297851562" layoutY="602.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland7" fitHeight="22.0" fitWidth="24.0" layoutX="702.4429931640625" layoutY="578.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="788.843017578125" layoutY="585.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="815.2430419921875" layoutY="602.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="826.4429931640625" layoutY="562.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="835.2430419921875" layoutY="585.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland6" fitHeight="22.0" fitWidth="24.0" layoutX="797.6430053710938" layoutY="562.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="857.6430053710938" layoutY="525.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="884.0430297851562" layoutY="542.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="895.2430419921875" layoutY="502.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="blueIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="904.0430297851562" layoutY="525.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkIsland5" fitHeight="22.0" fitWidth="24.0" layoutX="866.4429931640625" layoutY="502.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="yellowLabelIsland1" layoutX="681.6430053710938" layoutY="305.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland2" layoutX="773.6430053710938" layoutY="282.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland2" layoutX="829.6430053710938" layoutY="285.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland2" layoutX="768.843017578125" layoutY="325.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland2" layoutX="806.4429931640625" layoutY="342.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland2" layoutX="838.4429931640625" layoutY="314.1000061035156" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland6" layoutX="852.0430297851562" layoutY="598.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland3" layoutX="909.6430053710938" layoutY="335.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland3" layoutX="852.0430297851562" layoutY="378.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland3" layoutX="904.0430297851562" layoutY="394.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland3" layoutX="921.6430053710938" layoutY="367.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland4" layoutX="880.843017578125" layoutY="418.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland4" layoutX="927.2430419921875" layoutY="414.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland4" layoutX="869.6430053710938" layoutY="458.1000061035156" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland4" layoutX="898.4429931640625" layoutY="475.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland4" layoutX="946.4429931640625" layoutY="449.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland5" layoutX="856.843017578125" layoutY="498.1000061035156" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland5" layoutX="914.4429931640625" layoutY="497.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland5" layoutX="852.0430297851562" layoutY="540.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland5" layoutX="889.6430053710938" layoutY="558.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland5" layoutX="921.6430053710938" layoutY="529.2999877929688" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland12" layoutX="600.843017578125" layoutY="288.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland12" layoutX="656.843017578125" layoutY="282.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland12" layoutX="596.0430297851562" layoutY="316.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland12" layoutX="632.843017578125" layoutY="349.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland12" layoutX="664.843017578125" layoutY="325.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland11" layoutX="549.6430053710938" layoutY="346.1000061035156" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland11" layoutX="606.4429931640625" layoutY="349.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland11" layoutX="545.6430053710938" layoutY="391.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland11" layoutX="584.0430297851562" layoutY="403.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland11" layoutX="615.2430419921875" layoutY="380.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland10" layoutX="513.6430053710938" layoutY="416.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland10" layoutX="564.0430297851562" layoutY="427.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland10" layoutX="513.6430053710938" layoutY="469.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland10" layoutX="552.0430297851562" layoutY="475.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland10" layoutX="572.0430297851562" layoutY="446.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland6" layoutX="791.2430419921875" layoutY="558.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland6" layoutX="844.0430297851562" layoutY="557.2999877929688" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland6" layoutX="786.4429931640625" layoutY="600.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland6" layoutX="824.0430297851562" layoutY="618.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland3" layoutX="865.6430053710938" layoutY="330.1000061035156" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland9" layoutX="536.843017578125" layoutY="503.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland9" layoutX="590.4429931640625" layoutY="497.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland9" layoutX="532.843017578125" layoutY="540.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland9" layoutX="570.4429931640625" layoutY="558.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland9" layoutX="602.4429931640625" layoutY="529.2999877929688" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland8" layoutX="605.6430053710938" layoutY="566.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland8" layoutX="660.0430297851562" layoutY="559.7000122070312" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland8" layoutX="603.2430419921875" layoutY="606.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland8" layoutX="633.6430053710938" layoutY="626.9000244140625" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland8" layoutX="664.843017578125" layoutY="604.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="pinkLabelIsland7" layoutX="698.4429931640625" layoutY="570.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="redLabelIsland7" layoutX="748.0430297851562" layoutY="574.9000244140625" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="yellowLabelIsland7" layoutX="690.4429931640625" layoutY="618.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="greenLabelIsland7" layoutX="728.0430297851562" layoutY="635.7000122070312" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="blueLabelIsland7" layoutX="760.0430297851562" layoutY="606.9000244140625" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="towerIsland1" fitHeight="30.0" fitWidth="30.0" layoutX="702.4429931640625" layoutY="282.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="towerLabelIsland1" layoutX="720.0430297851562" layoutY="287.70001220703125" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="towerIsland6" fitHeight="30.0" fitWidth="30.0" layoutX="800.0430297851562" layoutY="578.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland7" fitHeight="30.0" fitWidth="30.0" layoutX="707.2430419921875" layoutY="595.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland8" fitHeight="30.0" fitWidth="30.0" layoutX="622.4429931640625" layoutY="578.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland9" fitHeight="30.0" fitWidth="30.0" layoutX="551.2430419921875" layoutY="517.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland10" fitHeight="30.0" fitWidth="30.0" layoutX="520.843017578125" layoutY="441.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland11" fitHeight="30.0" fitWidth="30.0" layoutX="563.2430419921875" layoutY="366.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland12" fitHeight="30.0" fitWidth="30.0" layoutX="615.2430419921875" layoutY="308.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland5" fitHeight="30.0" fitWidth="30.0" layoutX="872.0430297851562" layoutY="518.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland4" fitHeight="30.0" fitWidth="30.0" layoutX="889.6430053710938" layoutY="441.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland3" fitHeight="30.0" fitWidth="30.0" layoutX="869.6430053710938" layoutY="360.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="towerIsland2" fitHeight="30.0" fitWidth="30.0" layoutX="788.843017578125" layoutY="305.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/white_tower.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="towerLabelIsland3" layoutX="889.6430053710938" layoutY="360.5" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland2" layoutX="808.843017578125" layoutY="305.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland12" layoutX="632.843017578125" layoutY="310.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland11" layoutX="582.4429931640625" layoutY="366.1000061035156" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland10" layoutX="536.843017578125" layoutY="445.29998779296875" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland9" layoutX="569.6430053710938" layoutY="518.9000244140625" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland8" layoutX="640.0430297851562" layoutY="578.9000244140625" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland4" layoutX="907.2430419921875" layoutY="442.8999938964844" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland5" layoutX="892.0430297851562" layoutY="518.9000244140625" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland6" layoutX="817.6430053710938" layoutY="581.2999877929688" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Label fx:id="towerLabelIsland7" layoutX="725.6430053710938" layoutY="594.0999755859375" text="0">
+            <font>
+                <Font name="Arial Rounded MT Bold" size="13.0" />
+            </font>
+        </Label>
+        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 2">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 3">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island5Button" layoutX="927.2430419921875" layoutY="549.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 5">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 4">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 6">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island12Button" layoutX="550.4429931640625" layoutY="266.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 12">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island9Button" layoutX="476.843017578125" layoutY="513.2999877929688" mnemonicParsing="false" text="Island 9">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island10Button" layoutX="451.2430114746094" layoutY="429.29998779296875" mnemonicParsing="false" text="Island 10">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island11Button" layoutX="485.64300537109375" layoutY="357.29998779296875" mnemonicParsing="false" text="Island 11">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island8Button" layoutX="544.843017578125" layoutY="591.7000122070312" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 8">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="island7Button" layoutX="672.0430297851562" layoutY="650.0999755859375" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 7">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <Button fx:id="diningRoomButton" layoutX="679.2430419921875" layoutY="412.5" mnemonicParsing="false" onMouseClicked="#pickDiningRoomDestination" text="Pick Dininig Room">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <ImageView fx:id="motherNature2" fitHeight="45.0" fitWidth="45.0" layoutX="788.0430297851562" layoutY="271.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature3" fitHeight="45.0" fitWidth="45.0" layoutX="872.843017578125" layoutY="323.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature6" fitHeight="45.0" fitWidth="45.0" layoutX="800.843017578125" layoutY="539.7000122070312" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature5" fitHeight="45.0" fitWidth="45.0" layoutX="872.0430297851562" layoutY="484.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature4" fitHeight="45.0" fitWidth="45.0" layoutX="894.4429931640625" layoutY="405.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature10" fitHeight="45.0" fitWidth="45.0" layoutX="522.4429931640625" layoutY="403.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature9" fitHeight="45.0" fitWidth="45.0" layoutX="552.0430297851562" layoutY="479.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature8" fitHeight="45.0" fitWidth="45.0" layoutX="623.2430419921875" layoutY="544.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature7" fitHeight="45.0" fitWidth="45.0" layoutX="708.0430297851562" layoutY="558.9000244140625" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature11" fitHeight="45.0" fitWidth="45.0" layoutX="564.843017578125" layoutY="326.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="motherNature12" fitHeight="45.0" fitWidth="45.0" layoutX="618.4429931640625" layoutY="265.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/mother_nature.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry12" fitHeight="45.0" fitWidth="45.0" layoutX="616.843017578125" layoutY="297.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry11" fitHeight="45.0" fitWidth="45.0" layoutX="563.2430419921875" layoutY="355.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry10" fitHeight="45.0" fitWidth="45.0" layoutX="523.2430419921875" layoutY="422.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="askAssistantButton" layoutX="688.843017578125" layoutY="464.5" mnemonicParsing="false" onMouseClicked="#askAssistant" text="Pick Assistant">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Button>
+        <ImageView fx:id="noEntry9" fitHeight="45.0" fitWidth="45.0" layoutX="548.843017578125" layoutY="504.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry8" fitHeight="45.0" fitWidth="45.0" layoutX="620.843017578125" layoutY="568.5" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry7" fitHeight="45.0" fitWidth="45.0" layoutX="708.0430297851562" layoutY="589.2999877929688" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry6" fitHeight="45.0" fitWidth="45.0" layoutX="803.2430419921875" layoutY="566.0999755859375" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry5" fitHeight="45.0" fitWidth="45.0" layoutX="868.0430297851562" layoutY="506.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry4" fitHeight="45.0" fitWidth="45.0" layoutX="896.0430297851562" layoutY="425.29998779296875" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry3" fitHeight="45.0" fitWidth="45.0" layoutX="869.6430053710938" layoutY="346.1000061035156" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry2" fitHeight="45.0" fitWidth="45.0" layoutX="793.6430053710938" layoutY="290.8999938964844" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="noEntry1" fitHeight="45.0" fitWidth="45.0" layoutX="700.843017578125" layoutY="275.70001220703125" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="leftWizard" fitHeight="127.0" fitWidth="91.0" layoutX="120.0" layoutY="729.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wizards/king_no_bg.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="rightWizard" fitHeight="159.0" fitWidth="108.0" layoutX="1256.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+        <ImageView fx:id="rightWizard" fitHeight="159.0" fitWidth="108.0" layoutX="1257.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wizards/pixie_no_bg.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="myWizard" fitHeight="157.0" fitWidth="107.0" layoutX="973.0" layoutY="962.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="myWizard" fitHeight="157.0" fitWidth="107.0" layoutX="917.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wizards/sorcerer_no_bg.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="topWizard" fitHeight="127.0" fitWidth="91.0" layoutX="356.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+        <ImageView fx:id="topWizard" fitHeight="127.0" fitWidth="91.0" layoutX="408.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wizards/wizard_no_bg.png" />
             </image>
         </ImageView>
-        <Group fx:id="myGroup" layoutX="448.0" layoutY="927.0">
+        <Group fx:id="myGroup" layoutX="457.0" layoutY="674.0" scaleX="0.8" scaleY="0.8" AnchorPane.bottomAnchor="-13.0" AnchorPane.leftAnchor="458.0" AnchorPane.rightAnchor="618.6822509765625" AnchorPane.topAnchor="686.0">
             <children>
-                <ImageView fx:id="myBoard" fitHeight="227.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true" rotate="91.4">
+                <ImageView fx:id="myBoard" fitHeight="227.0" fitWidth="722.0" layoutX="1.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" rotate="91.4">
                     <image>
                         <Image url="@../graphics/boards/Plancia_DEF2.png" />
                     </image>
@@ -826,7 +1018,7 @@
                         <Point3D />
                     </rotationAxis>
                 </ImageView>
-                <Group fx:id="myPinkStudents" layoutX="93.0" layoutY="137.0">
+                <Group fx:id="myPinkStudents" layoutX="93.0" layoutY="147.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -880,7 +1072,7 @@
                         </ImageView>
                     </children>
                 </Group>
-                <Group fx:id="myYellowStudents" layoutX="93.0" layoutY="101.0">
+                <Group fx:id="myYellowStudents" layoutX="93.0" layoutY="111.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -934,7 +1126,7 @@
                         </ImageView>
                     </children>
                 </Group>
-                <Group fx:id="myRedStudents" layoutX="93.0" layoutY="63.0">
+                <Group fx:id="myRedStudents" layoutX="93.0" layoutY="73.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -988,7 +1180,7 @@
                         </ImageView>
                     </children>
                 </Group>
-                <Group fx:id="myBlueStudents" layoutX="93.0" layoutY="180.0">
+                <Group fx:id="myBlueStudents" layoutX="93.0" layoutY="190.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -1042,7 +1234,7 @@
                         </ImageView>
                     </children>
                 </Group>
-                <Group fx:id="myGreenStudents" layoutX="93.0" layoutY="31.0">
+                <Group fx:id="myGreenStudents" layoutX="93.0" layoutY="41.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -1096,32 +1288,32 @@
                         </ImageView>
                     </children>
                 </Group>
-                <ImageView fx:id="myBlueProfessor" fitHeight="19.0" fitWidth="17.0" layoutX="372.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="myBlueProfessor" fitHeight="19.0" fitWidth="17.0" layoutX="372.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/blueProf3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="myPinkProfessor" fitHeight="17.0" fitWidth="17.0" layoutX="372.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="myPinkProfessor" fitHeight="17.0" fitWidth="17.0" layoutX="372.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/pinkProf3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="myYellowProfessor" fitHeight="17.0" fitWidth="17.0" layoutX="372.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="myYellowProfessor" fitHeight="17.0" fitWidth="17.0" layoutX="372.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/yellowProf3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="myGreenProfessor" fitHeight="19.0" fitWidth="17.0" layoutX="372.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="myGreenProfessor" fitHeight="19.0" fitWidth="17.0" layoutX="372.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/greenProf3D.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="myRedProfessor" fitHeight="19.0" fitWidth="17.0" layoutX="372.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="myRedProfessor" fitHeight="19.0" fitWidth="17.0" layoutX="372.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../graphics/wooden_pieces/3D/redProf3D.png" />
                     </image>
                 </ImageView>
-                <Group fx:id="myTowers" layoutX="423.0" layoutY="35.0">
+                <Group fx:id="myTowers" layoutX="424.0" layoutY="47.0">
                     <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -1165,7 +1357,7 @@
                         </ImageView>
                     </children>
                 </Group>
-                <Group fx:id="myEntrance" layoutX="20.0" layoutY="34.0">
+                <Group fx:id="myEntrance" layoutX="24.0" layoutY="40.0">
                     <children>
                         <ImageView fitHeight="19.0" fitWidth="17.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -1216,7 +1408,7 @@
                 </Group>
             </children>
         </Group>
-        <ImageView fx:id="leftAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="132.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+        <ImageView fx:id="leftAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="132.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/assistants/Assistente (1).png" />
             </image>
@@ -1224,7 +1416,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Group fx:id="rightGroup" layoutX="1055.0" layoutY="489.0" rotate="-90.0">
+        <Group fx:id="rightGroup" layoutX="1056.0" layoutY="403.0" rotate="-90.0" scaleX="0.8" scaleY="0.8">
             <children>
                 <ImageView fx:id="rightBoard" fitHeight="227.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true" rotate="91.4">
                     <image>
@@ -1624,7 +1816,7 @@
                 </Group>
             </children>
         </Group>
-        <Group fx:id="topGroup" layoutX="439.0" layoutY="27.0" rotate="180.0">
+        <Group fx:id="topGroup" layoutX="441.0" layoutY="1.0" rotate="180.0" scaleX="0.8" scaleY="0.8" scaleZ="0.8">
             <children>
                 <ImageView fx:id="topBoard" fitHeight="227.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true" rotate="91.4">
                     <image>
@@ -2024,189 +2216,169 @@
                 </Group>
             </children>
         </Group>
-        <ImageView fx:id="green" fitHeight="19.0" fitWidth="17.0" layoutX="1272.0" layoutY="996.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="green" fitHeight="19.0" fitWidth="17.0" layoutX="1116.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="blue" fitHeight="19.0" fitWidth="17.0" layoutX="1272.0" layoutY="1127.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="blue" fitHeight="19.0" fitWidth="17.0" layoutX="1476.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="pink" fitHeight="19.0" fitWidth="17.0" layoutX="1272.0" layoutY="1093.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="pink" fitHeight="19.0" fitWidth="17.0" layoutX="1392.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="yellow" fitHeight="19.0" fitWidth="17.0" layoutX="1272.0" layoutY="1063.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="yellow" fitHeight="19.0" fitWidth="17.0" layoutX="1307.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="red" fitHeight="19.0" fitWidth="17.0" layoutX="1272.0" layoutY="1029.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="red" fitHeight="19.0" fitWidth="17.0" layoutX="1222.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
             </image>
         </ImageView>
-        <Button fx:id="quitButton" layoutX="143.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#quitGame" text="QUIT" textFill="#fc0000">
+        <Button fx:id="quitButton" layoutX="1519.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#quitGame" scaleX="0.8" scaleY="0.8" text="QUIT" textFill="#fc0000">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Group layoutX="21.0" layoutY="960.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
-            <children>
-                <ImageView fx:id="cloud1" fitHeight="142.0" fitWidth="143.0" layoutX="19.0" layoutY="8.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/cloud_card.png" />
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ImageView>
-                <ImageView fx:id="blueCloud1" fitHeight="51.0" fitWidth="37.0" layoutX="30.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </Group>
-        <Group layoutX="146.0" layoutY="931.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
-            <children>
-                <ImageView fx:id="cloud3" fitHeight="142.0" fitWidth="143.0" layoutX="19.0" layoutY="8.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/cloud_card.png" />
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ImageView>
-                <ImageView fx:id="blueCloud3" fitHeight="51.0" fitWidth="37.0" layoutX="30.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </Group>
-        <Group layoutX="50.0" layoutY="1052.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
-            <children>
-                <ImageView fx:id="cloud4" fitHeight="142.0" fitWidth="143.0" layoutX="19.0" layoutY="8.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/cloud_card.png" />
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ImageView>
-                <ImageView fx:id="blueCloud4" fitHeight="51.0" fitWidth="37.0" layoutX="30.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </Group>
-        <Group layoutX="163.0" layoutY="1030.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
-            <children>
-                <ImageView fx:id="cloud2" fitHeight="142.0" fitWidth="143.0" layoutX="19.0" layoutY="8.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/cloud_card.png" />
-                    </image>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </ImageView>
-                <ImageView fx:id="blueCloud2" fitHeight="51.0" fitWidth="37.0" layoutX="30.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="pinkCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="redCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="111.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="yellowCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
-                    </image>
-                </ImageView>
-                <ImageView fx:id="greenCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="58.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </Group>
-        <Button fx:id="askAssistantButton" layoutX="704.0" layoutY="883.0" mnemonicParsing="false" onAction="#askAssistant" text="Pick Assistant">
-            <font>
-                <Font name="Palatino" size="13.0" />
-            </font></Button>
-        <ImageView fx:id="rightAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="1278.0" layoutY="855.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+        <ImageView fx:id="cloud1" fitHeight="142.0" fitWidth="143.0" layoutX="52.0" layoutY="30.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/cloud_card.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fx:id="blueCloud1" fitHeight="51.0" fitWidth="37.0" layoutX="84.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="124.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="124.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="98.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenCloud1" fitHeight="41.0" fitWidth="37.0" layoutX="98.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="cloud3" fitHeight="142.0" fitWidth="143.0" layoutX="177.0" layoutY="1.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/cloud_card.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fx:id="blueCloud3" fitHeight="51.0" fitWidth="37.0" layoutX="209.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="250.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="250.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="223.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenCloud3" fitHeight="41.0" fitWidth="37.0" layoutX="223.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="cloud4" fitHeight="142.0" fitWidth="143.0" layoutX="81.0" layoutY="122.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/cloud_card.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fx:id="blueCloud4" fitHeight="51.0" fitWidth="37.0" layoutX="113.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="154.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="154.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="127.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenCloud4" fitHeight="41.0" fitWidth="37.0" layoutX="127.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="cloud2" fitHeight="142.0" fitWidth="143.0" layoutX="194.0" layoutY="101.0" onMouseClicked="#pickCloud" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/cloud_card.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fx:id="blueCloud2" fitHeight="51.0" fitWidth="37.0" layoutX="226.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="pinkCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="267.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/pinkStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="redCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="267.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="yellowCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="240.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/yellowStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="greenCloud2" fitHeight="41.0" fitWidth="37.0" layoutX="240.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true" scaleX="0.5" scaleY="0.5" scaleZ="0.5">
+            <image>
+                <Image url="@../graphics/wooden_pieces/3D/greenStudent3D.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="rightAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="1279.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/assistants/Assistente (1).png" />
             </image>
@@ -2214,7 +2386,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="myAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="356.0" layoutY="977.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="myAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="431.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/assistants/Assistente (1).png" />
             </image>
@@ -2222,7 +2394,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="topAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="973.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+        <ImageView fx:id="topAssistant" fitHeight="112.0" fitWidth="78.0" layoutX="915.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/assistants/Assistente (1).png" />
             </image>
@@ -2230,43 +2402,43 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Button fx:id="greenStudent" layoutX="1310.0" layoutY="992.0" mnemonicParsing="false" onMouseClicked="#pickGreenStudent" text="Green Frog" textFill="#1cb47c">
+        <Button fx:id="greenStudent" layoutX="1081.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickGreenStudent" scaleX="0.8" scaleY="0.8" text="Green Frog" textFill="#1cb47c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="redStudent" layoutX="1310.0" layoutY="1025.0" mnemonicParsing="false" onMouseClicked="#pickRedStudent" text="Red Dragon" textFill="#ec1c24">
+        <Button fx:id="redStudent" layoutX="1180.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickRedStudent" scaleX="0.8" scaleY="0.8" text="Red Dragon" textFill="#ec1c24">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="yellowStudent" layoutX="1310.0" layoutY="1058.0" mnemonicParsing="false" onMouseClicked="#pickYellowStudent" text="Yellow Elf" textFill="#fbac2c">
+        <Button fx:id="yellowStudent" layoutX="1277.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickYellowStudent" scaleX="0.8" scaleY="0.8" text="Yellow Elf" textFill="#fbac2c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="pinkStudent" layoutX="1310.0" layoutY="1089.0" mnemonicParsing="false" onMouseClicked="#pickPinkStudent" text="Pink Fairy" textFill="#db5ca3">
+        <Button fx:id="pinkStudent" layoutX="1360.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickPinkStudent" scaleX="0.8" scaleY="0.8" text="Pink Fairy" textFill="#db5ca3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="blueStudent" layoutX="1310.0" layoutY="1123.0" mnemonicParsing="false" onMouseClicked="#pickBlueStudent" text="Blue Unicorn" textFill="#24c4f3">
+        <Button fx:id="blueStudent" layoutX="1444.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickBlueStudent" scaleX="0.8" scaleY="0.8" text="Blue Unicorn" textFill="#24c4f3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud1Button" layoutX="56.0" layoutY="964.0" mnemonicParsing="false" onMouseClicked="#pickCloud1" text="Cloud 1">
+        <Button fx:id="cloud1Button" layoutX="47.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#pickCloud1" scaleX="0.8" scaleY="0.8" text="Cloud 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud4Button" layoutX="47.0" layoutY="1148.0" mnemonicParsing="false" onMouseClicked="#pickCloud4" text="Cloud 4">
+        <Button fx:id="cloud4Button" layoutX="47.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#pickCloud4" scaleX="0.8" scaleY="0.8" text="Cloud 4">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud2Button" layoutX="256.0" layoutY="1157.0" mnemonicParsing="false" onMouseClicked="#pickCloud2" text="Cloud 2">
+        <Button fx:id="cloud2Button" layoutX="281.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#pickCloud2" scaleX="0.8" scaleY="0.8" text="Cloud 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="cloud3Button" layoutX="249.0" layoutY="947.0" mnemonicParsing="false" onMouseClicked="#pickCloud3" text="Cloud 3">
+        <Button fx:id="cloud3Button" layoutX="274.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#pickCloud3" scaleX="0.8" scaleY="0.8" text="Cloud 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <ImageView fx:id="character1" fitHeight="112.0" fitWidth="78.0" layoutX="1141.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character1" fitHeight="112.0" fitWidth="78.0" layoutX="1139.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/characters/centarus.png" />
             </image>
@@ -2274,7 +2446,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="character2" fitHeight="112.0" fitWidth="78.0" layoutX="1246.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character2" fitHeight="112.0" fitWidth="78.0" layoutX="1244.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/characters/centarus.png" />
             </image>
@@ -2282,7 +2454,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="character3" fitHeight="112.0" fitWidth="78.0" layoutX="1351.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character3" fitHeight="112.0" fitWidth="78.0" layoutX="1349.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/characters/centarus.png" />
             </image>
@@ -2290,50 +2462,50 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Button fx:id="effect1" layoutX="1154.0" layoutY="27.0" mnemonicParsing="false" onAction="#showEffect" text="Effect">
+        <Button fx:id="effect1" layoutX="1152.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect2" layoutX="1259.0" layoutY="27.0" mnemonicParsing="false" onAction="#showEffect" text="Effect">
+        <Button fx:id="effect2" layoutX="1257.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect3" layoutX="1364.0" layoutY="27.0" mnemonicParsing="false" onAction="#showEffect" text="Effect">
+        <Button fx:id="effect3" layoutX="1362.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character1Button" layoutX="1139.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#playCharacter" text="Character 1">
+        <Button fx:id="character1Button" layoutX="1137.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character2Button" layoutX="1242.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#playCharacter" text="Character 2">
+        <Button fx:id="character2Button" layoutX="1240.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character3Button" layoutX="1347.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#playCharacter" text="Character 3">
+        <Button fx:id="character3Button" layoutX="1345.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="noCharacterButton" layoutX="1441.0" layoutY="98.0" mnemonicParsing="false" onMouseClicked="#playCharacter" text="No Character">
+        <Button fx:id="noCharacterButton" layoutX="1439.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="No Character">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <ImageView fx:id="character1Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1110.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character1Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1118.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/Moneta_base.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="character3Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1332.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character3Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1330.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/Moneta_base.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="character2Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1227.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="character2Coin" fitHeight="44.0" fitWidth="42.0" layoutX="1225.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/Moneta_base.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="myCoins" fitHeight="44.0" fitWidth="42.0" layoutX="356.0" layoutY="925.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="myCoins" fitHeight="44.0" fitWidth="42.0" layoutX="431.0" layoutY="704.0" pickOnBounds="true" preserveRatio="true" scaleX="0.8" scaleY="0.8">
             <image>
                 <Image url="@../graphics/Moneta_base.png" />
             </image>
@@ -2341,48 +2513,48 @@
                 <DropShadow />
             </effect>
         </ImageView>
-        <Label fx:id="myCoinsLabel" layoutX="417.0" layoutY="939.0" text="0">
+        <Label fx:id="myCoinsLabel" layoutX="492.0" layoutY="718.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font></Label>
-        <Label fx:id="character1LabelCoin" layoutX="1125.0" layoutY="100.0" text="0">
+        <Label fx:id="character1LabelCoin" layoutX="1123.0" layoutY="85.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font></Label>
-        <Label fx:id="character3LabelCoin" layoutX="1334.0" layoutY="100.0" text="0">
+        <Label fx:id="character3LabelCoin" layoutX="1332.0" layoutY="85.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font></Label>
-        <Label fx:id="character2LabelCoin" layoutX="1227.0" layoutY="100.0" text="0">
+        <Label fx:id="character2LabelCoin" layoutX="1225.0" layoutY="85.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font></Label>
-        <Button fx:id="greenPawn" layoutX="1168.0" layoutY="992.0" mnemonicParsing="false" onMouseClicked="#pickGreenPawn" text="Green Frog" textFill="#1cb47c">
+        <Button fx:id="greenPawn" layoutX="1083.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickGreenPawn" scaleX="0.8" scaleY="0.8" text="Green Frog" textFill="#1cb47c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="redPawn" layoutX="1168.0" layoutY="1025.0" mnemonicParsing="false" onMouseClicked="#pickRedPawn" text="Red Dragon" textFill="#ec1c24">
+        <Button fx:id="redPawn" layoutX="1182.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickRedPawn" scaleX="0.8" scaleY="0.8" text="Red Dragon" textFill="#ec1c24">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="yellowPawn" layoutX="1168.0" layoutY="1054.0" mnemonicParsing="false" onMouseClicked="#pickYellowPawn" text="Yellow Elf" textFill="#fbac2c">
+        <Button fx:id="yellowPawn" layoutX="1280.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickYellowPawn" scaleX="0.8" scaleY="0.8" text="Yellow Elf" textFill="#fbac2c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="pinkPawn" layoutX="1168.0" layoutY="1089.0" mnemonicParsing="false" onMouseClicked="#pickPinkPawn" text="Pink Fairy" textFill="#db5ca3">
+        <Button fx:id="pinkPawn" layoutX="1362.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickPinkPawn" scaleX="0.8" scaleY="0.8" text="Pink Fairy" textFill="#db5ca3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="bluePawn" layoutX="1168.0" layoutY="1123.0" mnemonicParsing="false" onMouseClicked="#pickBluePawn" text="Blue Unicorn" textFill="#24c4f3">
+        <Button fx:id="bluePawn" layoutX="1446.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickBluePawn" scaleX="0.8" scaleY="0.8" text="Blue Unicorn" textFill="#24c4f3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Group layoutX="1138.0" layoutY="210.0">
+        <Group layoutX="1137.0" layoutY="179.0" scaleX="0.8" scaleY="0.8">
             <children>
                 <ImageView fx:id="greenCharacter1" fitHeight="19.0" fitWidth="17.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -2436,7 +2608,7 @@
                 </Label>
             </children>
         </Group>
-        <Group layoutX="1242.0" layoutY="210.0">
+        <Group layoutX="1241.0" layoutY="179.0" scaleX="0.8" scaleY="0.8">
             <children>
                 <ImageView fx:id="greenCharacter2" fitHeight="19.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -2490,7 +2662,7 @@
                 </Label>
             </children>
         </Group>
-        <Group layoutX="1345.0" layoutY="210.0">
+        <Group layoutX="1344.0" layoutY="179.0" scaleX="0.8" scaleY="0.8">
             <children>
                 <ImageView fx:id="greenCharacter3" fitHeight="19.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -2544,7 +2716,7 @@
                 </Label>
             </children>
         </Group>
-        <Group fx:id="leftGroup" layoutX="-84.0" layoutY="489.0" rotate="90.0">
+        <Group fx:id="leftGroup" layoutX="-91.0" layoutY="427.0" rotate="90.0" scaleX="0.8" scaleY="0.8" AnchorPane.bottomAnchor="246.0" AnchorPane.leftAnchor="-91.0" AnchorPane.rightAnchor="1167.6822509765625" AnchorPane.topAnchor="427.0">
             <children>
                 <ImageView fx:id="leftBoard" fitHeight="227.0" fitWidth="722.0" pickOnBounds="true" preserveRatio="true" rotate="91.4">
                     <image>
@@ -2944,169 +3116,110 @@
                 </Group>
             </children>
         </Group>
-        <Label fx:id="pinkLabelCloud3" layoutX="265.0" layoutY="985.0" text="0">
+        <Label fx:id="pinkLabelCloud3" layoutX="277.0" layoutY="45.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelCloud3" layoutX="189.0" layoutY="1002.0" text="0">
+        <Label fx:id="blueLabelCloud3" layoutX="201.0" layoutY="62.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelCloud3" layoutX="222.0" layoutY="961.0" text="0">
+        <Label fx:id="greenLabelCloud3" layoutX="234.0" layoutY="21.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelCloud3" layoutX="265.0" layoutY="1025.0" text="0">
+        <Label fx:id="redLabelCloud3" layoutX="277.0" layoutY="85.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="yellowLabelCloud3" layoutX="227.0" layoutY="1041.0" text="0">
+        <Label fx:id="yellowLabelCloud3" layoutX="239.0" layoutY="101.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="pinkLabelCloud2" layoutX="283.0" layoutY="1086.0" text="0">
+        <Label fx:id="pinkLabelCloud2" layoutX="295.0" layoutY="146.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelCloud2" layoutX="207.0" layoutY="1103.0" text="0">
+        <Label fx:id="blueLabelCloud2" layoutX="219.0" layoutY="163.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelCloud2" layoutX="240.0" layoutY="1062.0" text="0">
+        <Label fx:id="greenLabelCloud2" layoutX="252.0" layoutY="122.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelCloud2" layoutX="283.0" layoutY="1126.0" text="0">
+        <Label fx:id="redLabelCloud2" layoutX="295.0" layoutY="186.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="yellowLabelCloud2" layoutX="245.0" layoutY="1142.0" text="0">
+        <Label fx:id="yellowLabelCloud2" layoutX="257.0" layoutY="202.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="pinkLabelCloud1" layoutX="143.0" layoutY="1010.0" text="0">
+        <Label fx:id="pinkLabelCloud1" layoutX="155.0" layoutY="70.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelCloud1" layoutX="63.0" layoutY="1032.0" text="0">
+        <Label fx:id="blueLabelCloud1" layoutX="75.0" layoutY="92.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelCloud1" layoutX="96.0" layoutY="991.0" text="0">
+        <Label fx:id="greenLabelCloud1" layoutX="108.0" layoutY="51.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelCloud1" layoutX="139.0" layoutY="1055.0" text="0">
+        <Label fx:id="redLabelCloud1" layoutX="151.0" layoutY="115.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="yellowLabelCloud1" layoutX="101.0" layoutY="1071.0" text="0">
+        <Label fx:id="yellowLabelCloud1" layoutX="113.0" layoutY="131.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="pinkLabelCloud4" layoutX="173.0" layoutY="1107.0" text="0">
+        <Label fx:id="pinkLabelCloud4" layoutX="185.0" layoutY="167.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="blueLabelCloud4" layoutX="97.0" layoutY="1124.0" text="0">
+        <Label fx:id="blueLabelCloud4" layoutX="109.0" layoutY="184.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="greenLabelCloud4" layoutX="130.0" layoutY="1083.0" text="0">
+        <Label fx:id="greenLabelCloud4" layoutX="142.0" layoutY="143.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="redLabelCloud4" layoutX="173.0" layoutY="1147.0" text="0">
+        <Label fx:id="redLabelCloud4" layoutX="185.0" layoutY="207.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="yellowLabelCloud4" layoutX="135.0" layoutY="1163.0" text="0">
+        <Label fx:id="yellowLabelCloud4" layoutX="147.0" layoutY="223.0" scaleX="0.8" scaleY="0.8" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <ImageView fx:id="motherNature" fitHeight="45.0" fitWidth="45.0" layoutX="973.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/mother_nature.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile1" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image></ImageView>
-      <ImageView fx:id="noEntryTile2" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile3" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile4" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile5" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile6" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile7" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile8" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile9" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile10" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile11" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="noEntryTile12" fitHeight="45.0" fitWidth="45.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
-         </image>
-      </ImageView>
+        <Label fx:id="descriptionLabel" layoutX="496.0" layoutY="672.0" prefHeight="32.0" prefWidth="450.0" text="Pick an island or the dining room button to choose the student destination">
+            <font>
+                <Font name="Palatino" size="13.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

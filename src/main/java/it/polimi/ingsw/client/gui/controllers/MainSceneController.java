@@ -285,6 +285,20 @@ public class MainSceneController implements GUIController {
     @FXML ImageView greenIsland11;
     @FXML Label greenLabelIsland11;
 
+    @FXML ImageView motherNature1;
+    @FXML ImageView motherNature2;
+    @FXML ImageView motherNature3;
+    @FXML ImageView motherNature4;
+    @FXML ImageView motherNature5;
+    @FXML ImageView motherNature6;
+    @FXML ImageView motherNature7;
+    @FXML ImageView motherNature8;
+    @FXML ImageView motherNature9;
+    @FXML ImageView motherNature10;
+    @FXML ImageView motherNature11;
+    @FXML ImageView motherNature12;
+
+
     @FXML ImageView redIsland12;
     @FXML Label redLabelIsland12;
     @FXML ImageView yellowIsland12;
@@ -543,12 +557,8 @@ public class MainSceneController implements GUIController {
         askAssistantButton.setVisible(false);
 
         switch (serverCommand) {
-            case "PICK_ASSISTANT" -> {
-               showAssistantButton();
-            }
-            case "PICK_CLOUD" -> {
-                askCloud();
-            }
+            case "PICK_ASSISTANT" -> showAssistantButton();
+            case "PICK_CLOUD" -> askCloud();
             case "PICK_DESTINATION" -> {
                 askDestination();
             }
@@ -638,7 +648,7 @@ public class MainSceneController implements GUIController {
         int cont = 0;
         Image pic = null;
         for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if (pl.getNickname().equals(gui.getModelView().getGameCopy().getCurrentPlayer().getNickname())) {
+            if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
@@ -785,82 +795,66 @@ public class MainSceneController implements GUIController {
      }
 
     public void updateMotherNature() {
-        motherNature.setVisible(false);
-        Image img = new Image("@../../graphics/wooden_pieces/mother_nature.png");
-        motherNature.setImage(img);
+        motherNature1.setVisible(false);
+        motherNature2.setVisible(false);
+        motherNature3.setVisible(false);
+        motherNature4.setVisible(false);
+        motherNature5.setVisible(false);
+        motherNature6.setVisible(false);
+        motherNature7.setVisible(false);
+        motherNature8.setVisible(false);
+        motherNature9.setVisible(false);
+        motherNature10.setVisible(false);
+        motherNature11.setVisible(false);
+        motherNature12.setVisible(false);
         int motherNaturePosition = gui.getModelView().getGameCopy().getGameBoard().getMotherNature().getPosition();
         switch (motherNaturePosition) {
             case 1 -> {
-                motherNature.setLayoutX(289);
-                motherNature.setLayoutY(-5);
-                motherNature.setVisible(true);
+                motherNature1.setVisible(true);
             }
             case 2 -> {
-                motherNature.setLayoutX(397);
-                motherNature.setLayoutY(21);
-                motherNature.setVisible(true);
+                motherNature2.setVisible(true);
             }
             case 3 -> {
-                motherNature.setLayoutX(501);
-                motherNature.setLayoutY(82);
-                motherNature.setVisible(true);
+                motherNature3.setVisible(true);
             }
             case 4 -> {
-                motherNature.setLayoutX(526);
-                motherNature.setLayoutY(192);
-                motherNature.setVisible(true);
+                motherNature4.setVisible(true);
             }
             case 5 -> {
-                motherNature.setLayoutX(501);
-                motherNature.setLayoutY(284);
-                motherNature.setVisible(true);
+                motherNature5.setVisible(true);
             }
             case 6 -> {
-                motherNature.setLayoutX(414);
-                motherNature.setLayoutY(358);
-                motherNature.setVisible(true);
+                motherNature6.setVisible(true);
             }
             case 7 -> {
-                motherNature.setLayoutX(295);
-                motherNature.setLayoutY(382);
-                motherNature.setVisible(true);
+                motherNature7.setVisible(true);
             }
 
             case 8 -> {
-                motherNature.setLayoutX(190);
-                motherNature.setLayoutY(358);
-                motherNature.setVisible(true);
+                motherNature8.setVisible(true);
             }
 
             case 9 -> {
-                motherNature.setLayoutX(104);
-                motherNature.setLayoutY(284);
-                motherNature.setVisible(true);
+                motherNature9.setVisible(true);
             }
 
             case 10 -> {
-                motherNature.setLayoutX(65);
-                motherNature.setLayoutY(188);
-                motherNature.setVisible(true);
+                motherNature10.setVisible(true);
             }
 
             case 11 -> {
-                motherNature.setLayoutX(115);
-                motherNature.setLayoutY(87);
-                motherNature.setVisible(true);
+                motherNature11.setVisible(true);
             }
 
             case 12 -> {
-                motherNature.setLayoutX(184);
-                motherNature.setLayoutY(18);
-                motherNature.setVisible(true);
+                motherNature12.setVisible(true);
             }
         }
     }
 
 
     public void updateNoEntryTile() {
-        Image img = new Image("@../../graphics/wooden_pieces/deny_island_icon.png");
         noEntryTile1.setVisible(false);
         noEntryTile2.setVisible(false);
         noEntryTile3.setVisible(false);
@@ -877,75 +871,39 @@ public class MainSceneController implements GUIController {
             if (i.getNoEntry()) {
                 switch (i.getIslandID()) {
                     case 1 -> {
-                        noEntryTile1.setLayoutX(289);
-                        noEntryTile1.setLayoutY(31);
-                        noEntryTile1.setImage(img);
                         noEntryTile1.setVisible(true);
                     }
                     case 2 -> {
-                        noEntryTile2.setLayoutX(397);
-                        noEntryTile2.setLayoutY(55);
-                        noEntryTile2.setImage(img);
                         noEntryTile2.setVisible(true);
                     }
                     case 3 -> {
-                        noEntryTile3.setLayoutX(501);
-                        noEntryTile3.setLayoutY(120);
-                        noEntryTile3.setImage(img);
                         noEntryTile3.setVisible(true);
                     }
                     case 4 -> {
-                        noEntryTile4.setLayoutX(526);
-                        noEntryTile4.setLayoutY(226);
-                        noEntryTile4.setImage(img);
                         noEntryTile4.setVisible(true);
                     }
                     case 5 -> {
-                        noEntryTile5.setLayoutX(501);
-                        noEntryTile5.setLayoutY(323);
-                        noEntryTile5.setImage(img);
                         noEntryTile5.setVisible(true);
                     }
                     case 6 -> {
-                        noEntryTile6.setLayoutX(414);
-                        noEntryTile6.setLayoutY(396);
-                        noEntryTile6.setImage(img);
                         noEntryTile6.setVisible(true);
                     }
                     case 7 -> {
-                        noEntryTile7.setLayoutX(295);
-                        noEntryTile7.setLayoutY(417);
-                        noEntryTile7.setImage(img);
                         noEntryTile7.setVisible(true);
                     }
                     case 8 -> {
-                        noEntryTile8.setLayoutX(190);
-                        noEntryTile8.setLayoutY(396);
-                        noEntryTile8.setImage(img);
                         noEntryTile8.setVisible(true);
                     }
                     case 9 -> {
-                        noEntryTile9.setLayoutX(104);
-                        noEntryTile9.setLayoutY(318);
-                        noEntryTile9.setImage(img);
                         noEntryTile9.setVisible(true);
                     }
                     case 10 -> {
-                        noEntryTile10.setLayoutX(65);
-                        noEntryTile10.setLayoutY(224);
-                        noEntryTile10.setImage(img);
                         noEntryTile10.setVisible(true);
                     }
                     case 11 -> {
-                        noEntryTile11.setLayoutX(115);
-                        noEntryTile11.setLayoutY(128);
-                        noEntryTile11.setImage(img);
                         noEntryTile11.setVisible(true);
                     }
                     case 12 -> {
-                        noEntryTile12.setLayoutX(184);
-                        noEntryTile12.setLayoutY(58);
-                        noEntryTile12.setImage(img);
                         noEntryTile12.setVisible(true);
                     }
                 }
@@ -1184,7 +1142,7 @@ public class MainSceneController implements GUIController {
         ImageView img;
         int cont = 0; //serve per decidere dove posizionare la board del player nella main scene
         for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if (pl.getNickname().equals(gui.getModelView().getGameCopy().getCurrentPlayer().getNickname())) {
+            if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
                     for (int i = 0; i < t.getTable().size(); i++) {
                         if (t.getTable().get(i).hasStudent()) {
@@ -2228,7 +2186,7 @@ public class MainSceneController implements GUIController {
         Image pic = null;
         int cont = 0;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
+            if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
                     pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
                     ((ImageView) myEntrance.getChildren().get(i)).setImage(pic);
@@ -2438,6 +2396,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void updateCharacters() {
+        int num = 0;
         character1.setVisible(true);
         character2.setVisible(true);
         character3.setVisible(true);
@@ -2465,7 +2424,6 @@ public class MainSceneController implements GUIController {
         pinkLabelCharacter3.setVisible(false);
         redLabelCharacter3.setVisible(false);
         yellowLabelCharacter3.setVisible(false);
-
         greenCharacter1.setVisible(false);
         blueCharacter1.setVisible(false);
         pinkCharacter1.setVisible(false);
@@ -2481,15 +2439,67 @@ public class MainSceneController implements GUIController {
         pinkCharacter3.setVisible(false);
         redCharacter3.setVisible(false);
         yellowCharacter3.setVisible(false);
-
         character1Coins.setVisible(true);
         character2Coins.setVisible(true);
         character3Coins.setVisible(true);
-
-        //TODO studenti sulle character cards, coins e rendere visibili i bottoni character1 ecc
-        /*for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
-            if(c.getName().equals())
-        }*/
+        character1Button.setVisible(true);
+        character2Button.setVisible(true);
+        character3Button.setVisible(true);
+        if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName().equals(Characters.JESTER)
+                || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName().equals(Characters.MONK)
+                || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName().equals(Characters.SPOILED_PRINCESS)) {
+            for(Student s : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getStudents()) {
+                if(s.getType().equals(PawnType.RED)) {
+                    redCharacter1.setVisible(true);
+                } else if(s.getType().equals(PawnType.GREEN)) {
+                    greenCharacter1.setVisible(true);
+                } else if(s.getType().equals(PawnType.PINK)) {
+                    pinkCharacter1.setVisible(true);
+                } else if(s.getType().equals(PawnType.BLUE)) {
+                    blueCharacter1.setVisible(true);
+                } else if(s.getType().equals(PawnType.YELLOW)) {
+                    yellowCharacter1.setVisible(true);
+                }
+            }
+            character1Coins.setVisible(true);
+            character1LabelCoin.setText(Integer.toString(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getInitialCost()));
+        } if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName().equals(Characters.JESTER)
+                || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName().equals(Characters.MONK)
+                || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName().equals(Characters.SPOILED_PRINCESS)) {
+            for(Student s : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getStudents()) {
+                if(s.getType().equals(PawnType.RED)) {
+                    redCharacter2.setVisible(true);
+                } else if(s.getType().equals(PawnType.GREEN)) {
+                    greenCharacter2.setVisible(true);
+                } else if(s.getType().equals(PawnType.PINK)) {
+                    pinkCharacter2.setVisible(true);
+                } else if(s.getType().equals(PawnType.BLUE)) {
+                    blueCharacter2.setVisible(true);
+                } else if(s.getType().equals(PawnType.YELLOW)) {
+                    yellowCharacter2.setVisible(true);
+                }
+            }
+            character2Coins.setVisible(true);
+            character2LabelCoin.setText(Integer.toString(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getInitialCost()));
+        } if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName().equals(Characters.JESTER)
+                || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName().equals(Characters.MONK)
+                || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName().equals(Characters.SPOILED_PRINCESS)) {
+            for(Student s : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getStudents()) {
+                if(s.getType().equals(PawnType.RED)) {
+                    redCharacter3.setVisible(true);
+                } else if(s.getType().equals(PawnType.GREEN)) {
+                    greenCharacter3.setVisible(true);
+                } else if(s.getType().equals(PawnType.PINK)) {
+                    pinkCharacter3.setVisible(true);
+                } else if(s.getType().equals(PawnType.BLUE)) {
+                    blueCharacter3.setVisible(true);
+                } else if(s.getType().equals(PawnType.YELLOW)) {
+                    yellowCharacter3.setVisible(true);
+                }
+            }
+            character3Coins.setVisible(true);
+            character3LabelCoin.setText(Integer.toString(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getInitialCost()));
+        }
     }
 
     public void playCharacter(ActionEvent e) {

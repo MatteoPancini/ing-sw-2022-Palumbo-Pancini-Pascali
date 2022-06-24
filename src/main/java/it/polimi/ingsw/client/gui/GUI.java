@@ -308,7 +308,7 @@ public class GUI extends Application implements ListenerInterface {
                     });
                     firstSetupScene = false;
                 } else {
-                    Platform.runLater(() -> updateMainScene());
+                    Platform.runLater(this::updateMainScene);
                 }
 
                 //this.changeStage();
@@ -321,9 +321,13 @@ public class GUI extends Application implements ListenerInterface {
                 assert serverCommand != null;
                 showLoseMessage(changeEvent.getNewValue().toString());
             }
-
              */
             default -> System.out.println("Unknown answer from server");
         }
+    }
+
+    public void showEndGame() {
+        infoAlert.setTitle("Game Over");
+        infoAlert.setContentText("Game over! Congratulations, you are the winner!");
     }
 }
