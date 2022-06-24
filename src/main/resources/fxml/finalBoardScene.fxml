@@ -808,32 +808,32 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 2">
+        <Button fx:id="island2Button" layoutX="831.2430419921875" layoutY="258.1000061035156" mnemonicParsing="false" onAction="#pickIsland" text="Island 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 3">
+        <Button fx:id="island3Button" layoutX="917.6430053710938" layoutY="310.8999938964844" mnemonicParsing="false" onAction="#pickIsland" text="Island 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island5Button" layoutX="927.2430419921875" layoutY="549.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 5">
+        <Button fx:id="island5Button" layoutX="927.2430419921875" layoutY="549.2999877929688" mnemonicParsing="false" onAction="#pickIsland" text="Island 5">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 4">
+        <Button fx:id="island4Button" layoutX="963.2430419921875" layoutY="424.5" mnemonicParsing="false" onAction="#pickIsland" text="Island 4">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 6">
+        <Button fx:id="island6Button" layoutX="855.2430419921875" layoutY="621.2999877929688" mnemonicParsing="false" onAction="#pickIsland" text="Island 6">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island12Button" layoutX="550.4429931640625" layoutY="266.8999938964844" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 12">
+        <Button fx:id="island12Button" layoutX="550.4429931640625" layoutY="266.8999938964844" mnemonicParsing="false" onAction="#pickIsland" text="Island 12">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -853,17 +853,17 @@
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island8Button" layoutX="544.843017578125" layoutY="591.7000122070312" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 8">
+        <Button fx:id="island8Button" layoutX="544.843017578125" layoutY="591.7000122070312" mnemonicParsing="false" onAction="#pickIsland" text="Island 8">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="island7Button" layoutX="672.0430297851562" layoutY="650.0999755859375" mnemonicParsing="false" onMouseClicked="#pickIsland" text="Island 7">
+        <Button fx:id="island7Button" layoutX="672.0430297851562" layoutY="650.0999755859375" mnemonicParsing="false" onAction="#pickIsland" text="Island 7">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="diningRoomButton" layoutX="679.2430419921875" layoutY="412.5" mnemonicParsing="false" onMouseClicked="#pickDiningRoomDestination" text="Pick Dininig Room">
+        <Button fx:id="diningRoomButton" layoutX="679.2430419921875" layoutY="412.5" mnemonicParsing="false" onAction="#pickDiningRoomDestination" text="Pick Dininig Room">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -938,7 +938,7 @@
                 <Image url="@../graphics/wooden_pieces/deny_island_icon.png" />
             </image>
         </ImageView>
-        <Button fx:id="askAssistantButton" layoutX="688.843017578125" layoutY="464.5" mnemonicParsing="false" onMouseClicked="#askAssistant" text="Pick Assistant">
+        <Button fx:id="askAssistantButton" layoutX="688.843017578125" layoutY="464.5" mnemonicParsing="false" onAction="#askAssistant" text="Pick Assistant">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
@@ -2241,7 +2241,7 @@
                 <Image url="@../graphics/wooden_pieces/3D/redStudent3D.png" />
             </image>
         </ImageView>
-        <Button fx:id="quitButton" layoutX="1519.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#quitGame" scaleX="0.8" scaleY="0.8" text="QUIT" textFill="#fc0000">
+        <Button fx:id="quitButton" layoutX="1519.0" layoutY="20.0" mnemonicParsing="false" onAction="#quitGame" scaleX="0.8" scaleY="0.8" text="QUIT" textFill="#fc0000">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>

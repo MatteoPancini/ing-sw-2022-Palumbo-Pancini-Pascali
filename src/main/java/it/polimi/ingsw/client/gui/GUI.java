@@ -18,9 +18,11 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Table;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -37,6 +39,7 @@ import java.util.*;
 
 public class GUI extends Application implements ListenerInterface {
 
+    @FXML Label descriptionLabel;
 
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private final ModelView modelView;
@@ -287,13 +290,16 @@ public class GUI extends Application implements ListenerInterface {
             }
 
             case "DynamicAnswer" -> Platform.runLater(() -> {
-                infoAlert.setTitle("INFO");
-                infoAlert.setHeaderText("Information from server");
-                infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
-                infoAlert.show();
+                if(modelView.isPianification() || modelView.isAction()) {
+                    MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
+                    descriptionLabel.setText(modelView.getServerAnswer().getMessage().toString());
+                } else {
+                    infoAlert.setTitle("INFO");
+                    infoAlert.setHeaderText("Information from server");
+                    infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
+                    infoAlert.show();
+                }
             });
-                    //showServerMessage(modelView.getServerAnswer());
-
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);
