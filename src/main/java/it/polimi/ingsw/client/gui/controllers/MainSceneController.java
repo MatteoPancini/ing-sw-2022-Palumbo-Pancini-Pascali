@@ -957,8 +957,8 @@ public class MainSceneController implements GUIController {
 
     public void pickIsland(ActionEvent e) {
         UserAction action = null;
-        ImageView img = (ImageView) e.getSource();
-        String island = img.getId();
+        ImageView button = (ImageView) e.getSource();
+        String island = button.getId();
         switch(island) {
             case "island1Button" -> {
                 action = new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0));

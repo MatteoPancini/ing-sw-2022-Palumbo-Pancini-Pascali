@@ -2399,23 +2399,23 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Button fx:id="greenStudent" layoutX="1081.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickGreenStudent" scaleX="0.8" scaleY="0.8" text="Green Frog" textFill="#1cb47c">
+        <Button fx:id="greenStudent" layoutX="1081.0" layoutY="860.0" mnemonicParsing="false" onAction="#pickGreenStudent" scaleX="0.8" scaleY="0.8" text="Green Frog" textFill="#1cb47c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="redStudent" layoutX="1180.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickRedStudent" scaleX="0.8" scaleY="0.8" text="Red Dragon" textFill="#ec1c24">
+        <Button fx:id="redStudent" layoutX="1180.0" layoutY="860.0" mnemonicParsing="false" onAction="#pickRedStudent" scaleX="0.8" scaleY="0.8" text="Red Dragon" textFill="#ec1c24">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="yellowStudent" layoutX="1277.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickYellowStudent" scaleX="0.8" scaleY="0.8" text="Yellow Elf" textFill="#fbac2c">
+        <Button fx:id="yellowStudent" layoutX="1277.0" layoutY="860.0" mnemonicParsing="false" onAction="#pickYellowStudent" scaleX="0.8" scaleY="0.8" text="Yellow Elf" textFill="#fbac2c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="pinkStudent" layoutX="1360.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickPinkStudent" scaleX="0.8" scaleY="0.8" text="Pink Fairy" textFill="#db5ca3">
+        <Button fx:id="pinkStudent" layoutX="1360.0" layoutY="860.0" mnemonicParsing="false" onAction="#pickPinkStudent" scaleX="0.8" scaleY="0.8" text="Pink Fairy" textFill="#db5ca3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="blueStudent" layoutX="1444.0" layoutY="860.0" mnemonicParsing="false" onMouseClicked="#pickBlueStudent" scaleX="0.8" scaleY="0.8" text="Blue Unicorn" textFill="#24c4f3">
+        <Button fx:id="blueStudent" layoutX="1444.0" layoutY="860.0" mnemonicParsing="false" onAction="#pickBlueStudent" scaleX="0.8" scaleY="0.8" text="Blue Unicorn" textFill="#24c4f3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
@@ -2459,31 +2459,31 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Button fx:id="effect1" layoutX="1152.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
+        <Button fx:id="effect1" layoutX="1152.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect2" layoutX="1257.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
+        <Button fx:id="effect2" layoutX="1257.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect3" layoutX="1362.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
+        <Button fx:id="effect3" layoutX="1362.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character1Button" layoutX="1137.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 1">
+        <Button fx:id="character1Button" layoutX="1137.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character2Button" layoutX="1240.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 2">
+        <Button fx:id="character2Button" layoutX="1240.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character3Button" layoutX="1345.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 3">
+        <Button fx:id="character3Button" layoutX="1345.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="noCharacterButton" layoutX="1439.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#playCharacter" scaleX="0.8" scaleY="0.8" text="No Character">
+        <Button fx:id="noCharacterButton" layoutX="1439.0" layoutY="83.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="No Character">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
@@ -2526,27 +2526,27 @@
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font></Label>
-        <Button fx:id="greenPawn" layoutX="1083.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickGreenPawn" scaleX="0.8" scaleY="0.8" text="Green Frog" textFill="#1cb47c">
+        <Button fx:id="greenPawn" layoutX="1083.0" layoutY="809.0" mnemonicParsing="false" onAction="#pickGreenPawn" scaleX="0.8" scaleY="0.8" text="Green Frog" textFill="#1cb47c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="redPawn" layoutX="1182.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickRedPawn" scaleX="0.8" scaleY="0.8" text="Red Dragon" textFill="#ec1c24">
+        <Button fx:id="redPawn" layoutX="1182.0" layoutY="809.0" mnemonicParsing="false" onAction="#pickRedPawn" scaleX="0.8" scaleY="0.8" text="Red Dragon" textFill="#ec1c24">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="yellowPawn" layoutX="1280.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickYellowPawn" scaleX="0.8" scaleY="0.8" text="Yellow Elf" textFill="#fbac2c">
+        <Button fx:id="yellowPawn" layoutX="1280.0" layoutY="809.0" mnemonicParsing="false" onAction="#pickYellowPawn" scaleX="0.8" scaleY="0.8" text="Yellow Elf" textFill="#fbac2c">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="pinkPawn" layoutX="1362.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickPinkPawn" scaleX="0.8" scaleY="0.8" text="Pink Fairy" textFill="#db5ca3">
+        <Button fx:id="pinkPawn" layoutX="1362.0" layoutY="809.0" mnemonicParsing="false" onAction="#pickPinkPawn" scaleX="0.8" scaleY="0.8" text="Pink Fairy" textFill="#db5ca3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="bluePawn" layoutX="1446.0" layoutY="809.0" mnemonicParsing="false" onMouseClicked="#pickBluePawn" scaleX="0.8" scaleY="0.8" text="Blue Unicorn" textFill="#24c4f3">
+        <Button fx:id="bluePawn" layoutX="1446.0" layoutY="809.0" mnemonicParsing="false" onAction="#pickBluePawn" scaleX="0.8" scaleY="0.8" text="Blue Unicorn" textFill="#24c4f3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>
