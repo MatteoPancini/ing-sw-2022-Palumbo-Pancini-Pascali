@@ -307,8 +307,7 @@ public class GUI extends Application implements ListenerInterface {
             }
             case "UpdateModelView" -> {
                 assert serverCommand != null;
-                System.out.println("Entro vera update");
-                //modelView.setGameCopy((Game) changeEvent.getNewValue());
+                modelView.setGameCopy((Game) changeEvent.getNewValue());
                 if(firstSetupScene) {
                     Platform.runLater(() -> {
                         changeStage(MAIN_SCENE);
@@ -316,7 +315,6 @@ public class GUI extends Application implements ListenerInterface {
                     });
                     firstSetupScene = false;
                 } else {
-
                     Platform.runLater(() -> updateMainScene());
                 }
 
@@ -334,5 +332,10 @@ public class GUI extends Application implements ListenerInterface {
              */
             default -> System.out.println("Unknown answer from server");
         }
+    }
+
+    public void showEndGame() {
+        infoAlert.setTitle("Game Over");
+        infoAlert.setContentText("Game over! Congratulations, you are the winner!");
     }
 }
