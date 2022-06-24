@@ -1420,6 +1420,10 @@ public class MainSceneController implements GUIController {
         pinkIsland12.setVisible(false);
         pinkLabelIsland12.setVisible(false);
         for (Island isl : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
+            System.out.println(isl.hasTower());
+        }
+
+        for (Island isl : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if (isl.getIslandID() == 1) {
                 island1.setVisible(true);
                 for (Student s : gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0).getStudents()) {
@@ -1924,23 +1928,23 @@ public class MainSceneController implements GUIController {
                         if(s.getType().equals(PawnType.RED)) {
                             redCloud1.setVisible(true);
                             redLabelCloud1.setVisible(true);
-                            redLabelCloud1.setText(getCloudStudentsNumber(c));
+                            redLabelCloud1.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.GREEN)) {
                             greenCloud1.setVisible(true);
                             greenLabelCloud1.setVisible(true);
-                            greenLabelCloud1.setText(getCloudStudentsNumber(c));
+                            greenLabelCloud1.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.YELLOW)) {
                             yellowCloud1.setVisible(true);
                             yellowLabelCloud1.setVisible(true);
-                            yellowLabelCloud1.setText(getCloudStudentsNumber(c));
+                            yellowLabelCloud1.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.PINK)) {
                             pinkCloud1.setVisible(true);
                             pinkLabelCloud1.setVisible(true);
-                            pinkLabelCloud1.setText(getCloudStudentsNumber(c));
+                            pinkLabelCloud1.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.BLUE)) {
                             blueCloud1.setVisible(true);
                             blueLabelCloud1.setVisible(true);
-                            blueLabelCloud1.setText(getCloudStudentsNumber(c));
+                            blueLabelCloud1.setText(getCloudStudentsNumber(c, s));
                         }
                     }
                 }
@@ -1951,23 +1955,23 @@ public class MainSceneController implements GUIController {
                         if(s.getType().equals(PawnType.RED)) {
                             redCloud2.setVisible(true);
                             redLabelCloud2.setVisible(true);
-                            redLabelCloud2.setText(getCloudStudentsNumber(c));
+                            redLabelCloud2.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.GREEN)) {
                             greenCloud2.setVisible(true);
                             greenLabelCloud2.setVisible(true);
-                            greenLabelCloud2.setText(getCloudStudentsNumber(c));
+                            greenLabelCloud2.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.YELLOW)) {
                             yellowCloud2.setVisible(true);
                             yellowLabelCloud2.setVisible(true);
-                            yellowLabelCloud2.setText(getCloudStudentsNumber(c));
+                            yellowLabelCloud2.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.PINK)) {
                             pinkCloud2.setVisible(true);
                             pinkLabelCloud2.setVisible(true);
-                            pinkLabelCloud2.setText(getCloudStudentsNumber(c));
+                            pinkLabelCloud2.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.BLUE)) {
                             blueCloud2.setVisible(true);
                             blueLabelCloud2.setVisible(true);
-                            blueLabelCloud2.setText(getCloudStudentsNumber(c));
+                            blueLabelCloud2.setText(getCloudStudentsNumber(c, s));
                         }
                     }
                 }
@@ -1978,23 +1982,23 @@ public class MainSceneController implements GUIController {
                         if(s.getType().equals(PawnType.RED)) {
                             redCloud3.setVisible(true);
                             redLabelCloud3.setVisible(true);
-                            redLabelCloud3.setText(getCloudStudentsNumber(c));
+                            redLabelCloud3.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.GREEN)) {
                             greenCloud3.setVisible(true);
                             greenLabelCloud3.setVisible(true);
-                            greenLabelCloud3.setText(getCloudStudentsNumber(c));
+                            greenLabelCloud3.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.YELLOW)) {
                             yellowCloud3.setVisible(true);
                             yellowLabelCloud3.setVisible(true);
-                            yellowLabelCloud3.setText(getCloudStudentsNumber(c));
+                            yellowLabelCloud3.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.PINK)) {
                             pinkCloud3.setVisible(true);
                             pinkLabelCloud3.setVisible(true);
-                            pinkLabelCloud3.setText(getCloudStudentsNumber(c));
+                            pinkLabelCloud3.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.BLUE)) {
                             blueCloud3.setVisible(true);
                             blueLabelCloud3.setVisible(true);
-                            blueLabelCloud3.setText(getCloudStudentsNumber(c));
+                            blueLabelCloud3.setText(getCloudStudentsNumber(c, s));
                         }
                     }
                 }
@@ -2005,23 +2009,23 @@ public class MainSceneController implements GUIController {
                         if(s.getType().equals(PawnType.RED)) {
                             redCloud4.setVisible(true);
                             redLabelCloud4.setVisible(true);
-                            redLabelCloud4.setText(getCloudStudentsNumber(c));
+                            redLabelCloud4.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.GREEN)) {
                             greenCloud4.setVisible(true);
                             greenLabelCloud4.setVisible(true);
-                            greenLabelCloud4.setText(getCloudStudentsNumber(c));
+                            greenLabelCloud4.setText(getCloudStudentsNumber(c, s));
                         } else if(s.getType().equals(PawnType.YELLOW)) {
                             yellowCloud4.setVisible(true);
                             yellowLabelCloud4.setVisible(true);
-                            yellowLabelCloud4.setText(getCloudStudentsNumber(c));
+                            yellowLabelCloud4.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.PINK)) {
                             pinkCloud4.setVisible(true);
                             pinkLabelCloud4.setVisible(true);
-                            pinkLabelCloud4.setText(getCloudStudentsNumber(c));
+                            pinkLabelCloud4.setText(getCloudStudentsNumber(c, s));
                         }  else if(s.getType().equals(PawnType.BLUE)) {
                             blueCloud4.setVisible(true);
                             blueLabelCloud4.setVisible(true);
-                            blueLabelCloud4.setText(getCloudStudentsNumber(c));
+                            blueLabelCloud4.setText(getCloudStudentsNumber(c, s));
                         }
                     }
                 }
@@ -2073,10 +2077,10 @@ public class MainSceneController implements GUIController {
     }
 
 
-    public String getCloudStudentsNumber(CloudTile cloud) {
+    public String getCloudStudentsNumber(CloudTile cloud, Student stud) {
         int num = 0;
         for(Student s : cloud.getStudents()) {
-            if(s.getType()==s.getType()) {
+            if(s.getType() == stud.getType()) {
                 num+= 1;
             }
         }

@@ -745,8 +745,10 @@ public class TurnController {
      * Ask from which cloud the player wants to take the students
      */
     public void askCloud() {
+        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
         RequestAction cloudAction = new RequestAction(Action.PICK_CLOUD);
         gameHandler.sendSinglePlayer(cloudAction, currentPlayer.getPlayerID());
+
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
