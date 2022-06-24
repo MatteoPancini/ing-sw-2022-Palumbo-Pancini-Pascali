@@ -2459,31 +2459,31 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Button fx:id="effect1" layoutX="1152.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
+        <Button fx:id="effect1" layoutX="1152.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect1" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect2" layoutX="1257.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
+        <Button fx:id="effect2" layoutX="1257.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect2" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="effect3" layoutX="1362.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect" scaleX="0.8" scaleY="0.8" text="Effect">
+        <Button fx:id="effect3" layoutX="1362.0" layoutY="12.0" mnemonicParsing="false" onAction="#showEffect3" scaleX="0.8" scaleY="0.8" text="Effect">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character1Button" layoutX="1137.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 1">
+        <Button fx:id="character1Button" layoutX="1137.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter1" scaleX="0.8" scaleY="0.8" text="Character 1">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character2Button" layoutX="1240.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 2">
+        <Button fx:id="character2Button" layoutX="1240.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter2" scaleX="0.8" scaleY="0.8" text="Character 2">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="character3Button" layoutX="1345.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="Character 3">
+        <Button fx:id="character3Button" layoutX="1345.0" layoutY="156.0" mnemonicParsing="false" onAction="#playCharacter3" scaleX="0.8" scaleY="0.8" text="Character 3">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>
-        <Button fx:id="noCharacterButton" layoutX="1439.0" layoutY="83.0" mnemonicParsing="false" onAction="#playCharacter" scaleX="0.8" scaleY="0.8" text="No Character">
+        <Button fx:id="noCharacterButton" layoutX="1439.0" layoutY="83.0" mnemonicParsing="false" onAction="#playNoCharacter" scaleX="0.8" scaleY="0.8" text="No Character">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font></Button>

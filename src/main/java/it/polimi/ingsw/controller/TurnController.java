@@ -337,7 +337,6 @@ public class TurnController {
                 }
             }
         }
-
         for (Player p : controller.getGame().getActivePlayers()) {
             System.out.println("P_ " + p.getNickname());
             for (int i = 0; i < 5; i++) {

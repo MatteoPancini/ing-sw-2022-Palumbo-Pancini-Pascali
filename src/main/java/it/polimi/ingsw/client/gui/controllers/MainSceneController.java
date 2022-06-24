@@ -10,8 +10,6 @@ import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.*;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -456,9 +454,7 @@ public class MainSceneController implements GUIController {
 
     @FXML ImageView myCoins;
     @FXML Label myCoinsLabel;
-    @FXML ImageView character1Coins;
-    @FXML ImageView character2Coins;
-    @FXML ImageView character3Coins;
+
 
     @Override
     public void setGui(GUI gui) {
@@ -555,6 +551,7 @@ public class MainSceneController implements GUIController {
         diningRoomButton.setVisible(false);
         askAssistantButton.setVisible(false);
         pickMovesBox.setVisible(false);
+        descriptionLabel.setText("");
 
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> showAssistantButton();
@@ -574,6 +571,10 @@ public class MainSceneController implements GUIController {
                     gui.getModelView().setMinestrelAction(false);
                 }
                 askMoves(gui.getModelView().getGameCopy().getCurrentPlayer().getChosenAssistant());
+            }
+
+            case "PICK_CHARACTER" -> {
+                askCharacter();
             }
             case "PICK_PAWN_TYPE" -> {
                 askPawnType();
@@ -607,7 +608,7 @@ public class MainSceneController implements GUIController {
                 myBoard.setVisible(true);
                 if(gui.getModelView().getGameCopy().isExpertMode()) {
                     myCoinsLabel.setVisible(true);
-                    //myCoinsLabel.setText(gui.getModelView().getGameCopy());
+                    myCoinsLabel.setText(String.valueOf(getCoinsByPlayer(p)));
                     myCoins.setVisible(true);
                 }
             } else if(cont==0) {
@@ -621,6 +622,16 @@ public class MainSceneController implements GUIController {
                 cont++;
             }
         }
+    }
+
+    public int getCoinsByPlayer(Player p) {
+        int coins = 0;
+        for(Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
+            if(p.equals(pl)) {
+                coins = pl.getMyCoins();
+            }
+        }
+        return coins;
     }
 
     public void updateProfessors() {
@@ -761,6 +772,7 @@ public class MainSceneController implements GUIController {
     }
 
      public void askMoves(AssistantCard a) {
+        descriptionLabel.setText("Choose mother nature's moves number from the box");
         pickMovesBox.setVisible(true);
         if(gui.getModelView().isMagicPostmanAction()) {
             for(int i = 1; i <= (a.getMoves() + 2); i++) {
@@ -837,6 +849,20 @@ public class MainSceneController implements GUIController {
             case 12 -> {
                 motherNature12.setVisible(true);
             }
+        }
+    }
+
+    public void askCharacter() {
+        descriptionLabel.setText("Pick a character or play \"No Character\"");
+        noCharacterButton.setVisible(true);
+        if(gui.getModelView().getGameCopy().getCurrentPlayer().getMyCoins() >= gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getInitialCost()) {
+            character1Button.setVisible(true);
+        }
+        if(gui.getModelView().getGameCopy().getCurrentPlayer().getMyCoins() >= gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getInitialCost()) {
+            character2Button.setVisible(true);
+        }
+        if(gui.getModelView().getGameCopy().getCurrentPlayer().getMyCoins() >= gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getInitialCost()) {
+            character3Button.setVisible(true);
         }
     }
 
@@ -1011,6 +1037,29 @@ public class MainSceneController implements GUIController {
                 alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getEffect());
             }
         }
+    }
+
+    public void showEffect1() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Characters Effect");
+        alert.setHeaderText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName() + "'s effect");
+        alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getEffect());
+        alert.show();
+    }
+    public void showEffect2() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Characters Effect");
+        alert.setHeaderText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName() + "'s effect");
+        alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getEffect());
+        alert.show();
+
+    }
+    public void showEffect3() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Characters Effect");
+        alert.setHeaderText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName() + "'s effect");
+        alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getEffect());
+        alert.show();
     }
 
     public void askDestination() {
@@ -2058,6 +2107,7 @@ public class MainSceneController implements GUIController {
         yellowLabelCloud4.setVisible(false);
         pinkLabelCloud4.setVisible(false);
         blueLabelCloud4.setVisible(false);
+        descriptionLabel.setText("Pick a cloud");
         for(CloudTile c : gui.getModelView().getGameCopy().getGameBoard().getClouds()) {
             if(c.getID() == 1) {
                 cloud1Button.setVisible(true);
@@ -2185,7 +2235,7 @@ public class MainSceneController implements GUIController {
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.getChosenAssistant() != null) {
                 img = setAssistantImage(p.getChosenAssistant());
-                if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
+                if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                     ((ImageView) myAssistant).setImage(img);
                     ((ImageView) myAssistant).setVisible(true);
                 } else if(cont==0) {
@@ -2320,7 +2370,7 @@ public class MainSceneController implements GUIController {
 
         } else if(gui.getModelView().isMinestrelAction()) {
             if(gui.getModelView().getCharacterAction() % 2 == 0) {
-                askStudent(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
+                askStudentDiningRoom();
             }
             gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
 
@@ -2371,19 +2421,24 @@ public class MainSceneController implements GUIController {
         for(Student s : c.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
+                redStudent.setVisible(true);
             } else if(s.getType().equals(PawnType.GREEN)) {
                 green.setVisible(true);
+                greenStudent.setVisible(true);
             } else if(s.getType().equals(PawnType.BLUE)) {
                 blue.setVisible(true);
+                blueStudent.setVisible(true);
             } else if(s.getType().equals(PawnType.YELLOW)) {
                 yellow.setVisible(true);
+                yellowStudent.setVisible(true);
             } else if(s.getType().equals(PawnType.PINK)) {
                 pink.setVisible(true);
+                pinkStudent.setVisible(true);
             }
         }
     }
 
-    public void askStudent(DiningRoom dr) {
+    public void askStudentDiningRoom() {
         descriptionLabel.setText("            Pick a student from your dining room");
         for(Table t : gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTable().get(0).hasStudent()) {
@@ -2433,6 +2488,7 @@ public class MainSceneController implements GUIController {
         character1Button.setVisible(false);
         character2Button.setVisible(false);
         character3Button.setVisible(false);
+        noCharacterButton.setVisible(false);
         effect1.setVisible(true);
         effect2.setVisible(true);
         effect3.setVisible(true);
@@ -2469,89 +2525,132 @@ public class MainSceneController implements GUIController {
         pinkCharacter3.setVisible(false);
         redCharacter3.setVisible(false);
         yellowCharacter3.setVisible(false);
-        character1Coins.setVisible(true);
-        character2Coins.setVisible(true);
-        character3Coins.setVisible(true);
-        character1Button.setVisible(true);
-        character2Button.setVisible(true);
-        character3Button.setVisible(true);
+        character1Coin.setVisible(false);
+        character1LabelCoin.setVisible(false);
+        character2Coin.setVisible(false);
+        character2LabelCoin.setVisible(false);
+        character3Coin.setVisible(false);
+        character3LabelCoin.setVisible(false);
+        if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).differentialCost() != 0) {
+            character1Coin.setVisible(true);
+            character1LabelCoin.setVisible(true);
+            character1LabelCoin.setText(String.valueOf(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).differentialCost()));
+        }
+        if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).differentialCost() != 0) {
+            character2Coin.setVisible(true);
+            character2LabelCoin.setVisible(true);
+            character2LabelCoin.setText(String.valueOf(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).differentialCost()));
+        }
+        if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).differentialCost() != 0) {
+            character3Coin.setVisible(true);
+            character3LabelCoin.setVisible(true);
+            character3LabelCoin.setText(String.valueOf(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).differentialCost()));
+        }
         if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName().equals(Characters.JESTER)
                 || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName().equals(Characters.MONK)
                 || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName().equals(Characters.SPOILED_PRINCESS)) {
             for(Student s : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getStudents()) {
                 if(s.getType().equals(PawnType.RED)) {
                     redCharacter1.setVisible(true);
+                    redLabelCharacter1.setVisible(true);
+                    redLabelCharacter1.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0), s));
                 } else if(s.getType().equals(PawnType.GREEN)) {
                     greenCharacter1.setVisible(true);
+                    greenLabelCharacter1.setVisible(true);
+                    greenLabelCharacter1.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0), s));
                 } else if(s.getType().equals(PawnType.PINK)) {
                     pinkCharacter1.setVisible(true);
+                    pinkLabelCharacter1.setVisible(true);
+                    pinkLabelCharacter1.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0), s));
                 } else if(s.getType().equals(PawnType.BLUE)) {
                     blueCharacter1.setVisible(true);
+                    blueLabelCharacter1.setVisible(true);
+                    blueLabelCharacter1.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0), s));
                 } else if(s.getType().equals(PawnType.YELLOW)) {
                     yellowCharacter1.setVisible(true);
+                    yellowLabelCharacter1.setVisible(true);
+                    yellowLabelCharacter1.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0), s));
                 }
             }
-            character1Coins.setVisible(true);
-            character1LabelCoin.setText(Integer.toString(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getInitialCost()));
         } if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName().equals(Characters.JESTER)
                 || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName().equals(Characters.MONK)
                 || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName().equals(Characters.SPOILED_PRINCESS)) {
             for(Student s : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getStudents()) {
                 if(s.getType().equals(PawnType.RED)) {
                     redCharacter2.setVisible(true);
+                    redLabelCharacter2.setVisible(true);
+                    redLabelCharacter2.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1), s));
                 } else if(s.getType().equals(PawnType.GREEN)) {
                     greenCharacter2.setVisible(true);
+                    greenLabelCharacter2.setVisible(true);
+                    greenLabelCharacter2.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1), s));
                 } else if(s.getType().equals(PawnType.PINK)) {
                     pinkCharacter2.setVisible(true);
+                    pinkLabelCharacter2.setVisible(true);
+                    pinkLabelCharacter2.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1), s));
                 } else if(s.getType().equals(PawnType.BLUE)) {
                     blueCharacter2.setVisible(true);
+                    blueLabelCharacter2.setVisible(true);
+                    blueLabelCharacter2.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1), s));
                 } else if(s.getType().equals(PawnType.YELLOW)) {
                     yellowCharacter2.setVisible(true);
+                    yellowLabelCharacter2.setVisible(true);
+                    yellowLabelCharacter2.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1), s));
                 }
             }
-            character2Coins.setVisible(true);
-            character2LabelCoin.setText(Integer.toString(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getInitialCost()));
         } if(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName().equals(Characters.JESTER)
                 || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName().equals(Characters.MONK)
                 || gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName().equals(Characters.SPOILED_PRINCESS)) {
             for(Student s : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getStudents()) {
                 if(s.getType().equals(PawnType.RED)) {
                     redCharacter3.setVisible(true);
+                    redLabelCharacter3.setVisible(true);
+                    redLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2), s));
                 } else if(s.getType().equals(PawnType.GREEN)) {
                     greenCharacter3.setVisible(true);
+                    greenLabelCharacter3.setVisible(true);
+                    greenLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2), s));
                 } else if(s.getType().equals(PawnType.PINK)) {
                     pinkCharacter3.setVisible(true);
+                    pinkLabelCharacter3.setVisible(true);
+                    pinkLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2), s));
                 } else if(s.getType().equals(PawnType.BLUE)) {
                     blueCharacter3.setVisible(true);
+                    blueLabelCharacter3.setVisible(true);
+                    blueLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(3), s));
                 } else if(s.getType().equals(PawnType.YELLOW)) {
                     yellowCharacter3.setVisible(true);
+                    yellowLabelCharacter3.setVisible(true);
+                    yellowLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2), s));
                 }
             }
-            character3Coins.setVisible(true);
-            character3LabelCoin.setText(Integer.toString(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getInitialCost()));
         }
     }
 
-    public void playCharacter(ActionEvent e) {
-        UserAction action = null;
-        ImageView img = (ImageView) e.getSource();
-        CharacterCard character = null;
-        if (img.getId().equals("character1")) {
-            character = gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0);
-        } else if (img.getId().equals("character2")) {
-            character = gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1);
-        } else if (img.getId().equals("character3")) {
-            character = gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2);
-        }
-        for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
-            if(c.equals(character)) {
-                action = new PickCharacter(character.getName());
+    public String getCharacterStudentsNumber(CharacterCard card, Student stud) {
+        int num = 0;
+        for(Student s : card.getStudents()) {
+            if(s.getType().equals(stud.getType())) {
+                num++;
             }
         }
-        if(action!=null) {
-            gui.getClientConnection().sendUserInput(action);
-        }
+        return String.valueOf(num);
     }
+
+
+    public void playCharacter1() {
+        gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName()));
+    }
+    public void playCharacter2() {
+        gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName()));
+    }
+    public void playCharacter3() {
+        gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName()));
+    }
+    public void playNoCharacter() {
+        gui.getClientConnection().sendUserInput(new PickCharacter(null));
+    }
+
 
     public Image getCharacterImage(CharacterCard c) {
         Image pic = null;
@@ -2561,7 +2660,7 @@ public class MainSceneController implements GUIController {
             } case "KNIGHT" -> {
                 pic = new Image("@../../graphics/characters/knight.png");
             } case "CENTAUR" -> {
-                pic = new Image("@../../graphics/characters/centaur.png");
+                pic = new Image("@../../graphics/characters/centarus.png");
             } case "FARMER" -> {
                 pic = new Image("@../../graphics/characters/farmer.png");
             } case "FUNGARUS" -> {
