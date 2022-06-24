@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="813.0" styleClass="mainMenuPanel" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainMenuController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="813.0" styleClass="mainMenuPanel" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.controllers.MainMenuController">
    <children>
       <ImageView fx:id="menuBackground" fitHeight="569.0" fitWidth="819.0" layoutX="-2.0" pickOnBounds="true">
          <image>
-            <Image url="@../graphics/menuBackground.jpg" />
+            <Image url="@../graphics/eriantys_banner.png" />
          </image>
+         <effect>
+            <BoxBlur height="2.0" width="2.0" />
+         </effect>
       </ImageView>
       <ImageView fx:id="cranioLogo" fitHeight="74.0" fitWidth="99.0" layoutX="381.0" layoutY="481.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,20 +24,29 @@
          <font>
             <Font name="Georgia Pro" size="17.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Button>
       <Button fx:id="quitButton" layoutX="640.0" layoutY="322.0" mnemonicParsing="false" onAction="#quit" prefHeight="61.0" prefWidth="111.0" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="QUIT" textFill="#714646">
          <font>
             <Font name="Georgia Pro" size="17.0" />
-         </font></Button>
-      <Label fx:id="authors" layoutX="603.0" layoutY="540.0" prefHeight="14.0" prefWidth="257.0" styleClass="credit" stylesheets="@../css/mainMenu.css" text="Francesco Palumbo, Matteo Pancini, Luigi Pascali">
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <Label fx:id="authors" layoutX="485.0" layoutY="538.0" prefHeight="17.0" prefWidth="328.0" styleClass="credit" stylesheets="@../css/mainMenu.css" text="Francesco Palumbo, Matteo Pancini, Luigi Pascali">
          <font>
-            <Font name="Felix Titling" size="7.0" />
+            <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Label>
       <ImageView fx:id="eriantys" fitHeight="106.0" fitWidth="257.0" layoutX="282.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/eriantys_text_logo.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
    </children>
 </AnchorPane>

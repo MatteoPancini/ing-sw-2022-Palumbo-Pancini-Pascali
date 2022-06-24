@@ -56,7 +56,7 @@ public class GameHandler {
         isExpertMode = expertMode;
         game.setExpertMode(expertMode);
         if(isExpertMode) {
-            controller.setExpertController(new ExpertController(game, game.getGameBoard(), controller.getTurnController()));
+            controller.setExpertController(new ExpertController(game, controller.getTurnController()));
         } else {
             System.out.println("NON SETTO EXPERT");
         }
@@ -175,7 +175,7 @@ public class GameHandler {
     }
 
     public void sendExcept(Answer serverAnswer, int notClientID) {
-        for(Player activePlayers : game.getActivePlayers()) {
+        for(Player activePlayers : controller.getGame().getActivePlayers()) {
             if(server.getIDFromNickname(activePlayers.getNickname()) != notClientID) {
                 sendSinglePlayer(serverAnswer, activePlayers.getPlayerID());
             }
@@ -183,7 +183,7 @@ public class GameHandler {
     }
 
     public void sendBroadcast(Answer serverAnswer) {
-        for(Player player : game.getActivePlayers()) {
+        for(Player player : controller.getGame().getActivePlayers()) {
             sendSinglePlayer(serverAnswer, server.getIDFromNickname(player.getNickname()));
         }
     }

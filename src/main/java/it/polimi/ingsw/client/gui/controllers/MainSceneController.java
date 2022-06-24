@@ -445,7 +445,6 @@ public class MainSceneController implements GUIController {
     @FXML ImageView leftGreenProfessor;
     @FXML ImageView leftPinkProfessor;
     @FXML ImageView leftYellowProfessor;
-    @FXML ImageView motherNature;
     @FXML ImageView myBoard;
     @FXML ImageView topBoard;
     @FXML ImageView leftBoard;
@@ -578,8 +577,7 @@ public class MainSceneController implements GUIController {
                 askPawnType();
             }
             default -> {
-                descriptionLabel.setText("Click the pick assistant button to choose your assistant. " +
-                        "Remember to take a look at the game status to make the best choice!");
+                descriptionLabel.setText("        Click the pick assistant button to choose your assistant");
                 System.out.println("Update without user actions (server command not in switch cases)");
             }
         }
@@ -651,23 +649,23 @@ public class MainSceneController implements GUIController {
                 for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
                             myBlueProfessor.setImage(pic);
                             myBlueProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
                             myGreenProfessor.setImage(pic);
                             myGreenProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
                             myPinkProfessor.setImage(pic);
                             myPinkProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
                             myRedProfessor.setImage(pic);
                             myRedProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
                             myYellowProfessor.setImage(pic);
                             myYellowProfessor.setVisible(true);
                         }
@@ -678,23 +676,23 @@ public class MainSceneController implements GUIController {
                 for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
                             topBlueProfessor.setImage(pic);
                             topBlueProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
                             topGreenProfessor.setImage(pic);
                             topGreenProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
                             topPinkProfessor.setImage(pic);
                             topPinkProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
                             topRedProfessor.setImage(pic);
                             topRedProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
                             topYellowProfessor.setImage(pic);
                             topYellowProfessor.setVisible(true);
                         }
@@ -706,23 +704,23 @@ public class MainSceneController implements GUIController {
                 for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
                             leftBlueProfessor.setImage(pic);
                             leftBlueProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
                             leftGreenProfessor.setImage(pic);
                             leftGreenProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
                             leftPinkProfessor.setImage(pic);
                             leftPinkProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
                             leftRedProfessor.setImage(pic);
                             leftRedProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
                             leftYellowProfessor.setImage(pic);
                             leftYellowProfessor.setVisible(true);
                         }
@@ -733,23 +731,23 @@ public class MainSceneController implements GUIController {
                 for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/blueProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
                             rightBlueProfessor.setImage(pic);
                             rightBlueProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/greenProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
                             rightGreenProfessor.setImage(pic);
                             rightGreenProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/pinkProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
                             rightPinkProfessor.setImage(pic);
                             rightPinkProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/redProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
                             rightRedProfessor.setImage(pic);
                             rightRedProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = new Image("@../../graphics/wooden_pieces/2D/yellowProf3D.png");
+                            pic = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
                             rightYellowProfessor.setImage(pic);
                             rightYellowProfessor.setVisible(true);
                         }
@@ -1101,8 +1099,7 @@ public class MainSceneController implements GUIController {
         cloud4Button.setVisible(false);
     }
     public void showAssistantButton() {
-        descriptionLabel.setText("Click the pick assistant button to choose your assistant. " +
-                "Remember to take a look at the game status to make the best choice!");
+        descriptionLabel.setText("Click the pick assistant button to choose your assistant. ");
         askAssistantButton.setVisible(true);
     }
 
@@ -2216,7 +2213,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void updateEntrances() {
-        for(int i=0; i < 10; i++) {
+        for(int i=0; i < 9; i++) {
             myEntrance.getChildren().get(i).setVisible(false);
             leftEntrance.getChildren().get(i).setVisible(false);
             topEntrance.getChildren().get(i).setVisible(false);
@@ -2354,7 +2351,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askStudentEntrance(Entrance e) {
-        descriptionLabel.setText("Pick a student from your entrance");
+        descriptionLabel.setText("             Pick a student from your entrance");
         for(Student s : e.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
@@ -2376,7 +2373,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askStudentCard(CharacterCard c) {
-        descriptionLabel.setText("Pick a student from the " + c.getName());
+        descriptionLabel.setText("         Pick a student from the " + c.getName());
         for(Student s : c.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
@@ -2393,7 +2390,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askStudent(DiningRoom dr) {
-        descriptionLabel.setText("Pick a student from your dining room");
+        descriptionLabel.setText("            Pick a student from your dining room");
         for(Table t : gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTable().get(0).hasStudent()) {
                 if(t.getTable().get(0).getBoardCellType() == PawnType.BLUE) {
@@ -2421,7 +2418,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askPawnType() {
-        descriptionLabel.setText("Pick a pawn type based on the effect of the character you chose");
+        descriptionLabel.setText("      Pick a pawn type based on the effect of the character you chose");
         green.setVisible(true);
         blue.setVisible(true);
         yellow.setVisible(true);

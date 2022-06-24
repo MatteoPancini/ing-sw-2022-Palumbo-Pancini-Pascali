@@ -60,7 +60,7 @@ public class ExpertControllerTest {
 
     final ControllerStub controllerStub = new ControllerStub(gameHandlerStub.getGame(), gameHandlerStub);
 
-    final ExpertController expertController = new ExpertController(controllerStub.getGame(), controllerStub.getGame().getGameBoard(), controllerStub.getTurnController());
+    final ExpertController expertController = new ExpertController(controllerStub.getGame(), controllerStub.getTurnController());
 
 
 
@@ -93,6 +93,7 @@ public class ExpertControllerTest {
 
     @Test
     public void coinTest() {
+        gameHandlerStub.setExpertMode(true);
 
         System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(PawnType.RED.getPawnID()).getTableStudentsNum());
 
@@ -364,7 +365,7 @@ public class ExpertControllerTest {
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MINESTREL);
         controllerStub.propertyChange(ev1);
-        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickCharacterActionsNum", null, 1);
+        PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickCharacterActionsNum", null, 2);
         controllerStub.propertyChange(ev2);
         PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, s1);
         controllerStub.propertyChange(ev3);
