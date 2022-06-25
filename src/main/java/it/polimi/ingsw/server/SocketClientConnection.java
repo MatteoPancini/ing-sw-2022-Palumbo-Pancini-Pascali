@@ -48,7 +48,6 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
-
     public Integer getClientID() {
         return clientID;
     }
@@ -126,7 +125,6 @@ public class SocketClientConnection implements Runnable {
             closeConnection();
         }
     }
-
 
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
@@ -248,6 +246,3 @@ public class SocketClientConnection implements Runnable {
         sendServerMessage(serverOut);
     }
 }
-
-
-

@@ -7,6 +7,7 @@ import java.lang.IllegalArgumentException;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.Wizards;
+import it.polimi.ingsw.model.player.Player;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
@@ -34,27 +35,21 @@ public class AssistantDeck implements Serializable {
     */
 
     public AssistantDeck(Wizards wizard) {
-        try {
-            File myObj = new File("src/main/resources/cards/assistantCards.txt");
-            Scanner myReader = new Scanner(myObj);
-            String data = myReader.nextLine();
+        InputStream stream = AssistantCard.class.getResourceAsStream("/cards/assistantCards.txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        Scanner myReader = new Scanner(reader);
+        String data = myReader.nextLine();
 
-            Gson gson = new Gson();
-            Type userListType = new TypeToken<ArrayList<AssistantCard>>(){}.getType();
-            deck = gson.fromJson(data, userListType);
+        Gson gson = new Gson();
+        Type userListType = new TypeToken<ArrayList<AssistantCard>>(){}.getType();
+        deck = gson.fromJson(data, userListType);
 
-            for(AssistantCard c : deck){
-                c.setWizard(wizard);
-            }
-
-            myReader.close();
-        }catch(FileNotFoundException e){
-            System.out.println("File not found.");
-            e.printStackTrace();
+        for(AssistantCard c : deck){
+            c.setWizard(wizard);
         }
-        //return;
-    }
 
+        myReader.close();
+    }
 
     public void removeCard(AssistantCard card) {
         for(AssistantCard c : this.getDeck()) {

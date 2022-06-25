@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.clienttoserver.actions.Action;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.CharacterCard;
@@ -15,19 +16,18 @@ import java.util.ArrayList;
 
 public class ExpertController {
     private final Game game;
+    private final GameBoard board;
     private final TurnController turnController;
     private Student studentOne;
     private Student studentTwo;
     private PawnType pawnTypeChosen;
     private Student studentChosen;
 
-
-
-    public ExpertController(Game game, TurnController turnController) {
+    public ExpertController(Game game, GameBoard board, TurnController turnController) {
         this.game = game;
+        this.board = board;
         this.turnController = turnController;
     }
-
 
     public Student getStudentChosen() {
         return studentChosen;
@@ -71,8 +71,6 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
 
 
-
-
     //JESTER
     //------------------------------------------------------------------------------------------------------------------
     private boolean jesterEffect;
@@ -100,8 +98,6 @@ public class ExpertController {
             turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
             turnController.askStudent();
         } else {
-            //student 1 = jester
-            //student 2 = entrance
             System.out.println("Stud 1: " + studentOne.getType());
             System.out.println("Stud 2: " + studentTwo.getType());
 
@@ -132,12 +128,15 @@ public class ExpertController {
     //MONK
     //------------------------------------------------------------------------------------------------------------------
     private boolean monkEffect;
+
     public boolean isMonkEffect() {
         return monkEffect;
     }
+
     public void setMonkEffect(boolean monkEffect) {
         this.monkEffect = monkEffect;
     }
+
     public void monkEffect() {
         monkEffect = true;
         turnController.getGameHandler().sendSinglePlayer(new MonkAction(), turnController.getCurrentPlayer().getPlayerID());
@@ -192,6 +191,7 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
     public void thiefEffect() {
         thiefEffect = true;
+
         RequestAction pawnRequest = new RequestAction(Action.PICK_PAWN_TYPE);
         turnController.getGameHandler().sendSinglePlayer(pawnRequest, turnController.getCurrentPlayer().getPlayerID());
     }
@@ -214,6 +214,7 @@ public class ExpertController {
                     p.getBoard().getProfessorTable().getCellByColor(pawnTypeChosen).resetProfessor();
                     break;
                 }
+
             }
         }
 
@@ -287,8 +288,6 @@ public class ExpertController {
 
             game.getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentTwo);
             game.getCurrentPlayer().getBoard().getEntrance().setStudents(studentOne);
-            turnController.setStudentToMove(studentTwo);
-            turnController.checkProfessorInfluence();
 
             studentOne = null;
             studentTwo = null;
@@ -301,6 +300,8 @@ public class ExpertController {
                 turnController.askStudent();
             }
         }
+
+
     }
     //------------------------------------------------------------------------------------------------------------------
 
