@@ -11,23 +11,17 @@ import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 public class GameHandler {
     private static Game game;
     private final Controller controller;
     private final Server server;
     private int playersNumber;
-    private ArrayList<Player> players;
     private final PropertyChangeSupport gameHandlerListener = new PropertyChangeSupport(this);
     private boolean isExpertMode;
     private boolean isTeamMode = false;
     private int currentPlayerId;
     private boolean isMatchStarted;
-
-    private Thread timeout;
-    private boolean activeTimeout = false;
-    private boolean restartGame = false;
 
 
     public GameHandler(Server server){
@@ -110,10 +104,6 @@ public class GameHandler {
 
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
     public Controller getController() {
         return controller;
     }
@@ -147,10 +137,6 @@ public class GameHandler {
         game.setPlayersNumber(playersNumber);
     }
 
-
-    public boolean isTeamMode() {
-        return isTeamMode;
-    }
 
     public void initializeWizards() {
         System.out.println("Il numero di giocatori della partita è: " + playersNumber);

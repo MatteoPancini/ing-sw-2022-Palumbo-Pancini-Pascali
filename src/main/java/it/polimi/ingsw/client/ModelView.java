@@ -2,13 +2,10 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
-import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
-
-import java.util.ArrayList;
 
 public class ModelView {
     private CLI cli;
@@ -120,37 +117,20 @@ public class ModelView {
         this.serverAnswer = serverAnswer;
     }
 
-    public boolean isActiveInput() {
-        return activeInput;
-    }
-
     public void setStartPlaying(boolean startPlaying) {
         this.startPlaying = startPlaying;
     }
 
-    public boolean isStartPlaying() {
-        return startPlaying;
-    }
-
-    public String getWizardName() {
-        return wizardName;
-    }
 
     public void setWizardName(String wizardName) {
         this.wizardName = wizardName;
     }
 
-    public boolean isGameStarted() {
-        return gameStarted;
-    }
 
     public void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
     }
 
-    public void setCli(CLI cli) {
-        this.cli = cli;
-    }
 
     public ModelView(CLI cli)  {
         this.cli = cli;
@@ -180,7 +160,6 @@ public class ModelView {
     }
 
     public void setGameCopy(Game game) {
-        System.out.println("Setto nuova gameCopy");
         this.gameCopy = game;
     }
 

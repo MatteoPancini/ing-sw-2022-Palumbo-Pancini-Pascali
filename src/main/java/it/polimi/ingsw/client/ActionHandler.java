@@ -47,7 +47,6 @@ public class ActionHandler {
                 view.firePropertyChange("InitialGamePhase", null, "RequestWizard");
             } else {
                 modelView.setWizardName(((WizardAnswer) answer).getWizard());
-                //cli.showServerMessage();
             }
         } else if (answer instanceof ExpertModeAnswer) {
             view.firePropertyChange("InitialGamePhase", null, "ExpertModeAnswer");
@@ -60,15 +59,10 @@ public class ActionHandler {
             modelView.setGameCopy((Game) answer.getMessage());
             showGame = showGame + 1;
             if(showGame == 1) {
-                System.out.println("Faccio update");
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
             } else if (gui != null) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }/* else if(modelView.isPianification()) {
-                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }*/
-
-            //System.out.println("non aggiorno");
+            }
         } else if(answer instanceof StartAction) {
             System.out.println("Setting Action");
             modelView.setActivateInput(true);
@@ -101,17 +95,25 @@ public class ActionHandler {
             modelView.setMagicPostmanAction(true);
         } else if(answer instanceof MinestrelAction) {
             modelView.setMinestrelAction(true);
-            cli.askCharacterActionsNumber();
+            if(cli != null) {
+                cli.askCharacterActionsNumber();
+            } else if(gui != null) {
+                view.firePropertyChange("UpdateModelView", null, "PICK_CHARACTER_NUMBER");
+            }
         } else if(answer instanceof JesterAction) {
             modelView.setJesterAction(true);
-            cli.askCharacterActionsNumber();
+            if(cli != null) {
+                cli.askCharacterActionsNumber();
+            } else if(gui != null) {
+                view.firePropertyChange("UpdateModelView", null, "PICK_CHARACTER_NUMBER");
+            }
         } else if(answer instanceof GrannyHerbsAction) {
             modelView.setGrannyHerbsAction(true);
             if (cli != null) {
                 cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
-            } /*else if(gui != null) {
-                gui.get
-            }*/
+            } else if(gui != null) {
+                view.firePropertyChange("UpdateModelView", null, "PICK_ISLAND");
+            }
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);
         } else if(answer instanceof NoWinnerGameNotification) {

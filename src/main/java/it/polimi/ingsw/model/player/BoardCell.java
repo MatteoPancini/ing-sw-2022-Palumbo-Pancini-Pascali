@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class BoardCell implements Serializable {
     private PawnType boardCellType;
@@ -33,10 +32,6 @@ public class BoardCell implements Serializable {
         return boardCellType;
     }
 
-    public void setBoardCellType(PawnType boardCellType) {
-        this.boardCellType = boardCellType;
-    }
-
     public void setStudent(Student student){
         this.student = student;
     }
@@ -51,9 +46,6 @@ public class BoardCell implements Serializable {
         this.professor = professor;
     }
 
-    public Professor getProfessor() {
-        return professor;
-    }
     public boolean hasProfessor() {
         if(professor != null) {
             return true;

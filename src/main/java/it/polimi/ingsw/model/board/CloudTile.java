@@ -12,7 +12,7 @@ public class CloudTile implements Serializable {
 
     public CloudTile(CloudSide side){
         this.side = side;
-        cloudStudents = new ArrayList<Student>();
+        cloudStudents = new ArrayList<>();
     }
 
     public int getID() {

@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.Game;
 
 public class GameBoard implements Serializable {
     private Game game;
-    private ArrayList<CloudTile> clouds = new ArrayList<>();;
+    private ArrayList<CloudTile> clouds = new ArrayList<>();
     private ArrayList<Island> islands;
     private ArrayList<Professor> professors;
     private MotherNature motherNature;
@@ -22,10 +22,7 @@ public class GameBoard implements Serializable {
 
     public GameBoard (Game game) {
         this.game = game;
-        System.err.println("Inizializzo GAMEBOARD");
 
-
-        System.out.println("Numero di giocatori : " + game.getPlayersNumber());
         for (int i = 1; i <= game.getPlayersNumber(); i++) {
             if (game.getPlayersNumber() == 3) {
                 this.clouds.add(new CloudTile(CloudSide.THREE));
@@ -38,23 +35,23 @@ public class GameBoard implements Serializable {
         }
 
 
-        islands = new ArrayList<Island>();
+        islands = new ArrayList<>();
         for (int j = 1; j <= 12; j++){
             islands.add(new Island(this, j));
         }
 
-        ArrayList<PawnType> pawns = new ArrayList<PawnType>();
+        ArrayList<PawnType> pawns = new ArrayList<>();
         pawns.add(PawnType.BLUE);
         pawns.add(PawnType.GREEN);
         pawns.add(PawnType.RED);
         pawns.add(PawnType.YELLOW);
         pawns.add(PawnType.PINK);
-        professors = new ArrayList<Professor>();
+        professors = new ArrayList<>();
         for (PawnType p : pawns) {
             professors.add(new Professor(p));
         }
 
-        studentsBag = new ArrayList<Student>();
+        studentsBag = new ArrayList<>();
         setupStudentsBag = new ArrayList<>();
         for (PawnType p : pawns) {
             for(int k = 1; k <= 24; k++) {
@@ -69,15 +66,6 @@ public class GameBoard implements Serializable {
 
         islandCounter = 12;
 
-        /*
-        if(game.isExpertMode() == true) {
-            playableCharacters = CharacterDeck.getPlayableCards(game);
-        }
-        else playableCharacters = null;
-
-
-         */
-        //lastAssistantUsed = new ArrayList<AssistantCard>();
     }
 
     public Game getGame() {
@@ -99,14 +87,6 @@ public class GameBoard implements Serializable {
     public void setPlayableCharacters() {
         characterDeck = CharacterDeck.getPlayableCards(game);
 
-        /*
-        for(int i = 3; i <= 12; i++){
-            playableCharacters.getDeck().remove(i);
-        }
-        System.out.println(playableCharacters.getDeck().size());
-
-
-         */
         for(int i = 0; i < 3; i++) {
             playableCharacters.add(characterDeck.getDeck().get(i));
         }

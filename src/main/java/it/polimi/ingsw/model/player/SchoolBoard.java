@@ -1,8 +1,5 @@
 package it.polimi.ingsw.model.player;
 
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.Student;
-
 import java.io.Serializable;
 
 public class SchoolBoard implements Serializable {
@@ -42,9 +39,4 @@ public class SchoolBoard implements Serializable {
 
     public void setEntrance(Entrance entrance){ this.entrance = entrance; }
 
-    public void setTowerArea(TowerArea towerArea){ this.towerArea = towerArea; }
-
-    /*public boolean isStudentInEntrance(String input) {
-
-    }*/
 }

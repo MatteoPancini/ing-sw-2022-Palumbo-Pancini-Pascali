@@ -2,37 +2,17 @@ package it.polimi.ingsw.model.cards;
 
 import com.google.gson.*;
 import java.io.*;
-import java.lang.IllegalArgumentException;
 
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.Wizards;
-import it.polimi.ingsw.model.player.Player;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class AssistantDeck implements Serializable {
     private List<AssistantCard> deck;
-
-    /*
-    public AssistantDeck(Wizards wizard) {
-        this.deck.add(new AssistantCard(Assistants.CAT, wizard));
-        this.deck.add(new AssistantCard(Assistants.EAGLE, wizard));
-        this.deck.add(new AssistantCard(Assistants.ELEPHANT, wizard));
-        this.deck.add(new AssistantCard(Assistants.OSTRICH, wizard));
-        this.deck.add(new AssistantCard(Assistants.TURTLE, wizard));
-        this.deck.add(new AssistantCard(Assistants.CHEETAH, wizard));
-        this.deck.add(new AssistantCard(Assistants.DOG, wizard));
-        this.deck.add(new AssistantCard(Assistants.FOX, wizard));
-        this.deck.add(new AssistantCard(Assistants.LIZARD, wizard));
-        this.deck.add(new AssistantCard(Assistants.OCTOPUS, wizard));
-    }
-    */
 
     public AssistantDeck(Wizards wizard) {
         InputStream stream = AssistantCard.class.getResourceAsStream("/cards/assistantCards.txt");

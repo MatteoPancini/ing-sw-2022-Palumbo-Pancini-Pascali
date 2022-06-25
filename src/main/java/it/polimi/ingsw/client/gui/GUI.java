@@ -233,6 +233,8 @@ public class GUI extends Application implements ListenerInterface {
          */
     }
 
+
+
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;

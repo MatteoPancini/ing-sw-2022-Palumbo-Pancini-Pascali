@@ -11,8 +11,6 @@ public class Player implements Serializable {
     private Wizards wizard;
     private AssistantDeck assistantDeck;
     private SchoolBoard board;
-    private boolean isPlaying;
-    private boolean isWinner;
     private int idTeam;
     private AssistantCard chosenAssistant;
     private boolean teamLeader;
@@ -86,12 +84,9 @@ public class Player implements Serializable {
 
     public void setWizard(Wizards wizard) {
         this.wizard = wizard;
-        System.out.println(nicknamePlayer + "'s wizard is " + wizard);
         assistantDeck = new AssistantDeck(wizard);
-        System.out.println("Setting " + nicknamePlayer + "'s cards:");
         for(AssistantCard a : assistantDeck.getDeck()) {
             a.setOwner(this);
-            System.out.println(" " + a.getName() + " " + a.getValue() + " " + a.getMoves() + " " + a.getWizard());
         }
     }
 
