@@ -29,10 +29,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ExpertControllerTest {
     final PlayerStub matteo = new PlayerStub("Matteo", 1);
     final PlayerStub cisco = new PlayerStub("Cisco", 2);
-    final PlayerStub gigiox = new PlayerStub("Gigiox", 3);
-    final PlayerStub mario = new PlayerStub("Mario", 4);
-
-
     final Socket socket = new Socket();
     final ServerStub server = new ServerStub();
     final GameHandlerStub gameHandlerStub = new GameHandlerStub(server);
@@ -63,7 +59,7 @@ public class ExpertControllerTest {
     final ExpertController expertController = new ExpertController(controllerStub.getGame(), controllerStub.getTurnController());
 
     @BeforeEach
-    @DisplayName("Expert Mode Tets")
+    @DisplayName("Expert Mode Test")
     public void expertModeGame() {
         matteo.setWizard(Wizards.KING);
         System.out.println("\n");
@@ -85,8 +81,6 @@ public class ExpertControllerTest {
         controllerStub.setExpertController(expertController);
     }
 
-
-
     @Test
     public void coinTest() {
         gameHandlerStub.setExpertMode(true);
@@ -100,9 +94,6 @@ public class ExpertControllerTest {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.HERALD, " ", 3));
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.GRANNY_HERBS, " ", 2));
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.FUNGARUS, " ", 3));
-
-
-
 
         controllerStub.getTurnController().setStudentToMove(s1);
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
@@ -123,11 +114,11 @@ public class ExpertControllerTest {
         assertEquals(controllerStub.getGame().getCurrentPlayer().getMyCoins(), 2);
 
         System.out.println(controllerStub.getGame().getCurrentPlayer().getMyCoins());
-        System.out.println("Prima" + controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getInitialCost());
+        System.out.println("Before" + controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getInitialCost());
 
         controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).incrementPrice();
 
-        System.out.println("Dopo" + controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getInitialCost());
+        System.out.println("After" + controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getInitialCost());
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev1);
@@ -137,44 +128,24 @@ public class ExpertControllerTest {
         for(CharacterCard c : controllerStub.getGame().getGameBoard().getPlayableCharacters()) {
             System.out.println(c.getName() + " " + c.getInitialCost());
         }
-
     }
-
-
 
     @Test
     @DisplayName("Herald Test")
     public void heraldTest() {
-        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.HERALD, " ", 3));
-        /*
-        System.out.println("\n" + controllerStub.getGame().getGameBoard().getPlayableCharacters().size());
-        for(CharacterCard c : controllerStub.getGame().getGameBoard().getPlayableCharacters()) {
-            System.out.println(c.getName() + " ");
-        }
-
-         */
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.HERALD);
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "CheckInfluence", null, controllerStub.getGame().getGameBoard().getIslands().get(0));
         controllerStub.propertyChange(ev2);
-
     }
 
     @Test
     @DisplayName("Centaur Test")
     public void centaurTest() {
-        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.CENTAUR, " ", 3));
-        /*
-        System.out.println("\n" + controllerStub.getGame().getGameBoard().getPlayableCharacters().size());
-        for(CharacterCard c : controllerStub.getGame().getGameBoard().getPlayableCharacters()) {
-            System.out.println(c.getName() + " ");
-        }
 
-         */
         System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().get(0).getColor().toString());
-
 
         controllerStub.getGame().getGameBoard().getIslands().get(2).setTower(controllerStub.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().get(0));
 
@@ -188,7 +159,6 @@ public class ExpertControllerTest {
     @Test
     @DisplayName("Knight Test")
     public void knightTest() {
-        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.KNIGHT, " ", 2));
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.KNIGHT);
@@ -200,7 +170,6 @@ public class ExpertControllerTest {
     @Test
     @DisplayName("Thief Test")
     public void thiefTest() {
-        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.THIEF, " ", 3));
 
         System.err.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum());
@@ -214,8 +183,6 @@ public class ExpertControllerTest {
         System.err.println(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum());
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(4).getTableStudentsNum(), 4);
 
-
-
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.THIEF);
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickPawnType", null, PawnType.BLUE);
@@ -227,21 +194,14 @@ public class ExpertControllerTest {
     @Test
     @DisplayName("Fungarus Test")
     public void fungarusTest() {
-        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.FUNGARUS, " ", 3));
-
-
 
         controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE));
         controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE).setOwner(controllerStub.getGame().getCurrentPlayer());
         controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.RED).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED));
         controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.RED).setOwner(controllerStub.getGame().getCurrentPlayer());
 
-        //controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
-        //controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
         controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.BLUE));
-        //controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().add(new Student(PawnType.RED));
-
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.FUNGARUS);
         controllerStub.propertyChange(ev1);
@@ -255,10 +215,7 @@ public class ExpertControllerTest {
     @Test
     @DisplayName("Farmer Test")
     public void farmerTest() {
-        //non setto controllerStub.getGame().setExpertMode altrimenti ogni volta mi crea carte a caso e non so quali devo giocare con il propertychange
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.FARMER, " ", 2));
-
-
 
         controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE));
         controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.BLUE).setOwner(controllerStub.getGame().getActivePlayers().get(1));
@@ -271,13 +228,10 @@ public class ExpertControllerTest {
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(new Student(PawnType.BLUE));
 
-
         assertEquals(controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().getDiningRoom().get(PawnType.BLUE.getPawnID()).getTableStudentsNum(), 2);
-
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.FARMER);
         controllerStub.propertyChange(ev1);
-
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getProfessorTable().getCellByColor(PawnType.BLUE).hasProfessor(), true);
     }
@@ -295,10 +249,6 @@ public class ExpertControllerTest {
         controllerStub.propertyChange(ev2);
         PropertyChangeEvent ev3 = new PropertyChangeEvent(1, "PickStudent", null, s);
         controllerStub.propertyChange(ev3);
-
-
-
-
     }
 
     @Test
@@ -306,13 +256,11 @@ public class ExpertControllerTest {
     public void magicPostmanTest() {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MAGIC_POSTMAN, " ", 1));
 
-
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.MAGIC_POSTMAN);
         controllerStub.propertyChange(ev1);
 
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickMovesNumber", null, 4);
         controllerStub.propertyChange(ev2);
-
     }
 
 
@@ -345,9 +293,8 @@ public class ExpertControllerTest {
     @DisplayName("Minestrel Test")
     public void minestrelTest() {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.MINESTREL, " ", 1));
-        Student s1 = new Student(PawnType.BLUE); //DINING
-        Student s2 = new Student(PawnType.RED); //ENTRANCE
-
+        Student s1 = new Student(PawnType.BLUE);
+        Student s2 = new Student(PawnType.RED);
 
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
         controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
@@ -379,7 +326,6 @@ public class ExpertControllerTest {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().add(new CharacterCard(Characters.SPOILED_PRINCESS, " ", 2));
         Student s1 = new Student(PawnType.BLUE);
 
-
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.SPOILED_PRINCESS);
         controllerStub.propertyChange(ev1);
         PropertyChangeEvent ev2 = new PropertyChangeEvent(1, "PickStudent", null, s1);
@@ -396,7 +342,6 @@ public class ExpertControllerTest {
         Student s3 = new Student(PawnType.RED); //ENTRANCE
         Student s4 = new Student(PawnType.GREEN); //ENTRANCE
 
-
         for(Student s : controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents()) {
             controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents().remove(s);
         }
@@ -404,7 +349,6 @@ public class ExpertControllerTest {
         controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).addStudent(s2);
 
         System.out.println(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
-
 
         controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
         controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().get(0));
@@ -419,8 +363,6 @@ public class ExpertControllerTest {
 
         assertEquals(controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents().size(), 2);
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size(), 2);
-
-
 
         PropertyChangeEvent ev1 = new PropertyChangeEvent(1, "PickCharacter", null, Characters.JESTER);
         controllerStub.propertyChange(ev1);
@@ -440,19 +382,9 @@ public class ExpertControllerTest {
 
         assertEquals(controllerStub.getGame().getCurrentPlayer().getBoard().getEntrance().getStudents().size(), 2);
         assertEquals(controllerStub.getGame().getGameBoard().getPlayableCharacters().get(0).getStudents().size(), 2);
-
-
-
-
     }
 
-
-
-
-
     public void setupGame() {
-        System.out.println("Starting setupGame");
-
         int studentsNumber;
         if(controllerStub.getGame().getPlayersNumber() == 3) {
             studentsNumber = 9;
@@ -482,16 +414,12 @@ public class ExpertControllerTest {
         }
 
         for(Player p : controllerStub.getGame().getActivePlayers()) {
-            //System.out.println("Inizio setup di " + p.getNickname());
-
-            //System.out.println("metto students nell'entrance");
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(controllerStub.getGame().getGameBoard().getStudentsBag());
                 p.getBoard().getEntrance().getStudents().add(controllerStub.getGame().getGameBoard().getStudentsBag().get(0));
                 controllerStub.getGame().getGameBoard().removeStudents(0);
             }
 
-            //System.out.println("metto torri");
             if(controllerStub.getGame().getActivePlayers().size() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
@@ -510,12 +438,9 @@ public class ExpertControllerTest {
             }
         }
 
-        //System.out.println("metto madre natura");
-
         int maximum = 11;
         SecureRandom r = new SecureRandom();
         controllerStub.getGame().getGameBoard().getMotherNature().setPosition(1);
-        //int n = 1;
         int mnPos = controllerStub.getGame().getGameBoard().getMotherNature().getPosition();
 
         int mnPosOpposite = -1;
@@ -525,16 +450,12 @@ public class ExpertControllerTest {
             mnPosOpposite = (mnPos + 6) % 12;
         }
 
-        //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
-
         for(int s = 1; s <= 12; s++) {
             if(s != mnPos && s != mnPosOpposite) {
-                //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
                 Collections.shuffle(controllerStub.getGame().getGameBoard().getSetupStudentsBag());
                 controllerStub.getGame().getGameBoard().getIslands().get(s - 1).addStudent(controllerStub.getGame().getGameBoard().getSetupStudentsBag().get(0));
                 controllerStub.getGame().getGameBoard().removeSetupStudents(0);
             }
-            //n++;
         }
 
         for(int p = 1; p <= 12; p++){
@@ -554,41 +475,22 @@ public class ExpertControllerTest {
         System.out.println("Finished setupGame");
     }
 
-    /** Class GameHandlerStub defines a stub for GameHandler class */
     public class GameHandlerStub extends GameHandler {
-
-        /**
-         * Constructor GameHandler creates a new GameHandler instance.
-         *
-         * @param server of type Server - the main server class.
-         */
         public GameHandlerStub(Server server) {
             super(server);
         }
 
         ControllerStub controllerStub;
-        /**
-         * Method singleSend sends a message to a client, identified by his ID number, through the
-         * server socket.
-         *
-         * @param message of type Answer - the message to be sent to the client.
-         * @param id of type int - the unique identification number of the client to be contacted.
-         */
+
         @Override
         public void sendSinglePlayer(Answer message, int id) {
             String print;
             if (message.getMessage() == null) {
-                print = "Not useraction";
+                print = "No user action";
             } else print = message.getMessage().toString();
             System.out.println(print);
         }
 
-        /**
-         * Method getCurrentPlayerID returns the current player client ID, getting it from the
-         * currentPlayer reference in the Game class.
-         *
-         * @return the currentPlayerID (type int) of this GameHandler object.
-         */
         @Override
         public int getCurrentPlayerId() {
             return game.getCurrentPlayer().getPlayerID();
@@ -598,19 +500,6 @@ public class ExpertControllerTest {
         public ControllerStub getController() {
             return controllerStub;
         }
-
-        public void setControllerStub(ControllerStub controllerStub) {
-            this.controllerStub = controllerStub;
-        }
-
-        /**
-         * Method sendAll does the same as the previous method, but it iterates on all the clients
-         * present in the game. It's a full effects broadcast.
-         *
-         * @param message of type Answer - the message to broadcast (at single match participants'
-         *     level).
-         */
-
 
         @Override
         public void sendBroadcast(Answer message) {
@@ -625,86 +514,39 @@ public class ExpertControllerTest {
 
     }
 
-    /** Class ControllerStub defines a stub for Controller class. */
     public static class ControllerStub extends Controller {
-
-        /**
-         * Constructor Controller creates a new Controller instance.
-         *
-         */
         public ControllerStub(Game game, GameHandler gameHandler) {
             super(game, gameHandler);
         }
     }
 
-
-    /** Class ServerStub defines a stub for Server class. */
     public static class ServerStub extends Server {
         private HashMap<Integer, VirtualClientView> idMapID;
-        /**
-         * Constructor Server creates the instance of the server, based on a socket and the mapping
-         * between VirtualClient, nicknames and client ids. It also creates a new game session.
-         */
+
         public ServerStub() {
             this.idMapID = null;
         }
-        /**
-         * Method setIdMapID sets the idMapID of this ServerStub object.
-         *
-         * @param idMapID the idMapID of this ServerStub object.
-         */
+
         public void setIdMapID(HashMap idMapID) {
             this.idMapID = idMapID;
         }
-        /**
-         * Method getClientByID returns a link to the desired virtual client, in order to make
-         * operations on it (like send, etc).
-         *
-         * @param id of type int - the id of the virtual client needed.
-         * @return VirtualClient - the correct virtual client.
-         */
+
         @Override
         public VirtualClientView getVirtualClientFromID(int id) {
             return idMapID.get(id);
         }
     }
 
-
-
-    /** Class PlayerStub defines a stub for Player class. */
     public static class PlayerStub extends Player {
-
-        /**
-         * Constructor PlayerStub creates a new PlayerStub instance.
-         *
-         * @param nickname of type String - the player's nickname.
-         * @param clientID of type int - the clientID.
-         */
         public PlayerStub(String nickname, int clientID) {
             super(nickname, clientID);
         }
     }
 
-
-    /** Class SocketClientConnectionStub defines a stub for SocketClientConnection class. */
     public static class SocketClientConnectionStub extends SocketClientConnection {
-
-        /**
-         * Constructor of the class: it instantiates an input/output stream from the socket received as
-         * parameters, and add the main server to his attributes too.
-         *
-         * @param socket the socket which accepted the client connection.
-         * @param server the main server class.
-         */
         public SocketClientConnectionStub(Socket socket, Server server) {
             super(socket, server);
         }
-        /**
-         * Method close terminates the connection with the client, closing firstly input and output
-         * streams, then invoking the server method called "unregisterClient", which will remove the
-         * active virtual client from the list.
-         *
-         */
         @Override
         public void closeConnection() {
             System.out.println("Connection closed to client");
