@@ -1,13 +1,10 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
-import it.polimi.ingsw.messages.clienttoserver.actions.PickDestination;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.Transient;
 
 
 public class Parser implements PropertyChangeListener {
@@ -23,43 +20,6 @@ public class Parser implements PropertyChangeListener {
 
     public ModelView getModelView() {
         return modelView;
-    }
-
-    public ClientConnection getConnectionSocket() {
-        return clientConnection;
-    }
-
-
-    public UserAction parseAssistant(String input) throws AlreadyPlayedAssistantException {
-        UserAction message = null;
-        try {
-            message = inputChecker.checkAssistant(input);
-        } catch (AlreadyPlayedAssistantException e) { modelView.getCli().getOutput().println(e.getMessage()); }
-        return message;
-    }
-
-    public UserAction parseStudent(String input) {
-        UserAction message;
-        message = inputChecker.checkStudent(input);
-        return message;
-    }
-
-    public UserAction parseDestination(String input) {
-        UserAction message = inputChecker.checkDestination(input);
-        return message;
-    }
-
-    public UserAction parseMoves(String input) {
-        UserAction message;
-        message = inputChecker.checkMoves(input);
-        return message;
-    }
-
-    public UserAction parseCloud(String input) {
-        UserAction message;
-        message = inputChecker.checkCloud(input);
-        //modelView.setLastUserAction(message);
-        return message;
     }
 
     public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
@@ -125,10 +85,7 @@ public class Parser implements PropertyChangeListener {
             modelView.getCli().showError("Input error: it's not your turn!");
         } else {
             try {
-                if (action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    //System.err.println("action giusta: " + evt.getNewValue().toString() + " <-questa");
-                    //modelView.setActivateInput(false);
-                } else {
+                if (!action(evt.getPropertyName(), evt.getNewValue().toString())) {
                     modelView.setActivateInput(true);
                 }
             } catch (AlreadyPlayedAssistantException e) {

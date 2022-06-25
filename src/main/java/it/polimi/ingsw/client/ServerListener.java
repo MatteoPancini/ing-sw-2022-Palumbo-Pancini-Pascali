@@ -26,9 +26,7 @@ public class ServerListener implements Runnable {
 
 
     public void readAnswerFromServer(SerializedAnswer answerFromServer) {
-        //System.out.print("Ho letto dal server: " + answerFromServer.getServerAnswer().getMessage());
         modelView.setServerAnswer(answerFromServer.getServerAnswer());
-        //System.out.println("Setting serverAnswer..." + modelView.getServerAnswer());
         actionHandler.answerHandler();
     }
 
@@ -57,7 +55,6 @@ public class ServerListener implements Runnable {
                 readAnswerFromServer(serializedAnswer);
             } catch(IOException | ClassNotFoundException e) {
                 System.out.println("Server is out... disconnecting from the game :(");
-                //e.printStackTrace();
                 closeConnection();
                 break;
             }

@@ -25,13 +25,6 @@ public enum Characters {
         this.characterID = characterID;
     }
 
-    public static Characters getCharacterFromID(int characterID) {
 
-        return map.get(characterID);
-    }
-
-    public int getCharacterID(){
-        return characterID;
-    }
 
 }

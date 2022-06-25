@@ -17,11 +17,13 @@ The project consists of a Java implementation of the board game Eryantis, made b
 
 
 ## Test cases coverage
-**Coverage criteria: ...**
+**Coverage criteria: Code Lines**
+
+All classes (from both Model and Controller's Packages) have 100% of class coverage.
 
 | Package    | Tested Class       |    Coverage    |
 |:-----------|:-------------------|:--------------:|
-| Controller | Controller         | .../... (...%) |
-| Controller | TurnController     | .../... (...%) |
-| Controller | ExpertController   | .../... (...%) |
-| Model      | Model Package      | .../... (...%) |
+| Controller | Controller         | 174/179 (97%) |
+| Controller | TurnController     | 346/419 (82%) |
+| Controller | ExpertController   | 129/142 (90%) |
+| Model      | Model Package      | 517/553 (93%) |

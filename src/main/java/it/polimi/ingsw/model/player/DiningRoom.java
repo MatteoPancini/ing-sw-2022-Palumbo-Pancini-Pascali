@@ -7,11 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DiningRoom implements Serializable {
-    private ArrayList<Table> diningRoom = new ArrayList<Table>();
+    private ArrayList<Table> diningRoom = new ArrayList<>();
     private boolean takeCoin;
 
     public DiningRoom() {
-        ArrayList<PawnType> pawns = new ArrayList<PawnType>();
+        ArrayList<PawnType> pawns = new ArrayList<>();
         pawns.add(PawnType.GREEN);
         pawns.add(PawnType.RED);
         pawns.add(PawnType.YELLOW);

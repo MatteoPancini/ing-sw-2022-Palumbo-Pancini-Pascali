@@ -5,7 +5,6 @@ import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.Message;
 import it.polimi.ingsw.messages.clienttoserver.NicknameChoice;
-import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.SerializedMessage;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.ConnectionResult;
@@ -22,22 +21,16 @@ import java.net.UnknownHostException;
 
 public class ClientConnection {
     // ClientConnection class handles the connection between the client and the server.
-
     private final String serverAddress;
     private final int serverPort;
     private ObjectOutputStream outputStream;
     private ServerListener serverListener;
-
 
     public ClientConnection() {
         this.serverAddress = Constants.getAddress();
         this.serverPort = Constants.getPort();
     }
 
-
-    //Method setup initializes a new socket connection and handles the nickname-choice response. It
-    //   * loops until the server confirms the successful connection (with no nickname duplication and
-    //   * with a correctly configured match lobby).
     public boolean setupNickname(String nickname, ModelView modelView, ActionHandler actionHandler) throws DuplicateNicknameException {
         try {
             System.out.println("Trying to configure a socket connection...");
@@ -74,8 +67,6 @@ public class ClientConnection {
         }
     }
 
-
-
     public boolean nicknameAvailabilityCheck(Object nicknameIn) throws DuplicateNicknameException {
         SerializedAnswer answer = (SerializedAnswer) nicknameIn;
         if (answer.getServerAnswer() instanceof ConnectionResult && ((ConnectionResult) answer.getServerAnswer()).isConnectionCompleted()) {
@@ -94,8 +85,6 @@ public class ClientConnection {
         return false;
     }
 
-
-
     public void sendUserInput(Message message) {
         SerializedMessage userInput = new SerializedMessage(message);
         try {
@@ -109,7 +98,6 @@ public class ClientConnection {
         }
     }
 
-
     public void sendUserInput(UserAction action) {
         SerializedMessage userInput = new SerializedMessage(action);
         try {
@@ -122,7 +110,4 @@ public class ClientConnection {
             System.err.println("Error during send process.");
         }
     }
-
-
-
 }

@@ -21,13 +21,10 @@ public class ExpertController {
     private PawnType pawnTypeChosen;
     private Student studentChosen;
 
-
-
     public ExpertController(Game game, TurnController turnController) {
         this.game = game;
         this.turnController = turnController;
     }
-
 
     public Student getStudentChosen() {
         return studentChosen;
@@ -71,8 +68,6 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
 
 
-
-
     //JESTER
     //------------------------------------------------------------------------------------------------------------------
     private boolean jesterEffect;
@@ -100,8 +95,6 @@ public class ExpertController {
             turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
             turnController.askStudent();
         } else {
-            //student 1 = jester
-            //student 2 = entrance
             System.out.println("Stud 1: " + studentOne.getType());
             System.out.println("Stud 2: " + studentTwo.getType());
 
@@ -132,12 +125,15 @@ public class ExpertController {
     //MONK
     //------------------------------------------------------------------------------------------------------------------
     private boolean monkEffect;
+
     public boolean isMonkEffect() {
         return monkEffect;
     }
+
     public void setMonkEffect(boolean monkEffect) {
         this.monkEffect = monkEffect;
     }
+
     public void monkEffect() {
         monkEffect = true;
         turnController.getGameHandler().sendSinglePlayer(new MonkAction(), turnController.getCurrentPlayer().getPlayerID());
@@ -192,6 +188,7 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
     public void thiefEffect() {
         thiefEffect = true;
+
         RequestAction pawnRequest = new RequestAction(Action.PICK_PAWN_TYPE);
         turnController.getGameHandler().sendSinglePlayer(pawnRequest, turnController.getCurrentPlayer().getPlayerID());
     }
@@ -214,6 +211,7 @@ public class ExpertController {
                     p.getBoard().getProfessorTable().getCellByColor(pawnTypeChosen).resetProfessor();
                     break;
                 }
+
             }
         }
 
@@ -299,6 +297,8 @@ public class ExpertController {
                 turnController.askStudent();
             }
         }
+
+
     }
     //------------------------------------------------------------------------------------------------------------------
 

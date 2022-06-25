@@ -5,10 +5,8 @@ import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Table;
 
 public class InputChecker {
@@ -20,14 +18,6 @@ public class InputChecker {
         this.modelView = modelView;
         this.cli = cli;
         this.clientConnection = connection;
-    }
-
-    public ModelView getModelView() {
-        return modelView;
-    }
-
-    public ClientConnection getConnectionSocket() {
-        return clientConnection;
     }
 
 
@@ -186,10 +176,7 @@ public class InputChecker {
     public boolean isStudentInEntrance(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
-        //System.out.println("Tipo passato: " + type.toString());
         for(int i = 0; i < modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size(); i++) {
-            //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
-
             if(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().equals(type)) {
                 return true;
             }
@@ -201,7 +188,6 @@ public class InputChecker {
     public boolean isStudentInJester(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
-        //System.out.println("Tipo passato: " + type.toString());
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             if(c.getName() == Characters.JESTER) {
                 for(Student s : c.getStudents()) {
@@ -256,7 +242,7 @@ public class InputChecker {
         //System.out.println("Tipo passato: " + type.toString());
         for(Table t : modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTableStudentsNum() > 0) {
-                if(t.getTable().get(0).getBoardCellType() == type) {
+                if(t.getDiningTable().get(0).getBoardCellType() == type) {
                     return true;
                 }
             }
@@ -293,12 +279,9 @@ public class InputChecker {
         try {
             int island = Integer.parseInt(islandID);
             if (island > 0 && island < 13) {
-                //int realIsland = island - 1;
-                //System.out.println("invio island" + island);
                 for(int i=0; i<modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
                     if(island == modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()) {
                         action = new PickDestination(modelView.getGameCopy().getGameBoard().getIslands().get(i));
-                        System.out.println("invio island" + island);
                         break;
                     }
                 }

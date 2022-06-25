@@ -3,10 +3,7 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.client.gui.controllers.MainSceneController;
-import it.polimi.ingsw.client.gui.controllers.PickAssistantController;
-import it.polimi.ingsw.client.gui.controllers.WizardMenuController;
 import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
-import it.polimi.ingsw.messages.clienttoserver.actions.PickAssistant;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.CharacterCard;
@@ -39,15 +36,11 @@ public class ActionHandler {
     //notifica la CLI con i listeners
     public void answerHandler() {
         Answer answer = modelView.getServerAnswer();
-        //System.out.println("Analizzo la server answer: " + answer.getMessage());
         if (answer instanceof NumOfPlayerRequest) {
             view.firePropertyChange("InitialGamePhase", null, "RequestPlayerNumber");
         } else if (answer instanceof WizardAnswer) {
             if (((WizardAnswer) answer).getMessage() != null) {
                 view.firePropertyChange("InitialGamePhase", null, "RequestWizard");
-            } else {
-                modelView.setWizardName(((WizardAnswer) answer).getWizard());
-                //cli.showServerMessage();
             }
         } else if (answer instanceof ExpertModeAnswer) {
             view.firePropertyChange("InitialGamePhase", null, "ExpertModeAnswer");
@@ -59,17 +52,11 @@ public class ActionHandler {
         } else if (answer instanceof GameCopy) {
             modelView.setGameCopy((Game) answer.getMessage());
             showGame = showGame + 1;
-            if(showGame == 1) {
-                System.out.println("Faccio update");
+            if(showGame == 1 || gui != null) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            } else if (gui != null) {
-                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }/* else if(modelView.isPianification()) {
-                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }*/
-
-            //System.out.println("non aggiorno");
+            }
         } else if(answer instanceof StartAction) {
+            System.out.println("Setting Action");
             modelView.setActivateInput(true);
             modelView.setAction(true);
             modelView.setPianification(false);
@@ -78,7 +65,6 @@ public class ActionHandler {
                 cli.showServerMessage(modelView.getServerAnswer());
             }
         }else if(answer instanceof EndAction) {
-            modelView.setStartPlaying(false);
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
             } else if (gui != null) {
@@ -88,6 +74,7 @@ public class ActionHandler {
                 gui.getInfoAlert().show();
             }
         } else if(answer instanceof StartPianification) {
+            System.out.println("Setting Pianification");
             modelView.setActivateInput(true);
             modelView.setPianification(true);
             modelView.setAction(false);
@@ -99,24 +86,32 @@ public class ActionHandler {
             modelView.setMagicPostmanAction(true);
         } else if(answer instanceof MinestrelAction) {
             modelView.setMinestrelAction(true);
-            cli.askCharacterActionsNumber();
+            if(cli != null) {
+                cli.askCharacterActionsNumber();
+            } else if(gui != null) {
+                view.firePropertyChange("UpdateModelView", null, "PICK_CHARACTER_NUMBER");
+            }
         } else if(answer instanceof JesterAction) {
             modelView.setJesterAction(true);
-            cli.askCharacterActionsNumber();
+            if(cli != null) {
+                cli.askCharacterActionsNumber();
+            } else if(gui != null) {
+                view.firePropertyChange("UpdateModelView", null, "PICK_CHARACTER_NUMBER");
+            }
         } else if(answer instanceof GrannyHerbsAction) {
             modelView.setGrannyHerbsAction(true);
             if (cli != null) {
                 cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
-            } /*else if(gui != null) {
-                gui.get
-            }*/
+            } else if(gui != null) {
+                view.firePropertyChange("UpdateModelView", null, "PICK_ISLAND");
+            }
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);
         } else if(answer instanceof NoWinnerGameNotification) {
             if(cli != null) {
                 cli.endGameMessage();
             } else if(gui != null) {
-                gui.showEndGame();
+                gui.showEndGameNoWinner();
             }
         } else if(answer instanceof PrincessAction) {
             modelView.setPrincessAction(true);
@@ -271,58 +266,5 @@ public class ActionHandler {
             }
         }
     }
-
-
-
-
-
-/*
-    public void updateStudentMove(String student, String dest) {
-        if(((PickDestination) modelView.getDestinationUserAction()).getChosenIsland() == -1) {
-            for(Table t : modelView.getVisualBoard().getDiningRoom().getDiningRoom()) {
-                if(t.getColor().equals(((PickStudent) modelView.getLastUserAction()).getChosenStudent())) {
-                    t.addStudent(((PickStudent) modelView.getLastUserAction()).getChosenStudent());
-                }
-            }
-        }
-        else if(((PickDestination) modelView.getDestinationUserAction()).getDiningRoom() == null) {
-            modelView.getVisualBoard().getIslandsView().get(((PickDestination) modelView.getLastUserAction()).getChosenIsland())
-                    .getStudents().add(((PickStudent) modelView.getLastUserAction()).getChosenStudent());
-        }
-        modelView.setDestinationUserAction(null);
-    }
-    public void updateModelView(String actionName) {
-        switch(actionName) {
-            case "PICKASSISTANT" -> {
-                modelView.getVisualBoard().
-                        setPlayedCard(takeCard(((PickAssistant) modelView.getLastUserAction()).getChosenAssistant()), modelView.getCurrentPlayer());
-            }
-            case "PICKCLOUD" -> {
-                for(Student s : modelView.getVisualBoard().getClouds().get(((PickCloud) modelView.getLastUserAction()).getChosenCloud()).getStudents()) {
-                    modelView.getCurrentPlayer().getBoard().getEntrance().getStudents().add(s);
-                    modelView.getVisualBoard().getClouds().get(((PickCloud) modelView.getLastUserAction()).getChosenCloud());
-                }
-            }
-            case "PICKMOVESNUMBER" -> {
-                modelView.getVisualBoard().setMotherNature(((PickMovesNumber) modelView.getLastUserAction()).getMoves()
-                        + modelView.getVisualBoard().getMotherNature().getPosition());
-            }
-            case "PICKCHARACTER" -> {
-                modelView.getVisualBoard().getCharacters().add(((PickCharacter) modelView.getLastUserAction()).getChosenCharacter());
-            }
-        }
-    }
-
-    public AssistantCard takeCard (AssistantCard card){
-        for(AssistantCard c : modelView.getVisualBoard().getLastAssistantUsed()){
-            if(card.getName() == c.getName()){
-                modelView.getVisualBoard().getLastAssistantUsed().remove(card);
-                return card;
-            }
-        }
-        return null;
-    }
-
- */
 
 }

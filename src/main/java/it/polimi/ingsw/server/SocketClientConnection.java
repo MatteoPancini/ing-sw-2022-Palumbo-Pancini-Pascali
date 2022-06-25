@@ -48,7 +48,6 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
-
     public Integer getClientID() {
         return clientID;
     }
@@ -67,10 +66,6 @@ public class SocketClientConnection implements Runnable {
                         int playersNumber = ((PlayersNumberChoice) clientMessage).getNumberOfPlayers();
                         server.setTotalGamePlayers(playersNumber);
                         server.getGameFromID(clientID).setPlayersNumber(playersNumber);
-
-                        if(playersNumber == 4) {
-                            server.getGameFromID(clientID).setTeamMode(true);
-                        }
 
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Players number officially set to " + playersNumber, false));
 
@@ -126,7 +121,6 @@ public class SocketClientConnection implements Runnable {
             closeConnection();
         }
     }
-
 
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
@@ -248,6 +242,3 @@ public class SocketClientConnection implements Runnable {
         sendServerMessage(serverOut);
     }
 }
-
-
-

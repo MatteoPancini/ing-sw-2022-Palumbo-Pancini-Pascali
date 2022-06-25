@@ -34,11 +34,9 @@ public class TurnController {
     private boolean lastRound;
 
 
-    private boolean isActionPhase;
 
     private int actionPhaseNum;
 
-    private boolean isPianificationPhase;
 
 
     private Student studentToMove;
@@ -58,8 +56,6 @@ public class TurnController {
     public TurnController(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
         this.gameHandler = gameHandler;
-        isPianificationPhase = false;
-        isActionPhase = false;
         actionPhaseNum = 0;
 
     }
@@ -73,29 +69,12 @@ public class TurnController {
         this.studentToMove = studentToMove;
     }
 
-    public void setPianificationPhase() {
-        isPianificationPhase = true;
-    }
-
-    public void setActionPhase() {
-        isActionPhase = true;
-    }
-
-
-    /**
-     * Set isPianificationPhase value to false
-     */
-    public void resetPianificationPhase() {
-        isPianificationPhase = false;
-    }
-
 
     /**
      * Start pianification phase
      */
     public void startPianificationPhase() {
         System.out.println("Start Pianification Phase");
-        setPianificationPhase();
 
         gameHandler.sendBroadcast(new DynamicAnswer(" ___  _   _   _  _  _  ___  _   __   _  ___  _   _   _  _   ___  _ _   _   __  ___ \n" +
                 "| o \\| | / \\ | \\| || || __|| | / _| / \\|_ _|| | / \\ | \\| | | o \\| U | / \\ / _|| __|\n" +
@@ -127,7 +106,6 @@ public class TurnController {
         if(actionPhaseNum == controller.getGame().getActivePlayers().size()) {
             startPianificationPhase();
         } else {
-            setActionPhase();
             gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
             //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
@@ -220,6 +198,8 @@ public class TurnController {
         if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
             //System.out.println("Entro");
             gameHandler.sendSinglePlayer(new StartPianification(), currentPlayer.getPlayerID());
+            gameHandler.sendExcept(new StartPianification(), currentPlayer.getPlayerID());
+
             //System.out.println("Mando StartPianification");
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
             //System.out.println("Mando Game");
@@ -232,8 +212,6 @@ public class TurnController {
                 controller.getGame().getActivePlayers().set(i, controller.getGame().getGameBoard().getLastAssistantUsed().get(i).getOwner());
                 System.out.println(controller.getGame().getActivePlayers().get(i).getNickname());
             }
-
-            resetPianificationPhase();
 
             gameHandler.sendBroadcast(new DynamicAnswer("This action phase round winner is: " + controller.getGame().getActivePlayers().get(0).getNickname(), false));
 
@@ -335,7 +313,6 @@ public class TurnController {
                 }
             }
         }
-
         for (Player p : controller.getGame().getActivePlayers()) {
             System.out.println("P_ " + p.getNickname());
             for (int i = 0; i < 5; i++) {
@@ -387,7 +364,6 @@ public class TurnController {
             controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentToMove);
         }
 
-        //System.out.println(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin());
 
         if(expertController != null) {
             if(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().isTakeCoin()) {
@@ -743,8 +719,10 @@ public class TurnController {
      * Ask from which cloud the player wants to take the students
      */
     public void askCloud() {
+        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
         RequestAction cloudAction = new RequestAction(Action.PICK_CLOUD);
         gameHandler.sendSinglePlayer(cloudAction, currentPlayer.getPlayerID());
+
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
@@ -837,11 +815,7 @@ public class TurnController {
         if(lastRound) {
             System.out.println("Enrtro 3");
 
-            if(controller.getGame().getCurrentPlayer().getNickname() != controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname()) {
-                return false;
-            } else {
-                return true;
-            }
+            return controller.getGame().getCurrentPlayer().getNickname().equals(controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname());
         }
 
         return false;
@@ -878,7 +852,7 @@ public class TurnController {
         for(Player player : controller.getGame().getActivePlayers()) {
             player.setProfInfluence(0);
             for(PawnType p : PawnType.values()) {
-                if(player.getBoard().getProfessorTable().getCellByColor(p).hasProfessor() == true) {
+                if(player.getBoard().getProfessorTable().getCellByColor(p).hasProfessor()) {
                     player.setProfInfluence(player.getProfInfluence() + 1);
                 }
             }

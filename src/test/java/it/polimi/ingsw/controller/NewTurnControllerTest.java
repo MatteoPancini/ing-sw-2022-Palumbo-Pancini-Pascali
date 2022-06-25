@@ -20,7 +20,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.beans.PropertyChangeEvent;
 import java.net.Socket;
@@ -85,7 +84,6 @@ public class NewTurnControllerTest {
             p.setBoard(new SchoolBoard(p.getPlayerID()));
         }
 
-
         controllerStub.getGame().setPlayersNumber(3);
         controllerStub.getGame().setCurrentPlayer(matteo);
         controllerStub.newSetupGame();
@@ -120,13 +118,10 @@ public class NewTurnControllerTest {
         controllerStub.getGame().addPlayer(gigiox);
         controllerStub.getGame().addPlayer(mario);
 
-        //controllerStub.getGame().setPlayersNumber(4);
         gameHandlerStub.setPlayersNumber(4);
         assertEquals(gameHandlerStub.getController(), controllerStub);
         assertEquals(gameHandlerStub.getController(), controllerStub);
         assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
-        gameHandlerStub.setTeamMode(true);
-        gameHandlerStub.setupTeams();
 
         for(Player p : controllerStub.getGame().getPlayers()) {
             p.setBoard(new SchoolBoard(p.getPlayerID()));
@@ -167,12 +162,8 @@ public class NewTurnControllerTest {
         PropertyChangeEvent ev17 = new PropertyChangeEvent(1, "CheckIslandInfluence", null, controllerStub.getGame().getGameBoard().getIslands().get(5));
         controllerStub.propertyChange(ev17);
 
-        //gigiox.getAssistantDeck().getDeck().remove(0);
-
         System.out.println(gigiox.getAssistantDeck().getDeck().size());
         System.out.println(gigiox.getAssistantDeck().getDeck().isEmpty());
-
-
     }
 
     @Test
@@ -195,13 +186,10 @@ public class NewTurnControllerTest {
         controllerStub.getGame().addPlayer(gigiox);
         controllerStub.getGame().addPlayer(mario);
 
-        //controllerStub.getGame().setPlayersNumber(4);
         gameHandlerStub.setPlayersNumber(4);
         assertEquals(gameHandlerStub.getController(), controllerStub);
         assertEquals(gameHandlerStub.getController(), controllerStub);
         assertEquals(gameHandlerStub.getController().getGame().getActivePlayers().size(), 4);
-        gameHandlerStub.setTeamMode(true);
-        gameHandlerStub.setupTeams();
 
         for(Player p : controllerStub.getGame().getPlayers()) {
             p.setBoard(new SchoolBoard(p.getPlayerID()));
@@ -255,7 +243,6 @@ public class NewTurnControllerTest {
 
         PropertyChangeEvent ev12 = new PropertyChangeEvent(1, "PickCloud", null, controllerStub.getGame().getGameBoard().getClouds().get(0));
         controllerStub.propertyChange(ev12);
-
     }
 
     @Test
@@ -333,7 +320,6 @@ public class NewTurnControllerTest {
         for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
             System.out.println("Island " + i.getIslandID() + ": " + i.getStudents().size());
         }
-        //assertEquals(controllerStub.getGame().getGameBoard().getIslandById(2).getStudents().size(), 2);
 
         controllerStub.getTurnController().setStudentToMove(matteo.getBoard().getEntrance().getStudents().get(0));
         controllerStub.getTurnController().moveStudentToIsland(controllerStub.getGame().getGameBoard().getIslandById(3));
@@ -555,8 +541,6 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getPlayers().add(gigiox);
         controllerStub.getGame().getPlayers().add(mario);
 
-        gameHandlerStub.setTeamMode(true);
-        gameHandlerStub.setupTeams();
 
         controllerStub.getGame().setPlayersNumber(4);
         controllerStub.getGame().setCurrentPlayer(matteo);
@@ -624,7 +608,6 @@ public class NewTurnControllerTest {
         Student s3 = new Student(PawnType.BLUE);
         Student s4 = new Student(PawnType.RED);
 
-
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s1);
         controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(s3);
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s2);
@@ -652,25 +635,13 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
         System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(2).getStudents().size());
 
-        System.out.println("muvo mn");
-        //Qui sposto in island 2
         controllerStub.getTurnController().moveMotherNature(1);
         assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).hasTower(), true);
-        //Qui sposto in island 3
-        //controllerStub.getTurnController().moveMotherNature(1);
-        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 2);
 
-        //Qui sposto in island 4
         controllerStub.getTurnController().moveMotherNature(2);
-        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 3);
-        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedTowers().size(), 3);
         assertEquals(controllerStub.getGame().getGameBoard().getIslands().get(1).getMergedIslands().size(), 1);
 
-
-
         controllerStub.getTurnController().moveMotherNature(8);
-
-        //assertEquals(controllerStub.getGame().getGameBoard().getIslands().size(), 10);
 
         controllerStub.getTurnController().moveMotherNature(3);
 
@@ -684,10 +655,6 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getGameBoard().getIslands().get(8).setTower(new Tower(TowerColor.WHITE));
         controllerStub.getGame().getGameBoard().getIslands().get(7).addStudent(new Student(PawnType.RED));
         controllerStub.getTurnController().moveMotherNature(7);
-        //controllerStub.getTurnController().moveMotherNature(1);
-
-
-
     }
 
     @Test
@@ -696,7 +663,6 @@ public class NewTurnControllerTest {
         matteo.setWizard(Wizards.KING);
         cisco.setWizard(Wizards.MONACH);
         server.setIdMapID(idMapID);
-
 
         controllerStub.getGame().getPlayers().add(matteo);
         controllerStub.getGame().getPlayers().add(cisco);
@@ -765,7 +731,6 @@ public class NewTurnControllerTest {
         controllerStub.propertyChange(ev18);
 
     }
-
 
     @Test
     @DisplayName("Change Island Influence Test")
@@ -848,35 +813,27 @@ public class NewTurnControllerTest {
         }
 
         for(Player p : controllerStub.getGame().getActivePlayers()) {
-            //System.out.println("Inizio setup di " + p.getNickname());
-
-            //System.out.println("metto students nell'entrance");
             for(int i = 1; i <= studentsNumber; i++){
                 Collections.shuffle(controllerStub.getGame().getGameBoard().getStudentsBag());
                 p.getBoard().getEntrance().getStudents().add(controllerStub.getGame().getGameBoard().getStudentsBag().get(0));
                 controllerStub.getGame().getGameBoard().removeStudents(0);
             }
 
-            System.out.println("metto torri");
             if(controllerStub.getGame().getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
                 }
                 if(colorsCounter3P < 2) {
                     colorsCounter3P++;
-                    System.out.println("change");
                 }
             } else if(controllerStub.getGame().getPlayersNumber() == 2) {
-                System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
                 }
                 if(colorsCounter2P < 2) {
-                    System.out.println("change");
                     colorsCounter2P++;
                 }
             } else if(controllerStub.getGame().getPlayersNumber() == 4) {
-                System.out.println("Entro QUI");
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
                     for(int l=1; l<= towersNumber; l++) {
                         p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
@@ -887,12 +844,9 @@ public class NewTurnControllerTest {
 
         }
 
-        //System.out.println("metto madre natura");
-
         int maximum = 11;
         SecureRandom r = new SecureRandom();
         controllerStub.getGame().getGameBoard().getMotherNature().setPosition(1);
-        //int n = 1;
         int mnPos = controllerStub.getGame().getGameBoard().getMotherNature().getPosition();
 
         int mnPosOpposite = -1;
@@ -901,8 +855,6 @@ public class NewTurnControllerTest {
         } else {
             mnPosOpposite = (mnPos + 6) % 12;
         }
-
-        //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
 
         controllerStub.getGame().getGameBoard().getIslands().get(1).addStudent(new Student(PawnType.RED));
         controllerStub.getGame().getGameBoard().getIslands().get(2).addStudent(new Student(PawnType.RED));
@@ -915,21 +867,6 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getGameBoard().getIslands().get(10).addStudent(new Student(PawnType.GREEN));
         controllerStub.getGame().getGameBoard().getIslands().get(11).addStudent(new Student(PawnType.GREEN));
 
-
-        /*
-        for(int s = 1; s <= 12; s++) {
-            if(s != mnPos && s != mnPosOpposite) {
-                //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
-
-                Collections.shuffle(controllerStub.getGame().getGameBoard().getSetupStudentsBag());
-                controllerStub.getGame().getGameBoard().getIslands().get(s - 1).addStudent(controllerStub.getGame().getGameBoard().getSetupStudentsBag().get(0));
-                controllerStub.getGame().getGameBoard().removeSetupStudents(0);
-            }
-            //n++;
-        }
-
-
-         */
         for(int p = 1; p <= 12; p++){
             if(p != mnPos && p != mnPosOpposite) {
                 System.out.println(p + ", " + "Student " + controllerStub.getGame().getGameBoard().getIslands().get(p - 1).getStudents().get(0).getType());
@@ -945,26 +882,12 @@ public class NewTurnControllerTest {
         System.out.println("Finished setupGame");
     }
 
-    /** Class GameHandlerStub defines a stub for GameHandler class */
     public class GameHandlerStub extends GameHandler {
-
-        /**
-         * Constructor GameHandler creates a new GameHandler instance.
-         *
-         * @param server of type Server - the main server class.
-         */
-        public GameHandlerStub(Server server) {
+    public GameHandlerStub(Server server) {
             super(server);
         }
 
         ControllerStub controllerStub;
-        /**
-         * Method singleSend sends a message to a client, identified by his ID number, through the
-         * server socket.
-         *
-         * @param message of type Answer - the message to be sent to the client.
-         * @param id of type int - the unique identification number of the client to be contacted.
-         */
         @Override
         public void sendSinglePlayer(Answer message, int id) {
             String print;
@@ -974,12 +897,6 @@ public class NewTurnControllerTest {
             System.out.println(print);
         }
 
-        /**
-         * Method getCurrentPlayerID returns the current player client ID, getting it from the
-         * currentPlayer reference in the Game class.
-         *
-         * @return the currentPlayerID (type int) of this GameHandler object.
-         */
         @Override
         public int getCurrentPlayerId() {
             return game.getCurrentPlayer().getPlayerID();
@@ -994,15 +911,6 @@ public class NewTurnControllerTest {
             this.controllerStub = controllerStub;
         }
 
-        /**
-         * Method sendAll does the same as the previous method, but it iterates on all the clients
-         * present in the game. It's a full effects broadcast.
-         *
-         * @param message of type Answer - the message to broadcast (at single match participants'
-         *     level).
-         */
-
-
         @Override
         public void sendBroadcast(Answer message) {
             System.out.println(message.getMessage());
@@ -1012,90 +920,40 @@ public class NewTurnControllerTest {
         public void sendExcept(Answer serverAnswer, int id) {
             System.out.println(serverAnswer.getMessage());
         }
-
-
     }
-
-    /** Class ControllerStub defines a stub for Controller class. */
     public static class ControllerStub extends Controller {
-
-        /**
-         * Constructor Controller creates a new Controller instance.
-         *
-         */
         public ControllerStub(Game game, GameHandler gameHandler) {
             super(game, gameHandler);
         }
     }
 
-
-    /** Class ServerStub defines a stub for Server class. */
     public static class ServerStub extends Server {
         private HashMap<Integer, VirtualClientView> idMapID;
-        /**
-         * Constructor Server creates the instance of the server, based on a socket and the mapping
-         * between VirtualClient, nicknames and client ids. It also creates a new game session.
-         */
+
         public ServerStub() {
             this.idMapID = null;
         }
-        /**
-         * Method setIdMapID sets the idMapID of this ServerStub object.
-         *
-         * @param idMapID the idMapID of this ServerStub object.
-         */
+
         public void setIdMapID(HashMap idMapID) {
             this.idMapID = idMapID;
         }
-        /**
-         * Method getClientByID returns a link to the desired virtual client, in order to make
-         * operations on it (like send, etc).
-         *
-         * @param id of type int - the id of the virtual client needed.
-         * @return VirtualClient - the correct virtual client.
-         */
+
         @Override
         public VirtualClientView getVirtualClientFromID(int id) {
             return idMapID.get(id);
         }
     }
 
-
-
-    /** Class PlayerStub defines a stub for Player class. */
     public static class PlayerStub extends Player {
-
-        /**
-         * Constructor PlayerStub creates a new PlayerStub instance.
-         *
-         * @param nickname of type String - the player's nickname.
-         * @param clientID of type int - the clientID.
-         */
         public PlayerStub(String nickname, int clientID) {
             super(nickname, clientID);
         }
     }
 
-
-    /** Class SocketClientConnectionStub defines a stub for SocketClientConnection class. */
     public static class SocketClientConnectionStub extends SocketClientConnection {
-
-        /**
-         * Constructor of the class: it instantiates an input/output stream from the socket received as
-         * parameters, and add the main server to his attributes too.
-         *
-         * @param socket the socket which accepted the client connection.
-         * @param server the main server class.
-         */
         public SocketClientConnectionStub(Socket socket, Server server) {
             super(socket, server);
         }
-        /**
-         * Method close terminates the connection with the client, closing firstly input and output
-         * streams, then invoking the server method called "unregisterClient", which will remove the
-         * active virtual client from the list.
-         *
-         */
         @Override
         public void closeConnection() {
             System.out.println("Connection closed to client");
