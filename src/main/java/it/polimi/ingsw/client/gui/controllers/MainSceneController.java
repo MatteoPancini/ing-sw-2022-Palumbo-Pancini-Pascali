@@ -759,43 +759,6 @@ public class MainSceneController implements GUIController {
         }
     }
 
-    public void askMoves(AssistantCard a) {
-
-    }
-
-     /*public void askMoves(AssistantCard a) {
-         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-         PickMovesNumber action = null;
-         ObservableList<String> availableChoices = FXCollections.observableList(getMovesList(a));
-         choiceBox.setItems(availableChoices);
-         choiceBox.show();
-         String choice = choiceBox.getSelectionModel().getSelectedItem();
-         switch(choice) {
-             case "1" -> {
-                 action = new PickMovesNumber(1);
-             } case "2" -> {
-                 action = new PickMovesNumber(2);
-             } case "3" -> {
-                 action = new PickMovesNumber(3);
-             } case "4" -> {
-                 action = new PickMovesNumber(4);
-             } case "5" -> {
-                 action = new PickMovesNumber(5);
-             } case "6" -> {
-                 action = new PickMovesNumber(6);
-             } case "7" -> {
-                 action = new PickMovesNumber(7);
-             } case "8" -> {
-                 action = new PickMovesNumber(8);
-             } case "9" -> {
-                 action = new PickMovesNumber(9);
-             } case "10" -> {
-                 action = new PickMovesNumber(10);
-             }
-         }
-         gui.getClientConnection().sendUserInput(action);
-     }*/
-
     public void updateMotherNature() {
         motherNature1.setVisible(false);
         motherNature2.setVisible(false);
@@ -854,7 +817,6 @@ public class MainSceneController implements GUIController {
             }
         }
     }
-
 
     public void updateNoEntryTile() {
         noEntryTile1.setVisible(false);
@@ -2219,7 +2181,7 @@ public class MainSceneController implements GUIController {
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.getChosenAssistant() != null) {
                 img = setAssistantImage(p.getChosenAssistant());
-                if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
+                if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                     ((ImageView) myAssistant).setImage(img);
                     ((ImageView) myAssistant).setVisible(true);
                 } else if(cont==0) {
@@ -2281,58 +2243,6 @@ public class MainSceneController implements GUIController {
         }
     }
 
-    /*public void updateTowerAreas() {
-        Image pic = null;
-        int cont = 0;
-        for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if (p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
-                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.GREY)) {
-                    pic = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.BLACK)) {
-                    pic = new Image("@../../graphics/wooden_pieces/black_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.WHITE)) {
-                    pic = new Image("@../../graphics/wooden_pieces/white_tower.png");
-                }
-                for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
-                    for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
-                        ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
-                    }
-                }
-                cont++;
-             } else if(cont == 0) {
-                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.GREY)) {
-                    pic = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.BLACK)) {
-                    pic = new Image("@../../graphics/wooden_pieces/black_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.WHITE)) {
-                    pic = new Image("@../../graphics/wooden_pieces/white_tower.png");
-                }
-                for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
-                    for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
-                        ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
-                    }
-                }
-                cont++;
-            } else if(cont == 1) {
-                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.GREY)) {
-                    pic = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.BLACK)) {
-                    pic = new Image("@../../graphics/wooden_pieces/black_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.WHITE)) {
-                    pic = new Image("@../../graphics/wooden_pieces/white_tower.png");
-                }
-                for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
-                    for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
-                        ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
-                        ((ImageView) myTowers.getChildren().get(i)).setVisible(false);
-                    }
-                }
-                cont++;
-            }
-        }
-    }*/
-
-    //creare un parametro che indichi che tipo di action è in corso, passarla come parametro
     public void updatePickStudents() {
         green.setVisible(false);
         yellow.setVisible(false);
@@ -2446,7 +2356,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askPawnType() {
-        descriptionLabel.setText("      Pick a pawn type based on the effect of the character you chose");
+        descriptionLabel.setText("Pick a pawn type based on the effect of the character you chose");
         green.setVisible(true);
         blue.setVisible(true);
         yellow.setVisible(true);
