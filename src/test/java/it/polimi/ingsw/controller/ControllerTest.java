@@ -84,8 +84,6 @@ public class ControllerTest {
         cStub.newSetupGame();
         assertEquals(2, cStub.getGame().getPlayersNumber());
         System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
-        //cStub.getGame().switchToNextPlayer();
-        //System.out.println(cStub.getGame().getCurrentPlayer().getNickname() + ", " + cStub.getGame().getCurrentPlayer().getPlayerID());
     }
 
     @Test
@@ -96,5 +94,4 @@ public class ControllerTest {
         assertEquals(Wizards.KING, cStub.getGame().getActivePlayers().get(0).getWizard());
         assertEquals(Wizards.MONACH, cStub.getGame().getActivePlayers().get(1).getWizard());
     }
-
 }
