@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProfessorTable implements Serializable {
-    private ArrayList<BoardCell> professorTable = new ArrayList<>();
+    private ArrayList<BoardCell> profTable = new ArrayList<>();
 
     public ProfessorTable (){
         ArrayList<PawnType> pawns = new ArrayList<>();
@@ -17,16 +17,16 @@ public class ProfessorTable implements Serializable {
         pawns.add(PawnType.YELLOW);
         for (PawnType p : pawns) {
             BoardCell cell = new BoardCell(p);
-            professorTable.add(cell);
+            profTable.add(cell);
         }
     }
 
-    public ArrayList<BoardCell> getProfessorTable() {
-        return professorTable;
+    public ArrayList<BoardCell> getProfTable() {
+        return profTable;
     }
 
     public BoardCell getCellByColor(PawnType color) {
-        for(BoardCell b : professorTable) {
+        for(BoardCell b : profTable) {
             if(b.getBoardCellType() == color){
                 return b;
             }

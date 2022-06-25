@@ -23,9 +23,6 @@ public class Game implements Serializable {
         this.currentPlayerNumber = currentPlayerNumber;
     }
 
-    public Game() {
-    }
-
 
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;

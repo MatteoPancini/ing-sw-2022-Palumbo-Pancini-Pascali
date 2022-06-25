@@ -70,10 +70,8 @@ public class CLITable {
         for (String[] cells : rows) {
             printRow(cells, maxWidths);
         }
-        if (headers != null) {
-            if(maxWidths != null) {
-                printLine(maxWidths);
-            }
+        if (headers != null && maxWidths != null) {
+            printLine(maxWidths);
         }
     }
 

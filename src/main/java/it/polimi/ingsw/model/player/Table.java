@@ -8,14 +8,14 @@ import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
 public class Table implements Serializable {
-    private ArrayList<BoardCell> table = new ArrayList<>();
+    private ArrayList<BoardCell> diningTable = new ArrayList<>();
     private int lastPosition = 0;
 
     public Table(PawnType p) {
         for (int i = 1; i <= 10; i++) {
             BoardCell cell = new BoardCell(p);
             if(i == 3 || i == 6 || i == 9) cell.setCoinCell();
-            table.add(cell);
+            diningTable.add(cell);
         }
     }
 
@@ -23,16 +23,16 @@ public class Table implements Serializable {
         return lastPosition;
     }
 
-    public ArrayList<BoardCell> getTable() {
-        return table;
+    public ArrayList<BoardCell> getDiningTable() {
+        return diningTable;
     }
 
     public PawnType getColor() {
-        return table.get(0).getBoardCellType();
+        return diningTable.get(0).getBoardCellType();
     }
 
     public void removeStudent() {
-        table.get(lastPosition - 1).removeStudent();
+        diningTable.get(lastPosition - 1).removeStudent();
         lastPosition--;
         System.err.println(lastPosition);
 
@@ -41,13 +41,13 @@ public class Table implements Serializable {
 
 
     public void addStudent(Student stud){
-        table.get(lastPosition).setStudent(stud);
+        diningTable.get(lastPosition).setStudent(stud);
         lastPosition++;
     }
 
     public int getTableStudentsNum() {
         int studentsNum = 0;
-        for(BoardCell b : table) {
+        for(BoardCell b : diningTable) {
             if(b.hasStudent()) {
                 studentsNum++;
             }

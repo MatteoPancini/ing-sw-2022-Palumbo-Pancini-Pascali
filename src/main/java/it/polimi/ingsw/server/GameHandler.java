@@ -19,7 +19,6 @@ public class GameHandler {
     private int playersNumber;
     private final PropertyChangeSupport gameHandlerListener = new PropertyChangeSupport(this);
     private boolean isExpertMode;
-    private boolean isTeamMode = false;
     private int currentPlayerId;
     private boolean isMatchStarted;
 
@@ -33,10 +32,6 @@ public class GameHandler {
 
     }
 
-
-    public void setTeamMode(boolean teamMode) {
-        isTeamMode = teamMode;
-    }
 
 
     public boolean getExpertMode() {

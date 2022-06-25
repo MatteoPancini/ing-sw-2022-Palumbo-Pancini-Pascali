@@ -67,10 +67,6 @@ public class SocketClientConnection implements Runnable {
                         server.setTotalGamePlayers(playersNumber);
                         server.getGameFromID(clientID).setPlayersNumber(playersNumber);
 
-                        if(playersNumber == 4) {
-                            server.getGameFromID(clientID).setTeamMode(true);
-                        }
-
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Players number officially set to " + playersNumber, false));
 
                         break;
