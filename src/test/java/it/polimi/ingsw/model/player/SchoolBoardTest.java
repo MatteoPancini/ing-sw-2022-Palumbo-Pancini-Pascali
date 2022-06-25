@@ -3,7 +3,6 @@ import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -110,21 +109,21 @@ public class SchoolBoardTest {
     @Test
     @DisplayName("Professor table test")
     void professorTableTest(){
-        assertEquals(PawnType.BLUE, schoolBTest.getProfessorTable().getProfessorTable().get(0).getBoardCellType());
-        assertEquals(PawnType.GREEN, schoolBTest.getProfessorTable().getProfessorTable().get(1).getBoardCellType());
-        assertEquals(PawnType.PINK, schoolBTest.getProfessorTable().getProfessorTable().get(2).getBoardCellType());
-        assertEquals(PawnType.RED, schoolBTest.getProfessorTable().getProfessorTable().get(3).getBoardCellType());
-        assertEquals(PawnType.YELLOW, schoolBTest.getProfessorTable().getProfessorTable().get(4).getBoardCellType());
+        assertEquals(PawnType.BLUE, schoolBTest.getProfessorTable().getProfTable().get(0).getBoardCellType());
+        assertEquals(PawnType.GREEN, schoolBTest.getProfessorTable().getProfTable().get(1).getBoardCellType());
+        assertEquals(PawnType.PINK, schoolBTest.getProfessorTable().getProfTable().get(2).getBoardCellType());
+        assertEquals(PawnType.RED, schoolBTest.getProfessorTable().getProfTable().get(3).getBoardCellType());
+        assertEquals(PawnType.YELLOW, schoolBTest.getProfessorTable().getProfTable().get(4).getBoardCellType());
     }
 
     @Test
     @DisplayName("Dining room test")
     void diningRoomTest(){
-        assertEquals(PawnType.GREEN, schoolBTest.getDiningRoom().getDiningRoom().get(0).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.RED, schoolBTest.getDiningRoom().getDiningRoom().get(1).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.YELLOW, schoolBTest.getDiningRoom().getDiningRoom().get(2).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.PINK, schoolBTest.getDiningRoom().getDiningRoom().get(3).getTable().get(0).getBoardCellType());
-        assertEquals(PawnType.BLUE, schoolBTest.getDiningRoom().getDiningRoom().get(4).getTable().get(0).getBoardCellType());
+        assertEquals(PawnType.GREEN, schoolBTest.getDiningRoom().getDiningRoom().get(0).getDiningTable().get(0).getBoardCellType());
+        assertEquals(PawnType.RED, schoolBTest.getDiningRoom().getDiningRoom().get(1).getDiningTable().get(0).getBoardCellType());
+        assertEquals(PawnType.YELLOW, schoolBTest.getDiningRoom().getDiningRoom().get(2).getDiningTable().get(0).getBoardCellType());
+        assertEquals(PawnType.PINK, schoolBTest.getDiningRoom().getDiningRoom().get(3).getDiningTable().get(0).getBoardCellType());
+        assertEquals(PawnType.BLUE, schoolBTest.getDiningRoom().getDiningRoom().get(4).getDiningTable().get(0).getBoardCellType());
     }
 
     @Test

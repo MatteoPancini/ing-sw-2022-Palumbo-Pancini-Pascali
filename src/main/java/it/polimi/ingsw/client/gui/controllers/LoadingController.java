@@ -58,7 +58,7 @@ public class LoadingController implements GUIController {
     }
 
 
-    public void askExpertMode(String serverReq) {
+    public void askExpertMode() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("ExpertMode Setup");
         alert.setHeaderText("Choose your game mode");

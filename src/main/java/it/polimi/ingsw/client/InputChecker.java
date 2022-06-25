@@ -242,7 +242,7 @@ public class InputChecker {
         //System.out.println("Tipo passato: " + type.toString());
         for(Table t : modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTableStudentsNum() > 0) {
-                if(t.getTable().get(0).getBoardCellType() == type) {
+                if(t.getDiningTable().get(0).getBoardCellType() == type) {
                     return true;
                 }
             }

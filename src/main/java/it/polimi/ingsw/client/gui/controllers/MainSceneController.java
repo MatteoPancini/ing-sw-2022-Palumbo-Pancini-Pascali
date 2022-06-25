@@ -559,14 +559,9 @@ public class MainSceneController implements GUIController {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> showAssistantButton();
             case "PICK_CLOUD" -> askCloud();
-            case "PICK_DESTINATION" -> {
-                askDestination();
-            }
-            case "PICK_STUDENT" -> {
-                //askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
-                updatePickStudents();
-
-            }
+            case "PICK_DESTINATION" -> askDestination();
+            case "PICK_STUDENT" -> //askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
+                    updatePickStudents();
             case "PICK_MOVES_NUMBER" -> {
                 if(gui.getModelView().isJesterAction()) {
                     gui.getModelView().setJesterAction(false);
@@ -576,20 +571,12 @@ public class MainSceneController implements GUIController {
                 askMoves(gui.getModelView().getGameCopy().getCurrentPlayer().getChosenAssistant());
             }
 
-            case "PICK_CHARACTER" -> {
-                askCharacter();
-            }
-            case "PICK_PAWN_TYPE" -> {
-                askPawnType();
-            }
+            case "PICK_CHARACTER" -> askCharacter();
+            case "PICK_PAWN_TYPE" -> askPawnType();
 
-            case "PICK_ISLAND" -> {
-                askGrannyHerbsIsland();
-            }
+            case "PICK_ISLAND" -> askGrannyHerbsIsland();
 
-            case "PICK_CHARACTER_NUMBER" -> {
-                askCharacterActionNumber();
-            }
+            case "PICK_CHARACTER_NUMBER" -> askCharacterActionNumber();
             default -> {
                 descriptionLabel.setText("        Click the pick assistant button to choose your assistant");
                 System.out.println("Update without user actions (server command not in switch cases)");
@@ -690,7 +677,7 @@ public class MainSceneController implements GUIController {
         Image pic = null;
         for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
             if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
                             pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
@@ -717,7 +704,7 @@ public class MainSceneController implements GUIController {
                 }
             } else if (cont == 0) {
                 //top Player corresponding to cont 0
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
                             pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
@@ -745,7 +732,7 @@ public class MainSceneController implements GUIController {
                 cont++;
             } else if (cont == 1) {
                 //left Player corresponding to cont 1
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
                             pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
@@ -772,7 +759,7 @@ public class MainSceneController implements GUIController {
                 }
                 cont++;
             } else if (cont == 2) {
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfessorTable()) {
+                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
                             pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
@@ -839,47 +826,23 @@ public class MainSceneController implements GUIController {
         motherNature12.setVisible(false);
         int motherNaturePosition = gui.getModelView().getGameCopy().getGameBoard().getMotherNature().getPosition();
         switch (motherNaturePosition) {
-            case 1 -> {
-                motherNature1.setVisible(true);
-            }
-            case 2 -> {
-                motherNature2.setVisible(true);
-            }
-            case 3 -> {
-                motherNature3.setVisible(true);
-            }
-            case 4 -> {
-                motherNature4.setVisible(true);
-            }
-            case 5 -> {
-                motherNature5.setVisible(true);
-            }
-            case 6 -> {
-                motherNature6.setVisible(true);
-            }
-            case 7 -> {
-                motherNature7.setVisible(true);
-            }
+            case 1 -> motherNature1.setVisible(true);
+            case 2 -> motherNature2.setVisible(true);
+            case 3 -> motherNature3.setVisible(true);
+            case 4 -> motherNature4.setVisible(true);
+            case 5 -> motherNature5.setVisible(true);
+            case 6 -> motherNature6.setVisible(true);
+            case 7 -> motherNature7.setVisible(true);
 
-            case 8 -> {
-                motherNature8.setVisible(true);
-            }
+            case 8 -> motherNature8.setVisible(true);
 
-            case 9 -> {
-                motherNature9.setVisible(true);
-            }
+            case 9 -> motherNature9.setVisible(true);
 
-            case 10 -> {
-                motherNature10.setVisible(true);
-            }
+            case 10 -> motherNature10.setVisible(true);
 
-            case 11 -> {
-                motherNature11.setVisible(true);
-            }
+            case 11 -> motherNature11.setVisible(true);
 
-            case 12 -> {
-                motherNature12.setVisible(true);
-            }
+            case 12 -> motherNature12.setVisible(true);
         }
     }
 
@@ -914,42 +877,18 @@ public class MainSceneController implements GUIController {
         for (Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if (i.getNoEntry()) {
                 switch (i.getIslandID()) {
-                    case 1 -> {
-                        noEntryTile1.setVisible(true);
-                    }
-                    case 2 -> {
-                        noEntryTile2.setVisible(true);
-                    }
-                    case 3 -> {
-                        noEntryTile3.setVisible(true);
-                    }
-                    case 4 -> {
-                        noEntryTile4.setVisible(true);
-                    }
-                    case 5 -> {
-                        noEntryTile5.setVisible(true);
-                    }
-                    case 6 -> {
-                        noEntryTile6.setVisible(true);
-                    }
-                    case 7 -> {
-                        noEntryTile7.setVisible(true);
-                    }
-                    case 8 -> {
-                        noEntryTile8.setVisible(true);
-                    }
-                    case 9 -> {
-                        noEntryTile9.setVisible(true);
-                    }
-                    case 10 -> {
-                        noEntryTile10.setVisible(true);
-                    }
-                    case 11 -> {
-                        noEntryTile11.setVisible(true);
-                    }
-                    case 12 -> {
-                        noEntryTile12.setVisible(true);
-                    }
+                    case 1 -> noEntryTile1.setVisible(true);
+                    case 2 -> noEntryTile2.setVisible(true);
+                    case 3 -> noEntryTile3.setVisible(true);
+                    case 4 -> noEntryTile4.setVisible(true);
+                    case 5 -> noEntryTile5.setVisible(true);
+                    case 6 -> noEntryTile6.setVisible(true);
+                    case 7 -> noEntryTile7.setVisible(true);
+                    case 8 -> noEntryTile8.setVisible(true);
+                    case 9 -> noEntryTile9.setVisible(true);
+                    case 10 -> noEntryTile10.setVisible(true);
+                    case 11 -> noEntryTile11.setVisible(true);
+                    case 12 -> noEntryTile12.setVisible(true);
                 }
             }
         }
@@ -1045,31 +984,6 @@ public class MainSceneController implements GUIController {
         gui.getClientConnection().sendUserInput(action);
     }
 
-    public void showEffect(ActionEvent e) {
-        Button b = (Button) e.getSource();
-        String effect = b.getId();
-        switch(effect) {
-            case "effect1" -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Characters Effect");
-                alert.setHeaderText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName() + "'s effect");
-                alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getEffect());
-            }
-            case "effect2" -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Characters Effect");
-                alert.setHeaderText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName() + "'s effect");
-                alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getEffect());
-            }
-            case "effect3" -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Characters Effect");
-                alert.setHeaderText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName() + "'s effect");
-                alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getEffect());
-            }
-        }
-    }
-
     public void showEffect1() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Characters Effect");
@@ -1131,18 +1045,10 @@ public class MainSceneController implements GUIController {
         ImageView img = (ImageView) e.getSource();
         String picked = img.getId();
         switch (picked) {
-            case "cloud1" -> {
-                action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0));
-            }
-            case "cloud2" -> {
-                action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1));
-            }
-            case "cloud3" -> {
-                action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2));
-            }
-            case "cloud4" -> {
-                action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3));
-            }
+            case "cloud1" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0));
+            case "cloud2" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1));
+            case "cloud3" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2));
+            case "cloud4" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3));
         }
         if (action != null) {
             gui.getClientConnection().sendUserInput(action);
@@ -1194,29 +1100,29 @@ public class MainSceneController implements GUIController {
         for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
             if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
-                    for (int i = 0; i < t.getTable().size(); i++) {
-                        if (t.getTable().get(i).hasStudent()) {
-                            if (t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                    for (int i = 0; i < t.getDiningTable().size(); i++) {
+                        if (t.getDiningTable().get(i).hasStudent()) {
+                            if (t.getDiningTable().get(i).getBoardCellType() == PawnType.BLUE) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
                                 img = ((ImageView) myBlueStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.GREEN) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
                                 img = ((ImageView) myGreenStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.RED) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
                                 img = ((ImageView) myRedStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.PINK) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
                                 img = ((ImageView) myPinkStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.YELLOW) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
                                 img = ((ImageView) myYellowStudents.getChildren().get(i));
                                 img.setImage(pic);
@@ -1228,29 +1134,29 @@ public class MainSceneController implements GUIController {
             } else if (cont == 0){
                 //top Player corresponding to cont 0
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
-                    for (int i = 0; i < t.getTable().size(); i++) {
-                        if (t.getTable().get(i).hasStudent()) {
-                            if (t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                    for (int i = 0; i < t.getDiningTable().size(); i++) {
+                        if (t.getDiningTable().get(i).hasStudent()) {
+                            if (t.getDiningTable().get(i).getBoardCellType() == PawnType.BLUE) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
                                 img = ((ImageView) topBlueStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.GREEN) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
                                 img = ((ImageView) topGreenStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.RED) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
                                 img = ((ImageView) topRedStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.PINK) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
                                 img = ((ImageView) topPinkStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.YELLOW) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
                                 img = ((ImageView) topYellowStudents.getChildren().get(i));
                                 img.setImage(pic);
@@ -1263,29 +1169,29 @@ public class MainSceneController implements GUIController {
             } else if (cont == 1) {
                 //left Player corresponding to cont 1
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
-                    for (int i = 0; i < t.getTable().size(); i++) {
-                        if (t.getTable().get(i).hasStudent()) {
-                            if (t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                    for (int i = 0; i < t.getDiningTable().size(); i++) {
+                        if (t.getDiningTable().get(i).hasStudent()) {
+                            if (t.getDiningTable().get(i).getBoardCellType() == PawnType.BLUE) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
                                 img = ((ImageView) leftBlueStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.GREEN) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
                                 img = ((ImageView) leftGreenStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.RED) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
                                 img = ((ImageView) leftRedStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.PINK) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
                                 img = ((ImageView) leftPinkStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.YELLOW) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
                                 img = ((ImageView) leftYellowStudents.getChildren().get(i));
                                 img.setImage(pic);
@@ -1298,29 +1204,29 @@ public class MainSceneController implements GUIController {
             } else if (cont == 2) {
                 //right Player corresponding to cont 2
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
-                    for (int i = 0; i < t.getTable().size(); i++) {
-                        if (t.getTable().get(i).hasStudent()) {
-                            if (t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                    for (int i = 0; i < t.getDiningTable().size(); i++) {
+                        if (t.getDiningTable().get(i).hasStudent()) {
+                            if (t.getDiningTable().get(i).getBoardCellType() == PawnType.BLUE) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
                                 img = ((ImageView) rightBlueStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.GREEN) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
                                 img = ((ImageView) rightGreenStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.RED) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
                                 img = ((ImageView) rightRedStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.PINK) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
                                 img = ((ImageView) rightPinkStudents.getChildren().get(i));
                                 img.setImage(pic);
                                 img.setVisible(true);
-                            } else if (t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                            } else if (t.getDiningTable().get(i).getBoardCellType() == PawnType.YELLOW) {
                                 pic = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
                                 img = ((ImageView) rightYellowStudents.getChildren().get(i));
                                 img.setImage(pic);
@@ -1910,13 +1816,9 @@ public class MainSceneController implements GUIController {
     public Image setTowersImage(Tower t) {
         Image tower = null;
         switch(t.getColor().toString()) {
-            case "BLACK" -> {
-                tower = new Image("@../../graphics/wooden_pieces/black_tower.png");
-            } case "GREY" -> {
-                tower = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-            } case "WHITE" -> {
-                tower = new Image("@../../graphics/wooden_pieces/white_tower.png");
-            }
+            case "BLACK" -> tower = new Image("@../../graphics/wooden_pieces/black_tower.png");
+            case "GREY" -> tower = new Image("@../../graphics/wooden_pieces/grey_tower.png");
+            case "WHITE" -> tower = new Image("@../../graphics/wooden_pieces/white_tower.png");
         }
         return tower;
     }
@@ -1928,32 +1830,8 @@ public class MainSceneController implements GUIController {
 
     public String getTowersNumber(Island i) {
         int num = i.getMergedTowers().size();
-
-        System.out.println("Island i " + num);
         return Integer.toString(num);
     }
-    /*
-    public ImageView setStudentsImage(Student s) {
-        ImageView stud = null;
-        switch (s.getType().toString()) {
-            case "BLUE" -> {
-                stud = new ImageView("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
-            }
-            case "RED" -> {
-                stud = new ImageView("@../../graphics/wooden_pieces/3D/redStudent3D.png");
-            }
-            case "GREEN" -> {
-                stud = new ImageView("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
-            }
-            case "PINK" -> {
-                stud = new ImageView("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
-            }
-            case "YELLOW" -> {
-                stud = new ImageView("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
-            }
-        }
-        return stud;
-    } */
 
     public String getStudentsNumber(Island i, Student s) {
         int num = 0;
@@ -1962,7 +1840,6 @@ public class MainSceneController implements GUIController {
                 num+= 1;
             }
         }
-        System.out.println("Number of students " + s.getType() +": " + String.valueOf(num));
         return String.valueOf(num);
     }
 
@@ -2228,18 +2105,10 @@ public class MainSceneController implements GUIController {
     public Image setWizardImage(Wizards w) {
         Image wiz = null;
         switch (w.toString()) {
-            case "KING" -> {
-                wiz = new Image("@../../graphics/wizards/king_no_bg.png");
-            }
-            case "WITCH" -> {
-                wiz = new Image("@../../graphics/wizards/pixie_no_bg.png");
-            }
-            case "MONACH" -> {
-                wiz = new Image("@../../graphics/wizards/sorcerer_no_bg.png");
-            }
-            case "FOREST" -> {
-                wiz = new Image("@../../graphics/wizards/wizard_no_bg.png");
-            }
+            case "KING" -> wiz = new Image("@../../graphics/wizards/king_no_bg.png");
+            case "WITCH" -> wiz = new Image("@../../graphics/wizards/pixie_no_bg.png");
+            case "MONACH" -> wiz = new Image("@../../graphics/wizards/sorcerer_no_bg.png");
+            case "FOREST" -> wiz = new Image("@../../graphics/wizards/wizard_no_bg.png");
         }
         return wiz;
     }
@@ -2250,7 +2119,7 @@ public class MainSceneController implements GUIController {
         topWizard.setVisible(false);
         leftWizard.setVisible(false);
         rightWizard.setVisible(false);
-        Image img = null;
+        Image img;
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             img = setWizardImage(p.getWizard());
             if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
@@ -2488,24 +2357,24 @@ public class MainSceneController implements GUIController {
     public void askStudentDiningRoom() {
         descriptionLabel.setText("            Pick a student from your dining room");
         for(Table t : gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
-            if(t.getTable().get(0).hasStudent()) {
-                if(t.getTable().get(0).getBoardCellType() == PawnType.BLUE) {
+            if(t.getDiningTable().get(0).hasStudent()) {
+                if(t.getDiningTable().get(0).getBoardCellType() == PawnType.BLUE) {
                     blue.setVisible(true);
                     blueStudent.setVisible(true);
                 }
-                else if(t.getTable().get(0).getBoardCellType() == PawnType.GREEN) {
+                else if(t.getDiningTable().get(0).getBoardCellType() == PawnType.GREEN) {
                     green.setVisible(true);
                     greenStudent.setVisible(true);
                 }
-                else if(t.getTable().get(0).getBoardCellType() == PawnType.RED) {
+                else if(t.getDiningTable().get(0).getBoardCellType() == PawnType.RED) {
                     red.setVisible(true);
                     redStudent.setVisible(true);
                 }
-                else if(t.getTable().get(0).getBoardCellType() == PawnType.PINK) {
+                else if(t.getDiningTable().get(0).getBoardCellType() == PawnType.PINK) {
                     pink.setVisible(true);
                     pinkStudent.setVisible(true);
                 }
-                else if(t.getTable().get(0).getBoardCellType() == PawnType.YELLOW) {
+                else if(t.getDiningTable().get(0).getBoardCellType() == PawnType.YELLOW) {
                     yellow.setVisible(true);
                     yellowStudent.setVisible(true);
                 }

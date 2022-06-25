@@ -192,7 +192,6 @@ public class CLI implements Runnable, ListenerInterface {
                 stud[t] = ANSI_RED + "• [" + printRedStudentsOnIsland(i) + "]" + ANSI_RESET;
                 r = true;
             }
-            //stud[t] = printColor(i.getStudents().get(t).getType()) + i.getStudents().get(t).getType() + ANSI_RESET ;
         }
         for(int j=0; j < stud.length; j++) {
             if (stud[j] != null) {
@@ -346,21 +345,21 @@ public class CLI implements Runnable, ListenerInterface {
         for(Player pl : modelView.getGameCopy().getActivePlayers()) {
             if(pl.getNickname().equals(name)) {
                 for(Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
-                    for(int i=0; i < t.getTable().size(); i++) {
-                        if(t.getTable().get(i).hasStudent()) {
-                            if(t.getTable().get(i).getBoardCellType() == PawnType.BLUE) {
+                    for(int i = 0; i < t.getDiningTable().size(); i++) {
+                        if(t.getDiningTable().get(i).hasStudent()) {
+                            if(t.getDiningTable().get(i).getBoardCellType() == PawnType.BLUE) {
                                 b++;
                             }
-                            else if(t.getTable().get(i).getBoardCellType() == PawnType.GREEN) {
+                            else if(t.getDiningTable().get(i).getBoardCellType() == PawnType.GREEN) {
                                 g++;
                             }
-                            else if(t.getTable().get(i).getBoardCellType() == PawnType.RED) {
+                            else if(t.getDiningTable().get(i).getBoardCellType() == PawnType.RED) {
                                 r++;
                             }
-                            else if(t.getTable().get(i).getBoardCellType() == PawnType.PINK) {
+                            else if(t.getDiningTable().get(i).getBoardCellType() == PawnType.PINK) {
                                 p++;
                             }
-                            else if(t.getTable().get(i).getBoardCellType() == PawnType.YELLOW) {
+                            else if(t.getDiningTable().get(i).getBoardCellType() == PawnType.YELLOW) {
                                 y++;
                             }
                         }
@@ -375,20 +374,6 @@ public class CLI implements Runnable, ListenerInterface {
             }
         return students;
     }
-
-   /* implementazione senza la tabella, segue quella con
-        public void showDiningRooms() {
-        out.println(">Take a look at the other players' dining rooms!");
-        for (Player p : modelView.getGameCopy().getActivePlayers()) {
-            int[] students = getPlayerDiningRoom(p.getPlayerID());
-            out.println("Player " + p.getNickname() + "has: ");
-            out.print(ANSI_BLUE + students[0] + "blue students\n" + ANSI_RESET);
-            out.print(ANSI_GREEN + students[1] + "green students\n" + ANSI_RESET);
-            out.print(ANSI_RED + students[2] + "red students\n" + ANSI_RESET);
-            out.print(ANSI_PURPLE + students[3] + "pink students\n" + ANSI_RESET);
-            out.print(ANSI_YELLOW + students[4] + "yellow students\n" + ANSI_RESET);
-        }
-    }*/
 
     public void showOtherDiningRooms() {
         System.out.println(">Take a look at the other players' dining rooms!\n");
@@ -663,10 +648,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void chooseExpertMode() {
         String expertModeChoice;
-        //System.out.println("Sono in chooseExpertMode");
         System.out.print(">");
         expertModeChoice = in.nextLine();
-        //System.out.println("Ho fatto l'assegnamento: della expert mode " + expertModeChoice);
         clientConnection.sendUserInput(new ExpertModeChoice(expertModeChoice));
     }
 
@@ -679,7 +662,6 @@ public class CLI implements Runnable, ListenerInterface {
                 Wizards wizardChosen = Wizards.parseWizardInput(wizardTyped);
                 if(availableWizards.contains(wizardChosen)) {
                     clientConnection.sendUserInput(new WizardChoice(wizardChosen));
-                    modelView.setGameStarted(true);
                     return;
                 } else {
                     System.out.println("Wizard not available!");
@@ -693,7 +675,6 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void choosePlayerNumber() {
-        //System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
         while (true) {
             try {
@@ -747,7 +728,6 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void userNicknameSetup() {
-        //System.out.println("Entro in usernameSetup");
 
         String userNickname = null;
         boolean nickCheck = false;
@@ -776,7 +756,6 @@ public class CLI implements Runnable, ListenerInterface {
             }
             System.out.println("Socket Connection setup completed!");
         } catch (DuplicateNicknameException e) {
-            //e.printStackTrace();
             userNicknameSetup();
         }
         virtualClient.addPropertyChangeListener(new Parser(clientConnection, modelView));
@@ -800,7 +779,6 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void initialGamePhaseHandler(String serverCommand) {
-        //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
         switch(serverCommand) {
 
             case "RequestPlayerNumber" -> {
@@ -814,7 +792,6 @@ public class CLI implements Runnable, ListenerInterface {
             case "RequestWizard"-> {
                 out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
                 ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> out.println(wizardLeft + ", "));
-                //System.out.println("\n");
                 chooseWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             }
             default -> out.println("Nothing to do");
@@ -847,8 +824,6 @@ public class CLI implements Runnable, ListenerInterface {
         CLI cli = new CLI();
 
         cli.run();
-        //System.out.println("Arrivo dopo qui");
-
     }
 
     public void showCharacters(AssistantDeck deck) {

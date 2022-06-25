@@ -14,9 +14,6 @@ public class ModelView {
     private boolean activeInput = false;
     private Game gameCopy;
     private String playerNickname;
-    private boolean startPlaying = false;
-    private String wizardName;
-    private boolean gameStarted;
     private boolean pianification = false;
     private boolean action = false;
     private boolean magicPostmanAction = false;
@@ -117,21 +114,6 @@ public class ModelView {
         this.serverAnswer = serverAnswer;
     }
 
-    public void setStartPlaying(boolean startPlaying) {
-        this.startPlaying = startPlaying;
-    }
-
-
-    public void setWizardName(String wizardName) {
-        this.wizardName = wizardName;
-    }
-
-
-    public void setGameStarted(boolean gameStarted) {
-        this.gameStarted = gameStarted;
-    }
-
-
     public ModelView(CLI cli)  {
         this.cli = cli;
         this.gui = null;
@@ -166,7 +148,7 @@ public class ModelView {
     public int getYellowStudents(Player p) {
         int yellow = 0;
         for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().get(i).getBoardCellType()
+            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType()
                     .equals(PawnType.YELLOW)) {
                 yellow++;
             }
@@ -177,7 +159,7 @@ public class ModelView {
     public int getBlueStudents(Player p) {
         int blue = 0;
         for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().get(i).getBoardCellType().equals(PawnType.BLUE)) {
+            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.BLUE)) {
                 blue++;
             }
         }
@@ -187,7 +169,7 @@ public class ModelView {
     public int getRedStudents(Player p) {
         int red = 0;
         for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().get(i).getBoardCellType().equals(PawnType.RED)) {
+            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.RED)) {
                 red++;
             }
         }
@@ -197,7 +179,7 @@ public class ModelView {
     public int getPinkStudents(Player p) {
         int pink = 0;
         for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().get(i).getBoardCellType().equals(PawnType.PINK)) {
+            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.PINK)) {
                 pink++;
             }
         }
@@ -207,7 +189,7 @@ public class ModelView {
     public int getGreenStudents(Player p) {
         int green = 0;
         for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getTable().get(i).getBoardCellType().equals(PawnType.GREEN)) {
+            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.GREEN)) {
                 green++;
             }
         }
@@ -216,7 +198,7 @@ public class ModelView {
 
     public String hasYellowProfessor(Player p) {
         String yellowProfessor;
-        if(p.getBoard().getProfessorTable().getProfessorTable().get(4).hasProfessor()) {
+        if(p.getBoard().getProfessorTable().getProfTable().get(4).hasProfessor()) {
             yellowProfessor = "yes";
         }
         else {
@@ -227,7 +209,7 @@ public class ModelView {
 
     public String hasBlueProfessor(Player p) {
         String blueProfessor;
-        if(p.getBoard().getProfessorTable().getProfessorTable().get(0).hasProfessor()) {
+        if(p.getBoard().getProfessorTable().getProfTable().get(0).hasProfessor()) {
             blueProfessor = "yes";
         }
         else {
@@ -238,7 +220,7 @@ public class ModelView {
 
     public String hasGreenProfessor(Player p) {
         String greenProfessor;
-        if(p.getBoard().getProfessorTable().getProfessorTable().get(1).hasProfessor()) {
+        if(p.getBoard().getProfessorTable().getProfTable().get(1).hasProfessor()) {
             greenProfessor = "yes";
         }
         else {
@@ -249,7 +231,7 @@ public class ModelView {
 
     public String hasPinkProfessor(Player p) {
         String pinkProfessor;
-        if(p.getBoard().getProfessorTable().getProfessorTable().get(2).hasProfessor()) {
+        if(p.getBoard().getProfessorTable().getProfTable().get(2).hasProfessor()) {
             pinkProfessor = "yes";
         }
         else {
@@ -260,7 +242,7 @@ public class ModelView {
 
     public String hasRedProfessor(Player p) {
         String redProfessor;
-        if(p.getBoard().getProfessorTable().getProfessorTable().get(3).hasProfessor()) {
+        if(p.getBoard().getProfessorTable().getProfTable().get(3).hasProfessor()) {
             redProfessor = "yes";
         }
         else {

@@ -206,7 +206,7 @@ public class GUI extends Application implements ListenerInterface {
 
             case "ExpertModeAnswer" -> Platform.runLater(() -> {
                 LoadingController controller = (LoadingController) getControllerFromName(LOADING_PAGE);
-                controller.askExpertMode(((ExpertModeAnswer) modelView.getServerAnswer()).getMessage());
+                controller.askExpertMode();
             }) ;
             case "RequestWizard" -> Platform.runLater(() -> {
                 WizardMenuController controller = (WizardMenuController) getControllerFromName(WIZARD_MENU);
