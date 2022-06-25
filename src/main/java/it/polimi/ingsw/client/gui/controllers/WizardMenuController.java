@@ -2,16 +2,12 @@ package it.polimi.ingsw.client.gui.controllers;
 
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
-import it.polimi.ingsw.model.cards.AssistantCard;
 import it.polimi.ingsw.model.enumerations.Wizards;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

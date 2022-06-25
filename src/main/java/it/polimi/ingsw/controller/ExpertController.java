@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.messages.clienttoserver.actions.Action;
 import it.polimi.ingsw.messages.servertoclient.*;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.GameBoard;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.CharacterCard;

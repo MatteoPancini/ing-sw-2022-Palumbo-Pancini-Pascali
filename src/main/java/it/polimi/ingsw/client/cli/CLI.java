@@ -37,8 +37,6 @@ import static it.polimi.ingsw.constants.Constants.*;
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
-    private String chosenCharacter;
-    //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
     private boolean activeGame;

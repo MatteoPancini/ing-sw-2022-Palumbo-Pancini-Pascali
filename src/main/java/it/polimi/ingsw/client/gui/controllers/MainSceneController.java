@@ -218,6 +218,8 @@ public class MainSceneController implements GUIController {
     @FXML ImageView greenIsland5;
     @FXML Label greenLabelIsland5;
 
+    @FXML ChoiceBox<String> pickCharacterActionNumberBox;
+
     @FXML ImageView redIsland6;
     @FXML Label redLabelIsland6;
     @FXML ImageView yellowIsland6;
@@ -551,6 +553,7 @@ public class MainSceneController implements GUIController {
         diningRoomButton.setVisible(false);
         askAssistantButton.setVisible(false);
         pickMovesBox.setVisible(false);
+        pickCharacterActionNumberBox.setVisible(false);
         descriptionLabel.setText("");
 
         switch (serverCommand) {
@@ -579,6 +582,14 @@ public class MainSceneController implements GUIController {
             case "PICK_PAWN_TYPE" -> {
                 askPawnType();
             }
+
+            case "PICK_ISLAND" -> {
+                askGrannyHerbsIsland();
+            }
+
+            case "PICK_CHARACTER_NUMBER" -> {
+                askCharacterActionNumber();
+            }
             default -> {
                 descriptionLabel.setText("        Click the pick assistant button to choose your assistant");
                 System.out.println("Update without user actions (server command not in switch cases)");
@@ -593,6 +604,26 @@ public class MainSceneController implements GUIController {
             moves.add(Integer.toString(i));
         }
         return moves;
+    }
+
+    public void askCharacterActionNumber() {
+        descriptionLabel.setText("Choose the number of actions you want to play");
+        pickCharacterActionNumberBox.setVisible(true);
+        if(gui.getModelView().isJesterAction()) {
+            for(int i = 1; i <= 3; i++) {
+                pickCharacterActionNumberBox.getItems().add(String.valueOf(i));
+            }
+        } else if(gui.getModelView().isMinestrelAction()){
+            for(int i = 1; i <= 2; i++) {
+                pickCharacterActionNumberBox.getItems().add(String.valueOf(i));
+            }
+        }
+        pickCharacterActionNumberBox.setOnAction(this::pickCharacterMoves);
+    }
+
+    public void pickCharacterMoves(ActionEvent e) {
+        int moves = Integer.parseInt(pickCharacterActionNumberBox.getValue());
+        gui.getClientConnection().sendUserInput(new PickCharacterActionsNum(moves));
     }
 
     public void updateBoards() {
@@ -1065,6 +1096,22 @@ public class MainSceneController implements GUIController {
     public void askDestination() {
         descriptionLabel.setText("Pick an island or the dining room button to choose the student destination");
         diningRoomButton.setVisible(true);
+        island1Button.setVisible(true);
+        island2Button.setVisible(true);
+        island3Button.setVisible(true);
+        island4Button.setVisible(true);
+        island5Button.setVisible(true);
+        island6Button.setVisible(true);
+        island7Button.setVisible(true);
+        island8Button.setVisible(true);
+        island9Button.setVisible(true);
+        island10Button.setVisible(true);
+        island11Button.setVisible(true);
+        island12Button.setVisible(true);
+    }
+    
+    public void askGrannyHerbsIsland() {
+        descriptionLabel.setText("Pick an island where you want to put a NO_ENTRY tile!");
         island1Button.setVisible(true);
         island2Button.setVisible(true);
         island3Button.setVisible(true);

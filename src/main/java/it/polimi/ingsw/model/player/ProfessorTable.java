@@ -2,16 +2,14 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.enumerations.PawnType;
 
-import it.polimi.ingsw.model.player.BoardCell;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProfessorTable implements Serializable {
-    private ArrayList<BoardCell> professorTable = new ArrayList<BoardCell>();
+    private ArrayList<BoardCell> professorTable = new ArrayList<>();
 
     public ProfessorTable (){
-        ArrayList<PawnType> pawns = new ArrayList<PawnType>();
+        ArrayList<PawnType> pawns = new ArrayList<>();
         pawns.add(PawnType.BLUE);
         pawns.add(PawnType.GREEN);
         pawns.add(PawnType.PINK);

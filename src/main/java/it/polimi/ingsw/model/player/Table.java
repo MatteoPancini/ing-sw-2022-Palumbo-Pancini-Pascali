@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.player;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
 import java.util.ArrayList;
 
@@ -9,7 +8,7 @@ import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
 public class Table implements Serializable {
-    private ArrayList<BoardCell> table = new ArrayList<BoardCell>();
+    private ArrayList<BoardCell> table = new ArrayList<>();
     private int lastPosition = 0;
 
     public Table(PawnType p) {
@@ -32,12 +31,6 @@ public class Table implements Serializable {
         return table.get(0).getBoardCellType();
     }
 
-    /*
-    public BoardCell getLastPosition() {
-        return this.getTable().get(this.getTable().size());
-    }
-
-     */
     public void removeStudent() {
         table.get(lastPosition - 1).removeStudent();
         lastPosition--;
@@ -50,8 +43,6 @@ public class Table implements Serializable {
     public void addStudent(Student stud){
         table.get(lastPosition).setStudent(stud);
         lastPosition++;
-        System.out.println("Last pos" + lastPosition);
-        return;
     }
 
     public int getTableStudentsNum() {

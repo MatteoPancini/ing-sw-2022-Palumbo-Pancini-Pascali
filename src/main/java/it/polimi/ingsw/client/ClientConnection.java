@@ -5,7 +5,6 @@ import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.exceptions.DuplicateNicknameException;
 import it.polimi.ingsw.messages.clienttoserver.Message;
 import it.polimi.ingsw.messages.clienttoserver.NicknameChoice;
-import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.SerializedMessage;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 import it.polimi.ingsw.messages.servertoclient.ConnectionResult;

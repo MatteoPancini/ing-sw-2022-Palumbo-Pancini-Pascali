@@ -24,13 +24,11 @@ public class Game implements Serializable {
     }
 
     public Game() {
-        //this.gameBoard = new GameBoard(this);
     }
 
 
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
-        System.out.println("Number of players: " + playersNumber);
         this.gameBoard = new GameBoard(this);
         currentPlayerNumber = 0;
     }
@@ -111,7 +109,6 @@ public class Game implements Serializable {
     public void switchToNextPlayer() {
         currentPlayerNumber = (currentPlayerNumber == activePlayers.size() - 1) ? 0 : currentPlayerNumber + 1;
         setCurrentPlayer(activePlayers.get(currentPlayerNumber));
-        System.out.println("Current player is: " + currentPlayer.getNickname());
     }
 
 }
