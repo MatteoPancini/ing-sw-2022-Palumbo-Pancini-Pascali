@@ -33,5 +33,4 @@ public class PlayerTest {
         testPlayer.setWizard(Wizards.KING);
         assertEquals(Wizards.KING, testPlayer.getWizard());
     }
-
 }

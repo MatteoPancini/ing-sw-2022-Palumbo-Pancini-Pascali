@@ -75,7 +75,6 @@ public class Player implements Serializable {
         return idTeam;
     }
 
-
     public int getIslandInfluence() {
         return islandInfluence;
     }
