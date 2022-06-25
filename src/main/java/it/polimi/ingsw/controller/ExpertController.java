@@ -16,16 +16,14 @@ import java.util.ArrayList;
 
 public class ExpertController {
     private final Game game;
-    private final GameBoard board;
     private final TurnController turnController;
     private Student studentOne;
     private Student studentTwo;
     private PawnType pawnTypeChosen;
     private Student studentChosen;
 
-    public ExpertController(Game game, GameBoard board, TurnController turnController) {
+    public ExpertController(Game game, TurnController turnController) {
         this.game = game;
-        this.board = board;
         this.turnController = turnController;
     }
 
