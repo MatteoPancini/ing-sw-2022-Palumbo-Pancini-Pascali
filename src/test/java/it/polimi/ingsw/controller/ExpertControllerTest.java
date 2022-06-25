@@ -62,10 +62,6 @@ public class ExpertControllerTest {
 
     final ExpertController expertController = new ExpertController(controllerStub.getGame(), controllerStub.getTurnController());
 
-
-
-
-
     @BeforeEach
     @DisplayName("Expert Mode Tets")
     public void expertModeGame() {
