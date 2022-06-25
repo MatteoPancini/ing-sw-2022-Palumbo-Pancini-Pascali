@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.gui;
 
-import com.sun.scenario.effect.Blend;
 import it.polimi.ingsw.client.ActionHandler;
 import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.ListenerInterface;
@@ -10,12 +9,7 @@ import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.board.Student;
-import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.enumerations.Assistants;
-import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Table;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -25,19 +19,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
-import static it.polimi.ingsw.constants.Constants.ANSI_RED;
-import static it.polimi.ingsw.constants.Constants.ANSI_RESET;
 
 
 public class GUI extends Application implements ListenerInterface {
@@ -319,7 +308,7 @@ public class GUI extends Application implements ListenerInterface {
             ArrayList<String> winners = new ArrayList<>();
             int winnerTeam = -1;
             for(Player p : modelView.getGameCopy().getPlayers()) {
-                if(p.getNickname() == winnerNickname) {
+                if(p.getNickname().equals(winnerNickname)) {
                     winnerTeam = p.getIdTeam();
                 }
             }

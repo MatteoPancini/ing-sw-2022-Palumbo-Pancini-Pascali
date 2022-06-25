@@ -840,7 +840,7 @@ public class TurnController {
         if(lastRound) {
             System.out.println("Enrtro 3");
 
-            if(controller.getGame().getCurrentPlayer().getNickname() != controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname()) {
+            if(!controller.getGame().getCurrentPlayer().getNickname().equals(controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname())) {
                 return false;
             } else {
                 return true;

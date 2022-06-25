@@ -37,6 +37,8 @@ import static it.polimi.ingsw.constants.Constants.*;
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
+    private String chosenCharacter;
+    //private String chosenTeam;
     private ClientConnection clientConnection;
     private final ModelView modelView;
     private boolean activeGame;
@@ -147,6 +149,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
 
+    //scrivere diversi show per ogni parte del modello da mostrare
     public void showBoard() {
         System.out.println("Here's a summary of your board: ");
         System.out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
@@ -191,6 +194,7 @@ public class CLI implements Runnable, ListenerInterface {
                 stud[t] = ANSI_RED + "• [" + printRedStudentsOnIsland(i) + "]" + ANSI_RESET;
                 r = true;
             }
+            //stud[t] = printColor(i.getStudents().get(t).getType()) + i.getStudents().get(t).getType() + ANSI_RESET ;
         }
         for(int j=0; j < stud.length; j++) {
             if (stud[j] != null) {
@@ -232,14 +236,12 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void showIslandsTable() {
-        //System.out.println(">Here's a little description of the islands in the game board. [Towers' legend: ▲ = Grey , █ = Black , ○ = White]");
         System.out.println(">Here's a little description of the islands in the game board. [Towers' legend: ▲ = Grey \"" + greyP + "\", █ = Black \"" + blackP + "\", ○ = White \"" + whiteP + "\"]");
 
         CLITable st = new CLITable();
         st.setHeaders("Island ID", "Merged Islands", "Students & Towers");
 
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
-            //st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)), printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
             if(modelView.getGameCopy().getGameBoard().getIslands().get(i).getNoEntry()) {
                 st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()) + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
             } else {
@@ -376,6 +378,20 @@ public class CLI implements Runnable, ListenerInterface {
         return students;
     }
 
+   /* implementazione senza la tabella, segue quella con
+        public void showDiningRooms() {
+        out.println(">Take a look at the other players' dining rooms!");
+        for (Player p : modelView.getGameCopy().getActivePlayers()) {
+            int[] students = getPlayerDiningRoom(p.getPlayerID());
+            out.println("Player " + p.getNickname() + "has: ");
+            out.print(ANSI_BLUE + students[0] + "blue students\n" + ANSI_RESET);
+            out.print(ANSI_GREEN + students[1] + "green students\n" + ANSI_RESET);
+            out.print(ANSI_RED + students[2] + "red students\n" + ANSI_RESET);
+            out.print(ANSI_PURPLE + students[3] + "pink students\n" + ANSI_RESET);
+            out.print(ANSI_YELLOW + students[4] + "yellow students\n" + ANSI_RESET);
+        }
+    }*/
+
     public void showOtherDiningRooms() {
         System.out.println(">Take a look at the other players' dining rooms!\n");
 
@@ -443,6 +459,7 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
 
+    //alla fine del turno rimuovere le lastAssistantsUsed
     public void askAssistant() {
         if(modelView.getGameCopy().getGameBoard().getLastAssistantUsed().size() > 0) {
             showLastAssistantsUsed();
@@ -678,12 +695,14 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     public void choosePlayerNumber() {
+        //System.out.println("Sono in choosePlayerNumber");
         int numOfPlayer;
         while (true) {
             try {
                 Scanner inputNum = new Scanner(System.in);
                 System.out.print(">");
                 numOfPlayer = inputNum.nextInt();
+
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid parameter, it must be a numeric value.");
@@ -711,7 +730,7 @@ public class CLI implements Runnable, ListenerInterface {
             ArrayList<String> winners = new ArrayList<>();
             int winnerTeam = -1;
             for(Player p : modelView.getGameCopy().getPlayers()) {
-                if(p.getNickname() == winnerNickname) {
+                if(p.getNickname().equals(winnerNickname)) {
                     winnerTeam = p.getIdTeam();
                 }
             }
@@ -767,9 +786,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     @Override
     public void run() {
-
         userNicknameSetup();
-
         while(true) {
             if(!activeGame) {
                 break;
@@ -832,6 +849,7 @@ public class CLI implements Runnable, ListenerInterface {
         CLI cli = new CLI();
 
         cli.run();
+        //System.out.println("Arrivo dopo qui");
 
     }
 
