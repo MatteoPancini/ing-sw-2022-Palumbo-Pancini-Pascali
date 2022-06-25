@@ -60,12 +60,17 @@ public class ActionHandler {
             modelView.setGameCopy((Game) answer.getMessage());
             showGame = showGame + 1;
             if(showGame == 1) {
+                System.out.println("Faccio update");
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            } else if(modelView.isPianification()) {
+            } else if (gui != null) {
                 view.firePropertyChange("UpdateModelView", null, answer.getMessage());
-            }
+            }/* else if(modelView.isPianification()) {
+                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+            }*/
+
             //System.out.println("non aggiorno");
         } else if(answer instanceof StartAction) {
+            System.out.println("Setting Action");
             modelView.setActivateInput(true);
             modelView.setAction(true);
             modelView.setPianification(false);
@@ -84,6 +89,7 @@ public class ActionHandler {
                 gui.getInfoAlert().show();
             }
         } else if(answer instanceof StartPianification) {
+            System.out.println("Setting Pianification");
             modelView.setActivateInput(true);
             modelView.setPianification(true);
             modelView.setAction(false);
@@ -109,7 +115,11 @@ public class ActionHandler {
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);
         } else if(answer instanceof NoWinnerGameNotification) {
-            cli.endGameMessage();
+            if(cli != null) {
+                cli.endGameMessage();
+            } else if(gui != null) {
+                gui.showEndGameNoWinner();
+            }
         } else if(answer instanceof PrincessAction) {
             modelView.setPrincessAction(true);
         } else if(answer instanceof MonkAction) {

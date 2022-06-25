@@ -297,4 +297,8 @@ public class ModelView {
     public void setPlayerNickname(String userNickname) {
         this.playerNickname = userNickname;
     }
+
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
 }

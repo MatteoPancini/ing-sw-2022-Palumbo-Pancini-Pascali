@@ -17,29 +17,19 @@ public class Island implements Serializable {
     private ArrayList<Tower> mergedTowers;
     private boolean noEntry;
     private Player owner;
-    private boolean motherNature;
-    private boolean isMerged;
-    private int leaderIsland = -1;
 
     public Island(GameBoard board, int ID){
         this.board = board;
         islandID = ID;
         tower = null;
-        mergedIsland = new ArrayList<Island>();
+        mergedIsland = new ArrayList<>();
         mergedIsland.add(this);
         System.out.println(mergedIsland.size());
-        students = new ArrayList<Student>();
+        students = new ArrayList<>();
         noEntry = false;
         owner = null;
     }
 
-    public void setMotherNature(boolean motherNature) {
-        this.motherNature = motherNature;
-    }
-
-    public boolean isMotherNature() {
-        return motherNature;
-    }
 
     public boolean hasTower(){
         if(tower != null) return true;
@@ -58,27 +48,10 @@ public class Island implements Serializable {
         this.noEntry = noEntry;
     }
 
-    public void setOwner(Player owner){ this.owner = owner; }
-
     public void addStudent(Student newStudent) {
         students.add(newStudent);
     }
 
-    public int getLeaderIsland() {
-        return leaderIsland;
-    }
-
-    public void setMerged(boolean merged) {
-        isMerged = merged;
-    }
-
-    public void setLeaderIsland(int leaderIsland) {
-        this.leaderIsland = leaderIsland;
-    }
-
-    public boolean isMerged() {
-        return isMerged;
-    }
 
     public void doubleMerge() {
         System.out.println("Faccio doble merge DI " + islandID);
@@ -168,10 +141,6 @@ public class Island implements Serializable {
             }
             System.out.println(island.getMergedTowers().size());
 
-            for(Student s : island.getStudents()) {
-                System.out.println("Aggiungo stude");
-                students.add(s);
-            }
             island.setTower(null);
             island.setMergedIsland(null);
             island.setStudents(null);

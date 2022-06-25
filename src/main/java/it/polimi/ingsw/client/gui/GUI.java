@@ -18,9 +18,12 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Table;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -33,10 +36,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import static it.polimi.ingsw.constants.Constants.ANSI_RED;
+import static it.polimi.ingsw.constants.Constants.ANSI_RESET;
 
 
 public class GUI extends Application implements ListenerInterface {
 
+    @FXML Label descriptionLabel;
 
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private final ModelView modelView;
@@ -80,47 +86,6 @@ public class GUI extends Application implements ListenerInterface {
         return mediaPlayer;
     }
 
-    public AssistantCard getAssistantFromDeck(Assistants a) {
-        for(AssistantCard card : modelView.getGameCopy().getCurrentPlayer().getAssistantDeck().getDeck()) {
-            if(a.equals(card.getName())) {
-                return card;
-            }
-        }
-        return null;
-    }
-
-    public int getIDFromIslandImage(String s) {
-        int id = -1;
-        switch(s) {
-            case "island1" -> {
-                id = 1;
-            } case "island2" -> {
-                id = 2;
-            } case "island3" -> {
-                id = 3;
-            } case "island4" -> {
-                id = 4;
-            } case "island5" -> {
-                id = 5;
-            } case "island6" -> {
-                id = 6;
-            } case "island7" -> {
-                id = 7;
-            } case "island8" -> {
-                id = 8;
-            } case "island9" -> {
-                id = 9;
-            } case "island10" -> {
-                id = 10;
-            } case "island11" -> {
-                id = 11;
-            } case "island12" -> {
-                id = 12;
-            }
-        }
-        return id;
-    }
-
     private Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
 
     private MediaPlayer mediaPlayer;
@@ -157,7 +122,7 @@ public class GUI extends Application implements ListenerInterface {
     public void run() {
         stage.setTitle("Eriantys");
         stage.setScene(currentScene);
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/icons/eriantys.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/eriantys_banner.png")));
         stage.show();
 
         //resizing
@@ -190,6 +155,11 @@ public class GUI extends Application implements ListenerInterface {
         currentScene = nameMapScene.get(newScene);
         stage.setScene(currentScene);
         stage.show();
+
+        stage.setOnCloseRequest(event -> {
+            event.consume();
+            showQuitGame();
+        });
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
@@ -208,7 +178,6 @@ public class GUI extends Application implements ListenerInterface {
         List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT, MAIN_SCENE));
         try {
             for(String pathFxml : fxmlList) {
-                System.out.println(pathFxml);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/" + pathFxml));
                 nameMapScene.put(pathFxml, new Scene(loader.load()));
                 GUIController controller = loader.getController();
@@ -287,13 +256,16 @@ public class GUI extends Application implements ListenerInterface {
             }
 
             case "DynamicAnswer" -> Platform.runLater(() -> {
-                infoAlert.setTitle("INFO");
-                infoAlert.setHeaderText("Information from server");
-                infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
-                infoAlert.show();
+                if(modelView.isPianification() || modelView.isAction()) {
+                    MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
+                    controller.updateDescription(modelView.getServerAnswer().getMessage().toString());
+                } else {
+                    infoAlert.setTitle("INFO");
+                    infoAlert.setHeaderText("Information from server");
+                    infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
+                    infoAlert.show();
+                }
             });
-                    //showServerMessage(modelView.getServerAnswer());
-
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);
@@ -308,22 +280,58 @@ public class GUI extends Application implements ListenerInterface {
                     });
                     firstSetupScene = false;
                 } else {
-                    Platform.runLater(() -> updateMainScene());
+                    Platform.runLater(this::updateMainScene);
                 }
 
                 //this.changeStage();
             }
-            /*case "WinMessage" -> {
+            case "WinMessage" -> {
                 assert serverCommand != null;
-                showWinMessage();
+                showWinGame();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
-                showLoseMessage(changeEvent.getNewValue().toString());
+                showLoseGame(changeEvent.getNewValue().toString());
             }
 
-             */
             default -> System.out.println("Unknown answer from server");
         }
     }
+
+    public void showQuitGame() {
+        infoAlert.setTitle("Quit Game");
+        infoAlert.setContentText("Game successfully quitted!");
+    }
+
+    public void showEndGameNoWinner() {
+        infoAlert.setTitle("Game Over");
+        infoAlert.setContentText("The game is over without a winner! Thanks to have played Eriantys!");
+    }
+
+    public void showWinGame() {
+        infoAlert.setTitle("Game Over");
+        infoAlert.setContentText("Congratulations: you are the winner! Thanks to have played Eriantys!");
+    }
+
+    public void showLoseGame(String winnerNickname) {
+        infoAlert.setTitle("Game Over");
+        if(modelView.isFourPlayers()) {
+            ArrayList<String> winners = new ArrayList<>();
+            int winnerTeam = -1;
+            for(Player p : modelView.getGameCopy().getPlayers()) {
+                if(p.getNickname() == winnerNickname) {
+                    winnerTeam = p.getIdTeam();
+                }
+            }
+
+            for(Player p : modelView.getGameCopy().getPlayers()) {
+                if(p.getIdTeam() == winnerTeam) {
+                    winners.add(p.getNickname());
+                }
+            }
+            infoAlert.setContentText("You lost: the winner are " + winners.get(0) + " & " + winners.get(1) + " from team " + winnerTeam + "! Thanks to have played Eriantys!");
+        } else {
+            infoAlert.setContentText("You lost: the winner is " + winnerNickname + "! Thanks to have played Eriantys!");
+        }
+}
 }

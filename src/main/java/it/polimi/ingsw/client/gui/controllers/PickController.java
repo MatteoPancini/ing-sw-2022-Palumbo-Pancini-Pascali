@@ -415,7 +415,7 @@ public class PickController implements GUIController{
             // COPIARE PER IL RESTO DELLE ISOLE
         }
     }
-    public void askStudent() {
+    public void askStudentDiningRoom() {
         gui.changeStage("PickStudent.fxml");
         redButton.setVisible(false);
         yellowButton.setVisible(false);
@@ -431,7 +431,7 @@ public class PickController implements GUIController{
                     }
                 }
             } else {
-                askStudent();
+                askStudentDiningRoom();
             }
             gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
 
@@ -443,7 +443,7 @@ public class PickController implements GUIController{
                     }
                 }
             } else {
-                askStudent();
+                askStudentDiningRoom();
 
             }
             gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);

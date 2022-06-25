@@ -69,28 +69,8 @@ public class TurnController {
         this.expertController = expertController;
     }
 
-    public boolean isPianificationPhase() {
-        return isPianificationPhase;
-    }
-
-    public int getStudentRequest() {
-        return studentRequest;
-    }
-
-    public void setStudentRequest(int studentRequest) {
-        this.studentRequest = studentRequest;
-    }
-
-    public Student getStudentToMove() {
-        return studentToMove;
-    }
-
     public void setStudentToMove(Student studentToMove) {
         this.studentToMove = studentToMove;
-    }
-
-    public boolean isActionPhase() {
-        return isActionPhase;
     }
 
     public void setPianificationPhase() {
@@ -109,17 +89,6 @@ public class TurnController {
         isPianificationPhase = false;
     }
 
-
-    /**
-     * Set isActionPhase value to false
-     */
-    public void resetActionPhase() {
-        isActionPhase = false;
-    }
-
-    public void setActionPhaseNum(int actionPhaseNum) {
-        this.actionPhaseNum = actionPhaseNum;
-    }
 
     /**
      * Start pianification phase
@@ -187,7 +156,6 @@ public class TurnController {
                 askMotherNatureMoves();
             }
         }
-        return;
     }
 
     /**
@@ -238,8 +206,6 @@ public class TurnController {
                     return;
                 }
                 newStudents.add(controller.getGame().getGameBoard().getStudentsBag().get(0));
-                //System.out.println(newStudents.get(j).getType());
-                //newStudents.get(j) = gameHandler.getGame().getGameBoard().getStudentsBag().get(0);
                 controller.getGame().getGameBoard().removeStudents(0);
             }
             cloud.setStudents(newStudents);
@@ -254,6 +220,8 @@ public class TurnController {
         if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
             //System.out.println("Entro");
             gameHandler.sendSinglePlayer(new StartPianification(), currentPlayer.getPlayerID());
+            gameHandler.sendExcept(new StartPianification(), currentPlayer.getPlayerID());
+
             //System.out.println("Mando StartPianification");
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
             //System.out.println("Mando Game");
@@ -363,13 +331,12 @@ public class TurnController {
 
         for(Player p : controller.getGame().getActivePlayers()) {
             if(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner() != null) {
-                if(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner().getNickname() == p.getNickname()) {
+                if(controller.getGame().getGameBoard().getProfessorByColor(studentToMove.getType()).getOwner().getNickname().equals(p.getNickname())) {
                     currentPlayerStudentsMax = p.getBoard().getDiningRoom().getDiningRoom().get(studentToMove.getType().getPawnID()).getTableStudentsNum();
                     professorWinnerId = p.getPlayerID();
                 }
             }
         }
-
         for (Player p : controller.getGame().getActivePlayers()) {
             System.out.println("P_ " + p.getNickname());
             for (int i = 0; i < 5; i++) {
@@ -600,7 +567,7 @@ public class TurnController {
                 System.out.println("DEVO ESSER QUI");
                 if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
                     Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
-                    System.out.println("Player " + studentOwner.getNickname() + " has professor of type " + studentType.toString());
+                    System.out.println("Player " + studentOwner.getNickname() + " has professor of type " + studentType);
                     studentOwner.setIslandInfluence(studentOwner.getIslandInfluence() + 1);
                     System.out.print(studentOwner.getNickname() + " influence: " + studentOwner.getIslandInfluence());
                 }
@@ -714,7 +681,7 @@ public class TurnController {
                             System.out.println("Merge a sx di isola 1");
                             controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() -1 ).getIslandID());
 
-                            controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1));
+                            controller.getGame().getGameBoard().getIslands().get(0).merge(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1));
 
                         }
 
@@ -777,8 +744,10 @@ public class TurnController {
      * Ask from which cloud the player wants to take the students
      */
     public void askCloud() {
+        gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
         RequestAction cloudAction = new RequestAction(Action.PICK_CLOUD);
         gameHandler.sendSinglePlayer(cloudAction, currentPlayer.getPlayerID());
+
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
@@ -840,7 +809,6 @@ public class TurnController {
             actionPhaseNum++;
             startActionPhase();
         }
-
     }
 
     /**
