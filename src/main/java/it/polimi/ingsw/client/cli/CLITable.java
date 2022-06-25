@@ -71,7 +71,9 @@ public class CLITable {
             printRow(cells, maxWidths);
         }
         if (headers != null) {
-            printLine(maxWidths);
+            if(maxWidths != null) {
+                printLine(maxWidths);
+            }
         }
     }
 
@@ -98,10 +100,7 @@ public class CLITable {
     }
 
     public static void main(String[] args) {
-        //test code
         CLITable st = new CLITable();
-        //st.setRightAlign(true);//if true then cell text is right aligned
-        //st.setShowVerticalLines(true);
         st.setHeaders("rosso", "giallo", "blu");
         st.addRow("1", "3", "0");
         st.print();
