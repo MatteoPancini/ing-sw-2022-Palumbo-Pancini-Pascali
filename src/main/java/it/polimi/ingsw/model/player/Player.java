@@ -23,37 +23,15 @@ public class Player implements Serializable {
         this.myCoins = myCoins;
     }
 
-    public String getNicknamePlayer() {
-        return nicknamePlayer;
-    }
-
-    public boolean isPlaying() {
-        return isPlaying;
-    }
-
-    public void setPlaying(boolean playing) {
-        isPlaying = playing;
-    }
-
-    public boolean isWinner() {
-        return isWinner;
-    }
-
-    public void setWinner(boolean winner) {
-        isWinner = winner;
-    }
-
     public void setChosenAssistant(AssistantCard chosenAssistant) {
         this.chosenAssistant = chosenAssistant;
     }
 
     public Player(String nickname, int playerID) {
         this.nicknamePlayer = nickname;
-        //board = new SchoolBoard(playerID); //potremmo far corrispondere l'ID della board con il client ID così da avere lo stesso identificativo
         this.playerID = playerID;
         this.wizard = null;
         islandInfluence = 0;
-        //inizializzare teammateID (probabilmente if(player2) { teammateID = 2} else if(player3) { teammateID = 1 }
     }
 
     public AssistantCard getChosenAssistant() {
@@ -106,16 +84,7 @@ public class Player implements Serializable {
         this.islandInfluence = islandInfluence;
     }
 
-    public void setIdPlayer(int playerID) {
-        this.playerID = playerID;
-    }
-
-    public void setNicknamePlayer(String nicknamePlayer) {
-        this.nicknamePlayer = nicknamePlayer;
-    }
-
     public void setWizard(Wizards wizard) {
-        //System.out.println("C'è un problema qua...");
         this.wizard = wizard;
         System.out.println(nicknamePlayer + "'s wizard is " + wizard);
         assistantDeck = new AssistantDeck(wizard);

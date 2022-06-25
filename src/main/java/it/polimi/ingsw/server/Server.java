@@ -36,8 +36,6 @@ public class Server {
     private final Map<Integer, VirtualClientView> idMapVirtualClient;
     private final Map<VirtualClientView, SocketClientConnection> virtualClientToClientConnection;
 
-
-
     public Server() {
         serverSocketHandler = new ServerSocketHandler(Constants.getPort(), this);
         nicknameMapID = new HashMap<>();

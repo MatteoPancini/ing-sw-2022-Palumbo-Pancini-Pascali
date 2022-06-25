@@ -35,7 +35,7 @@ public class AssistantDeck implements Serializable {
     */
 
     public AssistantDeck(Wizards wizard) {
-        InputStream stream = AssistantCard.class.getResourceAsStream("src/main/resources/cards/assistantCards.txt");
+        InputStream stream = AssistantCard.class.getResourceAsStream("/cards/assistantCards.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         Scanner myReader = new Scanner(reader);
         String data = myReader.nextLine();
@@ -50,7 +50,6 @@ public class AssistantDeck implements Serializable {
 
         myReader.close();
     }
-
 
     public void removeCard(AssistantCard card) {
         for(AssistantCard c : this.getDeck()) {

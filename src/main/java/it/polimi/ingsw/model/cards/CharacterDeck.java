@@ -25,7 +25,7 @@ public class CharacterDeck implements Serializable {
     public CharacterDeck(Game game) {
         this.game = game;
 
-        InputStream stream = CharacterCard.class.getResourceAsStream("src/main/resources/cards/characterCards.txt");
+        InputStream stream = CharacterCard.class.getResourceAsStream("/cards/characterCards.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         Scanner myReader = new Scanner(reader);
         String data = myReader.nextLine();

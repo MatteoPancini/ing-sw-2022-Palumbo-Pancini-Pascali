@@ -53,6 +53,4 @@ public class Constants {
     public static void setPlayersNum(int playersNum) {
         Constants.playersNum = playersNum;
     }
-
-
 }
