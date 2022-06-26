@@ -527,6 +527,7 @@ public class MainSceneController implements GUIController {
         updateNoEntryTile();
         updateProfessors();
         updateBoards();
+        updateNicknames();
 
         blueStudent.setVisible(false);
         greenStudent.setVisible(false);
@@ -560,8 +561,7 @@ public class MainSceneController implements GUIController {
             case "PICK_ASSISTANT" -> showAssistantButton();
             case "PICK_CLOUD" -> askCloud();
             case "PICK_DESTINATION" -> askDestination();
-            case "PICK_STUDENT" -> //askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
-                    updatePickStudents();
+            case "PICK_STUDENT" -> updatePickStudents();
             case "PICK_MOVES_NUMBER" -> {
                 if(gui.getModelView().isJesterAction()) {
                     gui.getModelView().setJesterAction(false);
@@ -578,7 +578,7 @@ public class MainSceneController implements GUIController {
 
             case "PICK_CHARACTER_NUMBER" -> askCharacterActionNumber();
             default -> {
-                descriptionLabel.setText("        Click the pick assistant button to choose your assistant");
+                descriptionLabel.setText("Click the pick assistant button to choose your assistant");
                 System.out.println("Update without user actions (server command not in switch cases)");
             }
         }
@@ -792,15 +792,18 @@ public class MainSceneController implements GUIController {
      public void askMoves(AssistantCard a) {
         descriptionLabel.setText("Choose mother nature's moves number from the box");
         pickMovesBox.setVisible(true);
-        if(gui.getModelView().isMagicPostmanAction()) {
+        /*if(gui.getModelView().isMagicPostmanAction()) {
             for(int i = 1; i <= (a.getMoves() + 2); i++) {
                 pickMovesBox.getItems().add(String.valueOf(i));
             }
-        } else {
+        } else {*/
             for(int i = 1; i <= a.getMoves(); i++) {
                 pickMovesBox.getItems().add(String.valueOf(i));
             }
-        }
+            if(gui.getModelView().isMagicPostmanAction()) {
+                pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 1));
+                pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 2));
+            }
         pickMovesBox.setOnAction(this::pickMoves);
      }
 
@@ -893,53 +896,6 @@ public class MainSceneController implements GUIController {
             }
         }
     }
-
-    /*public void askMoves(AssistantCard a) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Assistant Moves");
-        alert.setHeaderText("Choose your moves.");
-        //alert.setContentText(serverReq);
-        int cont = 1;
-        for(int i=1; i <= a.getMoves(); i++) {
-            cont+= 1;
-        }
-        if(gui.getModelView().isMagicPostmanAction()) {
-            cont+= 2;
-        }
-        for(int j=1; j < cont; j++) {
-            if(j==1) {
-                ButtonType one = new ButtonType("1");
-            } else if(j==2) {
-                ButtonType two = new ButtonType("2");
-            } else if(j==3) {
-                ButtonType three = new ButtonType("3");
-            } else if(j==4) {
-                ButtonType four = new ButtonType("4");
-            } else if(j==5) {
-                ButtonType five = new ButtonType("5");
-            } else if(j==6) {
-                ButtonType six = new ButtonType("6");
-            }else if(j==7) {
-                ButtonType seven = new ButtonType("7");
-            } else if(j==8) {
-                ButtonType eight = new ButtonType("8");
-            } else if(j==9) {
-                ButtonType nine = new ButtonType("9");
-            } else if(j==10) {
-                ButtonType ten = new ButtonType("10");
-            }
-        }
-
-
-        Optional<ButtonType> gameModeChoice = alert.showAndWait();
-        String choice = null;
-        if(gameModeChoice.isPresent() && gameModeChoice.get() == standardMode) {
-            choice = "n";
-        } else if(gameModeChoice.isPresent() && gameModeChoice.get() == expertMode) {
-            choice = "y";
-        }
-        gui.getClientConnection().sendUserInput(new ExpertModeChoice(choice));
-    }*/
 
     public void pickIsland1() {
         gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0)));
@@ -2034,17 +1990,25 @@ public class MainSceneController implements GUIController {
         descriptionLabel.setText("Pick a cloud");
         for(CloudTile c : gui.getModelView().getGameCopy().getGameBoard().getClouds()) {
             if(c.getID() == 1) {
-                cloud1Button.setVisible(true);
-                cloud1Button.setText("Cloud 1");
+                if(c.getStudents() != null) {
+                    cloud1Button.setVisible(true);
+                    cloud1Button.setText("Cloud 1");
+                }
             } else if(c.getID() == 2) {
-                cloud2Button.setVisible(true);
-                cloud2Button.setText("Cloud 2");
+                if(c.getStudents() != null) {
+                    cloud2Button.setVisible(true);
+                    cloud2Button.setText("Cloud 2");
+                }
             } else if(c.getID() == 3) {
-                cloud3Button.setVisible(true);
-                cloud3Button.setText("Cloud 3");
+                if(c.getStudents() != null) {
+                    cloud3Button.setVisible(true);
+                    cloud3Button.setText("Cloud 2");
+                }
             } else if(c.getID() == 4) {
-                cloud4Button.setVisible(true);
-                cloud4Button.setText("Cloud 4");
+                if(c.getStudents() != null) {
+                    cloud4Button.setVisible(true);
+                    cloud4Button.setText("Cloud 4");
+                }
             }
         }
         updateClouds();
@@ -2172,6 +2136,36 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    public void updateNicknames() {
+        int cont = 0;
+        for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
+            if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
+                Label myName = new Label(p.getNickname());
+                myName.setLayoutX(myWizard.getLayoutX());
+                myName.setLayoutY(myWizard.getLayoutY() + 20);
+                myName.setVisible(true);
+            } else if(cont == 0) {
+                Label topName = new Label(p.getNickname());
+                topName.setLayoutX(topWizard.getLayoutX());
+                topName.setLayoutY(topWizard.getLayoutY() + 20);
+                topName.setVisible(true);
+                cont++;
+            } else if(cont == 1) {
+                Label leftName = new Label(p.getNickname());
+                leftName.setLayoutX(leftWizard.getLayoutX());
+                leftName.setLayoutY(leftWizard.getLayoutY() + 20);
+                leftName.setVisible(true);
+                cont++;
+            } else if(cont == 2) {
+                Label rightName = new Label(p.getNickname());
+                rightName.setLayoutX(rightWizard.getLayoutX());
+                rightName.setLayoutY(rightWizard.getLayoutY() + 20);
+                rightName.setVisible(true);
+                cont++;
+            }
+        }
+    }
+
     public void updateEntrances() {
         for(int i=0; i < 9; i++) {
             myEntrance.getChildren().get(i).setVisible(false);
@@ -2212,57 +2206,6 @@ public class MainSceneController implements GUIController {
             }
         }
     }
-
-    /*public void updateTowerAreas() {
-        Image pic = null;
-        int cont = 0;
-        for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if (p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
-                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.GREY)) {
-                    pic = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.BLACK)) {
-                    pic = new Image("@../../graphics/wooden_pieces/black_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.WHITE)) {
-                    pic = new Image("@../../graphics/wooden_pieces/white_tower.png");
-                }
-                for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
-                    for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
-                        ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
-                    }
-                }
-                cont++;
-             } else if(cont == 0) {
-                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.GREY)) {
-                    pic = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.BLACK)) {
-                    pic = new Image("@../../graphics/wooden_pieces/black_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.WHITE)) {
-                    pic = new Image("@../../graphics/wooden_pieces/white_tower.png");
-                }
-                for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
-                    for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
-                        ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
-                    }
-                }
-                cont++;
-            } else if(cont == 1) {
-                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.GREY)) {
-                    pic = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.BLACK)) {
-                    pic = new Image("@../../graphics/wooden_pieces/black_tower.png");
-                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor().equals(TowerColor.WHITE)) {
-                    pic = new Image("@../../graphics/wooden_pieces/white_tower.png");
-                }
-                for(Tower t : p.getBoard().getTowerArea().getTowerArea()) {
-                    for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
-                        ((ImageView) myTowers.getChildren().get(i)).setImage(pic);
-                        ((ImageView) myTowers.getChildren().get(i)).setVisible(false);
-                    }
-                }
-                cont++;
-            }
-        }
-    }*/
 
     //creare un parametro che indichi che tipo di action è in corso, passarla come parametro
     public void updatePickStudents() {
@@ -2533,7 +2476,7 @@ public class MainSceneController implements GUIController {
                 } else if(s.getType().equals(PawnType.BLUE)) {
                     blueCharacter3.setVisible(true);
                     blueLabelCharacter3.setVisible(true);
-                    blueLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(3), s));
+                    blueLabelCharacter3.setText(getCharacterStudentsNumber(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2), s));
                 } else if(s.getType().equals(PawnType.YELLOW)) {
                     yellowCharacter3.setVisible(true);
                     yellowLabelCharacter3.setVisible(true);
