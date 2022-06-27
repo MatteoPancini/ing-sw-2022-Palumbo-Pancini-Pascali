@@ -61,9 +61,12 @@ public class ActionHandler {
             modelView.setAction(true);
             modelView.setPianification(false);
             showGame = 0;
+
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
             }
+
+
         }else if(answer instanceof EndAction) {
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
@@ -79,9 +82,12 @@ public class ActionHandler {
             modelView.setPianification(true);
             modelView.setAction(false);
             showGame = showGame + 1;
+            /*
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
             }
+
+             */
         } else if(answer instanceof MagicPostmanAction) {
             modelView.setMagicPostmanAction(true);
         } else if(answer instanceof MinestrelAction) {

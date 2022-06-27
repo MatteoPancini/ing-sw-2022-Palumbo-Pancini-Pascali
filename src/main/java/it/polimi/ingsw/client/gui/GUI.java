@@ -145,10 +145,6 @@ public class GUI extends Application implements ListenerInterface {
         stage.setScene(currentScene);
         stage.show();
 
-        stage.setOnCloseRequest(event -> {
-            event.consume();
-            showQuitGame();
-        });
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());

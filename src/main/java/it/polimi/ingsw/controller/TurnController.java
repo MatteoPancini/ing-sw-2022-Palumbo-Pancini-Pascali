@@ -677,9 +677,11 @@ public class TurnController {
                     System.out.println("merge a dx");
                     if(islandId == controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1).getIslandID()) {
                         controller.getGame().getGameBoard().getMotherNature().setPosition(1);
-                    }
-                    controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId));
+                        controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(0));
 
+                    } else {
+                        controller.getGame().getGameBoard().getIslands().get(islandId - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandId));
+                    }
 
                 }
         }

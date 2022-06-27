@@ -844,15 +844,30 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void attributeTowers() {
         for(Player p : modelView.getGameCopy().getActivePlayers()) {
-            if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.BLACK) {
-                blackP = p.getNickname();
+            if(modelView.getGameCopy().getActivePlayers().size() == 4) {
+                if(p.isTeamLeader()) {
+                    if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.BLACK) {
+                        blackP = p.getNickname();
 
-            } else if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.GREY) {
-                greyP = p.getNickname();
+                    } else if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.GREY) {
+                        greyP = p.getNickname();
 
 
-            } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.WHITE) {
-                whiteP = p.getNickname();
+                    } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.WHITE) {
+                        whiteP = p.getNickname();
+                    }
+                }
+            } else {
+                if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.BLACK) {
+                    blackP = p.getNickname();
+
+                } else if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.GREY) {
+                    greyP = p.getNickname();
+
+
+                } else if(p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == TowerColor.WHITE) {
+                    whiteP = p.getNickname();
+                }
             }
         }
     }
