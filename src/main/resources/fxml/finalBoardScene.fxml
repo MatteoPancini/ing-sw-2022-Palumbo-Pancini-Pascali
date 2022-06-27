@@ -690,7 +690,7 @@
                 <Image url="@../graphics/wooden_pieces/white_tower.png" />
             </image>
         </ImageView>
-        <Label fx:id="towerLabelIsland1" layoutX="720.0430297851562" layoutY="287.70001220703125" text="0">
+        <Label fx:id="towerLabelIsland1" layoutX="722" layoutY="287.70001220703125" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
@@ -750,57 +750,57 @@
                 <Image url="@../graphics/wooden_pieces/white_tower.png" />
             </image>
         </ImageView>
-        <Label fx:id="towerLabelIsland3" layoutX="889.6430053710938" layoutY="360.5" text="0">
+        <Label fx:id="towerLabelIsland3" layoutX="892" layoutY="360.5" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland2" layoutX="808.843017578125" layoutY="305.29998779296875" text="0">
+        <Label fx:id="towerLabelIsland2" layoutX="811" layoutY="305.29998779296875" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland12" layoutX="632.843017578125" layoutY="310.8999938964844" text="0">
+        <Label fx:id="towerLabelIsland12" layoutX="635" layoutY="310.8999938964844" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland11" layoutX="582.4429931640625" layoutY="366.1000061035156" text="0">
+        <Label fx:id="towerLabelIsland11" layoutX="585" layoutY="366.1000061035156" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland10" layoutX="536.843017578125" layoutY="445.29998779296875" text="0">
+        <Label fx:id="towerLabelIsland10" layoutX="539" layoutY="445.29998779296875" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland9" layoutX="569.6430053710938" layoutY="518.9000244140625" text="0">
+        <Label fx:id="towerLabelIsland9" layoutX="572" layoutY="518.9000244140625" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland8" layoutX="640.0430297851562" layoutY="578.9000244140625" text="0">
+        <Label fx:id="towerLabelIsland8" layoutX="643" layoutY="578.9000244140625" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland4" layoutX="907.2430419921875" layoutY="442.8999938964844" text="0">
+        <Label fx:id="towerLabelIsland4" layoutX="910" layoutY="442.8999938964844" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland5" layoutX="892.0430297851562" layoutY="518.9000244140625" text="0">
+        <Label fx:id="towerLabelIsland5" layoutX="895" layoutY="518.9000244140625" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland6" layoutX="817.6430053710938" layoutY="581.2999877929688" text="0">
+        <Label fx:id="towerLabelIsland6" layoutX="820" layoutY="581.2999877929688" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="towerLabelIsland7" layoutX="725.6430053710938" layoutY="594.0999755859375" text="0">
+        <Label fx:id="towerLabelIsland7" layoutX="728" layoutY="594.0999755859375" text="0">
             <font>
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
@@ -1987,7 +1987,7 @@
                 </Group>
                 <Group fx:id="topBlueStudents" layoutX="93.0" layoutY="180.0">
                     <children>
-                        <ImageView fitHeight="19.0" fitWidth="17.0" layoutX="54.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
                             </image>
@@ -1997,7 +1997,7 @@
                                 <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="19.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="17.0" layoutX="54.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../graphics/wooden_pieces/3D/blueStudent3D.png" />
                             </image>
@@ -3213,7 +3213,7 @@
                 <Font name="Arial Rounded MT Bold" size="13.0" />
             </font>
         </Label>
-        <Label fx:id="descriptionLabel" layoutX="496.0" layoutY="672.0" prefHeight="32.0" prefWidth="450.0" text="Pick an island or the dining room button to choose the student destination">
+        <Label fx:id="descriptionLabel" layoutX="510" layoutY="672.0" prefHeight="32.0" prefWidth="450.0" text="Pick an island or the dining room button to choose the student destination">
             <font>
                 <Font name="Palatino" size="13.0" />
             </font>

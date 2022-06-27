@@ -57,7 +57,6 @@ public class TurnController {
         this.controller = controller;
         this.gameHandler = gameHandler;
         actionPhaseNum = 0;
-
     }
 
     public void setExpertController(ExpertController expertController) {
@@ -107,7 +106,6 @@ public class TurnController {
             startPianificationPhase();
         } else {
             gameHandler.sendSinglePlayer(new StartAction(), currentPlayer.getPlayerID());
-            //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
 
             gameHandler.sendExcept(new DynamicAnswer("Please wait: " + currentPlayer.getNickname() + " is playing his action phase", false), currentPlayer.getPlayerID());
@@ -124,16 +122,30 @@ public class TurnController {
      * @param studentNum
      */
     public void askStudent(int studentNum) {
-        if(studentNum <= 3) {
-            RequestAction studentAction = new RequestAction(Action.PICK_STUDENT);
-            gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
-        } else {
-            if(controller.getGame().isExpertMode()) {
-                askCharacterCard();
+        if(controller.getGame().getActivePlayers().size() != 3) {
+            if(studentNum <= 3) {
+                RequestAction studentAction = new RequestAction(Action.PICK_STUDENT);
+                gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
             } else {
-                askMotherNatureMoves();
+                if(controller.getGame().isExpertMode()) {
+                    askCharacterCard();
+                } else {
+                    askMotherNatureMoves();
+                }
+            }
+        } else {
+            if(studentNum <= 4) {
+                RequestAction studentAction = new RequestAction(Action.PICK_STUDENT);
+                gameHandler.sendSinglePlayer(studentAction, currentPlayer.getPlayerID());
+            } else {
+                if(controller.getGame().isExpertMode()) {
+                    askCharacterCard();
+                } else {
+                    askMotherNatureMoves();
+                }
             }
         }
+
     }
 
     /**
@@ -735,16 +747,22 @@ public class TurnController {
      */
     public void fromCloudToEntrance(CloudTile cloud) {
         if(cloud != null) {
-            ArrayList<Student> newStudents = cloud.getStudents();
-            for (Student s : newStudents) {
-                controller.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s);
+            if(cloud.getStudents() != null) {
+                ArrayList<Student> newStudents = cloud.getStudents();
+                for (Student s : newStudents) {
+                    controller.getGame().getCurrentPlayer().getBoard().getEntrance().setStudents(s);
+                }
+
+                for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()){
+                    if(cloudTile.getID() == cloud.getID()){
+                        cloudTile.removeStudents();
+                    }
+                }
+            } else {
+                askCloud();
+                return;
             }
 
-            for(CloudTile cloudTile : controller.getGame().getGameBoard().getClouds()){
-                if(cloudTile.getID() == cloud.getID()){
-                    cloudTile.removeStudents();
-                }
-            }
         }
 
         if(checkWin()) {
