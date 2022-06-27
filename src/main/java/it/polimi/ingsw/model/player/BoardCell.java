@@ -22,6 +22,7 @@ public class BoardCell implements Serializable {
         }
         return false;
     }
+
     public boolean hasCoin() {
         return coinCell;
     }
@@ -35,7 +36,6 @@ public class BoardCell implements Serializable {
     public void setStudent(Student student){
         this.student = student;
     }
-
 
     public void removeStudent() {
         this.student = null;
