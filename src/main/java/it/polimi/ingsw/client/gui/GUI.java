@@ -269,8 +269,6 @@ public class GUI extends Application implements ListenerInterface {
                 } else {
                     Platform.runLater(this::updateMainScene);
                 }
-
-                //this.changeStage();
             }
             case "WinMessage" -> {
                 assert serverCommand != null;

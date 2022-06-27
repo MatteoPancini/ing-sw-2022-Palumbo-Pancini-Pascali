@@ -93,8 +93,32 @@ public class Game implements Serializable {
     public boolean canPlayAssistant(Assistants ass) {
         for (AssistantCard card : gameBoard.getLastAssistantUsed()) {
             if (card.getName() == ass) {
+                /*
                 for (AssistantCard myCard : currentPlayer.getAssistantDeck().getDeck()) {
-                    if (myCard.getName() != card.getName()) {
+
+                    if (!myCard.equals(card)) {
+                        return false;
+                    }
+
+
+
+                }
+                 */
+                if(currentPlayer.getAssistantDeck().getDeck().size() != gameBoard.getLastAssistantUsed().size()) {
+                    return false;
+                } else {
+                    int trovate = 0;
+                    for(AssistantCard myCard : currentPlayer.getAssistantDeck().getDeck()) {
+                        for(AssistantCard cardDeck : gameBoard.getLastAssistantUsed()) {
+                            if(cardDeck.getName() == myCard.getName()) {
+                                trovate++;
+                                break;
+                            }
+                        }
+                    }
+                    if(trovate == currentPlayer.getAssistantDeck().getDeck().size()) {
+                        return true;
+                    } else {
                         return false;
                     }
                 }
