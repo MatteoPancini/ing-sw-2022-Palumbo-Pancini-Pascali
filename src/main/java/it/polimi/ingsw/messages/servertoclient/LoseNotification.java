@@ -8,7 +8,7 @@ public class LoseNotification implements Answer {
     }
 
     @Override
-    public Object getMessage() {
+    public String getMessage() {
         return winnerNickname;
     }
 }

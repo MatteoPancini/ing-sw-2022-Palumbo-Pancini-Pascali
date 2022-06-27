@@ -123,6 +123,10 @@ public class ActionHandler {
             modelView.setPrincessAction(true);
         } else if(answer instanceof MonkAction) {
             modelView.setMonkAction(true);
+        } else if(answer instanceof WinNotification) {
+            view.firePropertyChange("WinMessage", null, null);
+        } else if(answer instanceof LoseNotification) {
+            view.firePropertyChange("LoseMessage", null, answer.getMessage());
         }
     }
 
