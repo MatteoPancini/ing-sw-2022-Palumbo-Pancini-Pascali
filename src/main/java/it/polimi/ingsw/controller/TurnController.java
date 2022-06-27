@@ -843,7 +843,7 @@ public class TurnController {
 
     /**
      * Check who is the winner
-     * @return
+     * @return the winner of the game
      */
     public Player checkWinner() {
         if(controller.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().size() == 0) {

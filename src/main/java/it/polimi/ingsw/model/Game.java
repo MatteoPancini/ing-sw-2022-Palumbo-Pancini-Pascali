@@ -94,7 +94,7 @@ public class Game implements Serializable {
         for (AssistantCard card : gameBoard.getLastAssistantUsed()) {
             if (card.getName() == ass) {
                 for (AssistantCard myCard : currentPlayer.getAssistantDeck().getDeck()) {
-                    if (!myCard.equals(card)) {
+                    if (myCard.getName() != card.getName()) {
                         return false;
                     }
                 }
