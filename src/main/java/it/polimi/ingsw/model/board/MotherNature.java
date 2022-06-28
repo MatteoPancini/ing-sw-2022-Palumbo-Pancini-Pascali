@@ -19,6 +19,7 @@ public class MotherNature implements Serializable {
     }
 
     public void setPosition(int position) {
+        System.out.println("Setting MN in island " + position);
         this.position = position;
     }
 }

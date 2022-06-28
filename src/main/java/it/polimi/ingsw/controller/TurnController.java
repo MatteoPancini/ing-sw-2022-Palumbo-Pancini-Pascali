@@ -648,16 +648,21 @@ public class TurnController {
                     if (controller.getGame().getGameBoard().getIslands().get(islandPos - 1).hasRight()) {
                         System.out.println("merge anche a dx");
                         if(controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID() != controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1).getIslandID()) {
+                            /*
                             for(int i = 0; i < controller.getGame().getGameBoard().getIslands().size(); i++) {
                                 if(controller.getGame().getGameBoard().getIslands().get(i+1).getIslandID() == islandPos) {
                                     controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(i).getIslandID());
                                     break;
                                 }
                             }
+                             */
+                            controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(islandPos).getIslandID());
+
                         } else {
-                            controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1).getIslandID());
+                            controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(0).getIslandID());
                         }
-                        controller.getGame().getGameBoard().getIslands().get(islandPos -1).doubleMerge();
+
+                        controller.getGame().getGameBoard().getIslands().get(islandPos - 1).doubleMerge();
 
                     } else {
                         if(controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID() != 1) {
@@ -666,7 +671,7 @@ public class TurnController {
                             controller.getGame().getGameBoard().getIslands().get(islandPos - 1).merge(controller.getGame().getGameBoard().getIslands().get(islandPos - 2));
                         } else {
                             System.out.println("Merge a sx di isola 1");
-                            controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() -1 ).getIslandID());
+                            controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(0).getIslandID());
 
                             controller.getGame().getGameBoard().getIslands().get(0).merge(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1));
 
@@ -675,8 +680,6 @@ public class TurnController {
                     }
                 } else if (controller.getGame().getGameBoard().getIslands().get(islandPos - 1).hasRight()) {
                     System.out.println("merge a dx");
-                    System.out.println(controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID());
-                    System.out.println(controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1).getIslandID());
 
                     if(controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID() == controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1).getIslandID()) {
                         controller.getGame().getGameBoard().getMotherNature().setPosition(1);
