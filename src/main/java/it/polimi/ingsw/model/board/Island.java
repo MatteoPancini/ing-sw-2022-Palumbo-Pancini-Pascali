@@ -56,11 +56,11 @@ public class Island implements Serializable {
         Island iBefore = null;
         Island iAfter = null;
 
-        for(int i=0; i<board.getIslands().size(); i++) {
+        for(int i=0; i < board.getIslands().size(); i++) {
             if(islandID != 1) {
                 if(board.getIslands().get(i+1).getIslandID() == islandID) {
                     iBefore = board.getIslands().get(i);
-                    if(board.getIslands().get(i+1).getIslandID() == board.getIslands().get(board.getIslands().size()-1).getIslandID()) {
+                    if(board.getIslands().get(i+1).getIslandID() == board.getIslands().get(board.getIslands().size() - 1).getIslandID()) {
                         iBefore = board.getIslands().get(0);
                         iAfter = board.getIslands().get(i);
                     } else {
@@ -74,6 +74,8 @@ public class Island implements Serializable {
             }
 
         }
+
+        System.out.println("After: " + iAfter.getIslandID() + ", Before: " + iBefore.getIslandID());
 
         for(Island i : mergedIsland) {
             iBefore.getMergedIslands().add(i);
@@ -112,7 +114,6 @@ public class Island implements Serializable {
         }
         board.decrementIslandCounter();
         board.decrementIslandCounter();
-
 
 
     }
