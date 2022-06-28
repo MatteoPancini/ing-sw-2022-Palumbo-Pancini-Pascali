@@ -894,53 +894,6 @@ public class MainSceneController implements GUIController {
         }
     }
 
-    /*public void askMoves(AssistantCard a) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Assistant Moves");
-        alert.setHeaderText("Choose your moves.");
-        //alert.setContentText(serverReq);
-        int cont = 1;
-        for(int i=1; i <= a.getMoves(); i++) {
-            cont+= 1;
-        }
-        if(gui.getModelView().isMagicPostmanAction()) {
-            cont+= 2;
-        }
-        for(int j=1; j < cont; j++) {
-            if(j==1) {
-                ButtonType one = new ButtonType("1");
-            } else if(j==2) {
-                ButtonType two = new ButtonType("2");
-            } else if(j==3) {
-                ButtonType three = new ButtonType("3");
-            } else if(j==4) {
-                ButtonType four = new ButtonType("4");
-            } else if(j==5) {
-                ButtonType five = new ButtonType("5");
-            } else if(j==6) {
-                ButtonType six = new ButtonType("6");
-            }else if(j==7) {
-                ButtonType seven = new ButtonType("7");
-            } else if(j==8) {
-                ButtonType eight = new ButtonType("8");
-            } else if(j==9) {
-                ButtonType nine = new ButtonType("9");
-            } else if(j==10) {
-                ButtonType ten = new ButtonType("10");
-            }
-        }
-
-
-        Optional<ButtonType> gameModeChoice = alert.showAndWait();
-        String choice = null;
-        if(gameModeChoice.isPresent() && gameModeChoice.get() == standardMode) {
-            choice = "n";
-        } else if(gameModeChoice.isPresent() && gameModeChoice.get() == expertMode) {
-            choice = "y";
-        }
-        gui.getClientConnection().sendUserInput(new ExpertModeChoice(choice));
-    }*/
-
     public void pickIsland1() {
         gui.getClientConnection().sendUserInput(new PickDestination(gui.getModelView().getGameCopy().getGameBoard().getIslands().get(0)));
     }
