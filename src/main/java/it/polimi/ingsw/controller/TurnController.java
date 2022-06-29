@@ -11,7 +11,6 @@ import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.Characters;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
-import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.server.GameHandler;
 
@@ -119,7 +118,8 @@ public class TurnController {
     /**
      * Ask what to do with a student if studentNum parameter less than or equal to 3, otherwise ask
      * a character card or a number of moves for mother nature
-     * @param studentNum
+     *
+     * @param studentNum -> global variable to understand students to ask remained
      */
     public void askStudent(int studentNum) {
         if(controller.getGame().getActivePlayers().size() != 3) {
@@ -208,13 +208,10 @@ public class TurnController {
      */
     public void askAssistantCard() {
         if(controller.getGame().getGameBoard().getLastAssistantUsed().size() != controller.getGame().getActivePlayers().size()) {
-            //System.out.println("Entro");
             gameHandler.sendSinglePlayer(new StartPianification(), currentPlayer.getPlayerID());
             gameHandler.sendExcept(new StartPianification(), currentPlayer.getPlayerID());
 
-            //System.out.println("Mando StartPianification");
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
-            //System.out.println("Mando Game");
 
             RequestAction assistantAction = new RequestAction(Action.PICK_ASSISTANT);
             gameHandler.sendSinglePlayer(assistantAction, currentPlayer.getPlayerID());
@@ -258,7 +255,8 @@ public class TurnController {
 
     /**
      * Play an assistant card
-     * @param nameCardPlayed
+     *
+     * @param nameCardPlayed -> name of the assistant card played by the player
      */
     public void playAssistantCard(Assistants nameCardPlayed) {
         AssistantCard cardPlayed = null;
@@ -295,7 +293,6 @@ public class TurnController {
             }
 
             if(controller.getGame().getCurrentPlayer().getAssistantDeck().getDeck().size() == 0){
-                System.out.println("Sono QUIIIIIIIIIIIIIIIIIIIIII");
                 lastRound = true;
             }
 
@@ -364,10 +361,9 @@ public class TurnController {
     }
 
     /**
-     * Move a student to the dining room chosenDiningRoom
-     * @param chosenDiningRoom
+     * Move a student to the dining room of the current player
      */
-    public void moveStudentsToDiningRoom(DiningRoom chosenDiningRoom) {
+    public void moveStudentsToDiningRoom() {
         System.out.println("Studente " + studentToMove.getType());
         if(controller.getGame().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(studentToMove.getType().getPawnID()).getTableStudentsNum() == 9) {
             gameHandler.sendSinglePlayer(new DynamicAnswer("Your DiningRoom is full. Please choose an island!", false), controller.getGame().getCurrentPlayer().getPlayerID());
@@ -396,7 +392,7 @@ public class TurnController {
 
     /**
      * Move a student to the island chosenIsland
-     * @param chosenIsland
+     * @param chosenIsland -> id of the island where the student will move
      */
     public void moveStudentToIsland(Island chosenIsland) {
         //Island chosenIsland = gameHandler.getGame().getGameBoard().getIslands().get(chosenIslandId - 1);
@@ -455,7 +451,8 @@ public class TurnController {
 
     /**
      * Move mother nature
-     * @param moves
+     *
+     * @param moves -> number of moves mother nature has to do
      */
     public void moveMotherNature(int moves) {
         System.out.println("entro in moveMotherNature per spostarmi di " + moves);
@@ -488,12 +485,9 @@ public class TurnController {
 
 
         if(expertController != null) {
-            System.out.println("Non devo esserci entrato");
-
             for(int i = 0; i< controller.getGame().getGameBoard().getIslands().size(); i++) {
                 if(controller.getGame().getGameBoard().getIslands().get(i).getIslandID() == newPosition) {
                     if(controller.getGame().getGameBoard().getIslands().get(i).getNoEntry()) {
-                        System.out.println("Me ne vado senza fare niente");
                         controller.getGame().getGameBoard().getIslands().get(i).setNoEntry(false);
                     } else {
                         checkIslandInfluence(i+1);
@@ -522,7 +516,8 @@ public class TurnController {
 
     /**
      * Check island influence
-     * @param islandPos
+     *
+     * @param islandPos position on the island's array of the island where mother nature moved
      */
     public void checkIslandInfluence(int islandPos) {
         System.out.println("Entro in checkIsland di " + controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID());
@@ -750,7 +745,8 @@ public class TurnController {
 
     /**
      * Move students from clouds to entrances
-     * @param cloud
+     *
+     * @param cloud -> cloud chosen by the player
      */
     public void fromCloudToEntrance(CloudTile cloud) {
         if(cloud != null) {
@@ -813,7 +809,8 @@ public class TurnController {
 
     /**
      * Check if the game is over
-     * @return
+     *
+     * @return true (if game has a winner), false (otherwise)
      */
     public boolean checkWin() {
         System.out.println("Entro in checkWin");
@@ -848,7 +845,8 @@ public class TurnController {
 
     /**
      * Check who is the winner
-     * @return
+     *
+     * @return -> winner player of the game
      */
     public Player checkWinner() {
         if(controller.getGame().getCurrentPlayer().getBoard().getTowerArea().getTowerArea().size() == 0) {

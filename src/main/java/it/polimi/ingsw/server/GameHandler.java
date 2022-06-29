@@ -23,7 +23,12 @@ public class GameHandler {
     private boolean isMatchStarted;
 
 
-    public GameHandler(Server server){
+    /**
+     * constructor of the GameHandler, which instantiates a new game and a new controller for the game
+     *
+     * @param server -> server who created the game handler
+     */
+    public GameHandler(Server server) {
         game = new Game();
         controller = new Controller(game, this);
         System.out.println("Istantiating new game and controller");
@@ -33,11 +38,15 @@ public class GameHandler {
     }
 
 
-
     public boolean getExpertMode() {
         return isExpertMode;
     }
 
+    /**
+     * method used to set expert mode and instantiate (eventually) an expert controller
+     *
+     * @param expertMode -> true (expert mode), false (standard mode)
+     */
     public void setExpertMode(boolean expertMode) {
         isExpertMode = expertMode;
         game.setExpertMode(expertMode);
@@ -73,6 +82,9 @@ public class GameHandler {
         return currentPlayerId;
     }
 
+    /**
+     * method used to create teams of a 4 player game
+     */
     public void setupTeams() {
         sendBroadcast(new DynamicAnswer("Setting up teams...", false));
         int teamID1 = 1;
@@ -107,11 +119,22 @@ public class GameHandler {
         return playersNumber;
     }
 
-
+    /**
+     * method used to send a server answer to a single player
+     *
+     * @param serverAnswer -> answer to send to the player
+     * @param clientID -> player ID
+     */
     public void sendSinglePlayer(Answer serverAnswer, int clientID) {
         server.getVirtualClientFromID(clientID).sendAnswerToClient(serverAnswer);
     }
 
+    /**
+     * method used to send a server answer to everyone except a single player
+     *
+     * @param serverAnswer -> answer to send to the player
+     * @param notClientID -> id of the player excluded
+     */
     public void sendExcept(Answer serverAnswer, int notClientID) {
         for(Player activePlayers : controller.getGame().getActivePlayers()) {
             if(server.getIDFromNickname(activePlayers.getNickname()) != notClientID) {
@@ -120,12 +143,22 @@ public class GameHandler {
         }
     }
 
+    /**
+     * method used to send a server answer to everyone in the game
+     *
+     * @param serverAnswer -> answer to send to the player
+     */
     public void sendBroadcast(Answer serverAnswer) {
         for(Player player : controller.getGame().getActivePlayers()) {
             sendSinglePlayer(serverAnswer, server.getIDFromNickname(player.getNickname()));
         }
     }
 
+    /**
+     * method used to set player's number of the game in this class and in the game class
+     *
+     * @param playersNumber -> player's number of the game
+     */
     public void setPlayersNumber(int playersNumber) {
         System.err.println("setting players of game to " + playersNumber);
         this.playersNumber = playersNumber;
@@ -133,6 +166,9 @@ public class GameHandler {
     }
 
 
+    /**
+     * method used to initialize wizards during the pre-game phase
+     */
     public void initializeWizards() {
         System.out.println("Il numero di giocatori della partita è: " + playersNumber);
         WizardAnswer chooseWizard = new WizardAnswer("Please choose your Wizard!");
@@ -157,24 +193,39 @@ public class GameHandler {
         }
     }
 
+
+    /**
+     * method used to start the game on the controller
+     */
     public void startGame() {
-        //GESTISCI MESSAGGIO PER METTERE GAMESTARTED IN MODELVIEW
         setMatchStarted();
         sendBroadcast(new DynamicAnswer("Game is started", false));
         if(playersNumber == 4) {
             sendBroadcast(new FourPModeNotification());
             setupTeams();
         }
-        //game.setCurrentPlayer(game.getActivePlayers().get(randomGenerator.nextInt(playersNumber)));
         game.setCurrentPlayer(game.getActivePlayers().get(0));
         System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
         controller.newSetupGame();
     }
 
+
+    /**
+     * method used to unregister a player from the game
+     *
+     * @param leavingPlayer -> ID of the player to unregister from the game
+     */
     public void unregisterPlayer(int leavingPlayer) {
         game.removePlayer(game.getPlayerByID(leavingPlayer));
     }
 
+
+    /**
+     * method used to parse actions sent by a player
+     *
+     * @param userAction -> user action sent from the player
+     * @param actionType -> string used to switch the action types in order to trigger the controller
+     */
     public void parseActions(UserAction userAction, String actionType) {
         System.out.println(actionType);
 
@@ -228,6 +279,11 @@ public class GameHandler {
     }
 
 
+    /**
+     * method used when a player leave the game, disconnecting everyone else and sending a noWinnerGame notification
+     *
+     * @param playerDisconnected -> nickname of player who disconnected from the game
+     */
     public void endPlayerGame(String playerDisconnected) {
         sendBroadcast(new DynamicAnswer("Player " + playerDisconnected + " has disconnected :( Game will finish without a winner! Thanks to have played Eriantys! Hope to see you soon ;)", false));
         sendBroadcast(new NoWinnerGameNotification());
@@ -237,6 +293,9 @@ public class GameHandler {
     }
 
 
+    /**
+     * method used to disconnect every player when the game ends with a winner
+     */
     public void endGame() {
         while(!game.getActivePlayers().isEmpty()) {
             server.getVirtualClientFromID(game.getActivePlayers().get(0).getPlayerID()).getSocketClientConnection().closeConnection();

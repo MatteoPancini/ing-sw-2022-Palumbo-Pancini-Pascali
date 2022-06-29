@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
-import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Tower;
 import it.polimi.ingsw.server.GameHandler;
@@ -171,15 +170,14 @@ public class Controller implements PropertyChangeListener {
                 System.out.println(p + ", " + "This island is empty");
             }
         }
-
-
-
         System.out.println("Finished setupGame");
         turnController.setCurrentPlayer(game.getCurrentPlayer());
 
         gameHandler.sendBroadcast(new DynamicAnswer("REMEMBER: During your turn type \"QUIT\" to quit the game!\n", false));
         turnController.startPianificationPhase();
     }
+
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("propertyChange del controller" + evt.getPropertyName());
@@ -222,7 +220,7 @@ public class Controller implements PropertyChangeListener {
 
             }
 
-            case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom((DiningRoom) evt.getNewValue());
+            case "PickDestinationDiningRoom" -> turnController.moveStudentsToDiningRoom();
 
             case "PickDestinationIsland" -> turnController.moveStudentToIsland((Island) evt.getNewValue());
 

@@ -633,7 +633,7 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s2);
 
         controllerStub.getTurnController().setStudentToMove(s2);
-        controllerStub.getTurnController().moveStudentsToDiningRoom(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.getTurnController().moveStudentsToDiningRoom();
         controllerStub.getTurnController().checkProfessorInfluence();
         controllerStub.getTurnController().setStudentToMove(s4);
         controllerStub.getTurnController().checkProfessorInfluence();
