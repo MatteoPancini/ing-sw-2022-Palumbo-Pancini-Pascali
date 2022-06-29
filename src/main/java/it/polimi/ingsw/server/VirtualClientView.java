@@ -6,15 +6,19 @@ import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
 public class VirtualClientView {
 
-    //VirtualClientView manages communication between server and client, representing a virtual instance of the client.
-    //Useful to prepare server messages for client
-
-
     private final int clientID;
     private final String clientNickname;
     private final SocketClientConnection socketClientConnection;
     private final GameHandler gameHandler;
 
+    /**
+     * constructor of the utility class used to manage communication between client and server
+     *
+     * @param clientID -> ID of the client created
+     * @param clientNickname -> nickname of the client
+     * @param socketClientConnection -> connection between the server and the client
+     * @param gameHandler -> game handler related to the client
+     */
     public VirtualClientView( int clientID, String clientNickname, SocketClientConnection socketClientConnection, GameHandler gameHandler) {
         this.clientID = clientID;
         this.clientNickname = clientNickname;
@@ -40,6 +44,11 @@ public class VirtualClientView {
     }
 
 
+    /**
+     * method used to prepare an answer to be sent
+     *
+     * @param answer -> server answer to be sent
+     */
     public void sendAnswerToClient(Answer answer) {
         SerializedAnswer serverAnswer = new SerializedAnswer();
         serverAnswer.setServerAnswer(answer);

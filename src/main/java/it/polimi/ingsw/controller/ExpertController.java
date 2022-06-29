@@ -284,6 +284,8 @@ public class ExpertController {
             game.getCurrentPlayer().getBoard().getEntrance().removeStudent(studentTwo);
 
             game.getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentTwo);
+            turnController.setStudentToMove(studentTwo);
+            turnController.checkProfessorInfluence();
             game.getCurrentPlayer().getBoard().getEntrance().setStudents(studentOne);
 
             studentOne = null;
