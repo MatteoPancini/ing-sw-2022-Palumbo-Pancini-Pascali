@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class CLITable is used to represent some game elements throguh a table
+ */
 public class CLITable {
     private static final String HORIZONTAL_SEP = "-";
     private String verticalSep;
@@ -13,39 +16,41 @@ public class CLITable {
     private List<String[]> rows = new ArrayList<>();
     private boolean rightAlign;
 
+    /**
+     * Constructor generating a new instance of the class
+     */
     public CLITable() {
         setShowVerticalLines(false);
     }
 
-    public void setRightAlign(boolean rightAlign) {
-        this.rightAlign = rightAlign;
-    }
-
+    /**
+     * Method showVerticalLines chooses to show vertical lines in the table based on the boolean input
+     * @param showVerticalLines boolean choice
+     */
     public void setShowVerticalLines(boolean showVerticalLines) {
         verticalSep = showVerticalLines ? "|" : "";
         joinSep = showVerticalLines ? "+" : " ";
     }
 
-    public void setHeader(String header) {
-        if(this.headers!=null) {
-            for (int i = 0; i < this.headers.length; i++) {
-                if (this.headers[i] != null) {
-                    headers[i] = header;
-                }
-            }
-        } else {
-            headers = new String[200];
-            headers[0] = header;
-        }
-    }
+    /**
+     * Method setHeaders set the headers of the table
+     * @param headers string of headers
+     */
     public void setHeaders(String... headers) {
         this.headers = headers;
     }
 
+    /**
+     * Method addRow adds rows to the table
+     * @param cells string of cells
+     */
     public void addRow(String... cells) {
         rows.add(cells);
     }
 
+    /**
+     * Method print prints the entire table once it is set up
+     */
     public void print() {
         int[] maxWidths = headers != null ?
                 Arrays.stream(headers).mapToInt(String::length).toArray() : null;
@@ -75,6 +80,10 @@ public class CLITable {
         }
     }
 
+    /**
+     * Method printLine prints a line of the table
+     * @param columnWidths column length
+     */
     private void printLine(int[] columnWidths) {
         for (int i = 0; i < columnWidths.length; i++) {
             String line = String.join("", Collections.nCopies(columnWidths[i] +
@@ -84,6 +93,11 @@ public class CLITable {
         System.out.println();
     }
 
+    /**
+     * Method printRow prints the rows of the table
+     * @param cells cells
+     * @param maxWidths max widths
+     */
     private void printRow(String[] cells, int[] maxWidths) {
         for (int i = 0; i < cells.length; i++) {
             String s = cells[i];
@@ -95,12 +109,5 @@ public class CLITable {
             }
         }
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        CLITable st = new CLITable();
-        st.setHeaders("rosso", "giallo", "blu");
-        st.addRow("1", "3", "0");
-        st.print();
     }
 }
