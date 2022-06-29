@@ -47,6 +47,9 @@ public class CLI implements Runnable, ListenerInterface {
     private String greyP = "";
     private String blackP = "";
 
+    /**
+     * CLI constructor generates a new instance when the user chooses to play with the command line
+     */
     public CLI() {
         in = new Scanner(System.in);
         out = new PrintStream(System.out);
@@ -55,6 +58,11 @@ public class CLI implements Runnable, ListenerInterface {
         actionHandler = new ActionHandler(this, modelView);
     }
 
+    /**
+     * Method printTowers
+     * @param isl
+     * @return
+     */
     public String printTowers(Island isl) {
         String towers = "";
         if(isl.hasTower()) {
