@@ -75,7 +75,7 @@ public class MainMenuController implements GUIController {
                 }
                 gui.setClientConnection(clientConnection);
                 loadingController.setText("SOCKET CONNECTION \nSETUP COMPLETED!");
-                loadingController.setText("WAITING FOR PLAYERS");
+                loadingController.setText("LOADING...");
                 gui.getVirtualClient().addPropertyChangeListener("action", new Parser(clientConnection, gui.getModelView()));
             } catch (DuplicateNicknameException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
