@@ -703,8 +703,12 @@ public class TurnController {
                         }
                     }
                 } else {
-                    gameHandler.sendSinglePlayer(new WinNotification(), controller.getGame().getCurrentPlayer().getPlayerID());
-                    gameHandler.sendExcept(new LoseNotification(controller.getGame().getCurrentPlayer().getNickname()), controller.getGame().getCurrentPlayer().getPlayerID());
+                    for(Player p : controller.getGame().getActivePlayers()){
+                        if(p.getPlayerID() == influenceWinner.getPlayerID()) {
+                            gameHandler.sendSinglePlayer(new WinNotification(), p.getPlayerID());
+                            gameHandler.sendExcept(new LoseNotification(p.getNickname()), p.getPlayerID());
+                        }
+                    }
                 }
 
                 gameHandler.endGame();
