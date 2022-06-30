@@ -16,7 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 import java.io.IOException;
 
-
+/**
+ * Server class is the main class "server side" creating connections with clients and games
+ */
 public class Server {
     private final ServerSocketHandler serverSocketHandler;
 
@@ -189,7 +191,7 @@ public class Server {
      * @throws InterruptedException -> if something goes wrong with the connections between clients and server
      */
     public synchronized void lobby(SocketClientConnection socketClientConnection) throws InterruptedException {
-        waitingPlayersConnection.add(socketClientConnection); //new connected player (no needs it's a new player of the game)
+        waitingPlayersConnection.add(socketClientConnection); //new connected player
         if(waitingPlayersConnection.size() == 1) { //if it's the first player
             socketClientConnection.setupPlayers(new NumOfPlayerRequest("Hi " + idMapVirtualClient.get(socketClientConnection.getClientID()).getClientNickname() + " you are now the host of this lobby.\nPlease choose the number of player you want to play with [2, 3, 4]:"));
             try {
@@ -205,7 +207,6 @@ public class Server {
             }
             waitingPlayersConnection.clear();
             Wizards.reset();
-
             for(Player p : GameHandler.getGame().getPlayers()) {
                 p.setBoard(new SchoolBoard(p.getPlayerID()));
             }

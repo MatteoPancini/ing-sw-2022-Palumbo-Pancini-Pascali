@@ -7,7 +7,10 @@ import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
+/**
+ * ServerSocketHandler class is a server's utility class used just to create a socket connection,
+ * in order to reduce server functionalities
+ */
 public class ServerSocketHandler implements Runnable {
     private final int port;
     private final ExecutorService executorService;
@@ -15,7 +18,7 @@ public class ServerSocketHandler implements Runnable {
     private boolean activeSocket;
 
     /**
-     * constructor of the utility class used just to create a connection, in order to reduce server functionalities
+     * constructor of the ServerSocketHandler
      *
      * @param port -> port of the server
      * @param server -> server who creates a new connection

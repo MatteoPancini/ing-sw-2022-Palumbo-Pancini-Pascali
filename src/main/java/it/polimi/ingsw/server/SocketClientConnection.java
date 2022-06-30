@@ -73,9 +73,7 @@ public class SocketClientConnection implements Runnable {
                         int playersNumber = ((PlayersNumberChoice) clientMessage).getNumberOfPlayers();
                         server.setTotalGamePlayers(playersNumber);
                         server.getGameFromID(clientID).setPlayersNumber(playersNumber);
-
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Players number officially set to " + playersNumber, false));
-
                         break;
                     } catch(OutOfBoundException e) {
                         server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Please insert a value between 2 and 4", true));

@@ -85,7 +85,9 @@ public class GameBoard implements Serializable {
     }
 
     public void setPlayableCharacters() {
-        characterDeck = CharacterDeck.getPlayableCards(game);
+        characterDeck = new CharacterDeck(game);
+
+        Collections.shuffle(characterDeck.getDeck());
 
         for(int i = 0; i < 3; i++) {
             playableCharacters.add(characterDeck.getDeck().get(i));

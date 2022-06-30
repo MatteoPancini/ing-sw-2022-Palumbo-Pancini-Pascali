@@ -794,7 +794,6 @@ public class CLI implements Runnable, ListenerInterface {
                 }
             } catch (IllegalArgumentException e) {
                 System.err.println(ANSI_RED + "Invalid input! Please provide one of the accepted wizards."+ ANSI_RESET);
-                System.out.print(">");
             }
         }
     }
@@ -996,7 +995,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     public void showServerError() {
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
-            showError("Server is full... please try again later!");
+            showError("Server's lobby is full... please try again in a few minutes!");
             System.exit(-1);
         } else if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.SERVEROUT) {
             showError("Server is out... please try again later!");

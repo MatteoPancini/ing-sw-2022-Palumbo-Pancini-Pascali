@@ -1,5 +1,8 @@
 package it.polimi.ingsw.messages.servertoclient;
 
+/**
+ * Message used for generic informations about game situation
+ */
 public class DynamicAnswer implements Answer {
     private final String serverAnswer;
     private boolean activateUserInput;
@@ -7,10 +10,6 @@ public class DynamicAnswer implements Answer {
     public DynamicAnswer(String serverAnswer, boolean activateUserInput) {
         this.serverAnswer = serverAnswer;
         this.activateUserInput = activateUserInput;
-    }
-
-    public String getServerAnswer() {
-        return serverAnswer;
     }
 
     public boolean isActivateUserInput() {

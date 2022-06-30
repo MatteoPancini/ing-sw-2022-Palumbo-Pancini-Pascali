@@ -14,30 +14,22 @@ import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.server.GameHandler;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 
+/**
+ * TurnController class handles all actions of a game turn, changing model and sending requests to clients
+ */
 public class TurnController {
+
     private final Controller controller;
-
     private final GameHandler gameHandler;
-
     private Player currentPlayer;
-
     private ExpertController expertController;
-
     private int studentRequest;
-
     private boolean lastRound;
-
-
-
     private int actionPhaseNum;
-
-
-
     private Student studentToMove;
 
     public Controller getController() {
@@ -59,7 +51,6 @@ public class TurnController {
     }
 
     public void setExpertController(ExpertController expertController) {
-        System.out.println("SETTO EXPERT CONTROLLER");
         this.expertController = expertController;
     }
 
@@ -270,13 +261,9 @@ public class TurnController {
             askAssistantCard();
             return;
         }
-        System.out.println("Sono in playAssistantCard di " + cardPlayed.getName());
 
         if(controller.getGame().canPlayAssistant(cardPlayed.getName())) {
-            System.out.println("aggiungo carta");
-
             controller.getGame().getGameBoard().getLastAssistantUsed().add(cardPlayed);
-            System.out.println("Sono in playAssistantCard");
 
             controller.getGame().getCurrentPlayer().getAssistantDeck().removeCard(cardPlayed);
 
@@ -471,7 +458,6 @@ public class TurnController {
                 break;
             }
         }
-        System.out.println("start index " + index);
         int newPosition = -1;
 
         while(moves > 0) {
@@ -479,12 +465,10 @@ public class TurnController {
                 index = -1;
             }
             newPosition = controller.getGame().getGameBoard().getIslands().get(index + 1).getIslandID();
-            System.out.println("new position = " + newPosition);
             moves--;
             index++;
         }
         System.out.println("final index " + index);
-
         controller.getGame().getGameBoard().getMotherNature().setPosition(newPosition);
         System.out.println("Sposto mn in island " + controller.getGame().getGameBoard().getMotherNature().getPosition());
 
@@ -551,7 +535,6 @@ public class TurnController {
                     }
                 }
             } else {
-                System.out.println("DEVO ESSER QUI");
                 if(controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner() != null) {
                     Player studentOwner = controller.getGame().getGameBoard().getProfessorByColor(studentType).getOwner();
                     System.out.println("Player " + studentOwner.getNickname() + " has professor of type " + studentType);
@@ -563,33 +546,25 @@ public class TurnController {
 
         if(expertController != null) {
             if(!expertController.isCentaurEffect()) {
-                if(controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers() != null) {
-                    TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers().get(0).getColor();
-                    for (Player p : controller.getGame().getActivePlayers()) {
-                        if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
-                            p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers().size());
-                        }
-                    }
-                }
+                addTowersInfluence(islandPos);
             }
         } else {
-            if(controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers() != null) {
-                TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers().get(0).getColor();
-                for (Player p : controller.getGame().getActivePlayers()) {
-                    if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
-                        p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers().size());
-                    }
-                }
-            }
+            addTowersInfluence(islandPos);
         }
 
         int islandInfluence = 0;
         Player influenceWinner = null;
+        boolean equalsInfluence = false;
 
         for(Player player : controller.getGame().getActivePlayers()) {
             if(player.getIslandInfluence() > islandInfluence || (controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getTower() != null && player.getBoard().getTowerArea().getTowerArea().get(0).getColor() == controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getTower().getColor()) && player.getIslandInfluence() >= islandInfluence) {
                 islandInfluence = player.getIslandInfluence();
                 influenceWinner = player;
+                equalsInfluence = false;
+            } else if(influenceWinner != null) {
+                if(player.getIslandInfluence() == influenceWinner.getIslandInfluence()) {
+                    equalsInfluence = true;
+                }
             }
         }
 
@@ -627,6 +602,11 @@ public class TurnController {
         if(influenceWinner != null)
             System.out.println("\nMax island influence " + islandInfluence + " di " + influenceWinner.getNickname() + " in isola " + controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getIslandID() + " che ha tower "+ controller.getGame().getGameBoard().getIslands().get(islandPos-1).hasTower());
 
+        if(equalsInfluence) {
+            influenceWinner = null;
+            islandInfluence = 0;
+        }
+
         if(islandInfluence != 0) {
             //if (controller.getGame().getCurrentPlayer().getIslandInfluence() == islandInfluence) {
                 //controllare che non abbia già costruito
@@ -659,14 +639,6 @@ public class TurnController {
                     if (controller.getGame().getGameBoard().getIslands().get(islandPos - 1).hasRight()) {
                         System.out.println("merge anche a dx");
                         if(controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID() != controller.getGame().getGameBoard().getIslands().get(controller.getGame().getGameBoard().getIslands().size() - 1).getIslandID()) {
-                            /*
-                            for(int i = 0; i < controller.getGame().getGameBoard().getIslands().size(); i++) {
-                                if(controller.getGame().getGameBoard().getIslands().get(i+1).getIslandID() == islandPos) {
-                                    controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(i).getIslandID());
-                                    break;
-                                }
-                            }
-                             */
                             controller.getGame().getGameBoard().getMotherNature().setPosition(controller.getGame().getGameBoard().getIslands().get(islandPos).getIslandID());
 
                         } else {
@@ -730,6 +702,22 @@ public class TurnController {
         }
 
 
+    }
+
+    /**
+     * method used to add islandInfluence to every player based on the possession of towers in the island
+     *
+     * @param islandPos -> position of the island to check on the island's ArrayList in the game
+     */
+    private void addTowersInfluence(int islandPos) {
+        if(controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers() != null) {
+            TowerColor towerColor = controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers().get(0).getColor();
+            for (Player p : controller.getGame().getActivePlayers()) {
+                if (p.getBoard().getTowerArea().getTowerArea().get(0).getColor() == towerColor) {
+                    p.setIslandInfluence(p.getIslandInfluence() + controller.getGame().getGameBoard().getIslands().get(islandPos - 1).getMergedTowers().size());
+                }
+            }
+        }
     }
 
     private void towerInfluenceWin(Player winner) {
