@@ -12,11 +12,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
+/**
+ * Class used to handle a connection between client and server, sending and receiving messages
+ */
 public class SocketClientConnection implements Runnable {
-
-    //app.Server.SocketClientConnection handles a connection between client and server, permitting sending and
-    // receiving messages.
 
     private final Socket socket;
     private final Server server;
@@ -39,6 +38,9 @@ public class SocketClientConnection implements Runnable {
 
     }
 
+    /**
+     * method used to close a connection between client and server
+     */
     public void closeConnection() {
         server.unregisterPlayer(clientID);
         try {
@@ -48,14 +50,19 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
+
     public Integer getClientID() {
         return clientID;
     }
 
+    /**
+     * method used to set up player's number of the game
+     *
+     * @param request -> message containing number of players of the game
+     */
     public void setupPlayers(NumOfPlayerRequest request) {
         SerializedAnswer serverAns = new SerializedAnswer();
         serverAns.setServerAnswer(request);
-        System.out.println("Inizio setup players");
         sendServerMessage(serverAns);
         while(true) {
             try {
@@ -78,12 +85,16 @@ public class SocketClientConnection implements Runnable {
                 closeConnection();
                 System.err.println("Error occurred while setting-up the game mode: " + e.getMessage());
             }
-
-
         }
-
     }
 
+    /**
+     * method used to set up game mode of the game
+     *
+     * @param answer -> answer sent from server to client, asking game mode
+     * @throws IOException -> in case client triggers an exception from input
+     * @throws ClassNotFoundException -> in case client triggers an exception from input
+     */
     public void setupGameMode(ExpertModeAnswer answer) throws IOException, ClassNotFoundException {
         SerializedAnswer serverAns = new SerializedAnswer();
         serverAns.setServerAnswer(answer);
@@ -97,12 +108,10 @@ public class SocketClientConnection implements Runnable {
                 if(expertMode.equalsIgnoreCase("y")) {
                     server.getGameFromID(clientID).setExpertMode(true);
                     server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Game will be played in Expert Mode!\nPlease wait for other players to connect :)", false));
-
                 }
                 else if(expertMode.equalsIgnoreCase("n")){
                     server.getGameFromID(clientID).setExpertMode(false);
                     server.getVirtualClientFromID(clientID).sendAnswerToClient(new DynamicAnswer("Game will be played in Standard Mode!\nPlease wait for other players to connect :)", false));
-
                 } else {
                     setupGameMode(new ExpertModeAnswer("Please type [y/n] to setup the Expert GameMode:\ny: Expert Mode\nn: Standard Mode"));
                 }
@@ -112,6 +121,11 @@ public class SocketClientConnection implements Runnable {
     }
 
 
+    /**
+     * method used to send a message from client to server
+     *
+     * @param serverMessage -> server message
+     */
     public void sendServerMessage(SerializedAnswer serverMessage) {
         try {
             outputStream.reset();
@@ -122,6 +136,12 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
+    /**
+     * method used to read (constantly) messages from client
+     *
+     * @throws IOException -> exception triggered by client error
+     * @throws ClassNotFoundException -> exception triggered by client error
+     */
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
         if(clientInput.message != null) {
@@ -136,6 +156,11 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
+    /**
+     * method used to switch choices messages during pre-game phase
+     *
+     * @param userMessage -> message sent by client
+     */
     public void actionHandler(Message userMessage) {
         if(userMessage instanceof NicknameChoice) {
             checkConnection((NicknameChoice) userMessage);
@@ -205,6 +230,11 @@ public class SocketClientConnection implements Runnable {
     }
 
 
+    /**
+     * method used to check client registration parameters and register a new client
+     *
+     * @param nickname -> nickname chosen by player
+     */
     private void checkConnection(NicknameChoice nickname) {
         try {
             clientID = server.registerClient(nickname.getNicknameChosen(), this);
@@ -219,7 +249,9 @@ public class SocketClientConnection implements Runnable {
         }
     }
 
-
+    /**
+     * thread that keep up reading messages from client, while connection is active
+     */
     @Override
     public void run() {
         try {
@@ -227,7 +259,6 @@ public class SocketClientConnection implements Runnable {
                 readClientStream();
             }
         } catch(IOException e) {
-            //e.printStackTrace();
             GameHandler game = server.getGameFromID(clientID);
             String player = server.getNicknameFromID(clientID);
             server.unregisterPlayer(clientID);

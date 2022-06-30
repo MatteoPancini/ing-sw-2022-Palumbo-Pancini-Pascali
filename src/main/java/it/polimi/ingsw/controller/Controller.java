@@ -17,12 +17,23 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Controller class is used as the "controller" of the game, switching messages from clients and triggering
+ * appropriate turn/expert controller actions
+ */
 public class Controller implements PropertyChangeListener {
     private final Game game;
     private final GameHandler gameHandler;
     private final TurnController turnController;
     private ExpertController expertController;
 
+
+    /**
+     * Constructor of controller class
+     *
+     * @param game -> game related to the controller
+     * @param gameHandler -> game handler that instantiated this controller
+     */
     public Controller(Game game, GameHandler gameHandler) {
         this.game = game;
         this.gameHandler = gameHandler;
@@ -30,6 +41,11 @@ public class Controller implements PropertyChangeListener {
     }
 
 
+    /**
+     * method used to set (in case of expert mode) the expert controller
+     *
+     * @param expertController -> controller containing expert mode methods
+     */
     public void setExpertController(ExpertController expertController) {
         this.expertController = expertController;
         this.turnController.setExpertController(expertController);
@@ -51,9 +67,11 @@ public class Controller implements PropertyChangeListener {
         return turnController;
     }
 
+    /**
+     * method used to set up the game board of a new game
+     */
     public void newSetupGame() {
         System.out.println("Starting setupGame");
-
         int studentsNumber;
         System.out.println(game.getPlayersNumber());
         if(game.getPlayersNumber() == 3) {
@@ -87,9 +105,6 @@ public class Controller implements PropertyChangeListener {
                 game.getGameBoard().removeStudents(0);
             }
 
-
-
-
             System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
@@ -97,19 +112,15 @@ public class Controller implements PropertyChangeListener {
                 }
                 if(colorsCounter3P < 2) {
                     colorsCounter3P++;
-                    System.out.println("change");
                 }
             } else if(game.getPlayersNumber() == 2) {
-                System.out.println("entro");
                 for(int k = 1; k <= towersNumber; k++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter2P)));
                 }
                 if(colorsCounter2P < 2) {
-                    System.out.println("change");
                     colorsCounter2P++;
                 }
             } else if(game.getPlayersNumber() == 4) {
-                System.out.println("Entro QUI");
                 if((p.getIdTeam() == 1 && p.isTeamLeader()) || (p.getIdTeam() == 2 && p.isTeamLeader())) {
                     for(int l=1; l<= towersNumber; l++) {
                         p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter4P)));
@@ -118,14 +129,12 @@ public class Controller implements PropertyChangeListener {
                 }
             }
 
-
             if(game.isExpertMode()) {
                 p.setMyCoins(1);
             }
         }
 
         for(Player q : game.getPlayers()) {
-            System.out.println("Player " + q.getNickname() + " has students:");
             for(Student s : q.getBoard().getEntrance().getStudents()) {
                 System.out.println(s.getType().toString());
             }
@@ -135,7 +144,6 @@ public class Controller implements PropertyChangeListener {
         int maximum = 11;
         SecureRandom r = new SecureRandom();
         game.getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
-        //int n = 1;
         int mnPos = game.getGameBoard().getMotherNature().getPosition();
 
         int mnPosOpposite;
@@ -145,16 +153,12 @@ public class Controller implements PropertyChangeListener {
             mnPosOpposite = (mnPos + 6) % 12;
         }
 
-        //System.out.println("mn = " + mnPos + ", mnOpp = " + mnPosOpposite);
-
         for(int s = 1; s <= 12; s++) {
             if(s != mnPos && s != mnPosOpposite) {
-                //pos = (game.getGameBoard().getMotherNature().getPosition() + s) % 12;
                 Collections.shuffle(game.getGameBoard().getSetupStudentsBag());
                 game.getGameBoard().getIslands().get(s - 1).addStudent(game.getGameBoard().getSetupStudentsBag().get(0));
                 game.getGameBoard().removeSetupStudents(0);
             }
-            //n++;
         }
 
         for(int p = 1; p <= 12; p++){
@@ -178,6 +182,11 @@ public class Controller implements PropertyChangeListener {
     }
 
 
+    /**
+     * method used to switch client messages and trigger a proper method of turn/expert controller
+     *
+     * @param evt -> event that will change the state of the model
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("propertyChange del controller" + evt.getPropertyName());

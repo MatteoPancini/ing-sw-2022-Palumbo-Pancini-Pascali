@@ -91,10 +91,6 @@ public class CLI implements Runnable, ListenerInterface {
         return in;
     }
 
-    public PrintStream getOutput() {
-        return out;
-    }
-
     public Integer printYellowStudentsOnIsland(Island isl) {
         int y = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -998,12 +994,15 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }*/
 
-    /*public void showServerError() {
+    public void showServerError() {
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
             showError("Server is full... please try again later!");
             System.exit(-1);
+        } else if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.SERVEROUT) {
+            showError("Server is out... please try again later!");
+            System.exit(-1);
         }
-    }*/
+    }
 
     /**
      * Method attributeTowers gives each player its corresponding tower color

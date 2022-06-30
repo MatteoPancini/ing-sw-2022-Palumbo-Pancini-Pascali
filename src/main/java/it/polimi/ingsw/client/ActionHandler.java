@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.client.gui.controllers.MainSceneController;
 import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
 import it.polimi.ingsw.messages.servertoclient.*;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Characters;
@@ -134,6 +135,10 @@ public class ActionHandler {
             view.firePropertyChange("WinMessage", null, null);
         } else if(answer instanceof LoseNotification) {
             view.firePropertyChange("LoseMessage", null, answer.getMessage());
+        } else if(answer instanceof ServerError) {
+            if(cli != null) {
+                cli.showServerError();
+            }
         }
     }
 
