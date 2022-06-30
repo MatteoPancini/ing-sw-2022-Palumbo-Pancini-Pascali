@@ -102,34 +102,34 @@ public class PickAssistantController implements GUIController {
         Image img = null;
         switch (a.getName().toString()) {
             case "EAGLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (4).png");
+                img = new Image("/graphics/assistants/Assistente (4).png");
             }
             case "DOG" -> {
-                img = new Image("@../../graphics/assistants/Assistente (8).png");
+                img = new Image("/graphics/assistants/Assistente (8).png");
             }
             case "ELEPHANT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (9).png");
+                img = new Image("/graphics/assistants/Assistente (9).png");
             }
             case "CAT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (3).png");
+                img = new Image("/graphics/assistants/Assistente (3).png");
             }
             case "CHEETAH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (1).png");
+                img = new Image("/graphics/assistants/Assistente (1).png");
             }
             case "LIZARD" -> {
-                img = new Image("@../../graphics/assistants/Assistente (6).png");
+                img = new Image("/graphics/assistants/Assistente (6).png");
             }
             case "OCTOPUS" -> {
-                img = new Image("@../../graphics/assistants/Assistente (7).png");
+                img = new Image("/graphics/assistants/Assistente (7).png");
             }
             case "OSTRICH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (2).png");
+                img = new Image("/graphics/assistants/Assistente (2).png");
             }
             case "TURTLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (10).png");
+                img = new Image("/graphics/assistants/Assistente (10).png");
             }
             case "FOX" -> {
-                img = new Image("@../../graphics/assistants/Assistente (5).png");
+                img = new Image("/graphics/assistants/Assistente (5).png");
             }
         }
         return img;
