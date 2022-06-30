@@ -15,30 +15,17 @@ import it.polimi.ingsw.model.player.DiningRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.server.GameHandler;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class TurnController {
     private final Controller controller;
-
     private final GameHandler gameHandler;
-
     private Player currentPlayer;
-
     private ExpertController expertController;
-
     private int studentRequest;
-
     private boolean lastRound;
-
-
-
     private int actionPhaseNum;
-
-
-
     private Student studentToMove;
 
     public Controller getController() {
@@ -810,7 +797,7 @@ public class TurnController {
 
     /**
      * Check if the game is over
-     * @return
+     * @return a boolean that says whether the game is over or not
      */
     public boolean checkWin() {
         System.out.println("Entro in checkWin");
