@@ -14,24 +14,33 @@ public class TowerArea implements Serializable {
 
     public ArrayList<Tower> getTowerArea() { return myTowers; }
 
+    /**
+     * Put a tower back to the tower area of his owner when another player conquers an island
+     * @param tower -> tower to add
+     */
     public void addTowers (Tower tower) {
         myTowers.add(tower);
-        System.out.println("add tower" + tower.getColor().toString());
     }
 
+    /**
+     * Move a tower from a tower area to an island
+     * @param island -> destination
+     */
     public void moveTowerToIsland(Island island) {
-        System.out.println("Entro tower");
         island.setTower(myTowers.get(myTowers.size() - 1));
         myTowers.remove(myTowers.get(myTowers.size() - 1));
 
     }
 
+    /**
+     * Move some towers from a tower area to an island
+     * @param island -> destination
+     * @param mergedTowers -> number of towers to move
+     */
     public void moveTowerToIsland(Island island, int mergedTowers) {
-        System.out.println("Entro towers");
         for (int i = 0; i < mergedTowers; i++) {
             island.getMergedTowers().add(myTowers.get(myTowers.size() - 1));
             myTowers.remove(myTowers.get(myTowers.size() - 1));
         }
     }
-
 }

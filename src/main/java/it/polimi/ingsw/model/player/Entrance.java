@@ -17,6 +17,10 @@ public class Entrance implements Serializable {
 
     public void setStudents(Student newStudent) { students.add(newStudent); }
 
+    /**
+     * Remove a student from an entrance
+     * @param studentToRemove -> student to remove
+     */
     public void removeStudent(Student studentToRemove) {
         for(int i = 0; i < students.size(); i++) {
             if(students.get(i).getType() == studentToRemove.getType()) {

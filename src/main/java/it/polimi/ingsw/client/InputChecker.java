@@ -249,7 +249,6 @@ public class InputChecker {
     public boolean checkStudentInDiningRoom(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
-        //System.out.println("Tipo passato: " + type.toString());
         for(Table t : modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTableStudentsNum() > 0) {
                 if(t.getDiningTable().get(0).getBoardCellType() == type) {
