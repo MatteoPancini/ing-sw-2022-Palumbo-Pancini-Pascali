@@ -31,6 +31,9 @@ public class CloudTile implements Serializable {
 
     public void setStudents(ArrayList<Student> newStudents){ cloudStudents = newStudents; }
 
+    /**
+     * Remove students from a cloud tile
+     */
     public void removeStudents() {
         cloudStudents = null;
     }
