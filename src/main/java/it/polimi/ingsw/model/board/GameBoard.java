@@ -88,11 +88,14 @@ public class GameBoard implements Serializable {
         studentsBag.remove(index);
     }
 
+
     /**
      * Select three character cards that can be played in a game
      */
     public void setPlayableCharacters() {
         characterDeck = new CharacterDeck(game);
+
+        Collections.shuffle(characterDeck.getDeck());
 
         for(int i = 0; i < 3; i++) {
             playableCharacters.add(characterDeck.getDeck().get(i));
@@ -105,7 +108,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * Remove students from the set up bag
+     * Remove students from the set-up bag
      * @param index -> index of the student to remove
      */
     public void removeSetupStudents(int index) {
