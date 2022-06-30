@@ -331,7 +331,7 @@ public class ExpertController {
 
     /**
      * Activate granny herbs effect: put a no entry tile on an island
-     * @param island
+     * @param island the island where to put the no entry tile
      */
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
