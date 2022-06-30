@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainSceneController implements GUIController {
 
@@ -457,49 +458,51 @@ public class MainSceneController implements GUIController {
     @FXML ImageView myCoins;
     @FXML Label myCoinsLabel;
 
-    private final Image blackTowerImage = new Image("@../../graphics/wooden_pieces/black_tower.png");
-    private final Image greyTowerImage = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-    private final Image whiteTowerImage = new Image("@../../graphics/wooden_pieces/white_tower.png");
+    //private final Image blackTowerImage = new Image(getClass().getClassLoader().getResourceAsStream("/graphics/wooden_pieces/black_tower.png"));
 
-    private final Image assistant1Image = new Image("@../../graphics/assistants/Assistente (1).png");
-    private final Image assistant2Image = new Image("@../../graphics/assistants/Assistente (2).png");
-    private final Image assistant3Image = new Image("@../../graphics/assistants/Assistente (3).png");
-    private final Image assistant4Image = new Image("@../../graphics/assistants/Assistente (4).png");
-    private final Image assistant5Image = new Image("@../../graphics/assistants/Assistente (5).png");
-    private final Image assistant6Image = new Image("@../../graphics/assistants/Assistente (6).png");
-    private final Image assistant7Image = new Image("@../../graphics/assistants/Assistente (7).png");
-    private final Image assistant8Image = new Image("@../../graphics/assistants/Assistente (8).png");
-    private final Image assistant9Image = new Image("@../../graphics/assistants/Assistente (9).png");
-    private final Image assistant10Image = new Image("@../../graphics/assistants/Assistente (10).png");
+    private final Image blackTowerImage = new Image("/graphics/wooden_pieces/black_tower.png");
+    private final Image greyTowerImage = new Image("/graphics/wooden_pieces/grey_tower.png");
+    private final Image whiteTowerImage = new Image("/graphics/wooden_pieces/white_tower.png");
 
-    private final Image kingImage = new Image("@../../graphics/wizards/king_no_bg.png");
-    private final Image witchImage = new Image("@../../graphics/wizards/pixie_no_bg.png");
-    private final Image monachImage = new Image("@../../graphics/wizards/wizard_no_bg.png");
-    private final Image forestImage = new Image("@../../graphics/wizards/sorcerer_no_bg.png");
+    private final Image assistant1Image = new Image("/graphics/assistants/Assistente (1).png");
+    private final Image assistant2Image = new Image("/graphics/assistants/Assistente (2).png");
+    private final Image assistant3Image = new Image("/graphics/assistants/Assistente (3).png");
+    private final Image assistant4Image = new Image("/graphics/assistants/Assistente (4).png");
+    private final Image assistant5Image = new Image("/graphics/assistants/Assistente (5).png");
+    private final Image assistant6Image = new Image("/graphics/assistants/Assistente (6).png");
+    private final Image assistant7Image = new Image("/graphics/assistants/Assistente (7).png");
+    private final Image assistant8Image = new Image("/graphics/assistants/Assistente (8).png");
+    private final Image assistant9Image = new Image("/graphics/assistants/Assistente (9).png");
+    private final Image assistant10Image = new Image("/graphics/assistants/Assistente (10).png");
 
-    private final Image redStudentImage = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
-    private final Image blueStudentImage = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
-    private final Image greenStudentImage = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
-    private final Image yellowStudentImage = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
-    private final Image pinkStudentImage = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
-    private final Image redProfImage = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
-    private final Image blueProfImage = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
-    private final Image yellowProfImage = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
-    private final Image pinkProfImage = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
-    private final Image greenProfImage = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
+    private final Image kingImage = new Image("/graphics/wizards/king_no_bg.png");
+    private final Image witchImage = new Image("/graphics/wizards/pixie_no_bg.png");
+    private final Image monachImage = new Image("/graphics/wizards/wizard_no_bg.png");
+    private final Image forestImage = new Image("/graphics/wizards/sorcerer_no_bg.png");
 
-    private final Image centarusImage = new Image("@../../graphics/characters/centarus.png");
-    private final Image farmerImage = new Image("@../../graphics/characters/farmer.png");
-    private final Image fungarusImage = new Image("@../../graphics/characters/fungarus.png");
-    private final Image grannyHerbsImage = new Image("@../../graphics/characters/grannyHerbs.png");
-    private final Image heraldImage = new Image("@../../graphics/characters/herald.png");
-    private final Image jesterImage = new Image("@../../graphics/characters/jester.png");
-    private final Image knightImage = new Image("@../../graphics/characters/knight.png");
-    private final Image magicPostmanImage = new Image("@../../graphics/characters/magicPostman.png");
-    private final Image minestrelImage = new Image("@../../graphics/characters/minestrel.png");
-    private final Image monkImage = new Image("@../../graphics/characters/monk.png");
-    private final Image spoiledPrincessImage = new Image("@../../graphics/characters/spoiledPrincess.png");
-    private final Image thiefImage = new Image("@../../graphics/characters/thief.png");
+    private final Image redStudentImage = new Image("/graphics/wooden_pieces/3D/redStudent3D.png");
+    private final Image blueStudentImage = new Image("/graphics/wooden_pieces/3D/blueStudent3D.png");
+    private final Image greenStudentImage = new Image("/graphics/wooden_pieces/3D/greenStudent3D.png");
+    private final Image yellowStudentImage = new Image("/graphics/wooden_pieces/3D/yellowStudent3D.png");
+    private final Image pinkStudentImage = new Image("/graphics/wooden_pieces/3D/pinkStudent3D.png");
+    private final Image redProfImage = new Image("/graphics/wooden_pieces/3D/redProf3D.png");
+    private final Image blueProfImage = new Image("/graphics/wooden_pieces/3D/blueProf3D.png");
+    private final Image yellowProfImage = new Image("/graphics/wooden_pieces/3D/yellowProf3D.png");
+    private final Image pinkProfImage = new Image("/graphics/wooden_pieces/3D/pinkProf3D.png");
+    private final Image greenProfImage = new Image("/graphics/wooden_pieces/3D/greenProf3D.png");
+
+    private final Image centarusImage = new Image("/graphics/characters/centarus.png");
+    private final Image farmerImage = new Image("/graphics/characters/farmer.png");
+    private final Image fungarusImage = new Image("/graphics/characters/fungarus.png");
+    private final Image grannyHerbsImage = new Image("/graphics/characters/grannyHerbs.png");
+    private final Image heraldImage = new Image("/graphics/characters/herald.png");
+    private final Image jesterImage = new Image("/graphics/characters/jester.png");
+    private final Image knightImage = new Image("/graphics/characters/knight.png");
+    private final Image magicPostmanImage = new Image("/graphics/characters/magicPostman.png");
+    private final Image minestrelImage = new Image("/graphics/characters/minestrel.png");
+    private final Image monkImage = new Image("/graphics/characters/monk.png");
+    private final Image spoiledPrincessImage = new Image("/graphics/characters/spoiledPrincess.png");
+    private final Image thiefImage = new Image("/graphics/characters/thief.png");
 
     @Override
     public void setGui(GUI gui) {
