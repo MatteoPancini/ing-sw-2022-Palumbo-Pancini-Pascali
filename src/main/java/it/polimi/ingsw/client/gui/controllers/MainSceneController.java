@@ -624,21 +624,11 @@ public class MainSceneController implements GUIController {
 
             case "PICK_CHARACTER_NUMBER" -> askCharacterActionNumber();
             default -> {
-                descriptionLabel.setText("Click the pick assistant button to choose your assistant");
+                descriptionLabel.setVisible(false);
                 System.out.println("Update without user actions (server command not in switch cases)");
             }
         }
     }
-
-    //ritorna una lista delle possibili mosse di un assistant card da passare nella choice box
-    public List<String> getMovesList(AssistantCard a) {
-        List<String> moves = new ArrayList<>();
-        for(int i=1; i <= gui.getModelView().getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves(); i++) {
-            moves.add(Integer.toString(i));
-        }
-        return moves;
-    }
-
     public void askCharacterActionNumber() {
         descriptionLabel.setText("Choose the number of actions you want to play");
         pickCharacterActionNumberBox.setVisible(true);
@@ -698,158 +688,153 @@ public class MainSceneController implements GUIController {
         return coins;
     }
 
-    public void updateProfessors() {
-        myBlueProfessor.setVisible(false);
-        myYellowProfessor.setVisible(false);
-        myPinkProfessor.setVisible(false);
-        myGreenProfessor.setVisible(false);
-        myRedProfessor.setVisible(false);
-        rightBlueProfessor.setVisible(false);
-        rightYellowProfessor.setVisible(false);
-        rightPinkProfessor.setVisible(false);
-        rightGreenProfessor.setVisible(false);
-        rightRedProfessor.setVisible(false);
-        leftBlueProfessor.setVisible(false);
-        leftYellowProfessor.setVisible(false);
-        leftPinkProfessor.setVisible(false);
-        leftGreenProfessor.setVisible(false);
-        leftRedProfessor.setVisible(false);
-        topBlueProfessor.setVisible(false);
-        topYellowProfessor.setVisible(false);
-        topPinkProfessor.setVisible(false);
-        topGreenProfessor.setVisible(false);
-        topRedProfessor.setVisible(false);
-        int cont = 0;
-        Image pic = null;
-        for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
-                    if (b.hasProfessor()) {
-                        if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = blueProfImage;
-                            myBlueProfessor.setImage(pic);
-                            myBlueProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = greenProfImage;
-                            myGreenProfessor.setImage(pic);
-                            myGreenProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = pinkProfImage;
-                            myPinkProfessor.setImage(pic);
-                            myPinkProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = redProfImage;
-                            myRedProfessor.setImage(pic);
-                            myRedProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = yellowProfImage;
-                            myYellowProfessor.setImage(pic);
-                            myYellowProfessor.setVisible(true);
+        public void updateProfessors() {
+            myBlueProfessor.setVisible(false);
+            myYellowProfessor.setVisible(false);
+            myPinkProfessor.setVisible(false);
+            myGreenProfessor.setVisible(false);
+            myRedProfessor.setVisible(false);
+            rightBlueProfessor.setVisible(false);
+            rightYellowProfessor.setVisible(false);
+            rightPinkProfessor.setVisible(false);
+            rightGreenProfessor.setVisible(false);
+            rightRedProfessor.setVisible(false);
+            leftBlueProfessor.setVisible(false);
+            leftYellowProfessor.setVisible(false);
+            leftPinkProfessor.setVisible(false);
+            leftGreenProfessor.setVisible(false);
+            leftRedProfessor.setVisible(false);
+            topBlueProfessor.setVisible(false);
+            topYellowProfessor.setVisible(false);
+            topPinkProfessor.setVisible(false);
+            topGreenProfessor.setVisible(false);
+            topRedProfessor.setVisible(false);
+            int cont = 0;
+            Image pic = null;
+            for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
+                if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
+                    for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
+                        if (b.hasProfessor()) {
+                            if (b.getBoardCellType() == PawnType.BLUE) {
+                                pic = blueProfImage;
+                                myBlueProfessor.setImage(pic);
+                                myBlueProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.GREEN) {
+                                pic = greenProfImage;
+                                myGreenProfessor.setImage(pic);
+                                myGreenProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.PINK) {
+                                pic = pinkProfImage;
+                                myPinkProfessor.setImage(pic);
+                                myPinkProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.RED) {
+                                pic = redProfImage;
+                                myRedProfessor.setImage(pic);
+                                myRedProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                                pic = yellowProfImage;
+                                myYellowProfessor.setImage(pic);
+                                myYellowProfessor.setVisible(true);
+                            }
                         }
                     }
-                }
-            } else if (cont == 0) {
-                //top Player corresponding to cont 0
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
-                    if (b.hasProfessor()) {
-                        if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = blueProfImage;
-                            topBlueProfessor.setImage(pic);
-                            topBlueProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = greenProfImage;
-                            topGreenProfessor.setImage(pic);
-                            topGreenProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = pinkProfImage;
-                            topPinkProfessor.setImage(pic);
-                            topPinkProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = redProfImage;
-                            topRedProfessor.setImage(pic);
-                            topRedProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = yellowProfImage;
-                            topYellowProfessor.setImage(pic);
-                            topYellowProfessor.setVisible(true);
+                } else if (cont == 0) {
+                    //top Player corresponding to cont 0
+                    for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
+                        if (b.hasProfessor()) {
+                            if (b.getBoardCellType() == PawnType.BLUE) {
+                                pic = blueProfImage;
+                                topBlueProfessor.setImage(pic);
+                                topBlueProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.GREEN) {
+                                pic = greenProfImage;
+                                topGreenProfessor.setImage(pic);
+                                topGreenProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.PINK) {
+                                pic = pinkProfImage;
+                                topPinkProfessor.setImage(pic);
+                                topPinkProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.RED) {
+                                pic = redProfImage;
+                                topRedProfessor.setImage(pic);
+                                topRedProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                                pic = yellowProfImage;
+                                topYellowProfessor.setImage(pic);
+                                topYellowProfessor.setVisible(true);
+                            }
                         }
                     }
-                }
-                cont++;
-            } else if (cont == 1) {
-                //left Player corresponding to cont 1
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
-                    if (b.hasProfessor()) {
-                        if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = blueProfImage;
-                            leftBlueProfessor.setImage(pic);
-                            leftBlueProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = greenProfImage;
-                            leftGreenProfessor.setImage(pic);
-                            leftGreenProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = pinkProfImage;
-                            leftPinkProfessor.setImage(pic);
-                            leftPinkProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = redProfImage;
-                            leftRedProfessor.setImage(pic);
-                            leftRedProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = yellowProfImage;
-                            leftYellowProfessor.setImage(pic);
-                            leftYellowProfessor.setVisible(true);
+                    cont++;
+                } else if (cont == 1) {
+                    //left Player corresponding to cont 1
+                    for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
+                        if (b.hasProfessor()) {
+                            if (b.getBoardCellType() == PawnType.BLUE) {
+                                pic = blueProfImage;
+                                leftBlueProfessor.setImage(pic);
+                                leftBlueProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.GREEN) {
+                                pic = greenProfImage;
+                                leftGreenProfessor.setImage(pic);
+                                leftGreenProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.PINK) {
+                                pic = pinkProfImage;
+                                leftPinkProfessor.setImage(pic);
+                                leftPinkProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.RED) {
+                                pic = redProfImage;
+                                leftRedProfessor.setImage(pic);
+                                leftRedProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                                pic = yellowProfImage;
+                                leftYellowProfessor.setImage(pic);
+                                leftYellowProfessor.setVisible(true);
+                            }
                         }
                     }
-                }
-                cont++;
-            } else if (cont == 2) {
-                for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
-                    if (b.hasProfessor()) {
-                        if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = blueProfImage;
-                            rightBlueProfessor.setImage(pic);
-                            rightBlueProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = greenProfImage;
-                            rightGreenProfessor.setImage(pic);
-                            rightGreenProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = pinkProfImage;
-                            rightPinkProfessor.setImage(pic);
-                            rightPinkProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = redProfImage;
-                            rightRedProfessor.setImage(pic);
-                            rightRedProfessor.setVisible(true);
-                        } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = yellowProfImage;
-                            rightYellowProfessor.setImage(pic);
-                            rightYellowProfessor.setVisible(true);
+                    cont++;
+                } else if (cont == 2) {
+                    for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
+                        if (b.hasProfessor()) {
+                            if (b.getBoardCellType() == PawnType.BLUE) {
+                                pic = blueProfImage;
+                                rightBlueProfessor.setImage(pic);
+                                rightBlueProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.GREEN) {
+                                pic = greenProfImage;
+                                rightGreenProfessor.setImage(pic);
+                                rightGreenProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.PINK) {
+                                pic = pinkProfImage;
+                                rightPinkProfessor.setImage(pic);
+                                rightPinkProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.RED) {
+                                pic = redProfImage;
+                                rightRedProfessor.setImage(pic);
+                                rightRedProfessor.setVisible(true);
+                            } else if (b.getBoardCellType() == PawnType.YELLOW) {
+                                pic = yellowProfImage;
+                                rightYellowProfessor.setImage(pic);
+                                rightYellowProfessor.setVisible(true);
+                            }
                         }
                     }
+                    cont++;
                 }
-                cont++;
             }
         }
-    }
-
-     public void askMoves(AssistantCard a) {
+        public void askMoves(AssistantCard a) {
         descriptionLabel.setText("Choose mother nature's moves number from the box");
         pickMovesBox.setVisible(true);
-        /*if(gui.getModelView().isMagicPostmanAction()) {
-            for(int i = 1; i <= (a.getMoves() + 2); i++) {
-                pickMovesBox.getItems().add(String.valueOf(i));
-            }
-        } else {*/
-            for(int i = 1; i <= a.getMoves(); i++) {
-                pickMovesBox.getItems().add(String.valueOf(i));
-            }
-            if(gui.getModelView().isMagicPostmanAction()) {
-                pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 1));
-                pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 2));
-            }
+        pickMovesBox.getItems().removeAll();
+        for(int i = 1; i <= a.getMoves(); i++) {
+            pickMovesBox.getItems().add(String.valueOf(i));
+        }
+        if(gui.getModelView().isMagicPostmanAction()) {
+            pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 1));
+            pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 2));
+        }
         pickMovesBox.setOnAction(this::pickMoves);
      }
 
@@ -2368,7 +2353,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askStudentEntrance(Entrance e) {
-        descriptionLabel.setText("             Pick a student from your entrance");
+        descriptionLabel.setText("Pick a student from your entrance");
         for(Student s : e.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
@@ -2390,7 +2375,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askStudentCard(CharacterCard c) {
-        descriptionLabel.setText("         Pick a student from the " + c.getName());
+        descriptionLabel.setText("Pick a student from the " + c.getName());
         for(Student s : c.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
@@ -2412,7 +2397,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askStudentDiningRoom() {
-        descriptionLabel.setText("            Pick a student from your dining room");
+        descriptionLabel.setText("Pick a student from your dining room");
         for(Table t : gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getDiningTable().get(0).hasStudent()) {
                 if(t.getDiningTable().get(0).getBoardCellType() == PawnType.BLUE) {
@@ -2440,7 +2425,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askPawnType() {
-        descriptionLabel.setText("      Pick a pawn type based on the effect of the character you chose");
+        descriptionLabel.setText("Pick a pawn type based on the effect of the character you chose");
         green.setVisible(true);
         blue.setVisible(true);
         yellow.setVisible(true);
