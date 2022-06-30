@@ -80,14 +80,19 @@ public class GameBoard implements Serializable {
         return studentsBag;
     }
 
+    /**
+     * Remove student from the students bag
+     * @param index -> index of the student to remove
+     */
     public void removeStudents(int index) {
         studentsBag.remove(index);
     }
 
+    /**
+     * Select three character cards that can be played in a game
+     */
     public void setPlayableCharacters() {
         characterDeck = new CharacterDeck(game);
-
-        Collections.shuffle(characterDeck.getDeck());
 
         for(int i = 0; i < 3; i++) {
             playableCharacters.add(characterDeck.getDeck().get(i));
@@ -99,21 +104,27 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * Remove students from the set up bag
+     * @param index -> index of the student to remove
+     */
     public void removeSetupStudents(int index) {
         setupStudentsBag.remove(index);
     }
-
-
 
     public ArrayList<CloudTile> getClouds() {
         return clouds;
     }
 
-
     public ArrayList<Professor> getProfessors() {
         return professors;
     }
 
+    /**
+     * Get a professor
+     * @param pawnType -> pawn type of the professor
+     * @return a professor
+     */
     public Professor getProfessorByColor(PawnType pawnType) {
         for(Professor professor : professors) {
             if(professor.getType() == pawnType) {
@@ -139,6 +150,11 @@ public class GameBoard implements Serializable {
         lastAssistantUsed.set(index, card);
     }
 
+    /**
+     * Get an island
+     * @param islandId -> id of the island
+     * @return an island
+     */
     public Island getIslandById(int islandId) {
         for(Island i : islands) {
             if(i.getIslandID() == islandId) {

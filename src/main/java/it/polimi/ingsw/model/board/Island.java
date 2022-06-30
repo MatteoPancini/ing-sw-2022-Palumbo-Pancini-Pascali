@@ -30,6 +30,10 @@ public class Island implements Serializable {
     }
 
 
+    /**
+     * Check if an island has a tower
+     * @return a boolean that says whether the island has a tower or not
+     */
     public boolean hasTower(){
         if(tower != null) return true;
         else return false;
@@ -51,7 +55,9 @@ public class Island implements Serializable {
         students.add(newStudent);
     }
 
-
+    /**
+     * Merge three contiguous islands that both have a tower of the same color
+     */
     public void doubleMerge() {
         Island iBefore = null;
         Island iAfter = null;
@@ -118,6 +124,10 @@ public class Island implements Serializable {
 
     }
 
+    /**
+     * Merge two contiguous islands that both have a tower of the same color
+     * @param island
+     */
     public void merge(Island island) {
         if(this.islandID < island.getIslandID()) {
             for(Island i : island.getMergedIslands()) {
@@ -163,7 +173,10 @@ public class Island implements Serializable {
         board.decrementIslandCounter();
     }
 
-
+    /**
+     * Check if the island on the left has a tower of the same color
+     * @return a boolean that says whether the island on the left has a tower or not
+     */
     public boolean hasLeft(){
         if(islandID != 1) {
             for(int i = 0; i < board.getIslands().size(); i++) {
@@ -189,6 +202,10 @@ public class Island implements Serializable {
         return false;
     }
 
+    /**
+     * Check if the island on the right has a tower of the same color
+     * @return a boolean that says whether the island on the right has a tower or not
+     */
     public boolean hasRight() {
         for(int i= 0; i<board.getIslands().size(); i++) {
             if(board.getIslands().get(i).getIslandID() == islandID) {
@@ -246,6 +263,10 @@ public class Island implements Serializable {
         mergedTowers.add(tower);
     }
 
+    /**
+     * Put towers back into their area when an island is conquered
+     * @param towerArea
+     */
     public void moveTowerToArea(TowerArea towerArea) {
         for(Tower t : mergedTowers) {
             System.out.println(t.getColor());

@@ -29,10 +29,7 @@ public class CharacterCard implements Serializable {
         return name;
     }
 
-    public void resetCost() {
-        System.out.print("Reset cost to " + resetCost);
-        initialCost = resetCost;
-    }
+    public void resetCost() { initialCost = resetCost; }
 
     public void setResetCost(int resetCost) {
         this.resetCost = resetCost;
@@ -57,6 +54,11 @@ public class CharacterCard implements Serializable {
 
     public int getInitialCost() { return initialCost; }
 
+
+    /**
+     * Remove a student from a character card
+     * @param stud -> student to remove
+     */
     public void removeStudent(Student stud) {
         for(Student s : students) {
             if(s.getType() == stud.getType()) {
@@ -68,10 +70,12 @@ public class CharacterCard implements Serializable {
         }
     }
 
+    /**
+     * Add a student to a character card
+     * @param stud -> student to add
+     */
     public void addStudent(Student stud) {
         System.out.println("Adding stud " + stud.getType());
         students.add(stud);
     }
-
-
 }

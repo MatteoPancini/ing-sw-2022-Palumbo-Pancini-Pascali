@@ -31,6 +31,9 @@ public class Table implements Serializable {
         return diningTable.get(0).getBoardCellType();
     }
 
+    /**
+     * Remove a student from a table when the owner wants to move it
+     */
     public void removeStudent() {
         diningTable.get(lastPosition - 1).removeStudent();
         lastPosition--;
@@ -38,13 +41,19 @@ public class Table implements Serializable {
 
     }
 
-
-
+    /**
+     * Put a student in a table
+     * @param stud -> student to add
+     */
     public void addStudent(Student stud){
         diningTable.get(lastPosition).setStudent(stud);
         lastPosition++;
     }
 
+    /**
+     * Calculate the number of students in a table
+     * @return the number of students
+     */
     public int getTableStudentsNum() {
         int studentsNum = 0;
         for(BoardCell b : diningTable) {
@@ -55,5 +64,4 @@ public class Table implements Serializable {
 
         return studentsNum;
     }
-
 }

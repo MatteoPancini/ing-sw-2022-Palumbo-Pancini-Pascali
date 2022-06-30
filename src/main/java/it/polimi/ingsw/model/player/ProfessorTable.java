@@ -25,6 +25,11 @@ public class ProfessorTable implements Serializable {
         return profTable;
     }
 
+    /**
+     * Get a board cell of a certain color
+     * @param color -> pawn type of required board cell
+     * @return a board cell of PawnType color
+     */
     public BoardCell getCellByColor(PawnType color) {
         for(BoardCell b : profTable) {
             if(b.getBoardCellType() == color){
@@ -33,5 +38,4 @@ public class ProfessorTable implements Serializable {
         }
         return null;
     }
-
 }
