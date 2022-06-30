@@ -55,22 +55,6 @@ public class CharacterDeck implements Serializable {
         }
     }
 
-    public static CharacterDeck getPlayableCards(Game game) {
-        CharacterDeck deck = new CharacterDeck(game);
-        //System.out.println(deck.getDeck().size());
-
-        CharacterDeck playableCards = null;
-
-        Collections.shuffle(deck.getDeck());
-
-        for(int i = 1; i <= 3; i++){
-            //playableCards.getDeck().add(deck.getDeck().get(i));
-            //playableCards.add(deck.getDeck().get(i));
-        }
-
-        return deck;
-    }
-
     public List<CharacterCard> getDeck(){
         return cards;
     }
