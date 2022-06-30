@@ -53,14 +53,16 @@ public class ActionHandler {
      */
     public void answerHandler() {
         Answer answer = modelView.getServerAnswer();
+        String initialProperty = "InitialGamePhase";
+        String updateProperty = "UpdateModelView";
         if (answer instanceof NumOfPlayerRequest) {
-            view.firePropertyChange("InitialGamePhase", null, "RequestPlayerNumber");
+            view.firePropertyChange(initialProperty, null, "RequestPlayerNumber");
         } else if (answer instanceof WizardAnswer) {
             if (((WizardAnswer) answer).getMessage() != null) {
-                view.firePropertyChange("InitialGamePhase", null, "RequestWizard");
+                view.firePropertyChange(initialProperty, null, "RequestWizard");
             }
         } else if (answer instanceof ExpertModeAnswer) {
-            view.firePropertyChange("InitialGamePhase", null, "ExpertModeAnswer");
+            view.firePropertyChange(initialProperty, null, "ExpertModeAnswer");
         } else if (answer instanceof DynamicAnswer) {
             notifyDynamicAnswer(answer);
         } else if (answer instanceof RequestAction) {
@@ -70,7 +72,7 @@ public class ActionHandler {
             modelView.setGameCopy((Game) answer.getMessage());
             showGame = showGame + 1;
             if(showGame == 1 || gui != null) {
-                view.firePropertyChange("UpdateModelView", null, answer.getMessage());
+                view.firePropertyChange(updateProperty, null, answer.getMessage());
             }
         } else if(answer instanceof StartAction) {
             System.out.println("Setting Action");
@@ -91,7 +93,6 @@ public class ActionHandler {
                 gui.getInfoAlert().show();
             }
         } else if(answer instanceof StartPianification) {
-            System.out.println("Setting Pianification");
             modelView.setActivateInput(true);
             modelView.setPianification(true);
             modelView.setAction(false);
@@ -103,21 +104,21 @@ public class ActionHandler {
             if(cli != null) {
                 cli.askCharacterActionsNumber();
             } else if(gui != null) {
-                view.firePropertyChange("UpdateModelView", null, "PICK_CHARACTER_NUMBER");
+                view.firePropertyChange(updateProperty, null, "PICK_CHARACTER_NUMBER");
             }
         } else if(answer instanceof JesterAction) {
             modelView.setJesterAction(true);
             if(cli != null) {
                 cli.askCharacterActionsNumber();
             } else if(gui != null) {
-                view.firePropertyChange("UpdateModelView", null, "PICK_CHARACTER_NUMBER");
+                view.firePropertyChange(updateProperty, null, "PICK_CHARACTER_NUMBER");
             }
         } else if(answer instanceof GrannyHerbsAction) {
             modelView.setGrannyHerbsAction(true);
             if (cli != null) {
-                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                cli.askIsland();
             } else if(gui != null) {
-                view.firePropertyChange("UpdateModelView", null, "PICK_ISLAND");
+                view.firePropertyChange(updateProperty, null, "PICK_ISLAND");
             }
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);
@@ -138,6 +139,8 @@ public class ActionHandler {
         } else if(answer instanceof ServerError) {
             if(cli != null) {
                 cli.showServerError();
+            } else if(gui != null) {
+                gui.showServerError();
             }
         }
     }
@@ -158,6 +161,7 @@ public class ActionHandler {
      * @param serverCommand command received from the server
      */
     public void makeAction(String serverCommand) {
+        String boardScene = "finalBoardScene.fxml";
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {
                 if(cli!=null) {
@@ -166,17 +170,17 @@ public class ActionHandler {
                 }
                 else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                         controller.update(serverCommand);
                     });
                 }
             }
             case "PICK_CLOUD" -> {
                 if(cli!=null) {
-                    cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+                    cli.askCloud();
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                         controller.update(serverCommand);
                     });
                 }
@@ -187,7 +191,7 @@ public class ActionHandler {
                     cli.askDestination();
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                         controller.update(serverCommand);
                     });
                 }
@@ -204,7 +208,7 @@ public class ActionHandler {
                                 }
                             }
                         } else {
-                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                            cli.askStudent();
                         }
                         modelView.setCharacterAction(modelView.getCharacterAction() + 1);
 
@@ -212,7 +216,7 @@ public class ActionHandler {
                         if(modelView.getCharacterAction() % 2 == 0) {
                             cli.askPawnType();
                         } else {
-                            cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                            cli.askStudent();
 
                         }
                         modelView.setCharacterAction(modelView.getCharacterAction() + 1);
@@ -233,11 +237,11 @@ public class ActionHandler {
                             }
                         }
                     } else {
-                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                        cli.askStudent();
                     }
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                         controller.update(serverCommand);
                     });
                 }
@@ -249,10 +253,10 @@ public class ActionHandler {
                    } else if (modelView.isMinestrelAction()) {
                        modelView.setMinestrelAction(false);
                    }
-                   cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
+                   cli.askMoves();
                } else if (gui!=null) {
                    Platform.runLater(() -> {
-                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                       MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                        controller.update(serverCommand);
                    });
                }
@@ -260,20 +264,20 @@ public class ActionHandler {
 
             case "PICK_CHARACTER" -> {
                if(cli!=null) {
-                   cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                   cli.askCharacterCard();
                } else if (gui!=null) {
                    Platform.runLater(() -> {
-                       MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                       MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                        controller.update(serverCommand);
                    });
                }
             }
             case "PICK_ISLAND" -> {
                 if(cli!=null) {
-                    cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                    cli.askIsland();
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                         controller.update(serverCommand);
                     });
                 }
@@ -283,13 +287,11 @@ public class ActionHandler {
                     cli.askPawnType();
                 } else if (gui!=null) {
                     Platform.runLater(() -> {
-                        MainSceneController controller = (MainSceneController) gui.getControllerFromName("finalBoardScene.fxml");
+                        MainSceneController controller = (MainSceneController) gui.getControllerFromName(boardScene);
                         controller.update(serverCommand);
                     });
                 }
             }
-
-
             default -> {
                 cli.showError("Error: no such action");
                 modelView.setActivateInput(false);

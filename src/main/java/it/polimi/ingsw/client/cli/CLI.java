@@ -10,17 +10,14 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
-import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
 import it.polimi.ingsw.model.player.Tower;
@@ -161,20 +158,6 @@ public class CLI implements Runnable, ListenerInterface {
         }
     }
 
-
-    /*public void showBoard() {
-        System.out.println("Here's a summary of your board: ");
-        System.out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasGreenProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasYellowProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasPinkProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-    }*/
 
     /**
      * Method studentsOnIsland shows the students on a given island
@@ -479,9 +462,8 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     /** Method askMoves prints the moves request arriving from the server
-     * @param card chosen assistant card
      */
-    public void askMoves(AssistantCard card) {
+    public void askMoves() {
         showIslandsTable();
         if(modelView.isMagicPostmanAction()) {
             System.out.println(">Pick a number of mother nature moves between 1 and "
@@ -535,9 +517,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askCloud prints the cloud request arriving from the server
-     * @param clouds available clouds
      */
-    public void askCloud(ArrayList<CloudTile> clouds) {
+    public void askCloud() {
         System.out.println(">Pick a cloud by typing its ID: ");
         showClouds();
         System.out.print(">");
@@ -553,9 +534,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askStudent prints the student request from the entrance arriving from the server
-     * @param schoolB game board of a player
      */
-    public void askStudent(SchoolBoard schoolB) {
+    public void askStudent() {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
         System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
@@ -586,9 +566,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askCharacterCard prints the character card request arriving from the server
-     * @param cards available characters
      */
-    public void askCharacterCard(ArrayList<CharacterCard> cards) {
+    public void askCharacterCard() {
         if (modelView.getGameCopy().isExpertMode()) {
             showCoins();
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
@@ -606,9 +585,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askIsland prints the island request arriving from the server
-     * @param islands available islands
      */
-    public void askIsland(ArrayList<Island> islands) {
+    public void askIsland() {
         if(modelView.isGrannyHerbsAction()) {
             System.out.println("GrannyHerbs action phase... put a tile into an island!");
         }
@@ -694,7 +672,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askCharacterStudents asks the character card and notifies the action parser through listeners
-     * @param card
+     * @param card -> character card with students
      */
     private void askCharacterStudents(CharacterCard card) {
         showCharacterStudent(card);
@@ -737,7 +715,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askStudentPrincess asks to choose a student from the character Spoiled Princess
-     * @param princess
+     * @param princess -> princess card
      */
     public void askStudentPrincess(CharacterCard princess) {
         System.out.println(">Choose a student from princess's students: ");
@@ -759,10 +737,6 @@ public class CLI implements Runnable, ListenerInterface {
     public void showMotherNature() {
         System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
-
-    /*public void noWinnerGame() {
-        System.exit(0);
-    }*/
 
     /**
      * Method chooseExpertMode reads the player's expert mode choice and sends it to the server
@@ -843,7 +817,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method showLoseMessage prints the lost message if the player has lost, and it prints the winner's nickname
-     * @param winnerNickname
+     * @param winnerNickname -> nickname of the winner
      */
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
@@ -929,7 +903,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method initialGamePhaseHandler is used in the CLI property change to switch between the different server commands and ask the corresponding
-     * @param serverCommand
+     * @param serverCommand -> command sent by server
      */
     public void initialGamePhaseHandler(String serverCommand) {
         switch(serverCommand) {
@@ -984,15 +958,6 @@ public class CLI implements Runnable, ListenerInterface {
         cli.run();
     }
 
-    /*public void showCharacters(AssistantDeck deck) {
-        System.out.println(">Take a look at your deck before choosing: ");
-        System.out.println(deck.getDeck().size());
-
-        for(int i = 0; i < 10; i++) {
-            System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
-        }
-    }*/
-
     public void showServerError() {
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
             showError("Server's lobby is full... please try again in a few minutes!");
@@ -1045,15 +1010,12 @@ public class CLI implements Runnable, ListenerInterface {
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
-        //System.out.println("PropertyChange arrivato: " + serverCommand);
         switch(changeEvent.getPropertyName()) {
             case "InitialGamePhase" -> {
                 assert serverCommand != null;
-                //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
             }
-            case "DynamicAnswer" -> //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
-                    showServerMessage(modelView.getServerAnswer());
+            case "DynamicAnswer" -> showServerMessage(modelView.getServerAnswer());
             case "ActionPhase" -> {
                 assert serverCommand != null;
                 actionHandler.makeAction(serverCommand);
@@ -1061,7 +1023,6 @@ public class CLI implements Runnable, ListenerInterface {
             case "UpdateModelView" -> {
                 assert serverCommand != null;
 
-                System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
                     if(firstTurn) {
                         attributeTowers();
@@ -1069,7 +1030,6 @@ public class CLI implements Runnable, ListenerInterface {
                     }
                     showIslandsTable();
                     showClouds();
-                    //showMotherNature();
                     showAvailableCharacters();
                     showCoins();
                     showOtherDiningRooms();

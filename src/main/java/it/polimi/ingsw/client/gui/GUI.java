@@ -8,6 +8,8 @@ import it.polimi.ingsw.client.gui.controllers.*;
 import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 import javafx.application.Application;
@@ -318,5 +320,17 @@ public class GUI extends Application implements ListenerInterface {
         } else {
             infoAlert.setContentText("You lost: the winner is " + winnerNickname + "! Thanks to have played Eriantys!");
         }
-}
+    }
+
+    public void showServerError() {
+        infoAlert.setTitle("Server Error");
+        if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
+            infoAlert.setContentText("Server's lobby is full... please try again in a few minutes!");
+            System.exit(-1);
+        } else if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.SERVEROUT) {
+            infoAlert.setContentText("Server is out... please try again later!");
+            System.exit(-1);
+        }
+
+    }
 }

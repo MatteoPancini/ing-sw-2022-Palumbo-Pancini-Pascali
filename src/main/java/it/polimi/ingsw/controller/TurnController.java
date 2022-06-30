@@ -422,11 +422,11 @@ public class TurnController {
                     }
                 }
                 expertController.setMonkEffect(false);
+                gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
                 askMotherNatureMoves();
             } else {
                 controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
                 studentRequest++;
-                //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
                 gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
 
                 askStudent(studentRequest);
@@ -434,7 +434,6 @@ public class TurnController {
         } else {
             controller.getGame().getCurrentPlayer().getBoard().getEntrance().removeStudent(studentToMove);
             studentRequest++;
-            //gameHandler.sendSinglePlayer(new GameCopy(controller.getGame()), currentPlayer.getPlayerID());
             gameHandler.sendBroadcast(new GameCopy(controller.getGame()));
 
             askStudent(studentRequest);
