@@ -550,6 +550,7 @@ public class InputChecker {
             case "NONE" -> action = new PickCharacter(null);
 
             case "QUIT" -> quitGame();
+
         }
         return action;
     }

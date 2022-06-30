@@ -23,7 +23,6 @@ import it.polimi.ingsw.model.player.Table;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -31,12 +30,10 @@ import java.util.Scanner;
 
 import static it.polimi.ingsw.constants.Constants.*;
 
-public class CLI implements Runnable, ListenerInterface {
+public class CLI implements ListenerInterface {
     private final Scanner in;
-    private static PrintStream out;
     private ClientConnection clientConnection;
     private final ModelView modelView;
-    private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private boolean firstTurn = true;
@@ -49,9 +46,7 @@ public class CLI implements Runnable, ListenerInterface {
      */
     public CLI() {
         in = new Scanner(System.in);
-        out = new PrintStream(System.out);
         modelView = new ModelView(this);
-        activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
     }
 
@@ -76,13 +71,6 @@ public class CLI implements Runnable, ListenerInterface {
         return towers;
     }
 
-    /**
-     * Method setActiveGame set the game to active or not active
-     * @param activeGame boolean active game
-     */
-    public void setActiveGame(boolean activeGame) {
-        this.activeGame = activeGame;
-    }
 
     public Scanner getIn() {
         return in;
@@ -880,18 +868,6 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener(new Parser(clientConnection, modelView));
     }
 
-    //TODO ?
-    @Override
-    public void run() {
-        userNicknameSetup();
-        while(true) {
-            if(!activeGame) {
-                break;
-            }
-        }
-        out.close();
-    }
-
     /**
      * Method endGameMessage shows the end game message and the application closing notification
      */
@@ -917,11 +893,11 @@ public class CLI implements Runnable, ListenerInterface {
                 chooseExpertMode();
             }
             case "RequestWizard"-> {
-                out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
-                ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> out.println(wizardLeft + ", "));
+                System.out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
+                ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> System.out.println(wizardLeft + ", "));
                 chooseWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             }
-            default -> out.println("Nothing to do");
+            default -> System.out.println("Nothing to do");
         }
     }
 
@@ -955,7 +931,7 @@ public class CLI implements Runnable, ListenerInterface {
         Constants.setPort(serverPort);
         CLI cli = new CLI();
 
-        cli.run();
+        cli.userNicknameSetup();
     }
 
     public void showServerError() {
@@ -1043,13 +1019,11 @@ public class CLI implements Runnable, ListenerInterface {
 
             case "WinMessage" -> {
                 assert serverCommand != null;
-                setActiveGame(false);
                 showWinMessage();
                 endGameMessage();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
-                setActiveGame(false);
                 showLoseMessage(changeEvent.getNewValue().toString());
                 endGameMessage();
 
