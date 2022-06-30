@@ -31,8 +31,6 @@ public class CharacterCardsTest {
     private static CharacterCard card11;
     private static CharacterCard card12;
 
-
-
     private static CharacterDeck deckTest;
     private static Game game;
 

@@ -3,7 +3,9 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
-
+/**
+ * VirtualClientView is a server's utility class used to manage communication with every single client
+ */
 public class VirtualClientView {
 
     private final int clientID;

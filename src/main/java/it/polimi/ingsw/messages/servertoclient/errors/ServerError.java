@@ -2,7 +2,9 @@ package it.polimi.ingsw.messages.servertoclient.errors;
 
 import it.polimi.ingsw.messages.servertoclient.Answer;
 
-
+/**
+ * Message sent if an error occurs in the server
+ */
 public class ServerError implements Answer {
     private final ServerErrorTypes serverError;
     private String errorMessage;

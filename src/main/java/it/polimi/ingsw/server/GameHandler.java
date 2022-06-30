@@ -12,6 +12,9 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeSupport;
 
+/**
+ * GameHandler class is used to instantiate a new game, handling the forwarding of messages from a server perspective
+ */
 public class GameHandler {
     private static Game game;
     private final Controller controller;
@@ -31,7 +34,7 @@ public class GameHandler {
     public GameHandler(Server server) {
         game = new Game();
         controller = new Controller(game, this);
-        System.out.println("Istantiating new game and controller");
+        System.out.println("Instantiating new game and controller");
         this.server = server;
         gameHandlerListener.addPropertyChangeListener(controller);
 
@@ -82,6 +85,7 @@ public class GameHandler {
         return currentPlayerId;
     }
 
+
     /**
      * method used to create teams of a 4 player game
      */
@@ -89,8 +93,6 @@ public class GameHandler {
         sendBroadcast(new DynamicAnswer("Setting up teams...", false));
         int teamID1 = 1;
         int teamID2 = 2;
-        System.out.println("Arrivo qui " + game.getPlayers().size());
-
         for(int i = 0; i < game.getPlayers().size(); i++) {
 
             if(i % 2 == 0) {
@@ -170,7 +172,6 @@ public class GameHandler {
      * method used to initialize wizards during the pre-game phase
      */
     public void initializeWizards() {
-        System.out.println("Il numero di giocatori della partita è: " + playersNumber);
         WizardAnswer chooseWizard = new WizardAnswer("Please choose your Wizard!");
         chooseWizard.setWizardsLeft(Wizards.notChosen());
         if ((playersNumber == 2 && Wizards.notChosen().size() > 2)) {
@@ -178,7 +179,6 @@ public class GameHandler {
             System.out.println(playerNickname);
             sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
             sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
-            return;
         } else if(playersNumber == 3 && Wizards.notChosen().size() > 1) {
             String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size() + 1).getNickname();
             sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
@@ -231,9 +231,7 @@ public class GameHandler {
 
         switch(actionType) {
             case "PickAssistant" -> {
-                System.out.println("Entro nel gameHandler e parso pickassistnat");
                 System.out.println(((PickAssistant) userAction).getChosenAssistant().toString());
-
                 gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
             }
 
@@ -259,9 +257,7 @@ public class GameHandler {
 
             }
 
-            case "GrannyHerbsTile" -> {
-                gameHandlerListener.firePropertyChange("GrannyHerbsTile", null, ((PickDestination) userAction).getChosenIsland());
-            }
+            case "GrannyHerbsTile" -> gameHandlerListener.firePropertyChange("GrannyHerbsTile", null, ((PickDestination) userAction).getChosenIsland());
 
             case "PickMovesNumber" -> gameHandlerListener.firePropertyChange("PickMovesNumber", null, ((PickMovesNumber) userAction).getMoves());
 

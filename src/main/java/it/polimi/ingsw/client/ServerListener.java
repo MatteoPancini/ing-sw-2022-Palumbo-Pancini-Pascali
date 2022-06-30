@@ -6,7 +6,9 @@ import java.net.Socket;
 
 import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
-
+/**
+ * ServerListener class is used by client to always listen to server messages
+ */
 public class ServerListener implements Runnable {
     private final Socket socket;
     private final ModelView modelView;
@@ -21,16 +23,23 @@ public class ServerListener implements Runnable {
         this.actionHandler = actionHandler;
         this.objectInputStream = objectInputStream;
         activeConnection = true;
-
     }
 
 
+    /**
+     * method used to read an answer from the server, triggering the action handler class
+     *
+     * @param answerFromServer -> answer received from server
+     */
     public void readAnswerFromServer(SerializedAnswer answerFromServer) {
         modelView.setServerAnswer(answerFromServer.getServerAnswer());
         actionHandler.answerHandler();
     }
 
 
+    /**
+     * method used to close the connection between the client and the server
+     */
     public synchronized void closeConnection() {
         System.out.println("Closing connection!");
         activeConnection = false;
@@ -48,19 +57,29 @@ public class ServerListener implements Runnable {
     }
 
 
+    /**
+     * method that handles deserialization of server messages
+     *
+     * @throws IOException -> if there is an error with deserialization of messages
+     */
     public void clientConnectionHandler() throws IOException {
         while(isActiveConnection()) {
             try {
                 SerializedAnswer serializedAnswer = (SerializedAnswer) objectInputStream.readObject();
                 readAnswerFromServer(serializedAnswer);
             } catch(IOException | ClassNotFoundException e) {
-                System.out.println("Server is out... disconnecting from the game :(");
+                System.out.println("Ooops... player disconnected or server is currently out :(");
+                System.out.println("Disconnecting from the game... Please try again later!");
+
                 closeConnection();
                 break;
             }
         }
     }
 
+    /**
+     * thread that handles the connection between client and server
+     */
     @Override
     public void run() {
         try {

@@ -24,6 +24,10 @@ public class DiningRoom implements Serializable {
         }
     }
 
+    /**
+     * Check if a board cell contains a coin
+     * @return a boolean that says whether the board cell contains a coin or not
+     */
     public boolean isTakeCoin() {
         return takeCoin;
     }
@@ -36,8 +40,11 @@ public class DiningRoom implements Serializable {
         return diningRoom;
     }
 
+    /**
+     * Move a student in a dining room
+     * @param student -> student to move
+     */
     public void setStudentToDiningRoom(Student student) {
-        System.out.println("Setting student");
         PawnType type = student.getType();
         for(int i = 0; i < 5; i++) {
             if(this.getDiningRoom().get(i).getColor().equals(type)) {
@@ -45,7 +52,6 @@ public class DiningRoom implements Serializable {
                 if(getDiningRoom().get(i).getLastPosition() - 1 == 2 || getDiningRoom().get(i).getLastPosition() - 1 == 5 || getDiningRoom().get(i).getLastPosition() - 1 == 8) {
                     takeCoin = true;
                 }
-                System.out.println(takeCoin);
                 return;
             }
         }

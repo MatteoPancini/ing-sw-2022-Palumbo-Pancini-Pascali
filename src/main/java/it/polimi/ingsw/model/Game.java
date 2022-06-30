@@ -18,11 +18,9 @@ public class Game implements Serializable {
     private Player currentPlayer;
     private int currentPlayerNumber;
 
-
     public void setCurrentPlayerNumber(int currentPlayerNumber) {
         this.currentPlayerNumber = currentPlayerNumber;
     }
-
 
     public void setPlayersNumber(int playersNumber) {
         this.playersNumber = playersNumber;
@@ -45,10 +43,10 @@ public class Game implements Serializable {
         return expertMode;
     }
 
-    public void addPlayer(Player newPlayer) {
-        players.add(newPlayer);
-        activePlayers.add(newPlayer);
-    }
+    /**
+     * Add a new player to the already existing list of players
+     * @param newPlayer -> player to add
+     */
     public void createNewPlayer(Player newPlayer) {
         players.add(newPlayer);
         activePlayers.add(newPlayer);
@@ -62,10 +60,19 @@ public class Game implements Serializable {
         return players;
     }
 
+    /**
+     * Remove a player from the list of active players
+     * @param player -> player to remove
+     */
     public void removePlayer(Player player) {
         activePlayers.remove(player);
     }
 
+    /**
+     * Get a player using his identifier
+     * @param idPlayer -> id of the player
+     * @return a player
+     */
     public Player getPlayerByID(int idPlayer) {
         for (Player player : activePlayers) {
             if (player.getPlayerID() == idPlayer) {
@@ -79,8 +86,6 @@ public class Game implements Serializable {
         return gameBoard;
     }
 
-
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -89,21 +94,14 @@ public class Game implements Serializable {
         currentPlayer = newPlayer;
     }
 
-
+    /**
+     * Check if a player can use an assistant (returns false if someone else already used that assistant)
+     * @param ass -> assistant that the player wants to use
+     * @return a boolean that says whether the player can use that assistant or not
+     */
     public boolean canPlayAssistant(Assistants ass) {
         for (AssistantCard card : gameBoard.getLastAssistantUsed()) {
             if (card.getName() == ass) {
-                /*
-                for (AssistantCard myCard : currentPlayer.getAssistantDeck().getDeck()) {
-
-                    if (!myCard.equals(card)) {
-                        return false;
-                    }
-
-
-
-                }
-                 */
                 if(currentPlayer.getAssistantDeck().getDeck().size() != gameBoard.getLastAssistantUsed().size()) {
                     return false;
                 } else {
@@ -127,6 +125,9 @@ public class Game implements Serializable {
         return true;
     }
 
+    /**
+     * Switch to the next player when the turn of the current player ends
+     */
     public void switchToNextPlayer() {
         currentPlayerNumber = (currentPlayerNumber == activePlayers.size() - 1) ? 0 : currentPlayerNumber + 1;
         setCurrentPlayer(activePlayers.get(currentPlayerNumber));

@@ -15,6 +15,20 @@ The project consists of a Java implementation of the board game Eryantis, made b
   
 **Teacher**: Gianpaolo Cugola
 
+## Implemented Functionalities
+| Functionality                | Implementation |
+|:-----------------------------|:--------------:|
+| Basic rules                  |       ✅        |
+| Complete rules               |       ✅        |
+| Socket                       |       ✅        |
+| CLI                          |       ✅        |
+| GUI                          |       ✅        |
+| Multiple games               |       ✅        |
+| 4 players game mode          |       ✅        |
+| 12 characters implementation |       ✅        |
+| Persistence                  |       ⛔        |
+| Disconnection resilience     |       ⛔        |
+
 
 ## Test cases coverage
 **Coverage criteria: Code Lines**

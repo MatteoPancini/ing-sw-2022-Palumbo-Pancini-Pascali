@@ -53,7 +53,6 @@ public class ClientConnection {
                     System.err.println(e.getMessage());
                 }
             }
-
             serverListener = new ServerListener(socket, inputStream, modelView, actionHandler);
             Thread thread = new Thread(serverListener);
             thread.start();

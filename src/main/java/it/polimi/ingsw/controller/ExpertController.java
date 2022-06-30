@@ -54,9 +54,11 @@ public class ExpertController {
     //CENTAUR
     //------------------------------------------------------------------------------------------------------------------
     private boolean centaurEffect;
+
     public void setCentaurEffect(boolean centaurEffect) {
         this.centaurEffect = centaurEffect;
     }
+
     public boolean isCentaurEffect() {
         return centaurEffect;
     }
@@ -90,6 +92,9 @@ public class ExpertController {
         turnController.getGameHandler().sendSinglePlayer(new JesterAction(), turnController.getCurrentPlayer().getPlayerID());
     }
 
+    /**
+     * Activate Jester effect: exchange up to three students between entrance and the students on the card
+     */
     public void activeJesterEffect() {
         if(studentOne == null || studentTwo == null) {
             turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
@@ -140,14 +145,15 @@ public class ExpertController {
         RequestAction studentRequest = new RequestAction(Action.PICK_STUDENT);
         turnController.getGameHandler().sendSinglePlayer(studentRequest, turnController.getCurrentPlayer().getPlayerID());
     }
+
+    /**
+     * Activate monk effect: take one student from the card and put it on an island
+     */
     public void activeMonkEffect() {
         RequestAction islandRequest = new RequestAction(Action.PICK_ISLAND);
         turnController.getGameHandler().sendSinglePlayer(islandRequest, turnController.getCurrentPlayer().getPlayerID());
     }
-
     //------------------------------------------------------------------------------------------------------------------
-
-
 
     //SPOILED_PRINCESS
     //------------------------------------------------------------------------------------------------------------------
@@ -164,6 +170,9 @@ public class ExpertController {
         turnController.getGameHandler().sendSinglePlayer(princessRequest, turnController.getCurrentPlayer().getPlayerID());
     }
 
+    /**
+     * Activate spoiled princess effect: take one student from the card and put it in the dining room
+     */
     public void activeSpoiledPrincessEffect() {
         game.getCurrentPlayer().getBoard().getDiningRoom().setStudentToDiningRoom(studentChosen);
 
@@ -198,11 +207,13 @@ public class ExpertController {
     }
     private boolean thiefEffect;
 
+    /**
+     * Activate thief effect: remove up to three students of a chosen pawn type from everyone's dining room
+     */
     public void activeThiefEffect() {
         for(Player p : turnController.getController().getGame().getActivePlayers()) {
             for(int i = 0; i < 3; i++) {
                 if(p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).getTableStudentsNum() > 0) {
-                    //System.out.println(pawnTypeChosen.getPawnID());
                     turnController.getController().getGame().getGameBoard().getStudentsBag().add(new Student(pawnTypeChosen));
                     p.getBoard().getDiningRoom().getDiningRoom().get(pawnTypeChosen.getPawnID()).removeStudent();
                 }
@@ -220,6 +231,10 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
 
 
+    /**
+     * Activate farmer effect: move a professor in a player's professor table even if this player
+     * has the same number of students of another player
+     */
     //FARMER
     //------------------------------------------------------------------------------------------------------------------
     public void farmerEffect() {
@@ -250,7 +265,6 @@ public class ExpertController {
     }
     //------------------------------------------------------------------------------------------------------------------
 
-
     //MINESTREL
     //------------------------------------------------------------------------------------------------------------------
     private boolean minestrelEffect;
@@ -272,14 +286,14 @@ public class ExpertController {
         turnController.getGameHandler().sendSinglePlayer(new MinestrelAction(), turnController.getCurrentPlayer().getPlayerID());
     }
 
+    /**
+     * Activate minestrel effect: exchange two students between entrance and dining room
+     */
     public void activeMinestrelEffect() {
         if(studentOne == null || studentTwo == null) {
             turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
             turnController.askStudent();
         } else {
-            //student 1 = dining room
-            //student 2 = entrance
-            System.out.println("Entro nell'active minestrel");
             game.getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom().get(studentOne.getType().getPawnID()).removeStudent();
             game.getCurrentPlayer().getBoard().getEntrance().removeStudent(studentTwo);
 
@@ -304,18 +318,23 @@ public class ExpertController {
     }
     //------------------------------------------------------------------------------------------------------------------
 
-
-
     //GRANNY HERBS
     //------------------------------------------------------------------------------------------------------------------
     private boolean grannyHerbsEffect;
+
     public boolean isGrannyHerbsEffect() {
         return grannyHerbsEffect;
     }
+
     public void grannyHerbsEffect() {
         grannyHerbsEffect = true;
         turnController.getGameHandler().sendSinglePlayer(new GrannyHerbsAction(), turnController.getCurrentPlayer().getPlayerID());
     }
+
+    /**
+     * Activate granny herbs effect: put a no entry tile on an island
+     * @param island the island where to put the no entry tile
+     */
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
             if(is.getIslandID() == island.getIslandID()) {
@@ -329,13 +348,13 @@ public class ExpertController {
     }
     //------------------------------------------------------------------------------------------------------------------
 
-
-
-
     //HERALD
     //------------------------------------------------------------------------------------------------------------------
     private boolean heraldEffect;
 
+    /**
+     * Activate herald effect: calculate the influence on an island even if mother nature isn't there
+     */
     public void heraldEffect() {
         heraldEffect = true;
         RequestAction islandDestination = new RequestAction(Action.PICK_ISLAND);
@@ -352,8 +371,9 @@ public class ExpertController {
     //------------------------------------------------------------------------------------------------------------------
 
 
-
-
+    /**
+     * Activate knight effect: give two additional points while calculating the influence
+     */
     //KNIGHT
     //------------------------------------------------------------------------------------------------------------------
     public void knightEffect() {
@@ -366,22 +386,30 @@ public class ExpertController {
     //FUNGARUS
     //------------------------------------------------------------------------------------------------------------------
     private boolean fungarusEffect;
+
     public boolean isFungarusEffect() {
         return fungarusEffect;
     }
+
+    /**
+     * Activate fungarus effect: ignore a pawn type while calculating the influence
+     */
     public void fungarusEffect() {
         fungarusEffect = true;
 
         RequestAction pawnTypeReq = new RequestAction(Action.PICK_PAWN_TYPE);
         turnController.getGameHandler().sendSinglePlayer(pawnTypeReq, turnController.getCurrentPlayer().getPlayerID());
     }
+
     public void setFungarusEffect(boolean fungarusEffect) {
         this.fungarusEffect = fungarusEffect;
     }
     //------------------------------------------------------------------------------------------------------------------
 
 
-
+    /**
+     * Activate magic postman effect: allow two extra moves with mother nature
+     */
     //MAGICPOSTMAN
     //------------------------------------------------------------------------------------------------------------------
     public void magicPostmanEffect() {
@@ -389,6 +417,4 @@ public class ExpertController {
         turnController.askMotherNatureMoves();
     }
     //------------------------------------------------------------------------------------------------------------------
-
-
 }

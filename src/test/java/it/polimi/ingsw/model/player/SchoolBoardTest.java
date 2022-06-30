@@ -145,5 +145,4 @@ public class SchoolBoardTest {
         assertEquals(tower, towerATest.getTowerArea().get(towerATest.getTowerArea().size() - 1));
         assertEquals(TowerColor.BLACK, towerATest.getTowerArea().get(towerATest.getTowerArea().size() - 1).getColor());
     }
-
 }

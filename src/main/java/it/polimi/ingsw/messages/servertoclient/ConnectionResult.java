@@ -1,5 +1,8 @@
 package it.polimi.ingsw.messages.servertoclient;
 
+/**
+ * Message used to notify the client about the connection creation
+ */
 public class ConnectionResult implements Answer {
 
     private final String connectionAnswer;
@@ -12,10 +15,6 @@ public class ConnectionResult implements Answer {
 
     public boolean isConnectionCompleted() {
         return connectionCompleted;
-    }
-
-    public String getConnectionAnswer() {
-        return connectionAnswer;
     }
 
     @Override
