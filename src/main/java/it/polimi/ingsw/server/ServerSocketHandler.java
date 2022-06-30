@@ -9,15 +9,17 @@ import java.util.concurrent.Executors;
 
 
 public class ServerSocketHandler implements Runnable {
-    // In order to create a smaller app.Server class, ServerSocketHandler class creates sockets
-    // and threads that work with them
-
     private final int port;
     private final ExecutorService executorService;
     private final Server server;
     private boolean activeSocket;
 
-
+    /**
+     * constructor of the utility class used just to create a connection, in order to reduce server functionalities
+     *
+     * @param port -> port of the server
+     * @param server -> server who creates a new connection
+     */
     public ServerSocketHandler(int port, Server server) {
         this.port = port;
         this.server = server;
@@ -26,6 +28,11 @@ public class ServerSocketHandler implements Runnable {
     }
 
 
+    /**
+     * method used to create a connection between client and server
+     *
+     * @param serverSocket -> new server socket related to a client
+     */
 
     public void createConnections(ServerSocket serverSocket) {
         while (activeSocket) {
@@ -43,6 +50,9 @@ public class ServerSocketHandler implements Runnable {
     }
 
 
+    /**
+     * thread used to instantiate a new client-server connection
+     */
     @Override
     public void run() {
         try {

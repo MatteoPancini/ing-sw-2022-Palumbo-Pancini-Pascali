@@ -21,6 +21,7 @@ src/**/META-INF
 !resources/
 !src/
 !javadoc/
+!deliverables
 /target/classes/
 
 */target/*

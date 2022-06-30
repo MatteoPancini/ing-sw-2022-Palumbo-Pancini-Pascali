@@ -14,9 +14,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-
-
 import java.io.IOException;
+
 
 public class Server {
     private final ServerSocketHandler serverSocketHandler;
@@ -29,13 +28,14 @@ public class Server {
 
     private final List<SocketClientConnection> waitingPlayersConnection = new ArrayList<>();
 
-
-
     private final Map<String, Integer> nicknameMapID;
     private final Map<Integer, String> idMapNickname;
     private final Map<Integer, VirtualClientView> idMapVirtualClient;
     private final Map<VirtualClientView, SocketClientConnection> virtualClientToClientConnection;
 
+    /**
+     * Server constructor instantiate a new server
+     */
     public Server() {
         serverSocketHandler = new ServerSocketHandler(Constants.getPort(), this);
         nicknameMapID = new HashMap<>();
@@ -48,7 +48,14 @@ public class Server {
         thread.start();
     }
 
-    //method used to add a connection
+
+    /**
+     * method is used to add a connection to the server, creating a new virtualClient
+     *
+     * @param clientNickname -> nickname chosen from the client
+     * @param socketClientConnection -> connection created from the client
+     * @return -> null (if something goes wrong), clientID if the connection is created
+     */
     public synchronized Integer registerClient(String clientNickname, SocketClientConnection socketClientConnection) {
         Integer clientID = nicknameMapID.get(clientNickname);
 
@@ -102,6 +109,12 @@ public class Server {
         return clientID;
     }
 
+
+    /**
+     * method used to unregister a Player from the server
+     *
+     * @param clientID -> ID of the client
+     */
     public synchronized void unregisterPlayer(int clientID) {
         getGameFromID(clientID).unregisterPlayer(clientID);
         VirtualClientView client = idMapVirtualClient.get(clientID);
@@ -115,6 +128,12 @@ public class Server {
     }
 
 
+    /**
+     * method to set the number of players of the game
+     *
+     * @param totalGamePlayers -> number of player fot the game create
+     * @throws OutOfBoundException -> if totalGamePlayers is not between 2 and 4
+     */
     public void setTotalGamePlayers (int totalGamePlayers) throws OutOfBoundException {
         if (totalGamePlayers < Constants.NUM_MIN_PLAYERS || totalGamePlayers > Constants.NUM_MAX_PLAYERS) {
             throw new OutOfBoundException();
@@ -124,8 +143,11 @@ public class Server {
     }
 
 
-
-
+    /**
+     * method used to iterate client IDs
+     *
+     * @return -> new client ID (used by next client connection)
+     */
     public synchronized int generateNewClientID() {
         int clientID = currentClientID;
         currentClientID++;
@@ -134,8 +156,9 @@ public class Server {
     }
 
 
-
-
+    /**
+     * method used by the server to quit its functionalities
+     */
     public void socketQuitting() {
         Scanner quittingInput = new Scanner(System.in);
         while (true) {
@@ -148,16 +171,23 @@ public class Server {
         }
     }
 
+
     public String getNicknameFromID(int clientID) {
         return idMapNickname.get(clientID);
     }
+
 
     public synchronized ServerSocketHandler getServerSocketHandler() {
         return serverSocketHandler;
     }
 
 
-
+    /**
+     * method used to set up the game parameters and wait for other players in order to start the game
+     *
+     * @param socketClientConnection -> connection of the player who joined the lobby
+     * @throws InterruptedException -> if something goes wrong with the connections between clients and server
+     */
     public synchronized void lobby(SocketClientConnection socketClientConnection) throws InterruptedException {
         waitingPlayersConnection.add(socketClientConnection); //new connected player (no needs it's a new player of the game)
         if(waitingPlayersConnection.size() == 1) { //if it's the first player
@@ -198,10 +228,16 @@ public class Server {
         return idMapVirtualClient.get(clientID);
     }
 
+
     public int getIDFromNickname(String clientNickname) {
         return nicknameMapID.get(clientNickname);
     }
 
+    /**
+     * main class of the server
+     *
+     * @param args -> args used by Eriantys class to open the server
+     */
     public static void main(String[] args) {
         
         System.out.println("""

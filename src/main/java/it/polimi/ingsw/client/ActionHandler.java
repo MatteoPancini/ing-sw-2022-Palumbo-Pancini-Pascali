@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.client.gui.controllers.MainSceneController;
 import it.polimi.ingsw.messages.clienttoserver.FourPModeNotification;
 import it.polimi.ingsw.messages.servertoclient.*;
+import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.Characters;
@@ -12,6 +13,10 @@ import javafx.application.Platform;
 
 import java.beans.PropertyChangeSupport;
 
+/**
+ * Class that handles the answers from the server notifying the corresponding part of the GUI or
+ * CLI through property change listeners.
+ */
 public class ActionHandler {
     private ModelView modelView;
     private CLI cli;
@@ -21,19 +26,31 @@ public class ActionHandler {
     private final PropertyChangeSupport view = new PropertyChangeSupport(this);
 
 
+    /**
+     * Constructor of the class with CLI
+     * @param cli cli instance
+     * @param modelView model view instance
+     */
     public ActionHandler(CLI cli, ModelView modelView) {
         this.cli = cli;
         this.modelView = modelView;
         view.addPropertyChangeListener(cli);
     }
 
+    /**
+     * Constructor of the class with GUI
+     * @param gui gui instance
+     * @param modelView model view instance
+     */
     public ActionHandler(GUI gui, ModelView modelView) {
         this.gui = gui;
         this.modelView = modelView;
         view.addPropertyChangeListener(gui);
     }
 
-    //notifica la CLI con i listeners
+    /**
+     * Method answerHandler handles the server answers by notifying the correct part of the cli/gui
+     */
     public void answerHandler() {
         Answer answer = modelView.getServerAnswer();
         if (answer instanceof NumOfPlayerRequest) {
@@ -61,12 +78,9 @@ public class ActionHandler {
             modelView.setAction(true);
             modelView.setPianification(false);
             showGame = 0;
-
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
             }
-
-
         }else if(answer instanceof EndAction) {
             if (cli != null) {
                 cli.showServerMessage(modelView.getServerAnswer());
@@ -82,12 +96,6 @@ public class ActionHandler {
             modelView.setPianification(true);
             modelView.setAction(false);
             showGame = showGame + 1;
-            /*
-            if (cli != null) {
-                cli.showServerMessage(modelView.getServerAnswer());
-            }
-
-             */
         } else if(answer instanceof MagicPostmanAction) {
             modelView.setMagicPostmanAction(true);
         } else if(answer instanceof MinestrelAction) {
@@ -127,15 +135,28 @@ public class ActionHandler {
             view.firePropertyChange("WinMessage", null, null);
         } else if(answer instanceof LoseNotification) {
             view.firePropertyChange("LoseMessage", null, answer.getMessage());
+        } else if(answer instanceof ServerError) {
+            if(cli != null) {
+                cli.showServerError();
+            }
         }
     }
 
+    /**
+     * Method notifyDynamicAnswer notifies the cli/gui with the received dynamic answer from the server
+     * @param answer dynamic answer from the server
+     */
     private void notifyDynamicAnswer(Answer answer) {
         view.firePropertyChange("DynamicAnswer", null, answer.getMessage());
         modelView.setActivateInput(((DynamicAnswer) answer).isActivateUserInput());
     }
 
-    //viene chiamato all'interno di propertyChange della CLI, notificata dall'Action Handler
+
+    /**
+     * Method makeAction handles the right action to do between all the possible user actions,
+     * it is called in the CLI property change
+     * @param serverCommand command received from the server
+     */
     public void makeAction(String serverCommand) {
         switch (serverCommand) {
             case "PICK_ASSISTANT" -> {

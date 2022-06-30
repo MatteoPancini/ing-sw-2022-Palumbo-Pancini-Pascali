@@ -9,11 +9,21 @@ import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Table;
 
+/**
+ * Class that checks if the user inputs are correct and, if so, it returns the corresponding user action
+ * to the parser
+ */
 public class InputChecker {
     private ClientConnection clientConnection;
     private ModelView modelView;
     private CLI cli;
 
+    /**
+     * Constructor that generates a new instance of the class only for the CLI
+     * @param modelView model view instance
+     * @param cli cli instance of the game
+     * @param connection connection of the game
+     */
     public InputChecker(ModelView modelView, CLI cli, ClientConnection connection) {
         this.modelView = modelView;
         this.cli = cli;
@@ -22,11 +32,11 @@ public class InputChecker {
 
 
     /**
-     * prende in input i chosen values e ritorna una UserAction da inviare al server
-     *
+     * Method checkAssistant checks if the chosen assistant by the player exists or can be played,
+     * then it returns the user action to the parser
      * @param input  assistant chosen
-     * @return
-     * @throws AlreadyPlayedAssistantException
+     * @return user action PickAssistant
+     * @throws AlreadyPlayedAssistantException exception
      */
     public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
         PickAssistant action = null;

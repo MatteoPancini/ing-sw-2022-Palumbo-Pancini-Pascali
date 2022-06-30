@@ -457,11 +457,45 @@ public class MainSceneController implements GUIController {
     @FXML ImageView myCoins;
     @FXML Label myCoinsLabel;
 
-
     @Override
     public void setGui(GUI gui) {
         this.gui = gui;
     }
+
+    private final Image blackTowerImage = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/black_tower.png"));
+    private final Image whiteTowerImage = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/white_tower.png"));
+    private final Image greyTowerImage = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/grey_tower.png"));
+
+    private final Image assistant1Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (1).png"));
+    private final Image assistant2Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (2).png"));
+    private final Image assistant3Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (3).png"));
+    private final Image assistant4Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (4).png"));
+    private final Image assistant5Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (5).png"));
+    private final Image assistant6Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (6).png"));
+    private final Image assistant7Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (7).png"));
+    private final Image assistant8Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (8).png"));
+    private final Image assistant9Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (9).png"));
+    private final Image assistant10Image = new Image(getClass().getResourceAsStream("/graphics/assistants/Assistente (10).png"));
+
+    private final Image kingImage = new Image(getClass().getResourceAsStream("graphics/wizards/king_no_bg.png"));
+    private final Image forestImage = new Image(getClass().getResourceAsStream("graphics/wizards/sorcerer_no_bg.png"));
+    private final Image monachImage = new Image(getClass().getResourceAsStream("graphics/wizards/wizard_no_bg.png"));
+    private final Image witchImage = new Image(getClass().getResourceAsStream("graphics/wizards/pixie_no_bg.png"));
+
+    private final Image heraldImage = new Image(getClass().getResourceAsStream("/graphics/characters/herald.png"));
+    private final Image knightImage = new Image(getClass().getResourceAsStream("/graphics/characters/knight.png"));
+    private final Image princessImage = new Image(getClass().getResourceAsStream("/graphics/characters/spoiledPrincess.png"));
+    private final Image grannyHerbsImage = new Image(getClass().getResourceAsStream("/graphics/characters/grannyHerbs.png"));
+    private final Image minestrelImage = new Image(getClass().getResourceAsStream("/graphics/characters/minestrel.png"));
+    private final Image jesterImage = new Image(getClass().getResourceAsStream("/graphics/characters/jester.png"));
+    private final Image centarursImage = new Image(getClass().getResourceAsStream("/graphics/characters/centarus.png"));
+    private final Image thiefImage = new Image(getClass().getResourceAsStream("/graphics/characters/thief.png"));
+    private final Image fungarusImage = new Image(getClass().getResourceAsStream("/graphics/characters/fungarus.png"));
+    private final Image monkImage = new Image(getClass().getResourceAsStream("/graphics/characters/monk.png"));
+    private final Image farmerImage = new Image(getClass().getResourceAsStream("/graphics/characters/farmer.png"));
+    private final Image magicPostmanImage = new Image(getClass().getResourceAsStream("/graphics/characters/magicPostman.png"));
+
+
 
     public void update(String serverCommand) {
         updateDiningRooms();
@@ -680,23 +714,28 @@ public class MainSceneController implements GUIController {
                 for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
                     if (b.hasProfessor()) {
                         if (b.getBoardCellType() == PawnType.BLUE) {
-                            pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
+                            pic = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/blueProf3D.png"));
+                            //pic = new Image("@../../graphics/wooden_pieces/3D/blueProf3D.png");
                             myBlueProfessor.setImage(pic);
                             myBlueProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.GREEN) {
-                            pic = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
+                            pic = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/greenProf3D.png"));
+                            //pic = new Image("@../../graphics/wooden_pieces/3D/greenProf3D.png");
                             myGreenProfessor.setImage(pic);
                             myGreenProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.PINK) {
-                            pic = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
+                            pic = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/pinkProf3D.png"));
+                            //pic = new Image("@../../graphics/wooden_pieces/3D/pinkProf3D.png");
                             myPinkProfessor.setImage(pic);
                             myPinkProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.RED) {
-                            pic = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
+                            pic = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/redProf3D.png"));
+                            //pic = new Image("@../../graphics/wooden_pieces/3D/redProf3D.png");
                             myRedProfessor.setImage(pic);
                             myRedProfessor.setVisible(true);
                         } else if (b.getBoardCellType() == PawnType.YELLOW) {
-                            pic = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
+                            pic = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/yellowProf3D.png"));
+                            //pic = new Image("@../../graphics/wooden_pieces/3D/yellowProf3D.png");
                             myYellowProfessor.setImage(pic);
                             myYellowProfessor.setVisible(true);
                         }
@@ -1772,9 +1811,9 @@ public class MainSceneController implements GUIController {
     public Image setTowersImage(Tower t) {
         Image tower = null;
         switch(t.getColor().toString()) {
-            case "BLACK" -> tower = new Image("@../../graphics/wooden_pieces/black_tower.png");
-            case "GREY" -> tower = new Image("@../../graphics/wooden_pieces/grey_tower.png");
-            case "WHITE" -> tower = new Image("@../../graphics/wooden_pieces/white_tower.png");
+            case "BLACK" -> tower = blackTowerImage;
+            case "GREY" -> tower = greyTowerImage;
+            case "WHITE" -> tower = whiteTowerImage;
         }
         return tower;
     }
@@ -2069,10 +2108,10 @@ public class MainSceneController implements GUIController {
     public Image setWizardImage(Wizards w) {
         Image wiz = null;
         switch (w.toString()) {
-            case "KING" -> wiz = new Image("@../../graphics/wizards/king_no_bg.png");
-            case "WITCH" -> wiz = new Image("@../../graphics/wizards/pixie_no_bg.png");
-            case "MONACH" -> wiz = new Image("@../../graphics/wizards/sorcerer_no_bg.png");
-            case "FOREST" -> wiz = new Image("@../../graphics/wizards/wizard_no_bg.png");
+            case "KING" -> wiz = kingImage;
+            case "WITCH" -> wiz = witchImage;
+            case "MONACH" -> wiz = monachImage;
+            case "FOREST" -> wiz = forestImage;
         }
         return wiz;
     }
@@ -2326,7 +2365,7 @@ public class MainSceneController implements GUIController {
     }
 
     public void askPawnType() {
-        descriptionLabel.setText("      Pick a pawn type based on the effect of the character you chose");
+        descriptionLabel.setText("Pick a pawn type based on the effect of the character you chose");
         green.setVisible(true);
         blue.setVisible(true);
         yellow.setVisible(true);
@@ -2515,29 +2554,41 @@ public class MainSceneController implements GUIController {
         Image pic = null;
         switch(c.getName().toString()) {
             case "HERALD" -> {
-                pic = new Image("@../../graphics/characters/herald.png");
+                pic = heraldImage;
+                //pic = new Image("@../../graphics/characters/herald.png");
             } case "KNIGHT" -> {
-                pic = new Image("@../../graphics/characters/knight.png");
+                pic = knightImage;
+                //pic = new Image("@../../graphics/characters/knight.png");
             } case "CENTAUR" -> {
-                pic = new Image("@../../graphics/characters/centarus.png");
+                pic = centarursImage;
+                //pic = new Image("@../../graphics/characters/centarus.png");
             } case "FARMER" -> {
-                pic = new Image("@../../graphics/characters/farmer.png");
+                pic = farmerImage;
+                //pic = new Image("@../../graphics/characters/farmer.png");
             } case "FUNGARUS" -> {
-                pic = new Image("@../../graphics/characters/fungarus.png");
+                pic = fungarusImage;
+                //pic = new Image("@../../graphics/characters/fungarus.png");
             } case "JESTER" -> {
-                pic = new Image("@../../graphics/characters/jester.png");
+                pic = jesterImage;
+                //pic = new Image("@../../graphics/characters/jester.png");
             } case "THIEF" -> {
-                pic = new Image("@../../graphics/characters/thief.png");
+                pic = thiefImage;
+                //pic = new Image("@../../graphics/characters/thief.png");
             } case "MINESTREL" -> {
-                pic = new Image("@../../graphics/characters/minestrel.png");
+                pic = minestrelImage;
+                //pic = new Image("@../../graphics/characters/minestrel.png");
             } case "GRANNY_HERBS" -> {
-                pic = new Image("@../../graphics/characters/grannyHerbs.png");
+                pic = grannyHerbsImage;
+                //pic = new Image("@../../graphics/characters/grannyHerbs.png");
             } case "MAGIC_POSTMAN" -> {
-                pic = new Image("@../../graphics/characters/magicPostman.png");
+                pic = magicPostmanImage;
+                //pic = new Image("@../../graphics/characters/magicPostman.png");
             } case "SPOILED_PRINCESS" -> {
-                pic = new Image("@../../graphics/characters/spoiledPrincess.png");
+                pic = princessImage;
+                //pic = new Image("@../../graphics/characters/spoiledPrincess.png");
             } case "MONK" -> {
-                pic = new Image("@../../graphics/characters/monk.png");
+                pic = monkImage;
+                //pic = new Image("@../../graphics/characters/monk.png");
             }
         }
         return pic;
@@ -2547,15 +2598,20 @@ public class MainSceneController implements GUIController {
         Image stud = null;
         switch(s.getType().toString()) {
             case "BLUE" -> {
-                stud = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
+                stud = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/blueStudent3D.png"));
+                //stud = new Image("@../../graphics/wooden_pieces/3D/blueStudent3D.png");
             } case "RED" -> {
-                stud = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
+                stud = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/redStudent3D.png"));
+                //stud = new Image("@../../graphics/wooden_pieces/3D/redStudent3D.png");
             } case "GREEN" -> {
-                stud = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
+                stud = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/greenStudent3D.png"));
+                //stud = new Image("@../../graphics/wooden_pieces/3D/greenStudent3D.png");
             } case "PINK" -> {
-                stud = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
+                stud = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/pinkStudent3D.png"));
+                //stud = new Image("@../../graphics/wooden_pieces/3D/pinkStudent3D.png");
             } case "YELLOW" -> {
-                stud = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
+                stud = new Image(getClass().getResourceAsStream("/graphics/wooden_pieces/3D/yellowStudent3D.png"));
+                //stud = new Image("@../../graphics/wooden_pieces/3D/yellowStudent3D.png");
             }
         }
         return stud;
@@ -2565,34 +2621,44 @@ public class MainSceneController implements GUIController {
         Image img = null;
         switch (a.getName().toString()) {
             case "EAGLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (4).png");
+                img = assistant4Image;
+                //img = new Image("@../../graphics/assistants/Assistente (4).png");
             }
             case "DOG" -> {
-                img = new Image("@../../graphics/assistants/Assistente (8).png");
+                img = assistant8Image;
+                //img = new Image("@../../graphics/assistants/Assistente (8).png");
             }
             case "ELEPHANT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (9).png");
+                img = assistant9Image;
+                //img = new Image("@../../graphics/assistants/Assistente (9).png");
             }
             case "CAT" -> {
-                img = new Image("@../../graphics/assistants/Assistente (3).png");
+                img = assistant3Image;
+                //img = new Image("@../../graphics/assistants/Assistente (3).png");
             }
             case "CHEETAH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (1).png");
+                img = assistant1Image;
+                //img = new Image("@../../graphics/assistants/Assistente (1).png");
             }
             case "LIZARD" -> {
-                img = new Image("@../../graphics/assistants/Assistente (6).png");
+                img = assistant6Image;
+                //img = new Image("@../../graphics/assistants/Assistente (6).png");
             }
             case "OCTOPUS" -> {
-                img = new Image("@../../graphics/assistants/Assistente (7).png");
+                img = assistant7Image;
+                //img = new Image("@../../graphics/assistants/Assistente (7).png");
             }
             case "OSTRICH" -> {
-                img = new Image("@../../graphics/assistants/Assistente (2).png");
+                img = assistant2Image;
+                //img = new Image("@../../graphics/assistants/Assistente (2).png");
             }
             case "TURTLE" -> {
-                img = new Image("@../../graphics/assistants/Assistente (10).png");
+                img = assistant10Image;
+                //img = new Image("@../../graphics/assistants/Assistente (10).png");
             }
             case "FOX" -> {
-                img = new Image("@../../graphics/assistants/Assistente (5).png");
+                img = assistant5Image;
+                //img = new Image("@../../graphics/assistants/Assistente (5).png");
             }
         }
         return img;

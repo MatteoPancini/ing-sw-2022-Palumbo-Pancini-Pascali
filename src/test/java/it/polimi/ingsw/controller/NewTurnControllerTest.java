@@ -633,7 +633,7 @@ public class NewTurnControllerTest {
         controllerStub.getGame().getActivePlayers().get(1).getBoard().getDiningRoom().setStudentToDiningRoom(s2);
 
         controllerStub.getTurnController().setStudentToMove(s2);
-        controllerStub.getTurnController().moveStudentsToDiningRoom(controllerStub.getGame().getCurrentPlayer().getBoard().getDiningRoom());
+        controllerStub.getTurnController().moveStudentsToDiningRoom();
         controllerStub.getTurnController().checkProfessorInfluence();
         controllerStub.getTurnController().setStudentToMove(s4);
         controllerStub.getTurnController().checkProfessorInfluence();
@@ -858,6 +858,76 @@ public class NewTurnControllerTest {
                 System.out.println(i.getIslandID() + " " + i.getStudents().get(0).getType() + " " + i.hasTower());
             }
         }
+    }
+
+    @Test
+    @DisplayName("New Double merge test")
+    public void newDoubleMergeTest() {
+        matteo.setWizard(Wizards.KING);
+        cisco.setWizard(Wizards.MONACH);
+        server.setIdMapID(idMapID);
+
+        controllerStub.getGame().getActivePlayers().add(matteo);
+        controllerStub.getGame().getActivePlayers().add(cisco);
+
+        controllerStub.getGame().setPlayersNumber(2);
+        controllerStub.getGame().setCurrentPlayer(cisco);
+        controllerStub.getTurnController().setCurrentPlayer(cisco);
+
+        for(Player p : controllerStub.getGame().getActivePlayers()) {
+            p.setBoard(new SchoolBoard(p.getPlayerID()));
+        }
+        setupGame();
+
+        cisco.getBoard().getProfessorTable().getCellByColor(PawnType.GREEN).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.GREEN));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.GREEN).setOwner(cisco);
+        cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.GREEN.getPawnID()).addStudent(new Student(PawnType.GREEN));
+        cisco.getBoard().getProfessorTable().getCellByColor(PawnType.PINK).setProfessor(controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getProfessorByColor(PawnType.PINK).setOwner(cisco);
+        cisco.getBoard().getDiningRoom().getDiningRoom().get(PawnType.PINK.getPawnID()).addStudent(new Student(PawnType.PINK));
+
+        controllerStub.getGame().getGameBoard().getIslands().get(9).addStudent(new Student(PawnType.GREEN));
+        controllerStub.getGame().getGameBoard().getIslands().get(9).setTower(new Tower(TowerColor.BLACK));
+        controllerStub.getGame().getGameBoard().getIslands().get(11).setTower(new Tower(TowerColor.BLACK));
+        controllerStub.getGame().getGameBoard().getIslands().get(0).addStudent(new Student(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getIslands().get(6).addStudent(new Student(PawnType.PINK));
+        controllerStub.getGame().getGameBoard().getIslands().get(11).addStudent(new Student(PawnType.PINK));
+
+
+
+
+
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            if(i.getStudents() != null) {
+                System.out.println(i.getIslandID() + " " + i.getStudents().get(0).getType() + " " + i.hasTower());
+            }
+        }
+        System.out.println(controllerStub.getGame().getGameBoard().getIslands().get(9).getStudents().get(1).getType());
+
+        controllerStub.getTurnController().moveMotherNature(12);
+
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            if(i.getStudents() != null) {
+                System.out.println(i.getIslandID() + " " + i.getStudents().get(0).getType() + " " + i.hasTower());
+            }
+        }
+        controllerStub.getTurnController().moveMotherNature(8);
+
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            if(i.getStudents() != null) {
+                System.out.println(i.getIslandID() + " " + i.getStudents().get(0).getType() + " " + i.hasTower());
+            }
+        }
+        controllerStub.getTurnController().moveMotherNature(1);
+        for(Island i : controllerStub.getGame().getGameBoard().getIslands()) {
+            if(i.getStudents() != null) {
+                System.out.println(i.getIslandID() + " " + i.getStudents().get(0).getType() + " " + i.hasTower());
+            }
+        }
+
+
+
+
     }
 
 

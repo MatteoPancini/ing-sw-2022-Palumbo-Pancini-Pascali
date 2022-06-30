@@ -1,7 +1,6 @@
 package it.polimi.ingsw.messages.servertoclient.errors;
 
 import it.polimi.ingsw.messages.servertoclient.Answer;
-import it.polimi.ingsw.server.Server;
 
 
 public class ServerError implements Answer {
