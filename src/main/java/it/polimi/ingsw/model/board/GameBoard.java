@@ -92,7 +92,7 @@ public class GameBoard implements Serializable {
      * Select three character cards that can be played in a game
      */
     public void setPlayableCharacters() {
-        characterDeck = CharacterDeck.getPlayableCards(game);
+        characterDeck = new CharacterDeck(game);
 
         for(int i = 0; i < 3; i++) {
             playableCharacters.add(characterDeck.getDeck().get(i));

@@ -113,10 +113,10 @@ public class NewTurnControllerTest {
         System.out.println("\n");
         server.setIdMapID(idMapID);
 
-        controllerStub.getGame().addPlayer(matteo);
-        controllerStub.getGame().addPlayer(cisco);
-        controllerStub.getGame().addPlayer(gigiox);
-        controllerStub.getGame().addPlayer(mario);
+        controllerStub.getGame().createNewPlayer(matteo);
+        controllerStub.getGame().createNewPlayer(cisco);
+        controllerStub.getGame().createNewPlayer(gigiox);
+        controllerStub.getGame().createNewPlayer(mario);
 
         matteo.setTeamLeader(true);
         cisco.setTeamLeader(true);
@@ -186,10 +186,10 @@ public class NewTurnControllerTest {
         System.out.println("\n");
         server.setIdMapID(idMapID);
 
-        controllerStub.getGame().addPlayer(matteo);
-        controllerStub.getGame().addPlayer(cisco);
-        controllerStub.getGame().addPlayer(gigiox);
-        controllerStub.getGame().addPlayer(mario);
+        controllerStub.getGame().createNewPlayer(matteo);
+        controllerStub.getGame().createNewPlayer(cisco);
+        controllerStub.getGame().createNewPlayer(gigiox);
+        controllerStub.getGame().createNewPlayer(mario);
 
         matteo.setTeamLeader(true);
         cisco.setTeamLeader(true);

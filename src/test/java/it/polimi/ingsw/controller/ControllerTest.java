@@ -66,8 +66,6 @@ public class ControllerTest {
         player2.setBoard(schoolB2);
         game.createNewPlayer(player1);
         game.createNewPlayer(player2);
-        game.addPlayer(player1);
-        game.addPlayer(player2);
 
         player1.setWizard(Wizards.FOREST);
         player2.setWizard(Wizards.KING);
