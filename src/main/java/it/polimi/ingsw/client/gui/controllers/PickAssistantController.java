@@ -10,6 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * PickAssistantController handles the assistant choice by showing a new stage
+ */
 public class PickAssistantController implements GUIController {
 
     private GUI gui;
@@ -30,6 +33,9 @@ public class PickAssistantController implements GUIController {
         this.gui = gui;
     }
 
+    /**
+     * Method askAssistant asks the user to choose an assistant between the available ones
+     */
     public void askAssistant() {
         gui.changeStage("PickAssistant.fxml");
         cheetah.setVisible(false);
@@ -98,6 +104,11 @@ public class PickAssistantController implements GUIController {
         }
     }
 
+    /**
+     * Method setAssistantImage sets a new assistant image to the corresponding assistant card
+     * @param a assistant card
+     * @return corresponding image
+     */
     public Image setAssistantImage(AssistantCard a) {
         Image img = null;
         switch (a.getName().toString()) {
@@ -135,6 +146,9 @@ public class PickAssistantController implements GUIController {
         return img;
     }
 
+    /**
+     * Method backToMainScene changes the stage going back to the main board scene
+     */
     public void backToMainScene() {
         Platform.runLater(() -> {
             gui.changeStage("finalBoardScene.fxml");
@@ -143,6 +157,9 @@ public class PickAssistantController implements GUIController {
         });
     }
 
+    /**
+     * Method pickAssistant1 handles the click event on the assistant 1 (Cheetah)
+     */
     public void pickAssistant1() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.CHEETAH)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.CHEETAH));
@@ -154,6 +171,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant2 handles the click event on the assistant 2 (Ostrich)
+     */
     public void pickAssistant2() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.OSTRICH)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.OSTRICH));
@@ -165,6 +185,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant3 handles the click event on the assistant 3 (Cat)
+     */
     public void pickAssistant3() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.CAT)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.CAT));
@@ -176,6 +199,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant4 handles the click event on the assistant 4 (Eagle)
+     */
     public void pickAssistant4() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.EAGLE)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.EAGLE));
@@ -187,6 +213,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant5 handles the click event on the assistant 5 (Fox)
+     */
     public void pickAssistant5() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.FOX)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX));
@@ -198,6 +227,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant6 handles the click event on the assistant 6 (Lizard)
+     */
     public void pickAssistant6() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.LIZARD)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.LIZARD));
@@ -209,6 +241,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant7 handles the click event on the assistant 7 (Octopus)
+     */
     public void pickAssistant7() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.OCTOPUS)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.OCTOPUS));
@@ -220,6 +255,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant8 handles the click event on the assistant 8 (Dog)
+     */
     public void pickAssistant8() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.DOG)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.DOG));
@@ -231,6 +269,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant9 handles the click event on the assistant 9 (Elephant)
+     */
     public void pickAssistant9() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.ELEPHANT)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.ELEPHANT));
@@ -242,6 +283,9 @@ public class PickAssistantController implements GUIController {
             gui.getInfoAlert().show();
         }
     }
+    /**
+     * Method pickAssistant10 handles the click event on the assistant 10 (Turtle)
+     */
     public void pickAssistant10() {
         if(gui.getModelView().getGameCopy().canPlayAssistant(Assistants.TURTLE)) {
             gui.getClientConnection().sendUserInput(new PickAssistant(Action.PICK_ASSISTANT, Assistants.TURTLE));

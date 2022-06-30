@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.util.*;
 
 
-
+/**
+ * Class GUI manages the game if the user decides to play through graphic interface
+ */
 public class GUI extends Application implements ListenerInterface {
 
     @FXML Label descriptionLabel;
@@ -87,7 +89,9 @@ public class GUI extends Application implements ListenerInterface {
     private static final String PICK_ASSISTANT = "PickAssistant.fxml";
 
 
-
+    /**
+     * Constructor GUI
+     */
     public GUI() {
         this.modelView = new ModelView(this);
         actionHandler = new ActionHandler(this, modelView);
@@ -95,6 +99,10 @@ public class GUI extends Application implements ListenerInterface {
         firstSetupScene = true;
     }
 
+    /**
+     * Method main launches gui
+     * @param args arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }
@@ -102,25 +110,39 @@ public class GUI extends Application implements ListenerInterface {
     public ModelView getModelView() {
         return modelView;
     }
+    public GUIController getControllerFromName(String name) {
+        return nameMapController.get(name);
+    }
+
+    public ActionHandler getActionHandler() {
+        return actionHandler;
+    }
+
+    public ClientConnection getClientConnection() {
+        return clientConnection;
+    }
+
+    public void setClientConnection(ClientConnection clientConnection) {
+        this.clientConnection = clientConnection;
+    }
 
 
     public PropertyChangeSupport getVirtualClient() {
         return virtualClient;
     }
 
+    /**
+     * Method run runs the gui with a new stage and resizes it
+     */
     public void run() {
         stage.setTitle("Eriantys");
         stage.setScene(currentScene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/eriantys_banner.png")));
         stage.show();
 
-        //resizing
-
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
-
-
 
         //musica
 
@@ -140,6 +162,10 @@ public class GUI extends Application implements ListenerInterface {
 
     }
 
+    /**
+     * Method changeStage is used to change the stage to a new fxml file
+     * @param newScene
+     */
     public void changeStage(String newScene) {
         currentScene = nameMapScene.get(newScene);
         stage.setScene(currentScene);
@@ -150,15 +176,21 @@ public class GUI extends Application implements ListenerInterface {
         currentScene.heightProperty().addListener(resize.getHeightListener());
     }
 
+    /**
+     * Method start starts the gui by setting it up and running it
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         setupGui();
         this.stage = stage;
-        //Load dei font
         run();
     }
 
 
+    /**
+     * Method setupGui sets the gui up by loading the multiple fxml files
+     */
     public void setupGui() {
         List<String> fxmlList = new ArrayList<>(Arrays.asList(MAIN_MENU, SETUP, LOADING_PAGE, WIZARD_MENU, PICK_ASSISTANT, MAIN_SCENE));
         try {
@@ -175,22 +207,11 @@ public class GUI extends Application implements ListenerInterface {
         currentScene = nameMapScene.get(MAIN_MENU);
     }
 
-    public GUIController getControllerFromName(String name) {
-        return nameMapController.get(name);
-    }
-
-    public ActionHandler getActionHandler() {
-        return actionHandler;
-    }
-
-    public ClientConnection getClientConnection() {
-        return clientConnection;
-    }
-
-    public void setClientConnection(ClientConnection clientConnection) {
-        this.clientConnection = clientConnection;
-    }
-
+    /**
+     * Method initialGamePhaseHandler handles the initial settings of the gui,
+     * such as number of players, standard or expert mode, wizard choice...
+     * @param serverCommand
+     */
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
         switch(serverCommand) {
@@ -215,22 +236,18 @@ public class GUI extends Application implements ListenerInterface {
     }
 
 
-
+    /**
+     * Method updateMainScene is run every time a game copy is received from the server
+     */
     public void updateMainScene() {
         MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
         controller.update("STANDARD_UPDATE");
-        /*
-        getControllerFromName(MAIN_SCENE).
-        mainSceneController.updateIslands();
-        mainSceneController.updateTowers();
-        mainSceneController.updateWizard();
-        mainSceneController.updateClouds();
-        mainSceneController.updateDiningRooms();
-         */
     }
 
-
-
+    /**
+     * Method propertyChange listens ActionHandler class and handles the actions to do
+     * @param changeEvent event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
@@ -283,21 +300,26 @@ public class GUI extends Application implements ListenerInterface {
         }
     }
 
-    public void showQuitGame() {
-        infoAlert.setTitle("Quit Game");
-        infoAlert.setContentText("Game successfully quitted!");
-    }
-
+    /**
+     * Method showEndGameNoWinner shows an info alert warning that the game is over without a winner
+     */
     public void showEndGameNoWinner() {
         infoAlert.setTitle("Game Over");
         infoAlert.setContentText("The game is over without a winner! Thanks to have played Eriantys!");
+        infoAlert.show();
     }
 
+    /**
+     * Method showWinGame shows an info alert warning that the user is the winner of the game
+     */
     public void showWinGame() {
         infoAlert.setTitle("Game Over");
-        infoAlert.setContentText("Congratulations: you are the winner! Thanks to have played Eriantys!");
+        infoAlert.setContentText("Congratulations: you are the winner! Thanks for playing Eriantys!");
+        infoAlert.show();
     }
-
+    /**
+     * Method showLoseGame shows an info alert warning that the game is over and the user has lost
+     */
     public void showLoseGame(String winnerNickname) {
         infoAlert.setTitle("Game Over");
         if(modelView.isFourPlayers()) {

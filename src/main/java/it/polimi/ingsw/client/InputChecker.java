@@ -10,8 +10,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Table;
 
 /**
- * Class that checks if the user inputs are correct and, if so, it returns the corresponding user action
- * to the parser
+ * Class that checks if the user inputs are correct and, if so, it returns the corresponding user action to the parser
  */
 public class InputChecker {
     private ClientConnection clientConnection;
@@ -135,6 +134,12 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method checkMoves checks if the user input for number of mother nature moves is correct,
+     * and if so it sends it to server
+     * @param input user input
+     * @return user action PickMovesNumber
+     */
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
         int maxMoves;
@@ -164,7 +169,11 @@ public class InputChecker {
         return action;
     }
 
-    //trasforma un input in un pawntype (es: 'y' -> 'YELLOW')
+    /**
+     * Method toPawnType turns an input into a pawn type by reading its initial letter
+     * @param input user input
+     * @return PawnType enum
+     */
     public PawnType toPawnType(String input) {
         PawnType type = null;
         try {
@@ -183,6 +192,11 @@ public class InputChecker {
         return type;
     }
 
+    /**
+     * Method isStudentInEntrance returns true if the input student is in the current player's entrance
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInEntrance(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
@@ -195,13 +209,17 @@ public class InputChecker {
     }
 
 
+    /**
+     * Method isStudentInJester returns true if the input student is on the character card Jester
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInJester(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             if(c.getName() == Characters.JESTER) {
                 for(Student s : c.getStudents()) {
-                    //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
                     if(s.getType().equals(type)) {
                         return true;
                     }
@@ -211,14 +229,17 @@ public class InputChecker {
         return false;
     }
 
+    /**
+     * Method isStudentInPrincess returns true if the input student is on the character card Spoiled Princess
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInPrincess(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
-        //System.out.println("Tipo passato: " + type.toString());
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             if(c.getName() == Characters.SPOILED_PRINCESS) {
                 for(Student s : c.getStudents()) {
-                    //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
                     if(s.getType().equals(type)) {
                         return true;
                     }
@@ -228,6 +249,11 @@ public class InputChecker {
         return false;
     }
 
+    /**
+     * Method isStudentInMonk returns true if the input student is on the character card Monk
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInMonk(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
@@ -246,6 +272,11 @@ public class InputChecker {
     }
 
 
+    /**
+     * Method checkStudentInDiningRoom returns true if the input student is in the current player's dining room
+     * @param input student type
+     * @return boolean value
+     */
     public boolean checkStudentInDiningRoom(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
@@ -260,7 +291,13 @@ public class InputChecker {
         return false;
     }
 
-    //se action == null ri-chiedo l'input
+
+    /**
+     * Method checkDestination checks if the destination received from the user is dining room or an island,
+     * then it sends it to server
+     * @param destination input
+     * @return user action PickDestination
+     */
     public PickDestination checkDestination(String destination) {
         PickDestination action = null;
         System.out.println(destination.toUpperCase());
@@ -284,6 +321,12 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method checkIsland checks if the island ID typed by the user is am valid island,
+     * then it sends it to server
+     * @param islandID input
+     * @return user action PickDestination
+     */
     public PickDestination checkIsland(String islandID) {
         PickDestination action = null;
         try {
@@ -313,6 +356,12 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method checkStudent checks if the student received from the user is a valid student in entrance or on character cards,
+     * then it sends it to server
+     * @param studentType input
+     * @return user action PickStudent
+     */
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
         if(modelView.isJesterAction()) {
@@ -436,6 +485,11 @@ public class InputChecker {
 
     }
 
+    /**
+     * Method checkPawnType checks if the student typed by the user is a valid one, it's used for character cards
+     * @param pawnType input
+     * @return user action PickPawnType
+     */
     public PickPawnType checkPawnType(String pawnType) {
         PickPawnType action = null;
         System.out.println("Entro in check");
@@ -449,6 +503,12 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method checkCloud checks if the cloud typed by the user is a valid one,
+     * then it sends it to server
+     * @param input cloud ID
+     * @return user action PickCloud
+     */
     public PickCloud checkCloud(String input) {
         PickCloud action = null;
         int cloudID;
@@ -472,6 +532,12 @@ public class InputChecker {
 
     }
 
+    /**
+     * Method checkCharacter checks if the character typed by the user is a valid one,
+     * then it sends it to server
+     * @param input character name
+     * @return user action PickCharacter
+     */
     public PickCharacter checkCharacter(String input) {
         PickCharacter action = null;
         switch(input.toUpperCase()) {
@@ -584,6 +650,9 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method quitGame disconnects the game from the server
+     */
     public void quitGame() {
         clientConnection.sendUserInput(new QuitGame());
         System.err.println("Disconnected from the server.");

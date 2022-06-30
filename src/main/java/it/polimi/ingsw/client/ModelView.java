@@ -8,8 +8,8 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
 public class ModelView {
-    private CLI cli;
-    private GUI gui;
+    private final CLI cli;
+    private final GUI gui;
     private Answer serverAnswer;
     private boolean activeInput = false;
     private Game gameCopy;
@@ -113,13 +113,32 @@ public class ModelView {
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
     }
+    public void setActivateInput(boolean activateUserInput) {
+        this.activeInput = activateUserInput;
+    }
 
+    public void setPlayerNickname(String userNickname) {
+        this.playerNickname = userNickname;
+    }
+
+    public String getPlayerNickname() {
+        return playerNickname;
+    }
+
+    /**
+     * Constructor of model view class with CLI mode
+     * @param cli
+     */
     public ModelView(CLI cli)  {
         this.cli = cli;
         this.gui = null;
 
     }
 
+    /**
+     * Constructor of model view class with GUI mode
+     * @param gui
+     */
     public ModelView(GUI gui) {
         this.gui = gui;
         this.cli = null;
@@ -145,57 +164,11 @@ public class ModelView {
         this.gameCopy = game;
     }
 
-    public int getYellowStudents(Player p) {
-        int yellow = 0;
-        for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType()
-                    .equals(PawnType.YELLOW)) {
-                yellow++;
-            }
-        }
-        return yellow;
-    }
-
-    public int getBlueStudents(Player p) {
-        int blue = 0;
-        for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.BLUE)) {
-                blue++;
-            }
-        }
-        return blue;
-    }
-
-    public int getRedStudents(Player p) {
-        int red = 0;
-        for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.RED)) {
-                red++;
-            }
-        }
-        return red;
-    }
-
-    public int getPinkStudents(Player p) {
-        int pink = 0;
-        for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.PINK)) {
-                pink++;
-            }
-        }
-        return pink;
-    }
-
-    public int getGreenStudents(Player p) {
-        int green = 0;
-        for(int i=0; i<=10; i++) {
-            if(p.getBoard().getDiningRoom().getDiningRoom().get(i).getDiningTable().get(i).getBoardCellType().equals(PawnType.GREEN)) {
-                green++;
-            }
-        }
-        return green;
-    }
-
+    /**
+     * Method hasYellowProfessor returns true if the input player has the yellow Professor
+     * @param p player
+     * @return yes/no
+     */
     public String hasYellowProfessor(Player p) {
         String yellowProfessor;
         if(p.getBoard().getProfessorTable().getProfTable().get(4).hasProfessor()) {
@@ -206,7 +179,11 @@ public class ModelView {
         }
         return yellowProfessor;
     }
-
+    /**
+     * Method hasBlueProfessor returns true if the input player has the blue Professor
+     * @param p player
+     * @return yes/no
+     */
     public String hasBlueProfessor(Player p) {
         String blueProfessor;
         if(p.getBoard().getProfessorTable().getProfTable().get(0).hasProfessor()) {
@@ -218,6 +195,11 @@ public class ModelView {
         return blueProfessor;
     }
 
+    /**
+     * Method hasGreenProfessor returns true if the input player has the green Professor
+     * @param p player
+     * @return yes/no
+     */
     public String hasGreenProfessor(Player p) {
         String greenProfessor;
         if(p.getBoard().getProfessorTable().getProfTable().get(1).hasProfessor()) {
@@ -228,7 +210,11 @@ public class ModelView {
         }
         return greenProfessor;
     }
-
+    /**
+     * Method hasPinkProfessor returns true if the input player has the pink Professor
+     * @param p player
+     * @return yes/no
+     */
     public String hasPinkProfessor(Player p) {
         String pinkProfessor;
         if(p.getBoard().getProfessorTable().getProfTable().get(2).hasProfessor()) {
@@ -239,7 +225,11 @@ public class ModelView {
         }
         return pinkProfessor;
     }
-
+    /**
+     * Method hasRedProfessor returns true if the input player has the red Professor
+     * @param p player
+     * @return yes/no
+     */
     public String hasRedProfessor(Player p) {
         String redProfessor;
         if(p.getBoard().getProfessorTable().getProfTable().get(3).hasProfessor()) {
@@ -251,15 +241,4 @@ public class ModelView {
         return redProfessor;
     }
 
-    public void setActivateInput(boolean activateUserInput) {
-        this.activeInput = activateUserInput;
-    }
-
-    public void setPlayerNickname(String userNickname) {
-        this.playerNickname = userNickname;
-    }
-
-    public String getPlayerNickname() {
-        return playerNickname;
-    }
 }

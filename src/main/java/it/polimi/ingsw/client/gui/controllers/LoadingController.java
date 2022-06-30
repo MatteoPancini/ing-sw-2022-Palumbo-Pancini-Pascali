@@ -19,11 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * LoaderController class is the loading screen controller which covers the color, challenger and
- * worker placement phases. By using several calls to main GUI class, it has a 360-degree view on
- * the GUI package and can make modifications based on the actual server request
+ * Class LoaderController is the controller that handles the initial set up of the game, by displaying the request
+ * of players number and standard/expert mode
  */
-
 public class LoadingController implements GUIController {
 
     private GUI gui;
@@ -34,6 +32,11 @@ public class LoadingController implements GUIController {
         status.setText(text.toUpperCase());
     }
 
+    /**
+     * Method askPlayerNumber displays to the user the request of players number by showing an alert,
+     * then it sends it to server
+     * @param serverReq
+     */
     public void askPlayerNumber(String serverReq) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Lobby capacity");
@@ -58,6 +61,10 @@ public class LoadingController implements GUIController {
     }
 
 
+    /**
+     * Method askExpertMode displays to the user the request of the game mode (standard or expert) by showing an alert,
+     * then it sends it to server
+     */
     public void askExpertMode() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("ExpertMode Setup");
@@ -77,11 +84,6 @@ public class LoadingController implements GUIController {
         }
         gui.getClientConnection().sendUserInput(new ExpertModeChoice(choice));
     }
-
-
-    //TODO metodi di ask
-
-
 
     @Override
     public void setGui(GUI gui) {

@@ -34,6 +34,9 @@ import java.util.Scanner;
 
 import static it.polimi.ingsw.constants.Constants.*;
 
+/**
+ * Class CLI manages the game if the user decides to play through command line
+ */
 public class CLI implements Runnable, ListenerInterface {
     private final Scanner in;
     private static PrintStream out;
@@ -48,7 +51,7 @@ public class CLI implements Runnable, ListenerInterface {
     private String blackP = "";
 
     /**
-     * CLI constructor generates a new instance when the user chooses to play with the command line
+     * CLI constructor
      */
     public CLI() {
         in = new Scanner(System.in);
