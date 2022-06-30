@@ -81,8 +81,8 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * Remove students from the students bag
-     * @param index
+     * Remove student from the students bag
+     * @param index -> index of the student to remove
      */
     public void removeStudents(int index) {
         studentsBag.remove(index);
@@ -104,6 +104,10 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * Remove students from the set up bag
+     * @param index -> index of the student to remove
+     */
     public void removeSetupStudents(int index) {
         setupStudentsBag.remove(index);
     }
@@ -118,8 +122,8 @@ public class GameBoard implements Serializable {
 
     /**
      * Get a professor
-     * @param pawnType
-     * @return the professor with type pawnType
+     * @param pawnType -> pawn type of the professor
+     * @return a professor
      */
     public Professor getProfessorByColor(PawnType pawnType) {
         for(Professor professor : professors) {
@@ -148,8 +152,8 @@ public class GameBoard implements Serializable {
 
     /**
      * Get an island
-     * @param islandId
-     * @return the island with id islandId
+     * @param islandId -> id of the island
+     * @return an island
      */
     public Island getIslandById(int islandId) {
         for(Island i : islands) {
