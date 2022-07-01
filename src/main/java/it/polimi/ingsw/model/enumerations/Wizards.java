@@ -33,7 +33,6 @@ public enum Wizards {
 
 
     public static Wizards parseWizardInput(String wizardInput) {
-        System.out.println(wizardInput);
         return Enum.valueOf(Wizards.class, wizardInput.toUpperCase());
     }
 }

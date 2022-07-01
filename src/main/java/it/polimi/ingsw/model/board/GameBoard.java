@@ -31,7 +31,6 @@ public class GameBoard implements Serializable {
                 this.clouds.add(new CloudTile(CloudSide.TWO_FOUR));
             }
             clouds.get(i -1).setID(i);
-            System.out.println(clouds.get(i - 1).getSide().toString() + clouds.get(i-1).getID());
         }
 
 
@@ -103,7 +102,6 @@ public class GameBoard implements Serializable {
 
         for(CharacterCard c : playableCharacters) {
             c.setResetCost(c.getInitialCost());
-            System.out.println("RESET: " + c.getResetCost());
         }
     }
 
