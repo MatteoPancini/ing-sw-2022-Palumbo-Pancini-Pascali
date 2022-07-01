@@ -49,8 +49,8 @@ Then run it from **terminal** (from the directory where you save it) by typing:
 
 For the best game experience we suggest:
 + CLI:
-  + enable ANSI 
-  + enable UTF-8
+  + set UTF-8 compatibility on your terminal
+  + set ANSI compatibility on your terminal
 + GUI:
   + if your computer has small memory size or "Load Exception - Java Heap Size" occurs, run the JAR file by typing:
     >*java -Xmx4096m -jar softeng-GC31.jar*
