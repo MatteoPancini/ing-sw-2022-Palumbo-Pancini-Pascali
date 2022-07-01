@@ -263,7 +263,7 @@ public class CLI implements ListenerInterface {
 
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
             if(modelView.getGameCopy().getGameBoard().getIslands().get(i).getNoEntry()) {
-                st.addRow(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID() + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), ANSI_RED + "X " + ANSI_RESET + studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
             } else {
                 st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
 
@@ -639,7 +639,6 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenPawnType = input.nextLine();
-        System.out.println("Typed " + chosenPawnType);
         if(chosenPawnType.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -680,7 +679,6 @@ public class CLI implements ListenerInterface {
     public void askStudentJester(CharacterCard jester) {
         System.out.println(">Choose a student from jester's students: ");
         askCharacterStudents(jester);
-
     }
 
     /**
@@ -693,7 +691,6 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String jesterStudent = input.nextLine();
-        System.out.println("Typed " + jesterStudent);
         if(jesterStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
@@ -830,7 +827,7 @@ public class CLI implements ListenerInterface {
      * Method prints the win message if the player has won
      */
     public void showWinMessage() {
-        System.out.println(">Game over!" + ANSI_RED + "You are the winner!" + ANSI_RESET);
+        System.out.println(">Game Over! " + ANSI_RED + "You are the winner!" + ANSI_RESET);
     }
 
     /**
@@ -1035,8 +1032,6 @@ public class CLI implements ListenerInterface {
             }
             case "UpdateModelView" -> {
                 assert serverCommand != null;
-
-                System.out.println("Current player is" + modelView.getGameCopy().getCurrentPlayer().getNickname());
                 if(modelView.isAction()) {
                     if(firstTurn) {
                         attributeTowers();
