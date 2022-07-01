@@ -71,9 +71,7 @@ public class Controller implements PropertyChangeListener {
      * method used to set up the game board of a new game
      */
     public void newSetupGame() {
-        System.out.println("Starting setupGame");
         int studentsNumber;
-        System.out.println(game.getPlayersNumber());
         if(game.getPlayersNumber() == 3) {
             studentsNumber = 9;
         }
@@ -105,7 +103,6 @@ public class Controller implements PropertyChangeListener {
                 game.getGameBoard().removeStudents(0);
             }
 
-            System.out.println("metto torri");
             if(game.getPlayersNumber() == 3) {
                 for(int i = 1; i <= towersNumber; i++) {
                     p.getBoard().getTowerArea().addTowers(new Tower(allTowerColors.get(colorsCounter3P)));
@@ -136,7 +133,6 @@ public class Controller implements PropertyChangeListener {
 
         for(Player q : game.getPlayers()) {
             for(Student s : q.getBoard().getEntrance().getStudents()) {
-                System.out.println(s.getType().toString());
             }
         }
 
@@ -160,21 +156,6 @@ public class Controller implements PropertyChangeListener {
                 game.getGameBoard().removeSetupStudents(0);
             }
         }
-
-        for(int p = 1; p <= 12; p++){
-            if(p != mnPos && p != mnPosOpposite) {
-                System.out.println(p + ", " + "Student " + game.getGameBoard().getIslands().get(p - 1).getStudents().get(0).getType());
-            }
-
-            if(p == mnPos){
-                System.out.println(p + ", " + "Mother nature is here");
-            }
-
-            if(p == mnPosOpposite){
-                System.out.println(p + ", " + "This island is empty");
-            }
-        }
-        System.out.println("Finished setupGame");
         turnController.setCurrentPlayer(game.getCurrentPlayer());
 
         gameHandler.sendBroadcast(new DynamicAnswer("REMEMBER: During your turn type \"QUIT\" to quit the game!\n", false));
@@ -183,13 +164,12 @@ public class Controller implements PropertyChangeListener {
 
 
     /**
-     * method used to switch client messages and trigger a proper method of turn/expert controller
+     * Method used to switch client messages and trigger a proper method of turn/expert controller
      *
      * @param evt -> event that will change the state of the model
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println("propertyChange del controller" + evt.getPropertyName());
 
         switch(evt.getPropertyName()) {
             case "PickAssistant" -> turnController.playAssistantCard((Assistants) evt.getNewValue());
@@ -199,7 +179,6 @@ public class Controller implements PropertyChangeListener {
                     turnController.setStudentToMove((Student) evt.getNewValue());
                     turnController.askStudentDestination();
                 } else {
-                    System.out.println("Setto studentChosen " + evt.getNewValue());
                     expertController.setStudentChosen((Student) evt.getNewValue());
                     if (expertController.isMonkEffect()) {
                         expertController.activeMonkEffect();
@@ -238,7 +217,6 @@ public class Controller implements PropertyChangeListener {
             case "PickCloud" -> turnController.fromCloudToEntrance((CloudTile) evt.getNewValue());
 
             case "PickCharacter" -> {
-                System.out.println(evt.getNewValue());
                 for(CharacterCard c : game.getGameBoard().getPlayableCharacters()) {
                     if(c.getName() == evt.getNewValue()) {
                         c.incrementPrice();
@@ -256,7 +234,6 @@ public class Controller implements PropertyChangeListener {
 
                 }
                 else if(evt.getNewValue() == Characters.CENTAUR) {
-                    System.out.println("Entro qui");
                     expertController.centaurEffect();
                     game.getCurrentPlayer().setMyCoins(game.getCurrentPlayer().getMyCoins() - 3);
 

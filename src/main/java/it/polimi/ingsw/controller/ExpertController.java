@@ -100,9 +100,6 @@ public class ExpertController {
             turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
             turnController.askStudent();
         } else {
-            System.out.println("Stud 1: " + studentOne.getType());
-            System.out.println("Stud 2: " + studentTwo.getType());
-
             for(CharacterCard c : game.getGameBoard().getPlayableCharacters()) {
                 if(c.getName() == Characters.JESTER) {
                     c.removeStudent(studentOne);
@@ -338,7 +335,6 @@ public class ExpertController {
     public void setGrannyHerbsTile(Island island) {
         for(Island is : turnController.getController().getGame().getGameBoard().getIslands()) {
             if(is.getIslandID() == island.getIslandID()) {
-                System.out.println("Setting granny " + is.getIslandID());
                 is.setNoEntry(true);
                 break;
             }

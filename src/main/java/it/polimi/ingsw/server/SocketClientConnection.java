@@ -96,7 +96,6 @@ public class SocketClientConnection implements Runnable {
     public void setupGameMode(ExpertModeAnswer answer) throws IOException, ClassNotFoundException {
         SerializedAnswer serverAns = new SerializedAnswer();
         serverAns.setServerAnswer(answer);
-        System.out.println("Inizio setup game mode");
         sendServerMessage(serverAns);
         while (true) {
             SerializedMessage input = (SerializedMessage) inputStream.readObject();
@@ -143,12 +142,10 @@ public class SocketClientConnection implements Runnable {
     public synchronized void readClientStream() throws IOException, ClassNotFoundException {
         SerializedMessage clientInput = (SerializedMessage) inputStream.readObject();
         if(clientInput.message != null) {
-            System.out.println("Leggo da client messaggio " + clientInput.message);
             Message userMessage = clientInput.message;
             actionHandler(userMessage);
 
         } else if (clientInput.userAction != null) {
-            System.out.println("Leggo da client action " + clientInput.userAction);
             UserAction userAction = clientInput.userAction;
             actionHandler(userAction);
         }

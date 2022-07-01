@@ -208,14 +208,16 @@ public class GUI extends Application implements ListenerInterface {
             }
 
             case "DynamicAnswer" -> Platform.runLater(() -> {
-                if(modelView.isPianification() || modelView.isAction()) {
-                    MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
-                    controller.updateDescription(modelView.getServerAnswer().getMessage().toString());
-                } else {
-                    infoAlert.setTitle("INFO");
-                    infoAlert.setHeaderText("Information from server");
-                    infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
-                    infoAlert.show();
+                if(!pianificationString(changeEvent.getNewValue().toString())) {
+                    if(modelView.isPianification() || modelView.isAction()) {
+                        MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
+                        controller.updateDescription(modelView.getServerAnswer().getMessage().toString());
+                    } else {
+                        infoAlert.setTitle("INFO");
+                        infoAlert.setHeaderText("Information from server");
+                        infoAlert.setContentText(modelView.getServerAnswer().getMessage().toString());
+                        infoAlert.show();
+                    }
                 }
             });
             case "ActionPhase" -> {
@@ -246,6 +248,20 @@ public class GUI extends Application implements ListenerInterface {
 
             default -> System.out.println("Unknown answer from server");
         }
+    }
+
+
+    /**
+     * Method pianificationString compares the dynamic answer received with the pianification phase string
+     * @param message dynamic answer message
+     * @return true if equals
+     */
+    public boolean pianificationString(String message) {
+        return message.equals(" ___  _   _   _  _  _  ___  _   __   _  ___  _   _   _  _   ___  _ _   _   __  ___ \n" +
+                "| o \\| | / \\ | \\| || || __|| | / _| / \\|_ _|| | / \\ | \\| | | o \\| U | / \\ / _|| __|\n" +
+                "|  _/| || o || \\\\ || || _| | |( (_ | o || | | |( o )| \\\\ | |  _/|   || o |\\_ \\| _| \n" +
+                "|_|  |_||_n_||_|\\_||_||_|  |_| \\__||_n_||_| |_| \\_/ |_|\\_| |_|  |_n_||_n_||__/|___|\n" +
+                "                                                                                   ");
     }
 
     /**

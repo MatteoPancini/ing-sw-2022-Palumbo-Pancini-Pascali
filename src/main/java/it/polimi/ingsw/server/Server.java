@@ -64,7 +64,6 @@ public class Server {
         //checks about nickname
         if (clientID == null) {
             if (waitingPlayersConnection.isEmpty()) {
-                System.out.println("Creo nuovo game");
                 gameHandler = new GameHandler(this);
             }
             if (nicknameMapID.keySet().stream().anyMatch(clientNickname::equalsIgnoreCase)) {

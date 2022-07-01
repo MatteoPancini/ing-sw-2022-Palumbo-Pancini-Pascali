@@ -34,7 +34,6 @@ public class GameHandler {
     public GameHandler(Server server) {
         game = new Game();
         controller = new Controller(game, this);
-        System.out.println("Instantiating new game and controller");
         this.server = server;
         gameHandlerListener.addPropertyChangeListener(controller);
 
@@ -55,8 +54,6 @@ public class GameHandler {
         game.setExpertMode(expertMode);
         if(isExpertMode) {
             controller.setExpertController(new ExpertController(game, controller.getTurnController()));
-        } else {
-            System.out.println("Don't set Expert Mode");
         }
     }
 
@@ -105,8 +102,6 @@ public class GameHandler {
             } else if(i == 1) {
                 game.getPlayers().get(i).setTeamLeader(true);
             }
-            System.out.println("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam());
-
             sendBroadcast(new DynamicAnswer("Player " + game.getPlayers().get(i).getNickname() + " joined team " + game.getPlayers().get(i).getIdTeam(), false));
         }
 
@@ -161,7 +156,6 @@ public class GameHandler {
      * @param playersNumber -> player's number of the game
      */
     public void setPlayersNumber(int playersNumber) {
-        System.err.println("setting players of game to " + playersNumber);
         this.playersNumber = playersNumber;
         game.setPlayersNumber(playersNumber);
     }
@@ -175,7 +169,6 @@ public class GameHandler {
         chooseWizard.setWizardsLeft(Wizards.notChosen());
         if ((playersNumber == 2 && Wizards.notChosen().size() > 2)) {
             String playerNickname = game.getActivePlayers().get(playersNumber - Wizards.notChosen().size() + 2).getNickname();
-            System.out.println(playerNickname);
             sendSinglePlayer(chooseWizard, server.getIDFromNickname(playerNickname));
             sendExcept(new DynamicAnswer("Please wait: player " + playerNickname + " is choosing his wizard!", false), server.getIDFromNickname(playerNickname));
         } else if(playersNumber == 3 && Wizards.notChosen().size() > 1) {
@@ -204,7 +197,6 @@ public class GameHandler {
             setupTeams();
         }
         game.setCurrentPlayer(game.getActivePlayers().get(0));
-        System.out.println("Current player is " + game.getCurrentPlayer().getNickname());
         controller.newSetupGame();
     }
 
@@ -226,8 +218,6 @@ public class GameHandler {
      * @param actionType -> string used to switch the action types in order to trigger the controller
      */
     public void parseActions(UserAction userAction, String actionType) {
-        System.out.println(actionType);
-
         switch(actionType) {
             case "PickAssistant" -> {
                 gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
@@ -244,7 +234,6 @@ public class GameHandler {
                             gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
                         }
                     } else {
-                        System.out.println("ENTRO QUA");
                         gameHandlerListener.firePropertyChange("PickDestinationIsland", null, ((PickDestination) userAction).getDestination());
                     }
                 }
