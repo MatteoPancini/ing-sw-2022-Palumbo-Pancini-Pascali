@@ -191,7 +191,19 @@ public class GUI extends Application implements ListenerInterface {
      */
     public void updateMainScene() {
         MainSceneController controller = (MainSceneController) getControllerFromName(MAIN_SCENE);
-        controller.update("STANDARD_UPDATE");
+        if(modelView.isJesterAction()) {
+            controller.update("PICK_CHARACTER_NUMBER");
+
+        } else if(modelView.isMinestrelAction()) {
+            controller.update("PICK_CHARACTER_NUMBER");
+
+        } else if(modelView.isGrannyHerbsAction()) {
+            controller.update("PICK_ISLAND");
+
+        } else {
+            controller.update("STANDARD_UPDATE");
+
+        }
     }
 
     /**
