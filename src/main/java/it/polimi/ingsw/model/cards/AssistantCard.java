@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.cards;
 import it.polimi.ingsw.model.enumerations.Assistants;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
-import com.google.gson.Gson;
 
 import java.io.Serializable;
 

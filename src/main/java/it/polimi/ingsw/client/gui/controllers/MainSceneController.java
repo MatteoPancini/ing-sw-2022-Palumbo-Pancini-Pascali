@@ -2321,7 +2321,7 @@ public class MainSceneController implements GUIController {
         Image img;
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             img = setWizardImage(p.getWizard());
-            if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
+            if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 myWizard.setImage(img);
                 myWizard.setVisible(true);
             } else if(cont==0) {

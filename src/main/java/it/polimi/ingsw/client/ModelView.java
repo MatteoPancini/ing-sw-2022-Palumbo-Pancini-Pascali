@@ -21,6 +21,31 @@ public class ModelView {
     private boolean magicPostmanAction = false;
     private boolean grannyHerbsAction;
     private boolean princessAction;
+    private int characterAction = 0;
+    private boolean monkAction;
+    private boolean isFourPlayers;
+    private boolean minestrelAction = false;
+    private boolean jesterAction = false;
+
+
+    /**
+     * Constructor of model view class with CLI mode
+     * @param cli cli instance of the game
+     */
+    public ModelView(CLI cli)  {
+        this.cli = cli;
+        this.gui = null;
+
+    }
+
+    /**
+     * Constructor of model view class with GUI mode
+     * @param gui gui instance of the game
+     */
+    public ModelView(GUI gui) {
+        this.gui = gui;
+        this.cli = null;
+    }
 
     public boolean isPrincessAction() {
         return princessAction;
@@ -38,9 +63,6 @@ public class ModelView {
         this.grannyHerbsAction = grannyHerbsAction;
     }
 
-    private int characterAction = 0;
-
-    private boolean monkAction;
 
     public boolean isMonkAction() {
         return monkAction;
@@ -50,7 +72,6 @@ public class ModelView {
         this.monkAction = monkAction;
     }
 
-    private boolean isFourPlayers;
 
     public void setFourPlayers(boolean fourPlayers) {
         isFourPlayers = fourPlayers;
@@ -67,10 +88,6 @@ public class ModelView {
     public void setCharacterAction(int characterAction) {
         this.characterAction = characterAction;
     }
-
-    private boolean minestrelAction = false;
-
-    private boolean jesterAction = false;
 
     public void setJesterAction(boolean jesterAction) {
         this.jesterAction = jesterAction;
@@ -115,6 +132,7 @@ public class ModelView {
     public void setServerAnswer(Answer serverAnswer) {
         this.serverAnswer = serverAnswer;
     }
+
     public void setActivateInput(boolean activateUserInput) {
         this.activeInput = activateUserInput;
     }
@@ -127,24 +145,6 @@ public class ModelView {
         return playerNickname;
     }
 
-    /**
-     * Constructor of model view class with CLI mode
-     * @param cli cli instance of the game
-     */
-    public ModelView(CLI cli)  {
-        this.cli = cli;
-        this.gui = null;
-
-    }
-
-    /**
-     * Constructor of model view class with GUI mode
-     * @param gui gui instance of the game
-     */
-    public ModelView(GUI gui) {
-        this.gui = gui;
-        this.cli = null;
-    }
 
     public Answer getServerAnswer() {
         return serverAnswer;

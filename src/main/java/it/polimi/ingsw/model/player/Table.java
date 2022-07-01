@@ -46,7 +46,7 @@ public class Table implements Serializable {
      * Put a student in a table
      * @param stud -> student to add
      */
-    public void addStudent(Student stud){
+    public void addStudent(Student stud) {
         diningTable.get(lastPosition).setStudent(stud);
         lastPosition++;
     }

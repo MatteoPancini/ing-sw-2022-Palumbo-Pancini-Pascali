@@ -77,6 +77,7 @@ public class GUI extends Application implements ListenerInterface {
     public ModelView getModelView() {
         return modelView;
     }
+
     public GUIController getControllerFromName(String name) {
         return nameMapController.get(name);
     }
@@ -163,7 +164,6 @@ public class GUI extends Application implements ListenerInterface {
      * @param serverCommand command from server
      */
     public void initialGamePhaseHandler(String serverCommand) {
-        //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
         switch(serverCommand) {
 
             case "RequestPlayerNumber" -> Platform.runLater(() -> {
@@ -201,11 +201,9 @@ public class GUI extends Application implements ListenerInterface {
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
-        //System.out.println("PropertyChange arrivato: " + serverCommand);
         switch(changeEvent.getPropertyName()) {
             case "InitialGamePhase" -> {
                 assert serverCommand != null;
-                //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
             }
 
