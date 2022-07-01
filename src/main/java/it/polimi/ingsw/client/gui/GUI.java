@@ -326,6 +326,8 @@ public class GUI extends Application implements ListenerInterface {
         } else {
             infoAlert.setContentText("You lost: the winner is " + winnerNickname + "! Thanks to have played Eriantys!");
         }
+        infoAlert.showAndWait();
+        quitGame();
     }
 
     /**
