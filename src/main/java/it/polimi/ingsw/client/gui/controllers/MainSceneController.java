@@ -17,10 +17,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
+/**
+ * Class MainSceneController handles the main board scene by updating it each time
+ * a game copy of the Game is received from the server
+ */
 public class MainSceneController implements GUIController {
 
     private GUI gui;
@@ -457,9 +458,6 @@ public class MainSceneController implements GUIController {
 
     @FXML ImageView myCoins;
     @FXML Label myCoinsLabel;
-
-    //private final Image blackTowerImage = new Image(getClass().getClassLoader().getResourceAsStream("/graphics/wooden_pieces/black_tower.png"));
-
     private final Image blackTowerImage = new Image("/graphics/wooden_pieces/black_tower.png");
     private final Image greyTowerImage = new Image("/graphics/wooden_pieces/grey_tower.png");
     private final Image whiteTowerImage = new Image("/graphics/wooden_pieces/white_tower.png");
@@ -509,6 +507,11 @@ public class MainSceneController implements GUIController {
         this.gui = gui;
     }
 
+    /**
+     * Method update is called every time a game copy is received, it updates each part of the main scene (students on boards, clouds, assistants,
+     * characters, islands...)
+     * @param serverCommand command server indicating if there is a user action in progress in order to show pick buttons
+     */
     public void update(String serverCommand) {
         updateDiningRooms();
         updateClouds();
@@ -573,7 +576,6 @@ public class MainSceneController implements GUIController {
         updateNoEntryTile();
         updateProfessors();
         updateBoards();
-        updateNicknames();
 
         blueStudent.setVisible(false);
         greenStudent.setVisible(false);
@@ -629,6 +631,10 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+
+    /**
+     * Method askCharacterActionNumber asks the number of Jester/Minestrel actions the user wants to play
+     */
     public void askCharacterActionNumber() {
         descriptionLabel.setText("Choose the number of actions you want to play");
         pickCharacterActionNumberBox.setVisible(true);
@@ -644,11 +650,19 @@ public class MainSceneController implements GUIController {
         pickCharacterActionNumberBox.setOnAction(this::pickCharacterMoves);
     }
 
+    /**
+     * Method pickCharacterMoves handles the selection of character moves from the choice box
+     * @param e selection event
+     */
     public void pickCharacterMoves(ActionEvent e) {
         int moves = Integer.parseInt(pickCharacterActionNumberBox.getValue());
         gui.getClientConnection().sendUserInput(new PickCharacterActionsNum(moves));
     }
 
+    /**
+     * Method updateBoards is used to update all the boards in the main scene,
+     * consisting of dining room, professor tables, tower area and entrance
+     */
     public void updateBoards() {
         myBoard.setVisible(false);
         leftBoard.setVisible(false);
@@ -678,6 +692,11 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method getCoinsByPlayer returns the number of coins owned by a player
+     * @param p player
+     * @return coins number
+     */
     public int getCoinsByPlayer(Player p) {
         int coins = 0;
         for(Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
@@ -688,6 +707,9 @@ public class MainSceneController implements GUIController {
         return coins;
     }
 
+    /**
+     * Method updateProfessors is used to update the professors' tables in the different dining rooms
+     */
         public void updateProfessors() {
             myBlueProfessor.setVisible(false);
             myYellowProfessor.setVisible(false);
@@ -710,7 +732,7 @@ public class MainSceneController implements GUIController {
             topGreenProfessor.setVisible(false);
             topRedProfessor.setVisible(false);
             int cont = 0;
-            Image pic = null;
+            Image pic;
             for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
                 if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                     for (BoardCell b : pl.getBoard().getProfessorTable().getProfTable()) {
@@ -824,10 +846,17 @@ public class MainSceneController implements GUIController {
                 }
             }
         }
-        public void askMoves(AssistantCard a) {
+
+    /**
+     * Method askMoves shows the choice box from which is possible to select the number of mother nature moves,
+     * according to the assistant chosen in the current turn
+     * @param a assistant chosen
+     */
+    public void askMoves(AssistantCard a) {
         descriptionLabel.setText("Choose mother nature's moves number from the box");
+        descriptionLabel.setVisible(true);
         pickMovesBox.setVisible(true);
-        pickMovesBox.getItems().removeAll();
+        pickMovesBox.getItems().clear();
         for(int i = 1; i <= a.getMoves(); i++) {
             pickMovesBox.getItems().add(String.valueOf(i));
         }
@@ -836,16 +865,22 @@ public class MainSceneController implements GUIController {
             pickMovesBox.getItems().add(String.valueOf(a.getMoves() + 2));
         }
         pickMovesBox.setOnAction(this::pickMoves);
-     }
+    }
 
+    /**
+     * Method pickMoves handles the selection event of a number of moves from the choice box
+     * Then it sends it to server
+     * @param e selection event
+     */
      public void pickMoves(ActionEvent e) {
          int moves = Integer.parseInt(pickMovesBox.getValue());
          gui.getClientConnection().sendUserInput(new PickMovesNumber(moves));
      }
 
-
-
-    public void updateMotherNature() {
+    /**
+     * Method updateMotherNature updates mother nature position on islands
+     */
+     public void updateMotherNature() {
         motherNature1.setVisible(false);
         motherNature2.setVisible(false);
         motherNature3.setVisible(false);
@@ -867,19 +902,17 @@ public class MainSceneController implements GUIController {
             case 5 -> motherNature5.setVisible(true);
             case 6 -> motherNature6.setVisible(true);
             case 7 -> motherNature7.setVisible(true);
-
             case 8 -> motherNature8.setVisible(true);
-
             case 9 -> motherNature9.setVisible(true);
-
             case 10 -> motherNature10.setVisible(true);
-
             case 11 -> motherNature11.setVisible(true);
-
             case 12 -> motherNature12.setVisible(true);
         }
     }
 
+    /**
+     * Method askCharacter asks the user if they want to play a character by showing the corresponding buttons
+     */
     public void askCharacter() {
         descriptionLabel.setText("Pick a character or play \"No Character\"");
         noCharacterButton.setVisible(true);
@@ -895,6 +928,9 @@ public class MainSceneController implements GUIController {
     }
 
 
+    /**
+     * Method updateNoEntryTile updates the no entry tiles on islands if they have been played
+     */
     public void updateNoEntryTile() {
         noEntryTile1.setVisible(false);
         noEntryTile2.setVisible(false);
@@ -928,6 +964,9 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method pickIsland1 handles the selection event of island1
+     */
     public void pickIsland1() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 1) {
@@ -936,41 +975,64 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+    /**
+     * Method pickIsland2 handles the selection event of island2
+     */
     public void pickIsland2() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 2) {
                 gui.getClientConnection().sendUserInput(new PickDestination(i));
                 break;
             }
-        }    }
+        }
+    }
+    /**
+     * Method pickIsland3 handles the selection event of island3
+     */
     public void pickIsland3() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 3) {
                 gui.getClientConnection().sendUserInput(new PickDestination(i));
                 break;
             }
-        }    }
+        }
+    }
+    /**
+     * Method pickIsland4 handles the selection event of island4
+     */
     public void pickIsland4() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 4) {
                 gui.getClientConnection().sendUserInput(new PickDestination(i));
                 break;
             }
-        }    }
+        }
+    }
+    /**
+     * Method pickIsland5 handles the selection event of island5
+     */
     public void pickIsland5() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 5) {
                 gui.getClientConnection().sendUserInput(new PickDestination(i));
                 break;
             }
-        }    }
+        }
+    }
+    /**
+     * Method pickIsland6 handles the selection event of island6
+     */
     public void pickIsland6() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 6) {
                 gui.getClientConnection().sendUserInput(new PickDestination(i));
                 break;
             }
-        }    }
+        }
+    }
+    /**
+     * Method pickIsland7 handles the selection event of island7
+     */
     public void pickIsland7() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 7) {
@@ -979,6 +1041,9 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+    /**
+     * Method pickIsland8 handles the selection event of island8
+     */
     public void pickIsland8() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 8) {
@@ -987,6 +1052,9 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+    /**
+     * Method pickIsland9 handles the selection event of island9
+     */
     public void pickIsland9() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 9) {
@@ -995,6 +1063,9 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+    /**
+     * Method pickIsland10 handles the selection event of island10
+     */
     public void pickIsland10() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 10) {
@@ -1003,6 +1074,9 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+    /**
+     * Method pickIsland11 handles the selection event of island11
+     */
     public void pickIsland11() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 11) {
@@ -1011,6 +1085,9 @@ public class MainSceneController implements GUIController {
             }
         }
     }
+    /**
+     * Method pickIsland12 handles the selection event of island12
+     */
     public void pickIsland12() {
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 12) {
@@ -1020,12 +1097,19 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method pickDiningRoomDestination handles the selection of dining room as destination
+     * Then it sends to the server
+     */
     public void pickDiningRoomDestination() {
         PickDestination action = new PickDestination(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
         diningRoomButton.setVisible(false);
         gui.getClientConnection().sendUserInput(action);
     }
 
+    /**
+     * Method showEffect1 shows an info alert with the description of character 1's effect
+     */
     public void showEffect1() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Characters Effect");
@@ -1033,6 +1117,9 @@ public class MainSceneController implements GUIController {
         alert.setContentText(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getEffect());
         alert.show();
     }
+    /**
+     * Method showEffect2 shows an info alert with the description of character 2's effect
+     */
     public void showEffect2() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Characters Effect");
@@ -1041,6 +1128,9 @@ public class MainSceneController implements GUIController {
         alert.show();
 
     }
+    /**
+     * Method showEffect3 shows an info alert with the description of character 3's effect
+     */
     public void showEffect3() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Characters Effect");
@@ -1049,8 +1139,13 @@ public class MainSceneController implements GUIController {
         alert.show();
     }
 
+    /**
+     * Method askDestination asks the user the destination for the picked student,
+     * making him choose between dining room or an island
+     */
     public void askDestination() {
         descriptionLabel.setText("Pick an island or the dining room button to choose the student destination");
+        descriptionLabel.setVisible(true);
         diningRoomButton.setVisible(true);
         for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
             if(i.getIslandID() == 1) island1Button.setVisible(true);
@@ -1067,9 +1162,13 @@ public class MainSceneController implements GUIController {
             else if(i.getIslandID() == 12) island12Button.setVisible(true);
         }
     }
-    
+
+    /**
+     * Method askGrannyHerbsIsland asks the user an island where to put the no entry tile got from the Granny Herbs
+     */
     public void askGrannyHerbsIsland() {
         descriptionLabel.setText("Pick an island where you want to put a NO_ENTRY tile!");
+        descriptionLabel.setVisible(true);
         island1Button.setVisible(true);
         island2Button.setVisible(true);
         island3Button.setVisible(true);
@@ -1084,29 +1183,18 @@ public class MainSceneController implements GUIController {
         island12Button.setVisible(true);
     }
 
-    public void pickCloud(ActionEvent e) {
-        UserAction action = null;
-        ImageView img = (ImageView) e.getSource();
-        String picked = img.getId();
-        switch (picked) {
-            case "cloud1" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0));
-            case "cloud2" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1));
-            case "cloud3" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2));
-            case "cloud4" -> action = new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3));
-        }
-        if (action != null) {
-            gui.getClientConnection().sendUserInput(action);
-        }
-        cloud1Button.setVisible(false);
-        cloud2Button.setVisible(false);
-        cloud3Button.setVisible(false);
-        cloud4Button.setVisible(false);
-    }
+    /**
+     * Method showAssistantButton shows the pick assistant button and the description telling the user what to do
+     */
     public void showAssistantButton() {
         descriptionLabel.setText("Click the pick assistant button to choose your assistant. ");
+        descriptionLabel.setVisible(true);
         askAssistantButton.setVisible(true);
     }
 
+    /**
+     * Method askAssistant shows the stage for the assistant choice by running a new thread
+     */
     public void askAssistant() {
         Platform.runLater(() -> {
             PickAssistantController controller = (PickAssistantController) gui.getControllerFromName("PickAssistant.fxml");
@@ -1115,6 +1203,9 @@ public class MainSceneController implements GUIController {
 
     }
 
+    /**
+     * Method updateDiningRooms updates all the dining rooms by showing the students on them
+     */
     public void updateDiningRooms() {
         for(int j=0; j < 10; j++) {
             myBlueStudents.getChildren().get(j).setVisible(false);
@@ -1140,7 +1231,7 @@ public class MainSceneController implements GUIController {
         }
         Image pic;
         ImageView img;
-        int cont = 0; //serve per decidere dove posizionare la board del player nella main scene
+        int cont = 0;
         for (Player pl : gui.getModelView().getGameCopy().getActivePlayers()) {
             if (pl.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
@@ -1176,7 +1267,6 @@ public class MainSceneController implements GUIController {
                     }
                 }
             } else if (cont == 0){
-                //top Player corresponding to cont 0
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
                     for (int i = 0; i < t.getDiningTable().size(); i++) {
                         if (t.getDiningTable().get(i).hasStudent()) {
@@ -1211,7 +1301,6 @@ public class MainSceneController implements GUIController {
                 }
                 cont++;
             } else if (cont == 1) {
-                //left Player corresponding to cont 1
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
                     for (int i = 0; i < t.getDiningTable().size(); i++) {
                         if (t.getDiningTable().get(i).hasStudent()) {
@@ -1246,7 +1335,6 @@ public class MainSceneController implements GUIController {
                 }
                 cont++;
             } else if (cont == 2) {
-                //right Player corresponding to cont 2
                 for (Table t : pl.getBoard().getDiningRoom().getDiningRoom()) {
                     for (int i = 0; i < t.getDiningTable().size(); i++) {
                         if (t.getDiningTable().get(i).hasStudent()) {
@@ -1284,6 +1372,9 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method updateIslands updates the islands status of the game by showing the students and towers on them
+     */
     public void updateIslands() {
         island1.setVisible(false);
         island2.setVisible(false);
@@ -1868,6 +1959,11 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method setTowersImage sets the image to the corresponding tower
+     * @param t tower
+     * @return image for tower
+     */
     public Image setTowersImage(Tower t) {
         Image tower = null;
         switch(t.getColor().toString()) {
@@ -1878,16 +1974,32 @@ public class MainSceneController implements GUIController {
         return tower;
     }
 
+    /**
+     * Method updateDescription updates the description that gives the user information on the game and the actions to do
+     * @param s description string
+     */
     public void updateDescription(String s) {
         descriptionLabel.setVisible(true);
         descriptionLabel.setText(s);
     }
 
+    /**
+     * Method getTowersNumber returns the towers number on an island in order to set the label on the given island
+     * @param i island
+     * @return number of towers
+     */
     public String getTowersNumber(Island i) {
         int num = i.getMergedTowers().size();
         return Integer.toString(num);
     }
 
+    /**
+     * Method getStudentsNumber returns the students number per type on an island,
+     * in order to set the students labels on the given island
+     * @param i island
+     * @param s student
+     * @return number of students of a type
+     */
     public String getStudentsNumber(Island i, Student s) {
         int num = 0;
         for(Student stud : i.getStudents()) {
@@ -1898,6 +2010,9 @@ public class MainSceneController implements GUIController {
         return String.valueOf(num);
     }
 
+    /**
+     * Method updateClouds updates the clouds' status of the game by showing the students on them
+     */
     public void updateClouds() {
         cloud1.setVisible(false);
         cloud2.setVisible(false);
@@ -2061,6 +2176,9 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method askCloud asks the user to choose a cloud between the remaining ones
+     */
     public void askCloud() {
         cloud1Button.setVisible(false);
         cloud2Button.setVisible(false);
@@ -2114,6 +2232,12 @@ public class MainSceneController implements GUIController {
     }
 
 
+    /**
+     * Method getCloudStudentsNumber returns the number of students on a cloud, in order to set the labels
+     * @param cloud cloud tile
+     * @param stud student
+     * @return number of students on cloud
+     */
     public String getCloudStudentsNumber(CloudTile cloud, Student stud) {
         int num = 0;
         for(Student s : cloud.getStudents()) {
@@ -2124,6 +2248,9 @@ public class MainSceneController implements GUIController {
         return Integer.toString(num);
     }
 
+    /**
+     * Method updateTowers updates the towers on the tower areas by showing them
+     */
     public void updateTowers() {
         for(int i=0; i < 8; i++) {
             myTowers.getChildren().get(i).setVisible(false);
@@ -2132,39 +2259,44 @@ public class MainSceneController implements GUIController {
             topTowers.getChildren().get(i).setVisible(false);
         }
         int cont = 0;
-        Image img = null;
+        Image img;
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) myTowers.getChildren().get(i)).setImage(img);
-                    ((ImageView) myTowers.getChildren().get(i)).setVisible(true);
+                    myTowers.getChildren().get(i).setVisible(true);
                 }
             } else if(cont==0) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) topTowers.getChildren().get(i)).setImage(img);
-                    ((ImageView) topTowers.getChildren().get(i)).setVisible(true);
+                    topTowers.getChildren().get(i).setVisible(true);
                 }
                 cont++;
             } else if(cont==1) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) leftTowers.getChildren().get(i)).setImage(img);
-                    ((ImageView) leftTowers.getChildren().get(i)).setVisible(true);
+                    leftTowers.getChildren().get(i).setVisible(true);
                 }
                 cont++;
             } else if(cont==2) {
                 for(int i=0; i < p.getBoard().getTowerArea().getTowerArea().size(); i++) {
                     img = setTowersImage(p.getBoard().getTowerArea().getTowerArea().get(i));
                     ((ImageView) rightTowers.getChildren().get(i)).setImage(img);
-                    ((ImageView) rightTowers.getChildren().get(i)).setVisible(true);
+                    rightTowers.getChildren().get(i).setVisible(true);
                 }
                 cont++;
             }
         }
     }
 
+    /**
+     * Method setWizardImage sets the image corresponding to the given wizard
+     * @param w wizard
+     * @return image for wizard
+     */
     public Image setWizardImage(Wizards w) {
         Image wiz = null;
         switch (w.toString()) {
@@ -2176,6 +2308,10 @@ public class MainSceneController implements GUIController {
         return wiz;
     }
 
+    /**
+     * Method updateWizard updates the wizards in the main scene,
+     * assigning the wizard to the player who has chosen it
+     */
     public void updateWizard() {
         int cont = 0;
         myWizard.setVisible(false);
@@ -2186,48 +2322,51 @@ public class MainSceneController implements GUIController {
         for (Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             img = setWizardImage(p.getWizard());
             if(p.equals(gui.getModelView().getGameCopy().getCurrentPlayer())) {
-                ((ImageView) myWizard).setImage(img);
-                ((ImageView) myWizard).setVisible(true);
+                myWizard.setImage(img);
+                myWizard.setVisible(true);
             } else if(cont==0) {
-                ((ImageView) topWizard).setImage(img);
-                ((ImageView) topWizard).setVisible(true);
+                topWizard.setImage(img);
+                topWizard.setVisible(true);
                 cont++;
             } else if(cont==1) {
-                ((ImageView) leftWizard).setImage(img);
-                ((ImageView) leftWizard).setVisible(true);
+                leftWizard.setImage(img);
+                leftWizard.setVisible(true);
                 cont++;
             } else if(cont==2) {
-                ((ImageView) rightWizard).setImage(img);
-                ((ImageView) rightWizard).setVisible(true);
+                rightWizard.setImage(img);
+                rightWizard.setVisible(true);
                 cont++;
             }
         }
     }
 
+    /**
+     * Method updateAssistant updates the main board scene by showing the assistants chosen by the players
+     */
     public void updateAssistant() {
         int cont = 0;
         myAssistant.setVisible(false);
         leftAssistant.setVisible(false);
         topAssistant.setVisible(false);
         rightAssistant.setVisible(false);
-        Image img = null;
+        Image img;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.getChosenAssistant() != null) {
                 img = setAssistantImage(p.getChosenAssistant());
                 if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
-                    ((ImageView) myAssistant).setImage(img);
-                    ((ImageView) myAssistant).setVisible(true);
+                    myAssistant.setImage(img);
+                    myAssistant.setVisible(true);
                 } else if(cont==0) {
-                    ((ImageView) topAssistant).setImage(img);
-                    ((ImageView) topAssistant).setVisible(true);
+                    topAssistant.setImage(img);
+                    topAssistant.setVisible(true);
                     cont++;
                 } else if(cont==1) {
-                    ((ImageView) leftAssistant).setImage(img);
-                    ((ImageView) leftAssistant).setVisible(true);
+                    leftAssistant.setImage(img);
+                    leftAssistant.setVisible(true);
                     cont++;
                 } else if(cont==2) {
-                    ((ImageView) rightAssistant).setImage(img);
-                    ((ImageView) rightAssistant).setVisible(true);
+                    rightAssistant.setImage(img);
+                    rightAssistant.setVisible(true);
                     cont++;
                 }
             }
@@ -2235,36 +2374,9 @@ public class MainSceneController implements GUIController {
         }
     }
 
-    public void updateNicknames() {
-        int cont = 0;
-        for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
-            if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
-                Label myName = new Label(p.getNickname());
-                myName.setLayoutX(myWizard.getLayoutX());
-                myName.setLayoutY(myWizard.getLayoutY() + 20);
-                myName.setVisible(true);
-            } else if(cont == 0) {
-                Label topName = new Label(p.getNickname());
-                topName.setLayoutX(topWizard.getLayoutX());
-                topName.setLayoutY(topWizard.getLayoutY() + 20);
-                topName.setVisible(true);
-                cont++;
-            } else if(cont == 1) {
-                Label leftName = new Label(p.getNickname());
-                leftName.setLayoutX(leftWizard.getLayoutX());
-                leftName.setLayoutY(leftWizard.getLayoutY() + 20);
-                leftName.setVisible(true);
-                cont++;
-            } else if(cont == 2) {
-                Label rightName = new Label(p.getNickname());
-                rightName.setLayoutX(rightWizard.getLayoutX());
-                rightName.setLayoutY(rightWizard.getLayoutY() + 20);
-                rightName.setVisible(true);
-                cont++;
-            }
-        }
-    }
-
+    /**
+     * Method updateEntrances updates all the entrances in the main scene by showing the students in them
+     */
     public void updateEntrances() {
         for(int i=0; i < 9; i++) {
             myEntrance.getChildren().get(i).setVisible(false);
@@ -2272,41 +2384,43 @@ public class MainSceneController implements GUIController {
             topEntrance.getChildren().get(i).setVisible(false);
             rightEntrance.getChildren().get(i).setVisible(false);
         }
-        Image pic = null;
+        Image pic;
         int cont = 0;
         for(Player p : gui.getModelView().getGameCopy().getActivePlayers()) {
             if(p.getNickname().equals(gui.getModelView().getPlayerNickname())) {
                 for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
                     pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
                     ((ImageView) myEntrance.getChildren().get(i)).setImage(pic);
-                    ((ImageView) myEntrance.getChildren().get(i)).setVisible(true);
+                    myEntrance.getChildren().get(i).setVisible(true);
                 }
             } else if(cont == 0) {
                 for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
                     pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
                     ((ImageView) topEntrance.getChildren().get(i)).setImage(pic);
-                    ((ImageView) topEntrance.getChildren().get(i)).setVisible(true);
+                    topEntrance.getChildren().get(i).setVisible(true);
                 }
                 cont++;
             } else if(cont == 1) {
                 for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
                     pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
                     ((ImageView) leftEntrance.getChildren().get(i)).setImage(pic);
-                    ((ImageView) leftEntrance.getChildren().get(i)).setVisible(true);
+                    leftEntrance.getChildren().get(i).setVisible(true);
                 }
                 cont++;
             } else if(cont == 2) {
                 for (int i = 0; i < p.getBoard().getEntrance().getStudents().size(); i++) {
                     pic = setStudentsEntrance(p.getBoard().getEntrance().getStudents().get(i));
                     ((ImageView) rightEntrance.getChildren().get(i)).setImage(pic);
-                    ((ImageView) rightEntrance.getChildren().get(i)).setVisible(true);
+                    rightEntrance.getChildren().get(i).setVisible(true);
                 }
                 cont++;
             }
         }
     }
 
-    //creare un parametro che indichi che tipo di action è in corso, passarla come parametro
+    /**
+     * Method updatePickStudents updates the students to pick if there is a pick user action
+     */
     public void updatePickStudents() {
         green.setVisible(false);
         yellow.setVisible(false);
@@ -2352,8 +2466,13 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method askStudentEntrance asks the user to pick a student from their entrance by showing buttons and students type
+     * @param e entrance
+     */
     public void askStudentEntrance(Entrance e) {
         descriptionLabel.setText("Pick a student from your entrance");
+        descriptionLabel.setVisible(true);
         for(Student s : e.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
@@ -2374,8 +2493,13 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method askStudentCard asks the user to pick a student from a character card
+     * @param c character card with students on
+     */
     public void askStudentCard(CharacterCard c) {
         descriptionLabel.setText("Pick a student from the " + c.getName());
+        descriptionLabel.setVisible(true);
         for(Student s : c.getStudents()) {
             if(s.getType().equals(PawnType.RED)) {
                 red.setVisible(true);
@@ -2396,8 +2520,12 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method askStudentDiningRoom asks the user to pick a student form their dining room
+     */
     public void askStudentDiningRoom() {
         descriptionLabel.setText("Pick a student from your dining room");
+        descriptionLabel.setVisible(true);
         for(Table t : gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getDiningTable().get(0).hasStudent()) {
                 if(t.getDiningTable().get(0).getBoardCellType() == PawnType.BLUE) {
@@ -2424,8 +2552,12 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method askPawnType asks the user to pick a student according to the character card's effect
+     */
     public void askPawnType() {
         descriptionLabel.setText("Pick a pawn type based on the effect of the character you chose");
+        descriptionLabel.setVisible(true);
         green.setVisible(true);
         blue.setVisible(true);
         yellow.setVisible(true);
@@ -2438,8 +2570,11 @@ public class MainSceneController implements GUIController {
         pinkPawn.setVisible(true);
     }
 
+    /**
+     * Method updateCharacters updates the character cards in the main scene according
+     * to the playable characters in the current game
+     */
     public void updateCharacters() {
-        int num = 0;
         character1.setVisible(true);
         character2.setVisible(true);
         character3.setVisible(true);
@@ -2585,6 +2720,12 @@ public class MainSceneController implements GUIController {
         }
     }
 
+    /**
+     * Method getCharacterStudentsNumber returns the students number on a character card
+     * @param card character card
+     * @param stud student type
+     * @return students number
+     */
     public String getCharacterStudentsNumber(CharacterCard card, Student stud) {
         int num = 0;
         for(Student s : card.getStudents()) {
@@ -2596,151 +2737,184 @@ public class MainSceneController implements GUIController {
     }
 
 
+    /**
+     * Method playCharacter1 handles the click event on character1
+     */
     public void playCharacter1() {
         gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getName()));
     }
+    /**
+     * Method playCharacter2 handles the click event on character2
+     */
     public void playCharacter2() {
         gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(1).getName()));
     }
+    /**
+     * Method playCharacter3 handles the click event on character3
+     */
     public void playCharacter3() {
         gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName()));
     }
+    /**
+     * Method playNoCharacter handles the click event on no character button
+     */
     public void playNoCharacter() {
         gui.getClientConnection().sendUserInput(new PickCharacter(null));
     }
 
 
+    /**
+     * Method getCharacterImage sets the image corresponding to the given character
+     * @param c character card
+     * @return image for character
+     */
     public Image getCharacterImage(CharacterCard c) {
         Image pic = null;
         switch(c.getName().toString()) {
-            case "HERALD" -> {
-                pic = heraldImage;
-            } case "KNIGHT" -> {
-                pic = knightImage;
-            } case "CENTAUR" -> {
-                pic = centarusImage;
-            } case "FARMER" -> {
-                pic = farmerImage;
-            } case "FUNGARUS" -> {
-                pic = fungarusImage;
-            } case "JESTER" -> {
-                pic = jesterImage;
-            } case "THIEF" -> {
-                pic = thiefImage;
-            } case "MINESTREL" -> {
-                pic = minestrelImage;
-            } case "GRANNY_HERBS" -> {
-                pic = grannyHerbsImage;
-            } case "MAGIC_POSTMAN" -> {
-                pic = magicPostmanImage;
-            } case "SPOILED_PRINCESS" -> {
-                pic = spoiledPrincessImage;
-            } case "MONK" -> {
-                pic = monkImage;
-            }
+            case "HERALD" -> pic = heraldImage;
+            case "KNIGHT" -> pic = knightImage;
+            case "CENTAUR" -> pic = centarusImage;
+            case "FARMER" -> pic = farmerImage;
+            case "FUNGARUS" -> pic = fungarusImage;
+            case "JESTER" -> pic = jesterImage;
+            case "THIEF" -> pic = thiefImage;
+            case "MINESTREL" -> pic = minestrelImage;
+            case "GRANNY_HERBS" -> pic = grannyHerbsImage;
+            case "MAGIC_POSTMAN" -> pic = magicPostmanImage;
+            case "SPOILED_PRINCESS" -> pic = spoiledPrincessImage;
+            case "MONK" -> pic = monkImage;
         }
         return pic;
     }
 
+    /**
+     * Method setStudentsEntrance sets the image corresponding to the given student in the entrance
+     * @param s student
+     * @return image for student
+     */
     public Image setStudentsEntrance(Student s) {
         Image stud = null;
         switch(s.getType().toString()) {
-            case "BLUE" -> {
-                stud = blueStudentImage;
-            } case "RED" -> {
-                stud = redStudentImage;
-            } case "GREEN" -> {
-                stud = greenStudentImage;
-            } case "PINK" -> {
-                stud = pinkStudentImage;
-            } case "YELLOW" -> {
-                stud = yellowStudentImage;
-            }
+            case "BLUE" -> stud = blueStudentImage;
+            case "RED" -> stud = redStudentImage;
+            case "GREEN" -> stud = greenStudentImage;
+            case "PINK" -> stud = pinkStudentImage;
+            case "YELLOW" -> stud = yellowStudentImage;
         }
         return stud;
     }
 
+    /**
+     * Method setAssistantImage sets the image corresponding to the given assistant card
+     * @param a assistant card
+     * @return image for assistant
+     */
     public Image setAssistantImage(AssistantCard a) {
         Image img = null;
         switch (a.getName().toString()) {
-            case "EAGLE" -> {
-                img = assistant4Image;
-            }
-            case "DOG" -> {
-                img = assistant8Image;
-            }
-            case "ELEPHANT" -> {
-                img = assistant9Image;
-            }
-            case "CAT" -> {
-                img = assistant3Image;
-            }
-            case "CHEETAH" -> {
-                img = assistant1Image;
-            }
-            case "LIZARD" -> {
-                img = assistant6Image;
-            }
-            case "OCTOPUS" -> {
-                img = assistant7Image;
-            }
-            case "OSTRICH" -> {
-                img = assistant2Image;
-            }
-            case "TURTLE" -> {
-                img = assistant10Image;
-            }
-            case "FOX" -> {
-                img = assistant5Image;
-            }
+            case "EAGLE" -> img = assistant4Image;
+            case "DOG" -> img = assistant8Image;
+            case "ELEPHANT" -> img = assistant9Image;
+            case "CAT" -> img = assistant3Image;
+            case "CHEETAH" -> img = assistant1Image;
+            case "LIZARD" -> img = assistant6Image;
+            case "OCTOPUS" -> img = assistant7Image;
+            case "OSTRICH" -> img = assistant2Image;
+            case "TURTLE" -> img = assistant10Image;
+            case "FOX" -> img = assistant5Image;
         }
         return img;
     }
 
+    /**
+     * Method pickCloud1 handles the click event on the cloud 1 and sends it to server
+     */
     public void pickCloud1() {
         gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(0)));
     }
+    /**
+     * Method pickCloud2 handles the click event on the cloud 2 and sends it to server
+     */
     public void pickCloud2() {
         gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(1)));
     }
+    /**
+     * Method pickCloud3 handles the click event on the cloud 3 and sends it to server
+     */
     public void pickCloud3() {
         gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(2)));
     }
+    /**
+     * Method pickCloud4 handles the click event on the cloud 4 and sends it to server
+     */
     public void pickCloud4() {
         gui.getClientConnection().sendUserInput(new PickCloud(gui.getModelView().getGameCopy().getGameBoard().getClouds().get(3)));
     }
 
+    /**
+     * Method pickBluePawn handles the click event on the blue pawn and sends it to server
+     */
     public void pickBluePawn() {
         gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.BLUE));
     }
+    /**
+     * Method pickRedPawn handles the click event on the red pawn and sends it to server
+     */
     public void pickRedPawn() {
         gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.RED));
     }
+    /**
+     * Method pickYellowPawn handles the click event on the yellow pawn and sends it to server
+     */
     public void pickYellowPawn() {
         gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.YELLOW));
     }
+    /**
+     * Method pickGreenPawn handles the click event on the green pawn and sends it to server
+     */
     public void pickGreenPawn() {
         gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.GREEN));
     }
+    /**
+     * Method pickPinkPawn handles the click event on the pink pawn and sends it to server
+     */
     public void pickPinkPawn() {
         gui.getClientConnection().sendUserInput(new PickPawnType(PawnType.PINK));
     }
+    /**
+     * Method pickBlueStudent handles the click event on the blue student and sends it to server
+     */
     public void pickBlueStudent() {
         gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.BLUE)));
     }
+    /**
+     * Method pickRedStudent handles the click event on the red student and sends it to server
+     */
     public void pickRedStudent() {
         gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.RED)));
     }
+    /**
+     * Method pickYellowStudent handles the click event on the yellow student and sends it to server
+     */
     public void pickYellowStudent() {
         gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.YELLOW)));
     }
+    /**
+     * Method pickGreenStudent handles the click event on the green student and sends it to server
+     */
     public void pickGreenStudent() {
         gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.GREEN)));
     }
+    /**
+     * Method pickPinkStudent handles the click event on the pink student and sends it to server
+     */
     public void pickPinkStudent() {
         gui.getClientConnection().sendUserInput(new PickStudent(new Student(PawnType.PINK)));
     }
 
+    /**
+     * Method quitGame quits the game when the quit button is pressed
+     */
     public void quitGame() {
         System.out.println("Thanks for playing! See you next time!");
         System.exit(0);

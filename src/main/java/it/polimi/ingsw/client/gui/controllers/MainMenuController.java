@@ -13,6 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 
+/**
+ * Class MainMenuController manages the connection set up and the nickname choice
+ */
 public class MainMenuController implements GUIController {
 
     private GUI gui;
@@ -37,10 +40,16 @@ public class MainMenuController implements GUIController {
     }
 
 
+    /**
+     * Method play changes the stage to the setup fxml
+     */
     public void play() {
         gui.changeStage("setup.fxml");
     }
 
+    /**
+     * Method start is used to read user input for nickname, IP address and port number
+     */
     public void start() {
         if (username.getText().equals("") || ipAddress.getText().equals("") || port.getText().equals("")) {
             confirmationLabel.setText("Attention: missing parameters!");

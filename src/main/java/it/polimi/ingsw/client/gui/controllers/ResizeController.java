@@ -14,6 +14,9 @@ import javafx.scene.layout.Region;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class ResizeController handles windows auto resizing.
+ */
 public class ResizeController {
     private final ArrayList<Node> nodes = new ArrayList<>();
     private final ArrayList<ArrayList<Double>> properties = new ArrayList<>();
@@ -23,10 +26,19 @@ public class ResizeController {
     private double rootHeight;
 
 
+    /**
+     * Constructor
+     * @param pane pane to resize
+     */
     public ResizeController (Pane pane) {
         calculateResize(pane, pane);
     }
-
+    /**
+     * Method calculateResize calculates resizing
+     *
+     * @param pane root pane
+     * @param parent original root pane
+     */
     public void calculateResize(Pane pane, Pane parent) {
         if (pane.equals(parent)) {
             properties.clear();
@@ -109,7 +121,6 @@ public class ResizeController {
                     }
                 };
     }
-
 
     public ChangeListener<Number> getWidthListener() {
         return widthListener;

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
+import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.Student;
@@ -9,8 +10,7 @@ import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.player.Table;
 
 /**
- * Class that checks if the user inputs are correct and, if so, it returns the corresponding user action
- * to the parser
+ * Class that checks if the user inputs are correct and, if so, it returns the corresponding user action to the parser
  */
 public class InputChecker {
     private ClientConnection clientConnection;
@@ -35,16 +35,16 @@ public class InputChecker {
      * then it returns the user action to the parser
      * @param input  assistant chosen
      * @return user action PickAssistant
+     * @throws AlreadyPlayedAssistantException exception
      */
-    public PickAssistant checkAssistant(String input) {
+    public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
         PickAssistant action = null;
-        String assistantError = "Error: you chose an assistant card already played by another player!";
         switch (input.toUpperCase()) {
             case "EAGLE" -> {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.EAGLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.EAGLE);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -52,7 +52,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.DOG)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.DOG);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -60,7 +60,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.ELEPHANT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.ELEPHANT);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -68,7 +68,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.CAT)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CAT);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -76,7 +76,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.CHEETAH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.CHEETAH);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -84,7 +84,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.LIZARD)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.LIZARD);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -92,7 +92,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.OCTOPUS)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OCTOPUS);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -100,7 +100,7 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.OSTRICH)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.OSTRICH);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
@@ -108,30 +108,42 @@ public class InputChecker {
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.TURTLE)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.TURTLE);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
             case "FOX" -> {
+                System.out.println("Entro in foxx");
+
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.FOX)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX);
                 } else {
-                    cli.showError(assistantError);
+                    cli.showError("Error: you chose an assistant card already played by another player!");
                     cli.askAssistant();
                 }
             }
-            case "QUIT" -> quitGame();
+
+            case "QUIT" -> {
+                quitGame();
+            }
             default -> {
-                cli.showError(assistantError);
+                cli.showError("Error: you chose an assistant card already played by another player!");
                 cli.askAssistant();
             }
         }
         return action;
     }
 
+    /**
+     * Method checkMoves checks if the user input for number of mother nature moves is correct,
+     * and if so it sends it to server
+     * @param input user input
+     * @return user action PickMovesNumber
+     */
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
         int maxMoves;
+        System.out.println("My input: " + input);
         if(modelView.isMagicPostmanAction()) {
             maxMoves = (modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2);
         } else {
@@ -139,23 +151,29 @@ public class InputChecker {
         }
         try {
             int moves = Integer.parseInt(input);
+            System.out.println("Parso " + moves);
             if (moves > 0 && moves <= maxMoves) {
                 action = new PickMovesNumber(moves);
                 if(modelView.isMagicPostmanAction()) {
                     modelView.setMagicPostmanAction(false);
                 }
             } else {
-                cli.askMoves();
+                cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
             }
         } catch (NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");
-            cli.askMoves();
+            cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
         }
 
 
         return action;
     }
 
+    /**
+     * Method toPawnType turns an input into a pawn type by reading its initial letter
+     * @param input user input
+     * @return PawnType enum
+     */
     public PawnType toPawnType(String input) {
         PawnType type = null;
         try {
@@ -174,6 +192,11 @@ public class InputChecker {
         return type;
     }
 
+    /**
+     * Method isStudentInEntrance returns true if the input student is in the current player's entrance
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInEntrance(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
@@ -186,6 +209,11 @@ public class InputChecker {
     }
 
 
+    /**
+     * Method isStudentInJester returns true if the input student is on the character card Jester
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInJester(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
@@ -201,6 +229,11 @@ public class InputChecker {
         return false;
     }
 
+    /**
+     * Method isStudentInPrincess returns true if the input student is on the character card Spoiled Princess
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInPrincess(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
@@ -216,12 +249,19 @@ public class InputChecker {
         return false;
     }
 
+    /**
+     * Method isStudentInMonk returns true if the input student is on the character card Monk
+     * @param input student type
+     * @return boolean value
+     */
     public boolean isStudentInMonk(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
+        //System.out.println("Tipo passato: " + type.toString());
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             if(c.getName() == Characters.MONK) {
                 for(Student s : c.getStudents()) {
+                    //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
                     if(s.getType().equals(type)) {
                         return true;
                     }
@@ -232,9 +272,15 @@ public class InputChecker {
     }
 
 
+    /**
+     * Method checkStudentInDiningRoom returns true if the input student is in the current player's dining room
+     * @param input student type
+     * @return boolean value
+     */
     public boolean checkStudentInDiningRoom(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
+        //System.out.println("Tipo passato: " + type.toString());
         for(Table t : modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTableStudentsNum() > 0) {
                 if(t.getDiningTable().get(0).getBoardCellType() == type) {
@@ -245,15 +291,27 @@ public class InputChecker {
         return false;
     }
 
+
+    /**
+     * Method checkDestination checks if the destination received from the user is dining room or an island,
+     * then it sends it to server
+     * @param destination input
+     * @return user action PickDestination
+     */
     public PickDestination checkDestination(String destination) {
         PickDestination action = null;
+        System.out.println(destination.toUpperCase());
         switch(destination.toUpperCase()) {
-            case "DININGROOM" -> action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
+            case "DININGROOM" -> {
+                action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
+            }
             case "ISLAND" -> {
-                cli.askIsland();
+                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
                 return null;
             }
-            case "QUIT" -> quitGame();
+            case "QUIT" -> {
+                quitGame();
+            }
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
@@ -263,6 +321,12 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method checkIsland checks if the island ID typed by the user is am valid island,
+     * then it sends it to server
+     * @param islandID input
+     * @return user action PickDestination
+     */
     public PickDestination checkIsland(String islandID) {
         PickDestination action = null;
         try {
@@ -276,22 +340,28 @@ public class InputChecker {
                 }
                 if(action == null) {
                     cli.showError("Error: merged island! Choose a valid number ID");
-                    cli.askIsland();
+                    cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
                 }
 
             } else {
                 cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                         "the remaining islands");
-                cli.askIsland();
+                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
             }
         } catch(NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");
-            cli.askIsland();
+            cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
         }
 
         return action;
     }
 
+    /**
+     * Method checkStudent checks if the student received from the user is a valid student in entrance or on character cards,
+     * then it sends it to server
+     * @param studentType input
+     * @return user action PickStudent
+     */
     public PickStudent checkStudent(String studentType) {
         PickStudent action = null;
         if(modelView.isJesterAction()) {
@@ -322,13 +392,13 @@ public class InputChecker {
                 if (isStudentInEntrance(studentType)) {
                     PawnType type = toPawnType(studentType);
                     if(type == null) {
-                        cli.askStudent();
+                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     } else {
                         action = new PickStudent(new Student(type));
                     }
                 } else {
                     cli.showError("No such student in your entrance! Please enter a valid student!");
-                    cli.askStudent();
+                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                 }
             }
         } else if(modelView.isMinestrelAction()) {
@@ -343,7 +413,7 @@ public class InputChecker {
                 if (isStudentInEntrance(studentType)) {
                     PawnType type = toPawnType(studentType);
                     if(type == null) {
-                        cli.askStudent();
+                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                     } else {
                         action = new PickStudent(new Student(type));
                     }
@@ -374,6 +444,7 @@ public class InputChecker {
             }
 
         } else if(modelView.isMonkAction()) {
+            System.out.println("Controllo monk");
             if(isStudentInMonk(studentType)) {
                 PawnType type = toPawnType(studentType);
                 if(type == null) {
@@ -385,6 +456,7 @@ public class InputChecker {
                         }
                     }
                 } else {
+                    System.out.println("Invio monk student " + type);
                     action = new PickStudent(new Student(type));
                 }
             }  else {
@@ -400,21 +472,27 @@ public class InputChecker {
             if (isStudentInEntrance(studentType)) {
                 PawnType type = toPawnType(studentType);
                 if(type == null) {
-                    cli.askStudent();
+                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
                 } else {
                     action = new PickStudent(new Student(type));
                 }
             } else {
                 cli.showError("No such student in your entrance! Please enter a valid student!");
-                cli.askStudent();
+                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
             }
         }
         return action;
 
     }
 
+    /**
+     * Method checkPawnType checks if the student typed by the user is a valid one, it's used for character cards
+     * @param pawnType input
+     * @return user action PickPawnType
+     */
     public PickPawnType checkPawnType(String pawnType) {
         PickPawnType action = null;
+        System.out.println("Entro in check");
         if(pawnType.toUpperCase().equalsIgnoreCase("GREEN") || pawnType.toUpperCase().equalsIgnoreCase("RED") || pawnType.toUpperCase().equalsIgnoreCase("YELLOW") || pawnType.toUpperCase().equalsIgnoreCase("PINK")  || pawnType.toUpperCase().equalsIgnoreCase("BLUE")) {
             action = new PickPawnType(toPawnType(pawnType));
         } else {
@@ -425,37 +503,50 @@ public class InputChecker {
         return action;
     }
 
+    /**
+     * Method checkCloud checks if the cloud typed by the user is a valid one,
+     * then it sends it to server
+     * @param input cloud ID
+     * @return user action PickCloud
+     */
     public PickCloud checkCloud(String input) {
         PickCloud action = null;
         int cloudID;
         try {
             cloudID = Integer.parseInt(input);
+            //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
+            //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
             if(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1).getStudents() != null) {
                 action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1));
             }
             else {
                 cli.showError("Error: the cloud has already been taken! Choose another one");
-                cli.askCloud();
+                cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
             }
         } catch(NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");
-            cli.askCloud();
+            cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
         }
 
         return action;
 
     }
 
+    /**
+     * Method checkCharacter checks if the character typed by the user is a valid one,
+     * then it sends it to server
+     * @param input character name
+     * @return user action PickCharacter
+     */
     public PickCharacter checkCharacter(String input) {
         PickCharacter action = null;
-        String coinsError = "You don't have enough coins... choose another card or none";
         switch(input.toUpperCase()) {
             case "HERALD" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
                     action = new PickCharacter(Characters.HERALD);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
 
             }
@@ -463,97 +554,105 @@ public class InputChecker {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
                     action = new PickCharacter(Characters.KNIGHT);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "CENTAUR" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
                     action = new PickCharacter(Characters.CENTAUR);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "FARMER" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
                     action = new PickCharacter(Characters.FARMER);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "FUNGARUS" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
                     action = new PickCharacter(Characters.FUNGARUS);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "JESTER" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
                     action = new PickCharacter(Characters.JESTER);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "THIEF" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 3) {
                     action = new PickCharacter(Characters.THIEF);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "MINESTREL" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
                     action = new PickCharacter(Characters.MINESTREL);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "MONK" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
                     action = new PickCharacter(Characters.MONK);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "GRANNY_HERBS" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
                     action = new PickCharacter(Characters.GRANNY_HERBS);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "MAGIC_POSTMAN" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 1) {
                     action = new PickCharacter(Characters.MAGIC_POSTMAN);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
             case "SPOILED_PRINCESS" -> {
                 if(modelView.getGameCopy().getCurrentPlayer().getMyCoins() >= 2) {
                     action = new PickCharacter(Characters.SPOILED_PRINCESS);
                 } else {
-                    cli.showError(coinsError);
-                    cli.askCharacterCard();
+                    cli.showError("You don't have enough coins... choose another card or none");
+                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
                 }
             }
-            case "NONE" -> action = new PickCharacter(null);
+            case "NONE" -> {
+                action = new PickCharacter(null);
+            }
 
-            case "QUIT" -> quitGame();
+            case "QUIT" -> {
+                quitGame();
+            }
+            default -> action = null;
         }
         return action;
     }
 
+    /**
+     * Method quitGame disconnects the game from the server
+     */
     public void quitGame() {
         clientConnection.sendUserInput(new QuitGame());
         System.err.println("Disconnected from the server.");
