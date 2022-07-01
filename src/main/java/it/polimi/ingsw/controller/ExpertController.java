@@ -113,6 +113,7 @@ public class ExpertController {
             studentTwo = null;
             if(jesterReqNum == 0) {
                 jesterEffect = false;
+                turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
                 turnController.askMotherNatureMoves();
             } else {
                 turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
@@ -305,6 +306,7 @@ public class ExpertController {
 
             if(minestrelReqNum == 0) {
                 minestrelEffect = false;
+                turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
                 turnController.askMotherNatureMoves();
             } else {
                 turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
@@ -341,6 +343,7 @@ public class ExpertController {
             }
         }
         grannyHerbsEffect = false;
+        turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
         turnController.askMotherNatureMoves();
     }
     //------------------------------------------------------------------------------------------------------------------

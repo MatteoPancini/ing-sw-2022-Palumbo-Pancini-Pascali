@@ -637,8 +637,9 @@ public class MainSceneController implements GUIController {
      */
     public void askCharacterActionNumber() {
         descriptionLabel.setText("Choose the number of actions you want to play");
-        pickCharacterActionNumberBox.getItems().clear();
+        descriptionLabel.setVisible(true);
         pickCharacterActionNumberBox.setVisible(true);
+        pickCharacterActionNumberBox.getItems().clear();
         if(gui.getModelView().isJesterAction()) {
             for(int i = 1; i <= 3; i++) {
                 pickCharacterActionNumberBox.getItems().add(String.valueOf(i));
@@ -656,8 +657,12 @@ public class MainSceneController implements GUIController {
      * @param e selection event
      */
     public void pickCharacterMoves(ActionEvent e) {
-        int moves = Integer.parseInt(pickCharacterActionNumberBox.getValue());
-        gui.getClientConnection().sendUserInput(new PickCharacterActionsNum(moves));
+        try {
+            int characterMoves = Integer.parseInt(pickCharacterActionNumberBox.getValue());
+            gui.getClientConnection().sendUserInput(new PickCharacterActionsNum(characterMoves));
+        } catch(NumberFormatException e1) {
+            askCharacterActionNumber();
+        }
     }
 
     /**
@@ -2448,9 +2453,10 @@ public class MainSceneController implements GUIController {
         } else if(gui.getModelView().isMinestrelAction()) {
             if(gui.getModelView().getCharacterAction() % 2 == 0) {
                 askStudentDiningRoom();
+            } else {
+                askStudentEntrance(gui.getModelView().getGameCopy().getCurrentPlayer().getBoard().getEntrance());
             }
             gui.getModelView().setCharacterAction(gui.getModelView().getCharacterAction() + 1);
-
         } else if(gui.getModelView().isPrincessAction()) {
             for(CharacterCard c : gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters()) {
                 if(c.getName() == Characters.SPOILED_PRINCESS) {
