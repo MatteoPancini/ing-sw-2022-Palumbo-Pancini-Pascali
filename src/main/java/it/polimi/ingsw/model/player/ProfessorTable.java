@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class ProfessorTable represents the professors' table
+ */
 public class ProfessorTable implements Serializable {
     private ArrayList<BoardCell> profTable = new ArrayList<>();
 

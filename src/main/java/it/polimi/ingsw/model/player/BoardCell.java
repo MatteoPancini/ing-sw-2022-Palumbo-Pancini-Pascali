@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 
 import java.io.Serializable;
 
+/**
+ * Class BoardCell represents the single cell of a table in the board, containing the students
+ */
 public class BoardCell implements Serializable {
     private PawnType boardCellType;
     private boolean coinCell;
