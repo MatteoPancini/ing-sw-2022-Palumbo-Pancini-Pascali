@@ -63,7 +63,6 @@ public class Parser implements PropertyChangeListener {
         }
 
         if(action!=null) {
-            System.out.println("invio action");
             clientConnection.sendUserInput(action);
             return true;
         }

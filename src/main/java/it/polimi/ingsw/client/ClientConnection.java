@@ -110,7 +110,6 @@ public class ClientConnection {
     public void sendUserInput(Message message) {
         SerializedMessage userInput = new SerializedMessage(message);
         try {
-            System.out.println("Invio messaggio al server: " + userInput.message.toString());
             outputStream.reset();
             outputStream.writeObject(userInput);
             outputStream.flush();
@@ -127,11 +126,9 @@ public class ClientConnection {
     public void sendUserInput(UserAction action) {
         SerializedMessage userInput = new SerializedMessage(action);
         try {
-            System.out.println("Invio : " + userInput.userAction.toString());
             outputStream.reset();
             outputStream.writeObject(userInput);
             outputStream.flush();
-            System.out.println("action inviata");
         } catch (IOException e) {
             System.err.println("Error during send process.");
         }

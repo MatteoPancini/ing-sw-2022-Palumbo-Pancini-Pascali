@@ -111,7 +111,6 @@ public class InputChecker {
                 }
             }
             case "FOX" -> {
-                System.out.println("Entro in foxx");
 
                 if (modelView.getGameCopy().canPlayAssistant(Assistants.FOX)) {
                     action = new PickAssistant(Action.PICK_ASSISTANT, Assistants.FOX);
@@ -139,7 +138,6 @@ public class InputChecker {
     public PickMovesNumber checkMoves(String input) {
         PickMovesNumber action = null;
         int maxMoves;
-        System.out.println("My input: " + input);
         if(modelView.isMagicPostmanAction()) {
             maxMoves = (modelView.getGameCopy().getCurrentPlayer().getChosenAssistant().getMoves() + 2);
         } else {
@@ -147,7 +145,6 @@ public class InputChecker {
         }
         try {
             int moves = Integer.parseInt(input);
-            System.out.println("Parso " + moves);
             if (moves > 0 && moves <= maxMoves) {
                 action = new PickMovesNumber(moves);
                 if(modelView.isMagicPostmanAction()) {
@@ -160,7 +157,6 @@ public class InputChecker {
             cli.showError("Error: NumberFormatException. Please insert a number!");
             cli.askMoves();
         }
-
 
         return action;
     }
@@ -276,7 +272,6 @@ public class InputChecker {
     public boolean checkStudentInDiningRoom(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
-        //System.out.println("Tipo passato: " + type.toString());
         for(Table t : modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom().getDiningRoom()) {
             if(t.getTableStudentsNum() > 0) {
                 if(t.getDiningTable().get(0).getBoardCellType() == type) {
@@ -296,7 +291,6 @@ public class InputChecker {
      */
     public PickDestination checkDestination(String destination) {
         PickDestination action = null;
-        System.out.println(destination.toUpperCase());
         switch(destination.toUpperCase()) {
             case "DININGROOM" -> action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
             case "ISLAND" -> {
@@ -436,7 +430,6 @@ public class InputChecker {
             }
 
         } else if(modelView.isMonkAction()) {
-            System.out.println("Controllo monk");
             if(isStudentInMonk(studentType)) {
                 PawnType type = toPawnType(studentType);
                 if(type == null) {
@@ -448,7 +441,6 @@ public class InputChecker {
                         }
                     }
                 } else {
-                    System.out.println("Invio monk student " + type);
                     action = new PickStudent(new Student(type));
                 }
             }  else {
@@ -484,7 +476,6 @@ public class InputChecker {
      */
     public PickPawnType checkPawnType(String pawnType) {
         PickPawnType action = null;
-        System.out.println("Entro in check");
         if(pawnType.equalsIgnoreCase("GREEN") || pawnType.equalsIgnoreCase("RED") || pawnType.equalsIgnoreCase("YELLOW") || pawnType.equalsIgnoreCase("PINK")  || pawnType.equalsIgnoreCase("BLUE")) {
             action = new PickPawnType(toPawnType(pawnType));
         } else {
