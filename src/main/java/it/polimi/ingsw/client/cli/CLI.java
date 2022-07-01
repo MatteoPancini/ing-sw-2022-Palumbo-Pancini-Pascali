@@ -317,7 +317,6 @@ public class CLI implements ListenerInterface {
     public String printStudentsOnCloud(int ID) {
         StringBuilder str = new StringBuilder();
         for(Student s : modelView.getGameCopy().getGameBoard().getClouds().get(ID - 1).getStudents()) {
-            //System.out.print("-" + s.getType());
             str.append(printColor(s.getType())).append("•").append(ANSI_RESET);
         }
         return str.toString();
@@ -368,7 +367,6 @@ public class CLI implements ListenerInterface {
      */
     public void showEntrance() {
         System.out.println(">Here's a summary of the students in your entrance: ");
-        //System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
@@ -748,9 +746,6 @@ public class CLI implements ListenerInterface {
         System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
 
-    /*public void noWinnerGame() {
-        System.exit(0);
-    }*/
 
     /**
      * Method chooseExpertMode reads the player's expert mode choice and sends it to the server
@@ -1017,7 +1012,6 @@ public class CLI implements ListenerInterface {
     @Override
     public void propertyChange(PropertyChangeEvent changeEvent) {
         String serverCommand = (changeEvent.getNewValue() != null) ? changeEvent.getNewValue().toString() : null;
-        //System.out.println("PropertyChange arrivato: " + serverCommand);
         switch(changeEvent.getPropertyName()) {
             case "InitialGamePhase" -> {
                 assert serverCommand != null;

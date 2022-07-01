@@ -231,7 +231,6 @@ public class TurnController {
     public void askStudentDestination() {
         RequestAction studentDestinationAction = new RequestAction(Action.PICK_DESTINATION);
         gameHandler.sendSinglePlayer(studentDestinationAction, currentPlayer.getPlayerID());
-        //gameHandler.sendExcept(new DynamicAnswer("Please wait: player " + currentPlayer.getNickname() + " is choosing where to move his student!", false), currentPlayer.getPlayerID());
     }
 
     /**
