@@ -158,7 +158,7 @@ public class Controller implements PropertyChangeListener {
         }
         turnController.setCurrentPlayer(game.getCurrentPlayer());
 
-        gameHandler.sendBroadcast(new DynamicAnswer("REMEMBER: During your turn type \"QUIT\" to quit the game!\n", false));
+        gameHandler.sendBroadcast(new DynamicAnswer("REMEMBER: During your turn \"QUIT\" to quit the game!\n", false));
         turnController.startPianificationPhase();
     }
 

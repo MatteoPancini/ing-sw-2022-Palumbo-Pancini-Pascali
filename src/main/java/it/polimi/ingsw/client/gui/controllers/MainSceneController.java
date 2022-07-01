@@ -626,8 +626,8 @@ public class MainSceneController implements GUIController {
 
             case "PICK_CHARACTER_NUMBER" -> askCharacterActionNumber();
             default -> {
-                descriptionLabel.setVisible(false);
-                System.out.println("Update without user actions (server command not in switch cases)");
+                descriptionLabel.setText("Wait for player " + gui.getModelView().getGameCopy().getCurrentPlayer().getNickname() + " to complete their action phase");
+                descriptionLabel.setVisible(true);
             }
         }
     }
@@ -915,6 +915,7 @@ public class MainSceneController implements GUIController {
      */
     public void askCharacter() {
         descriptionLabel.setText("Pick a character or play \"No Character\"");
+        descriptionLabel.setVisible(true);
         noCharacterButton.setVisible(true);
         if(gui.getModelView().getGameCopy().getCurrentPlayer().getMyCoins() >= gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(0).getInitialCost()) {
             character1Button.setVisible(true);
@@ -2205,6 +2206,7 @@ public class MainSceneController implements GUIController {
         pinkLabelCloud4.setVisible(false);
         blueLabelCloud4.setVisible(false);
         descriptionLabel.setText("Pick a cloud");
+        descriptionLabel.setVisible(true);
         for(CloudTile c : gui.getModelView().getGameCopy().getGameBoard().getClouds()) {
             if(c.getID() == 1) {
                 if(c.getStudents() != null) {
@@ -2756,7 +2758,7 @@ public class MainSceneController implements GUIController {
         gui.getClientConnection().sendUserInput(new PickCharacter(gui.getModelView().getGameCopy().getGameBoard().getPlayableCharacters().get(2).getName()));
     }
     /**
-     * Method playNoCharacter handles the click event on no character button
+     * Method playNoCharacter handles the click event on the no character button
      */
     public void playNoCharacter() {
         gui.getClientConnection().sendUserInput(new PickCharacter(null));

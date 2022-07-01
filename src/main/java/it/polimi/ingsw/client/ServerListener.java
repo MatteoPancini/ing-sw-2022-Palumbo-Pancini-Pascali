@@ -7,7 +7,7 @@ import java.net.Socket;
 import it.polimi.ingsw.messages.servertoclient.SerializedAnswer;
 
 /**
- * ServerListener class is used by client to always listen to server messages
+ * ServerListener class is used by the client to always listen to server messages
  */
 public class ServerListener implements Runnable {
     private final Socket socket;
@@ -27,7 +27,7 @@ public class ServerListener implements Runnable {
 
 
     /**
-     * method used to read an answer from the server, triggering the action handler class
+     * Method used to read an answer from the server, triggering the action handler class
      *
      * @param answerFromServer -> answer received from server
      */
@@ -70,7 +70,6 @@ public class ServerListener implements Runnable {
             } catch(IOException | ClassNotFoundException e) {
                 System.out.println("Ooops... player disconnected or server is currently out :(");
                 System.out.println("Disconnecting from the game... Please try again later!");
-
                 closeConnection();
                 break;
             }
@@ -78,7 +77,7 @@ public class ServerListener implements Runnable {
     }
 
     /**
-     * thread that handles the connection between client and server
+     * Thread that handles the connection between client and server
      */
     @Override
     public void run() {

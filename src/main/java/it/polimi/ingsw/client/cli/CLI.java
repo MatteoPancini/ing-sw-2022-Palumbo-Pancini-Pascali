@@ -1021,10 +1021,9 @@ public class CLI implements ListenerInterface {
         switch(changeEvent.getPropertyName()) {
             case "InitialGamePhase" -> {
                 assert serverCommand != null;
-                //System.out.println("Sono in property change e ho letto:" + serverCommand);
                 initialGamePhaseHandler(serverCommand);
             }
-            case "DynamicAnswer" -> //System.out.println("Sono in propertyChange e ho letto una Dynamic Answer");
+            case "DynamicAnswer" ->
                     showServerMessage(modelView.getServerAnswer());
             case "ActionPhase" -> {
                 assert serverCommand != null;
@@ -1039,7 +1038,6 @@ public class CLI implements ListenerInterface {
                     }
                     showIslandsTable();
                     showClouds();
-                    //showMotherNature();
                     showAvailableCharacters();
                     showCoins();
                     showOtherDiningRooms();

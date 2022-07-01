@@ -75,7 +75,6 @@ public class ActionHandler {
                 view.firePropertyChange(updateProperty, null, answer.getMessage());
             }
         } else if(answer instanceof StartAction) {
-            System.out.println("Setting Action");
             modelView.setActivateInput(true);
             modelView.setAction(true);
             modelView.setPianification(false);
