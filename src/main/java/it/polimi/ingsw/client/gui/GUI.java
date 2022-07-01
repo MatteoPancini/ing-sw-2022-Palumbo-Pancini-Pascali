@@ -266,7 +266,17 @@ public class GUI extends Application implements ListenerInterface {
         infoAlert.setTitle("Game Over");
         infoAlert.setContentText("Congratulations: you are the winner! Thanks for playing Eriantys!");
         infoAlert.show();
+        quitGame();
     }
+
+    /**
+     * Method quitGame quits the game when the quit button is pressed
+     */
+    public void quitGame() {
+        System.out.println("Thanks for playing! See you next time!");
+        System.exit(0);
+    }
+
     /**
      * Method showLoseGame shows an info alert warning that the game is over and the user has lost
      */
