@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.enumerations.PawnType;
 
+/**
+ * Class used to implement the tables
+ */
 public class Table implements Serializable {
     private ArrayList<BoardCell> diningTable = new ArrayList<>();
     private int lastPosition = 0;

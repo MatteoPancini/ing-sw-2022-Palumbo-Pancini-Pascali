@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class used to implement and instantiate the character deck of the game
+ */
 public class CharacterDeck implements Serializable {
     private static List<CharacterCard> cards;
     private static Game game;

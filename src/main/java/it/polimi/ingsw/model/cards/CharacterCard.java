@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.enumerations.Characters;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class used to implement a character card and assign its attributes
+ */
 public class CharacterCard implements Serializable {
     private final Characters name;
     private int initialCost;

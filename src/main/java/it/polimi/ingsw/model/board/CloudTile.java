@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.enumerations.CloudSide;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class used to implement the cloud tiles
+ */
 public class CloudTile implements Serializable {
     private CloudSide side;
     private int ID;

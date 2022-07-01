@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class used to implement and instantiate the assistant deck of the game
+ */
 public class AssistantDeck implements Serializable {
     private List<AssistantCard> deck;
 
