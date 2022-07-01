@@ -9,6 +9,9 @@ import it.polimi.ingsw.model.player.Player;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class Game is the main class of the game
+ */
 public class Game implements Serializable {
     private GameBoard gameBoard;
     private int playersNumber;

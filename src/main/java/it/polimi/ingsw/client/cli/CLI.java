@@ -10,23 +10,19 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
-import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -37,12 +33,10 @@ import static it.polimi.ingsw.constants.Constants.*;
 /**
  * Class CLI manages the game if the user decides to play through command line
  */
-public class CLI implements Runnable, ListenerInterface {
+public class CLI implements ListenerInterface {
     private final Scanner in;
-    private static PrintStream out;
     private ClientConnection clientConnection;
     private final ModelView modelView;
-    private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private boolean firstTurn = true;
@@ -55,9 +49,7 @@ public class CLI implements Runnable, ListenerInterface {
      */
     public CLI() {
         in = new Scanner(System.in);
-        out = new PrintStream(System.out);
         modelView = new ModelView(this);
-        activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
     }
 
@@ -82,58 +74,75 @@ public class CLI implements Runnable, ListenerInterface {
         return towers;
     }
 
-    /**
-     * Method setActiveGame set the game to active or not active
-     * @param activeGame boolean active game
-     */
-    public void setActiveGame(boolean activeGame) {
-        this.activeGame = activeGame;
-    }
-
     public Scanner getIn() {
         return in;
     }
 
+    /**
+     * Method printYellowStudentsOnIsland prints the number of yellow students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printYellowStudentsOnIsland(Island isl) {
         int y = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("YELLOW")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("YELLOW")) {
                 y++;
             }
         }
         return y;
     }
+    /**
+     * Method printBlueStudentsOnIsland prints the number of blue students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printBlueStudentsOnIsland(Island isl) {
         int b = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("BLUE")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("BLUE")) {
                 b++;
             }
         }
         return b;
     }
+    /**
+     * Method printPinkStudentsOnIsland prints the number of pink students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printPinkStudentsOnIsland(Island isl) {
         int p = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("PINK")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("PINK")) {
                 p++;
             }
         }
         return p;
     }
+    /**
+     * Method printGreenStudentsOnIsland prints the number of green students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printGreenStudentsOnIsland(Island isl) {
         int g = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("GREEN")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("GREEN")) {
                 g++;
             }
         }
         return g;
     }
+    /**
+     * Method printRedStudentsOnIsland prints the number of red students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printRedStudentsOnIsland(Island isl) {
         int r = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("RED")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("RED")) {
                 r++;
             }
         }
@@ -159,26 +168,10 @@ public class CLI implements Runnable, ListenerInterface {
             st.setShowVerticalLines(true);
             st.setHeaders(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getName().toString());
             st.addRow("Effect: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getEffect());
-            st.addRow("Cost: " + Integer.toString(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost()));
+            st.addRow("Cost: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost());
             st.print();
         }
     }
-
-
-    /*public void showBoard() {
-        System.out.println("Here's a summary of your board: ");
-        System.out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasGreenProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasYellowProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasPinkProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-    }*/
-
     /**
      * Method studentsOnIsland shows the students on a given island
      * @param i island
@@ -219,7 +212,7 @@ public class CLI implements Runnable, ListenerInterface {
             if (stud[j] != null) {
                 if(j==0) {
 
-                    s = new StringBuilder(stud[0].toString());
+                    s = new StringBuilder(stud[0]);
                 }
                 else {
                     s.append(", ").append(stud[j]);
@@ -246,10 +239,10 @@ public class CLI implements Runnable, ListenerInterface {
                     for(int i=0; i < merged.length; i++) {
                         if (merged[i] != null) {
                             if(i==0) {
-                                s = new StringBuilder(merged[0].toString());
+                                s = new StringBuilder(merged[0]);
                             }
                             else {
-                                s.append(", ").append(merged[i].toString());
+                                s.append(", ").append(merged[i]);
                             }
                         }
                     }
@@ -270,7 +263,7 @@ public class CLI implements Runnable, ListenerInterface {
 
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
             if(modelView.getGameCopy().getGameBoard().getIslands().get(i).getNoEntry()) {
-                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()) + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+                st.addRow(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID() + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
             } else {
                 st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
 
@@ -451,16 +444,16 @@ public class CLI implements Runnable, ListenerInterface {
         CLITable st = new CLITable();
 
         if(modelView.isFourPlayers()) {
-            st.setHeaders(p.getNickname().toString() + " team " + p.getIdTeam());
+            st.setHeaders(p.getNickname() + " team " + p.getIdTeam());
         } else {
-            st.setHeaders(p.getNickname().toString());
+            st.setHeaders(p.getNickname());
         }
 
-        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_BLUE + "• [" + getPlayerDiningRoom(p.getNickname())[0] + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "• [" + getPlayerDiningRoom(p.getNickname())[1] + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_RED + "• [" + getPlayerDiningRoom(p.getNickname())[2] + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "• [" + getPlayerDiningRoom(p.getNickname())[3] + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "• [" + getPlayerDiningRoom(p.getNickname())[4] + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
         st.print();
     }
 
@@ -496,7 +489,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenMoves = input.nextLine();
-        if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenMoves.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
@@ -544,7 +537,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenCloud = input.nextLine();
-        if(chosenCloud.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenCloud.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
@@ -562,7 +555,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenStudent = input.nextLine();
-        if(chosenStudent.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
@@ -577,7 +570,7 @@ public class CLI implements Runnable, ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenDestination = input.nextLine();
-        if(chosenDestination.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenDestination.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
@@ -692,7 +685,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askCharacterStudents asks the character card and notifies the action parser through listeners
-     * @param card
+     * @param card character card
      */
     private void askCharacterStudents(CharacterCard card) {
         showCharacterStudent(card);
@@ -735,7 +728,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askStudentPrincess asks to choose a student from the character Spoiled Princess
-     * @param princess
+     * @param princess princess card
      */
     public void askStudentPrincess(CharacterCard princess) {
         System.out.println(">Choose a student from princess's students: ");
@@ -842,7 +835,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method showLoseMessage prints the lost message if the player has lost, and it prints the winner's nickname
-     * @param winnerNickname
+     * @param winnerNickname -> nickname of the winner
      */
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
@@ -905,17 +898,6 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener(new Parser(clientConnection, modelView));
     }
 
-    //TODO ?
-    @Override
-    public void run() {
-        userNicknameSetup();
-        while(true) {
-            if(!activeGame) {
-                break;
-            }
-        }
-        out.close();
-    }
 
     /**
      * Method endGameMessage shows the end game message and the application closing notification
@@ -928,7 +910,7 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method initialGamePhaseHandler is used in the CLI property change to switch between the different server commands and ask the corresponding
-     * @param serverCommand
+     * @param serverCommand command sent from server
      */
     public void initialGamePhaseHandler(String serverCommand) {
         switch(serverCommand) {
@@ -942,11 +924,11 @@ public class CLI implements Runnable, ListenerInterface {
                 chooseExpertMode();
             }
             case "RequestWizard"-> {
-                out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
-                ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> out.println(wizardLeft + ", "));
+                System.out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
+                ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> System.out.println(wizardLeft + ", "));
                 chooseWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             }
-            default -> out.println("Nothing to do");
+            default -> System.out.println("Nothing to do");
         }
     }
 
@@ -979,19 +961,13 @@ public class CLI implements Runnable, ListenerInterface {
         Constants.setAddress(ipServerAddress);
         Constants.setPort(serverPort);
         CLI cli = new CLI();
-
-        cli.run();
+        cli.userNicknameSetup();
     }
 
-    /*public void showCharacters(AssistantDeck deck) {
-        System.out.println(">Take a look at your deck before choosing: ");
-        System.out.println(deck.getDeck().size());
 
-        for(int i = 0; i < 10; i++) {
-            System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
-        }
-    }*/
-
+    /**
+     * Method showServerError shows an error message if occurred
+     */
     public void showServerError() {
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
             showError("Server is full... please try again later!");
@@ -1082,13 +1058,11 @@ public class CLI implements Runnable, ListenerInterface {
 
             case "WinMessage" -> {
                 assert serverCommand != null;
-                setActiveGame(false);
                 showWinMessage();
                 endGameMessage();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
-                setActiveGame(false);
                 showLoseMessage(changeEvent.getNewValue().toString());
                 endGameMessage();
 

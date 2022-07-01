@@ -4,7 +4,6 @@ import it.polimi.ingsw.client.cli.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
 /**
@@ -130,7 +129,7 @@ public class ModelView {
 
     /**
      * Constructor of model view class with CLI mode
-     * @param cli
+     * @param cli cli instance of the game
      */
     public ModelView(CLI cli)  {
         this.cli = cli;
@@ -140,7 +139,7 @@ public class ModelView {
 
     /**
      * Constructor of model view class with GUI mode
-     * @param gui
+     * @param gui gui instance of the game
      */
     public ModelView(GUI gui) {
         this.gui = gui;

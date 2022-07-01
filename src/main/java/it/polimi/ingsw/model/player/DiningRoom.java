@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.enumerations.PawnType;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class DiningRoom represents the dining room in the board, containing the students' tables
+ */
 public class DiningRoom implements Serializable {
     private ArrayList<Table> diningRoom = new ArrayList<>();
     private boolean takeCoin;

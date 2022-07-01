@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 
 import java.beans.PropertyChangeEvent;
@@ -11,9 +10,9 @@ import java.beans.PropertyChangeListener;
  * it parses the given input into the corresponding user action to be sent to the server
  */
 public class Parser implements PropertyChangeListener {
-    private ClientConnection clientConnection;
-    private ModelView modelView;
-    private InputChecker inputChecker;
+    private final ClientConnection clientConnection;
+    private final ModelView modelView;
+    private final InputChecker inputChecker;
 
 
     /**
@@ -38,40 +37,18 @@ public class Parser implements PropertyChangeListener {
      * @param actionName action received from the cli
      * @param chosenValue chosen value by the player
      * @return boolean value which tells if the action can be done, and it has been sent to the server
-     * @throws AlreadyPlayedAssistantException
      */
-    public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
-        //System.out.println("Entro in action");
-        UserAction action = null;
-        //System.out.println(actionName.toUpperCase());
+    public synchronized boolean action(String actionName, String chosenValue) {
+        UserAction action;
         switch(actionName.toUpperCase()) {
-            case "PICKASSISTANT" -> {
-                //System.out.println("Sono in pickAssistant");
-                action = inputChecker.checkAssistant(chosenValue);
-            }
-            case "PICKCLOUD" -> {
-                action = inputChecker.checkCloud(chosenValue);
-            }
-            case "PICKMOVESNUMBER" -> {
-                //System.out.println("Entro in pickmovesnumbero");
-                action = inputChecker.checkMoves(chosenValue);
-            }
-            case "PICKSTUDENT" -> {
-                //System.out.println("Entro in pickStudent");
-                action = inputChecker.checkStudent(chosenValue);
-            }
-            case "PICKDESTINATION" -> {
-                action = inputChecker.checkDestination(chosenValue);
-            }
-            case "PICKCHARACTER" -> {
-                action = inputChecker.checkCharacter(chosenValue);
-            }
-            case "PICKISLAND" -> {
-                action = inputChecker.checkIsland(chosenValue);
-            }
-            case "PICKPAWNTYPE" -> {
-                action = inputChecker.checkPawnType(chosenValue);
-            }
+            case "PICKASSISTANT" -> action = inputChecker.checkAssistant(chosenValue);
+            case "PICKCLOUD" -> action = inputChecker.checkCloud(chosenValue);
+            case "PICKMOVESNUMBER" -> action = inputChecker.checkMoves(chosenValue);
+            case "PICKSTUDENT" -> action = inputChecker.checkStudent(chosenValue);
+            case "PICKDESTINATION" -> action = inputChecker.checkDestination(chosenValue);
+            case "PICKCHARACTER" -> action = inputChecker.checkCharacter(chosenValue);
+            case "PICKISLAND" -> action = inputChecker.checkIsland(chosenValue);
+            case "PICKPAWNTYPE" -> action = inputChecker.checkPawnType(chosenValue);
             case "QUIT" -> {
                 inputChecker.quitGame();
                 return true;
@@ -101,12 +78,8 @@ public class Parser implements PropertyChangeListener {
         if (!modelView.getActiveInput()) {
             modelView.getCli().showError("Input error: it's not your turn!");
         } else {
-            try {
-                if (!action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    modelView.setActivateInput(true);
-                }
-            } catch (AlreadyPlayedAssistantException e) {
-                e.printStackTrace();
+            if (!action(evt.getPropertyName(), evt.getNewValue().toString())) {
+                modelView.setActivateInput(true);
             }
         }
     }
