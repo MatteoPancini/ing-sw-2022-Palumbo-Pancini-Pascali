@@ -38,5 +38,4 @@ public class SchoolBoard implements Serializable {
     }
 
     public void setEntrance(Entrance entrance){ this.entrance = entrance; }
-
 }

@@ -28,6 +28,5 @@ public class Entrance implements Serializable {
                 break;
             }
         }
-        System.out.println("Rimuovo studente -> " + students.size());
     }
 }

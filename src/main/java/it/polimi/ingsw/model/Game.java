@@ -105,16 +105,16 @@ public class Game implements Serializable {
                 if(currentPlayer.getAssistantDeck().getDeck().size() != gameBoard.getLastAssistantUsed().size()) {
                     return false;
                 } else {
-                    int trovate = 0;
+                    int found = 0;
                     for(AssistantCard myCard : currentPlayer.getAssistantDeck().getDeck()) {
                         for(AssistantCard cardDeck : gameBoard.getLastAssistantUsed()) {
                             if(cardDeck.getName() == myCard.getName()) {
-                                trovate++;
+                                found++;
                                 break;
                             }
                         }
                     }
-                    if(trovate == currentPlayer.getAssistantDeck().getDeck().size()) {
+                    if(found == currentPlayer.getAssistantDeck().getDeck().size()) {
                         return true;
                     } else {
                         return false;

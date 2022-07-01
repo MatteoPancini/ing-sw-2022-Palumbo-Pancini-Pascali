@@ -37,8 +37,6 @@ public class Table implements Serializable {
     public void removeStudent() {
         diningTable.get(lastPosition - 1).removeStudent();
         lastPosition--;
-        System.err.println(lastPosition);
-
     }
 
     /**
