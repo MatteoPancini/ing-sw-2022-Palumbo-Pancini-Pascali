@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.player.TowerArea;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class used to implement the islands
+ */
 public class Island implements Serializable {
     private GameBoard board = null;
     private int islandID;
@@ -23,7 +26,6 @@ public class Island implements Serializable {
         tower = null;
         mergedIsland = new ArrayList<>();
         mergedIsland.add(this);
-        System.out.println(mergedIsland.size());
         students = new ArrayList<>();
         noEntry = false;
         owner = null;
@@ -81,8 +83,6 @@ public class Island implements Serializable {
 
         }
 
-        System.out.println("After: " + iAfter.getIslandID() + ", Before: " + iBefore.getIslandID());
-
         for(Island i : mergedIsland) {
             iBefore.getMergedIslands().add(i);
         }
@@ -120,8 +120,6 @@ public class Island implements Serializable {
         }
         board.decrementIslandCounter();
         board.decrementIslandCounter();
-
-
     }
 
     /**
@@ -269,7 +267,6 @@ public class Island implements Serializable {
      */
     public void moveTowerToArea(TowerArea towerArea) {
         for(Tower t : mergedTowers) {
-            System.out.println(t.getColor());
             towerArea.addTowers(t);
         }
 

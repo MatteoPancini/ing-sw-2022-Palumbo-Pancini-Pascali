@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model.board;
 import java.io.Serializable;
 
+/**
+ * Class used to implement mother nature
+ */
 public class MotherNature implements Serializable {
     private int position;
     private static MotherNature motherNature = null;
@@ -18,8 +21,5 @@ public class MotherNature implements Serializable {
         return position;
     }
 
-    public void setPosition(int position) {
-        System.out.println("Setting MN in island " + position);
-        this.position = position;
-    }
+    public void setPosition(int position) { this.position = position; }
 }

@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 
 import java.io.Serializable;
 
+/**
+ * Class used to implement an assistant card and assign its attributes
+ */
 public class AssistantCard implements Serializable {
     private final Assistants name;
     private int orderValue;

@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.io.Serializable;
 
+/**
+ * Class used to implement the professors
+ */
 public class Professor implements Serializable {
     private final PawnType type;
     private Player owner;

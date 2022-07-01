@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
+/**
+ * Class used to implement a game board
+ */
 public class GameBoard implements Serializable {
     private Game game;
     private ArrayList<CloudTile> clouds = new ArrayList<>();
@@ -31,7 +34,6 @@ public class GameBoard implements Serializable {
                 this.clouds.add(new CloudTile(CloudSide.TWO_FOUR));
             }
             clouds.get(i -1).setID(i);
-            System.out.println(clouds.get(i - 1).getSide().toString() + clouds.get(i-1).getID());
         }
 
 
@@ -103,7 +105,6 @@ public class GameBoard implements Serializable {
 
         for(CharacterCard c : playableCharacters) {
             c.setResetCost(c.getInitialCost());
-            System.out.println("RESET: " + c.getResetCost());
         }
     }
 

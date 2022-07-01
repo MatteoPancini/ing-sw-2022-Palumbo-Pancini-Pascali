@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.enumerations.Characters;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class used to implement a character card and assign its attributes
+ */
 public class CharacterCard implements Serializable {
     private final Characters name;
     private int initialCost;
@@ -62,8 +65,6 @@ public class CharacterCard implements Serializable {
     public void removeStudent(Student stud) {
         for(Student s : students) {
             if(s.getType() == stud.getType()) {
-                System.out.println("Removing stud " + stud.getType());
-
                 students.remove(s);
                 break;
             }
@@ -75,7 +76,6 @@ public class CharacterCard implements Serializable {
      * @param stud -> student to add
      */
     public void addStudent(Student stud) {
-        System.out.println("Adding stud " + stud.getType());
         students.add(stud);
     }
 }
