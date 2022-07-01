@@ -7,6 +7,9 @@ import it.polimi.ingsw.server.Server;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Main class of the game, executable file of the jar
+ */
 public class Eriantys {
     public static void main(String[] args) {
         System.out.println("Hi! Welcome to Eriantys!");

@@ -37,9 +37,8 @@ import static it.polimi.ingsw.constants.Constants.*;
 /**
  * Class CLI manages the game if the user decides to play through command line
  */
-public class CLI implements Runnable, ListenerInterface {
+public class CLI implements ListenerInterface {
     private final Scanner in;
-    private static PrintStream out;
     private ClientConnection clientConnection;
     private final ModelView modelView;
     private boolean activeGame;
@@ -55,7 +54,6 @@ public class CLI implements Runnable, ListenerInterface {
      */
     public CLI() {
         in = new Scanner(System.in);
-        out = new PrintStream(System.out);
         modelView = new ModelView(this);
         activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
@@ -94,6 +92,11 @@ public class CLI implements Runnable, ListenerInterface {
         return in;
     }
 
+    /**
+     * Method printYellowStudentsOnIsland prints the number of yellow students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printYellowStudentsOnIsland(Island isl) {
         int y = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -103,6 +106,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return y;
     }
+    /**
+     * Method printBlueStudentsOnIsland prints the number of blue students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printBlueStudentsOnIsland(Island isl) {
         int b = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -112,6 +120,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return b;
     }
+    /**
+     * Method printPinkStudentsOnIsland prints the number of pink students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printPinkStudentsOnIsland(Island isl) {
         int p = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -121,6 +134,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return p;
     }
+    /**
+     * Method printGreenStudentsOnIsland prints the number of green students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printGreenStudentsOnIsland(Island isl) {
         int g = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -130,6 +148,11 @@ public class CLI implements Runnable, ListenerInterface {
         }
         return g;
     }
+    /**
+     * Method printRedStudentsOnIsland prints the number of red students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printRedStudentsOnIsland(Island isl) {
         int r = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -163,22 +186,6 @@ public class CLI implements Runnable, ListenerInterface {
             st.print();
         }
     }
-
-
-    /*public void showBoard() {
-        System.out.println("Here's a summary of your board: ");
-        System.out.println(Constants.ANSI_GREEN + "Green = " + modelView.getGreenStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasGreenProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(Constants.ANSI_RED + "Red = " + modelView.getRedStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_YELLOW + "Yellow = " + modelView.getYellowStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasYellowProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_PURPLE + "Pink = " + modelView.getPinkStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasPinkProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-        System.out.println(ANSI_BLUE + "Blue = " + modelView.getBlueStudents(modelView.getGameCopy().getCurrentPlayer()) + " - Professor : "
-                + modelView.hasRedProfessor(modelView.getGameCopy().getCurrentPlayer()) + ANSI_RESET);
-    }*/
-
     /**
      * Method studentsOnIsland shows the students on a given island
      * @param i island
@@ -905,17 +912,6 @@ public class CLI implements Runnable, ListenerInterface {
         virtualClient.addPropertyChangeListener(new Parser(clientConnection, modelView));
     }
 
-    //TODO ?
-    @Override
-    public void run() {
-        userNicknameSetup();
-        while(true) {
-            if(!activeGame) {
-                break;
-            }
-        }
-        out.close();
-    }
 
     /**
      * Method endGameMessage shows the end game message and the application closing notification
@@ -942,11 +938,11 @@ public class CLI implements Runnable, ListenerInterface {
                 chooseExpertMode();
             }
             case "RequestWizard"-> {
-                out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
-                ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> out.println(wizardLeft + ", "));
+                System.out.println(((WizardAnswer) modelView.getServerAnswer()).getMessage() + "\nRemaining:");
+                ((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft().forEach(wizardLeft -> System.out.println(wizardLeft + ", "));
                 chooseWizard(((WizardAnswer) modelView.getServerAnswer()).getWizardsLeft());
             }
-            default -> out.println("Nothing to do");
+            default -> System.out.println("Nothing to do");
         }
     }
 
@@ -979,19 +975,13 @@ public class CLI implements Runnable, ListenerInterface {
         Constants.setAddress(ipServerAddress);
         Constants.setPort(serverPort);
         CLI cli = new CLI();
-
-        cli.run();
+        cli.userNicknameSetup();
     }
 
-    /*public void showCharacters(AssistantDeck deck) {
-        System.out.println(">Take a look at your deck before choosing: ");
-        System.out.println(deck.getDeck().size());
 
-        for(int i = 0; i < 10; i++) {
-            System.out.println("(Name: " + String.valueOf(deck.getDeck().get(i).getName()) + ", " + "Value: " + deck.getDeck().get(i).getValue() + ", " + "Moves: " + deck.getDeck().get(i).getMoves());
-        }
-    }*/
-
+    /**
+     * Method showServerError shows an error message if occurred
+     */
     public void showServerError() {
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
             showError("Server is full... please try again later!");

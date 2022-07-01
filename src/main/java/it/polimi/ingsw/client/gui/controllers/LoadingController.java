@@ -4,18 +4,10 @@ package it.polimi.ingsw.client.gui.controllers;
 import it.polimi.ingsw.client.gui.GUI;
 import it.polimi.ingsw.messages.clienttoserver.ExpertModeChoice;
 import it.polimi.ingsw.messages.clienttoserver.PlayersNumberChoice;
-import it.polimi.ingsw.messages.clienttoserver.WizardChoice;
-import it.polimi.ingsw.model.enumerations.Wizards;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-
-
-import java.awt.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,7 +18,6 @@ public class LoadingController implements GUIController {
 
     private GUI gui;
     @FXML private Label status;
-    @FXML private ImageView loadingImage;
 
     public void setText(String text) {
         status.setText(text.toUpperCase());
@@ -35,7 +26,7 @@ public class LoadingController implements GUIController {
     /**
      * Method askPlayerNumber displays to the user the request of players number by showing an alert,
      * then it sends it to server
-     * @param serverReq
+     * @param serverReq request from server
      */
     public void askPlayerNumber(String serverReq) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
