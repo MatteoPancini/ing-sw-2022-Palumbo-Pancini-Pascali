@@ -33,6 +33,8 @@ public class ResizeController {
     public ResizeController (Pane pane) {
         calculateResize(pane, pane);
     }
+
+
     /**
      * Method calculateResize calculates resizing
      *
