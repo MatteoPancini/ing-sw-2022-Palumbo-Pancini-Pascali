@@ -286,7 +286,9 @@ public class GUI extends Application implements ListenerInterface {
     public void showEndGameNoWinner() {
         infoAlert.setTitle("Game Over");
         infoAlert.setContentText("The game is over without a winner! Thanks to have played Eriantys!");
-        infoAlert.show();
+        infoAlert.showAndWait();
+        quitGame();
+
     }
 
     /**
@@ -295,7 +297,7 @@ public class GUI extends Application implements ListenerInterface {
     public void showWinGame() {
         infoAlert.setTitle("Game Over");
         infoAlert.setContentText("Congratulations: you are the winner! Thanks for playing Eriantys!");
-        infoAlert.show();
+        infoAlert.showAndWait();
         quitGame();
     }
 
