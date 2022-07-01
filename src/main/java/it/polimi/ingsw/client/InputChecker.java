@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.CLI;
-import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.QuitGame;
 import it.polimi.ingsw.messages.clienttoserver.actions.*;
 import it.polimi.ingsw.model.board.Student;
@@ -13,9 +12,9 @@ import it.polimi.ingsw.model.player.Table;
  * Class that checks if the user inputs are correct and, if so, it returns the corresponding user action to the parser
  */
 public class InputChecker {
-    private ClientConnection clientConnection;
-    private ModelView modelView;
-    private CLI cli;
+    private final ClientConnection clientConnection;
+    private final ModelView modelView;
+    private final CLI cli;
 
     /**
      * Constructor that generates a new instance of the class only for the CLI
@@ -35,9 +34,8 @@ public class InputChecker {
      * then it returns the user action to the parser
      * @param input  assistant chosen
      * @return user action PickAssistant
-     * @throws AlreadyPlayedAssistantException exception
      */
-    public PickAssistant checkAssistant(String input) throws AlreadyPlayedAssistantException {
+    public PickAssistant checkAssistant(String input) {
         PickAssistant action = null;
         switch (input.toUpperCase()) {
             case "EAGLE" -> {
@@ -123,9 +121,7 @@ public class InputChecker {
                 }
             }
 
-            case "QUIT" -> {
-                quitGame();
-            }
+            case "QUIT" -> quitGame();
             default -> {
                 cli.showError("Error: you chose an assistant card already played by another player!");
                 cli.askAssistant();
@@ -302,16 +298,12 @@ public class InputChecker {
         PickDestination action = null;
         System.out.println(destination.toUpperCase());
         switch(destination.toUpperCase()) {
-            case "DININGROOM" -> {
-                action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
-            }
+            case "DININGROOM" -> action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
             case "ISLAND" -> {
                 cli.askIsland();
                 return null;
             }
-            case "QUIT" -> {
-                quitGame();
-            }
+            case "QUIT" -> quitGame();
             default -> {
                 cli.showError("Error: type a destination for your student by choosing between 'diningroom'" +
                         "or 'island'");
@@ -493,13 +485,12 @@ public class InputChecker {
     public PickPawnType checkPawnType(String pawnType) {
         PickPawnType action = null;
         System.out.println("Entro in check");
-        if(pawnType.toUpperCase().equalsIgnoreCase("GREEN") || pawnType.toUpperCase().equalsIgnoreCase("RED") || pawnType.toUpperCase().equalsIgnoreCase("YELLOW") || pawnType.toUpperCase().equalsIgnoreCase("PINK")  || pawnType.toUpperCase().equalsIgnoreCase("BLUE")) {
+        if(pawnType.equalsIgnoreCase("GREEN") || pawnType.equalsIgnoreCase("RED") || pawnType.equalsIgnoreCase("YELLOW") || pawnType.equalsIgnoreCase("PINK")  || pawnType.equalsIgnoreCase("BLUE")) {
             action = new PickPawnType(toPawnType(pawnType));
         } else {
             cli.showError("Invalid pawn type! Please insert a valid pawn type");
             cli.askPawnType();
         }
-
         return action;
     }
 
@@ -638,13 +629,9 @@ public class InputChecker {
                     cli.askCharacterCard();
                 }
             }
-            case "NONE" -> {
-                action = new PickCharacter(null);
-            }
+            case "NONE" -> action = new PickCharacter(null);
 
-            case "QUIT" -> {
-                quitGame();
-            }
+            case "QUIT" -> quitGame();
             default -> action = null;
         }
         return action;

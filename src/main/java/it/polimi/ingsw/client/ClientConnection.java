@@ -19,18 +19,31 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+
+/**
+ * Class ClientConnection handles the connection between client and server
+ */
 public class ClientConnection {
-    // ClientConnection class handles the connection between the client and the server.
     private final String serverAddress;
     private final int serverPort;
     private ObjectOutputStream outputStream;
-    private ServerListener serverListener;
 
+    /**
+     * Constructor of the class
+     */
     public ClientConnection() {
         this.serverAddress = Constants.getAddress();
         this.serverPort = Constants.getPort();
     }
 
+    /**
+     * Method setupNickname is used in the initial phase to setup the nickname
+     * @param nickname chosen nickname
+     * @param modelView model view instance
+     * @param actionHandler action handler
+     * @return boolean value
+     * @throws DuplicateNicknameException exception
+     */
     public boolean setupNickname(String nickname, ModelView modelView, ActionHandler actionHandler) throws DuplicateNicknameException {
         try {
             System.out.println("Trying to configure a socket connection...");
@@ -53,7 +66,7 @@ public class ClientConnection {
                     System.err.println(e.getMessage());
                 }
             }
-            serverListener = new ServerListener(socket, inputStream, modelView, actionHandler);
+            ServerListener serverListener = new ServerListener(socket, inputStream, modelView, actionHandler);
             Thread thread = new Thread(serverListener);
             thread.start();
 
@@ -66,6 +79,12 @@ public class ClientConnection {
         }
     }
 
+    /**
+     * Method nicknameAvailabilityCheck sends the nickname typed by the user and waits for the server check
+     * @param nicknameIn typed nickname
+     * @return true if available, false if not
+     * @throws DuplicateNicknameException
+     */
     public boolean nicknameAvailabilityCheck(Object nicknameIn) throws DuplicateNicknameException {
         SerializedAnswer answer = (SerializedAnswer) nicknameIn;
         if (answer.getServerAnswer() instanceof ConnectionResult && ((ConnectionResult) answer.getServerAnswer()).isConnectionCompleted()) {
@@ -84,6 +103,10 @@ public class ClientConnection {
         return false;
     }
 
+    /**
+     * Method sendUserInput sends a message from client to server
+     * @param message serializable message
+     */
     public void sendUserInput(Message message) {
         SerializedMessage userInput = new SerializedMessage(message);
         try {
@@ -97,6 +120,10 @@ public class ClientConnection {
         }
     }
 
+    /**
+     * Method sendUserInput sends a user action from client to server
+     * @param action action
+     */
     public void sendUserInput(UserAction action) {
         SerializedMessage userInput = new SerializedMessage(action);
         try {

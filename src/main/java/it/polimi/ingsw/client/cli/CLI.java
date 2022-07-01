@@ -10,19 +10,23 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
+import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
+import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -37,6 +41,7 @@ public class CLI implements ListenerInterface {
     private final Scanner in;
     private ClientConnection clientConnection;
     private final ModelView modelView;
+    private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private boolean firstTurn = true;
@@ -50,6 +55,7 @@ public class CLI implements ListenerInterface {
     public CLI() {
         in = new Scanner(System.in);
         modelView = new ModelView(this);
+        activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
     }
 
@@ -74,10 +80,23 @@ public class CLI implements ListenerInterface {
         return towers;
     }
 
+    /**
+     * Method setActiveGame set the game to active or not active
+     * @param activeGame boolean active game
+     */
+    public void setActiveGame(boolean activeGame) {
+        this.activeGame = activeGame;
+    }
+
     public Scanner getIn() {
         return in;
     }
 
+    /**
+     * Method printYellowStudentsOnIsland prints the number of yellow students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printYellowStudentsOnIsland(Island isl) {
         int y = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -87,6 +106,11 @@ public class CLI implements ListenerInterface {
         }
         return y;
     }
+    /**
+     * Method printBlueStudentsOnIsland prints the number of blue students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printBlueStudentsOnIsland(Island isl) {
         int b = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -96,6 +120,11 @@ public class CLI implements ListenerInterface {
         }
         return b;
     }
+    /**
+     * Method printPinkStudentsOnIsland prints the number of pink students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printPinkStudentsOnIsland(Island isl) {
         int p = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -105,6 +134,11 @@ public class CLI implements ListenerInterface {
         }
         return p;
     }
+    /**
+     * Method printGreenStudentsOnIsland prints the number of green students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printGreenStudentsOnIsland(Island isl) {
         int g = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -114,6 +148,11 @@ public class CLI implements ListenerInterface {
         }
         return g;
     }
+    /**
+     * Method printRedStudentsOnIsland prints the number of red students on a given island
+     * @param isl island
+     * @return students number
+     */
     public Integer printRedStudentsOnIsland(Island isl) {
         int r = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
@@ -143,11 +182,10 @@ public class CLI implements ListenerInterface {
             st.setShowVerticalLines(true);
             st.setHeaders(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getName().toString());
             st.addRow("Effect: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getEffect());
-            st.addRow("Cost: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost());
+            st.addRow("Cost: " + Integer.toString(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost()));
             st.print();
         }
     }
-
     /**
      * Method studentsOnIsland shows the students on a given island
      * @param i island
@@ -188,7 +226,7 @@ public class CLI implements ListenerInterface {
             if (stud[j] != null) {
                 if(j==0) {
 
-                    s = new StringBuilder(stud[0]);
+                    s = new StringBuilder(stud[0].toString());
                 }
                 else {
                     s.append(", ").append(stud[j]);
@@ -215,10 +253,10 @@ public class CLI implements ListenerInterface {
                     for(int i=0; i < merged.length; i++) {
                         if (merged[i] != null) {
                             if(i==0) {
-                                s = new StringBuilder(merged[0]);
+                                s = new StringBuilder(merged[0].toString());
                             }
                             else {
-                                s.append(", ").append(merged[i]);
+                                s.append(", ").append(merged[i].toString());
                             }
                         }
                     }
@@ -344,6 +382,7 @@ public class CLI implements ListenerInterface {
      */
     public void showEntrance() {
         System.out.println(">Here's a summary of the students in your entrance: ");
+        //System.out.println(modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().size());
         for(Student s : modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents()) {
             System.out.print("•" + printColor(s.getType()) + s.getType() + ANSI_RESET);
         }
@@ -419,16 +458,16 @@ public class CLI implements ListenerInterface {
         CLITable st = new CLITable();
 
         if(modelView.isFourPlayers()) {
-            st.setHeaders(p.getNickname() + " team " + p.getIdTeam());
+            st.setHeaders(p.getNickname().toString() + " team " + p.getIdTeam());
         } else {
-            st.setHeaders(p.getNickname());
+            st.setHeaders(p.getNickname().toString());
         }
 
-        st.addRow(ANSI_BLUE + "• [" + getPlayerDiningRoom(p.getNickname())[0] + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_GREEN + "• [" + getPlayerDiningRoom(p.getNickname())[1] + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_RED + "• [" + getPlayerDiningRoom(p.getNickname())[2] + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_PURPLE + "• [" + getPlayerDiningRoom(p.getNickname())[3] + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_YELLOW + "• [" + getPlayerDiningRoom(p.getNickname())[4] + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
         st.print();
     }
 
@@ -464,7 +503,7 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenMoves = input.nextLine();
-        if(chosenMoves.equalsIgnoreCase("QUIT")) {
+        if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
@@ -703,7 +742,7 @@ public class CLI implements ListenerInterface {
 
     /**
      * Method askStudentPrincess asks to choose a student from the character Spoiled Princess
-     * @param princess -> princess card
+     * @param princess
      */
     public void askStudentPrincess(CharacterCard princess) {
         System.out.println(">Choose a student from princess's students: ");
@@ -720,14 +759,18 @@ public class CLI implements ListenerInterface {
     }
 
     /**
-     * Method showMotherNature prints mother nature's position
+     * Method showMotherNature prints the mother nature's position
      */
     public void showMotherNature() {
         System.out.println(">Now Mother Nature is on island " + modelView.getGameCopy().getGameBoard().getMotherNature().getPosition());
     }
 
+    /*public void noWinnerGame() {
+        System.exit(0);
+    }*/
+
     /**
-     * Method chooseExpertMode reads player's expert mode choice and sends it to the server
+     * Method chooseExpertMode reads the player's expert mode choice and sends it to the server
      */
     public void chooseExpertMode() {
         String expertModeChoice;
@@ -737,7 +780,7 @@ public class CLI implements ListenerInterface {
     }
 
     /**
-     * Method chooseWizard asks the player to choose a wizard and then sends it to the server
+     * Method chooseWizard asks the player to choose a wizard and then it sends it to the server
      * @param availableWizards available wizards (not already chosen by the other players)
      */
     public void chooseWizard(List<Wizards> availableWizards) {
@@ -762,7 +805,7 @@ public class CLI implements ListenerInterface {
     }
 
     /**
-     * Method choosePlayerNumber reads player's choice of players number
+     * Method choosePlayerNumber reads the player's choice of players number
      */
     public void choosePlayerNumber() {
         int numOfPlayer;
@@ -806,7 +849,7 @@ public class CLI implements ListenerInterface {
 
     /**
      * Method showLoseMessage prints the lost message if the player has lost, and it prints the winner's nickname
-     * @param winnerNickname -> nickname of the winner
+     * @param winnerNickname
      */
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
@@ -868,6 +911,7 @@ public class CLI implements ListenerInterface {
         }
         virtualClient.addPropertyChangeListener(new Parser(clientConnection, modelView));
     }
+
 
     /**
      * Method endGameMessage shows the end game message and the application closing notification
@@ -931,8 +975,13 @@ public class CLI implements ListenerInterface {
         Constants.setAddress(ipServerAddress);
         Constants.setPort(serverPort);
         CLI cli = new CLI();
+        cli.userNicknameSetup();
     }
 
+
+    /**
+     * Method showServerError shows an error message if occurred
+     */
     public void showServerError() {
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {
             showError("Server is full... please try again later!");
@@ -1023,11 +1072,13 @@ public class CLI implements ListenerInterface {
 
             case "WinMessage" -> {
                 assert serverCommand != null;
+                setActiveGame(false);
                 showWinMessage();
                 endGameMessage();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
+                setActiveGame(false);
                 showLoseMessage(changeEvent.getNewValue().toString());
                 endGameMessage();
 

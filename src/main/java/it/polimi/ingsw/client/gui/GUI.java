@@ -5,7 +5,6 @@ import it.polimi.ingsw.client.ClientConnection;
 import it.polimi.ingsw.client.ListenerInterface;
 import it.polimi.ingsw.client.ModelView;
 import it.polimi.ingsw.client.gui.controllers.*;
-import it.polimi.ingsw.messages.servertoclient.ExpertModeAnswer;
 import it.polimi.ingsw.messages.servertoclient.NumOfPlayerRequest;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
@@ -14,14 +13,11 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
@@ -35,53 +31,23 @@ import java.util.*;
  */
 public class GUI extends Application implements ListenerInterface {
 
-    @FXML Label descriptionLabel;
-
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private final ModelView modelView;
     private final ActionHandler actionHandler;
     private ClientConnection clientConnection;
-    private MainSceneController mainSceneController;
 
-    private boolean activeGame;
     private Stage stage;
     private Scene currentScene;
-    private HashMap<String, Scene> nameMapScene = new HashMap<>();
+    private final HashMap<String, Scene> nameMapScene = new HashMap<>();
     private final HashMap<String, GUIController> nameMapController = new HashMap<>();
 
     private boolean firstSetupScene;
-
-    public boolean isActiveGame() {
-        return activeGame;
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
-
-    public Scene getCurrentScene() {
-        return currentScene;
-    }
-
-    public HashMap<String, Scene> getNameMapScene() {
-        return nameMapScene;
-    }
-
-    public HashMap<String, GUIController> getNameMapController() {
-        return nameMapController;
-    }
 
     public Alert getInfoAlert() {
         return infoAlert;
     }
 
-    public MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
-    }
-
-    private Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
-
-    private MediaPlayer mediaPlayer;
+    private final Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
 
     private static final String MAIN_MENU = "mainMenu.fxml";
     private static final String SETUP = "setup.fxml";
@@ -97,7 +63,6 @@ public class GUI extends Application implements ListenerInterface {
     public GUI() {
         this.modelView = new ModelView(this);
         actionHandler = new ActionHandler(this, modelView);
-        activeGame = true;
         firstSetupScene = true;
     }
 
@@ -139,34 +104,17 @@ public class GUI extends Application implements ListenerInterface {
     public void run() {
         stage.setTitle("Eriantys");
         stage.setScene(currentScene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/eriantys_banner.png")));
+        stage.getIcons().add(new Image("/graphics/eriantys_banner.png"));
         stage.show();
 
         ResizeController resize = new ResizeController((Pane) currentScene.lookup("#mainPane"));
         currentScene.widthProperty().addListener(resize.getWidthListener());
         currentScene.heightProperty().addListener(resize.getHeightListener());
-
-        //musica
-
-        /*
-        Media pick = new Media(Objects.requireNonNull(getClass().getClassLoader()
-                .getResource("media/Epic_Battle_Speech.mp3")).toExternalForm());
-        mediaPlayer = new MediaPlayer(pick);
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.setVolume(25);
-        mediaPlayer.setOnEndOfMedia(() -> {
-            mediaPlayer.seek(Duration.ZERO);
-            mediaPlayer.play();
-        });
-
-         */
-
     }
 
     /**
      * Method changeStage is used to change the stage to a new fxml file
-     * @param newScene
+     * @param newScene fxml file
      */
     public void changeStage(String newScene) {
         currentScene = nameMapScene.get(newScene);
@@ -180,7 +128,7 @@ public class GUI extends Application implements ListenerInterface {
 
     /**
      * Method start starts the gui by setting it up and running it
-     * @param stage
+     * @param stage main stage
      */
     @Override
     public void start(Stage stage) {
@@ -212,7 +160,7 @@ public class GUI extends Application implements ListenerInterface {
     /**
      * Method initialGamePhaseHandler handles the initial settings of the gui,
      * such as number of players, standard or expert mode, wizard choice...
-     * @param serverCommand
+     * @param serverCommand command from server
      */
     public void initialGamePhaseHandler(String serverCommand) {
         //System.out.println("Sono entrato in initialGamePhaseHandler perchè ho letto: " + serverCommand);
@@ -344,6 +292,9 @@ public class GUI extends Application implements ListenerInterface {
         }
     }
 
+    /**
+     * Method showServerError shows a server error by setting an info alert
+     */
     public void showServerError() {
         infoAlert.setTitle("Server Error");
         if(((ServerError) modelView.getServerAnswer()).getError() == ServerErrorTypes.FULLGAMESERVER) {

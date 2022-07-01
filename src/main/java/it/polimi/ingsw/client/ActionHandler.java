@@ -18,7 +18,7 @@ import java.beans.PropertyChangeSupport;
  * CLI through property change listeners.
  */
 public class ActionHandler {
-    private ModelView modelView;
+    private final ModelView modelView;
     private CLI cli;
     private GUI gui;
     private int showGame = 0;
