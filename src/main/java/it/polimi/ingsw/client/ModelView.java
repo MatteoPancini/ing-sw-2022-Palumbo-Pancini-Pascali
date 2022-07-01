@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.player.Player;
 
+/**
+ * Class Model View is used to get informations from the game copy received or the game status
+ */
 public class ModelView {
     private final CLI cli;
     private final GUI gui;

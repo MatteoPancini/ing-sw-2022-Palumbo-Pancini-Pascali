@@ -2,13 +2,17 @@ package it.polimi.ingsw.messages.clienttoserver.actions;
 
 import it.polimi.ingsw.model.board.CloudTile;
 
+/**
+ * Class PickCloud is a user action used to send the cloud chosen by the user
+ */
 public class PickCloud implements UserAction {
     private Action action;
     private CloudTile chosenCloud;
-    public PickCloud() {
-        this.action = Action.PICK_CLOUD;
-    }
 
+    /**
+     * Constructor of the class
+     * @param cloudID chosen cloud
+     */
     public PickCloud(CloudTile cloudID) {
         this.action = Action.PICK_CLOUD;
         this.chosenCloud = cloudID;

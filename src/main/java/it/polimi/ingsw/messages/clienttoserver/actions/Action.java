@@ -1,5 +1,9 @@
 package it.polimi.ingsw.messages.clienttoserver.actions;
 
+
+/**
+ * Class Action contains all the user actions as enumerations
+ */
 public enum Action {
     PICK_ASSISTANT,
     PICK_CHARACTER,
@@ -9,9 +13,6 @@ public enum Action {
     PICK_DESTINATION,
     PICK_ISLAND,
     PICK_PAWN_TYPE,
-    PICK_MONK_STUDENT,
     PICK_CHARACTER_NUM,
-    PICK_JESTER_TYPE,
-    PICK_ENTRANCE,
-    PICK_DINING_TYPE,
+
 }
