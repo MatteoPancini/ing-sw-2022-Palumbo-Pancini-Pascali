@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.player;
 
 import java.io.Serializable;
 
+/**
+ * Class used to implement the school boards
+ */
 public class SchoolBoard implements Serializable {
     private int boardID;
     private DiningRoom diningRoom;

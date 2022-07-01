@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.player.TowerArea;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class used to implement the islands
+ */
 public class Island implements Serializable {
     private GameBoard board = null;
     private int islandID;

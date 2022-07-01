@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.model.enumerations.*;
 import it.polimi.ingsw.model.Game;
 
+/**
+ * Class used to implement a game board
+ */
 public class GameBoard implements Serializable {
     private Game game;
     private ArrayList<CloudTile> clouds = new ArrayList<>();

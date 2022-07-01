@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.model.board.Island;
 
+/**
+ * Class used to implement the tower areas
+ */
 public class TowerArea implements Serializable {
     private final ArrayList<Tower> myTowers;
 
