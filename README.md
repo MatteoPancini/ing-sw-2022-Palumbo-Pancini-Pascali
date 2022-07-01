@@ -1,5 +1,5 @@
-# ERYANTIS - Software Engineering Final Project 2021/2022
-The project consists of a Java implementation of the board game Eryantis, made by Cranio Creations.
+# ERIANTYS - Software Engineering Final Project 2021/2022
+The project consists of a Java implementation of the board game Eriantys, made by Cranio Creations.
 
 ![This is an image](src/main/resources/graphics/eriantys_banner.png)
 
