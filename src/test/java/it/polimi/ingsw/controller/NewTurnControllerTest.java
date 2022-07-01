@@ -470,6 +470,11 @@ public class NewTurnControllerTest {
 
         controllerStub.getTurnController().checkWinner();
         assertEquals(cisco, controllerStub.getTurnController().checkWinner());
+
+        System.out.println(cisco.getBoard().getTowerArea().getTowerArea().size());
+        cisco.getBoard().getTowerArea().getTowerArea().clear();
+        cisco.getBoard().getTowerArea().getTowerArea().add(new Tower(TowerColor.BLACK));
+        controllerStub.getTurnController().checkIslandInfluence(3);
     }
 
     @Test

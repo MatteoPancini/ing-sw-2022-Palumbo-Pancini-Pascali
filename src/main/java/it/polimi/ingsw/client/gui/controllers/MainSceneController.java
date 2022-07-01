@@ -637,6 +637,7 @@ public class MainSceneController implements GUIController {
      */
     public void askCharacterActionNumber() {
         descriptionLabel.setText("Choose the number of actions you want to play");
+        pickCharacterActionNumberBox.getItems().clear();
         pickCharacterActionNumberBox.setVisible(true);
         if(gui.getModelView().isJesterAction()) {
             for(int i = 1; i <= 3; i++) {
@@ -1170,18 +1171,20 @@ public class MainSceneController implements GUIController {
     public void askGrannyHerbsIsland() {
         descriptionLabel.setText("Pick an island where you want to put a NO_ENTRY tile!");
         descriptionLabel.setVisible(true);
-        island1Button.setVisible(true);
-        island2Button.setVisible(true);
-        island3Button.setVisible(true);
-        island4Button.setVisible(true);
-        island5Button.setVisible(true);
-        island6Button.setVisible(true);
-        island7Button.setVisible(true);
-        island8Button.setVisible(true);
-        island9Button.setVisible(true);
-        island10Button.setVisible(true);
-        island11Button.setVisible(true);
-        island12Button.setVisible(true);
+        for(Island i : gui.getModelView().getGameCopy().getGameBoard().getIslands()) {
+            if(i.getIslandID() == 1) island1Button.setVisible(true);
+            else if(i.getIslandID() == 2) island2Button.setVisible(true);
+            else if(i.getIslandID() == 3) island3Button.setVisible(true);
+            else if(i.getIslandID() == 4) island4Button.setVisible(true);
+            else if(i.getIslandID() == 5) island5Button.setVisible(true);
+            else if(i.getIslandID() == 6) island6Button.setVisible(true);
+            else if(i.getIslandID() == 7) island7Button.setVisible(true);
+            else if(i.getIslandID() == 8) island8Button.setVisible(true);
+            else if(i.getIslandID() == 9) island9Button.setVisible(true);
+            else if(i.getIslandID() == 10) island10Button.setVisible(true);
+            else if(i.getIslandID() == 11) island11Button.setVisible(true);
+            else if(i.getIslandID() == 12) island12Button.setVisible(true);
+        }
     }
 
     /**

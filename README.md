@@ -37,7 +37,7 @@ All classes (from both Model and Controller's Packages) have 100% of class cover
 
 | Package    | Tested Class       |    Coverage    |
 |:-----------|:-------------------|:--------------:|
-| Controller | Controller         | 174/179 (97%) |
-| Controller | TurnController     | 346/419 (82%) |
-| Controller | ExpertController   | 129/142 (90%) |
-| Model      | Model Package      | 517/553 (93%) |
+| Controller | Controller         | 150/158 (94%) |
+| Controller | TurnController     | 322/389 (82%) |
+| Controller | ExpertController   | 127/140 (90%) |
+| Model      | Model Package      | 496/533 (94%) |

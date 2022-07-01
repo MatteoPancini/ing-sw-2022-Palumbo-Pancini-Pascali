@@ -103,21 +103,21 @@ public class ActionHandler {
             if(cli != null) {
                 cli.askCharacterActionsNumber();
             } else if(gui != null) {
-                view.firePropertyChange(updateProperty, null, "PICK_CHARACTER_NUMBER");
+                view.firePropertyChange(updateProperty, null, answer.getMessage());
             }
         } else if(answer instanceof JesterAction) {
             modelView.setJesterAction(true);
             if(cli != null) {
                 cli.askCharacterActionsNumber();
             } else if(gui != null) {
-                view.firePropertyChange(updateProperty, null, "PICK_CHARACTER_NUMBER");
+                view.firePropertyChange(updateProperty, null, answer.getMessage());
             }
         } else if(answer instanceof GrannyHerbsAction) {
             modelView.setGrannyHerbsAction(true);
             if (cli != null) {
                 cli.askIsland();
             } else if(gui != null) {
-                view.firePropertyChange(updateProperty, null, "PICK_ISLAND");
+                view.firePropertyChange(updateProperty, null, answer.getMessage());
             }
         } else if(answer instanceof FourPModeNotification) {
             modelView.setFourPlayers(true);

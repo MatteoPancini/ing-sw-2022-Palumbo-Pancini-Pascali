@@ -184,6 +184,7 @@ public class ExpertController {
                 break;
             }
         }
+        turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
         turnController.askMotherNatureMoves();
     }
 
@@ -256,7 +257,7 @@ public class ExpertController {
             }
 
         }
-
+        turnController.getGameHandler().sendSinglePlayer(new GameCopy(turnController.getController().getGame()), turnController.getController().getGame().getCurrentPlayer().getPlayerID());
         turnController.askMotherNatureMoves();
 
     }
