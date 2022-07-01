@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Class CLITable is used to represent some game elements throguh a table
+ * Class CLITable is used to represent some game elements through a table
  */
 public class CLITable {
     private static final String HORIZONTAL_SEP = "-";
