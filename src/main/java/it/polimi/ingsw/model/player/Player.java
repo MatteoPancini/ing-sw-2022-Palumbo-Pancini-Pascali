@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 
 import java.io.Serializable;
 
+/**
+ * Class Player represents the player of the game
+ */
 public class Player implements Serializable {
     private String nicknamePlayer;
     private int playerID;

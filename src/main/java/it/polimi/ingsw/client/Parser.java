@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.exceptions.AlreadyPlayedAssistantException;
 import it.polimi.ingsw.messages.clienttoserver.actions.UserAction;
 
 import java.beans.PropertyChangeEvent;
@@ -38,9 +37,8 @@ public class Parser implements PropertyChangeListener {
      * @param actionName action received from the cli
      * @param chosenValue chosen value by the player
      * @return boolean value which tells if the action can be done, and it has been sent to the server
-     * @throws AlreadyPlayedAssistantException exception if the assistant has been already played by another player
      */
-    public synchronized boolean action(String actionName, String chosenValue) throws AlreadyPlayedAssistantException {
+    public synchronized boolean action(String actionName, String chosenValue) {
         UserAction action;
         switch(actionName.toUpperCase()) {
             case "PICKASSISTANT" -> action = inputChecker.checkAssistant(chosenValue);
@@ -79,12 +77,8 @@ public class Parser implements PropertyChangeListener {
         if (!modelView.getActiveInput()) {
             modelView.getCli().showError("Input error: it's not your turn!");
         } else {
-            try {
-                if (!action(evt.getPropertyName(), evt.getNewValue().toString())) {
-                    modelView.setActivateInput(true);
-                }
-            } catch (AlreadyPlayedAssistantException e) {
-                e.printStackTrace();
+            if (!action(evt.getPropertyName(), evt.getNewValue().toString())) {
+                modelView.setActivateInput(true);
             }
         }
     }

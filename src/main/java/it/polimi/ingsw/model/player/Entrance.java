@@ -6,6 +6,9 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+/**
+ * Class Entrance represents the entrance in the board, containing students
+ */
 public class Entrance implements Serializable {
     private ArrayList<Student> students;
 

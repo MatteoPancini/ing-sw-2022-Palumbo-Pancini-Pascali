@@ -34,6 +34,10 @@ public class AssistantDeck implements Serializable {
         myReader.close();
     }
 
+    /**
+     * Method removeCard removes the assistant cards from the deck
+     * @param card assistant card
+     */
     public void removeCard(AssistantCard card) {
         for(AssistantCard c : this.getDeck()) {
             if(card.getName() == c.getName()){
