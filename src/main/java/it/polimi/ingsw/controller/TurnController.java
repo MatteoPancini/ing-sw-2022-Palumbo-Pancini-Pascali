@@ -446,9 +446,7 @@ public class TurnController {
      * @param moves -> number of moves mother nature has to do
      */
     public void moveMotherNature(int moves) {
-        System.out.println("entro in moveMotherNature per spostarmi di " + moves);
         int currPosition = controller.getGame().getGameBoard().getMotherNature().getPosition();
-        System.out.println("CurrPosition " + currPosition);
         int index = -1;
         for(int i = 0; i<controller.getGame().getGameBoard().getIslands().size(); i++) {
             System.out.println("Island" + controller.getGame().getGameBoard().getIslands().get(i).getIslandID());
@@ -508,11 +506,6 @@ public class TurnController {
      * @param islandPos position on the island's array of the island where mother nature moved
      */
     public void checkIslandInfluence(int islandPos) {
-        System.out.println("Entro in checkIsland di " + controller.getGame().getGameBoard().getIslands().get(islandPos-1).getIslandID());
-
-        System.out.println("island ha " + controller.getGame().getGameBoard().getIslands().get(islandPos-1).getStudents().size());
-
-
         for(Student student : controller.getGame().getGameBoard().getIslands().get(islandPos-1).getStudents()) {
             PawnType studentType = student.getType();
             System.out.println(studentType.toString());
@@ -820,30 +813,23 @@ public class TurnController {
      * @return true (if game has a winner), false (otherwise)
      */
     public boolean checkWin() {
-        System.out.println("Entro in checkWin");
-
         if(controller.getGame().getGameBoard().getIslandCounter() == 3) {
-            System.out.println("Enrtro 1");
             return true;
         }
 
         for(Player p: controller.getGame().getActivePlayers()) {
             if(controller.getGame().getPlayers().size() == 4) {
                 if(p.getBoard().getTowerArea().getTowerArea().size() == 0 && p.isTeamLeader()) {
-                    System.out.println("Enrtro 2");
                     return true;
                 }
             } else {
                 if(p.getBoard().getTowerArea().getTowerArea().isEmpty()) {
-                    System.out.println("Enrtro 2");
                     return true;
                 }
             }
         }
 
         if(lastRound) {
-            System.out.println("Enrtro 3");
-
             return controller.getGame().getCurrentPlayer().getNickname().equals(controller.getGame().getActivePlayers().get(controller.getGame().getActivePlayers().size() - 1).getNickname());
         }
 
