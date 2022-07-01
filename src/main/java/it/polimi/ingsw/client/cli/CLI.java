@@ -10,23 +10,19 @@ import it.polimi.ingsw.messages.servertoclient.Answer;
 import it.polimi.ingsw.messages.servertoclient.WizardAnswer;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerError;
 import it.polimi.ingsw.messages.servertoclient.errors.ServerErrorTypes;
-import it.polimi.ingsw.model.board.CloudTile;
 import it.polimi.ingsw.model.board.Island;
 import it.polimi.ingsw.model.board.Student;
 import it.polimi.ingsw.model.cards.AssistantCard;
-import it.polimi.ingsw.model.cards.AssistantDeck;
 import it.polimi.ingsw.model.cards.CharacterCard;
 import it.polimi.ingsw.model.enumerations.PawnType;
 import it.polimi.ingsw.model.enumerations.TowerColor;
 import it.polimi.ingsw.model.enumerations.Wizards;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.constants.Constants;
 import it.polimi.ingsw.model.player.Table;
 import it.polimi.ingsw.model.player.Tower;
 
 import java.beans.PropertyChangeEvent;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -41,7 +37,6 @@ public class CLI implements ListenerInterface {
     private final Scanner in;
     private ClientConnection clientConnection;
     private final ModelView modelView;
-    private boolean activeGame;
     private final ActionHandler actionHandler;
     private final PropertyChangeSupport virtualClient = new PropertyChangeSupport(this);
     private boolean firstTurn = true;
@@ -55,7 +50,6 @@ public class CLI implements ListenerInterface {
     public CLI() {
         in = new Scanner(System.in);
         modelView = new ModelView(this);
-        activeGame = true;
         actionHandler = new ActionHandler(this, modelView);
     }
 
@@ -78,14 +72,6 @@ public class CLI implements ListenerInterface {
             }
         }
         return towers;
-    }
-
-    /**
-     * Method setActiveGame set the game to active or not active
-     * @param activeGame boolean active game
-     */
-    public void setActiveGame(boolean activeGame) {
-        this.activeGame = activeGame;
     }
 
     public Scanner getIn() {
@@ -182,7 +168,7 @@ public class CLI implements ListenerInterface {
             st.setShowVerticalLines(true);
             st.setHeaders(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getName().toString());
             st.addRow("Effect: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getEffect());
-            st.addRow("Cost: " + Integer.toString(modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost()));
+            st.addRow("Cost: " + modelView.getGameCopy().getGameBoard().getPlayableCharacters().get(i).getInitialCost());
             st.print();
         }
     }
@@ -226,7 +212,7 @@ public class CLI implements ListenerInterface {
             if (stud[j] != null) {
                 if(j==0) {
 
-                    s = new StringBuilder(stud[0].toString());
+                    s = new StringBuilder(stud[0]);
                 }
                 else {
                     s.append(", ").append(stud[j]);
@@ -253,10 +239,10 @@ public class CLI implements ListenerInterface {
                     for(int i=0; i < merged.length; i++) {
                         if (merged[i] != null) {
                             if(i==0) {
-                                s = new StringBuilder(merged[0].toString());
+                                s = new StringBuilder(merged[0]);
                             }
                             else {
-                                s.append(", ").append(merged[i].toString());
+                                s.append(", ").append(merged[i]);
                             }
                         }
                     }
@@ -458,16 +444,16 @@ public class CLI implements ListenerInterface {
         CLITable st = new CLITable();
 
         if(modelView.isFourPlayers()) {
-            st.setHeaders(p.getNickname().toString() + " team " + p.getIdTeam());
+            st.setHeaders(p.getNickname() + " team " + p.getIdTeam());
         } else {
-            st.setHeaders(p.getNickname().toString());
+            st.setHeaders(p.getNickname());
         }
 
-        st.addRow(ANSI_BLUE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[0]) + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_GREEN + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[1]) + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_RED + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[2]) + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_PURPLE + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[3]) + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
-        st.addRow(ANSI_YELLOW + "• [" + Integer.toString(getPlayerDiningRoom(p.getNickname())[4]) + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_BLUE + "• [" + getPlayerDiningRoom(p.getNickname())[0] + "]" + " - Professor : " + modelView.hasBlueProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_GREEN + "• [" + getPlayerDiningRoom(p.getNickname())[1] + "]" + " - Professor : " + modelView.hasGreenProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_RED + "• [" + getPlayerDiningRoom(p.getNickname())[2] + "]" + " - Professor : " + modelView.hasRedProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_PURPLE + "• [" + getPlayerDiningRoom(p.getNickname())[3] + "]" + " - Professor : " + modelView.hasPinkProfessor(p) + ANSI_RESET);
+        st.addRow(ANSI_YELLOW + "• [" + getPlayerDiningRoom(p.getNickname())[4] + "]" + " - Professor : " + modelView.hasYellowProfessor(p) + ANSI_RESET);
         st.print();
     }
 
@@ -699,7 +685,7 @@ public class CLI implements ListenerInterface {
 
     /**
      * Method askCharacterStudents asks the character card and notifies the action parser through listeners
-     * @param card
+     * @param card character card
      */
     private void askCharacterStudents(CharacterCard card) {
         showCharacterStudent(card);
@@ -742,7 +728,7 @@ public class CLI implements ListenerInterface {
 
     /**
      * Method askStudentPrincess asks to choose a student from the character Spoiled Princess
-     * @param princess
+     * @param princess princess card
      */
     public void askStudentPrincess(CharacterCard princess) {
         System.out.println(">Choose a student from princess's students: ");
@@ -849,7 +835,7 @@ public class CLI implements ListenerInterface {
 
     /**
      * Method showLoseMessage prints the lost message if the player has lost, and it prints the winner's nickname
-     * @param winnerNickname
+     * @param winnerNickname -> nickname of the winner
      */
     public void showLoseMessage(String winnerNickname) {
         System.out.println(">Game Over! You lost :(");
@@ -924,7 +910,7 @@ public class CLI implements ListenerInterface {
 
     /**
      * Method initialGamePhaseHandler is used in the CLI property change to switch between the different server commands and ask the corresponding
-     * @param serverCommand
+     * @param serverCommand command sent from server
      */
     public void initialGamePhaseHandler(String serverCommand) {
         switch(serverCommand) {
@@ -1072,13 +1058,11 @@ public class CLI implements ListenerInterface {
 
             case "WinMessage" -> {
                 assert serverCommand != null;
-                setActiveGame(false);
                 showWinMessage();
                 endGameMessage();
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
-                setActiveGame(false);
                 showLoseMessage(changeEvent.getNewValue().toString());
                 endGameMessage();
 
