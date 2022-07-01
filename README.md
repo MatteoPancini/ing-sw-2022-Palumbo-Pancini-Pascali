@@ -41,3 +41,18 @@ All classes (from both Model and Controller's Packages) have 100% of class cover
 | Controller | TurnController     | 346/419 (82%) |
 | Controller | ExpertController   | 129/142 (90%) |
 | Model      | Model Package      | 517/553 (93%) |
+
+## Run game instructions
+In order to run the game, download the JAR file contained in the "deliverables" folder of the repository.
+Then run it from **terminal** (from the directory where the JAR is stored) by typing:
+>*java -jar softeng-GC31.jar*
+
+**Remember**: you need to have JAVA installed in your PC!
+
+For the best possible experience we suggest to:
++ CLI:
+  + set UTF-8 compatibility on your terminal
+  + set ANSI compatibility on your terminal
++ GUI:
+  + if your PC has small memory or your GUI setup fails with "load exception", please run the jar typing:
+    >*java -Xmx4096m -jar softeng-GC31.jar*
