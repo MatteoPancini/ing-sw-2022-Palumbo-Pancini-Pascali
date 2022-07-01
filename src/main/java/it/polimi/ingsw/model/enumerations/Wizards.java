@@ -3,6 +3,9 @@ package it.polimi.ingsw.model.enumerations;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Enumeration containing the wizards of the game, in a static structure used during pre-match phase
+ */
 public enum Wizards {
     MONACH,
     WITCH,

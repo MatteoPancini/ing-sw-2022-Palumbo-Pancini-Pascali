@@ -85,7 +85,6 @@ public class GameHandler {
         return currentPlayerId;
     }
 
-
     /**
      * method used to create teams of a 4 player game
      */
@@ -231,7 +230,6 @@ public class GameHandler {
 
         switch(actionType) {
             case "PickAssistant" -> {
-                System.out.println(((PickAssistant) userAction).getChosenAssistant().toString());
                 gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
             }
 

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.messages.servertoclient;
 
 /**
- * Message used for generic informations about game situation
+ * Message used for generic information about game situation
  */
 public class DynamicAnswer implements Answer {
     private final String serverAnswer;

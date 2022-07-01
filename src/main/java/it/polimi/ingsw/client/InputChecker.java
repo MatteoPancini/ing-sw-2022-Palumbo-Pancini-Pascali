@@ -158,11 +158,11 @@ public class InputChecker {
                     modelView.setMagicPostmanAction(false);
                 }
             } else {
-                cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
+                cli.askMoves();
             }
         } catch (NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");
-            cli.askMoves(modelView.getGameCopy().getCurrentPlayer().getChosenAssistant());
+            cli.askMoves();
         }
 
 
@@ -306,7 +306,7 @@ public class InputChecker {
                 action = new PickDestination(modelView.getGameCopy().getCurrentPlayer().getBoard().getDiningRoom());
             }
             case "ISLAND" -> {
-                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                cli.askIsland();
                 return null;
             }
             case "QUIT" -> {
@@ -340,17 +340,17 @@ public class InputChecker {
                 }
                 if(action == null) {
                     cli.showError("Error: merged island! Choose a valid number ID");
-                    cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                    cli.askIsland();
                 }
 
             } else {
                 cli.showError("Error: wrong island! Choose a number between 1 and 12, according to " +
                         "the remaining islands");
-                cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+                cli.askIsland();
             }
         } catch(NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");
-            cli.askIsland(modelView.getGameCopy().getGameBoard().getIslands());
+            cli.askIsland();
         }
 
         return action;
@@ -392,13 +392,13 @@ public class InputChecker {
                 if (isStudentInEntrance(studentType)) {
                     PawnType type = toPawnType(studentType);
                     if(type == null) {
-                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                        cli.askStudent();
                     } else {
                         action = new PickStudent(new Student(type));
                     }
                 } else {
                     cli.showError("No such student in your entrance! Please enter a valid student!");
-                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                    cli.askStudent();
                 }
             }
         } else if(modelView.isMinestrelAction()) {
@@ -413,7 +413,7 @@ public class InputChecker {
                 if (isStudentInEntrance(studentType)) {
                     PawnType type = toPawnType(studentType);
                     if(type == null) {
-                        cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                        cli.askStudent();
                     } else {
                         action = new PickStudent(new Student(type));
                     }
@@ -472,13 +472,13 @@ public class InputChecker {
             if (isStudentInEntrance(studentType)) {
                 PawnType type = toPawnType(studentType);
                 if(type == null) {
-                    cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                    cli.askStudent();
                 } else {
                     action = new PickStudent(new Student(type));
                 }
             } else {
                 cli.showError("No such student in your entrance! Please enter a valid student!");
-                cli.askStudent(modelView.getGameCopy().getCurrentPlayer().getBoard());
+                cli.askStudent();
             }
         }
         return action;
@@ -521,11 +521,11 @@ public class InputChecker {
             }
             else {
                 cli.showError("Error: the cloud has already been taken! Choose another one");
-                cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+                cli.askCloud();
             }
         } catch(NumberFormatException e) {
             cli.showError("Error: NumberFormatException. Please insert a number!");
-            cli.askCloud(modelView.getGameCopy().getGameBoard().getClouds());
+            cli.askCloud();
         }
 
         return action;
@@ -546,7 +546,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.HERALD);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
 
             }
@@ -555,7 +555,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.KNIGHT);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "CENTAUR" -> {
@@ -563,7 +563,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.CENTAUR);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "FARMER" -> {
@@ -571,7 +571,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.FARMER);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "FUNGARUS" -> {
@@ -579,7 +579,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.FUNGARUS);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "JESTER" -> {
@@ -587,7 +587,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.JESTER);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "THIEF" -> {
@@ -595,7 +595,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.THIEF);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "MINESTREL" -> {
@@ -603,7 +603,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.MINESTREL);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "MONK" -> {
@@ -611,7 +611,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.MONK);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "GRANNY_HERBS" -> {
@@ -619,7 +619,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.GRANNY_HERBS);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "MAGIC_POSTMAN" -> {
@@ -627,7 +627,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.MAGIC_POSTMAN);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "SPOILED_PRINCESS" -> {
@@ -635,7 +635,7 @@ public class InputChecker {
                     action = new PickCharacter(Characters.SPOILED_PRINCESS);
                 } else {
                     cli.showError("You don't have enough coins... choose another card or none");
-                    cli.askCharacterCard(modelView.getGameCopy().getGameBoard().getPlayableCharacters());
+                    cli.askCharacterCard();
                 }
             }
             case "NONE" -> {

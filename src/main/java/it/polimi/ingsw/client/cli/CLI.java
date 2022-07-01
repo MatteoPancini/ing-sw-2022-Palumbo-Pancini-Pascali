@@ -482,9 +482,8 @@ public class CLI implements Runnable, ListenerInterface {
     }
 
     /** Method askMoves prints the moves request arriving from the server
-     * @param card chosen assistant card
      */
-    public void askMoves(AssistantCard card) {
+    public void askMoves() {
         showIslandsTable();
         if(modelView.isMagicPostmanAction()) {
             System.out.println(">Pick a number of mother nature moves between 1 and "
@@ -538,9 +537,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askCloud prints the cloud request arriving from the server
-     * @param clouds available clouds
      */
-    public void askCloud(ArrayList<CloudTile> clouds) {
+    public void askCloud() {
         System.out.println(">Pick a cloud by typing its ID: ");
         showClouds();
         System.out.print(">");
@@ -556,9 +554,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askStudent prints the student request from the entrance arriving from the server
-     * @param schoolB game board of a player
      */
-    public void askStudent(SchoolBoard schoolB) {
+    public void askStudent() {
         System.out.println(">Pick a student from your Entrance by typing its color: ");
         System.out.println("[RED, BLUE, YELLOW, GREEN, PINK]");
         showEntrance();
@@ -589,9 +586,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askCharacterCard prints the character card request arriving from the server
-     * @param cards available characters
      */
-    public void askCharacterCard(ArrayList<CharacterCard> cards) {
+    public void askCharacterCard() {
         if (modelView.getGameCopy().isExpertMode()) {
             showCoins();
             System.out.println(">Type the name of the character card you want to play [\"NONE\" if you don't want to play one]: ");
@@ -609,9 +605,8 @@ public class CLI implements Runnable, ListenerInterface {
 
     /**
      * Method askIsland prints the island request arriving from the server
-     * @param islands available islands
      */
-    public void askIsland(ArrayList<Island> islands) {
+    public void askIsland() {
         if(modelView.isGrannyHerbsAction()) {
             System.out.println("GrannyHerbs action phase... put a tile into an island!");
         }

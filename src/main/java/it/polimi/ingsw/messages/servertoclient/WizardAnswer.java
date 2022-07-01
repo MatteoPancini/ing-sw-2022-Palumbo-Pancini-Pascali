@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.enumerations.Wizards;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Message used to ask a player their wizard's choice
+ */
 public class WizardAnswer implements Answer {
     private String wizardRequest;
     private String wizardMessage;
