@@ -86,7 +86,7 @@ public class CLI implements ListenerInterface {
     public Integer printYellowStudentsOnIsland(Island isl) {
         int y = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("YELLOW")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("YELLOW")) {
                 y++;
             }
         }
@@ -100,7 +100,7 @@ public class CLI implements ListenerInterface {
     public Integer printBlueStudentsOnIsland(Island isl) {
         int b = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("BLUE")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("BLUE")) {
                 b++;
             }
         }
@@ -114,7 +114,7 @@ public class CLI implements ListenerInterface {
     public Integer printPinkStudentsOnIsland(Island isl) {
         int p = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("PINK")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("PINK")) {
                 p++;
             }
         }
@@ -128,7 +128,7 @@ public class CLI implements ListenerInterface {
     public Integer printGreenStudentsOnIsland(Island isl) {
         int g = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("GREEN")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("GREEN")) {
                 g++;
             }
         }
@@ -142,7 +142,7 @@ public class CLI implements ListenerInterface {
     public Integer printRedStudentsOnIsland(Island isl) {
         int r = 0;
         for(int j=0; j < isl.getStudents().size(); j++) {
-            if(isl.getStudents().get(j).getType().toString().toUpperCase().equals("RED")) {
+            if(isl.getStudents().get(j).getType().toString().equalsIgnoreCase("RED")) {
                 r++;
             }
         }
@@ -263,7 +263,7 @@ public class CLI implements ListenerInterface {
 
         for(int i = 0; i < modelView.getGameCopy().getGameBoard().getIslands().size(); i++) {
             if(modelView.getGameCopy().getGameBoard().getIslands().get(i).getNoEntry()) {
-                st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()) + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
+                st.addRow(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID() + ANSI_RED + " X" + ANSI_RESET, isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
             } else {
                 st.addRow(Integer.toString(modelView.getGameCopy().getGameBoard().getIslands().get(i).getIslandID()), isMerged(modelView.getGameCopy().getGameBoard().getIslands().get(i)), studentsOnIsland(modelView.getGameCopy().getGameBoard().getIslands().get(i)) + "          " + printTowers(modelView.getGameCopy().getGameBoard().getIslands().get(i)));
 
@@ -489,7 +489,7 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenMoves = input.nextLine();
-        if(chosenMoves.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenMoves.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickMovesNumber", null, chosenMoves);
@@ -537,7 +537,7 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenCloud = input.nextLine();
-        if(chosenCloud.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenCloud.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickCloud", null, chosenCloud);
@@ -555,7 +555,7 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenStudent = input.nextLine();
-        if(chosenStudent.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenStudent.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickStudent", null, chosenStudent);
@@ -570,7 +570,7 @@ public class CLI implements ListenerInterface {
         System.out.print(">");
         Scanner input = new Scanner(System.in);
         String chosenDestination = input.nextLine();
-        if(chosenDestination.toUpperCase().equalsIgnoreCase("QUIT")) {
+        if(chosenDestination.equalsIgnoreCase("QUIT")) {
             virtualClient.firePropertyChange("Quit", null, "Quit");
         } else {
             virtualClient.firePropertyChange("PickDestination", null, chosenDestination);
