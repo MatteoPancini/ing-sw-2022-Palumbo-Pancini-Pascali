@@ -37,7 +37,7 @@ public class ClientConnection {
     }
 
     /**
-     * Method setupNickname is used in the initial phase to setup the nickname
+     * Method setupNickname is used in the initial phase to set up the nickname
      * @param nickname chosen nickname
      * @param modelView model view instance
      * @param actionHandler action handler

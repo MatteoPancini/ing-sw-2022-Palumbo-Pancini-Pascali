@@ -219,9 +219,7 @@ public class GameHandler {
      */
     public void parseActions(UserAction userAction, String actionType) {
         switch(actionType) {
-            case "PickAssistant" -> {
-                gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
-            }
+            case "PickAssistant" -> gameHandlerListener.firePropertyChange("PickAssistant", null, ((PickAssistant) userAction).getChosenAssistant());
 
             case "PickStudent" -> gameHandlerListener.firePropertyChange("PickStudent", null, ((PickStudent) userAction).getChosenStudent());
 

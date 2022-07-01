@@ -249,11 +249,9 @@ public class InputChecker {
     public boolean isStudentInMonk(String input) {
         PawnType type = toPawnType(input);
         if(type == null) return false;
-        //System.out.println("Tipo passato: " + type.toString());
         for(CharacterCard c : modelView.getGameCopy().getGameBoard().getPlayableCharacters()) {
             if(c.getName() == Characters.MONK) {
                 for(Student s : c.getStudents()) {
-                    //System.out.println("Tipo letto: " + modelView.getGameCopy().getCurrentPlayer().getBoard().getEntrance().getStudents().get(i).getType().toString());
                     if(s.getType().equals(type)) {
                         return true;
                     }
@@ -496,8 +494,6 @@ public class InputChecker {
         int cloudID;
         try {
             cloudID = Integer.parseInt(input);
-            //ricordare che funziona solo se rimuovo gli studenti dalla nuvola una volta scelta
-            //e che le clouds hanno ID che parte da 0 (per combaciare con l'indice dell'arraylist)
             if(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1).getStudents() != null) {
                 action = new PickCloud(modelView.getGameCopy().getGameBoard().getClouds().get(cloudID - 1));
             }

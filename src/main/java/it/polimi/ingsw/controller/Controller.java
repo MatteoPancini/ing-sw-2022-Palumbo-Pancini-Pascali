@@ -131,12 +131,6 @@ public class Controller implements PropertyChangeListener {
             }
         }
 
-        for(Player q : game.getPlayers()) {
-            for(Student s : q.getBoard().getEntrance().getStudents()) {
-            }
-        }
-
-
         int maximum = 11;
         SecureRandom r = new SecureRandom();
         game.getGameBoard().getMotherNature().setPosition(r.nextInt(maximum) + 1);
