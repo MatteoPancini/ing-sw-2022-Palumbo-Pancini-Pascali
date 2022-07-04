@@ -125,7 +125,10 @@ public class ActionHandler {
             if(cli != null) {
                 cli.endGameMessage();
             } else if(gui != null) {
-                gui.showEndGameNoWinner();
+                Platform.runLater(() ->  {
+                            gui.showEndGameNoWinner();
+                        }
+                );
             }
         } else if(answer instanceof PrincessAction) {
             modelView.setPrincessAction(true);

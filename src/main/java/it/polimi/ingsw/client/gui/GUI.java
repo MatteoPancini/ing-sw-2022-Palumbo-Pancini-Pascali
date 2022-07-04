@@ -255,11 +255,16 @@ public class GUI extends Application implements ListenerInterface {
             }
             case "WinMessage" -> {
                 assert serverCommand != null;
-                showWinGame();
+                Platform.runLater(() -> {
+                    showWinGame();
+
+                });
             }
             case "LoseMessage" -> {
                 assert serverCommand != null;
-                showLoseGame(changeEvent.getNewValue().toString());
+                Platform.runLater(() -> {
+                    showLoseGame(changeEvent.getNewValue().toString());
+                });
             }
 
             default -> System.out.println("Unknown answer from server");
