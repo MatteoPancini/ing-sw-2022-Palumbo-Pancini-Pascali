@@ -8,14 +8,14 @@ The project consists of a Java implementation of the board game Eriantys, made b
 
 
 
-## GroupID: GC31
+## 👤 GroupID: GC31
 + Francesco Palumbo
 + Matteo Pancini
 + Luigi Pascali
   
 **Teacher**: Gianpaolo Cugola
 
-## Implemented Functionalities
+## ⁉️ Implemented Functionalities
 | Functionality                | Implementation |
 |:-----------------------------|:--------------:|
 | Basic rules                  |       ✅        |
@@ -30,7 +30,7 @@ The project consists of a Java implementation of the board game Eriantys, made b
 | Disconnection resilience     |       ⛔        |
 
 
-## Test cases coverage
+## ⚙️ Test cases coverage
 **Coverage criteria: Code Lines**
 
 All classes (from both Model and Controller's Packages) have 100% of class coverage.
@@ -42,7 +42,7 @@ All classes (from both Model and Controller's Packages) have 100% of class cover
 | Controller | ExpertController   | 131/145 (90%) |
 | Model      | Model Package      | 496/533 (94%) |
 
-## Run jar information
+## 🏃‍♂️ Run jar information
 In order to play the game file, download the JAR file from "deliverables" folder.
 Then run it from **terminal** (from the directory where you save it) by typing:
 >*java -jar softeng-GC31.jar*
