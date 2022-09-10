@@ -55,3 +55,10 @@ For the best game experience we suggest:
   + if your computer has small memory size or "Load Exception - Java Heap Size" occurs, run the JAR file by typing:
     >*java -Xmx4096m -jar softeng-GC31.jar*
   + set OS screen size to 100% in order to enjoy the complete scene board
+
+## 🔨 Tools and Languages
++ Programming Language: ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
++ Project Management: ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
++ IDE: ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
++ Testing and Bug Fixing: Sonarqube
++ UML and Documentation: draw.io
